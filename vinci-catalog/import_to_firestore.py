@@ -36,7 +36,7 @@ SERIES_TO_CATEGORY = {
     "maxx": "playground",
     "roxx": "climbing",
     "steel": "playground",
-    "steel-plus": "playground",
+    "steelplus": "playground",
     "crooc": "playground",
     "topicco": "playground",
     "solo": "playground",

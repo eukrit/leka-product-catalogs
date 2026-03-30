@@ -33,6 +33,9 @@ BASE_URL = "https://vinci-play.com"
 LANG = "en"
 
 # All known product series with their URL slugs
+# listing_slug = slug used on /en/playground-equipment/{slug} (may have suffix)
+# offer_slug = slug used in /en/offer/{slug}/{product} (the canonical series ID)
+# When listing_slug differs from slug, the listing page uses a suffixed URL
 SERIES = [
     {"slug": "robinia", "name": "ROBINIA", "description": "Acacia wood playground equipment"},
     {"slug": "wooden", "name": "WOODEN", "description": "Wooden playground equipment"},
@@ -44,7 +47,7 @@ SERIES = [
     {"slug": "maxx", "name": "MAXX", "description": "Large multi-functional structures"},
     {"slug": "roxx", "name": "ROXX", "description": "Geometric climbing modules"},
     {"slug": "steel", "name": "STEEL", "description": "Steel playground equipment"},
-    {"slug": "steel-plus", "name": "STEEL+", "description": "Enhanced steel playground equipment"},
+    {"slug": "steelplus", "listing_slug": "steel-048", "name": "STEEL+", "description": "Enhanced steel playground equipment"},
     {"slug": "crooc", "name": "CROOC", "description": "Stainless steel playground equipment"},
     {"slug": "topicco", "name": "TOPICCO", "description": "Creative vehicles"},
     {"slug": "solo", "name": "SOLO", "description": "Single play devices"},
@@ -54,8 +57,8 @@ SERIES = [
     {"slug": "spring", "name": "SPRING", "description": "Spring riders"},
     {"slug": "swing", "name": "SWING", "description": "Swings"},
     {"slug": "hoop", "name": "HOOP", "description": "Playground carousels"},
-    {"slug": "arena", "name": "ARENA", "description": "Multifunctional playing fields"},
-    {"slug": "jumpoo", "name": "JUMPOO", "description": "Trampolines"},
+    {"slug": "arena", "listing_slug": "arena-fe8", "name": "ARENA", "description": "Multifunctional playing fields"},
+    {"slug": "jumpoo", "listing_slug": "jumpoo-f94", "name": "JUMPOO", "description": "Trampolines"},
     {"slug": "fitness", "name": "FITNESS", "description": "Fitness activity equipment"},
     {"slug": "workout", "name": "WORKOUT", "description": "Bodyweight training equipment"},
     {"slug": "workout-pro", "name": "WORKOUT PRO", "description": "Professional training equipment"},
@@ -104,25 +107,39 @@ def fetch_page(url, retries=MAX_RETRIES):
     return None
 
 
-def get_product_urls_for_series(series_slug):
-    """Scrape all product URLs from a series listing page."""
-    url = f"{BASE_URL}/{LANG}/playground-equipment/{series_slug}"
+def get_product_urls_for_series(series_info):
+    """Scrape all product URLs from a series listing page.
+
+    Uses listing_slug (if different from slug) for the category page,
+    and detects the actual offer slug from product hrefs.
+    """
+    listing_slug = series_info.get("listing_slug", series_info["slug"])
+    offer_slug = series_info["slug"]
+
+    url = f"{BASE_URL}/{LANG}/playground-equipment/{listing_slug}"
     log.info(f"Fetching series page: {url}")
     soup = fetch_page(url)
     if not soup:
         return []
 
     product_urls = []
-    # Product links follow pattern: /en/offer/{series}/{series}-{code}
-    offer_pattern = re.compile(rf"^/{LANG}/offer/{re.escape(series_slug)}/")
+    # Product links follow pattern: /en/offer/{offer_slug}/{product-slug}
+    # Match broadly on /en/offer/ and filter for this series
+    offer_pattern = re.compile(rf"^/{LANG}/offer/")
     for a_tag in soup.find_all("a", href=True):
         href = a_tag["href"]
         if offer_pattern.match(href):
-            full_url = urljoin(BASE_URL, href)
-            if full_url not in product_urls:
-                product_urls.append(full_url)
+            # Extract the offer series from the URL
+            parts = href.strip("/").split("/")
+            if len(parts) >= 4:  # en/offer/{series}/{product}
+                url_series = parts[2]
+                # Accept if it matches the offer_slug or listing_slug
+                if url_series == offer_slug or url_series == listing_slug:
+                    full_url = urljoin(BASE_URL, href)
+                    if full_url not in product_urls:
+                        product_urls.append(full_url)
 
-    log.info(f"  Found {len(product_urls)} products in {series_slug}")
+    log.info(f"  Found {len(product_urls)} products in {series_info['name']} (listing: {listing_slug}, offer: {offer_slug})")
     return product_urls
 
 
@@ -278,7 +295,8 @@ def scrape_product(url, series_slug, series_name):
         if m:
             specs["free_fall_height_cm"] = parse_spec_value(m.group(1))
     if "en_standard" not in specs:
-        m = re.search(r"(EN\s*1176[\w:+\-. ]*)", page_text)
+        # EN 1176 (playground), EN 16630 (fitness), EN 15312 (sport)
+        m = re.search(r"(EN\s*(?:1176|16630|15312)[\w:+\-. ]*)", page_text)
         if m:
             specs["en_standard"] = m.group(1).strip()
 
@@ -451,7 +469,7 @@ def main():
 
     # Determine which series to scrape
     if args.series:
-        target_series = [s for s in SERIES if s["slug"] == args.series]
+        target_series = [s for s in SERIES if s["slug"] == args.series or s.get("listing_slug") == args.series]
         if not target_series:
             log.error(f"Unknown series: {args.series}")
             log.info(f"Available: {', '.join(s['slug'] for s in SERIES)}")
@@ -487,7 +505,7 @@ def main():
         log.info(f"{'='*60}")
 
         # Get all product URLs for this series
-        product_urls = get_product_urls_for_series(slug)
+        product_urls = get_product_urls_for_series(series_info)
 
         series_products = []
         for i, url in enumerate(product_urls):
