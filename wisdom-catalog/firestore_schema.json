@@ -1,0 +1,89 @@
+{
+  "collections": {
+    "products": {
+      "description": "Main product catalog - each document is one product line item",
+      "document_id": "{item_code}  (e.g., KB1-TKC1A002)",
+      "fields": {
+        "item_code": { "type": "string", "required": true, "description": "Unique product code (e.g., KB1-TKC1A002, QSWP-350106N06)" },
+        "description": { "type": "string", "required": true, "description": "English product name" },
+        "description_cn": { "type": "string", "required": false, "description": "Chinese product name (2025年品名)" },
+        "category": { "type": "string", "required": true, "description": "Product category derived from prefix (furniture, playground, outdoor, etc.)" },
+        "subcategory": { "type": "string", "required": false, "description": "Subcategory (cabinet, table, chair, slide, swing, etc.)" },
+        "material": { "type": "string", "required": false, "description": "Primary material (Wood, PE, Metal, etc.)" },
+        "dimensions": {
+          "type": "map",
+          "fields": {
+            "raw": { "type": "string", "description": "Original size string" },
+            "length_cm": { "type": "number" },
+            "width_cm": { "type": "number" },
+            "height_cm": { "type": "number" }
+          }
+        },
+        "volume_cbm": { "type": "number", "description": "Product volume in cubic meters" },
+        "weight_kg": { "type": "number", "required": false, "description": "Product weight in kg (US catalog only)" },
+        "pricing": {
+          "type": "map",
+          "fields": {
+            "fob_usd": { "type": "number", "description": "FOB Shanghai price in USD" },
+            "currency": { "type": "string", "default": "USD" },
+            "price_date": { "type": "string", "description": "Date of price (e.g., 2025-11-07)" }
+          }
+        },
+        "catalog_page": { "type": "number", "description": "Page number in physical catalog" },
+        "catalog_source": { "type": "string", "description": "Which catalog (china_2025, us_2025, quotation)" },
+        "images": {
+          "type": "array",
+          "items": {
+            "type": "map",
+            "fields": {
+              "url": { "type": "string", "description": "GCS or external image URL" },
+              "alt_text": { "type": "string" },
+              "is_primary": { "type": "boolean" },
+              "source": { "type": "string", "description": "Where image came from (catalog_pdf, slack, manual)" }
+            }
+          }
+        },
+        "created_at": { "type": "timestamp" },
+        "updated_at": { "type": "timestamp" }
+      },
+      "indexes": [
+        { "fields": ["category", "pricing.fob_usd"], "order": "ASC" },
+        { "fields": ["catalog_source", "catalog_page"], "order": "ASC" },
+        { "fields": ["subcategory"], "order": "ASC" }
+      ]
+    },
+    "quotations": {
+      "description": "Individual quotations referencing products",
+      "document_id": "auto-generated",
+      "fields": {
+        "quotation_id": { "type": "string", "description": "Quotation reference (e.g., Quotation20260318)" },
+        "date": { "type": "timestamp" },
+        "source": { "type": "string", "description": "Origin (slack_channel, email, etc.)" },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "map",
+            "fields": {
+              "item_code": { "type": "string" },
+              "fob_usd": { "type": "number" },
+              "volume_cbm": { "type": "number" },
+              "remarks": { "type": "string" }
+            }
+          }
+        },
+        "created_at": { "type": "timestamp" }
+      }
+    },
+    "product_categories": {
+      "description": "Lookup table for category metadata",
+      "document_id": "{category_key}",
+      "fields": {
+        "name": { "type": "string" },
+        "name_cn": { "type": "string" },
+        "prefix_patterns": { "type": "array", "items": { "type": "string" } },
+        "product_count": { "type": "number" },
+        "icon": { "type": "string" }
+      }
+    }
+  }
+}
