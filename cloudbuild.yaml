@@ -1,0 +1,121 @@
+# cloudbuild.yaml
+# GO Corporation — GCP Cloud Build Pipeline
+# Triggers: push to main (deploy) | push to dev/* (build+test only)
+#
+# Secrets are loaded from GCP Secret Manager — never hardcoded.
+# See CLAUDE.md > Credentials & Secrets for the full secret inventory.
+
+substitutions:
+  _SERVICE: your-service-name        # Cloud Run service name
+  _REGION: asia-southeast1           # Bangkok-nearest region
+  _REPO: gcr.io/$PROJECT_ID          # Container registry
+  _NOTION_DASHBOARD: https://www.notion.so/gocorp/Coding-Project-Dashboard-Claude-32c82cea8bb080f1bbd7f26770ae9e80
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+  machineType: E2_MEDIUM
+
+# ============================================
+# SECRET MANAGER — all secrets loaded here
+# ============================================
+availableSecrets:
+  secretManager:
+    - versionName: projects/$PROJECT_ID/secrets/peak-api-token/versions/latest
+      env: 'PEAK_USER_TOKEN'
+    - versionName: projects/$PROJECT_ID/secrets/n8n-webhook-key/versions/latest
+      env: 'N8N_WEBHOOK_KEY'
+    - versionName: projects/$PROJECT_ID/secrets/xero-client-secret/versions/latest
+      env: 'XERO_CLIENT_SECRET'
+    - versionName: projects/$PROJECT_ID/secrets/notion-api-key/versions/latest
+      env: 'NOTION_API_KEY'
+    - versionName: projects/$PROJECT_ID/secrets/slack-bot-token/versions/latest
+      env: 'SLACK_BOT_TOKEN'
+    - versionName: projects/$PROJECT_ID/secrets/figma-token/versions/latest
+      env: 'FIGMA_TOKEN'
+
+steps:
+  # Step 1: Install dependencies
+  - name: 'node:20'
+    id: install
+    entrypoint: npm
+    args: ['ci']
+
+  # Step 2: Run tests
+  - name: 'node:20'
+    id: test
+    entrypoint: npm
+    args: ['test']
+    env:
+      - 'NODE_ENV=test'
+
+  # Step 3: Run verify.sh (API + integration checks)
+  - name: 'node:20'
+    id: verify
+    entrypoint: bash
+    args: ['./verify.sh', '--ci-mode']
+    env:
+      - 'CI=true'
+      - 'GCP_PROJECT_ID=$PROJECT_ID'
+    secretEnv:
+      - 'PEAK_USER_TOKEN'
+      - 'N8N_WEBHOOK_KEY'
+      - 'XERO_CLIENT_SECRET'
+      - 'NOTION_API_KEY'
+      - 'SLACK_BOT_TOKEN'
+      - 'FIGMA_TOKEN'
+
+  # Step 4: Build Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    id: build-image
+    args:
+      - 'build'
+      - '-t'
+      - '$_REPO/$_SERVICE:$SHORT_SHA'
+      - '-t'
+      - '$_REPO/$_SERVICE:latest'
+      - '.'
+
+  # Step 5: Push image
+  - name: 'gcr.io/cloud-builders/docker'
+    id: push-image
+    args: ['push', '--all-tags', '$_REPO/$_SERVICE']
+
+  # Step 6: Deploy to Cloud Run (main branch only)
+  # Secrets injected as Cloud Run env vars at deploy time
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    id: deploy
+    entrypoint: bash
+    args:
+      - '-c'
+      - |
+        if [ "$BRANCH_NAME" = "main" ]; then
+          gcloud run deploy $_SERVICE \
+            --image $_REPO/$_SERVICE:$SHORT_SHA \
+            --region $_REGION \
+            --platform managed \
+            --allow-unauthenticated \
+            --set-secrets="PEAK_USER_TOKEN=peak-api-token:latest,N8N_WEBHOOK_KEY=n8n-webhook-key:latest,NOTION_API_KEY=notion-api-key:latest,SLACK_BOT_TOKEN=slack-bot-token:latest"
+          echo "Deployed $_SERVICE:$SHORT_SHA to Cloud Run with secrets"
+        else
+          echo "Branch $BRANCH_NAME: skipping deploy (build+test only)"
+        fi
+
+  # Step 7: Post-build — update CHANGELOG and notify
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    id: post-build
+    entrypoint: bash
+    args:
+      - '-c'
+      - |
+        echo "Build $SHORT_SHA completed at $(date -u)" >> CHANGELOG.md
+        echo "Branch: $BRANCH_NAME | Trigger: $TRIGGER_NAME" >> CHANGELOG.md
+        echo "Post-build record written."
+
+images:
+  - '$_REPO/$_SERVICE:$SHORT_SHA'
+  - '$_REPO/$_SERVICE:latest'
+
+tags:
+  - '$_SERVICE'
+  - '$BRANCH_NAME'
+  - '$SHORT_SHA'

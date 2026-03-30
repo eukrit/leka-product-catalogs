@@ -1,0 +1,10 @@
+# Python dependencies — rename to requirements.txt for Python projects
+# Remove Dockerfile (Node.js) and use Dockerfile.python instead
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+pydantic>=2.5.0
+pydantic-settings>=2.1.0
+httpx>=0.25.0
+google-cloud-secret-manager>=2.16.0
+google-cloud-firestore>=2.13.0
+python-dotenv>=1.0.0

@@ -1,0 +1,54 @@
+# Credentials — NEVER commit
+manifest.json
+.env
+.env.*
+credentials/
+*.key
+*.pem
+*.p12
+*.pfx
+
+# Specific credential files
+ai-agents-go-*.json
+client_secret_*.json
+*_tokens.json
+token_*.json
+*_token.json
+*credentials*.json
+*secret*.json
+
+# Peak API
+Peak*.env
+
+# Notion
+NOTION_API_KEY*
+
+# Build artifacts
+verify-report.json
+verify-report.txt
+build-meta.json
+
+# Node
+node_modules/
+npm-debug.log*
+package-lock.json
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+*.egg
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo

@@ -1,0 +1,17 @@
+{
+  "name": "goco-project-template",
+  "version": "0.1.0",
+  "description": "GO Corporation — Cloud Run project template",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"No tests configured yet\" && exit 0",
+    "verify": "./verify.sh"
+  },
+  "author": "Eukrit / GO Corporation Co., Ltd.",
+  "license": "UNLICENSED",
+  "private": true,
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
