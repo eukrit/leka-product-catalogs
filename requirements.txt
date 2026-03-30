@@ -6,3 +6,5 @@ PyMuPDF==1.25.*
 Pillow==11.*
 google-cloud-firestore==2.19.*
 google-cloud-storage==2.19.*
+requests==2.32.*
+beautifulsoup4==4.12.*

@@ -1,0 +1,77 @@
+{
+  "brand": "vinci",
+  "collection": "products_vinci",
+  "source": "vinci-play.com (web scrape)",
+  "document_id": "{series_slug}-{item_code}",
+  "fields": {
+    "item_code": { "type": "string", "required": true, "description": "Product model code (e.g., RB1907, 0829)" },
+    "brand": { "type": "string", "value": "vinci" },
+    "name": { "type": "string", "description": "Full product name (e.g., ROBINIA RB1907)" },
+    "description": { "type": "string", "description": "Product description from website" },
+    "category": { "type": "string", "description": "Standardized category (playground, climbing, fitness, outdoor, sports, early_years, other)" },
+    "subcategory": { "type": "string", "description": "Series slug used as subcategory" },
+    "series_slug": { "type": "string", "description": "URL slug (robinia, solo, etc.)" },
+    "series_name": { "type": "string", "description": "Display name (ROBINIA, SOLO, etc.)" },
+    "material": { "type": "string", "required": false },
+    "dimensions": {
+      "type": "map",
+      "fields": {
+        "raw": { "type": "string" },
+        "length_cm": { "type": "number" },
+        "width_cm": { "type": "number" },
+        "height_cm": { "type": "number" }
+      }
+    },
+    "specifications": {
+      "type": "map",
+      "fields": {
+        "age_group": { "type": "string", "description": "e.g., 6+ years, 1-8 years" },
+        "num_users": { "type": "number", "description": "Maximum simultaneous users" },
+        "safety_zone_m2": { "type": "number", "description": "Required safety zone in m²" },
+        "free_fall_height_cm": { "type": "number", "description": "Maximum free fall height in cm" },
+        "platform_heights": { "type": "string", "description": "Available platform heights" },
+        "slide_platform_height": { "type": "string" },
+        "tube_slide_platform_height": { "type": "string" },
+        "en_standard": { "type": "string", "description": "EN norm compliance (e.g., EN 1176-1:2017+A1:2023)" },
+        "spare_parts_available": { "type": "string" }
+      }
+    },
+    "images": {
+      "type": "array",
+      "items": {
+        "type": "map",
+        "fields": {
+          "url": { "type": "string", "description": "Image URL (renders from zamowienia.vinci-play.pl)" },
+          "alt_text": { "type": "string" },
+          "is_primary": { "type": "boolean" },
+          "source": { "type": "string", "value": "website_scrape" },
+          "view_type": { "type": "string", "description": "render | top | front" }
+        }
+      }
+    },
+    "downloads": {
+      "type": "array",
+      "items": {
+        "type": "map",
+        "fields": {
+          "type": { "type": "string", "description": "technical_sheet | dwg_2d | dwg_3d | document" },
+          "format": { "type": "string", "description": "pdf | dwg" },
+          "url": { "type": "string" },
+          "label": { "type": "string" }
+        }
+      }
+    },
+    "certifications": { "type": "array", "items": { "type": "string" }, "description": "TÜV Rheinland, ISO 9001:2015, etc." },
+    "tags": { "type": "array", "items": { "type": "string" }, "description": "new, inclusive, etc." },
+    "source_url": { "type": "string", "description": "Original product page URL on vinci-play.com" },
+    "status": { "type": "string", "default": "active" },
+    "created_at": { "type": "timestamp" },
+    "updated_at": { "type": "timestamp" }
+  },
+  "series": [
+    "robinia", "wooden", "naturo", "recycled", "castillo", "jungle", "space",
+    "maxx", "roxx", "steel", "steel-plus", "crooc", "topicco", "solo",
+    "minisweet", "climboo", "nettix", "spring", "swing", "hoop", "arena",
+    "jumpoo", "fitness", "workout", "workout-pro", "active", "woof", "park", "stock"
+  ]
+}

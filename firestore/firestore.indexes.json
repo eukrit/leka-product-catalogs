@@ -25,6 +25,30 @@
       ]
     },
     {
+      "collectionGroup": "products_vinci",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "category", "order": "ASCENDING" },
+        { "fieldPath": "series_slug", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "products_vinci",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "status", "order": "ASCENDING" },
+        { "fieldPath": "category", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "products_vinci",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "series_slug", "order": "ASCENDING" },
+        { "fieldPath": "name", "order": "ASCENDING" }
+      ]
+    },
+    {
       "collectionGroup": "products",
       "queryScope": "COLLECTION",
       "fields": [

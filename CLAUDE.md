@@ -92,9 +92,10 @@ All catalogs use the **Leka Design System** (Figma: `ER6pbDqrJ4Uo9FuldnYBfm`):
 
 ## Active Brands
 
-| Brand | Subfolder | Cloud Run URL | Products |
-|-------|-----------|---------------|----------|
-| Wisdom | `wisdom-catalog/` | TBD | 5,071 |
+| Brand | Subfolder | Cloud Run URL | Products | Source |
+|-------|-----------|---------------|----------|--------|
+| Wisdom | `wisdom-catalog/` | TBD | 5,071 | Excel catalogs |
+| Vinci Play | `vinci-catalog/` | TBD | ~1,000+ | vinci-play.com scrape |
 
 ## Project Structure (enforced)
 ```

@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.0] - 2026-03-30
+
+### Added — Vinci Play Brand
+- `vinci-catalog/` brand folder with complete scraping and import pipeline
+- `scrape_catalog.py` — full website scraper for vinci-play.com (29 series, ~1,000+ products)
+  - Extracts: product info, specifications, images, drawings, downloads, certifications
+  - Supports `--resume` for checkpoint/resume and `--series` for single-series scraping
+  - Rate-limited with retry logic for reliability
+- `import_to_firestore.py` — imports scraped JSON to `products_vinci` collection
+  - Supports `--dry-run` for preview mode
+- `firestore_schema.json` — Vinci-specific schema documentation
+- `DEPLOYMENT_LOG.md` — brand-specific deployment tracking
+- Firestore composite indexes for `products_vinci`
+- Added `requests` and `beautifulsoup4` to requirements.txt
+
 ## [0.2.0] - 2026-03-30
 
 ### Added
