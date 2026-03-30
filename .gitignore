@@ -28,10 +28,12 @@ verify-report.json
 verify-report.txt
 build-meta.json
 
-# Node
-node_modules/
-npm-debug.log*
-package-lock.json
+# Product catalog specific
+extracted_images/
+extracted_images_v2/
+verified_images/
+*Slack Downloads/
+*.pdf
 
 # Python
 __pycache__/
@@ -42,6 +44,11 @@ build/
 .venv/
 venv/
 *.egg
+
+# Node (for package.json scripts only)
+node_modules/
+npm-debug.log*
+package-lock.json
 
 # OS
 .DS_Store

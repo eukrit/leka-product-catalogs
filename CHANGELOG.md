@@ -2,15 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.1.0] - 2026-03-24
+## [0.1.0] - 2026-03-30
 
 ### Added
-- Initial project template with CI/CD pipeline
-- CLAUDE.md session protocol
-- cloudbuild.yaml for GCP Cloud Build
-- verify.sh post-build verification script
+- Initial project structure from goco-project-template
+- Python 3.11 runtime with Flask health endpoint
+- Cloud Build pipeline (cloudbuild.yaml) for CI/CD
 - Dockerfile for Cloud Run deployment
-- setup.sh bootstrap script
-- manifest.example.json credentials template
-- PR template with AI eval score fields
-- Deployment Plan and Build Plan templates
+- verify.sh post-build verification script
+- Leka Design System configuration
+- Wisdom brand catalog (5,071 products) — migrated from product-catalogs repo
+- Firestore rules and composite indexes
+- Multi-brand architecture with per-brand subfolders

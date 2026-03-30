@@ -1,0 +1,8 @@
+flask==3.1.*
+gunicorn==23.*
+pandas==2.2.*
+openpyxl==3.1.*
+PyMuPDF==1.25.*
+Pillow==11.*
+google-cloud-firestore==2.19.*
+google-cloud-storage==2.19.*

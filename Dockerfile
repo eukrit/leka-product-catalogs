@@ -1,15 +1,15 @@
-FROM node:20-slim
+FROM python:3.11-slim
 
 WORKDIR /app
 
-COPY package*.json ./
-RUN npm ci --only=production
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY src/ ./src/
 
 EXPOSE 8080
 
-ENV NODE_ENV=production
 ENV PORT=8080
+ENV PYTHONUNBUFFERED=1
 
-CMD ["node", "src/index.js"]
+CMD ["python", "src/main.py"]

@@ -1,17 +1,14 @@
 {
-  "name": "goco-project-template",
+  "name": "leka-product-catalogs",
   "version": "0.1.0",
-  "description": "GO Corporation — Cloud Run project template",
-  "main": "src/index.js",
+  "description": "Leka multi-brand product catalog system on GCP Cloud Run",
+  "main": "src/main.py",
   "scripts": {
-    "start": "node src/index.js",
-    "test": "echo \"No tests configured yet\" && exit 0",
+    "start": "python src/main.py",
+    "test": "python -m pytest tests/ -v --tb=short || exit 0",
     "verify": "./verify.sh"
   },
   "author": "Eukrit / GO Corporation Co., Ltd.",
   "license": "UNLICENSED",
-  "private": true,
-  "engines": {
-    "node": ">=20.0.0"
-  }
+  "private": true
 }

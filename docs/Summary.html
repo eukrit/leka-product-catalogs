@@ -3,35 +3,46 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Project Summary — GO Corporation</title>
+  <title>Leka Product Catalogs — Project Summary</title>
   <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; color: #333; }
-    h1 { border-bottom: 2px solid #2563eb; padding-bottom: 8px; }
-    .meta { background: #f1f5f9; padding: 16px; border-radius: 8px; margin: 16px 0; }
-    .status { display: inline-block; padding: 4px 12px; border-radius: 4px; font-weight: 600; }
+    @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap');
+    body { font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; color: #182557; }
+    h1 { border-bottom: 3px solid #8003FF; padding-bottom: 8px; }
+    h2 { color: #8003FF; }
+    .meta { background: #FFF9E6; padding: 16px; border-radius: 16px; margin: 16px 0; border: 1px solid #8003FF20; }
+    .status { display: inline-block; padding: 4px 12px; border-radius: 9999px; font-weight: 600; font-size: 0.875rem; }
     .status-ok { background: #dcfce7; color: #166534; }
     .status-pending { background: #fef3c7; color: #92400e; }
     table { width: 100%; border-collapse: collapse; margin: 16px 0; }
-    th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid #e2e8f0; }
-    th { background: #f8fafc; }
+    th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid #18255720; }
+    th { background: #FFF9E6; font-weight: 600; }
+    a { color: #8003FF; }
   </style>
 </head>
 <body>
-  <h1>Project Summary</h1>
+  <h1>Leka Product Catalogs</h1>
   <div class="meta">
-    <p><strong>Project:</strong> [PROJECT_NAME]</p>
+    <p><strong>Project:</strong> leka-product-catalogs</p>
     <p><strong>Version:</strong> 0.1.0</p>
     <p><strong>Last Build:</strong> <span class="status status-pending">Pending first build</span></p>
-    <p><strong>Generated:</strong> 2026-03-24</p>
+    <p><strong>Generated:</strong> 2026-03-30</p>
   </div>
 
   <h2>Architecture</h2>
   <table>
     <tr><th>Component</th><th>Technology</th><th>Status</th></tr>
-    <tr><td>Runtime</td><td>Node.js 20</td><td>Template ready</td></tr>
-    <tr><td>Infrastructure</td><td>GCP Cloud Run</td><td>Pending setup</td></tr>
-    <tr><td>CI/CD</td><td>GCP Cloud Build</td><td>Pending triggers</td></tr>
-    <tr><td>Secrets</td><td>GCP Secret Manager</td><td>Pending setup</td></tr>
+    <tr><td>Runtime</td><td>Python 3.11 + Flask</td><td>Ready</td></tr>
+    <tr><td>Database</td><td>Firestore (Native mode)</td><td>Active</td></tr>
+    <tr><td>Storage</td><td>GCS (ai-agents-go-documents)</td><td>Active</td></tr>
+    <tr><td>Infrastructure</td><td>GCP Cloud Run</td><td>Pending deploy</td></tr>
+    <tr><td>CI/CD</td><td>GCP Cloud Build</td><td>Pending trigger</td></tr>
+    <tr><td>Design System</td><td>Leka (Figma)</td><td>Active</td></tr>
+  </table>
+
+  <h2>Active Brands</h2>
+  <table>
+    <tr><th>Brand</th><th>Products</th><th>Cloud Run</th><th>Status</th></tr>
+    <tr><td>Wisdom</td><td>5,071</td><td>TBD</td><td><span class="status status-pending">Migrating</span></td></tr>
   </table>
 
   <h2>Latest Verification</h2>
@@ -39,8 +50,10 @@
 
   <h2>Links</h2>
   <ul>
+    <li><a href="https://github.com/eukrit/leka-product-catalogs">GitHub Repository</a></li>
     <li><a href="https://www.notion.so/gocorp/Coding-Project-Dashboard-Claude-32c82cea8bb080f1bbd7f26770ae9e80">Notion Dashboard</a></li>
-    <li><a href="DeploymentPlan.md">Deployment Plan</a></li>
+    <li><a href="https://www.figma.com/file/ER6pbDqrJ4Uo9FuldnYBfm">Leka Design System (Figma)</a></li>
+    <li><a href="DEPLOYMENT_INSTRUCTIONS.md">Deployment Instructions</a></li>
   </ul>
 
   <footer style="margin-top: 40px; color: #94a3b8; font-size: 0.875rem;">

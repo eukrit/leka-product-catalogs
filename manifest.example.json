@@ -1,9 +1,9 @@
 {
-  "project": "[PROJECT_NAME]",
+  "project": "leka-product-catalogs",
   "version": "0.1.0",
   "owner": "Eukrit / GO Corporation Co., Ltd.",
-  "github_repo": "https://github.com/eukrit/[PROJECT_NAME]",
-  "local_path": "/path/to/local/repo",
+  "github_repo": "https://github.com/eukrit/leka-product-catalogs",
+  "local_path": "C:\\Users\\eukri\\OneDrive\\Documents\\Claude Code\\leka-product-catalogs",
 
   "credentials": {
     "centralized_folder": "C:\\Users\\eukri\\OneDrive\\Documents\\Claude Code\\Credentials Claude Code",
@@ -15,10 +15,12 @@
     "project_id": "ai-agents-go",
     "project_number": "538978391890",
     "region": "asia-southeast1",
-    "service_name": "[SERVICE_NAME]",
+    "service_name": "leka-product-catalogs",
     "service_account": "claude@ai-agents-go.iam.gserviceaccount.com",
     "service_account_key": "file:credentials/ai-agents-go-4c81b70995db.json",
     "oauth_client": "file:credentials/client_secret_538978391890-2ol1mrglnelng580ldvj5fi4tkrliqhf.apps.googleusercontent.com.json",
+    "firestore": "native mode, default database",
+    "gcs_bucket": "ai-agents-go-documents",
     "secret_manager": {
       "peak-api-token": "projects/ai-agents-go/secrets/peak-api-token/versions/latest",
       "n8n-webhook-key": "projects/ai-agents-go/secrets/n8n-webhook-key/versions/latest",
@@ -29,58 +31,27 @@
     }
   },
 
-  "apis": {
-    "peak": {
-      "base_url": "http://peakengineapidev.azurewebsites.net",
-      "connect_id": "ENV:PEAK_CONNECT_ID",
-      "connect_key": "ENV:PEAK_CONNECT_KEY",
-      "application_code": "ENV:PEAK_APP_CODE",
-      "user_token": "ENV:PEAK_USER_TOKEN",
-      "reference_contact": "C00001",
-      "mcp_gateway": "https://gocorp.app.n8n.cloud/mcp/peak_mcp"
-    },
-    "n8n": {
-      "base_url": "https://gocorp.app.n8n.cloud",
-      "webhook_key": "ENV:N8N_WEBHOOK_KEY"
-    },
-    "xero": {
-      "base_url": "https://api.xero.com/api.xro/2.0/",
-      "token_url": "https://identity.xero.com/connect/token",
-      "client_id": "ENV:XERO_CLIENT_ID",
-      "client_secret": "ENV:XERO_CLIENT_SECRET",
-      "tenant_id": "ENV:XERO_TENANT_ID",
-      "tokens_file": "file:credentials/xero_tokens.json",
-      "scopes": "accounting.contacts accounting.invoices accounting.settings.read offline_access"
-    },
-    "notion": {
-      "api_key": "ENV:NOTION_API_KEY",
-      "dashboard_url": "https://www.notion.so/gocorp/Coding-Project-Dashboard-Claude-32c82cea8bb080f1bbd7f26770ae9e80",
-      "api_version": "2022-06-28"
-    },
-    "slack": {
-      "bot_token": "ENV:SLACK_BOT_TOKEN",
-      "webhook_url": "ENV:SLACK_WEBHOOK_URL",
-      "workspace": "lekastudio.slack.com"
-    },
-    "figma": {
-      "personal_access_token": "ENV:FIGMA_TOKEN",
-      "base_url": "https://api.figma.com/v1/"
-    },
-    "google_ads": {
-      "developer_token": "ENV:GOOGLE_ADS_DEV_TOKEN",
-      "refresh_token": "ENV:GOOGLE_ADS_REFRESH_TOKEN",
-      "status": "test-only — needs Basic Access approval"
-    },
-    "google_sheets": {
-      "auth_method": "service_account OR oauth",
-      "service_account_key": "file:credentials/ai-agents-go-4c81b70995db.json",
-      "oauth_token": "file:credentials/token_oauth.json",
-      "scope": "https://www.googleapis.com/auth/script.projects"
-    },
-    "gmail": {
-      "account": "eukrit@goco.bz",
-      "auth_method": "mcp_connector",
-      "oauth_token": "file:credentials/token_gmail_settings.json"
+  "brands": {
+    "wisdom": {
+      "subfolder": "wisdom-catalog",
+      "cloud_run_service": "wisdom-catalog",
+      "products_count": 5071,
+      "firestore_collection": "products",
+      "gcs_path": "product-images/wisdom/catalog/"
+    }
+  },
+
+  "design_system": {
+    "name": "Leka",
+    "figma_file": "ER6pbDqrJ4Uo9FuldnYBfm",
+    "font": "Manrope",
+    "colors": {
+      "purple": "#8003FF",
+      "navy": "#182557",
+      "cream": "#FFF9E6",
+      "magenta": "#970260",
+      "amber": "#FFA900",
+      "red_orange": "#E54822"
     }
   },
 
