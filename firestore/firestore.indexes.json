@@ -1,6 +1,30 @@
 {
   "indexes": [
     {
+      "collectionGroup": "products_wisdom",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "category", "order": "ASCENDING" },
+        { "fieldPath": "pricing.fob_usd", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "products_wisdom",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "catalog_source", "order": "ASCENDING" },
+        { "fieldPath": "catalog_page", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "products_wisdom",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "status", "order": "ASCENDING" },
+        { "fieldPath": "category", "order": "ASCENDING" }
+      ]
+    },
+    {
       "collectionGroup": "products",
       "queryScope": "COLLECTION",
       "fields": [

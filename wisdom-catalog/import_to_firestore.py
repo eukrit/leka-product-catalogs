@@ -1,18 +1,29 @@
 """
 Import Wisdom product catalog data from Excel files into Firestore.
 Uses GCP service account: claude@ai-agents-go.iam.gserviceaccount.com
+
+Collection: products_wisdom (multi-brand architecture)
 """
 import re
 import sys
 import json
+import os
+import glob
 import pandas as pd
 from datetime import datetime
 from google.cloud import firestore
 
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
+from shared.base_importer import safe_float, parse_dimensions, batch_write, build_category_index, register_brand
+from shared.category_mapper import classify_category, classify_subcategory
+
 SERVICE_ACCOUNT_PATH = r"C:\Users\eukri\OneDrive\Documents\Claude Code\Credentials Claude Code\ai-agents-go-4c81b70995db.json"
 DOWNLOADS_DIR = r"C:\Users\eukri\OneDrive\Documents\Claude Code\2026 Product Catalogs Claude\Wisdom Slack Downloads"
 
-# Category mapping based on item code prefixes
+BRAND = "wisdom"
+COLLECTION_NAME = "products_wisdom"
+
+# Wisdom-specific category mapping based on item code prefixes
 CATEGORY_MAP = {
     "KB": "furniture",
     "GP": "playground",
@@ -30,83 +41,6 @@ CATEGORY_MAP = {
     "WPPE": "playground",
 }
 
-SUBCATEGORY_KEYWORDS = {
-    "cabinet": "cabinet",
-    "table": "table",
-    "chair": "chair",
-    "slide": "slide",
-    "swing": "swing",
-    "tower": "tower",
-    "shelf": "shelf",
-    "bed": "bed",
-    "desk": "desk",
-    "fence": "fence",
-    "bench": "bench",
-    "sand": "sand_play",
-    "climb": "climbing",
-    "balance": "balance",
-    "kitchen": "kitchen",
-    "house": "house",
-    "play": "play_structure",
-}
-
-
-def classify_category(item_code):
-    if not item_code or pd.isna(item_code):
-        return "uncategorized"
-    code = str(item_code).upper()
-    for prefix, cat in sorted(CATEGORY_MAP.items(), key=lambda x: -len(x[0])):
-        if code.startswith(prefix):
-            return cat
-    return "other"
-
-
-def classify_subcategory(description):
-    if not description or pd.isna(description):
-        return None
-    desc_lower = str(description).lower()
-    for keyword, subcat in SUBCATEGORY_KEYWORDS.items():
-        if keyword in desc_lower:
-            return subcat
-    return None
-
-
-def parse_dimensions(size_str):
-    if not size_str or pd.isna(size_str):
-        return {"raw": None}
-    raw = str(size_str)
-    result = {"raw": raw}
-    # Extract material
-    mat_match = re.search(r"Material:\s*(.+?)(?:\n|$)", raw)
-    if mat_match:
-        result["material"] = mat_match.group(1).strip()
-    # Extract dimensions like 111×29.8×81.8 cm
-    dim_match = re.search(r"([\d.]+)\s*[×xX]\s*([\d.]+)\s*[×xX]\s*([\d.]+)", raw)
-    if dim_match:
-        result["length_cm"] = float(dim_match.group(1))
-        result["width_cm"] = float(dim_match.group(2))
-        result["height_cm"] = float(dim_match.group(3))
-    return result
-
-
-def safe_float(val):
-    if val is None or pd.isna(val):
-        return None
-    try:
-        return float(val)
-    except (ValueError, TypeError):
-        s = str(val)
-        # Handle range values like "2.28-2.58" - take the first number
-        range_match = re.match(r"([\d.]+)\s*[-–]\s*[\d.]+", s)
-        if range_match:
-            return float(range_match.group(1))
-        # Handle strings like "US$10,630.00"
-        cleaned = re.sub(r"[^\d.]", "", s)
-        try:
-            return float(cleaned) if cleaned else None
-        except ValueError:
-            return None
-
 
 def import_full_catalog(db):
     """Import the main 2025 catalog (4903 products)."""
@@ -114,8 +48,7 @@ def import_full_catalog(db):
     df = pd.read_excel(path, sheet_name="2025 Price for China Catalog", header=0)
     print(f"Full catalog: {len(df)} rows")
 
-    batch = db.batch()
-    count = 0
+    documents = []
     skipped = 0
 
     for _, row in df.iterrows():
@@ -130,9 +63,10 @@ def import_full_catalog(db):
 
         doc_data = {
             "item_code": item_code,
+            "brand": BRAND,
             "description": str(row.get("Description", "")).strip() if pd.notna(row.get("Description")) else "",
             "description_cn": str(row.get("2025\u5e74\u54c1\u540d", "")).strip() if pd.notna(row.get("2025\u5e74\u54c1\u540d")) else "",
-            "category": classify_category(item_code),
+            "category": classify_category(item_code, CATEGORY_MAP),
             "subcategory": classify_subcategory(row.get("Description")),
             "material": material,
             "dimensions": dims,
@@ -146,22 +80,13 @@ def import_full_catalog(db):
             "catalog_page": int(row["Page"]) if pd.notna(row.get("Page")) else None,
             "catalog_source": "china_2025",
             "images": [],
+            "status": "active",
             "created_at": firestore.SERVER_TIMESTAMP,
             "updated_at": firestore.SERVER_TIMESTAMP,
         }
+        documents.append((item_code, doc_data))
 
-        doc_ref = db.collection("products").document(item_code)
-        batch.set(doc_ref, doc_data)
-        count += 1
-
-        if count % 400 == 0:
-            batch.commit()
-            batch = db.batch()
-            print(f"  Committed {count} products...")
-
-    if count % 400 != 0:
-        batch.commit()
-
+    count = batch_write(db, COLLECTION_NAME, documents)
     print(f"  Done: {count} imported, {skipped} skipped")
     return count
 
@@ -179,7 +104,7 @@ def import_us_catalog(db):
             continue
 
         item_code = str(item_code).strip()
-        doc_ref = db.collection("products").document(item_code)
+        doc_ref = db.collection(COLLECTION_NAME).document(item_code)
         doc = doc_ref.get()
 
         price_val = safe_float(row.get("FOB Shanghai price (USD)"))
@@ -194,9 +119,10 @@ def import_us_catalog(db):
         else:
             doc_data = {
                 "item_code": item_code,
+                "brand": BRAND,
                 "description": str(row.get("Description", "")).strip() if pd.notna(row.get("Description")) else "",
                 "description_cn": "",
-                "category": classify_category(item_code),
+                "category": classify_category(item_code, CATEGORY_MAP),
                 "subcategory": classify_subcategory(row.get("Description")),
                 "material": None,
                 "dimensions": {"raw": None},
@@ -210,6 +136,7 @@ def import_us_catalog(db):
                 "catalog_page": int(row["Page"]) if pd.notna(row.get("Page")) else None,
                 "catalog_source": "us_2025",
                 "images": [],
+                "status": "active",
                 "created_at": firestore.SERVER_TIMESTAMP,
                 "updated_at": firestore.SERVER_TIMESTAMP,
             }
@@ -222,7 +149,6 @@ def import_us_catalog(db):
 
 def import_quotations(db):
     """Import quotation files as separate quotation documents."""
-    import glob
     quotation_files = glob.glob(f"{DOWNLOADS_DIR}/Quotation*.xlsx") + glob.glob(f"{DOWNLOADS_DIR}/*Quotation*.xlsx")
     quotation_files = list(set(quotation_files))
     print(f"Found {len(quotation_files)} quotation files")
@@ -230,7 +156,6 @@ def import_quotations(db):
     count = 0
     for fpath in sorted(quotation_files):
         fname = fpath.split("\\")[-1].split("/")[-1]
-        # Extract date from filename
         date_match = re.search(r"(\d{8}|\d{6})", fname)
         date_str = date_match.group(1) if date_match else ""
 
@@ -240,7 +165,6 @@ def import_quotations(db):
             print(f"  Skip {fname}: {e}")
             continue
 
-        # Normalize column names
         cols = df.columns.tolist()
         code_col = next((c for c in cols if "code" in str(c).lower() or "item" in str(c).lower()), cols[0] if cols else None)
         price_col = next((c for c in cols if "fob" in str(c).lower() or "price" in str(c).lower() or "usd" in str(c).lower()), None)
@@ -262,6 +186,7 @@ def import_quotations(db):
         if items:
             doc_data = {
                 "quotation_id": fname.replace(".xlsx", ""),
+                "brand": BRAND,
                 "date": date_str,
                 "source": "slack_vendor_wisdom_playground",
                 "items": items,
@@ -275,48 +200,34 @@ def import_quotations(db):
     return count
 
 
-def build_category_index(db):
-    """Build product_categories collection from product data."""
-    products = db.collection("products").stream()
-    cat_counts = {}
-    for doc in products:
-        data = doc.to_dict()
-        cat = data.get("category", "uncategorized")
-        if cat not in cat_counts:
-            cat_counts[cat] = {"count": 0, "prefixes": set()}
-        cat_counts[cat]["count"] += 1
-        code = data.get("item_code", "")
-        prefix = re.match(r"^([A-Z]+\d*)", code)
-        if prefix:
-            cat_counts[cat]["prefixes"].add(prefix.group(1))
-
-    for cat, info in cat_counts.items():
-        db.collection("product_categories").document(cat).set({
-            "name": cat.replace("_", " ").title(),
-            "prefix_patterns": sorted(info["prefixes"]),
-            "product_count": info["count"],
-        })
-        print(f"  {cat}: {info['count']} products")
-
-
 def main():
-    import os
     os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = SERVICE_ACCOUNT_PATH
 
     db = firestore.Client(project="ai-agents-go")
-    print("Connected to Firestore (ai-agents-go)\n")
+    print(f"Connected to Firestore (ai-agents-go) — Brand: {BRAND}\n")
 
     print("=== Step 1: Import Full Catalog ===")
-    import_full_catalog(db)
+    full_count = import_full_catalog(db)
 
     print("\n=== Step 2: Import US Catalog ===")
-    import_us_catalog(db)
+    us_count = import_us_catalog(db)
 
     print("\n=== Step 3: Import Quotations ===")
     import_quotations(db)
 
     print("\n=== Step 4: Build Category Index ===")
-    build_category_index(db)
+    cat_counts = build_category_index(db, COLLECTION_NAME, BRAND)
+
+    print("\n=== Step 5: Register Brand ===")
+    register_brand(
+        db,
+        brand=BRAND,
+        name="Wisdom Playground",
+        supplier="Wisdom Playground Equipment Co., Ltd.",
+        country="China",
+        product_count=full_count + us_count,
+        categories=list(cat_counts.keys()),
+    )
 
     print("\nImport complete!")
 

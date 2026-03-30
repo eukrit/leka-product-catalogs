@@ -1,36 +1,54 @@
 {
+  "architecture": "multi-brand with separate collections per brand",
+  "naming_convention": "products_{brand}, product_categories_{brand}",
   "collections": {
-    "products": {
-      "description": "Main product catalog - each document is one product line item",
-      "document_id": "{item_code}  (e.g., KB1-TKC1A002)",
+    "brands": {
+      "description": "Brand registry — one document per brand",
+      "document_id": "{brand_slug} (e.g., wisdom, areda)",
       "fields": {
-        "item_code": { "type": "string", "required": true, "description": "Unique product code (e.g., KB1-TKC1A002, QSWP-350106N06)" },
+        "name": { "type": "string", "required": true, "description": "Display name (e.g., Wisdom Playground)" },
+        "supplier": { "type": "string", "required": true, "description": "Supplier company name" },
+        "country": { "type": "string", "required": false, "description": "Country of origin" },
+        "product_count": { "type": "number", "description": "Total products for this brand" },
+        "categories": { "type": "array", "items": { "type": "string" }, "description": "Category slugs used by this brand" },
+        "logo_url": { "type": "string", "required": false, "description": "Brand logo in GCS" },
+        "catalog_url": { "type": "string", "required": false, "description": "Cloud Run URL for this brand's catalog" },
+        "last_import": { "type": "timestamp", "description": "Last data import timestamp" }
+      }
+    },
+    "products_{brand}": {
+      "description": "Per-brand product catalog — each document is one product",
+      "document_id": "{item_code} (unique within brand)",
+      "fields": {
+        "item_code": { "type": "string", "required": true, "description": "Unique product code within this brand" },
+        "brand": { "type": "string", "required": true, "description": "Brand slug (e.g., wisdom)" },
         "description": { "type": "string", "required": true, "description": "English product name" },
-        "description_cn": { "type": "string", "required": false, "description": "Chinese product name (2025年品名)" },
-        "category": { "type": "string", "required": true, "description": "Product category derived from prefix (furniture, playground, outdoor, etc.)" },
-        "subcategory": { "type": "string", "required": false, "description": "Subcategory (cabinet, table, chair, slide, swing, etc.)" },
+        "description_cn": { "type": "string", "required": false, "description": "Chinese product name" },
+        "description_th": { "type": "string", "required": false, "description": "Thai product name" },
+        "category": { "type": "string", "required": true, "description": "Product category (furniture, playground, outdoor, etc.)" },
+        "subcategory": { "type": "string", "required": false, "description": "Subcategory (cabinet, table, chair, slide, etc.)" },
         "material": { "type": "string", "required": false, "description": "Primary material (Wood, PE, Metal, etc.)" },
         "dimensions": {
           "type": "map",
           "fields": {
-            "raw": { "type": "string", "description": "Original size string" },
+            "raw": { "type": "string", "description": "Original size string from catalog" },
             "length_cm": { "type": "number" },
             "width_cm": { "type": "number" },
             "height_cm": { "type": "number" }
           }
         },
         "volume_cbm": { "type": "number", "description": "Product volume in cubic meters" },
-        "weight_kg": { "type": "number", "required": false, "description": "Product weight in kg (US catalog only)" },
+        "weight_kg": { "type": "number", "required": false, "description": "Product weight in kg" },
         "pricing": {
           "type": "map",
           "fields": {
-            "fob_usd": { "type": "number", "description": "FOB Shanghai price in USD" },
+            "fob_usd": { "type": "number", "description": "FOB price in USD" },
             "currency": { "type": "string", "default": "USD" },
-            "price_date": { "type": "string", "description": "Date of price (e.g., 2025-11-07)" }
+            "price_date": { "type": "string", "description": "Date of price (YYYY-MM-DD)" }
           }
         },
         "catalog_page": { "type": "number", "description": "Page number in physical catalog" },
-        "catalog_source": { "type": "string", "description": "Which catalog (china_2025, us_2025, quotation)" },
+        "catalog_source": { "type": "string", "description": "Which catalog (e.g., china_2025, us_2025)" },
         "images": {
           "type": "array",
           "items": {
@@ -39,25 +57,28 @@
               "url": { "type": "string", "description": "GCS or external image URL" },
               "alt_text": { "type": "string" },
               "is_primary": { "type": "boolean" },
-              "source": { "type": "string", "description": "Where image came from (catalog_pdf, slack, manual)" }
+              "source": { "type": "string", "description": "Origin (catalog_pdf, slack, manual)" }
             }
           }
         },
+        "tags": { "type": "array", "items": { "type": "string" }, "required": false, "description": "Free-form searchable tags" },
+        "status": { "type": "string", "description": "active | discontinued | draft", "default": "active" },
         "created_at": { "type": "timestamp" },
         "updated_at": { "type": "timestamp" }
       },
       "indexes": [
         { "fields": ["category", "pricing.fob_usd"], "order": "ASC" },
         { "fields": ["catalog_source", "catalog_page"], "order": "ASC" },
-        { "fields": ["subcategory"], "order": "ASC" }
+        { "fields": ["status", "category"], "order": "ASC" }
       ]
     },
     "quotations": {
-      "description": "Individual quotations referencing products",
+      "description": "Quotations from all brands (filtered by brand field)",
       "document_id": "auto-generated",
       "fields": {
-        "quotation_id": { "type": "string", "description": "Quotation reference (e.g., Quotation20260318)" },
-        "date": { "type": "timestamp" },
+        "quotation_id": { "type": "string", "description": "Quotation reference" },
+        "brand": { "type": "string", "required": true, "description": "Brand slug" },
+        "date": { "type": "string" },
         "source": { "type": "string", "description": "Origin (slack_channel, email, etc.)" },
         "items": {
           "type": "array",
@@ -74,15 +95,16 @@
         "created_at": { "type": "timestamp" }
       }
     },
-    "product_categories": {
-      "description": "Lookup table for category metadata",
+    "product_categories_{brand}": {
+      "description": "Per-brand category lookup table",
       "document_id": "{category_key}",
       "fields": {
         "name": { "type": "string" },
-        "name_cn": { "type": "string" },
+        "brand": { "type": "string" },
+        "name_cn": { "type": "string", "required": false },
         "prefix_patterns": { "type": "array", "items": { "type": "string" } },
         "product_count": { "type": "number" },
-        "icon": { "type": "string" }
+        "icon": { "type": "string", "required": false }
       }
     }
   }

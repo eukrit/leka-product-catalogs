@@ -113,6 +113,11 @@ leka-product-catalogs/
 ├── scripts/                     # Utility scripts
 ├── docs/                        # HTML deployment summaries
 │   └── <brand>.html
+├── shared/                      # Shared multi-brand utilities
+│   ├── __init__.py
+│   ├── base_importer.py         # Common import logic (batch_write, parsing)
+│   ├── category_mapper.py       # Unified category taxonomy
+│   └── image_pipeline.py        # Shared PDF extraction & GCS upload
 ├── <brand-name>/                # One folder per brand
 │   ├── import_to_firestore.py   # Data import pipeline
 │   ├── export_to_json.py        # Static JSON export
@@ -142,11 +147,12 @@ leka-product-catalogs/
 4. Commit and push to GitHub
 5. Do NOT sync to GitHub: `extracted_images/`, `*Slack Downloads/`, `__pycache__/`, `.env`
 
-### Firestore Collections
-- `products` — main product documents (keyed by item_code)
-- `quotations` — quotation documents
-- `product_categories` — category lookup table
-- Multi-brand: add `brand` field or use `products_<brand>` collection
+### Firestore Collections (Multi-Brand Architecture)
+- `brands` — brand registry (one doc per brand, keyed by slug)
+- `products_{brand}` — per-brand product documents (e.g. `products_wisdom`, `products_areda`)
+- `product_categories_{brand}` — per-brand category lookup
+- `quotations` — quotation documents (all brands, filtered by `brand` field)
+- `products` — legacy Wisdom collection (pre-migration, read-only)
 
 ### Image Pipeline
 1. Download catalog PDFs from source (Slack/email/Drive)
