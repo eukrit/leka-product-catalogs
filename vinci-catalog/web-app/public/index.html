@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vinci Play — Product Catalog</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="header-brand">
+        <div class="brand-accent"></div>
+        <div>
+          <div class="brand-title">Vinci Play</div>
+          <div class="brand-subtitle">Playground Equipment Catalog</div>
+        </div>
+      </div>
+      <div class="header-stats">
+        <div class="stat-item">
+          <div class="stat-value" id="stat-products">—</div>
+          <div class="stat-label">Products</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="stat-series">—</div>
+          <div class="stat-label">Series</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Filters -->
+  <section class="filters">
+    <div class="filters-inner">
+      <div class="search-box">
+        <svg class="search-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="8.5" cy="8.5" r="6"/>
+          <path d="M13 13l4 4"/>
+        </svg>
+        <input type="text" class="search-input" id="search" placeholder="Search products by name, code, or description...">
+      </div>
+      <div class="filter-row">
+        <div class="filter-group">
+          <label class="filter-label">Series</label>
+          <select class="filter-select" id="filter-series">
+            <option value="">All Series</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label class="filter-label">Category</label>
+          <select class="filter-select" id="filter-category">
+            <option value="">All Categories</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label class="filter-label">Age Group</label>
+          <select class="filter-select" id="filter-age">
+            <option value="">All Ages</option>
+            <option value="1+">1+ years</option>
+            <option value="3+">3+ years</option>
+            <option value="6+">6+ years</option>
+            <option value="14+">14+ years</option>
+          </select>
+        </div>
+        <button class="btn-secondary" id="btn-reset">Reset</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Series Badges -->
+  <div class="categories" id="series-badges"></div>
+
+  <!-- Product Grid -->
+  <div class="product-grid" id="product-grid">
+    <div class="loading">
+      <div class="spinner"></div>
+      <p>Loading products...</p>
+    </div>
+  </div>
+
+  <!-- Load More -->
+  <div class="load-more" id="load-more" style="display:none;">
+    <button class="btn-primary" id="btn-load-more">Load More Products</button>
+  </div>
+
+  <!-- Product Detail Modal -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal">
+      <button class="modal-close" id="modal-close">&times;</button>
+      <div class="modal-body" id="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div>Vinci Play — Leka Product Catalogs</div>
+    <div class="footer-sub">GO Corporation Co., Ltd. &copy; 2026</div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

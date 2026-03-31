@@ -294,9 +294,9 @@ def scrape_product(url, series_slug, series_name):
         m = re.search(r"[Ff]ree\s*[Ff]all\s*[Hh]eight[:\s]+[<>]?([\d.,]+)\s*cm", page_text)
         if m:
             specs["free_fall_height_cm"] = parse_spec_value(m.group(1))
+    # EN standard — capture only the standard number, not trailing text
     if "en_standard" not in specs:
-        # EN 1176 (playground), EN 16630 (fitness), EN 15312 (sport)
-        m = re.search(r"(EN\s*(?:1176|16630|15312)[\w:+\-. ]*)", page_text)
+        m = re.search(r"(EN\s*(?:1176|16630|15312)[\-\d:]+(?:\+A\d:\d+)?)", page_text)
         if m:
             specs["en_standard"] = m.group(1).strip()
 
@@ -310,12 +310,23 @@ def scrape_product(url, series_slug, series_name):
     }
 
     # --- Images ---
+    # Only collect renders_webp images that match this product's code
     images = []
     seen_urls = set()
-    # Look for render images from zamowienia.vinci-play.pl
+    item_code_lower = product.get("item_code", "").lower().replace("-", "")
+
+    def is_product_image(src):
+        """Check if an image URL is a render for THIS specific product."""
+        src_lower = src.lower()
+        if "renders_webp" not in src_lower:
+            return False
+        filename = src_lower.split("/")[-1]
+        code_clean = item_code_lower.replace("-", "")
+        return code_clean in filename.replace("-", "")
+
     for img in soup.find_all("img", src=True):
         src = img["src"]
-        if "renders_webp" in src or "renders/" in src or "vinci-play" in src:
+        if is_product_image(src):
             full_src = urljoin(BASE_URL, src)
             if full_src not in seen_urls:
                 seen_urls.add(full_src)
@@ -329,32 +340,37 @@ def scrape_product(url, series_slug, series_name):
                     "view_type": view_type,
                     "is_primary": len(images) == 0 and not is_top and not is_front,
                 })
-    # Also check srcset and data-src (lazy loading)
+
+    # Also check data-src (lazy loading) and source srcset
     for img in soup.find_all("img", attrs={"data-src": True}):
         src = img["data-src"]
-        if "renders" in src or "vinci-play" in src:
+        if is_product_image(src):
             full_src = urljoin(BASE_URL, src)
             if full_src not in seen_urls:
                 seen_urls.add(full_src)
+                is_top = "top" in src.lower()
+                is_front = "front" in src.lower()
+                view_type = "top" if is_top else ("front" if is_front else "render")
                 images.append({
                     "url": full_src,
                     "alt_text": img.get("alt", ""),
-                    "view_type": "render",
+                    "view_type": view_type,
                     "is_primary": False,
                 })
-    # Check source elements in picture tags
     for source in soup.find_all("source", srcset=True):
-        srcset = source["srcset"]
-        for src_part in srcset.split(","):
+        for src_part in source["srcset"].split(","):
             src = src_part.strip().split(" ")[0]
-            if "renders" in src or "vinci-play" in src:
+            if is_product_image(src):
                 full_src = urljoin(BASE_URL, src)
                 if full_src not in seen_urls:
                     seen_urls.add(full_src)
+                    is_top = "top" in src.lower()
+                    is_front = "front" in src.lower()
+                    view_type = "top" if is_top else ("front" if is_front else "render")
                     images.append({
                         "url": full_src,
                         "alt_text": "",
-                        "view_type": "render",
+                        "view_type": view_type,
                         "is_primary": False,
                     })
 
@@ -389,7 +405,10 @@ def scrape_product(url, series_slug, series_name):
                     "url": full_href,
                     "label": "2D DWG Drawing",
                 })
-        elif href.endswith(".pdf") or "pdf" in text:
+        elif href.endswith(".pdf"):
+            # Skip general catalog PDFs and keep only product-specific ones
+            if "katalog" in href.lower() or "catalogue" in href.lower():
+                continue
             downloads.append({
                 "type": "document",
                 "format": "pdf",
@@ -459,11 +478,11 @@ def main():
     parser = argparse.ArgumentParser(description="Scrape Vinci Play product catalog")
     parser.add_argument("--series", type=str, help="Scrape only this series (slug)")
     parser.add_argument("--resume", action="store_true", help="Resume from checkpoint")
-    parser.add_argument("--delay", type=float, default=REQUEST_DELAY, help="Delay between requests (seconds)")
+    parser.add_argument("--delay", type=float, default=1.0, help="Delay between requests (seconds)")
     parser.add_argument("--output", type=str, default=OUTPUT_DIR, help="Output directory")
     args = parser.parse_args()
 
-    global REQUEST_DELAY
+    global REQUEST_DELAY  # noqa: PLW0603
     REQUEST_DELAY = args.delay
     os.makedirs(args.output, exist_ok=True)
 
