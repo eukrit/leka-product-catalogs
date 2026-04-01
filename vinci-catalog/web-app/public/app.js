@@ -121,9 +121,8 @@
   }
 
   function renderProducts() {
-    const start = 0;
     const end = (currentPage + 1) * PAGE_SIZE;
-    const visible = filteredProducts.slice(start, end);
+    const visible = filteredProducts.slice(0, end);
 
     if (visible.length === 0) {
       grid.innerHTML = '<div class="no-results"><h3>No products found</h3><p>Try adjusting your filters or search query.</p></div>';
@@ -133,9 +132,28 @@
 
     grid.innerHTML = visible.map(productCard).join('');
     loadMoreWrap.style.display = end < filteredProducts.length ? 'block' : 'none';
+    attachCardHandlers();
+  }
 
-    // Attach click handlers
+  function appendProducts() {
+    const start = currentPage * PAGE_SIZE;
+    const end = (currentPage + 1) * PAGE_SIZE;
+    const chunk = filteredProducts.slice(start, end);
+
+    if (chunk.length === 0) return;
+
+    const fragment = document.createRange().createContextualFragment(
+      chunk.map((p, i) => productCard(p, start + i)).join('')
+    );
+    grid.appendChild(fragment);
+    loadMoreWrap.style.display = end < filteredProducts.length ? 'block' : 'none';
+    attachCardHandlers();
+  }
+
+  function attachCardHandlers() {
     grid.querySelectorAll('.product-card').forEach(card => {
+      if (card.dataset.bound) return;
+      card.dataset.bound = '1';
       card.addEventListener('click', () => {
         const idx = parseInt(card.dataset.index);
         openModal(filteredProducts[idx]);
@@ -286,10 +304,30 @@
     applyFilters();
     renderSeriesBadges();
   });
-  btnLoadMore.addEventListener('click', () => { currentPage++; renderProducts(); });
+  btnLoadMore.addEventListener('click', () => { currentPage++; appendProducts(); });
   modalClose.addEventListener('click', closeModal);
   modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) closeModal(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+  // Infinite scroll via IntersectionObserver
+  let isLoadingMore = false;
+  const sentinel = document.createElement('div');
+  sentinel.id = 'scroll-sentinel';
+  loadMoreWrap.parentNode.insertBefore(sentinel, loadMoreWrap);
+
+  const observer = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting && !isLoadingMore) {
+      const end = (currentPage + 1) * PAGE_SIZE;
+      if (end < filteredProducts.length) {
+        isLoadingMore = true;
+        currentPage++;
+        appendProducts();
+        isLoadingMore = false;
+      }
+    }
+  }, { rootMargin: '400px' });
+
+  observer.observe(sentinel);
 
   function debounce(fn, ms) {
     let timer;
