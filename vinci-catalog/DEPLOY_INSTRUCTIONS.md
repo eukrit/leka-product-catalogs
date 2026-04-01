@@ -1,20 +1,27 @@
 # Vinci Play Catalog — Deploy Instructions
 
-## Resume Session
+## Live URL
+**https://vinci-catalog-538978391890.asia-southeast1.run.app/**
 
-Branch: `claude/project-overview-gNRJV`
+## Branch
+`claude/project-overview-gNRJV`
+
+---
+
+## Remaining Tasks
+
+### Task 1: Full Scrape (all 29 series, ~1,000+ products)
+Currently only 47 Spring series products are live. Run the full scrape to get all products.
 
 ```bash
-git fetch origin claude/project-overview-gNRJV
-git checkout claude/project-overview-gNRJV
+cd leka-product-catalogs
+pip install requests beautifulsoup4
+python vinci-catalog/scrape_catalog.py           # ~30-60 min
+python vinci-catalog/scrape_catalog.py --resume  # if interrupted
 ```
 
-## Deploy to Cloud Run
-
-The previous deploy failed because Cloud Build ran in `asia-south` region.
-Fix: specify `--default-build-region` or use `us-central1` for the build.
-
-### Option A: Deploy with explicit build region (recommended)
+### Task 2: Redeploy with Full Data
+After scraping, redeploy to include all products.
 
 ```bash
 cd vinci-catalog/web-app
@@ -22,18 +29,42 @@ gcloud run deploy vinci-catalog \
   --source . \
   --region asia-southeast1 \
   --allow-unauthenticated \
-  --project ai-agents-go \
-  --default-build-region us-central1
+  --project ai-agents-go
 ```
 
-### Option B: If Option A fails, build and push manually
+### Task 3: Import to Firestore
+Import the scraped data into Firestore for API access and cross-brand queries.
 
 ```bash
-# 1. Build the image
+python vinci-catalog/import_to_firestore.py --dry-run   # preview
+python vinci-catalog/import_to_firestore.py              # write to Firestore
+```
+
+### Task 4: Update Root Service
+Update `src/main.py` brands list and redeploy the root `leka-product-catalogs` service.
+
+### Task 5: Merge to Main
+Once all tasks are verified, merge `claude/project-overview-gNRJV` to `main`.
+
+---
+
+## Deploy Commands Reference
+
+### Standard deploy (what worked)
+```bash
+cd vinci-catalog/web-app
+gcloud run deploy vinci-catalog \
+  --source . \
+  --region asia-southeast1 \
+  --allow-unauthenticated \
+  --project ai-agents-go
+```
+
+### Manual build + deploy (fallback)
+```bash
 cd vinci-catalog/web-app
 gcloud builds submit --tag gcr.io/ai-agents-go/vinci-catalog --project ai-agents-go
 
-# 2. Deploy the image
 gcloud run deploy vinci-catalog \
   --image gcr.io/ai-agents-go/vinci-catalog \
   --region asia-southeast1 \
@@ -43,17 +74,13 @@ gcloud run deploy vinci-catalog \
   --max-instances 3
 ```
 
-### Option C: Deploy via Artifact Registry (if gcr.io is blocked)
-
+### Via Artifact Registry
 ```bash
-# 1. Build
 cd vinci-catalog/web-app
 gcloud builds submit \
   --tag asia-southeast1-docker.pkg.dev/ai-agents-go/leka-product-catalogs/vinci-catalog \
-  --project ai-agents-go \
-  --region us-central1
+  --project ai-agents-go
 
-# 2. Deploy
 gcloud run deploy vinci-catalog \
   --image asia-southeast1-docker.pkg.dev/ai-agents-go/leka-product-catalogs/vinci-catalog \
   --region asia-southeast1 \
@@ -61,33 +88,13 @@ gcloud run deploy vinci-catalog \
   --project ai-agents-go
 ```
 
-## Expected Output
+---
 
-```
-Service [vinci-catalog] revision [...] has been deployed
-Service URL: https://vinci-catalog-xxxxxxxxxx-as.a.run.app
-```
-
-## After Deploy
-
-1. Visit the URL to verify the catalog loads
-2. Share the URL back — CLAUDE.md and DEPLOYMENT_LOG.md will be updated
-
-## Full Scrape (optional — only 47 Spring products included now)
-
-```bash
-cd leka-product-catalogs
-pip install requests beautifulsoup4
-python vinci-catalog/scrape_catalog.py           # all 29 series
-python vinci-catalog/scrape_catalog.py --resume  # if interrupted
-```
-
-Then redeploy to include all products.
-
-## What's in This Branch
+## Commit History
 
 | Commit | Description |
 |--------|-------------|
+| `5d38bda` | Deploy instructions + .dockerignore |
 | `527271d` | Dockerfile + cloudbuild.yaml for Cloud Run |
 | `5d9a3b8` | Web app (HTML/CSS/JS) + scraper fixes |
 | `8b5f49c` | Correct series slugs for arena/jumpoo/steel+ |

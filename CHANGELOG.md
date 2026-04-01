@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.1] - 2026-04-01
+
+### Deployed — Vinci Play Catalog
+- Live URL: https://vinci-catalog-538978391890.asia-southeast1.run.app/
+- Cloud Run service `vinci-catalog` in asia-southeast1
+- 47 Spring series products live (full scrape pending)
+- Dockerfile + .dockerignore for Cloud Run deploy
+- Deploy instructions in `vinci-catalog/DEPLOY_INSTRUCTIONS.md`
+
 ## [0.3.0] - 2026-03-30
 
 ### Added — Vinci Play Brand

@@ -1,5 +1,33 @@
 # Vinci Play Catalog — Deployment Log
 
+## 2026-04-01 — Cloud Run Deployment (v1 — Spring Series)
+
+### Live URL
+**https://vinci-catalog-538978391890.asia-southeast1.run.app/**
+
+### What's Live
+- Web app with Leka Design System (Manrope, purple/navy/cream palette)
+- 47 Spring series products with full data
+- Search, filter by series/category/age, series badges
+- Product detail modal: specs, images, downloads, certifications
+- Health endpoint: `/health`
+- Data endpoint: `/data/products_all.json`
+
+### GCP Resources
+- Cloud Run Service: `vinci-catalog`
+- Region: `asia-southeast1`
+- Project: `ai-agents-go`
+- Memory: 256Mi
+- Image: built via `gcloud run deploy --source`
+
+### Verified
+- [x] Health check returns `{"status": "ok", "brand": "vinci"}`
+- [x] Product data serves 47 products via JSON API
+- [x] Images load from `zamowienia.vinci-play.pl`
+- [x] Downloads link to tech sheets, DWG 2D/3D
+
+---
+
 ## 2026-03-30 — Initial Setup
 
 ### Changes
@@ -30,7 +58,8 @@
 ### Status
 - [x] Scraper built
 - [x] Firestore importer built
-- [ ] Initial scrape run
+- [x] Test scrape run (47 Spring products)
+- [ ] Full scrape run (all 29 series)
 - [ ] Firestore import run
-- [ ] Web app built
-- [ ] Cloud Run deployed
+- [x] Web app built
+- [x] Cloud Run deployed
