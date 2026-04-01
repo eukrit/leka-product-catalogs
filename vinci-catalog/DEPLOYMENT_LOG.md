@@ -30,8 +30,8 @@
 ### Status
 - [x] Scraper built
 - [x] Firestore importer built
-- [ ] Initial scrape run (full — only Spring series scraped so far)
-- [ ] Firestore import run
+- [x] Initial scrape run (1,172 products across 29 series)
+- [x] Firestore import run (products_vinci collection)
 - [x] Web app built
 - [x] Cloud Run deployed
 
@@ -59,3 +59,28 @@
 ### Issues Resolved
 - Cloud Build failed in asia-south region — used `--region us-central1` for build
 - Artifact Registry repo `leka-product-catalogs` didn't exist — created it
+
+---
+
+## 2026-04-01 — Full Scrape + Firestore Import + Redeploy
+
+### Changes
+- Full scrape of all 29 series completed (1,172 products, ~50 min)
+- Redeployed web app with full product data (revision vinci-catalog-00002-vsj)
+- Imported all 1,172 products to Firestore `products_vinci` collection
+- Built category index in `product_categories_vinci`
+- Registered Vinci brand in `brands/vinci`
+- Fixed service account credential path (eukri → Eukrit)
+
+### Product Breakdown by Category
+| Category | Count |
+|----------|-------|
+| playground | 822 |
+| fitness | 128 |
+| climbing | 82 |
+| outdoor | 52 |
+| sports | 16 |
+| early_years | 13 |
+
+### Series Breakdown
+29 series scraped — largest: ROBINIA (257), RECYCLED (158), SOLO (109)

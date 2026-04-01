@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.5.0] - 2026-04-01
+
+### Added — Full Vinci Play Catalog (1,172 products)
+- Full website scrape of all 29 Vinci Play series (1,172 products)
+- Firestore import to `products_vinci` collection with category index
+- Brand registration in `brands/vinci`
+- Redeployed web app with complete product data
+
+### Fixed
+- Service account credential path case mismatch (eukri → Eukrit)
+
 ## [0.4.0] - 2026-04-01
 
 ### Added — Vinci Play Web App & Cloud Run Deployment

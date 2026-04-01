@@ -1,8 +1,179 @@
 [
   {
+    "slug": "robinia",
+    "name": "ROBINIA",
+    "description": "Acacia wood playground equipment",
+    "product_count": 257
+  },
+  {
+    "slug": "wooden",
+    "name": "WOODEN",
+    "description": "Wooden playground equipment",
+    "product_count": 49
+  },
+  {
+    "slug": "naturo",
+    "name": "NATURO",
+    "description": "Natural wood playground",
+    "product_count": 29
+  },
+  {
+    "slug": "recycled",
+    "name": "RECYCLED",
+    "description": "Recycled material playground equipment",
+    "product_count": 158
+  },
+  {
+    "slug": "castillo",
+    "name": "CASTILLO",
+    "description": "Castle-themed towers and sets",
+    "product_count": 14
+  },
+  {
+    "slug": "jungle",
+    "name": "JUNGLE",
+    "description": "Tropical forest motif towers",
+    "product_count": 11
+  },
+  {
+    "slug": "space",
+    "name": "SPACE",
+    "description": "Space stations and rocket towers",
+    "product_count": 11
+  },
+  {
+    "slug": "maxx",
+    "name": "MAXX",
+    "description": "Large multi-functional structures",
+    "product_count": 17
+  },
+  {
+    "slug": "roxx",
+    "name": "ROXX",
+    "description": "Geometric climbing modules",
+    "product_count": 6
+  },
+  {
+    "slug": "steel",
+    "name": "STEEL",
+    "description": "Steel playground equipment",
+    "product_count": 17
+  },
+  {
+    "slug": "steelplus",
+    "listing_slug": "steel-048",
+    "name": "STEEL+",
+    "description": "Enhanced steel playground equipment",
+    "product_count": 39
+  },
+  {
+    "slug": "crooc",
+    "name": "CROOC",
+    "description": "Stainless steel playground equipment",
+    "product_count": 13
+  },
+  {
+    "slug": "topicco",
+    "name": "TOPICCO",
+    "description": "Creative vehicles",
+    "product_count": 6
+  },
+  {
+    "slug": "solo",
+    "name": "SOLO",
+    "description": "Single play devices",
+    "product_count": 109
+  },
+  {
+    "slug": "minisweet",
+    "name": "MINISWEET",
+    "description": "Play sets for young children",
+    "product_count": 15
+  },
+  {
+    "slug": "climboo",
+    "name": "CLIMBOO",
+    "description": "Climbing and fitness equipment",
+    "product_count": 62
+  },
+  {
+    "slug": "nettix",
+    "name": "NETTIX",
+    "description": "Activity equipment and ropeways",
+    "product_count": 21
+  },
+  {
     "slug": "spring",
     "name": "SPRING",
     "description": "Spring riders",
     "product_count": 47
+  },
+  {
+    "slug": "swing",
+    "name": "SWING",
+    "description": "Swings",
+    "product_count": 56
+  },
+  {
+    "slug": "hoop",
+    "name": "HOOP",
+    "description": "Playground carousels",
+    "product_count": 17
+  },
+  {
+    "slug": "arena",
+    "listing_slug": "arena-fe8",
+    "name": "ARENA",
+    "description": "Multifunctional playing fields",
+    "product_count": 18
+  },
+  {
+    "slug": "jumpoo",
+    "listing_slug": "jumpoo-f94",
+    "name": "JUMPOO",
+    "description": "Trampolines",
+    "product_count": 13
+  },
+  {
+    "slug": "fitness",
+    "name": "FITNESS",
+    "description": "Fitness activity equipment",
+    "product_count": 68
+  },
+  {
+    "slug": "workout",
+    "name": "WORKOUT",
+    "description": "Bodyweight training equipment",
+    "product_count": 54
+  },
+  {
+    "slug": "workout-pro",
+    "name": "WORKOUT PRO",
+    "description": "Professional training equipment",
+    "product_count": 0
+  },
+  {
+    "slug": "active",
+    "name": "ACTIVE",
+    "description": "Equipment for seniors",
+    "product_count": 11
+  },
+  {
+    "slug": "woof",
+    "name": "WOOF",
+    "description": "Dog agility equipment",
+    "product_count": 12
+  },
+  {
+    "slug": "park",
+    "name": "PARK",
+    "description": "Small architecture",
+    "product_count": 42
+  },
+  {
+    "slug": "stock",
+    "name": "STOCK",
+    "description": "Ready-to-ship products",
+    "product_count": 0
   }
 ]
