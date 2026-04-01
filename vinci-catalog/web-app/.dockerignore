@@ -1,0 +1,6 @@
+__pycache__/
+*.py[cod]
+.scrape_checkpoint.json
+*.env
+.git
+.gitignore
