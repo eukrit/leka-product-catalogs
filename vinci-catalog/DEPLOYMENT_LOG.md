@@ -30,7 +30,32 @@
 ### Status
 - [x] Scraper built
 - [x] Firestore importer built
-- [ ] Initial scrape run
+- [ ] Initial scrape run (full — only Spring series scraped so far)
 - [ ] Firestore import run
-- [ ] Web app built
-- [ ] Cloud Run deployed
+- [x] Web app built
+- [x] Cloud Run deployed
+
+---
+
+## 2026-04-01 — Cloud Run Deployment
+
+### Changes
+- Created Artifact Registry repo `leka-product-catalogs` in asia-southeast1
+- Built Docker image via Cloud Build (us-central1)
+- Deployed to Cloud Run as `vinci-catalog` service
+
+### Cloud Run
+- Service: `vinci-catalog`
+- URL: https://vinci-catalog-538978391890.asia-southeast1.run.app
+- Region: asia-southeast1
+- Memory: 256Mi
+- Max instances: 3
+- Image: `asia-southeast1-docker.pkg.dev/ai-agents-go/leka-product-catalogs/vinci-catalog`
+
+### Data
+- 47 products from Spring series (static JSON in web-app/public/data/)
+- Full scrape of all 29 series still pending
+
+### Issues Resolved
+- Cloud Build failed in asia-south region — used `--region us-central1` for build
+- Artifact Registry repo `leka-product-catalogs` didn't exist — created it

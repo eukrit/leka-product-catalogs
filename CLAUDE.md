@@ -95,7 +95,7 @@ All catalogs use the **Leka Design System** (Figma: `ER6pbDqrJ4Uo9FuldnYBfm`):
 | Brand | Subfolder | Cloud Run URL | Products | Source |
 |-------|-----------|---------------|----------|--------|
 | Wisdom | `wisdom-catalog/` | TBD | 5,071 | Excel catalogs |
-| Vinci Play | `vinci-catalog/` | TBD | ~1,000+ | vinci-play.com scrape |
+| Vinci Play | `vinci-catalog/` | https://vinci-catalog-538978391890.asia-southeast1.run.app | 47 (Spring series) | vinci-play.com scrape |
 
 ## Project Structure (enforced)
 ```

@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.4.0] - 2026-04-01
+
+### Added — Vinci Play Web App & Cloud Run Deployment
+- Web app with Leka Design System for browsing Vinci Play products
+- Dockerfile and Cloud Build config for containerized deployment
+- Cloud Run service `vinci-catalog` at https://vinci-catalog-538978391890.asia-southeast1.run.app
+- Artifact Registry repo `leka-product-catalogs` in asia-southeast1
+- 47 Spring series products with static JSON data
+- `.dockerignore` and deploy instructions
+
 ## [0.3.0] - 2026-03-30
 
 ### Added — Vinci Play Brand
