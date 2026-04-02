@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leka — Product Catalogs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --purple: #8003FF;
+      --navy: #182557;
+      --cream: #FFF9E6;
+      --magenta: #970260;
+      --amber: #FFA900;
+      --red-orange: #E54822;
+      --white: #FFFFFF;
+      --navy-08: rgba(24, 37, 87, 0.08);
+      --font: 'Manrope', sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--font); background: #F5F3EF; color: var(--navy); min-height: 100vh; }
+
+    .header {
+      background: var(--navy);
+      padding: 48px 0;
+      text-align: center;
+    }
+    .header-inner { max-width: 960px; margin: 0 auto; padding: 0 40px; }
+    .header-accent {
+      width: 48px; height: 6px;
+      background: var(--purple);
+      border-radius: 4px;
+      margin: 0 auto 24px;
+    }
+    .header-title {
+      font-size: 40px; font-weight: 800;
+      color: var(--cream); letter-spacing: -1px;
+    }
+    .header-sub {
+      font-size: 16px; font-weight: 400;
+      color: var(--cream); opacity: 0.6;
+      margin-top: 8px;
+    }
+
+    .collections {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 48px 40px;
+    }
+    .section-label {
+      font-size: 13px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1.5px;
+      color: var(--purple); margin-bottom: 24px;
+    }
+
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
+
+    .card {
+      background: var(--white);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px var(--navy-08);
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+      text-decoration: none; color: inherit;
+      display: block;
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(24,37,87,0.12); }
+
+    .card-banner {
+      height: 120px;
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .card-banner-title {
+      font-size: 28px; font-weight: 800;
+      color: var(--white); letter-spacing: -0.5px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    .card-country {
+      position: absolute; top: 12px; right: 12px;
+      font-size: 11px; font-weight: 600;
+      background: rgba(255,255,255,0.2); color: var(--white);
+      padding: 4px 10px; border-radius: 9999px;
+      backdrop-filter: blur(4px);
+    }
+
+    .card-body { padding: 20px; }
+    .card-desc {
+      font-size: 15px; font-weight: 500;
+      color: var(--navy); margin-bottom: 16px;
+    }
+    .card-stats { display: flex; gap: 24px; }
+    .card-stat-value { font-size: 22px; font-weight: 800; color: var(--navy); }
+    .card-stat-label { font-size: 11px; font-weight: 500; color: var(--navy); opacity: 0.5; text-transform: uppercase; letter-spacing: 0.5px; }
+
+    .card-footer {
+      padding: 14px 20px;
+      border-top: 1px solid var(--navy-08);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .card-link {
+      font-size: 13px; font-weight: 700; color: var(--purple);
+    }
+    .card-arrow { font-size: 18px; color: var(--purple); }
+
+    .empty-state {
+      text-align: center; padding: 80px 40px;
+      color: var(--navy); opacity: 0.4;
+    }
+    .empty-state h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+
+    .footer {
+      text-align: center;
+      padding: 32px;
+      font-size: 13px; font-weight: 500;
+      color: var(--navy); opacity: 0.4;
+    }
+
+    @media (max-width: 640px) {
+      .header { padding: 32px 0; }
+      .header-title { font-size: 28px; }
+      .collections { padding: 32px 20px; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-inner">
+      <div class="header-accent"></div>
+      <div class="header-title">Leka Catalogs</div>
+      <div class="header-sub">Product collections by GO Corporation</div>
+    </div>
+  </header>
+
+  <section class="collections">
+    <div class="section-label">Collections</div>
+    <div class="grid" id="grid">
+      <div class="empty-state"><h3>Loading...</h3></div>
+    </div>
+  </section>
+
+  <footer class="footer">GO Corporation Co., Ltd. &copy; 2026</footer>
+
+  <script>
+    (async function () {
+      const grid = document.getElementById('grid');
+      try {
+        const res = await fetch('/api/brands');
+        const brands = await res.json();
+
+        if (brands.length === 0) {
+          grid.innerHTML = '<div class="empty-state"><h3>No collections yet</h3><p>Check back soon.</p></div>';
+          return;
+        }
+
+        grid.innerHTML = brands.map(b => `
+          <a class="card" href="${b.url}">
+            <div class="card-banner" style="background: ${b.color}">
+              <div class="card-banner-title">${esc(b.name)}</div>
+              <div class="card-country">${esc(b.country)}</div>
+            </div>
+            <div class="card-body">
+              <div class="card-desc">${esc(b.description)}</div>
+              <div class="card-stats">
+                <div><div class="card-stat-value">${b.product_count.toLocaleString()}</div><div class="card-stat-label">Products</div></div>
+                <div><div class="card-stat-value">${b.series_count}</div><div class="card-stat-label">Series</div></div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <span class="card-link">Browse catalog</span>
+              <span class="card-arrow">&rarr;</span>
+            </div>
+          </a>
+        `).join('');
+      } catch (e) {
+        grid.innerHTML = '<div class="empty-state"><h3>Failed to load</h3><p>' + e.message + '</p></div>';
+      }
+
+      function esc(s) {
+        const d = document.createElement('div');
+        d.textContent = s;
+        return d.innerHTML;
+      }
+    })();
+  </script>
+</body>
+</html>
