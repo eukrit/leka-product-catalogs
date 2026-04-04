@@ -18,7 +18,7 @@ from google.cloud import firestore
 DOWNLOADS_DIR = r"C:\Users\eukri\OneDrive\Documents\Claude Code\2026 Product Catalogs Claude\Wisdom Slack Downloads"
 REPORT_DIR = r"C:\Users\eukri\OneDrive\Documents\Claude Code\2026 Product Catalogs Claude\docs"
 
-db = firestore.Client(project="ai-agents-go")
+db = firestore.Client(project="ai-agents-go", database="leka-product-catalogs")
 
 
 def load_firestore_products():

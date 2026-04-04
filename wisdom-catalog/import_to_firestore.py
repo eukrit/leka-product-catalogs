@@ -203,7 +203,7 @@ def import_quotations(db):
 def main():
     os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = SERVICE_ACCOUNT_PATH
 
-    db = firestore.Client(project="ai-agents-go")
+    db = firestore.Client(project="ai-agents-go", database="leka-product-catalogs")
     print(f"Connected to Firestore (ai-agents-go) — Brand: {BRAND}\n")
 
     print("=== Step 1: Import Full Catalog ===")

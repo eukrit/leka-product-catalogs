@@ -31,7 +31,7 @@ os.makedirs(IMG_DIR, exist_ok=True)
 
 # All product codes from Firestore
 def load_product_codes():
-    db = firestore.Client(project="ai-agents-go")
+    db = firestore.Client(project="ai-agents-go", database="leka-product-catalogs")
     codes = set()
     for doc in db.collection("products").stream():
         codes.add(doc.id)
@@ -219,7 +219,7 @@ def upload_and_update(all_mappings):
     print(f"  Uploaded {len(uploaded_files)} unique images to GCS")
 
     # Clear old images and set new ones in Firestore
-    db = firestore.Client(project="ai-agents-go")
+    db = firestore.Client(project="ai-agents-go", database="leka-product-catalogs")
 
     # First clear all existing
     batch = db.batch()

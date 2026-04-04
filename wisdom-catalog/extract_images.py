@@ -127,7 +127,7 @@ def upload_to_gcs(results):
 
 def update_firestore(results):
     """Link uploaded images to products in Firestore."""
-    db = firestore.Client(project="ai-agents-go")
+    db = firestore.Client(project="ai-agents-go", database="leka-product-catalogs")
 
     # Build mapping: product_code -> list of images
     code_to_images = {}

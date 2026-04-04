@@ -68,7 +68,7 @@ Master instructions: `Credentials Claude Code/Instructions/API Access Master Ins
 |----------|-------|
 | GCP Project | `ai-agents-go` |
 | Service Account | `claude@ai-agents-go.iam.gserviceaccount.com` |
-| Firestore | Native mode, default database |
+| Firestore | Native mode, database `leka-product-catalogs` (asia-southeast1) |
 | GCS Bucket | `ai-agents-go-documents` (public read, uniform bucket-level access) |
 | Cloud Build | GitHub connection `github-eukrit` (us-central1) |
 | Cloud Run | asia-southeast1 region |
@@ -149,6 +149,9 @@ leka-product-catalogs/
 5. Do NOT sync to GitHub: `extracted_images/`, `*Slack Downloads/`, `__pycache__/`, `.env`
 
 ### Firestore Collections (Multi-Brand Architecture)
+All collections live in the **`leka-product-catalogs`** database (not `(default)`).
+All `firestore.Client()` calls must include `database="leka-product-catalogs"`.
+
 - `brands` — brand registry (one doc per brand, keyed by slug)
 - `products_{brand}` — per-brand product documents (e.g. `products_wisdom`, `products_areda`)
 - `product_categories_{brand}` — per-brand category lookup
