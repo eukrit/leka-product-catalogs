@@ -46,10 +46,20 @@ build/
 venv/
 *.egg
 
-# Node (for package.json scripts only)
+# Node
 node_modules/
 npm-debug.log*
-package-lock.json
+
+# Next.js
+.next/
+out/
+
+# Medusa
+.medusa/
+uploads/
+
+# Migration data (large JSON exports)
+migration/
 
 # OS
 .DS_Store

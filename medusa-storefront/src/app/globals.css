@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap");
+
+@layer base {
+  body {
+    @apply font-sans text-leka-navy bg-white antialiased;
+  }
+}
+
+@layer components {
+  .badge {
+    @apply inline-flex items-center gap-1.5 px-3 py-1.5 rounded-badge text-sm font-semibold cursor-pointer transition-all;
+  }
+  .badge-purple {
+    @apply bg-leka-purple text-white;
+  }
+  .badge-navy {
+    @apply bg-leka-navy text-white;
+  }
+  .badge-amber {
+    @apply bg-leka-amber text-leka-navy;
+  }
+  .badge-magenta {
+    @apply bg-leka-magenta text-white;
+  }
+  .badge-red-orange {
+    @apply bg-leka-red-orange text-white;
+  }
+  .badge-outline {
+    @apply bg-white text-leka-navy border border-gray-200 hover:border-leka-purple hover:text-leka-purple;
+  }
+  .badge-count {
+    @apply text-xs opacity-75;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 bg-leka-purple text-white font-semibold rounded-button hover:bg-leka-purple/90 transition-colors;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3 bg-white text-leka-navy font-semibold rounded-button border border-gray-200 hover:border-leka-purple hover:text-leka-purple transition-colors;
+  }
+
+  .card {
+    @apply bg-white rounded-card shadow-card overflow-hidden hover:shadow-card-hover transition-shadow;
+  }
+}

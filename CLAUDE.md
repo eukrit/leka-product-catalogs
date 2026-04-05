@@ -7,14 +7,17 @@
 - GitHub Repo: https://github.com/eukrit/leka-product-catalogs
 - GCP Project ID: ai-agents-go
 - GCP Project Number: 538978391890
-- Cloud Run Service: leka-product-catalogs
+- Cloud Run Services: leka-medusa-backend (Medusa v2), leka-medusa-storefront (Next.js)
 - Region: asia-southeast1
 - Service Account: claude@ai-agents-go.iam.gserviceaccount.com
 - Artifact Registry: asia-southeast1-docker.pkg.dev/ai-agents-go/leka-product-catalogs
-- Language: python
+- Backend: Medusa Commerce v2 (TypeScript/Node.js)
+- Frontend: Next.js 15 (React/TypeScript)
+- Database: Cloud SQL PostgreSQL 15
+- Cache: Memorystore Redis
 
 ## What This Project Does
-Multi-brand product catalog system hosted on GCP. Each brand gets its own subfolder with a complete pipeline: data import, image extraction, Firestore storage, and Cloud Run web app. All catalogs use the **Leka Design System**.
+Multi-brand product catalog and e-commerce system powered by Medusa Commerce v2, hosted on GCP. Each brand is a Medusa Sales Channel with its own product set, pricing, and storefront. Features: product browsing, search, filtering, cart, checkout, order management, and admin dashboard. All catalogs use the **Leka Design System**.
 
 ## Related Repos
 - **accounting-automation** (master) — Peak API, Xero, MCP server → `eukrit/accounting-automation`

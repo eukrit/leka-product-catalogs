@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.0] - 2026-04-06
+
+### Changed — Medusa Commerce v2 Migration
+- **Backend**: Migrated from Python/Flask/Firestore to Medusa Commerce v2 (TypeScript/Node.js/PostgreSQL)
+- **Frontend**: Migrated from vanilla JS static app to Next.js 15 with Tailwind CSS
+- **Database**: Migrated from Firestore to Cloud SQL PostgreSQL 15
+- **Architecture**: Products now managed via Medusa Admin API with Sales Channels per brand
+
+### Added
+- `medusa-backend/` — Medusa v2 backend with custom API routes for specifications and downloads
+- `medusa-storefront/` — Next.js storefront with Leka Design System (Tailwind)
+- Full e-commerce: cart, checkout, customer accounts, order management
+- Multi-brand via Medusa Sales Channels (Wisdom, Vinci Play)
+- Product detail pages (replaces modal) with image gallery, specs, downloads, certifications
+- Customer authentication (login, register, order history)
+- `scripts/export_firestore_to_json.py` — Firestore data export for migration
+- `medusa-backend/src/scripts/seed-from-firestore.ts` — Medusa seed script
+- `shared/medusa_importer.py` — Medusa Admin API import helper
+- `wisdom-catalog/import_to_medusa.py` — Wisdom Excel → Medusa importer
+- `vinci-catalog/import_to_medusa.py` — Vinci JSON → Medusa importer
+- Updated `cloudbuild.yaml` for multi-service build (backend + storefront)
+
+### Deprecated
+- `src/main.py` (Flask gateway) — replaced by Medusa backend
+- `*/import_to_firestore.py` — replaced by `*/import_to_medusa.py`
+- `vinci-catalog/web-app/` — replaced by `medusa-storefront/`
+- Firestore collections — data migrated to PostgreSQL
+
 ## [0.5.0] - 2026-04-01
 
 ### Added — Full Vinci Play Catalog (1,172 products)

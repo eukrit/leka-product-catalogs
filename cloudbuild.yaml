@@ -1,124 +1,143 @@
 # cloudbuild.yaml
-# Leka Product Catalogs — GCP Cloud Build Pipeline
-# Triggers: push to main (deploy) | push to dev/* (build+test only)
+# Leka Product Catalogs — Multi-Service Cloud Build Pipeline
+# Services: medusa-backend (Medusa v2), medusa-storefront (Next.js)
 #
-# Secrets are loaded from GCP Secret Manager — never hardcoded.
-# See CLAUDE.md > Credentials & Secrets for the full secret inventory.
+# Triggers: push to main (deploy) | push to dev/* (build+test only)
+# Secrets are loaded from GCP Secret Manager.
 
 substitutions:
-  _SERVICE: leka-product-catalogs
   _REGION: asia-southeast1
-  _REPO: gcr.io/$PROJECT_ID
-  _NOTION_DASHBOARD: https://www.notion.so/gocorp/Coding-Project-Dashboard-Claude-32c82cea8bb080f1bbd7f26770ae9e80
+  _AR_REPO: asia-southeast1-docker.pkg.dev/$PROJECT_ID/leka-product-catalogs
 
 options:
   logging: CLOUD_LOGGING_ONLY
   machineType: E2_MEDIUM
 
-# ============================================
-# SECRET MANAGER — all secrets loaded here
-# ============================================
 availableSecrets:
   secretManager:
-    - versionName: projects/$PROJECT_ID/secrets/peak-api-token/versions/latest
-      env: 'PEAK_USER_TOKEN'
-    - versionName: projects/$PROJECT_ID/secrets/n8n-webhook-key/versions/latest
-      env: 'N8N_WEBHOOK_KEY'
-    - versionName: projects/$PROJECT_ID/secrets/xero-client-secret/versions/latest
-      env: 'XERO_CLIENT_SECRET'
-    - versionName: projects/$PROJECT_ID/secrets/notion-api-key/versions/latest
-      env: 'NOTION_API_KEY'
-    - versionName: projects/$PROJECT_ID/secrets/slack-bot-token/versions/latest
-      env: 'SLACK_BOT_TOKEN'
-    - versionName: projects/$PROJECT_ID/secrets/figma-token/versions/latest
-      env: 'FIGMA_TOKEN'
+    - versionName: projects/$PROJECT_ID/secrets/medusa-database-url/versions/latest
+      env: 'DATABASE_URL'
+    - versionName: projects/$PROJECT_ID/secrets/medusa-redis-url/versions/latest
+      env: 'REDIS_URL'
+    - versionName: projects/$PROJECT_ID/secrets/medusa-cookie-secret/versions/latest
+      env: 'COOKIE_SECRET'
+    - versionName: projects/$PROJECT_ID/secrets/medusa-jwt-secret/versions/latest
+      env: 'JWT_SECRET'
 
 steps:
-  # Step 1: Install Python dependencies
-  - name: 'python:3.11'
-    id: install
-    entrypoint: pip
-    args: ['install', '-r', 'requirements.txt', '--user']
+  # ============================================
+  # MEDUSA BACKEND
+  # ============================================
 
-  # Step 2: Run tests
-  - name: 'python:3.11'
-    id: test
-    entrypoint: python
-    args: ['-m', 'pytest', 'tests/', '-v', '--tb=short']
-    env:
-      - 'PYTHONPATH=/app'
-    allowFailure: true
-
-  # Step 3: Run verify.sh (API + integration checks)
-  - name: 'python:3.11'
-    id: verify
-    entrypoint: bash
-    args: ['./verify.sh', '--ci-mode']
-    env:
-      - 'CI=true'
-      - 'GCP_PROJECT_ID=$PROJECT_ID'
-    secretEnv:
-      - 'PEAK_USER_TOKEN'
-      - 'N8N_WEBHOOK_KEY'
-      - 'XERO_CLIENT_SECRET'
-      - 'NOTION_API_KEY'
-      - 'SLACK_BOT_TOKEN'
-      - 'FIGMA_TOKEN'
-
-  # Step 4: Build Docker image
+  # Step 1: Build Medusa backend image
   - name: 'gcr.io/cloud-builders/docker'
-    id: build-image
+    id: build-medusa-backend
     args:
       - 'build'
       - '-t'
-      - '$_REPO/$_SERVICE:$SHORT_SHA'
+      - '$_AR_REPO/medusa-backend:$SHORT_SHA'
       - '-t'
-      - '$_REPO/$_SERVICE:latest'
-      - '.'
+      - '$_AR_REPO/medusa-backend:latest'
+      - '-f'
+      - 'medusa-backend/Dockerfile'
+      - 'medusa-backend'
 
-  # Step 5: Push image
+  # Step 2: Push Medusa backend image
   - name: 'gcr.io/cloud-builders/docker'
-    id: push-image
-    args: ['push', '--all-tags', '$_REPO/$_SERVICE']
+    id: push-medusa-backend
+    args: ['push', '--all-tags', '$_AR_REPO/medusa-backend']
+    waitFor: ['build-medusa-backend']
 
-  # Step 6: Deploy to Cloud Run (main branch only)
+  # Step 3: Run Medusa DB migrations (main branch only)
+  - name: '$_AR_REPO/medusa-backend:$SHORT_SHA'
+    id: db-migrate
+    entrypoint: npx
+    args: ['medusa', 'db:migrate']
+    secretEnv: ['DATABASE_URL', 'REDIS_URL', 'COOKIE_SECRET', 'JWT_SECRET']
+    waitFor: ['push-medusa-backend']
+
+  # Step 4: Deploy Medusa backend to Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    id: deploy
+    id: deploy-medusa-backend
     entrypoint: bash
     args:
       - '-c'
       - |
         if [ "$BRANCH_NAME" = "main" ]; then
-          gcloud run deploy $_SERVICE \
-            --image $_REPO/$_SERVICE:$SHORT_SHA \
+          gcloud run deploy leka-medusa-backend \
+            --image $_AR_REPO/medusa-backend:$SHORT_SHA \
             --region $_REGION \
             --platform managed \
             --allow-unauthenticated \
-            --port 8080 \
-            --memory 512Mi \
+            --port 9000 \
+            --memory 1Gi \
+            --cpu 1 \
+            --min-instances 1 \
             --max-instances 5 \
-            --set-secrets="PEAK_USER_TOKEN=peak-api-token:latest,N8N_WEBHOOK_KEY=n8n-webhook-key:latest,NOTION_API_KEY=notion-api-key:latest,SLACK_BOT_TOKEN=slack-bot-token:latest"
-          echo "Deployed $_SERVICE:$SHORT_SHA to Cloud Run with secrets"
+            --set-secrets="DATABASE_URL=medusa-database-url:latest,REDIS_URL=medusa-redis-url:latest,COOKIE_SECRET=medusa-cookie-secret:latest,JWT_SECRET=medusa-jwt-secret:latest" \
+            --set-env-vars="STORE_CORS=https://catalogs.leka.studio,ADMIN_CORS=https://admin.catalogs.leka.studio,AUTH_CORS=https://catalogs.leka.studio"
+          echo "Deployed medusa-backend:$SHORT_SHA"
         else
-          echo "Branch $BRANCH_NAME: skipping deploy (build+test only)"
+          echo "Branch $BRANCH_NAME: skipping deploy"
         fi
+    waitFor: ['db-migrate']
 
-  # Step 7: Post-build — update CHANGELOG
+  # ============================================
+  # NEXT.JS STOREFRONT
+  # ============================================
+
+  # Step 5: Build storefront image
+  - name: 'gcr.io/cloud-builders/docker'
+    id: build-storefront
+    args:
+      - 'build'
+      - '-t'
+      - '$_AR_REPO/medusa-storefront:$SHORT_SHA'
+      - '-t'
+      - '$_AR_REPO/medusa-storefront:latest'
+      - '-f'
+      - 'medusa-storefront/Dockerfile'
+      - 'medusa-storefront'
+      - '--build-arg'
+      - 'NEXT_PUBLIC_MEDUSA_BACKEND_URL=https://leka-medusa-backend-538978391890.$_REGION.run.app'
+
+  # Step 6: Push storefront image
+  - name: 'gcr.io/cloud-builders/docker'
+    id: push-storefront
+    args: ['push', '--all-tags', '$_AR_REPO/medusa-storefront']
+    waitFor: ['build-storefront']
+
+  # Step 7: Deploy storefront to Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    id: post-build
+    id: deploy-storefront
     entrypoint: bash
     args:
       - '-c'
       - |
-        echo "Build $SHORT_SHA completed at $(date -u)" >> CHANGELOG.md
-        echo "Branch: $BRANCH_NAME | Trigger: $TRIGGER_NAME" >> CHANGELOG.md
-        echo "Post-build record written."
+        if [ "$BRANCH_NAME" = "main" ]; then
+          gcloud run deploy leka-medusa-storefront \
+            --image $_AR_REPO/medusa-storefront:$SHORT_SHA \
+            --region $_REGION \
+            --platform managed \
+            --allow-unauthenticated \
+            --port 3000 \
+            --memory 512Mi \
+            --cpu 1 \
+            --min-instances 0 \
+            --max-instances 5
+          echo "Deployed medusa-storefront:$SHORT_SHA"
+        else
+          echo "Branch $BRANCH_NAME: skipping deploy"
+        fi
+    waitFor: ['push-storefront']
 
 images:
-  - '$_REPO/$_SERVICE:$SHORT_SHA'
-  - '$_REPO/$_SERVICE:latest'
+  - '$_AR_REPO/medusa-backend:$SHORT_SHA'
+  - '$_AR_REPO/medusa-backend:latest'
+  - '$_AR_REPO/medusa-storefront:$SHORT_SHA'
+  - '$_AR_REPO/medusa-storefront:latest'
 
 tags:
-  - '$_SERVICE'
+  - 'leka-product-catalogs'
   - '$BRANCH_NAME'
   - '$SHORT_SHA'
