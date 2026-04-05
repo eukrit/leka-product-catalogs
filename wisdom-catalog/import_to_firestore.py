@@ -14,7 +14,7 @@ from datetime import datetime
 from google.cloud import firestore
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
-from shared.base_importer import safe_float, parse_dimensions, batch_write, build_category_index, register_brand
+from shared.base_importer import safe_float, parse_dimensions, batch_write, build_category_index
 from shared.category_mapper import classify_category, classify_subcategory
 
 SERVICE_ACCOUNT_PATH = r"C:\Users\eukri\OneDrive\Documents\Claude Code\Credentials Claude Code\ai-agents-go-4c81b70995db.json"
@@ -192,7 +192,8 @@ def import_quotations(db):
                 "items": items,
                 "created_at": firestore.SERVER_TIMESTAMP,
             }
-            db.collection("quotations").add(doc_data)
+            doc_data["vendor_name"] = "Wisdom Playground Equipment Co., Ltd."
+            db.collection("leka_vendor_quotations").add(doc_data)
             count += 1
             print(f"  {fname}: {len(items)} items")
 
@@ -216,18 +217,7 @@ def main():
     import_quotations(db)
 
     print("\n=== Step 4: Build Category Index ===")
-    cat_counts = build_category_index(db, COLLECTION_NAME, BRAND)
-
-    print("\n=== Step 5: Register Brand ===")
-    register_brand(
-        db,
-        brand=BRAND,
-        name="Wisdom Playground",
-        supplier="Wisdom Playground Equipment Co., Ltd.",
-        country="China",
-        product_count=full_count + us_count,
-        categories=list(cat_counts.keys()),
-    )
+    build_category_index(db, COLLECTION_NAME, BRAND)
 
     print("\nImport complete!")
 

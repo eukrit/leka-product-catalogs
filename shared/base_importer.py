@@ -103,14 +103,3 @@ def build_category_index(db, collection_name, brand):
     return cat_counts
 
 
-def register_brand(db, brand, name, supplier, country, product_count, categories):
-    """Register or update a brand in the brands collection."""
-    db.collection("brands").document(brand).set({
-        "name": name,
-        "supplier": supplier,
-        "country": country,
-        "product_count": product_count,
-        "categories": categories,
-        "last_import": firestore.SERVER_TIMESTAMP,
-    }, merge=True)
-    print(f"  Brand '{brand}' registered with {product_count} products")

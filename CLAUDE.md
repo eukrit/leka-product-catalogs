@@ -152,11 +152,9 @@ leka-product-catalogs/
 All collections live in the **`leka-product-catalogs`** database (not `(default)`).
 All `firestore.Client()` calls must include `database="leka-product-catalogs"`.
 
-- `brands` — brand registry (one doc per brand, keyed by slug)
-- `products_{brand}` — per-brand product documents (e.g. `products_wisdom`, `products_areda`)
+- `products_{brand}` — per-brand product documents (e.g. `products_wisdom`, `products_vinci`)
 - `product_categories_{brand}` — per-brand category lookup
-- `quotations` — quotation documents (all brands, filtered by `brand` field)
-- `products` — legacy Wisdom collection (pre-migration, read-only)
+- `leka_vendor_quotations` — vendor quotations with `vendor_name` and `brand` fields
 
 ### Image Pipeline
 1. Download catalog PDFs from source (Slack/email/Drive)

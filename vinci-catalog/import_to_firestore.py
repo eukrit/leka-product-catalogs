@@ -16,7 +16,7 @@ import argparse
 from google.cloud import firestore
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
-from shared.base_importer import batch_write, build_category_index, register_brand
+from shared.base_importer import batch_write, build_category_index
 
 SERVICE_ACCOUNT_PATH = r"C:\Users\Eukrit\OneDrive\Documents\Claude Code\Credentials Claude Code\ai-agents-go-4c81b70995db.json"
 
@@ -168,18 +168,7 @@ def main():
     print(f"  Done: {count} products imported to {COLLECTION_NAME}")
 
     print("\n=== Step 2: Build Category Index ===")
-    cat_counts = build_category_index(db, COLLECTION_NAME, BRAND)
-
-    print("\n=== Step 3: Register Brand ===")
-    register_brand(
-        db,
-        brand=BRAND,
-        name="Vinci Play",
-        supplier="Vinci Play Sp. z o.o.",
-        country="Poland",
-        product_count=count,
-        categories=list(cat_counts.keys()),
-    )
+    build_category_index(db, COLLECTION_NAME, BRAND)
 
     print(f"\nImport complete! {count} products in {COLLECTION_NAME}")
 

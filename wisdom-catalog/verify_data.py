@@ -23,7 +23,7 @@ db = firestore.Client(project="ai-agents-go", database="leka-product-catalogs")
 
 def load_firestore_products():
     products = {}
-    for doc in db.collection("products").stream():
+    for doc in db.collection("products_wisdom").stream():
         products[doc.id] = doc.to_dict()
     return products
 

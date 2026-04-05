@@ -33,7 +33,7 @@ os.makedirs(IMG_DIR, exist_ok=True)
 def load_product_codes():
     db = firestore.Client(project="ai-agents-go", database="leka-product-catalogs")
     codes = set()
-    for doc in db.collection("products").stream():
+    for doc in db.collection("products_wisdom").stream():
         codes.add(doc.id)
     return codes
 
@@ -224,7 +224,7 @@ def upload_and_update(all_mappings):
     # First clear all existing
     batch = db.batch()
     bc = 0
-    for doc in db.collection("products").stream():
+    for doc in db.collection("products_wisdom").stream():
         if doc.to_dict().get("images"):
             batch.update(doc.reference, {"images": []})
             bc += 1
@@ -241,7 +241,7 @@ def upload_and_update(all_mappings):
     bc = 0
     updated = 0
     for code, imgs in all_mappings.items():
-        doc_ref = db.collection("products").document(code)
+        doc_ref = db.collection("products_wisdom").document(code)
         doc = doc_ref.get()
         if not doc.exists:
             continue

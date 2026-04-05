@@ -145,7 +145,7 @@ def update_firestore(results):
     updated = 0
     not_found = 0
     for code, images in code_to_images.items():
-        doc_ref = db.collection("products").document(code)
+        doc_ref = db.collection("products_wisdom").document(code)
         doc = doc_ref.get()
         if doc.exists:
             existing = doc.to_dict().get("images", [])
