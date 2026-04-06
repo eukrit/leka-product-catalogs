@@ -81,12 +81,22 @@ function CatalogContent({ brand }: { brand: BrandConfig }) {
           { "x-publishable-api-key": brand.publishableKey } as any
         ) as any
 
+        // Client-side age filter (metadata field, not queryable via API)
+        let filtered = fetched
+        if (ageFilter) {
+          filtered = fetched.filter((p: MedusaProduct) => {
+            const specs = (p.metadata?.specifications || {}) as Record<string, unknown>
+            const ageGroup = String(specs.age_group || "")
+            return ageGroup.includes(ageFilter.replace("+", ""))
+          })
+        }
+
         if (reset) {
-          setProducts(fetched)
+          setProducts(filtered)
           setOffset(PAGE_SIZE)
           setTotalCount(count)
         } else {
-          setProducts((prev) => [...prev, ...fetched])
+          setProducts((prev) => [...prev, ...filtered])
           setOffset(currentOffset + PAGE_SIZE)
         }
         setHasMore(currentOffset + PAGE_SIZE < count)

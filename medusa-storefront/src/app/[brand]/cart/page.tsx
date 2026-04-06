@@ -6,6 +6,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { medusa, getBrand } from "@/lib/medusa-client"
+import { getCartId, clearCart } from "@/lib/cart"
 import { PromoInput } from "@/components/promo-input"
 
 interface CartItem {
@@ -45,7 +46,7 @@ export default function CartPage({
 
   useEffect(() => {
     async function loadCart() {
-      const cartId = localStorage.getItem(`cart_${brandSlug}`)
+      const cartId = getCartId(brandSlug)
       if (!cartId) {
         setLoading(false)
         return
@@ -58,7 +59,7 @@ export default function CartPage({
         ) as any
         setCart(fetched)
       } catch {
-        localStorage.removeItem(`cart_${brandSlug}`)
+        clearCart(brandSlug)
       }
       setLoading(false)
     }

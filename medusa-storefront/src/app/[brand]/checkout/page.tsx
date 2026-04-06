@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { use } from "react"
 import { notFound, useRouter } from "next/navigation"
 import { medusa, getBrand } from "@/lib/medusa-client"
+import { getCartId, clearCart } from "@/lib/cart"
 
 interface CheckoutForm {
   email: string
@@ -31,6 +32,7 @@ export default function CheckoutPage({
   const router = useRouter()
   const [step, setStep] = useState<"shipping" | "review" | "complete">("shipping")
   const [submitting, setSubmitting] = useState(false)
+  const [error, setError] = useState("")
   const [cart, setCart] = useState<any>(null)
   const [form, setForm] = useState<CheckoutForm>({
     email: "",
@@ -48,7 +50,7 @@ export default function CheckoutPage({
 
   useEffect(() => {
     async function loadCart() {
-      const cartId = localStorage.getItem(`cart_${brandSlug}`)
+      const cartId = getCartId(brandSlug)
       if (!cartId) {
         router.push(`/${brandSlug}/cart`)
         return
@@ -74,8 +76,8 @@ export default function CheckoutPage({
   async function handleSubmitShipping() {
     if (!cart) return
     setSubmitting(true)
+    setError("")
     try {
-      // Update cart with shipping address
       await medusa.store.cart.update(
         cart.id,
         {
@@ -96,8 +98,9 @@ export default function CheckoutPage({
         { "x-publishable-api-key": brand!.publishableKey } as any
       )
       setStep("review")
-    } catch (err) {
-      console.error("Failed to update shipping:", err)
+    } catch (err: any) {
+      const msg = err?.response?.data?.message || "Failed to save shipping address. Please check your details."
+      setError(msg)
     }
     setSubmitting(false)
   }
@@ -106,7 +109,6 @@ export default function CheckoutPage({
     if (!cart) return
     setSubmitting(true)
     try {
-      // Complete the cart (creates order)
       const { type, order } = await medusa.store.cart.complete(
         cart.id,
         {},
@@ -114,11 +116,12 @@ export default function CheckoutPage({
       ) as any
 
       if (type === "order") {
-        localStorage.removeItem(`cart_${brandSlug}`)
+        clearCart(brandSlug)
         setStep("complete")
       }
-    } catch (err) {
-      console.error("Failed to place order:", err)
+    } catch (err: any) {
+      const msg = err?.response?.data?.message || "Failed to place order. Please try again."
+      setError(msg)
     }
     setSubmitting(false)
   }
@@ -274,10 +277,13 @@ export default function CheckoutPage({
               />
             </div>
           </div>
+          {error && (
+            <p className="text-sm text-red-500 mt-4 p-3 bg-red-50 rounded-button">{error}</p>
+          )}
           <button
             onClick={handleSubmitShipping}
             disabled={submitting || !form.email || !form.first_name || !form.address_1}
-            className="btn-primary w-full mt-6 disabled:opacity-50"
+            className="btn-primary w-full mt-4 disabled:opacity-50"
           >
             {submitting ? "Saving..." : "Continue to Review"}
           </button>
@@ -316,7 +322,10 @@ export default function CheckoutPage({
           <p className="text-xs text-gray-400 mt-4">
             Payment: Manual (invoice will be sent separately)
           </p>
-          <div className="flex gap-3 mt-6">
+          {error && (
+            <p className="text-sm text-red-500 mt-4 p-3 bg-red-50 rounded-button">{error}</p>
+          )}
+          <div className="flex gap-3 mt-4">
             <button
               onClick={() => setStep("shipping")}
               className="btn-secondary flex-1"
