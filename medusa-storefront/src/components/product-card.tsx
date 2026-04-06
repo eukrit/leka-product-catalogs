@@ -73,16 +73,16 @@ export function ProductCard({ product, brandSlug, showPrice }: ProductCardProps)
           {product.title}
         </div>
         <div className="flex flex-wrap gap-1 mt-2">
-          {specs.age_group && (
+          {specs.age_group ? (
             <span className="text-xs bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded">
-              {specs.age_group as string}
+              {String(specs.age_group)}
             </span>
-          )}
-          {specs.num_users && (
+          ) : null}
+          {specs.num_users ? (
             <span className="text-xs bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded">
               {String(specs.num_users)} users
             </span>
-          )}
+          ) : null}
         </div>
       </div>
 

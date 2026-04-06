@@ -25,7 +25,7 @@ export function FilterBar({
   showAgeFilter,
   onReset,
 }: FilterBarProps) {
-  const debounceRef = useRef<ReturnType<typeof setTimeout>>()
+  const debounceRef = useRef<ReturnType<typeof setTimeout>>(null)
 
   function handleSearchInput(value: string) {
     if (debounceRef.current) clearTimeout(debounceRef.current)
@@ -33,8 +33,9 @@ export function FilterBar({
   }
 
   useEffect(() => {
+    const ref = debounceRef.current
     return () => {
-      if (debounceRef.current) clearTimeout(debounceRef.current)
+      if (ref) clearTimeout(ref)
     }
   }, [])
 

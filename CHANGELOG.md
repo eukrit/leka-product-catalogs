@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.0.1] - 2026-04-07
+
+### Added — Sprint 1: Cart Flow, Filters, i18n, Loading States
+- Cart state management (`lib/cart.ts`) with localStorage persistence per brand
+- Slide-out cart drawer component with quantity controls
+- Add-to-cart handler on product detail page with loading/success feedback
+- Age group filter dropdown (Vinci-specific, matching current site)
+- Product/series count stats in catalog header
+- Download count icon on product cards
+- "NEW" badge on product cards from tags
+- Loading skeleton for catalog page
+- 404 pages (brand-scoped and root)
+- Locale switcher component (EN/TH/CN) with i18n library
+- Mobile-responsive header with cart drawer
+- Region setup (Asia-Pacific, USD, 5 countries) in seed script
+- Manual fulfillment and payment provider setup in seed script
+- Publishable API key generation per sales channel
+
+## [2.0.0] - 2026-04-06
+
+Renamed from [1.0.0].
+
 ## [1.0.0] - 2026-04-06
 
 ### Changed — Medusa Commerce v2 Migration

@@ -239,8 +239,8 @@ export default async function seedFromFirestore({ container }: ExecArgs) {
       productData.collection_id = collectionMap[p.series_slug]
     }
 
-    const product = await productService.createProducts(productData as any)
-    return product.id
+    const product = await productService.createProducts(productData as any) as any
+    return Array.isArray(product) ? product[0]?.id : product.id
   }
 
   // Import Wisdom products
