@@ -6,6 +6,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { medusa, getBrand } from "@/lib/medusa-client"
+import { addToCart } from "@/lib/cart"
 
 interface ProductDetail {
   id: string
@@ -43,6 +44,8 @@ export default function ProductDetailPage({
   const [product, setProduct] = useState<ProductDetail | null>(null)
   const [loading, setLoading] = useState(true)
   const [selectedImage, setSelectedImage] = useState(0)
+  const [addingToCart, setAddingToCart] = useState(false)
+  const [addedToCart, setAddedToCart] = useState(false)
 
   useEffect(() => {
     async function load() {
@@ -187,7 +190,24 @@ export default function ProductDetailPage({
 
           {/* Add to Cart */}
           <div className="mt-6 flex gap-3">
-            <button className="btn-primary flex-1">Add to Cart</button>
+            <button
+              onClick={async () => {
+                if (!variant?.id) return
+                setAddingToCart(true)
+                try {
+                  await addToCart(brandSlug, variant.id, 1)
+                  setAddedToCart(true)
+                  setTimeout(() => setAddedToCart(false), 2000)
+                } catch (err) {
+                  console.error("Failed to add to cart:", err)
+                }
+                setAddingToCart(false)
+              }}
+              disabled={addingToCart}
+              className="btn-primary flex-1 disabled:opacity-50"
+            >
+              {addingToCart ? "Adding..." : addedToCart ? "Added!" : "Add to Cart"}
+            </button>
           </div>
 
           {/* Tags */}

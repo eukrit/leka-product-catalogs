@@ -8,6 +8,9 @@ interface FilterBarProps {
   categories: Array<{ id: string; name: string; handle: string }>
   selectedCategory: string
   onCategoryChange: (value: string) => void
+  selectedAge: string
+  onAgeChange: (value: string) => void
+  showAgeFilter: boolean
   onReset: () => void
 }
 
@@ -17,6 +20,9 @@ export function FilterBar({
   categories,
   selectedCategory,
   onCategoryChange,
+  selectedAge,
+  onAgeChange,
+  showAgeFilter,
   onReset,
 }: FilterBarProps) {
   const debounceRef = useRef<ReturnType<typeof setTimeout>>()
@@ -38,7 +44,7 @@ export function FilterBar({
       <div className="relative flex-1 min-w-[200px]">
         <input
           type="text"
-          placeholder="Search products..."
+          placeholder="Search products by name, code, or description..."
           defaultValue={search}
           onChange={(e) => handleSearchInput(e.target.value)}
           className="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-button text-sm focus:outline-none focus:border-leka-purple focus:ring-1 focus:ring-leka-purple/20"
@@ -58,6 +64,21 @@ export function FilterBar({
           </option>
         ))}
       </select>
+
+      {/* Age Group (Vinci-specific) */}
+      {showAgeFilter && (
+        <select
+          value={selectedAge}
+          onChange={(e) => onAgeChange(e.target.value)}
+          className="px-4 py-2.5 bg-white border border-gray-200 rounded-button text-sm focus:outline-none focus:border-leka-purple"
+        >
+          <option value="">All Ages</option>
+          <option value="1+">1+ years</option>
+          <option value="3+">3+ years</option>
+          <option value="6+">6+ years</option>
+          <option value="14+">14+ years</option>
+        </select>
+      )}
 
       {/* Reset */}
       <button

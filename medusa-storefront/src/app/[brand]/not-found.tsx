@@ -1,0 +1,16 @@
+import Link from "next/link"
+
+export default function BrandNotFound() {
+  return (
+    <main className="max-w-2xl mx-auto px-6 py-16 text-center">
+      <div className="text-6xl text-gray-200 mb-4">404</div>
+      <h1 className="text-2xl font-bold text-leka-navy mb-2">Page Not Found</h1>
+      <p className="text-gray-500 mb-8">
+        The page you are looking for does not exist or has been moved.
+      </p>
+      <Link href="/" className="btn-primary">
+        Back to Catalogs
+      </Link>
+    </main>
+  )
+}

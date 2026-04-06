@@ -28,6 +28,7 @@ export function ProductCard({ product, brandSlug, showPrice }: ProductCardProps)
   const imageUrl = product.thumbnail || product.images?.[0]?.url
   const price = variant?.prices?.find((p) => p.currency_code === "usd")
   const specs = (product.metadata?.specifications || {}) as Record<string, unknown>
+  const downloads = (product.metadata?.downloads || []) as Array<unknown>
   const isNew = product.tags?.some((t) => t.value === "new")
   const seriesName = (product.metadata?.series_name as string) || product.collection?.title
 
@@ -88,11 +89,18 @@ export function ProductCard({ product, brandSlug, showPrice }: ProductCardProps)
       {/* Footer */}
       <div className="px-3 pb-3 flex items-center justify-between">
         <span className="text-xs text-gray-400">{dims}</span>
-        {showPrice && price && (
-          <span className="text-sm font-semibold text-leka-purple">
-            ${(price.amount / 100).toFixed(2)}
-          </span>
-        )}
+        <div className="flex items-center gap-2">
+          {downloads.length > 0 && (
+            <span className="text-xs text-gray-400" title={`${downloads.length} downloads`}>
+              📥 {downloads.length}
+            </span>
+          )}
+          {showPrice && price && (
+            <span className="text-sm font-semibold text-leka-purple">
+              ${(price.amount / 100).toFixed(2)}
+            </span>
+          )}
+        </div>
       </div>
     </Link>
   )

@@ -54,6 +54,8 @@ function CatalogContent({ brand }: { brand: BrandConfig }) {
   const [search, setSearch] = useState("")
   const [categoryFilter, setCategoryFilter] = useState("")
   const [collectionFilter, setCollectionFilter] = useState("")
+  const [ageFilter, setAgeFilter] = useState("")
+  const [totalCount, setTotalCount] = useState(0)
   const [categories, setCategories] = useState<Array<{ id: string; name: string; handle: string }>>([])
   const [collections, setCollections] = useState<Array<{ id: string; title: string; handle: string }>>([])
   const sentinelRef = useRef<HTMLDivElement>(null)
@@ -82,6 +84,7 @@ function CatalogContent({ brand }: { brand: BrandConfig }) {
         if (reset) {
           setProducts(fetched)
           setOffset(PAGE_SIZE)
+          setTotalCount(count)
         } else {
           setProducts((prev) => [...prev, ...fetched])
           setOffset(currentOffset + PAGE_SIZE)
@@ -92,7 +95,7 @@ function CatalogContent({ brand }: { brand: BrandConfig }) {
       }
       setLoading(false)
     },
-    [brand.publishableKey, offset, search, categoryFilter, collectionFilter]
+    [brand.publishableKey, offset, search, categoryFilter, collectionFilter, ageFilter]
   )
 
   // Load categories and collections
@@ -122,7 +125,7 @@ function CatalogContent({ brand }: { brand: BrandConfig }) {
   // Initial load and filter changes
   useEffect(() => {
     fetchProducts(true)
-  }, [search, categoryFilter, collectionFilter])
+  }, [search, categoryFilter, collectionFilter, ageFilter])
 
   // Infinite scroll observer
   useEffect(() => {
@@ -141,10 +144,28 @@ function CatalogContent({ brand }: { brand: BrandConfig }) {
 
   return (
     <main className="max-w-7xl mx-auto px-6 py-8">
-      {/* Stats */}
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold text-leka-navy">{brand.name}</h1>
-        <p className="text-sm text-gray-500 mt-1">{brand.description}</p>
+      {/* Stats Header */}
+      <div className="mb-6 flex items-end justify-between">
+        <div>
+          <h1 className="text-2xl font-bold text-leka-navy">{brand.name}</h1>
+          <p className="text-sm text-gray-500 mt-1">{brand.description}</p>
+        </div>
+        <div className="flex gap-6 text-right">
+          <div>
+            <div className="text-2xl font-bold text-leka-navy">
+              {totalCount.toLocaleString()}
+            </div>
+            <div className="text-xs text-gray-400">Products</div>
+          </div>
+          {brand.hasCollections && (
+            <div>
+              <div className="text-2xl font-bold text-leka-navy">
+                {collections.length}
+              </div>
+              <div className="text-xs text-gray-400">Series</div>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Series Badges (Vinci) */}
@@ -164,10 +185,14 @@ function CatalogContent({ brand }: { brand: BrandConfig }) {
         categories={categories}
         selectedCategory={categoryFilter}
         onCategoryChange={setCategoryFilter}
+        selectedAge={ageFilter}
+        onAgeChange={setAgeFilter}
+        showAgeFilter={brand.hasCollections}
         onReset={() => {
           setSearch("")
           setCategoryFilter("")
           setCollectionFilter("")
+          setAgeFilter("")
         }}
       />
 

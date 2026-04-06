@@ -275,6 +275,63 @@ export default async function seedFromFirestore({ container }: ExecArgs) {
   }
   console.log(`  Done: ${vinciCount} Vinci products imported`)
 
+  // --- Step 6: Region, Fulfillment, Payment ---
+  console.log("\nStep 6: Setting up Region, Fulfillment, and Payment...")
+
+  const regionService = container.resolve(Modules.REGION)
+  const fulfillmentService = container.resolve(Modules.FULFILLMENT)
+  const paymentService = container.resolve(Modules.PAYMENT)
+
+  // Create region for Asia-Pacific (THB + USD)
+  const region = await (regionService as any).createRegions({
+    name: "Asia-Pacific",
+    currency_code: "usd",
+    countries: ["th", "cn", "sg", "pl", "us"],
+    payment_providers: ["pp_system_default"],
+  })
+  console.log(`  Region: Asia-Pacific (${region.id})`)
+
+  // Create shipping option (manual fulfillment)
+  try {
+    const shippingProfile = await (fulfillmentService as any).createShippingProfiles({
+      name: "Default",
+      type: "default",
+    })
+
+    await (fulfillmentService as any).createShippingOptions({
+      name: "Standard Shipping",
+      price_type: "flat",
+      service_zone_id: undefined,
+      shipping_profile_id: shippingProfile.id,
+      provider_id: "manual",
+      type: { label: "Standard", description: "Standard shipping", code: "standard" },
+      data: {},
+      prices: [{ amount: 0, currency_code: "usd" }],
+    })
+    console.log("  Shipping: Standard Shipping (free)")
+  } catch (err: any) {
+    console.log(`  Shipping setup skipped: ${err.message}`)
+  }
+
+  // Create Publishable API Keys for each sales channel
+  const apiKeyService = container.resolve(Modules.API_KEY)
+  try {
+    const wisdomKey = await (apiKeyService as any).createApiKeys({
+      title: "Wisdom Storefront",
+      type: "publishable",
+    })
+    const vinciKey = await (apiKeyService as any).createApiKeys({
+      title: "Vinci Play Storefront",
+      type: "publishable",
+    })
+    console.log(`  Publishable Keys:`)
+    console.log(`    Wisdom: ${wisdomKey.token}`)
+    console.log(`    Vinci:  ${vinciKey.token}`)
+    console.log(`  >> Copy these keys to medusa-storefront/.env.local`)
+  } catch (err: any) {
+    console.log(`  API Key setup skipped: ${err.message}`)
+  }
+
   // --- Summary ---
   console.log("\n=== Seed Complete ===")
   console.log(`  Sales Channels: 2 (Wisdom, Vinci Play)`)
@@ -282,4 +339,5 @@ export default async function seedFromFirestore({ container }: ExecArgs) {
   console.log(`  Collections: ${seriesSlugs.size}`)
   console.log(`  Tags: ${allTags.size}`)
   console.log(`  Products: ${wisdomCount + vinciCount} (Wisdom: ${wisdomCount}, Vinci: ${vinciCount})`)
+  console.log(`  Region: Asia-Pacific (USD, 5 countries)`)
 }
