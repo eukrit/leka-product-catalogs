@@ -3,10 +3,14 @@ FROM node:20-slim AS builder
 WORKDIR /app
 
 COPY package.json package-lock.json* ./
-# Install all deps (including dev) for the build step
 RUN npm ci
 
 COPY . .
+
+# Build with development env so config validation doesn't require real DB/Redis
+ENV NODE_ENV=development
+ENV DATABASE_URL=postgres://placeholder:placeholder@localhost:5432/placeholder
+ENV REDIS_URL=redis://localhost:6379
 RUN npm run build
 
 # Prune dev dependencies after build
