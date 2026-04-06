@@ -173,12 +173,29 @@ export default function ProductDetailPage({
             {seriesName && `${seriesName} \u00B7 `}{variant?.sku}
           </p>
 
-          {price && (
+          {price ? (
             <div className="mt-4">
               <span className="text-3xl font-bold text-leka-purple">
                 ${(price.amount / 100).toFixed(2)}
               </span>
               <span className="text-sm text-gray-400 ml-2">FOB USD</span>
+              <p className="text-xs text-gray-400 mt-1">
+                Dealer & distributor pricing available.{" "}
+                <Link href={`/${brandSlug}/account`} className="text-leka-purple hover:underline">
+                  Sign in
+                </Link>{" "}
+                for your group price.
+              </p>
+            </div>
+          ) : (
+            <div className="mt-4">
+              <p className="text-sm text-gray-500">
+                Price available on request.{" "}
+                <Link href={`/${brandSlug}/account`} className="text-leka-purple hover:underline">
+                  Sign in
+                </Link>{" "}
+                or contact your account manager.
+              </p>
             </div>
           )}
 

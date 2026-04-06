@@ -213,6 +213,26 @@ export default function AccountPage({
         </div>
       </div>
 
+      {/* Quick Links */}
+      <div className="flex gap-3 mb-8">
+        <Link
+          href={`/${brandSlug}/account/quotes`}
+          className="card p-4 flex-1 hover:ring-2 hover:ring-leka-purple/20 text-center"
+        >
+          <div className="text-2xl mb-1">📋</div>
+          <div className="text-sm font-semibold text-leka-navy">Quotations</div>
+          <div className="text-xs text-gray-400">Draft orders & quotes</div>
+        </Link>
+        <Link
+          href={`/${brandSlug}`}
+          className="card p-4 flex-1 hover:ring-2 hover:ring-leka-purple/20 text-center"
+        >
+          <div className="text-2xl mb-1">🛍️</div>
+          <div className="text-sm font-semibold text-leka-navy">Browse</div>
+          <div className="text-xs text-gray-400">Product catalog</div>
+        </Link>
+      </div>
+
       <h2 className="text-lg font-semibold text-leka-navy mb-4">
         Order History
       </h2>

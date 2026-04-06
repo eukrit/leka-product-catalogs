@@ -332,6 +332,26 @@ export default async function seedFromFirestore({ container }: ExecArgs) {
     console.log(`  API Key setup skipped: ${err.message}`)
   }
 
+  // --- Step 7: B2B Customer Groups ---
+  console.log("\nStep 7: Creating B2B Customer Groups...")
+  const customerService = container.resolve(Modules.CUSTOMER)
+  try {
+    const groups = [
+      { name: "Dealer", metadata: { discount_pct: 15 } },
+      { name: "Distributor", metadata: { discount_pct: 25 } },
+      { name: "Retail", metadata: { discount_pct: 0 } },
+    ]
+    for (const g of groups) {
+      await (customerService as any).createCustomerGroups({
+        name: g.name,
+        metadata: g.metadata,
+      })
+      console.log(`  Group: ${g.name} (${g.metadata.discount_pct}% discount)`)
+    }
+  } catch (err: any) {
+    console.log(`  Customer groups skipped: ${err.message}`)
+  }
+
   // --- Summary ---
   console.log("\n=== Seed Complete ===")
   console.log(`  Sales Channels: 2 (Wisdom, Vinci Play)`)
@@ -340,4 +360,5 @@ export default async function seedFromFirestore({ container }: ExecArgs) {
   console.log(`  Tags: ${allTags.size}`)
   console.log(`  Products: ${wisdomCount + vinciCount} (Wisdom: ${wisdomCount}, Vinci: ${vinciCount})`)
   console.log(`  Region: Asia-Pacific (USD, 5 countries)`)
+  console.log(`  Customer Groups: 3 (Dealer, Distributor, Retail)`)
 }

@@ -1,5 +1,17 @@
+import type { Metadata } from "next"
 import Link from "next/link"
 import { BRANDS } from "@/lib/medusa-client"
+
+export const metadata: Metadata = {
+  title: "Leka Product Catalogs — Multi-Brand E-Commerce",
+  description:
+    "Browse playground equipment, furniture, and outdoor products from Wisdom and Vinci Play. Powered by GO Corporation Co., Ltd.",
+  openGraph: {
+    title: "Leka Product Catalogs",
+    description: "Multi-brand product catalog and e-commerce platform",
+    type: "website",
+  },
+}
 
 export default function LandingPage() {
   const brands = Object.values(BRANDS)

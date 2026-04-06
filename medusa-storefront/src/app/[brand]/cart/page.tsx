@@ -6,6 +6,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { medusa, getBrand } from "@/lib/medusa-client"
+import { PromoInput } from "@/components/promo-input"
 
 interface CartItem {
   id: string
@@ -168,6 +169,23 @@ export default function CartPage({
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* Promo Code */}
+          <div className="card p-4">
+            <h3 className="text-sm font-semibold text-leka-navy mb-2">Promo Code</h3>
+            <PromoInput
+              brandSlug={brandSlug}
+              cartId={cart!.id}
+              onApplied={() => {
+                if (!cart) return
+                medusa.store.cart.retrieve(
+                  cart.id,
+                  {},
+                  { "x-publishable-api-key": brand!.publishableKey } as any
+                ).then((res: any) => setCart(res.cart))
+              }}
+            />
           </div>
 
           {/* Summary */}
