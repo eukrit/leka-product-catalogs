@@ -26,22 +26,4 @@ export default defineConfig({
   admin: {
     backendUrl: process.env.MEDUSA_BACKEND_URL || "http://localhost:9000",
   },
-  modules: [
-    {
-      resolve: IS_PROD && process.env.GCS_BUCKET
-        ? "@medusajs/file-s3"
-        : "@medusajs/file-local",
-      options: IS_PROD && process.env.GCS_BUCKET
-        ? {
-            file_url: `https://storage.googleapis.com/${process.env.GCS_BUCKET}`,
-            access_key_id: process.env.GCS_ACCESS_KEY || "",
-            secret_access_key: process.env.GCS_SECRET_KEY || "",
-            region: process.env.GCS_REGION || "asia-southeast1",
-            bucket: process.env.GCS_BUCKET,
-            prefix: process.env.GCS_PREFIX || "medusa-uploads",
-            endpoint: "https://storage.googleapis.com",
-          }
-        : { upload_dir: "uploads" },
-    },
-  ],
 })
