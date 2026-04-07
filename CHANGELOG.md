@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.1.1] - 2026-04-07
+
+### Added — Product Data Seeded
+- Exported 6,219 documents from Firestore (5,071 Wisdom + 1,113 Vinci + categories + quotations)
+- Seeded 6,151 products via Medusa Admin API (5,056 Wisdom + 1,095 Vinci)
+- Created Admin API seed script (`scripts/seed_medusa_api.py`) for remote seeding
+- Created Sales Channels: Wisdom, Vinci Play (with publishable API keys)
+- Created Region: Asia-Pacific (USD, 5 countries)
+- Created admin user (admin@leka.studio)
+- Rebuilt storefront with API keys baked in via Docker build args
+
 ## [2.1.0] - 2026-04-07
 
 ### Deployed — GCP Infrastructure & Cloud Run Services
