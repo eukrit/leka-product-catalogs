@@ -1,0 +1,15 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '--build-arg'
+      - 'NEXT_PUBLIC_MEDUSA_BACKEND_URL=https://leka-medusa-backend-538978391890.asia-southeast1.run.app'
+      - '--build-arg'
+      - 'NEXT_PUBLIC_WISDOM_PUBLISHABLE_KEY=pk_b7d7b7412262b05054450cd08213cd3d7d3432616ffff885e4c8a57e1b596e53'
+      - '--build-arg'
+      - 'NEXT_PUBLIC_VINCI_PUBLISHABLE_KEY=pk_966daecb0de97a83ad5ffab563f3eb1e66bc360dd67b0594c1b86a64287f837a'
+      - '-t'
+      - 'asia-southeast1-docker.pkg.dev/$PROJECT_ID/leka-product-catalogs/medusa-storefront:latest'
+      - '.'
+images:
+  - 'asia-southeast1-docker.pkg.dev/$PROJECT_ID/leka-product-catalogs/medusa-storefront:latest'
