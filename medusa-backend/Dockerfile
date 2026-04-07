@@ -16,8 +16,8 @@ RUN npm run build
 # Compile medusa-config.ts to JS so runtime doesn't need ts-node
 RUN npx ts-node -e "const ts = require('typescript'); const src = require('fs').readFileSync('medusa-config.ts','utf8'); const out = ts.transpileModule(src, { compilerOptions: { module: ts.ModuleKind.CommonJS, esModuleInterop: true, target: ts.ScriptTarget.ES2021 }}); require('fs').writeFileSync('medusa-config.js', out.outputText);"
 
-# Prune dev dependencies after build
-RUN npm prune --omit=dev
+# Note: not pruning devDeps — ts-node and typescript needed at runtime
+# for medusa CLI commands (db:migrate, start)
 
 FROM node:20-slim
 
@@ -26,7 +26,10 @@ WORKDIR /app
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/.medusa ./.medusa
 COPY --from=builder /app/package.json ./
+COPY --from=builder /app/medusa-config.ts ./
 COPY --from=builder /app/medusa-config.js ./
+COPY --from=builder /app/tsconfig.json ./
+COPY --from=builder /app/src ./src
 COPY --from=builder /app/start.sh ./
 RUN sed -i 's/\r$//' start.sh && chmod +x start.sh
 
