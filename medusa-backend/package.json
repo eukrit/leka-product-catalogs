@@ -12,6 +12,7 @@
     "db:generate": "medusa db:generate"
   },
   "dependencies": {
+    "@medusajs/admin-sdk": "^2.13.5",
     "@medusajs/file-local": "^2.13",
     "@medusajs/file-s3": "^2.13",
     "@medusajs/framework": "^2.13",
