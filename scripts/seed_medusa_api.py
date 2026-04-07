@@ -115,7 +115,7 @@ def seed_product(token, p, brand, sc_id, cat_map, col_map):
         "title": p.get("name") or p.get("description") or item_code,
         "handle": handle,
         "description": p.get("description", ""),
-        "status": "published" if p.get("status") == "active" else "draft",
+        "status": "draft" if p.get("status") == "discontinued" else "published",
         "metadata": metadata,
         "images": images,
         "sales_channels": [{"id": sc_id}],
