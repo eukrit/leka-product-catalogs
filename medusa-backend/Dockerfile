@@ -26,7 +26,7 @@ COPY --from=builder /app/package.json ./
 COPY --from=builder /app/medusa-config.ts ./
 COPY --from=builder /app/tsconfig.json ./
 COPY --from=builder /app/start.sh ./
-RUN chmod +x start.sh
+RUN sed -i 's/\r$//' start.sh && chmod +x start.sh
 
 EXPOSE 9000
 
