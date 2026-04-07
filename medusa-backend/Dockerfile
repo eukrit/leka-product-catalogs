@@ -13,6 +13,9 @@ ENV DATABASE_URL=postgres://placeholder:placeholder@localhost:5432/placeholder
 ENV REDIS_URL=redis://localhost:6379
 RUN npm run build
 
+# Compile medusa-config.ts to JS so runtime doesn't need ts-node
+RUN npx tsc medusa-config.ts --esModuleInterop --module commonjs --moduleResolution node --skipLibCheck --outDir .
+
 # Prune dev dependencies after build
 RUN npm prune --omit=dev
 
@@ -23,8 +26,7 @@ WORKDIR /app
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/.medusa ./.medusa
 COPY --from=builder /app/package.json ./
-COPY --from=builder /app/medusa-config.ts ./
-COPY --from=builder /app/tsconfig.json ./
+COPY --from=builder /app/medusa-config.js ./
 COPY --from=builder /app/start.sh ./
 RUN sed -i 's/\r$//' start.sh && chmod +x start.sh
 
