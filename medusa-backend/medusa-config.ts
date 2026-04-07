@@ -4,7 +4,6 @@ loadEnv(process.env.NODE_ENV || "development", process.cwd())
 
 const IS_PROD = process.env.NODE_ENV === "production"
 
-// Validate required env vars in production
 if (IS_PROD) {
   const required = ["DATABASE_URL", "COOKIE_SECRET", "JWT_SECRET"]
   for (const key of required) {
@@ -14,7 +13,7 @@ if (IS_PROD) {
   }
 }
 
-module.exports = defineConfig({
+export default defineConfig({
   projectConfig: {
     databaseUrl: process.env.DATABASE_URL || "postgres://localhost:5432/medusa",
     redisUrl: process.env.REDIS_URL,

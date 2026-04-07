@@ -5,8 +5,8 @@
     "outDir": ".medusa/server",
     "esModuleInterop": true,
     "declaration": true,
-    "module": "es2022",
-    "moduleResolution": "bundler",
+    "module": "commonjs",
+    "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "sourceMap": false,
@@ -17,6 +17,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "medusa-config.ts"],
   "exclude": ["node_modules", ".medusa", "dist"]
 }
