@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.1.0] - 2026-04-07
+
+### Deployed — GCP Infrastructure & Cloud Run Services
+- Cloud SQL PostgreSQL: `areda-medusa` / `leka_medusa` (asia-southeast1)
+- Memorystore Redis: `leka-medusa-redis` (10.225.88.67:6379)
+- VPC Connector: `leka-connector` (10.8.0.0/28)
+- Secret Manager: 4 secrets (database-url, redis-url, cookie-secret, jwt-secret)
+- **Medusa Backend**: https://leka-medusa-backend-538978391890.asia-southeast1.run.app
+- **Next.js Storefront**: https://leka-medusa-storefront-538978391890.asia-southeast1.run.app
+
+### Fixed — Docker Build & Deployment Issues
+- Added ts-node + typescript as production dependencies (Medusa CLI needs them at runtime)
+- Fixed medusa-config.ts: use module:nodenext for ts-node compatibility, export default
+- Removed custom modules array from config (Medusa v2.13 includes all modules by default)
+- Added @medusajs/admin-sdk peer dependency for draft-order admin UI
+- Compiled medusa-config.ts to .js via ts.transpileModule for runtime fallback
+- Added start.sh with db:migrate before server start
+- Fixed CRLF line endings with .gitattributes + sed in Dockerfile
+- Switched from Cloud SQL Unix socket to public IP (Unix socket URL format incompatible with MikroORM)
+- Added DISABLE_ADMIN env var to skip admin UI when build output missing
+
 ## [2.0.1] - 2026-04-07
 
 ### Added — Sprint 1: Cart Flow, Filters, i18n, Loading States
