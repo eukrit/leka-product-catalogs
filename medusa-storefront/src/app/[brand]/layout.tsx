@@ -7,6 +7,7 @@ import { notFound } from "next/navigation"
 import { getBrand } from "@/lib/medusa-client"
 import { getCartId } from "@/lib/cart"
 import { CartDrawer } from "@/components/cart-drawer"
+import { LocaleSwitcher } from "@/components/locale-switcher"
 
 export default function BrandLayout({
   children,
@@ -51,6 +52,7 @@ export default function BrandLayout({
             </Link>
           </div>
           <nav className="flex items-center gap-2 sm:gap-4">
+            <LocaleSwitcher />
             <button
               onClick={openCart}
               className="btn-secondary text-sm px-3 sm:px-4 py-2 relative"

@@ -75,7 +75,7 @@ steps:
             --min-instances 1 \
             --max-instances 5 \
             --set-secrets="DATABASE_URL=medusa-database-url:latest,REDIS_URL=medusa-redis-url:latest,COOKIE_SECRET=medusa-cookie-secret:latest,JWT_SECRET=medusa-jwt-secret:latest" \
-            --set-env-vars="STORE_CORS=https://catalogs.leka.studio,ADMIN_CORS=https://admin.catalogs.leka.studio,AUTH_CORS=https://catalogs.leka.studio"
+            --set-env-vars="STORE_CORS=https://catalogs.leka.studio,ADMIN_CORS=https://leka-medusa-backend-538978391890.$_REGION.run.app,AUTH_CORS=https://catalogs.leka.studio\,https://leka-medusa-backend-538978391890.$_REGION.run.app"
           echo "Deployed medusa-backend:$SHORT_SHA"
         else
           echo "Branch $BRANCH_NAME: skipping deploy"
