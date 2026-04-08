@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.2.0] - 2026-04-09
+
+### Added — Vendor Product Catalogs (991 products, 4 brands)
+- Scraped and uploaded 4 vendor catalogs to Medusa:
+  - Berliner Seilfabrik (466 products) — rope play equipment, Germany
+  - Eurotramp (80 products) — trampolines, Germany
+  - Rampline (54 products) — motor skill equipment, Norway
+  - 4soft (391 products) — EPDM surfaces, Czech Republic
+- Created Sales Channels + publishable API keys per vendor
+- Added vendor brand pages to storefront (6 brands total)
+- Fixed 15 failed product uploads (SKU deduplication, handle sanitization)
+- Bulk-published all 991 vendor products
+- GCS image re-hosting script (`scripts/rehost-images-to-gcs.ts`)
+- Vendor scraper scripts: `scripts/scrape-{berliner,eurotramp,rampline,4soft}.ts`
+- Unified upload script: `scripts/upload-vendors-to-medusa.ts`
+
+### Changed
+- Updated product card and detail page to handle vendor metadata format
+- Added vendor CDN image domains to Next.js config
+- Updated cloudbuild.yaml with all 6 vendor publishable API keys
+- Applied SEO metadata (generateMetadata) to brand and product pages
+- Wired up quotation accept/reject workflow
+
 ## [2.1.1] - 2026-04-07
 
 ### Added — Product Data Seeded

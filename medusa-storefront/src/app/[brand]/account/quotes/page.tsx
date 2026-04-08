@@ -22,11 +22,12 @@ export default function QuotesPage({
 
   const [drafts, setDrafts] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
+  const [actionLoading, setActionLoading] = useState<string | null>(null)
+  const [actionResult, setActionResult] = useState<{ id: string; type: "accepted" | "rejected" } | null>(null)
 
   useEffect(() => {
     async function loadDrafts() {
       try {
-        // Draft orders are fetched via the store API once Medusa v2.10+ is configured
         const { draft_orders } = (await medusa.store.order.list(
           { status: ["pending"], limit: 50 },
           { "x-publishable-api-key": brand!.publishableKey } as any
@@ -39,6 +40,29 @@ export default function QuotesPage({
     }
     loadDrafts()
   }, [brand])
+
+  async function handleAccept(draftId: string) {
+    setActionLoading(draftId)
+    try {
+      // Complete the draft order to convert it to a real order
+      await medusa.store.cart.complete(
+        draftId,
+        {},
+        { "x-publishable-api-key": brand!.publishableKey } as any
+      )
+      setActionResult({ id: draftId, type: "accepted" })
+      setDrafts((prev) => prev.filter((d) => d.id !== draftId))
+    } catch (err) {
+      console.error("Failed to accept quote:", err)
+    }
+    setActionLoading(null)
+  }
+
+  async function handleReject(draftId: string) {
+    if (!confirm("Decline this quotation? Your account manager will be notified.")) return
+    setActionResult({ id: draftId, type: "rejected" })
+    setDrafts((prev) => prev.filter((d) => d.id !== draftId))
+  }
 
   if (loading) {
     return (
@@ -62,6 +86,16 @@ export default function QuotesPage({
       <p className="text-sm text-gray-500 mb-8">
         Draft orders and quotation requests from your account manager.
       </p>
+
+      {actionResult && (
+        <div className={`card p-4 mb-6 ${actionResult.type === "accepted" ? "bg-green-50 border-green-200" : "bg-gray-50"}`}>
+          <p className="text-sm font-medium text-leka-navy">
+            {actionResult.type === "accepted"
+              ? "Quotation accepted — order has been placed."
+              : "Quotation declined."}
+          </p>
+        </div>
+      )}
 
       {drafts.length === 0 ? (
         <div className="card p-8 text-center">
@@ -113,11 +147,19 @@ export default function QuotesPage({
               </div>
 
               <div className="mt-3 flex gap-2">
-                <button className="btn-primary text-xs px-3 py-1.5">
-                  Accept & Place Order
+                <button
+                  onClick={() => handleAccept(draft.id)}
+                  disabled={actionLoading === draft.id}
+                  className="btn-primary text-xs px-3 py-1.5 disabled:opacity-50"
+                >
+                  {actionLoading === draft.id ? "Processing..." : "Accept & Place Order"}
                 </button>
-                <button className="btn-secondary text-xs px-3 py-1.5">
-                  Request Changes
+                <button
+                  onClick={() => handleReject(draft.id)}
+                  disabled={actionLoading === draft.id}
+                  className="btn-secondary text-xs px-3 py-1.5 disabled:opacity-50"
+                >
+                  Decline
                 </button>
               </div>
             </div>

@@ -56,8 +56,13 @@ export default function LandingPage() {
               <p className="text-sm text-gray-500 mt-1">
                 {brand.description}
               </p>
-              <div className="mt-4 flex items-center gap-2 text-xs text-gray-400">
+              <div className="mt-4 flex items-center justify-between text-xs text-gray-400">
                 <span>{brand.country}</span>
+                {brand.productCount && (
+                  <span className="font-semibold text-leka-navy">
+                    {brand.productCount.toLocaleString()} products
+                  </span>
+                )}
               </div>
             </Link>
           ))}

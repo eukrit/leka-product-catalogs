@@ -18,6 +18,7 @@ export const BRANDS: Record<string, BrandConfig> = {
     publishableKey: process.env.NEXT_PUBLIC_WISDOM_PUBLISHABLE_KEY || "",
     hasCollections: false,
     hasPricing: true,
+    productCount: 5056,
   },
   vinciplay: {
     name: "Vinci Play",
@@ -28,6 +29,7 @@ export const BRANDS: Record<string, BrandConfig> = {
     publishableKey: process.env.NEXT_PUBLIC_VINCI_PUBLISHABLE_KEY || "",
     hasCollections: true,
     hasPricing: false,
+    productCount: 1095,
   },
   berliner: {
     name: "Berliner Seilfabrik",
@@ -38,6 +40,7 @@ export const BRANDS: Record<string, BrandConfig> = {
     publishableKey: process.env.NEXT_PUBLIC_BERLINER_PUBLISHABLE_KEY || "",
     hasCollections: true,
     hasPricing: false,
+    productCount: 466,
   },
   eurotramp: {
     name: "Eurotramp",
@@ -48,6 +51,7 @@ export const BRANDS: Record<string, BrandConfig> = {
     publishableKey: process.env.NEXT_PUBLIC_EUROTRAMP_PUBLISHABLE_KEY || "",
     hasCollections: false,
     hasPricing: false,
+    productCount: 80,
   },
   rampline: {
     name: "Rampline",
@@ -58,6 +62,7 @@ export const BRANDS: Record<string, BrandConfig> = {
     publishableKey: process.env.NEXT_PUBLIC_RAMPLINE_PUBLISHABLE_KEY || "",
     hasCollections: false,
     hasPricing: true,
+    productCount: 54,
   },
   "4soft": {
     name: "4soft",
@@ -68,6 +73,7 @@ export const BRANDS: Record<string, BrandConfig> = {
     publishableKey: process.env.NEXT_PUBLIC_4SOFT_PUBLISHABLE_KEY || "",
     hasCollections: true,
     hasPricing: false,
+    productCount: 391,
   },
 }
 
@@ -80,6 +86,7 @@ export interface BrandConfig {
   publishableKey: string
   hasCollections: boolean
   hasPricing: boolean
+  productCount?: number
 }
 
 export function getBrand(slug: string): BrandConfig | undefined {
