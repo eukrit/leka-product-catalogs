@@ -5,7 +5,7 @@ import { BRANDS } from "@/lib/medusa-client"
 export const metadata: Metadata = {
   title: "Leka Product Catalogs — Multi-Brand E-Commerce",
   description:
-    "Browse playground equipment, furniture, and outdoor products from Wisdom and Vinci Play. Powered by GO Corporation Co., Ltd.",
+    "Browse playground equipment, trampolines, surfaces, and outdoor products from top global brands. Powered by GO Corporation Co., Ltd.",
   openGraph: {
     title: "Leka Product Catalogs",
     description: "Multi-brand product catalog and e-commerce platform",

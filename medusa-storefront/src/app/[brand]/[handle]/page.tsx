@@ -81,31 +81,37 @@ export default function ProductDetailPage({
   }
 
   const variant = product.variants?.[0]
-  const specs = (product.metadata?.specifications || {}) as Record<string, unknown>
-  const downloads = (product.metadata?.downloads || []) as Array<{
-    type: string
-    format: string
-    url: string
-    label: string
-  }>
-  const certifications = (product.metadata?.certifications || []) as string[]
-  const seriesName = (product.metadata?.series_name as string) || product.collection?.title
-  const sourceUrl = product.metadata?.source_url as string | undefined
-  const price = variant?.prices?.find((p) => p.currency_code === "usd")
+  const meta = product.metadata || {} as Record<string, unknown>
+  const specs = (meta.specifications || {}) as Record<string, unknown>
+  // Downloads: handle both Wisdom format and vendor format
+  const rawDownloads = (meta.downloads || []) as Array<Record<string, string>>
+  const downloads = rawDownloads.map((d) => ({
+    type: d.type || "",
+    format: d.format || d.type || "",
+    url: d.gcs_url || d.url || d.original_url || "",
+    label: d.label || d.filename || d.type || "Download",
+  }))
+  const certifications = (meta.certifications || []) as string[]
+  const seriesName = (meta.series_name as string) || (meta.product_group as string) || product.collection?.title
+  const sourceUrl = (meta.source_url || meta.vendor_url) as string | undefined
+  const price = variant?.prices?.find((p) => p.currency_code === "usd") || variant?.prices?.find((p) => p.currency_code === "nok")
+  const priceCurrency = price?.currency_code?.toUpperCase() || "USD"
   const images = product.images || []
 
+  // Build spec entries from both formats
   const specEntries = [
-    ["Length", variant?.length ? `${variant.length} cm` : null],
-    ["Width", variant?.width ? `${variant.width} cm` : null],
-    ["Height", variant?.height ? `${variant.height} cm` : null],
-    ["Weight", variant?.weight ? `${variant.weight} kg` : null],
-    ["Age Group", specs.age_group],
-    ["Users", specs.num_users],
+    ["Length", (variant?.length || meta.length_cm) ? `${variant?.length || meta.length_cm} cm` : null],
+    ["Width", (variant?.width || meta.width_cm) ? `${variant?.width || meta.width_cm} cm` : null],
+    ["Height", (variant?.height || meta.height_cm) ? `${variant?.height || meta.height_cm} cm` : null],
+    ["Weight", (variant?.weight || meta.weight_kg) ? `${variant?.weight || meta.weight_kg} kg` : null],
+    ["Age Group", specs.age_group || meta.age_group],
+    ["Users", specs.num_users || meta.max_users],
     ["Safety Zone", specs.safety_zone_m2 ? `${specs.safety_zone_m2} m\u00B2` : null],
-    ["Free Fall Height", specs.free_fall_height_cm ? `${specs.free_fall_height_cm} cm` : null],
+    ["Fall Height", (specs.free_fall_height_cm || meta.fall_height_cm) ? `${specs.free_fall_height_cm || meta.fall_height_cm} cm` : null],
     ["EN Standard", specs.en_standard],
-    ["Spare Parts", specs.spare_parts_available],
-  ].filter(([, v]) => v != null) as [string, string][]
+    ["Materials", (meta.materials as string[])?.join(", ")],
+    ["Country", meta.brand_country],
+  ].filter(([, v]) => v != null && v !== "" && v !== "0 cm" && v !== "0 kg") as [string, string][]
 
   return (
     <main className="max-w-7xl mx-auto px-6 py-8">
@@ -173,12 +179,12 @@ export default function ProductDetailPage({
             {seriesName && `${seriesName} \u00B7 `}{variant?.sku}
           </p>
 
-          {price ? (
+          {price && price.amount > 0 ? (
             <div className="mt-4">
               <span className="text-3xl font-bold text-leka-purple">
-                ${(price.amount / 100).toFixed(2)}
+                {priceCurrency === "NOK" ? "kr " : "$"}{(price.amount / 100).toFixed(2)}
               </span>
-              <span className="text-sm text-gray-400 ml-2">FOB USD</span>
+              <span className="text-sm text-gray-400 ml-2">FOB {priceCurrency}</span>
               <p className="text-xs text-gray-400 mt-1">
                 Dealer & distributor pricing available.{" "}
                 <Link href={`/${brandSlug}/account`} className="text-leka-purple hover:underline">

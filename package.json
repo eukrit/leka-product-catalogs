@@ -10,5 +10,11 @@
   },
   "author": "Eukrit / GO Corporation Co., Ltd.",
   "license": "UNLICENSED",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "@google-cloud/storage": "^7.19.0",
+    "cheerio": "^1.2.0",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.2"
+  }
 }

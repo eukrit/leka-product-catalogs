@@ -100,6 +100,18 @@ steps:
       - 'medusa-storefront'
       - '--build-arg'
       - 'NEXT_PUBLIC_MEDUSA_BACKEND_URL=https://leka-medusa-backend-538978391890.$_REGION.run.app'
+      - '--build-arg'
+      - 'NEXT_PUBLIC_WISDOM_PUBLISHABLE_KEY=pk_b7d7b7412262b05054450cd08213cd3d7d3432616ffff885e4c8a57e1b596e53'
+      - '--build-arg'
+      - 'NEXT_PUBLIC_VINCI_PUBLISHABLE_KEY=pk_966daecb0de97a83ad5ffab563f3eb1e66bc360dd67b0594c1b86a64287f837a'
+      - '--build-arg'
+      - 'NEXT_PUBLIC_BERLINER_PUBLISHABLE_KEY=pk_585443cff7953bf55b4581f6bb7af3127a0dc2f723addfc38e31ade49b6451d6'
+      - '--build-arg'
+      - 'NEXT_PUBLIC_EUROTRAMP_PUBLISHABLE_KEY=pk_e91c2f1cee7a1577fc31298c2c891d52b9e919ff58b8f2eef36bcce6120cf36c'
+      - '--build-arg'
+      - 'NEXT_PUBLIC_RAMPLINE_PUBLISHABLE_KEY=pk_efdd4924d1fe83bce2386dfdb483d0415a5869e4f08b1ee32fd77236c635aec1'
+      - '--build-arg'
+      - 'NEXT_PUBLIC_4SOFT_PUBLISHABLE_KEY=pk_01650dad46210b8e881569841f33c7b0e3a536deb417e8109e69774bfc3ae77f'
 
   # Step 6: Push storefront image
   - name: 'gcr.io/cloud-builders/docker'

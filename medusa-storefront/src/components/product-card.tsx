@@ -26,16 +26,18 @@ interface ProductCardProps {
 export function ProductCard({ product, brandSlug, showPrice }: ProductCardProps) {
   const variant = product.variants?.[0]
   const imageUrl = product.thumbnail || product.images?.[0]?.url
-  const price = variant?.prices?.find((p) => p.currency_code === "usd")
-  const specs = (product.metadata?.specifications || {}) as Record<string, unknown>
-  const downloads = (product.metadata?.downloads || []) as Array<unknown>
-  const isNew = product.tags?.some((t) => t.value === "new")
-  const seriesName = (product.metadata?.series_name as string) || product.collection?.title
+  const price = variant?.prices?.find((p) => p.currency_code === "usd") || variant?.prices?.find((p) => p.currency_code === "nok")
+  const meta = product.metadata || {} as Record<string, unknown>
+  const specs = (meta.specifications || {}) as Record<string, unknown>
+  const downloads = (meta.downloads || []) as Array<unknown>
+  const isNew = product.tags?.some((t) => t.value === "new") || !!meta.is_new
+  const seriesName = (meta.series_name as string) || (meta.product_group as string) || product.collection?.title
 
-  const dims =
-    variant?.length && variant?.width
-      ? `${variant.length} x ${variant.width}${variant.height ? ` x ${variant.height}` : ""} cm`
-      : ""
+  // Dimensions: try variant fields first, then metadata
+  const l = variant?.length || meta.length_cm as number || 0
+  const w = variant?.width || meta.width_cm as number || 0
+  const h = variant?.height || meta.height_cm as number || 0
+  const dims = l && w ? `${l} x ${w}${h ? ` x ${h}` : ""} cm` : ""
 
   return (
     <Link href={`/${brandSlug}/${product.handle}`} className="card group">
@@ -73,14 +75,14 @@ export function ProductCard({ product, brandSlug, showPrice }: ProductCardProps)
           {product.title}
         </div>
         <div className="flex flex-wrap gap-1 mt-2">
-          {specs.age_group ? (
+          {(specs.age_group || meta.age_group) ? (
             <span className="text-xs bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded">
-              {String(specs.age_group)}
+              {String(specs.age_group || meta.age_group)}
             </span>
           ) : null}
-          {specs.num_users ? (
+          {(specs.num_users || meta.max_users) ? (
             <span className="text-xs bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded">
-              {String(specs.num_users)} users
+              {String(specs.num_users || meta.max_users)} users
             </span>
           ) : null}
         </div>
