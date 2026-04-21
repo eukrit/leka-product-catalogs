@@ -29,11 +29,37 @@ Added Vortex Aquatic Structures International (vortex-intl.com) as the third bra
 
 - **Gmail draft created** (ID: `r6018115205171597500`) — Request to Vortex for 2026 pricelist & updated catalogs. To: vdenisova@vortex-intl.com (current account manager). CC: cezeta@vortex-intl.com, dlopez@vortex-intl.com. NOT SENT — user reviews in Gmail Drafts before sending.
 
-### Pending — run after scrape completes
+### Scrape results (2026-04-21)
 
-1. `python vortex-catalog/mirror_images_to_gcs.py` — mirror ~2,500 images to GCS
-2. `python vortex-catalog/import_to_medusa.py --dry-run` — verify shape
-3. `python vortex-catalog/import_to_medusa.py` — import to Medusa. Record the generated Sales Channel ID and publishable API key below.
+- Ran with `--skip-types --delay 10` → 272/272 products in 3433s (~57 min)
+- 272/272 with name (100%)
+- 272/272 with description (100%, extracted from `og:description`)
+- 272/272 with at least one image (1,949 total images)
+- 246/272 with Vortex model code (90%; e.g. `VOR-7281`)
+- Specs parsing yielded 0 entries per product — Vortex public pages do not expose technical specs in HTML (likely gated behind the Resource Center). Non-blocking — specs can be enriched later from the pricelist/catalog once Vortex sends the 2026 PDFs.
+- `product_types` left empty for this first pass — the WP listing pages at `/products/?product_types=<slug>` only returned 79/272 distinct slugs, so categorization will be done post-import via Medusa admin once products are loaded.
+- Output: [web-app/public/data/products_all.json](web-app/public/data/products_all.json), [products_1.json](web-app/public/data/products_1.json), [families.json](web-app/public/data/families.json)
+
+### Image mirror (2026-04-21) — complete
+
+- Ran `python vortex-catalog/mirror_images_to_gcs.py` with GCS ADC from
+  `Credentials Claude Code/ai-agents-go-4c81b70995db.json`
+- Target: `gs://ai-agents-go-documents/product-images/vortex/catalog/<slug>/<filename>-<hash>.<ext>`
+- **1,949/1,949 images mirrored · 0 failed · 7,649 s (~2h 7min)**
+- `products_all.json` now carries both `images[].url` (original vortex-intl.com source) and `images[].gcs_url` (GCS public URL) for every image
+- Example: `https://storage.googleapis.com/ai-agents-go-documents/product-images/vortex/catalog/deflex/2--vor-7281_deflex_pv2-68c1369f.png`
+
+### Medusa dry-run (2026-04-21)
+
+- `python vortex-catalog/import_to_medusa.py --dry-run` ✓ shape valid
+- Sample handle: `vortex-uncategorized-deflex` · SKU `VOR-7281` · 9 images
+- Real import deferred — requires `MEDUSA_ADMIN_API_KEY`. Run when ready:
+  ```
+  MEDUSA_ADMIN_API_KEY=... \
+  MEDUSA_BACKEND_URL=https://leka-medusa-backend-538978391890.asia-southeast1.run.app \
+    python vortex-catalog/import_to_medusa.py
+  ```
+  Record the generated Sales Channel ID and publishable API key below.
 
 ### Sales Channel (fill after import)
 

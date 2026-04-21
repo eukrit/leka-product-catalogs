@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## [2.3.0] - 2026-04-21
 
-### Added — Vortex Aquatics brand (272 products)
+### Added — Vortex Aquatics brand (272 products · 1,949 images mirrored)
 
 - New brand folder [vortex-catalog/](vortex-catalog/) mirrors the vinci-catalog pattern
 - **Scraper** [vortex-catalog/scrape_catalog.py](vortex-catalog/scrape_catalog.py) — hybrid WP REST + HTML approach against www.vortex-intl.com
