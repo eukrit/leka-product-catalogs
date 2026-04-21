@@ -75,6 +75,17 @@ export const BRANDS: Record<string, BrandConfig> = {
     hasPricing: false,
     productCount: 391,
   },
+  vortex: {
+    name: "Vortex Aquatics",
+    slug: "vortex",
+    description: "Splashpads, Waterslides & Aquatic Play Structures",
+    country: "Canada",
+    color: "#153cba",
+    publishableKey: process.env.NEXT_PUBLIC_VORTEX_PUBLISHABLE_KEY || "",
+    hasCollections: true,
+    hasPricing: false,
+    productCount: 272,
+  },
 }
 
 export interface BrandConfig {

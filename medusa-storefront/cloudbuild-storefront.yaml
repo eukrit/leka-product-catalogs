@@ -8,6 +8,8 @@ steps:
       - 'NEXT_PUBLIC_WISDOM_PUBLISHABLE_KEY=pk_b7d7b7412262b05054450cd08213cd3d7d3432616ffff885e4c8a57e1b596e53'
       - '--build-arg'
       - 'NEXT_PUBLIC_VINCI_PUBLISHABLE_KEY=pk_966daecb0de97a83ad5ffab563f3eb1e66bc360dd67b0594c1b86a64287f837a'
+      - '--build-arg'
+      - 'NEXT_PUBLIC_VORTEX_PUBLISHABLE_KEY=pk_df5eb6c3d0032c6baebe18bec7b3be1cdb024ba5efd3833cac2b8517432c56dc'
       - '-t'
       - 'asia-southeast1-docker.pkg.dev/$PROJECT_ID/leka-product-catalogs/medusa-storefront:latest'
       - '.'
