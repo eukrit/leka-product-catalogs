@@ -20,9 +20,9 @@ export const BRANDS: Record<string, BrandConfig> = {
     hasPricing: true,
     productCount: 5056,
   },
-  vinciplay: {
+  vinci: {
     name: "Vinci Play",
-    slug: "vinciplay",
+    slug: "vinci",
     description: "Playground Equipment",
     country: "Poland",
     color: "#970260",
