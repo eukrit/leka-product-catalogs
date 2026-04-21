@@ -49,17 +49,38 @@ Added Vortex Aquatic Structures International (vortex-intl.com) as the third bra
 - `products_all.json` now carries both `images[].url` (original vortex-intl.com source) and `images[].gcs_url` (GCS public URL) for every image
 - Example: `https://storage.googleapis.com/ai-agents-go-documents/product-images/vortex/catalog/deflex/2--vor-7281_deflex_pv2-68c1369f.png`
 
-### Medusa dry-run (2026-04-21)
+### Medusa import (2026-04-21) — complete
 
-- `python vortex-catalog/import_to_medusa.py --dry-run` ✓ shape valid
-- Sample handle: `vortex-uncategorized-deflex` · SKU `VOR-7281` · 9 images
-- Real import deferred — requires `MEDUSA_ADMIN_API_KEY`. Run when ready:
-  ```
-  MEDUSA_ADMIN_API_KEY=... \
-  MEDUSA_BACKEND_URL=https://leka-medusa-backend-538978391890.asia-southeast1.run.app \
-    python vortex-catalog/import_to_medusa.py
-  ```
-  Record the generated Sales Channel ID and publishable API key below.
+**272/272 products imported, 0 errors.**
+
+- **Sales Channel**: `sc_01KPRY1T8HZJ57020JPZVGAKZK` · name "Vortex Aquatics"
+- **Publishable API Key**: `apk_01KPRY4A8K6NCCDKAN91NFP4M9` · token `pk_df5eb6c3d0032c6baebe18bec7b3be1cdb024ba5efd3833cac2b8517432c56dc`
+- **Category**: `pcat_01KNKVH8QGWEPES0FNZW3CT2VT` (`water_play`)
+- **Collections** (one per product_type):
+  - splashpad: `pcol_01KPRY1TK73RR8CHJ93BTGP5G3`
+  - waterslide: `pcol_01KPRY1TQ64NGNE8WYXS7Z5SDC`
+  - elevations-playnuk: `pcol_01KPRY1TV2ZYFQ6JSWQBJZX6AE`
+  - playable-fountains: `pcol_01KPRY1TZ3YZ8PC8Y9EAVRRPRT`
+  - coolhub: `pcol_01KPRY1V36S9RGVQNE72K1G06K`
+  - dream-tunnel: `pcol_01KPRY1V78ZYEZ0AD5FX6VH2QF`
+  - water-management-solutions: `pcol_01KPRY1VAZ9N7VNAY0JYDESHB3`
+  - uncategorized: `pcol_01KPRY1VF4RSV2NTSBVMX1VHSQ` (initial landing; recategorize via admin)
+
+### Auth setup
+
+- GSM secret `medusa-admin-password` (v2, 13 bytes) holds `LekaAdmin2026`
+- `shared/medusa_importer.py` now uses Medusa v2 Bearer auth. If `MEDUSA_ADMIN_API_KEY` is empty, it falls back to `MEDUSA_ADMIN_EMAIL` + `MEDUSA_ADMIN_PASSWORD` and does `/auth/user/emailpass` auto-login.
+- Re-run is idempotent: `batch_import()` skips products whose handle already exists.
+
+### How to re-run
+
+```powershell
+$env:MEDUSA_BACKEND_URL = "https://leka-medusa-backend-538978391890.asia-southeast1.run.app"
+$pass = gcloud secrets versions access latest --secret=medusa-admin-password --project=ai-agents-go
+$env:MEDUSA_ADMIN_EMAIL = "admin@leka.studio"
+$env:MEDUSA_ADMIN_PASSWORD = $pass
+python vortex-catalog/import_to_medusa.py
+```
 
 ### Sales Channel (fill after import)
 

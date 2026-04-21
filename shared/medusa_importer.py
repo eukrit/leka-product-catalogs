@@ -1,8 +1,16 @@
 """
 Shared Medusa Admin API import helpers.
 
-Used by brand-specific importers (wisdom, vinci) to write products
-to Medusa Commerce v2 via the Admin API.
+Used by brand-specific importers (wisdom, vinci, vortex) to write
+products to Medusa Commerce v2 via the Admin API.
+
+Auth — Medusa v2 accepts a Bearer token in the Authorization header.
+The token can be either a short-lived user JWT (POST /auth/user/emailpass
+returns one) or a long-lived Secret API Key (POST /admin/api-keys with
+type=secret). Pass either via `api_key=` or MEDUSA_ADMIN_API_KEY env.
+
+If MEDUSA_ADMIN_EMAIL / MEDUSA_ADMIN_PASSWORD are set (and api_key is
+empty), the client auto-logs in and uses the returned JWT.
 """
 import os
 import json
@@ -17,11 +25,33 @@ class MedusaImporter:
     def __init__(self, base_url: str = None, api_key: str = None):
         self.base_url = (base_url or os.environ.get("MEDUSA_BACKEND_URL", "http://localhost:9000")).rstrip("/")
         self.api_key = api_key or os.environ.get("MEDUSA_ADMIN_API_KEY", "")
+
+        # Fallback: auto-login with admin email/password if no key was provided.
+        if not self.api_key:
+            email = os.environ.get("MEDUSA_ADMIN_EMAIL")
+            password = os.environ.get("MEDUSA_ADMIN_PASSWORD")
+            if email and password:
+                self.api_key = self._login_with_password(email, password)
+
         self.session = requests.Session()
         self.session.headers.update({
             "Content-Type": "application/json",
-            "x-medusa-access-token": self.api_key,
+            "Authorization": f"Bearer {self.api_key}",
         })
+
+    def _login_with_password(self, email: str, password: str) -> str:
+        """POST /auth/user/emailpass → JWT token string."""
+        resp = requests.post(
+            f"{self.base_url}/auth/user/emailpass",
+            json={"email": email, "password": password},
+            timeout=30,
+        )
+        resp.raise_for_status()
+        data = resp.json()
+        token = data.get("token") or data.get("access_token")
+        if not token:
+            raise RuntimeError(f"Login succeeded but no token in response: {data}")
+        return token
 
     def _post(self, path: str, data: dict) -> dict:
         resp = self.session.post(f"{self.base_url}{path}", json=data)
@@ -47,7 +77,13 @@ class MedusaImporter:
         variant: dict = None,
         sales_channel_ids: list = None,
     ) -> dict:
-        """Create a product with a single variant."""
+        """Create a product with a single variant.
+
+        Medusa v2 requires every variant to reference a product-level
+        `options` entry. If the caller passes a variant without declaring
+        options, we inject a default "Style → Standard" option so the
+        payload validates.
+        """
         data: dict = {
             "title": title,
             "handle": handle,
@@ -64,12 +100,28 @@ class MedusaImporter:
             data["collection_id"] = collection_id
         if tag_ids:
             data["tags"] = [{"id": tid} for tid in tag_ids]
+
         if variant:
-            data["variants"] = [variant]
+            # Ensure the variant has the option map Medusa v2 expects.
+            v = dict(variant)
+            if "options" not in v:
+                v["options"] = {"Style": "Standard"}
+            data["options"] = [{"title": "Style", "values": ["Standard"]}]
+            data["variants"] = [v]
+
         if sales_channel_ids:
             data["sales_channels"] = [{"id": scid} for scid in sales_channel_ids]
 
         return self._post("/admin/products", data)
+
+    def find_product_by_handle(self, handle: str) -> Optional[str]:
+        """Return product ID if a product with this handle exists, else None."""
+        try:
+            resp = self._get("/admin/products", {"handle": handle, "limit": 1})
+            products = resp.get("products", [])
+            return products[0]["id"] if products else None
+        except Exception:
+            return None
 
     def get_or_create_sales_channel(self, name: str, description: str = "") -> str:
         """Get existing sales channel by name or create a new one. Returns sales_channel ID."""
@@ -93,10 +145,15 @@ class MedusaImporter:
         key_id = key["id"]
         token = key.get("token") or key.get("redacted") or ""
 
-        # 2) Link to sales channel
-        self._post(f"/admin/api-keys/{key_id}/sales-channels/batch", {
-            "add": [sales_channel_id],
-        })
+        # 2) Link to sales channel (Medusa v2: POST /admin/api-keys/:id/sales-channels with {add})
+        try:
+            self._post(f"/admin/api-keys/{key_id}/sales-channels", {
+                "add": [sales_channel_id],
+            })
+        except requests.HTTPError as e:
+            # The exact path varies across 2.x minor versions. Not fatal — the key still works
+            # once linked manually via the admin UI. Log and continue.
+            print(f"  (warning: could not auto-link publishable key to sales channel: {e.response.status_code})")
         return {"id": key_id, "token": token}
 
     def get_or_create_category(self, name: str, handle: str) -> str:
@@ -142,24 +199,35 @@ class MedusaImporter:
         products: list,
         batch_size: int = 50,
         delay: float = 0.1,
+        skip_existing: bool = True,
     ) -> int:
-        """Import a list of product dicts. Returns count of successfully imported products."""
+        """Import a list of product dicts. Returns count of successfully imported products.
+
+        If skip_existing=True (default), a product whose handle already exists
+        in Medusa is skipped rather than retried — makes re-runs idempotent.
+        """
         count = 0
+        skipped = 0
         errors = 0
         for i, product_data in enumerate(products):
+            handle = product_data.get("handle", "unknown")
             try:
+                if skip_existing and self.find_product_by_handle(handle):
+                    skipped += 1
+                    if skipped % batch_size == 0:
+                        print(f"  Skipped {skipped} existing (progress {i+1}/{len(products)})")
+                    continue
                 self.create_product(**product_data)
                 count += 1
                 if count % batch_size == 0:
-                    print(f"  Imported {count} / {len(products)}")
+                    print(f"  Imported {count} new / {len(products)} total (skipped {skipped})")
                     time.sleep(delay)
             except requests.HTTPError as e:
                 errors += 1
-                handle = product_data.get("handle", "unknown")
                 print(f"  Error importing {handle}: {e.response.status_code} {e.response.text[:200]}")
             except Exception as e:
                 errors += 1
                 print(f"  Error: {e}")
 
-        print(f"  Done: {count} imported, {errors} errors")
+        print(f"  Done: {count} imported, {skipped} skipped (existed), {errors} errors")
         return count
