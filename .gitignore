@@ -70,3 +70,12 @@ Thumbs.db
 .idea/
 *.swp
 *.swo
+
+# Session state (Rule 6) — per-user local state, not committed
+.claude/PROGRESS.md
+.claude/sessions/
+.claude/cache/
+.claude/backups/
+.claude/debug/
+.claude/downloads/
+.claude/telemetry/
