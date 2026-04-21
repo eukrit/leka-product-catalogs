@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vortex Aquatics — Catalog Build Summary</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Work+Sans:wght@600;700;800&display=swap');
+    :root {
+      --vortex-blue: #153cba;
+      --vortex-magenta: #ff33d4;
+      --vortex-cyan: #6ed4fc;
+      --vortex-navy: #000732;
+      --vortex-grey-50: #f2f2f2;
+      --vortex-grey-500: #757575;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 32px 20px 80px;
+      color: #000;
+      background: var(--vortex-grey-50);
+    }
+    h1, h2, h3 { font-family: 'Work Sans', sans-serif; margin: 0 0 12px; }
+    h1 { border-bottom: 3px solid var(--vortex-blue); padding-bottom: 8px; font-size: 32px; color: var(--vortex-navy); }
+    h2 { color: var(--vortex-blue); margin-top: 32px; font-size: 22px; }
+    .hero {
+      background: linear-gradient(135deg, var(--vortex-blue), var(--vortex-navy));
+      color: #fff;
+      padding: 32px 28px;
+      border-radius: 16px;
+      margin-bottom: 24px;
+    }
+    .hero h1 { color: #fff; border: none; padding: 0; margin-bottom: 8px; }
+    .hero p { margin: 0; opacity: 0.88; font-family: 'Work Sans'; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; font-size: 13px; }
+    .meta {
+      background: #fff;
+      padding: 20px 24px;
+      border-radius: 12px;
+      margin: 16px 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .meta p { margin: 6px 0; }
+    .status {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      font-weight: 700;
+      font-family: 'Work Sans';
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .status-ok { background: #dcfce7; color: #166534; }
+    .status-pending { background: #fef3c7; color: #92400e; }
+    .status-running { background: #dbeafe; color: #1e40af; }
+    table { width: 100%; border-collapse: collapse; margin: 12px 0; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    th, td { text-align: left; padding: 10px 16px; border-bottom: 1px solid #eee; }
+    th { background: var(--vortex-grey-50); font-family: 'Work Sans'; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--vortex-grey-500); }
+    tr:last-child td { border-bottom: none; }
+    a { color: var(--vortex-blue); text-decoration: none; }
+    a:hover { color: var(--vortex-magenta); text-decoration: underline; }
+    code { background: var(--vortex-grey-50); padding: 2px 6px; border-radius: 4px; font-size: 13px; }
+    .swatch-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+    .swatch { width: 88px; text-align: center; }
+    .swatch-color { width: 88px; height: 60px; border-radius: 8px; margin-bottom: 4px; border: 1px solid rgba(0,0,0,0.08); }
+    .swatch-name { font-size: 11px; font-family: 'Work Sans'; font-weight: 600; }
+    .swatch-hex { font-size: 11px; color: var(--vortex-grey-500); font-family: monospace; }
+    footer { margin-top: 48px; color: var(--vortex-grey-500); font-size: 13px; text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <h1>Vortex Aquatics Catalog</h1>
+    <p>Splashpad · Waterslide · Playable Fountains · Elevations · CoolHub</p>
+  </div>
+
+  <div class="meta">
+    <p><strong>Brand:</strong> Vortex Aquatic Structures International</p>
+    <p><strong>Source:</strong> <a href="https://www.vortex-intl.com" target="_blank">www.vortex-intl.com</a></p>
+    <p><strong>Version:</strong> 0.1.0</p>
+    <p><strong>Last build:</strong> 2026-04-21 · <span class="status status-running">Scrape in progress</span></p>
+    <p><strong>Total products:</strong> 272 (WP REST confirmed)</p>
+  </div>
+
+  <h2>Pipeline status</h2>
+  <table>
+    <tr><th>Stage</th><th>Status</th><th>Notes</th></tr>
+    <tr><td>Scrape (WP REST + HTML)</td><td><span class="status status-running">Running</span></td><td>~45 min full pass · 10s crawl-delay per robots.txt</td></tr>
+    <tr><td>Image mirror → GCS</td><td><span class="status status-pending">Pending scrape</span></td><td><code>gs://ai-agents-go-documents/product-images/vortex/catalog/</code></td></tr>
+    <tr><td>Medusa import</td><td><span class="status status-pending">Pending mirror</span></td><td>New Sales Channel "Vortex Aquatics" + publishable API key</td></tr>
+    <tr><td>Cloud Run deploy</td><td><span class="status status-pending">Pending commit</span></td><td>Service name: <code>vortex-catalog</code></td></tr>
+    <tr><td>Pricelist email (2026)</td><td><span class="status status-ok">Drafted</span></td><td>Gmail draft to Vicky Denisova · NOT SENT — user reviews and sends manually</td></tr>
+  </table>
+
+  <h2>Vortex Design System (derived)</h2>
+  <p>Tokens extracted from <a href="https://www.vortex-intl.com/wp-content/themes/vortex/dist/styles/main_4d2020b1.css" target="_blank">main theme CSS</a>. Full reference: <a href="../vortex-catalog/DESIGN_SYSTEM.md">DESIGN_SYSTEM.md</a>.</p>
+  <div class="swatch-row">
+    <div class="swatch"><div class="swatch-color" style="background:#153cba"></div><div class="swatch-name">Blue</div><div class="swatch-hex">#153cba</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#ff33d4"></div><div class="swatch-name">Magenta</div><div class="swatch-hex">#ff33d4</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#6ed4fc"></div><div class="swatch-name">Cyan</div><div class="swatch-hex">#6ed4fc</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#000732"></div><div class="swatch-name">Navy</div><div class="swatch-hex">#000732</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#ffe000"></div><div class="swatch-name">Yellow</div><div class="swatch-hex">#ffe000</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#d72500"></div><div class="swatch-name">Red</div><div class="swatch-hex">#d72500</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#f2f2f2; border:1px solid #ddd"></div><div class="swatch-name">Grey 50</div><div class="swatch-hex">#f2f2f2</div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#757575"></div><div class="swatch-name">Grey 500</div><div class="swatch-hex">#757575</div></div>
+  </div>
+  <p style="margin-top:16px"><strong>Fonts:</strong> Nunito (body) · Work Sans (headings)</p>
+
+  <h2>Product families (collections)</h2>
+  <table>
+    <tr><th>Slug</th><th>Display name</th></tr>
+    <tr><td><code>splashpad</code></td><td>Splashpad</td></tr>
+    <tr><td><code>waterslide</code></td><td>Waterslide</td></tr>
+    <tr><td><code>elevations-playnuk</code></td><td>Elevations & PlayNuk</td></tr>
+    <tr><td><code>playable-fountains</code></td><td>Playable Fountains</td></tr>
+    <tr><td><code>coolhub</code></td><td>CoolHub</td></tr>
+    <tr><td><code>dream-tunnel</code></td><td>Dream Tunnel</td></tr>
+    <tr><td><code>water-management-solutions</code></td><td>Water Management Solutions</td></tr>
+  </table>
+
+  <h2>Files</h2>
+  <ul>
+    <li><a href="../vortex-catalog/scrape_catalog.py">scrape_catalog.py</a> — WP REST + HTML hybrid scraper</li>
+    <li><a href="../vortex-catalog/mirror_images_to_gcs.py">mirror_images_to_gcs.py</a> — Image mirror to GCS</li>
+    <li><a href="../vortex-catalog/import_to_medusa.py">import_to_medusa.py</a> — Medusa v2 Admin API importer</li>
+    <li><a href="../vortex-catalog/DESIGN_SYSTEM.md">DESIGN_SYSTEM.md</a> — Vortex design tokens</li>
+    <li><a href="../vortex-catalog/DEPLOYMENT_LOG.md">DEPLOYMENT_LOG.md</a> — Version history for this brand</li>
+    <li><a href="../vortex-catalog/web-app/">web-app/</a> — Flask static catalog viewer</li>
+  </ul>
+
+  <footer>
+    Auto-generated by Claude Code · <a href="https://github.com/eukrit/leka-product-catalogs">eukrit/leka-product-catalogs</a>
+  </footer>
+</body>
+</html>

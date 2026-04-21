@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vortex Aquatics — Product Catalog</title>
+  <meta name="description" content="Vortex Aquatic Structures — splashpads, waterslides, playable fountains, and aquatic play. Catalog browser.">
+  <link rel="icon" type="image/svg+xml" href="assets/vortex-logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&family=Work+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-inner">
+      <a class="brand" href="/">
+        <img src="assets/vortex-logo.svg" alt="Vortex" class="brand-logo">
+        <span class="brand-divider"></span>
+        <span class="brand-subtitle">Product Catalog</span>
+      </a>
+      <div class="header-stats">
+        <div class="stat"><span class="stat-value" id="stat-products">—</span><span class="stat-label">Products</span></div>
+        <div class="stat"><span class="stat-value" id="stat-types">—</span><span class="stat-label">Product Types</span></div>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <h1 class="hero-title">Aquatic play, rediscovered.</h1>
+      <p class="hero-tagline">Splashpads · Waterslides · Playable Fountains · Elevations · CoolHub · Dream Tunnel</p>
+    </div>
+  </section>
+
+  <section class="filters">
+    <div class="filters-inner">
+      <div class="search-box">
+        <svg class="search-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="8.5" cy="8.5" r="6"/><path d="M13 13l4 4"/>
+        </svg>
+        <input type="text" id="search" placeholder="Search by name, model code, or description…">
+      </div>
+      <div class="filter-row">
+        <label class="filter-label">Product Type
+          <select id="filter-type">
+            <option value="">All Types</option>
+          </select>
+        </label>
+        <button class="btn-secondary" id="btn-reset">Reset</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="type-chips" id="type-chips"></div>
+
+  <main class="product-grid" id="product-grid">
+    <div class="loading"><div class="spinner"></div><p>Loading Vortex catalog…</p></div>
+  </main>
+
+  <div class="modal-overlay" id="modal-overlay" hidden>
+    <div class="modal" role="dialog" aria-modal="true">
+      <button class="modal-close" id="modal-close" aria-label="Close">×</button>
+      <div class="modal-body" id="modal-body"></div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>Vortex Aquatics Catalog · Leka Product Catalogs</div>
+      <div class="footer-sub">GO Corporation Co., Ltd. — Thailand distributor · Source: vortex-intl.com</div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
