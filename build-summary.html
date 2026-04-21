@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>leka-product-catalogs — Build Summary</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&family=Work+Sans:wght@600;700&display=swap');
+    :root {
+      --purple: #8003FF;
+      --navy: #182557;
+      --cream: #FFF9E6;
+      --magenta: #970260;
+    }
+    * { box-sizing: border-box; }
+    body { font-family: 'Manrope', -apple-system, sans-serif; max-width: 1040px; margin: 0 auto; padding: 32px 20px 80px; color: var(--navy); background: #fafafa; }
+    h1 { font-weight: 800; border-bottom: 3px solid var(--purple); padding-bottom: 8px; margin-bottom: 8px; }
+    h2 { color: var(--purple); margin: 28px 0 10px; }
+    .meta { background: var(--cream); padding: 14px 18px; border-radius: 16px; border: 1px solid rgba(128,3,255,0.15); margin-bottom: 24px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+    .card { background: #fff; border-radius: 16px; padding: 18px 22px 20px; box-shadow: 0 2px 8px rgba(24,37,87,0.08); border-top: 4px solid var(--purple); }
+    .card.vortex { border-top-color: #153cba; }
+    .card.vinci { border-top-color: #8003FF; }
+    .card.wisdom { border-top-color: #FFA900; }
+    .card h3 { margin: 0 0 6px; font-family: 'Work Sans', sans-serif; font-weight: 700; font-size: 18px; }
+    .card .count { font-size: 30px; font-weight: 800; color: var(--navy); font-family: 'Work Sans'; margin-bottom: 2px; }
+    .card .label { color: #64748b; font-size: 13px; margin-bottom: 12px; }
+    .card ul { padding-left: 18px; margin: 0; font-size: 13px; color: #475569; }
+    .status { display: inline-block; padding: 3px 10px; border-radius: 9999px; font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .status-ok { background: #dcfce7; color: #166534; }
+    .status-pending { background: #fef3c7; color: #92400e; }
+    .status-running { background: #dbeafe; color: #1e40af; }
+    a { color: var(--purple); text-decoration: none; }
+    a:hover { color: var(--magenta); text-decoration: underline; }
+    footer { margin-top: 40px; color: #94a3b8; font-size: 12px; text-align: center; }
+    code { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <h1>leka-product-catalogs — Build Summary</h1>
+  <div class="meta">
+    <strong>Project:</strong> leka-product-catalogs · <strong>Version:</strong> 2.3.0 · <strong>Last build:</strong> 2026-04-21 · <strong>Repo:</strong> <a href="https://github.com/eukrit/leka-product-catalogs">eukrit/leka-product-catalogs</a>
+  </div>
+
+  <h2>Brands</h2>
+  <div class="grid">
+
+    <div class="card wisdom">
+      <div class="label">Brand</div>
+      <h3>Wisdom</h3>
+      <div class="count">5,071</div>
+      <div class="label">Products in Medusa</div>
+      <ul>
+        <li>Source: Excel catalogs</li>
+        <li>Folder: <code>wisdom-catalog/</code></li>
+        <li>Status: <span class="status status-ok">Live</span></li>
+      </ul>
+    </div>
+
+    <div class="card vinci">
+      <div class="label">Brand</div>
+      <h3>Vinci Play</h3>
+      <div class="count">1,172</div>
+      <div class="label">Products in Medusa</div>
+      <ul>
+        <li>Source: vinci-play.com scrape</li>
+        <li>Folder: <code>vinci-catalog/</code></li>
+        <li>Storefront: <a href="https://catalogs.leka.studio">catalogs.leka.studio</a></li>
+        <li>Status: <span class="status status-ok">Live</span></li>
+      </ul>
+    </div>
+
+    <div class="card vortex">
+      <div class="label">Brand — NEW</div>
+      <h3>Vortex Aquatics</h3>
+      <div class="count">272</div>
+      <div class="label">Products (scraping in progress)</div>
+      <ul>
+        <li>Source: <a href="https://www.vortex-intl.com">vortex-intl.com</a> scrape</li>
+        <li>Folder: <code>vortex-catalog/</code></li>
+        <li>Design System: <a href="vortex-catalog/DESIGN_SYSTEM.md">Derived (Vortex tokens)</a></li>
+        <li>Category: <code>water_play</code></li>
+        <li>Collections: 7 (splashpad, waterslide, playable fountains, …)</li>
+        <li>Status: <span class="status status-running">Scrape in progress</span> → <a href="docs/vortex.html">Details</a></li>
+        <li>Pricelist email: <span class="status status-ok">Drafted</span> (user to review & send)</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <h2>Infrastructure</h2>
+  <table style="width:100%; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(24,37,87,0.08);">
+    <tr style="background: var(--cream);"><th style="padding: 10px 16px; text-align: left;">Component</th><th style="padding: 10px 16px; text-align: left;">Value</th></tr>
+    <tr><td style="padding: 10px 16px; border-top: 1px solid #eee;">Medusa Backend</td><td style="padding: 10px 16px; border-top: 1px solid #eee;"><code>leka-medusa-backend.asia-southeast1.run.app</code></td></tr>
+    <tr><td style="padding: 10px 16px; border-top: 1px solid #eee;">Next.js Storefront</td><td style="padding: 10px 16px; border-top: 1px solid #eee;"><code>leka-medusa-storefront.asia-southeast1.run.app</code></td></tr>
+    <tr><td style="padding: 10px 16px; border-top: 1px solid #eee;">Database</td><td style="padding: 10px 16px; border-top: 1px solid #eee;">Cloud SQL PostgreSQL 15</td></tr>
+    <tr><td style="padding: 10px 16px; border-top: 1px solid #eee;">Cache</td><td style="padding: 10px 16px; border-top: 1px solid #eee;">Memorystore Redis</td></tr>
+    <tr><td style="padding: 10px 16px; border-top: 1px solid #eee;">GCS Bucket</td><td style="padding: 10px 16px; border-top: 1px solid #eee;"><code>ai-agents-go-documents</code></td></tr>
+    <tr><td style="padding: 10px 16px; border-top: 1px solid #eee;">Region</td><td style="padding: 10px 16px; border-top: 1px solid #eee;">asia-southeast1</td></tr>
+  </table>
+
+  <h2>Recent activity</h2>
+  <ul>
+    <li><strong>v2.3.0 · 2026-04-21</strong> — Added Vortex Aquatics brand (272 products), derived Vortex Design System, drafted 2026 pricelist email · <a href="CHANGELOG.md">CHANGELOG</a></li>
+    <li><strong>v2.2.0 · 2026-04-09</strong> — Added 4 vendor catalogs (Berliner, Eurotramp, Rampline, 4soft) — 991 products</li>
+    <li><strong>v2.1.1 · 2026-04-07</strong> — Seeded 6,151 products into Medusa v2 (Wisdom + Vinci)</li>
+  </ul>
+
+  <footer>Auto-generated by Claude Code · <a href="https://github.com/eukrit/leka-product-catalogs">GitHub</a></footer>
+</body>
+</html>

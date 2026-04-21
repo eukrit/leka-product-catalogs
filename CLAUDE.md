@@ -99,6 +99,7 @@ All catalogs use the **Leka Design System** (Figma: `ER6pbDqrJ4Uo9FuldnYBfm`):
 |-------|-----------|---------------|----------|--------|
 | Wisdom | `wisdom-catalog/` | TBD | 5,071 | Excel catalogs |
 | Vinci Play | `vinci-catalog/` | https://catalogs.leka.studio | 1,172 | vinci-play.com scrape |
+| Vortex Aquatics | `vortex-catalog/` | TBD | 272 | vortex-intl.com scrape |
 
 ## Project Structure (enforced)
 ```

@@ -45,6 +45,7 @@ class MedusaImporter:
         collection_id: str = None,
         tag_ids: list = None,
         variant: dict = None,
+        sales_channel_ids: list = None,
     ) -> dict:
         """Create a product with a single variant."""
         data: dict = {
@@ -65,8 +66,38 @@ class MedusaImporter:
             data["tags"] = [{"id": tid} for tid in tag_ids]
         if variant:
             data["variants"] = [variant]
+        if sales_channel_ids:
+            data["sales_channels"] = [{"id": scid} for scid in sales_channel_ids]
 
         return self._post("/admin/products", data)
+
+    def get_or_create_sales_channel(self, name: str, description: str = "") -> str:
+        """Get existing sales channel by name or create a new one. Returns sales_channel ID."""
+        resp = self._get("/admin/sales-channels", {"name": name, "limit": 1})
+        channels = resp.get("sales_channels", [])
+        if channels:
+            return channels[0]["id"]
+
+        result = self._post("/admin/sales-channels", {
+            "name": name,
+            "description": description,
+            "is_disabled": False,
+        })
+        return result["sales_channel"]["id"]
+
+    def create_publishable_api_key(self, title: str, sales_channel_id: str) -> dict:
+        """Create a publishable API key bound to a sales channel. Returns {id, token}."""
+        # 1) Create the key
+        result = self._post("/admin/api-keys", {"title": title, "type": "publishable"})
+        key = result.get("api_key") or result.get("publishable_api_key")
+        key_id = key["id"]
+        token = key.get("token") or key.get("redacted") or ""
+
+        # 2) Link to sales channel
+        self._post(f"/admin/api-keys/{key_id}/sales-channels/batch", {
+            "add": [sales_channel_id],
+        })
+        return {"id": key_id, "token": token}
 
     def get_or_create_category(self, name: str, handle: str) -> str:
         """Get existing category by handle or create new one. Returns category ID."""
