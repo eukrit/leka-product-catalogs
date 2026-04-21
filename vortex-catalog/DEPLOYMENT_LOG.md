@@ -68,7 +68,15 @@ Added Vortex Aquatic Structures International (vortex-intl.com) as the third bra
 - Category: `water_play`
 - Collection handles: `vortex-splashpad`, `vortex-waterslide`, `vortex-elevations-playnuk`, `vortex-playable-fountains`, `vortex-coolhub`, `vortex-dream-tunnel`, `vortex-water-management-solutions`, `vortex-uncategorized`
 
-### Cloud Run service (fill after deploy)
+### Cloud Run service (deployed 2026-04-21)
 
-- URL: _TBD_
-- Artifact: `gcr.io/ai-agents-go/vortex-catalog:latest`
+- **URL: https://vortex-catalog-rg5gmtwrfa-as.a.run.app**
+- Build ID: `fe0d65bd-2327-4708-a17c-de28a5a7b5b3` (SUCCESS, 1m55s)
+- Artifact: `gcr.io/ai-agents-go/vortex-catalog:41f9755` (also tagged `:latest`)
+- Region: asia-southeast1
+- Commit deployed: `41f9755` (merge of PR #1)
+- Health check: `GET /health` → `{"brand":"vortex","status":"ok"}`
+
+### Note on trigger setup
+
+The Vortex build was submitted manually because the root `leka-product-catalogs-deploy` Cloud Build trigger (us-central1, id `7cd91f80`) targets the root `cloudbuild.yaml` — which builds the original Medusa backend and currently fails on a pre-existing `$PROJECT_ID` substitution bug (failure IDs: `93b796f1` today and earlier). Fixing that trigger OR adding a dedicated `vortex-catalog-deploy` trigger pointing at `vortex-catalog/web-app/cloudbuild.yaml` is a follow-up task.
