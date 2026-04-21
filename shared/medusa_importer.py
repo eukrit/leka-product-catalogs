@@ -138,7 +138,20 @@ class MedusaImporter:
         return result["sales_channel"]["id"]
 
     def create_publishable_api_key(self, title: str, sales_channel_id: str) -> dict:
-        """Create a publishable API key bound to a sales channel. Returns {id, token}."""
+        """Get-or-create a publishable API key by title. Returns {id, token}.
+
+        Idempotent: if a publishable key with the same title already exists,
+        reuse it instead of minting a duplicate.
+        """
+        # 0) Look for existing key with this title
+        try:
+            existing = self._get("/admin/api-keys", {"type": "publishable", "limit": 100})
+            for k in existing.get("api_keys", []):
+                if k.get("title") == title:
+                    return {"id": k["id"], "token": k.get("token") or k.get("redacted") or ""}
+        except Exception:
+            pass
+
         # 1) Create the key
         result = self._post("/admin/api-keys", {"title": title, "type": "publishable"})
         key = result.get("api_key") or result.get("publishable_api_key")
