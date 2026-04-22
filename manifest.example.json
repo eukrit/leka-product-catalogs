@@ -17,7 +17,7 @@
     "region": "asia-southeast1",
     "service_name": "leka-product-catalogs",
     "service_account": "claude@ai-agents-go.iam.gserviceaccount.com",
-    "service_account_key": "file:credentials/ai-agents-go-4c81b70995db.json",
+    "service_account_key": "file:credentials/ai-agents-go-9b4219be8c01.json",
     "oauth_client": "file:credentials/client_secret_538978391890-2ol1mrglnelng580ldvj5fi4tkrliqhf.apps.googleusercontent.com.json",
     "firestore": "native mode, default database",
     "gcs_bucket": "ai-agents-go-documents",

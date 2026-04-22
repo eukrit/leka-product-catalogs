@@ -20,7 +20,7 @@ from datetime import datetime
 
 from google.cloud import firestore
 
-SERVICE_ACCOUNT_PATH = r"C:\Users\Eukrit\OneDrive\Documents\Claude Code\Credentials Claude Code\ai-agents-go-4c81b70995db.json"
+SERVICE_ACCOUNT_PATH = r"C:\Users\Eukrit\OneDrive\Documents\Claude Code\Credentials Claude Code\ai-agents-go-9b4219be8c01.json"
 MIGRATION_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "migration")
 
 COLLECTIONS = [

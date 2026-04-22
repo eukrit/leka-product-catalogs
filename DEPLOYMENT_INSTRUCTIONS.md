@@ -36,7 +36,7 @@ product-catalogs/
 |----------|-------|
 | GCP Project | `ai-agents-go` |
 | Service Account | `claude@ai-agents-go.iam.gserviceaccount.com` |
-| Credentials | `C:\Users\eukri\OneDrive\Documents\Claude Code\Credentials Claude Code\ai-agents-go-4c81b70995db.json` |
+| Credentials | `C:\Users\eukri\OneDrive\Documents\Claude Code\Credentials Claude Code\ai-agents-go-9b4219be8c01.json` |
 | Firestore | Native mode, default database |
 | GCS Bucket | `ai-agents-go-documents` (public read) |
 | Cloud Build | GitHub connection `github-eukrit` (us-central1) |

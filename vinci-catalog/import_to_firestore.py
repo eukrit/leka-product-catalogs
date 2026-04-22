@@ -18,7 +18,7 @@ from google.cloud import firestore
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 from shared.base_importer import batch_write, build_category_index
 
-SERVICE_ACCOUNT_PATH = r"C:\Users\Eukrit\OneDrive\Documents\Claude Code\Credentials Claude Code\ai-agents-go-4c81b70995db.json"
+SERVICE_ACCOUNT_PATH = r"C:\Users\Eukrit\OneDrive\Documents\Claude Code\Credentials Claude Code\ai-agents-go-9b4219be8c01.json"
 
 BRAND = "vinci"
 COLLECTION_NAME = "products_vinci"

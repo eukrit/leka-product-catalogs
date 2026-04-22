@@ -43,7 +43,7 @@ Added Vortex Aquatic Structures International (vortex-intl.com) as the third bra
 ### Image mirror (2026-04-21) — complete
 
 - Ran `python vortex-catalog/mirror_images_to_gcs.py` with GCS ADC from
-  `Credentials Claude Code/ai-agents-go-4c81b70995db.json`
+  `Credentials Claude Code/ai-agents-go-9b4219be8c01.json`
 - Target: `gs://ai-agents-go-documents/product-images/vortex/catalog/<slug>/<filename>-<hash>.<ext>`
 - **1,949/1,949 images mirrored · 0 failed · 7,649 s (~2h 7min)**
 - `products_all.json` now carries both `images[].url` (original vortex-intl.com source) and `images[].gcs_url` (GCS public URL) for every image
