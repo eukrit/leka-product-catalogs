@@ -3,7 +3,9 @@
   "hub": {
     "live": { "enabled": false },
     "exclude": [],
-    "extra_links": [],
+    "extra_links": [
+      { "label": "Vinci Play catalog (Medusa storefront)", "url": "https://catalogs.leka.studio" }
+    ],
     "section_order": ["essentials","dashboards","reports","forms","summaries","documents","catalogs","other","live_urls","related"],
     "classification_overrides": {}
   }
