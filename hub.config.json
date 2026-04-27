@@ -1,12 +1,32 @@
 {
-  "LIVE_URL_BASE": "",
+  "LIVE_URL_BASE": "https://gateway.goco.bz/leka-product-catalogs",
   "hub": {
-    "live": { "enabled": false },
+    "live": {
+      "enabled": false
+    },
     "exclude": [],
     "extra_links": [
-      { "label": "Vinci Play catalog (Medusa storefront)", "url": "https://catalogs.leka.studio" }
+      {
+        "label": "Vinci Play catalog (Medusa storefront)",
+        "url": "https://catalogs.leka.studio"
+      }
     ],
-    "section_order": ["essentials","dashboards","reports","forms","summaries","documents","catalogs","other","live_urls","related"],
+    "section_order": [
+      "essentials",
+      "dashboards",
+      "reports",
+      "forms",
+      "summaries",
+      "documents",
+      "catalogs",
+      "other",
+      "live_urls",
+      "related"
+    ],
     "classification_overrides": {}
+  },
+  "GATEWAY_URL": "https://gateway.goco.bz",
+  "gateway": {
+    "project_id": "leka-product-catalogs"
   }
 }

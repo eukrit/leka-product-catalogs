@@ -35,17 +35,24 @@ EXCLUDE_PATTERNS=()
 EXTRA_LINKS_JSON="[]"
 LIVE_URL_BASE=""
 HUB_LIVE_ENABLED="false"
+GATEWAY_URL="https://gateway.goco.bz"
+GATEWAY_PROJECT_ID="$PROJECT_NAME"
 
 if [ -f "$CONFIG" ]; then
   # Minimal JSON extraction via python (portable, no jq dep)
   LIVE_URL_BASE=$(python -c "import json,sys;d=json.load(open('$CONFIG'));print(d.get('LIVE_URL_BASE',''))" 2>/dev/null || echo "")
   HUB_LIVE_ENABLED=$(python -c "import json;d=json.load(open('$CONFIG'));print(str(d.get('hub',{}).get('live',{}).get('enabled',False)).lower())" 2>/dev/null || echo "false")
+  GATEWAY_URL=$(python -c "import json;d=json.load(open('$CONFIG'));print(d.get('GATEWAY_URL','https://gateway.goco.bz'))" 2>/dev/null || echo "https://gateway.goco.bz")
+  GATEWAY_PROJECT_ID=$(python -c "import json;d=json.load(open('$CONFIG'));print(d.get('gateway',{}).get('project_id','') or '$PROJECT_NAME')" 2>/dev/null || echo "$PROJECT_NAME")
   # Exclude list joined by \n
   EXCLUDES=$(python -c "import json;d=json.load(open('$CONFIG'));print('\n'.join(d.get('hub',{}).get('exclude',[])))" 2>/dev/null || echo "")
   while IFS= read -r pat; do
     [ -n "$pat" ] && EXCLUDE_PATTERNS+=("$pat")
   done <<< "$EXCLUDES"
 fi
+GATEWAY_URL="${GATEWAY_URL%/}"
+GATEWAY_DIRECTORY_URL="${GATEWAY_URL}/"
+GATEWAY_PROJECT_URL="${GATEWAY_URL}/${GATEWAY_PROJECT_ID}"
 
 TODAY=$(date +%Y-%m-%d)
 
@@ -158,6 +165,17 @@ add_md "SECURITY.md"      "Security Surface"
 add_md "COLLABORATORS.md" "Collaborators & Access"
 add_md ".claude/PROGRESS.md" "Progress (local)"
 
+# Architecture summary lives at docs/architecture.html — already swept up by the
+# HTML scan loop above, but we want it sorted into the essentials block alongside
+# build-summary.html. Promote via classification override.
+ARCHITECTURE_HTML_ROW=""
+if [ -f "docs/architecture.html" ]; then
+  arch_mtime=$(git log -1 --format=%cs -- "docs/architecture.html" 2>/dev/null || date -r "docs/architecture.html" +%Y-%m-%d 2>/dev/null || echo "")
+  ARCHITECTURE_HTML_ROW="<tr><td><a href=\"architecture.html\">Architecture Summary</a></td><td><code>docs/architecture.html</code></td><td>${arch_mtime}</td></tr>"$'\n'
+  # Also remove it from the 'other' bucket if classified there.
+  ROWS_BY_SECTION[other]=$(printf "%s" "${ROWS_BY_SECTION[other]}" | grep -v "docs/architecture.html" || true)
+fi
+
 # Live URLs — parsed from PROJECT_INDEX.md "User-Facing Dashboards & URLs" block
 LIVE_URL_ROWS=""
 if [ -f "PROJECT_INDEX.md" ]; then
@@ -235,6 +253,10 @@ HEAD_CSS='<style>
   h2{margin-top:2rem;border-bottom:1px solid #eee;padding-bottom:4px}
   .meta{color:#666;font-size:.9rem;margin-bottom:1.5rem}
   .toggle{background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:.5rem 1rem;margin-bottom:1rem;font-size:.9rem}
+  .gateway-bar{background:#1f2937;color:#f9fafb;border-radius:8px;padding:.55rem 1rem;margin-bottom:1rem;font-size:.9rem;display:flex;align-items:center;gap:.5rem}
+  .gateway-bar a{color:#93c5fd;text-decoration:none;font-weight:600}
+  .gateway-bar a:hover{text-decoration:underline}
+  .gateway-bar .sep{opacity:.5}
   table{width:100%;border-collapse:collapse;margin-top:.5rem}
   th,td{text-align:left;padding:8px 12px;border-bottom:1px solid #eee;vertical-align:top}
   th{background:#fafafa;font-weight:600}
@@ -252,11 +274,16 @@ write_hub() {
 <title>${PROJECT_NAME} — Hub Page ${variant}</title>
 ${HEAD_CSS}
 </head><body>
+<div class="gateway-bar">
+  <a href="${GATEWAY_PROJECT_URL}">↗ Open ${PROJECT_NAME} in Access Gateway</a>
+  <span class="sep">·</span>
+  <a href="${GATEWAY_DIRECTORY_URL}">Workspace directory</a>
+</div>
 <h1>${PROJECT_NAME} <span style="font-weight:400;color:#666">— Hub Page ${variant}</span></h1>
-<div class="meta">Generated ${TODAY} · See <a href="../PROJECT_INDEX.md">PROJECT_INDEX.md</a> · Rule 13</div>
+<div class="meta">Generated ${TODAY} · See <a href="../PROJECT_INDEX.md">PROJECT_INDEX.md</a> · Rule 13 · The three first-class artifacts (Build Log · Build Summary · Architecture Summary) appear under <em>Project essentials</em>.</div>
 ${toggle_html}
 HEAD
-    section_block "Project essentials" "${ESSENTIALS_MD_ROWS}${ROWS_BY_SECTION[essentials]}" "<th>Title</th><th>Path</th><th>Updated</th>"
+    section_block "Project essentials" "${ESSENTIALS_MD_ROWS}${ARCHITECTURE_HTML_ROW}${ROWS_BY_SECTION[essentials]}" "<th>Title</th><th>Path</th><th>Updated</th>"
     section_block "Dashboards"         "${ROWS_BY_SECTION[dashboards]}" "<th>Title</th><th>Path</th><th>Updated</th>"
     section_block "Reports"            "${ROWS_BY_SECTION[reports]}"    "<th>Title</th><th>Path</th><th>Updated</th>"
     section_block "Forms"              "${ROWS_BY_SECTION[forms]}"      "<th>Title</th><th>Path</th><th>Updated</th>"

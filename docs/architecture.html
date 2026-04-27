@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"/>
+<title>leka-product-catalogs — Architecture Summary</title>
+<style>
+  body { font-family: -apple-system, Segoe UI, Roboto, sans-serif; max-width: 1040px; margin: 2rem auto; padding: 0 1rem; color: #1a1a1a; }
+  h1 { margin-bottom: 0.25rem; }
+  h2 { margin-top: 2rem; border-bottom: 1px solid #eee; padding-bottom: 4px; }
+  h3 { margin-top: 1.5rem; color: #374151; }
+  .meta { color: #666; font-size: 0.9rem; margin-bottom: 1.5rem; }
+  .card { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 1rem 1.25rem; }
+  table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; }
+  th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid #eee; vertical-align: top; }
+  th { background: #fafafa; font-weight: 600; }
+  code { background: #f4f4f5; padding: 1px 6px; border-radius: 4px; font-size: 0.9em; }
+  a { color: #2563eb; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  ul { margin-top: 0.4rem; }
+</style>
+</head><body>
+<h1>leka-product-catalogs <span style="font-weight:400;color:#666">— Architecture Summary</span></h1>
+<div class="meta">Generated 2026-04-27 from <a href="../PROJECT_INDEX.md">PROJECT_INDEX.md</a> · Rule 4 (refresh)</div>
+
+<div class="card">
+  <h2 style="margin-top:0;border:0">Status</h2>
+  <ul><li><strong>Version:</strong> [0.1.0] · <strong>Last build:</strong> 2026-04-22 · <strong>Status:</strong> [deployed|failed|pending] · <strong>Commit:</strong> [sha]</li><li><strong>Branch:</strong> [main|master]</li><li><strong>GitHub Repo:</strong> <a href="https://github.com/eukrit/leka-product-catalogs">https://github.com/eukrit/leka-product-catalogs</a></li><li><strong>Cloud Run URL:</strong> [if any]</li><li><strong>Live dashboard:</strong> [if any]</li></ul>
+</div>
+
+<h2>Directory Map</h2>
+<table><thead><tr><th>Concern</th><th>Path in repo</th></tr></thead><tbody><tr><td>Cloud Build config</td><td><code>cloudbuild.yaml</code></td></tr><tr><td>Dockerfile(s)</td><td><code>Dockerfile</code>, <code>Dockerfile.python</code></td></tr><tr><td>Manifest (services, APIs, env refs)</td><td><code>manifest.json</code> (local only), <code>manifest.example.json</code> (committed)</td></tr><tr><td>Source code</td><td><code>src/</code></td></tr><tr><td>Scripts (utilities, deploy, sync)</td><td><code>scripts/</code></td></tr><tr><td>Tests</td><td><code>tests/</code></td></tr><tr><td>Docs (markdown, developer-facing)</td><td><code>docs/</code></td></tr><tr><td>Documents (user-facing generated HTML/PDF)</td><td><code>documents/</code></td></tr><tr><td>Skills (Claude-invocable skills this project defines)</td><td><code>.claude/skills/</code></td></tr><tr><td>Agents (Claude Code subagents for this project)</td><td><code>agents/</code></td></tr><tr><td>Session state (local)</td><td><code>.claude/PROGRESS.md</code></td></tr><tr><td>Plans / build plans</td><td><code>docs/BuildPlans/</code></td></tr><tr><td>Credentials (local only, gitignored)</td><td><code>credentials/</code>, <code>.env</code></td></tr></tbody></table>
+
+<h2>Databases &amp; Data Stores</h2>
+<ul><li><strong>Firestore</strong> (database <code>[name]</code>): collections — <code>[col1]</code>, <code>[col2]</code></li><li><strong>Google Sheets:</strong> <code>[name]</code> — [URL] ([what it stores])</li><li><strong>BigQuery:</strong> <code>[dataset.table]</code> — [purpose]</li><li><strong>Postgres / other:</strong> [...]</li></ul>
+
+<h2>Cloud Build &amp; CI/CD</h2>
+<ul><li><strong>Trigger:</strong> <code>[trigger-name]</code> on <code>^main$</code></li><li><strong>Steps:</strong> [test → build image → push to Artifact Registry → deploy to Cloud Run]</li><li><strong>Artifact Registry:</strong> <code>asia-southeast1-docker.pkg.dev/ai-agents-go/leka-product-catalogs</code></li><li><strong>Cloud Run service:</strong> <code>[service-name]</code> · <strong>Region:</strong> <code>asia-southeast1</code></li><li><strong>Secret bindings (from cloudbuild.yaml <code>secretEnv</code>):</strong> <code>[SECRET_ENV_VAR → projects/ai-agents-go/secrets/&lt;name&gt;/versions/latest]</code></li></ul>
+
+<h2>Scheduled / Cron</h2>
+<table><thead><tr><th>Name</th><th>Schedule</th><th>Target</th><th>Code path</th></tr></thead><tbody><tr><td>[daily_sync]</td><td>[06:00 daily]</td><td>[Cloud Run / Function]</td><td>[scripts/sync.py]</td></tr></tbody></table>
+
+<h2>Connectors</h2>
+<h3>Slack</h3><ul><li><code>#[channel-name]</code> (<code>C01234ABCD</code>) — [purpose]</li><h3>Google Drive</h3><ul><li>Folder <code>[name]</code> — [URL]</li><h3>Notion</h3><ul><li>Page / Database — [URL]</li><h3>Google Sheets</h3><ul><li><code>[name]</code> — [URL]</li><h3>Gmail labels</h3><ul><li><code>project/[label]</code></li><h3>Webhooks / n8n</h3><ul><li>[URL]</li><h3>APIs &amp; preferred paths</h3><ul><li>[Service] ([API + MCP | API only | MCP only]) — prefer [API|MCP] in [scheduled jobs | interactive]</li></ul>
+
+<h2>Security Surface</h2>
+<table><thead><tr><th>Item</th><th>Risk</th><th>Who must NOT have access</th></tr></thead><tbody><tr><td>[Service account with Domain-Wide Delegation]</td><td><strong>HIGH</strong> (impersonates any Workspace user)</td><td><code>secretmanager.secretAccessor</code> on its key; <code>iam.serviceAccountTokenCreator</code> on it</td></tr><tr><td>Cloud Build auto-deploy trigger</td><td>HIGH (push-to-main ships code)</td><td>Direct push to <code>main</code>; modify <code>cloudbuild.yaml</code> without review</td></tr><tr><td>[Hot secrets]</td><td>MEDIUM</td><td><code>secretmanager.secretAccessor</code> unless scoped</td></tr><tr><td>Firestore write</td><td>MEDIUM</td><td><code>datastore.user</code> / <code>datastore.owner</code> unless required</td></tr></tbody></table>
+
+<h2>Relationships</h2>
+<ul><li><strong>Depends on:</strong> [other projects]</li><li><strong>Depended on by:</strong> [other projects]</li></ul>
+
+<p class="meta">Regenerated by <code>scripts/generate-architecture-page.sh</code>. To opt-out of regeneration, replace this file with one whose first line is <code>&lt;!-- HAND-CURATED --&gt;</code>.</p>
+</body></html>
