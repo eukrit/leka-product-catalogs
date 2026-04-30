@@ -64,7 +64,7 @@ Master instructions: `Credentials Claude Code/Instructions/API Access Master Ins
 ### Credential File References
 | File | Location | Purpose |
 |---|---|---|
-| `ai-agents-go-9b4219be8c01.json` | Credentials folder | GCP service account key |
+| `ai-agents-go-0d28f3991b7b.json` | Credentials folder | GCP service account key |
 | `client_secret_538978391890-*.json` | Credentials folder | GCP OAuth client |
 | `xero_tokens.json` | Credentials folder | Xero OAuth tokens (rotating) |
 | `token_oauth.json` | Credentials folder | Google OAuth token |
