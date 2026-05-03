@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(.claude/PROGRESS.md)",
+      "Read(PROJECT_INDEX.md)"
+    ]
+  }
+}
