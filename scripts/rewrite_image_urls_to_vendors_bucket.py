@@ -45,6 +45,9 @@ SRC_DB = "vendors"
 OLD_BUCKET = "ai-agents-go-documents"
 OLD_PREFIX = "product-images"
 NEW_BUCKET = "ai-agents-go-vendors"
+# Default target rewrites direct GCS URLs. Override with --target-base to redirect
+# through a proxy (e.g. https://catalogs.leka.studio/api/i) — see Phase 4 plan.
+DEFAULT_TARGET_BASE = f"https://storage.googleapis.com/{NEW_BUCKET}"
 BACKEND = "https://leka-medusa-backend-538978391890.asia-southeast1.run.app"
 TIMEOUT = 60
 TOKEN_REFRESH_EVERY = 400
@@ -90,32 +93,41 @@ def verify_target_folders(brands: list[str]) -> None:
         )
 
 
-def rewrite_url(url: str, slug: str) -> tuple[str, str]:
-    """Return (new_url, status). status in {rewritten, already_new, external, unknown_host, no_match}."""
+def rewrite_url(url: str, slug: str, target_base: str) -> tuple[str, str]:
+    """Return (new_url, status). status in {rewritten, already_new, external, unknown_host, no_match}.
+
+    A URL is considered "already_new" when it already points at `target_base`.
+    Both old-bucket URLs AND new-bucket direct URLs (from earlier passes) are
+    accepted as input and rewritten forward.
+    """
     if not url:
         return url, "no_match"
     parts = urlsplit(url)
+    target_base_clean = target_base.rstrip("/")
+    if url.startswith(target_base_clean + f"/{BRAND_FOLDER_MAP[slug]}/"):
+        return url, "already_new"
     if parts.netloc != "storage.googleapis.com":
         if "googleusercontent.com" in parts.netloc:
             return url, "unknown_host"
         return url, "external"
     path = parts.path.lstrip("/")
-    if path.startswith(f"{NEW_BUCKET}/"):
-        return url, "already_new"
-    expected_prefix = f"{OLD_BUCKET}/{OLD_PREFIX}/{slug}/"
-    if not path.startswith(expected_prefix):
-        return url, "no_match"
     folder = BRAND_FOLDER_MAP[slug]
-    tail = path[len(expected_prefix):]
-    new_path = f"/{NEW_BUCKET}/{folder}/{tail}"
-    return urlunsplit((parts.scheme, parts.netloc, new_path, parts.query, parts.fragment)), "rewritten"
+    old_prefix = f"{OLD_BUCKET}/{OLD_PREFIX}/{slug}/"
+    new_direct_prefix = f"{NEW_BUCKET}/{folder}/"
+    if path.startswith(old_prefix):
+        tail = path[len(old_prefix):]
+    elif path.startswith(new_direct_prefix):
+        tail = path[len(new_direct_prefix):]
+    else:
+        return url, "no_match"
+    return f"{target_base_clean}/{folder}/{tail}", "rewritten"
 
 
 def _bump(counters: dict, key: str) -> None:
     counters[key] = counters.get(key, 0) + 1
 
 
-def rewrite_firestore(slug: str, dry_run: bool, limit: int | None) -> dict:
+def rewrite_firestore(slug: str, dry_run: bool, limit: int | None, target_base: str) -> dict:
     db = firestore.Client(project=PROJECT, database=SRC_DB)
     coll = db.collection("vendors").document(slug).collection("products")
     docs = list(coll.stream())
@@ -141,7 +153,7 @@ def rewrite_firestore(slug: str, dry_run: bool, limit: int | None) -> dict:
                 new_images.append(img)
                 continue
             old = img.get("url")
-            new_url, status = rewrite_url(old, slug)
+            new_url, status = rewrite_url(old, slug, target_base)
             _bump(counters, {
                 "rewritten": "urls_rewritten",
                 "already_new": "urls_already_new",
@@ -189,7 +201,7 @@ def _hdrs(token: str) -> dict:
     return {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
 
 
-def rewrite_medusa(slug: str, dry_run: bool, limit: int | None) -> dict:
+def rewrite_medusa(slug: str, dry_run: bool, limit: int | None, target_base: str) -> dict:
     sc_id = BRAND_SALES_CHANNELS[slug]
     token = _admin_login()
     counters = {"products_scanned": 0, "products_changed": 0, "urls_rewritten": 0,
@@ -222,7 +234,7 @@ def rewrite_medusa(slug: str, dry_run: bool, limit: int | None) -> dict:
             changed = False
             for img in images:
                 old = img.get("url")
-                new_url, status = rewrite_url(old, slug)
+                new_url, status = rewrite_url(old, slug, target_base)
                 _bump(counters, {
                     "rewritten": "urls_rewritten",
                     "already_new": "urls_already_new",
@@ -237,7 +249,7 @@ def rewrite_medusa(slug: str, dry_run: bool, limit: int | None) -> dict:
                     new_urls.append(new_url)
                 else:
                     new_urls.append(old)
-            new_thumb, thumb_status = rewrite_url(p.get("thumbnail"), slug)
+            new_thumb, thumb_status = rewrite_url(p.get("thumbnail"), slug, target_base)
             if thumb_status == "rewritten":
                 changed = True
             if changed:
@@ -277,6 +289,11 @@ def main() -> int:
     ap.add_argument("--brand", required=True,
                     help="Brand slug or 'all' (one of: %s, all)" % ", ".join(BRAND_FOLDER_MAP))
     ap.add_argument("--target", choices=("firestore", "medusa", "both"), default="both")
+    ap.add_argument("--target-base", default=DEFAULT_TARGET_BASE,
+                    help=("URL prefix that will replace the bucket part of each image URL. "
+                          "Default rewrites to %(default)s/<vendor>/<path>. "
+                          "Override with e.g. https://catalogs.leka.studio/api/i to route "
+                          "through the storefront image proxy."))
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--limit", type=int, default=None)
     args = ap.parse_args()
@@ -287,20 +304,24 @@ def main() -> int:
             log.error("unknown brand: %s (valid: %s, all)", b, ", ".join(BRAND_FOLDER_MAP))
             return 2
 
-    log.info("=== rewrite_image_urls_to_vendors_bucket mode=%s target=%s brands=%s ===",
-             "DRY-RUN" if args.dry_run else "WRITE", args.target, brands)
+    log.info("=== rewrite_image_urls_to_vendors_bucket mode=%s target=%s target_base=%s brands=%s ===",
+             "DRY-RUN" if args.dry_run else "WRITE", args.target, args.target_base, brands)
 
-    verify_target_folders(brands)
+    # Only check the GCS folder map when the rewrite preserves the direct-bucket
+    # URL shape. When routing through a proxy we don't need the bucket folders
+    # to literally exist (the proxy maps proxy-path -> bucket on its own).
+    if args.target_base.rstrip("/") == DEFAULT_TARGET_BASE.rstrip("/"):
+        verify_target_folders(brands)
 
     grand_unknown = 0
     grand_rewritten = 0
     for slug in brands:
         if args.target in ("firestore", "both"):
-            c = rewrite_firestore(slug, args.dry_run, args.limit)
+            c = rewrite_firestore(slug, args.dry_run, args.limit, args.target_base)
             grand_unknown += c["urls_unknown_host"]
             grand_rewritten += c["urls_rewritten"]
         if args.target in ("medusa", "both"):
-            c = rewrite_medusa(slug, args.dry_run, args.limit)
+            c = rewrite_medusa(slug, args.dry_run, args.limit, args.target_base)
             grand_unknown += c["urls_unknown_host"]
             grand_rewritten += c["urls_rewritten"]
         time.sleep(1)

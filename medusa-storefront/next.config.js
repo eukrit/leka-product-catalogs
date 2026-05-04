@@ -10,6 +10,16 @@ const nextConfig = {
       },
       {
         protocol: "https",
+        hostname: "catalogs.leka.studio",
+        pathname: "/api/i/**",
+      },
+      {
+        protocol: "https",
+        hostname: "leka-medusa-storefront-rg5gmtwrfa-as.a.run.app",
+        pathname: "/api/i/**",
+      },
+      {
+        protocol: "https",
         hostname: "zamowienia.vinci-play.pl",
         pathname: "/**",
       },
