@@ -14,6 +14,8 @@ import { NextRequest } from "next/server";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
+export const revalidate = 0;
 
 const BUCKET = process.env.IMAGE_PROXY_BUCKET || "ai-agents-go-vendors";
 const METADATA_TOKEN_URL =
@@ -46,6 +48,7 @@ export async function GET(
   ctx: { params: Promise<{ path: string[] }> },
 ) {
   const { path } = await ctx.params;
+  console.log("[image-proxy] hit", JSON.stringify(path));
   if (!path || path.length === 0) {
     return new Response("not found", { status: 404 });
   }
