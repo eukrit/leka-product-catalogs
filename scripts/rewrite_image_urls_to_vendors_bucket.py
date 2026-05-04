@@ -64,9 +64,9 @@ BRAND_SALES_CHANNELS: dict[str, str] = {
 # CONFIRM these against `gcloud storage ls gs://ai-agents-go-vendors/` before live use.
 # The startup check fails loudly if any target folder is absent.
 BRAND_FOLDER_MAP: dict[str, str] = {
-    "wisdom":    "wisdom-playground",
-    "vortex":    "vortex-aquatics",
-    "berliner":  "berliner-seilfabrik",
+    "wisdom":    "wisdom",
+    "vortex":    "vortex",
+    "berliner":  "berliner",
     "eurotramp": "eurotramp",
     "rampline":  "rampline",
     "4soft":     "4soft",
