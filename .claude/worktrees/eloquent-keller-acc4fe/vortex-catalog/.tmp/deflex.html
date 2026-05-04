@@ -1,0 +1,1093 @@
+<!doctype html>
+<html lang="en-US" prefix="og: https://ogp.me/ns#">
+  <head>
+          <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-TB8DRSQ');</script>
+        <!-- End Google Tag Manager -->
+	<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n
+
+.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '530629623138682');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=530629623138682&ev=PageView&noscript=1"
+/></noscript>
+	<!-- End Meta Pixel Code -->
+	<!-- Google tag (gtag.js) --> <script async src="https://www.googletagmanager.com/gtag/js?id=G-69P1CCRW2M"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(argum$
+          <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://www.vortex-intl.com/wp-content/themes/vortex/dist/images/favicons/apple-touch-icon_cd72593f.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://www.vortex-intl.com/wp-content/themes/vortex/dist/images/favicons/favicon-16x16_0e1aa525.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.vortex-intl.com/wp-content/themes/vortex/dist/images/favicons/favicon-32x32_cf425b0c.png">
+<link rel="icon" type="image/png" sizes="192x192" href="https://www.vortex-intl.com/wp-content/themes/vortex/dist/images/favicons/android-chrome-192x192_41cec5c9.png">
+<link rel="icon" type="image/png" sizes="512x512" href="https://www.vortex-intl.com/wp-content/themes/vortex/dist/images/favicons/android-chrome-512x512_6ab52ddc.png">
+<link rel="manifest" href="https://www.vortex-intl.com/wp-content/themes/vortex/dist/images/favicons/site_b9aa277f.webmanifest">
+<link rel="mask-icon" href="https://www.vortex-intl.com/wp-content/themes/vortex/dist/images/favicons/safari-pinned-tab.svg" color="#153cba">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="theme-color" content="#ffffff">  <script>
+    function ready(fn) {
+      if (document.readyState != 'loading'){
+        fn();
+      } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', fn);
+      } else {
+        document.attachEvent('onreadystatechange', function() {
+          if (document.readyState != 'loading')
+            fn();
+        });
+      }
+    }
+
+    const i18n = {
+        'Back to Product': {
+            'en-US' : 'Back to Product',
+            'fr-FR' : 'Retour au Produit'
+        },
+        'Back to Expertise': {
+            'en-US' : 'Back to Expertise',
+            'fr-FR' : 'Retour à l\'Expertise'
+        }
+    };
+
+    function __(str) {
+        var lang = document.getElementsByTagName('html')[0].getAttribute('lang');
+        return i18n[str][lang];
+    }
+
+    ready(function() { 
+
+        var classList = document.body.classList;
+        var pageClass = '';
+
+        if(classList.contains('single-products')) {
+            pageClass = 'products';
+        } else if (classList.contains('page-template-page-technologies')) {
+            pageClass = 'technologies-page';
+        } else if (classList.contains('post-type-archive-expertise')) {
+            pageClass = 'expertise-page';
+        }
+
+        const currentPage = {
+            url: window.location.href,
+            class: pageClass
+        }
+
+        var vorhistoryJSON = window.localStorage.getItem('vorhistory') || "[]";
+
+        var vorhistory = JSON.parse(vorhistoryJSON);
+
+        if(vorhistory.length === 0 || JSON.stringify(vorhistory[0]) !== JSON.stringify(currentPage)) {
+            vorhistory.unshift(currentPage);
+        }
+        if(vorhistory.length > 2) {
+            vorhistory.pop();
+        }
+
+        window.localStorage.setItem('vorhistory', JSON.stringify(vorhistory));
+
+        var fromProductToTechnologies = vorhistory[0].class === 'technologies-page' && vorhistory[1].class === 'products';
+        var fromExpertisetoTechnologies = vorhistory[0].class === 'technologies-page' && vorhistory[1].class === 'expertise-page';
+        
+        if(fromProductToTechnologies || fromExpertisetoTechnologies) {
+            var elem = document.createElement('a');
+            elem.className += 'linkround linkround--blue';
+            elem.style.cssText = 'position:fixed;z-index:100;top:110px;right:40px;';
+            elem.setAttribute('href', vorhistory[1].url);
+
+            if(fromProductToTechnologies) {
+                elem.innerHTML = __("Back to Product");
+            }
+            if (fromExpertisetoTechnologies) {
+                elem.innerHTML = __("Back to Expertise");  
+            }
+
+            document.body.appendChild(elem);
+        }
+
+        console.log(vorhistory);
+
+    });
+
+</script>
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-10598377-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-10598377-1'); </script>
+<!-- LinkedIn tag -->
+   <script type='text/javascript'>
+_linkedin_partner_id = '7017050';
+window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || []; window._linkedin_data_partner_ids.push(_linkedin_partner_id);
+</script><script type='text/javascript'>
+(function(l) {
+if (!l){window.lintrk = function(a,b){window.lintrk.q.push([a,b])};
+window.lintrk.q=[]}
+var s = document.getElementsByTagName('script')[0];
+var b = document.createElement('script'); b.type = 'text/javascript';b.async = true; b.src = 'https://snap.licdn.com/li.lms-analytics/insight.min.js';
+s.parentNode.insertBefore(b, s);})(window.lintrk); </script> <noscript> <img height='1' width='1' style='display:none;' alt='' src='https://px.ads.linkedin.com/collect/?pid=7017050&fmt=gif' /></noscript>
+    
+    <link rel="alternate" href="https://www.vortex-intl.com/products/deflex/" />
+<link rel="alternate" hreflang="en" href="https://www.vortex-intl.com/products/deflex/" />
+<link rel="alternate" hreflang="fr" href="https://www.vortex-intl.com/fr/produits/deflex/" />
+<link rel="alternate" hreflang="es" href="https://www.vortex-intl.com/es/productos/deflex/" />
+<link rel="alternate" hreflang="x-default" href="https://www.vortex-intl.com/products/deflex/" />
+
+<!-- Search Engine Optimization by Rank Math - https://rankmath.com/ -->
+<title>Deflex | Vortex</title>
+<meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"/>
+<link rel="canonical" href="https://www.vortex-intl.com/products/deflex/" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Deflex | Vortex" />
+<meta property="og:url" content="https://www.vortex-intl.com/products/deflex/" />
+<meta property="og:site_name" content="VORTEX" />
+<meta property="article:publisher" content="https://www.facebook.com/vortexintl/" />
+<meta property="og:image" content="https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-1024x1024.png" />
+<meta property="og:image:secure_url" content="https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-1024x1024.png" />
+<meta property="og:image:width" content="1024" />
+<meta property="og:image:height" content="1024" />
+<meta property="og:image:alt" content="Deflex" />
+<meta property="og:image:type" content="image/png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Deflex | Vortex" />
+<meta name="twitter:site" content="@VortexINTL" />
+<meta name="twitter:creator" content="@VortexINTL" />
+<meta name="twitter:image" content="https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-1024x1024.png" />
+<script type="application/ld+json" class="rank-math-schema">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","@id":"https://www.vortex-intl.com/products/deflex/#breadcrumb","itemListElement":[{"@type":"ListItem","position":"1","item":{"@id":"https://www.vortex-intl.com","name":"VORTEX"}},{"@type":"ListItem","position":"2","item":{"@id":"https://www.vortex-intl.com/products/","name":"Products"}},{"@type":"ListItem","position":"3","item":{"@id":"https://www.vortex-intl.com/products/deflex/","name":"Deflex"}}]}]}</script>
+<!-- /Rank Math WordPress SEO plugin -->
+
+<link rel='dns-prefetch' href='//cdnjs.cloudflare.com' />
+<link rel='dns-prefetch' href='//cdn.jsdelivr.net' />
+<link rel='dns-prefetch' href='//ajax.googleapis.com' />
+<style id='rank-math-toc-block-style-inline-css' type='text/css'>
+.wp-block-rank-math-toc-block nav ol{counter-reset:item}.wp-block-rank-math-toc-block nav ol li{display:block}.wp-block-rank-math-toc-block nav ol li:before{content:counters(item, ".") ". ";counter-increment:item}
+
+</style>
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='owl.carousel/css/main-css' href='//cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css' type='text/css' media='' />
+<link rel='stylesheet' id='owl.carousel/css/default-css' href='//cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css' type='text/css' media='' />
+<link rel='stylesheet' id='lightagallery/css/main-css' href='//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.12/css/lightgallery.min.css' type='text/css' media='' />
+<link rel='stylesheet' id='mediaelement-css' href='https://www.vortex-intl.com/wp-includes/js/mediaelement/mediaelementplayer-legacy.min.css?ver=4.2.17' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-mediaelement-css' href='https://www.vortex-intl.com/wp-includes/js/mediaelement/wp-mediaelement.min.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='sage/main-vid.css-css' href='https://www.vortex-intl.com/wp-content/themes/vortex/dist/styles/main_4d2020b1.css' type='text/css' media='all' />
+<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js?ver=3.4.1' id='jquery-js'></script>
+<script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js' id='owl.carousel/js/main-js'></script>
+<script type='text/javascript' src='//cdn.jsdelivr.net/npm/isotope-layout@3/dist/isotope.pkgd.js' id='isotope/js/main-js'></script>
+<script type='text/javascript' src='//cdn.jsdelivr.net/npm/isotope-packery@2/packery-mode.pkgd.js' id='isotope/js/packery-js'></script>
+<script type='text/javascript' src='//cdn.jsdelivr.net/npm/isotope-masonry-horizontal@2/masonry-horizontal.js' id='isotope/js/masonry-horizontal-js'></script>
+<script type='text/javascript' src='//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js' id='jquery-ui-js'></script>
+<script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/jquery.selectboxit/3.8.0/jquery.selectBoxIt.min.js' id='selectboxit/js/main-js'></script>
+<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/enquire.js/2.1.6/enquire.min.js' id='enquire-js-js'></script>
+<script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/Sly/1.6.1/sly.min.js' id='sly/js/main-js'></script>
+<script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.12/js/lightgallery-all.min.js' id='lightagallery/js/main-js'></script>
+
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "sxb34vmbu8");
+</script><style>
+    .project-box {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px;
+        margin: 20px 0;
+        background: #fff;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        display: inline-block;
+        vertical-align: top;
+        box-sizing: border-box;
+    }
+    
+    .project-box:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    }
+    
+    /* Width Varianten */
+    .project-width-full {
+        width: 100%;
+        display: block;
+    }
+    
+    .project-width-half {
+        width: calc(50% - 10px);
+        margin-right: 20px;
+    }
+    
+    .project-width-third {
+        width: calc(33.333% - 14px);
+        margin-right: 20px;
+    }
+    
+    /* Letztes Element in Reihe ohne margin-right */
+    .project-width-half:nth-child(2n),
+    .project-width-third:nth-child(3n) {
+        margin-right: 0;
+    }
+    
+    /* Responsive Anpassungen */
+    @media (max-width: 768px) {
+        .project-width-half,
+        .project-width-third {
+            width: 100%;
+            margin-right: 0;
+            display: block;
+        }
+    }
+    
+    .project-title {
+        margin: 0 0 10px 0;
+        font-size: 1.4em;
+        line-height: 1.3;
+    }
+    
+    .project-title a {
+        color: #333;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+    
+    .project-title a:hover {
+        color: #0073aa;
+        text-decoration: underline;
+    }
+    
+    .project-location {
+        color: #666;
+        font-size: 0.9em;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #eee;
+        font-weight: 500;
+    }
+    
+    .project-location:before {
+        content: "";
+        background-image: url("https://www.vortex-intl.com/wp-content/themes/vortex/dist/images/flags/US_34885271.svg");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        display: inline-block;
+        width: 20px;
+        height: 15px;
+        margin-right: 8px;
+        vertical-align: middle;
+    }
+    
+    .project-image {
+        margin-top: 15px;
+        overflow: hidden;
+        border-radius: 5px;
+    }
+    
+    .project-image img {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+        display: block;
+    }
+    </style>		<script>
+			document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+		</script>
+				<style>
+			.no-js img.lazyload {
+				display: none;
+			}
+
+			figure.wp-block-image img.lazyloading {
+				min-width: 150px;
+			}
+
+						.lazyload, .lazyloading {
+				opacity: 0;
+			}
+
+			.lazyloaded {
+				opacity: 1;
+				transition: opacity 400ms;
+				transition-delay: 0ms;
+			}
+
+					</style>
+		<link rel="icon" href="https://www.vortex-intl.com/wp-content/uploads/2025/02/inserted/vortex_flavicon.png" sizes="32x32" />
+<link rel="icon" href="https://www.vortex-intl.com/wp-content/uploads/2025/02/inserted/vortex_flavicon.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://www.vortex-intl.com/wp-content/uploads/2025/02/inserted/vortex_flavicon.png" />
+<meta name="msapplication-TileImage" content="https://www.vortex-intl.com/wp-content/uploads/2025/02/inserted/vortex_flavicon.png" />
+		<style type="text/css" id="wp-custom-css">
+			.login_block h1 {
+	padding: 0 0 2rem;
+	font-size: 3rem;
+}
+
+.page-template-flexible h1 {
+	padding: 0;
+	font-size: 3rem;
+}
+
+.page-template-full-width .wysiwyg-content ul,
+.full-width-location .wysiwyg-content ul {
+	list-style: circle;
+	list-style: inside;
+	font-size: 1.3rem !important;
+	margin-top: 1rem;
+}
+
+.page-template-full-width h1,
+.full-width-location h1 {
+	padding-bottom: 1rem !important;
+}
+
+.full-width-location h1 {
+	padding-top: 0;
+}
+
+.full-width-location > .hero-image {
+	opacity: 0.6 !important;
+}
+
+.page-template-full-width h2,
+.full-width-location h2 {
+	padding-top: 2rem;
+}
+
+.full-width-location main {
+	margin-top: 0;
+}
+
+.full-width-location .cta-div {
+	margin-left: 0;
+}
+
+.full-width-location .cta-capsule_title {
+	padding-top: 0;
+}
+
+@media only screen and (min-width: 48em) {
+	.big-h2 {
+		 font-size: 5rem;
+	}
+}		</style>
+		          <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Vortex Aquatic Structures International Inc",
+            "url": "https://www.vortex-intl.com/",
+            "logo": "https://www.vortex-intl.com/wp-content/themes/vortex/resources/assets/images/schema/schema-organization-logo400x400.jpg",
+            "alternateName": "Vortex International Canada",
+            "sameAs": [
+                "https://twitter.com/VortexINTL",
+                "https://www.facebook.com/vortexintl",
+                "https://www.linkedin.com/company/vortex-aquatic-structures-international/"
+            ],
+            "contactPoint": [
+                {
+                    "@type": "ContactPoint",
+                    "telephone": "+1-877-586-7839",
+                    "contactType": "sales",
+                    "email": "info@vortex-intl.com",
+                    "areaServed": [
+                        "CA",
+                        "US",
+                        "SP"
+                    ],
+                    "availableLanguage": [
+                        "fr",
+                        "en",
+                        "sp"
+                    ]
+                }
+            ]
+        }
+        </script>
+                <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Vortex Aquatic Structures International Inc",
+            "url": "https://www.vortex-intl.com/",
+            "logo": "https://www.vortex-intl.com/wp-content/themes/vortex/resources/assets/images/schema/schema-organization-logo400x400.jpg",
+            "alternateName": "Vortex International Canada",
+            "sameAs": [
+                "https://twitter.com/VortexINTL",
+                "https://www.facebook.com/vortexintl",
+                "https://www.linkedin.com/company/vortex-aquatic-structures-international/"
+            ],
+            "contactPoint": [
+                {
+                    "@type": "ContactPoint",
+                    "telephone": "+1-877-586-7839",
+                    "contactType": "sales",
+                    "email": "info@vortex-intl.com",
+                    "areaServed": [
+                        "CA",
+                        "US",
+                        "SP"
+                    ],
+                    "availableLanguage": [
+                        "fr",
+                        "en",
+                        "sp"
+                    ]
+                }
+            ]
+        }
+        </script>
+        </head>
+    <body style="background-color: #f2f2f2;" class="products-template-default single single-products postid-208992 header-theme-dark sp-easy-accordion-enabled deflex app-data index-data singular-data single-data single-products-data single-products-deflex-data">
+            <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TB8DRSQ"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+            <div class="bg-shape bg-shape-0" data-bg-shape-y="0">
+	 <svg width="800" height="800" xmlns="http://www.w3.org/2000/svg">
+		 <g stroke-width="200" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+			 <circle stroke="#979797" stroke-width="0" cx="400" cy="400" r="400"/>
+			 <path class="shape-1-path" d="M375.594488,90.9465786 C215.794137,103.391641 90,237.005423 90,400 C90,571.208272 228.791728,710 400,710 L400,710 C571.208272,710 710,571.208272 710,400 C710,228.791728 571.208272,90 400,90" stroke="#000" stroke-width="180" stroke-linecap="round"/>
+			 <path class="shape-2-path" d="M375.594488,90.9465786 C215.794137,103.391641 90,237.005423 90,400 C90,571.208272 228.791728,710 400,710 L400,710 C571.208272,710 710,571.208272 710,400 C710,228.791728 571.208272,90 400,90" stroke="#000" stroke-width="180" stroke-linecap="round"/>
+		 </g>
+	</svg>
+</div>
+
+<div class="bg-shape bg-shape-3" data-bg-shape-y="0.3">
+	 <svg width="692" height="1183" xmlns="http://www.w3.org/2000/svg">
+		 <g stroke-width="200" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+			 <path class="shape-1-path" d="M100.5 100.5c0 271.172 219.828 491 491 491" stroke="#6ED4FC"/>
+			 <path class="shape-2-path" d="M100.5 1082.5c0-271.172 219.828-491 491-491" stroke="#FFE000"/>
+		 </g>
+	</svg>
+</div>
+
+<div class="bg-shape bg-shape-4" data-bg-shape-y="0.5">
+	 <svg width="800" height="800" xmlns="http://www.w3.org/2000/svg">
+		 <g stroke-width="200" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+			 <circle stroke="#979797" stroke-width="0" cx="400" cy="400" r="400"/>
+			 <path class="shape-1-path" d="M375.594488,90.9465786 C215.794137,103.391641 90,237.005423 90,400 C90,571.208272 228.791728,710 400,710 L400,710 C571.208272,710 710,571.208272 710,400 C710,228.791728 571.208272,90 400,90" stroke="#000" stroke-width="180" stroke-linecap="round"/>
+			 <path class="shape-2-path" d="M375.594488,90.9465786 C215.794137,103.391641 90,237.005423 90,400 C90,571.208272 228.791728,710 400,710 L400,710 C571.208272,710 710,571.208272 710,400 C710,228.791728 571.208272,90 400,90" stroke="#000" stroke-width="180" stroke-linecap="round"/>
+		 </g>
+	</svg>
+</div>
+
+<div class="bg-shape bg-shape-2" data-bg-shape-y="0.65">
+	<svg class="shape-1" width="800" height="800" xmlns="http://www.w3.org/2000/svg">
+		<g stroke-width="200" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+			<circle stroke="#979797" stroke-width="0" cx="400" cy="400" r="400"/>
+			<path class="shape-1-path" d="M375.594488,90.9465786 C215.794137,103.391641 90,237.005423 90,400 C90,571.208272 228.791728,710 400,710 L400,710 C571.208272,710 710,571.208272 710,400 C710,228.791728 571.208272,90 400,90" stroke="#000" stroke-width="180" stroke-linecap="round"/>
+		</g>
+	</svg>
+	<svg class="shape-2" width="800" height="800" xmlns="http://www.w3.org/2000/svg">
+		<g stroke-width="200" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+			<circle stroke="#979797" stroke-width="0" cx="400" cy="400" r="400"/>
+			<path class="shape-2-path" d="M375.594488,90.9465786 C215.794137,103.391641 90,237.005423 90,400 C90,571.208272 228.791728,710 400,710 L400,710 C571.208272,710 710,571.208272 710,400 C710,228.791728 571.208272,90 400,90" stroke="#000" stroke-width="180" stroke-linecap="round"/>
+		</g>
+	</svg>
+</div>
+
+<div class="bg-shape bg-shape-5" data-bg-shape-y="0.8">
+	<svg width="837" height="2147" xmlns="http://www.w3.org/2000/svg">
+		<g stroke-width="200" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+			<path class="shape-1-path" d="M696.675 2046.125C347.142 1855.736 74.11 1385.981 102.477 976.64c28.367-409.342 312.327-801.453 634.227-875.81" stroke="#FFE000"/>
+			<path class="shape-2-path" d="M592.642 510.5c-271.172 0-491 219.828-491 491s219.828 491 491 491" stroke="#FF33D4"/>
+		</g>
+	</svg>
+</div>
+        <header class="banner">
+  <div class="navs-container">
+    <div class="desktop-nav">
+      <a class="link brand" href="https://www.vortex-intl.com/">
+        <span class="visually-hidden">Vortex</span>
+        <svg class="logo" viewBox="0 0 192 41" aria-hidden="true">
+          <use xlink:href="https://www.vortex-intl.com/wp-content/themes/vortex/dist/images/svg_map_68028944.svg#vortex-logo" />
+        </svg>
+      </a>
+      <nav class="nav-primary">
+                  <div id="desktop-nav" class="menu-primary-menu-container"><ul id="desk-nav-primary" class="nav"><li id="menu-item-4958" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4958"><a href="https://www.vortex-intl.com/inspiration/">Inspiration</a></li>
+<li id="menu-item-29081" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-29081"><a href="/projects/">Projects</a>
+<ul class="sub-menu">
+	<li id="menu-item-29648" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-29648"><a href="/projects/?venues_cat=aquatic-center&#038;continent"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/10/aquatic_center3-2-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/10/aquatic_center3-2-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/10/aquatic_center3-2-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/10/aquatic_center3-2-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2019/10/aquatic_center3-2-150x150.png" /></noscript></noscript></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">Aquatic Centers</span></span></div></a></li>
+	<li id="menu-item-29649" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-29649"><a href="/projects/?venues_cat=campground&#038;continent"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/09/hotels_resorts2-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/09/hotels_resorts2-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2019/09/hotels_resorts2-150x150.jpg" /></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">Campgrounds</span></span></div></a></li>
+	<li id="menu-item-29650" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-29650"><a href="/projects/?venues_cat=hotel-and-resort&#038;continent"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/09/hotels_resorts2-1-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/09/hotels_resorts2-1-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/09/hotels_resorts2-1-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/09/hotels_resorts2-1-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2019/09/hotels_resorts2-1-150x150.jpg" /></noscript></noscript></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">Hotels &#038; Resorts</span></span></div></a></li>
+	<li id="menu-item-29651" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-29651"><a href="/projects/?venues_cat=park&#038;continent"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/11/header_parks3-9-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/11/header_parks3-9-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/11/header_parks3-9-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/11/header_parks3-9-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2019/11/header_parks3-9-150x150.png" /></noscript></noscript></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">Parks</span></span></div></a></li>
+	<li id="menu-item-29652" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-29652"><a href="/projects/?venues_cat=special-project&#038;continent"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/11/special_prjects_header-1-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/11/special_prjects_header-1-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/11/special_prjects_header-1-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/11/special_prjects_header-1-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2019/11/special_prjects_header-1-150x150.jpg" /></noscript></noscript></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">Special Projects</span></span></div></a></li>
+	<li id="menu-item-29653" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-29653"><a href="/projects/?venues_cat=waterpark-amusement-park&#038;continent"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/10/4-prj_tommygarrottaquaticsfacility_2017-14-2-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/10/4-prj_tommygarrottaquaticsfacility_2017-14-2-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2019/10/4-prj_tommygarrottaquaticsfacility_2017-14-2-150x150.jpg" /></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">Waterparks &#038; Amusement Parks</span></span></div></a></li>
+</ul>
+</li>
+<li id="menu-item-674" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-674"><a href="https://www.vortex-intl.com/venues/">Venues</a>
+<ul class="sub-menu">
+	<li id="menu-item-29618" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-29618"><a href="/venues/municipal-parks/"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/11/header_parks3-9-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/11/header_parks3-9-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/11/header_parks3-9-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/11/header_parks3-9-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2019/11/header_parks3-9-150x150.png" /></noscript></noscript></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">Parks</span></span></div></a></li>
+	<li id="menu-item-29619" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-29619"><a href="/venues/community-aquatic-centers/"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/10/aquatic_center3-2-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/10/aquatic_center3-2-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/10/aquatic_center3-2-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/10/aquatic_center3-2-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2019/10/aquatic_center3-2-150x150.png" /></noscript></noscript></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">Aquatic Centers</span></span></div></a></li>
+	<li id="menu-item-29620" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-29620"><a href="/venues/hotels-or-resort/"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/09/hotels_resorts2-1-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/09/hotels_resorts2-1-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/09/hotels_resorts2-1-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/09/hotels_resorts2-1-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2019/09/hotels_resorts2-1-150x150.jpg" /></noscript></noscript></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">Hotels, Resorts &#038; Campgrounds</span></span></div></a></li>
+	<li id="menu-item-154910" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-154910"><a href="/venues/waterparks-amusement-parks/"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/11/featured-image-2-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/11/featured-image-2-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2019/11/featured-image-2-150x150.jpg" /></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">Waterparks &#038; Amusement Parks</span></span></div></a></li>
+	<li id="menu-item-29621" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-29621"><a href="/venues/special-projects/"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/11/special_prjects_header-1-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/11/special_prjects_header-1-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/11/special_prjects_header-1-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/11/special_prjects_header-1-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2019/11/special_prjects_header-1-150x150.jpg" /></noscript></noscript></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">Retail and Commercial</span></span></div></a></li>
+</ul>
+</li>
+<li id="menu-item-673" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-673"><a href="https://www.vortex-intl.com/product-types/">Products</a>
+<ul class="sub-menu">
+	<li id="menu-item-29622" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-29622"><a href="/product-types/splashpad/"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2020/07/header_splashpad2-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2020/07/header_splashpad2-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2020/07/header_splashpad2-150x150.jpg" /></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">Splashpad®</span></span></div></a></li>
+	<li id="menu-item-29623" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-29623"><a href="/product-types/waterslide/"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/4-moo-lagoon-stl_2024_moolagoon_drone-3-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/4-moo-lagoon-stl_2024_moolagoon_drone-3-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/4-moo-lagoon-stl_2024_moolagoon_drone-3-150x150.jpg" /></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">Waterslides</span></span></div></a></li>
+	<li id="menu-item-29624" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-29624"><a href="/product-types/elevations-playnuk/"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2020/09/header_elevations5-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2020/09/header_elevations5-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2020/09/header_elevations5-150x150.png" /></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">Elevations™ and PlayNuk™</span></span></div></a></li>
+	<li id="menu-item-29625" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-29625"><a href="/product-types/playable-fountains/"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2020/07/playablefountains_header2-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2020/07/playablefountains_header2-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2020/07/playablefountains_header2-150x150.jpg" /></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">Playable Fountains</span></span></div></a></li>
+	<li id="menu-item-207050" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-207050"><a href="/product-types/coolhub/"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2023/10/inserted/for-menu-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2023/10/inserted/for-menu-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2023/10/inserted/for-menu-150x150.png" /></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">CoolHub™</span></span></div></a></li>
+	<li id="menu-item-154405" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-154405"><a href="/product-types/dream-tunnel/"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2021/11/inserted/dbobyk_210922_0236-edit_web-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2021/11/inserted/dbobyk_210922_0236-edit_web-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2021/11/inserted/dbobyk_210922_0236-edit_web-150x150.jpg" /></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">Dream Tunnel™</span></span></div></a></li>
+	<li id="menu-item-29626" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-29626"><a href="/product-types/water-management-solutions/"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2020/07/wms_header2-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2020/07/wms_header2-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2020/07/wms_header2-150x150.jpg" /></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">Water Management Solutions</span></span></div></a></li>
+</ul>
+</li>
+<li id="menu-item-180343" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-180343"><a href="https://www.vortex-intl.com/expertise/">Expertise</a>
+<ul class="sub-menu">
+	<li id="menu-item-207530" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-207530"><a href="/expertise/immersive-entertainment/"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2022/06/inserted/dream-tunnel-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2022/06/inserted/dream-tunnel-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2022/06/inserted/dream-tunnel-150x150.jpg" /></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">Immersive Entertainment</span></span></div></a></li>
+	<li id="menu-item-207531" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-207531"><a href="/expertise/project-design/"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2020/07/header_design-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2020/07/header_design-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2020/07/header_design-150x150.jpg" /></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">Project Design</span></span></div></a></li>
+	<li id="menu-item-207532" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-207532"><a href="/expertise/project-engineering/"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2020/07/header_engineering-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2020/07/header_engineering-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2020/07/header_engineering-150x150.jpg" /></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">Project Engineering</span></span></div></a></li>
+	<li id="menu-item-207533" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-207533"><a href="/expertise/cutting-edge-process/"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2020/08/header_design-new-logo-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2020/08/header_design-new-logo-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2020/08/header_design-new-logo-150x150.png" /></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">Research &#038; Development</span></span></div></a></li>
+	<li id="menu-item-207534" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-207534"><a href="/technologies/"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2025/11/inserted/splashsync-1-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2025/11/inserted/splashsync-1-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2025/11/inserted/splashsync-1-150x150.jpg" /></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">Product Innovations</span></span></div></a></li>
+	<li id="menu-item-207535" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-207535"><a href="/expertise/globally-recognized-standards/"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2020/07/header-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2020/07/header-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2020/07/header-150x150.png" /></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">Manufacturing Excellence</span></span></div></a></li>
+	<li id="menu-item-207536" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-207536"><a href="/expertise/technical-support/"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2020/08/header_installation-new-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2020/08/header_installation-new-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2020/08/header_installation-new-150x150.png" /></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">Installation and Support</span></span></div></a></li>
+</ul>
+</li>
+</ul></div>
+              </nav>
+      <nav class="nav-side">
+                  <div id="desktop-side" class="menu-secondary-menu-container"><ul id="desk-nav-side" class="side-links"><li class="contact-link"><a class="contact-us side-link" href="https://www.vortex-intl.com/contact-us/"><span class="visually-hidden">"Contact Vortex Aquatic Structures International"</span><svg class="logo" viewBox="0 0 32 32" aria-hidden="true"><use xlink:href="https://www.vortex-intl.com/wp-content/themes/vortex/dist/images/svg_map_68028944.svg#contact-logo" /></svg><div class="tooltip">Contact Vortex Aquatic Structures International</div></a></li><li class="langs-links"><ul class="langs-wrapper"><div class="holder"><li class="lang-item display-lang"><a class="active-lang barba-prevent"> EN</a><div class="arrow-down"><span></span></div></li><li class="lang-item"><a class="barba-prevent" href="https://www.vortex-intl.com/fr/produits/deflex/"> FR</a></li><li class="lang-item"><a class="barba-prevent" href="https://www.vortex-intl.com/es/productos/deflex/"> ES</a></li></div><div class="langs-wrapper_after"></div></ul></li><a class="account side-link link" href="https://www.vortex-intl.com/resource-center/"><span class="visually-hidden">"Resource Center"</span><svg class="logo" viewBox="0 0 32 32" aria-hidden="true"><use xlink:href="https://www.vortex-intl.com/wp-content/themes/vortex/dist/images/svg_map_68028944.svg#user-logo" /></svg>
+            <div class="tooltip">Resource Center</div>
+            </a><a class="search side-link link search-btn-ctrl barba-prevent" href="#"><span class="visually-hidden">Search</span><svg class="logo" viewBox="0 0 32 32" aria-hidden="true"><use xlink:href="https://www.vortex-intl.com/wp-content/themes/vortex/dist/images/svg_map_68028944.svg#search-logo" /></svg>
+            <div class="tooltip">Search</div>
+            </a></li><li class="search-menu"><div class="searchform search__wrapper gform_wrapper clearfix">
+  <form role="search" method="get" class="search__form no-barba" action="https://www.vortex-intl.com/">
+  	<div class="gfield input-button">
+		  <label>
+		    <span class="screen-reader-texts visually-hidden">Search for:</span>
+		    <input type="search" class="search__field" placeholder="Search project, product, rep..." value="" name="s" autocomplete="off" />
+		  </label>
+		  <button type="submit" class="search__submit linkround linkround--blue linkround--icon linkround--icon--after">
+		    <span class="d-none d-initial--mb">Search</span>
+	        <svg aria-hidden="true">
+	          <use xlink:href="https://www.vortex-intl.com/wp-content/themes/vortex/dist/images/svg_map_68028944.svg#search-logo" />
+	        </svg>
+		  </button>
+		</div>
+		<div class="clearfix"></div>
+
+		  </form>
+</div></li></ul></div>
+              </nav>
+      <div class="mobile-menu-btn">
+        <a href="#" class="barba-prevent buger-menu">
+          <div class="buger-menu__wrapper">
+            <span></span>
+          </div>
+          <div class="buger-menu__anim__wrapper">
+            <div class="buger-menu__anim"><span class="visually-hidden">translate : menu open close</span></div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="mobile-nav-container">
+      <div class="navs-wrapper gsap-menus">
+        <nav class="nav-primary">
+                      <div id="mob-nav" class="menu-primary-menu-container"><ul id="mob-nav-primary" class="nav"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4958"><a href="https://www.vortex-intl.com/inspiration/">Inspiration</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-29081"><a href="/projects/">Projects</a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-29648"><a href="/projects/?venues_cat=aquatic-center&#038;continent"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/10/aquatic_center3-2-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/10/aquatic_center3-2-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/10/aquatic_center3-2-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/10/aquatic_center3-2-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2019/10/aquatic_center3-2-150x150.png" /></noscript></noscript></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">Aquatic Centers</span></span></div></a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-29649"><a href="/projects/?venues_cat=campground&#038;continent"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/09/hotels_resorts2-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/09/hotels_resorts2-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2019/09/hotels_resorts2-150x150.jpg" /></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">Campgrounds</span></span></div></a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-29650"><a href="/projects/?venues_cat=hotel-and-resort&#038;continent"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/09/hotels_resorts2-1-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/09/hotels_resorts2-1-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/09/hotels_resorts2-1-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/09/hotels_resorts2-1-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2019/09/hotels_resorts2-1-150x150.jpg" /></noscript></noscript></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">Hotels &#038; Resorts</span></span></div></a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-29651"><a href="/projects/?venues_cat=park&#038;continent"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/11/header_parks3-9-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/11/header_parks3-9-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/11/header_parks3-9-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/11/header_parks3-9-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2019/11/header_parks3-9-150x150.png" /></noscript></noscript></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">Parks</span></span></div></a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-29652"><a href="/projects/?venues_cat=special-project&#038;continent"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/11/special_prjects_header-1-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/11/special_prjects_header-1-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/11/special_prjects_header-1-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/11/special_prjects_header-1-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2019/11/special_prjects_header-1-150x150.jpg" /></noscript></noscript></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">Special Projects</span></span></div></a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-29653"><a href="/projects/?venues_cat=waterpark-amusement-park&#038;continent"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/10/4-prj_tommygarrottaquaticsfacility_2017-14-2-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/10/4-prj_tommygarrottaquaticsfacility_2017-14-2-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2019/10/4-prj_tommygarrottaquaticsfacility_2017-14-2-150x150.jpg" /></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">Waterparks &#038; Amusement Parks</span></span></div></a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-674"><a href="https://www.vortex-intl.com/venues/">Venues</a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-29618"><a href="/venues/municipal-parks/"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/11/header_parks3-9-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/11/header_parks3-9-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/11/header_parks3-9-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/11/header_parks3-9-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2019/11/header_parks3-9-150x150.png" /></noscript></noscript></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">Parks</span></span></div></a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-29619"><a href="/venues/community-aquatic-centers/"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/10/aquatic_center3-2-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/10/aquatic_center3-2-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/10/aquatic_center3-2-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/10/aquatic_center3-2-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2019/10/aquatic_center3-2-150x150.png" /></noscript></noscript></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">Aquatic Centers</span></span></div></a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-29620"><a href="/venues/hotels-or-resort/"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/09/hotels_resorts2-1-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/09/hotels_resorts2-1-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/09/hotels_resorts2-1-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/09/hotels_resorts2-1-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2019/09/hotels_resorts2-1-150x150.jpg" /></noscript></noscript></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">Hotels, Resorts &#038; Campgrounds</span></span></div></a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-154910"><a href="/venues/waterparks-amusement-parks/"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/11/featured-image-2-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/11/featured-image-2-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2019/11/featured-image-2-150x150.jpg" /></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">Waterparks &#038; Amusement Parks</span></span></div></a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-29621"><a href="/venues/special-projects/"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/11/special_prjects_header-1-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/11/special_prjects_header-1-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/11/special_prjects_header-1-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2019/11/special_prjects_header-1-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2019/11/special_prjects_header-1-150x150.jpg" /></noscript></noscript></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">Retail and Commercial</span></span></div></a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-673"><a href="https://www.vortex-intl.com/product-types/">Products</a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-29622"><a href="/product-types/splashpad/"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2020/07/header_splashpad2-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2020/07/header_splashpad2-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2020/07/header_splashpad2-150x150.jpg" /></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">Splashpad®</span></span></div></a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-29623"><a href="/product-types/waterslide/"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/4-moo-lagoon-stl_2024_moolagoon_drone-3-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/4-moo-lagoon-stl_2024_moolagoon_drone-3-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/4-moo-lagoon-stl_2024_moolagoon_drone-3-150x150.jpg" /></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">Waterslides</span></span></div></a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-29624"><a href="/product-types/elevations-playnuk/"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2020/09/header_elevations5-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2020/09/header_elevations5-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2020/09/header_elevations5-150x150.png" /></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">Elevations™ and PlayNuk™</span></span></div></a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-29625"><a href="/product-types/playable-fountains/"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2020/07/playablefountains_header2-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2020/07/playablefountains_header2-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2020/07/playablefountains_header2-150x150.jpg" /></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">Playable Fountains</span></span></div></a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-207050"><a href="/product-types/coolhub/"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2023/10/inserted/for-menu-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2023/10/inserted/for-menu-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2023/10/inserted/for-menu-150x150.png" /></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">CoolHub™</span></span></div></a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-154405"><a href="/product-types/dream-tunnel/"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2021/11/inserted/dbobyk_210922_0236-edit_web-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2021/11/inserted/dbobyk_210922_0236-edit_web-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2021/11/inserted/dbobyk_210922_0236-edit_web-150x150.jpg" /></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">Dream Tunnel™</span></span></div></a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-29626"><a href="/product-types/water-management-solutions/"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2020/07/wms_header2-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2020/07/wms_header2-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2020/07/wms_header2-150x150.jpg" /></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">Water Management Solutions</span></span></div></a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-180343"><a href="https://www.vortex-intl.com/expertise/">Expertise</a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-207530"><a href="/expertise/immersive-entertainment/"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2022/06/inserted/dream-tunnel-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2022/06/inserted/dream-tunnel-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2022/06/inserted/dream-tunnel-150x150.jpg" /></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">Immersive Entertainment</span></span></div></a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-207531"><a href="/expertise/project-design/"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2020/07/header_design-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2020/07/header_design-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2020/07/header_design-150x150.jpg" /></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">Project Design</span></span></div></a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-207532"><a href="/expertise/project-engineering/"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2020/07/header_engineering-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2020/07/header_engineering-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2020/07/header_engineering-150x150.jpg" /></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">Project Engineering</span></span></div></a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-207533"><a href="/expertise/cutting-edge-process/"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2020/08/header_design-new-logo-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2020/08/header_design-new-logo-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2020/08/header_design-new-logo-150x150.png" /></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">Research &#038; Development</span></span></div></a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-207534"><a href="/technologies/"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2025/11/inserted/splashsync-1-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2025/11/inserted/splashsync-1-150x150.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2025/11/inserted/splashsync-1-150x150.jpg" /></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">Product Innovations</span></span></div></a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-207535"><a href="/expertise/globally-recognized-standards/"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2020/07/header-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2020/07/header-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2020/07/header-150x150.png" /></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">Manufacturing Excellence</span></span></div></a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-207536"><a href="/expertise/technical-support/"><div class="menu-item-inner"><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2020/08/header_installation-new-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image lazyload" data-src="https://www.vortex-intl.com/wp-content/uploads/2020/08/header_installation-new-150x150.png" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 150px; --smush-placeholder-aspect-ratio: 150/150;" /><noscript><img width="150" height="150" class="menu-item-image" src="https://www.vortex-intl.com/wp-content/uploads/2020/08/header_installation-new-150x150.png" /></noscript></noscript><span class="menu-item-text-container"><span class="menu-item-text">Installation and Support</span></span></div></a></li>
+</ul>
+</li>
+</ul></div>
+                  </nav>
+        <nav class="nav-side">
+                      <div id="mob-side" class="menu-secondary-menu-container"><ul id="mob-nav-side" class="side-links"><li class="contact-link"><a class="contact-us side-link" href="https://www.vortex-intl.com/contact-us/"><span class="visually-hidden">"Contact Vortex Aquatic Structures International"</span><svg class="logo" viewBox="0 0 32 32" aria-hidden="true"><use xlink:href="https://www.vortex-intl.com/wp-content/themes/vortex/dist/images/svg_map_68028944.svg#contact-logo" /></svg><div class="tooltip">Contact Vortex Aquatic Structures International</div></a></li><li class="langs-links"><ul class="langs-wrapper"><div class="holder"><li class="lang-item display-lang"><a class="active-lang barba-prevent"> EN</a><div class="arrow-down"><span></span></div></li><li class="lang-item"><a class="barba-prevent" href="https://www.vortex-intl.com/fr/produits/deflex/"> FR</a></li><li class="lang-item"><a class="barba-prevent" href="https://www.vortex-intl.com/es/productos/deflex/"> ES</a></li></div><div class="langs-wrapper_after"></div></ul></li><a class="account side-link link" href="https://www.vortex-intl.com/resource-center/"><span class="visually-hidden">"Resource Center"</span><svg class="logo" viewBox="0 0 32 32" aria-hidden="true"><use xlink:href="https://www.vortex-intl.com/wp-content/themes/vortex/dist/images/svg_map_68028944.svg#user-logo" /></svg>
+            <div class="tooltip">Resource Center</div>
+            </a><a class="search side-link link search-btn-ctrl barba-prevent" href="#"><span class="visually-hidden">Search</span><svg class="logo" viewBox="0 0 32 32" aria-hidden="true"><use xlink:href="https://www.vortex-intl.com/wp-content/themes/vortex/dist/images/svg_map_68028944.svg#search-logo" /></svg>
+            <div class="tooltip">Search</div>
+            </a></li><li class="search-menu"><div class="searchform search__wrapper gform_wrapper clearfix">
+  <form role="search" method="get" class="search__form no-barba" action="https://www.vortex-intl.com/">
+  	<div class="gfield input-button">
+		  <label>
+		    <span class="screen-reader-texts visually-hidden">Search for:</span>
+		    <input type="search" class="search__field" placeholder="Search project, product, rep..." value="" name="s" autocomplete="off" />
+		  </label>
+		  <button type="submit" class="search__submit linkround linkround--blue linkround--icon linkround--icon--after">
+		    <span class="d-none d-initial--mb">Search</span>
+	        <svg aria-hidden="true">
+	          <use xlink:href="https://www.vortex-intl.com/wp-content/themes/vortex/dist/images/svg_map_68028944.svg#search-logo" />
+	        </svg>
+		  </button>
+		</div>
+		<div class="clearfix"></div>
+
+		  </form>
+</div></li></ul></div>
+                  </nav>
+      </div>
+    </div>
+  </div>
+</header>    <div id="vortex-barba-wrapper" data-barba="wrapper">
+      <div data-barba="container" class="products-template-default single single-products postid-208992 vortex-barba-container header-theme-dark sp-easy-accordion-enabled deflex app-data index-data singular-data single-data single-products-data single-products-deflex-data">
+        <div class="wrap" role="document">
+          <div class="content">
+            <main class="main vortex-els">
+                     <article class="clearfix post-208992 products type-products status-publish has-post-thumbnail hentry technologies-safeswap-anchoring-system technologies-dualspray technologies-seeflow technologies-toeguard product_types-splashpad product_collection-vectorytm">
+  <div class="overview-content__side-bar nav-sticky">
+    <div class="sidenav-wrapper">
+      
+	  		<div class="new-product-tag" style="
+			display: inline-flex;
+    		width: fit-content;
+    		color: white;
+			background-color: #ff33d4;
+			padding: 0.1em 0.5em;
+			margin-bottom: 0.25em;
+			font-family: Nunito, sans-serif;
+			font-size: 2rem;
+			font-weight: 800;
+   			border-radius: 1em;
+		">New</div>
+                 <h1 class="entry-title">Deflex</h1>
+      <div class="code">VOR 7281</div>
+              <div class="tagline">Collection: <span>Vectory™</span></div>
+            <nav class="side-nav">
+        <dl>
+          <dt><a class="inview-el overview current barba-prevent" href="#overview"><span>Overview</span></a></dt>
+          <dt><a class="inview-el description barba-prevent" href="#description"><span>Product Highlights</span></a></dt>
+                    <dt><a class="inview-el inaction barba-prevent" href="#inaction"><span>In Action</span></a></dt>
+                    <dt><a class="inview-el feat-products barba-prevent" href="#feat-products"><span>Related products</span></a></dt>
+                  </dl>  
+      </nav>
+      <div class="bottom-els">
+        <div class="side-prod-thumbnail">
+          <img width="400" height="400" data-src="https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-400x400.png" class="attachment-featprod-thumb size-featprod-thumb wp-post-image lazyload" alt="2 vor 7281 deflex pv2" decoding="async" loading="lazy" data-srcset="https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-2048x2048.png 2048w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-1536x1536.png 1536w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-1440x1440.png 1440w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-1080x1080.png 1080w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-1024x1024.png 1024w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-768x768.png 768w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-400x400.png 400w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-300x300.png 300w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-150x150.png 150w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-140x140.png 140w" data-sizes="(max-width: 400px) 100vw, 400px" title="Deflex" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 400px; --smush-placeholder-aspect-ratio: 400/400;"><noscript><img width="400" height="400" src="https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-400x400.png" class="attachment-featprod-thumb size-featprod-thumb wp-post-image" alt="2 vor 7281 deflex pv2" decoding="async" loading="lazy" srcset="https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-2048x2048.png 2048w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-1536x1536.png 1536w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-1440x1440.png 1440w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-1080x1080.png 1080w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-1024x1024.png 1024w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-768x768.png 768w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-400x400.png 400w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-300x300.png 300w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-150x150.png 150w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-140x140.png 140w" sizes="(max-width: 400px) 100vw, 400px" title="Deflex"></noscript>
+        </div>
+        <div class="side-bar-assets">
+                  </div>
+      </div>
+    </div>
+  </div>
+  <div id="overview" class="prod-view slider-wrapper row" data-view="overview">
+    <div class="overview-content overview-content__mosaic">
+              <div class="product-hero-slider " data-slider-auto-height="false" data-slider=".slider" data-slider-thumbnails-container="slider-thumbnails" data-slider-thumbnail-item="slider-thumbnails__item" data-slider-thumbnail-item-selected="slider-thumbnails__item_selected" data-slider-thumbnail-item-changing="slider-thumbnails__item_changing" data-slider-prev=".owl-custom-prev" data-slider-next=".owl-custom-next">
+      <div class="hero-slider_slide">
+        <div class="slider hero-slider_slide_content first-img">
+          <img width="1080" height="1080" data-src="https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-1080x1080.png" class="attachment-lrg-hero-product size-lrg-hero-product wp-post-image lazyload" alt="2 vor 7281 deflex pv2" decoding="async" loading="lazy" data-srcset="https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-2048x2048.png 2048w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-1536x1536.png 1536w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-1440x1440.png 1440w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-1080x1080.png 1080w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-1024x1024.png 1024w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-768x768.png 768w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-400x400.png 400w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-300x300.png 300w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-150x150.png 150w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-140x140.png 140w" data-sizes="(max-width: 1080px) 100vw, 1080px" title="Deflex" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 1080px; --smush-placeholder-aspect-ratio: 1080/1080;"><noscript><img width="1080" height="1080" src="https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-1080x1080.png" class="attachment-lrg-hero-product size-lrg-hero-product wp-post-image" alt="2 vor 7281 deflex pv2" decoding="async" loading="lazy" srcset="https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-2048x2048.png 2048w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-1536x1536.png 1536w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-1440x1440.png 1440w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-1080x1080.png 1080w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-1024x1024.png 1024w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-768x768.png 768w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-400x400.png 400w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-300x300.png 300w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-150x150.png 150w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-140x140.png 140w" sizes="(max-width: 1080px) 100vw, 1080px" title="Deflex"></noscript>
+                                    <div class="image-mosaic__item">
+    <img width="551" height="575" data-src="https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/4--en-only-dualspray-caroussel-en.png" class="attachment-lrg-hero-product size-lrg-hero-product lazyload" alt="" decoding="async" loading="lazy" data-srcset="https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/4--en-only-dualspray-caroussel-en.png 551w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/4--en-only-dualspray-caroussel-en-383x400.png 383w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/4--en-only-dualspray-caroussel-en-287x300.png 287w" data-sizes="(max-width: 551px) 100vw, 551px" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 551px; --smush-placeholder-aspect-ratio: 551/575;" /><noscript><img width="551" height="575" src="https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/4--en-only-dualspray-caroussel-en.png" class="attachment-lrg-hero-product size-lrg-hero-product" alt="" decoding="async" loading="lazy" srcset="https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/4--en-only-dualspray-caroussel-en.png 551w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/4--en-only-dualspray-caroussel-en-383x400.png 383w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/4--en-only-dualspray-caroussel-en-287x300.png 287w" sizes="(max-width: 551px) 100vw, 551px" /></noscript>
+  </div>                          <div class="image-mosaic__item">
+    <img width="1080" height="1080" data-src="https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/1--vor-7281_deflex_pv_combo2-1080x1080.png" class="attachment-lrg-hero-product size-lrg-hero-product lazyload" alt="" decoding="async" loading="lazy" data-srcset="https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/1--vor-7281_deflex_pv_combo2-2048x2048.png 2048w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/1--vor-7281_deflex_pv_combo2-1536x1536.png 1536w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/1--vor-7281_deflex_pv_combo2-1440x1440.png 1440w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/1--vor-7281_deflex_pv_combo2-1080x1080.png 1080w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/1--vor-7281_deflex_pv_combo2-1024x1024.png 1024w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/1--vor-7281_deflex_pv_combo2-768x768.png 768w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/1--vor-7281_deflex_pv_combo2-400x400.png 400w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/1--vor-7281_deflex_pv_combo2-300x300.png 300w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/1--vor-7281_deflex_pv_combo2-150x150.png 150w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/1--vor-7281_deflex_pv_combo2-140x140.png 140w" data-sizes="(max-width: 1080px) 100vw, 1080px" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 1080px; --smush-placeholder-aspect-ratio: 1080/1080;" /><noscript><img width="1080" height="1080" src="https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/1--vor-7281_deflex_pv_combo2-1080x1080.png" class="attachment-lrg-hero-product size-lrg-hero-product" alt="" decoding="async" loading="lazy" srcset="https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/1--vor-7281_deflex_pv_combo2-2048x2048.png 2048w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/1--vor-7281_deflex_pv_combo2-1536x1536.png 1536w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/1--vor-7281_deflex_pv_combo2-1440x1440.png 1440w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/1--vor-7281_deflex_pv_combo2-1080x1080.png 1080w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/1--vor-7281_deflex_pv_combo2-1024x1024.png 1024w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/1--vor-7281_deflex_pv_combo2-768x768.png 768w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/1--vor-7281_deflex_pv_combo2-400x400.png 400w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/1--vor-7281_deflex_pv_combo2-300x300.png 300w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/1--vor-7281_deflex_pv_combo2-150x150.png 150w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/1--vor-7281_deflex_pv_combo2-140x140.png 140w" sizes="(max-width: 1080px) 100vw, 1080px" /></noscript>
+  </div>                          <div class="image-mosaic__item">
+    <img width="1080" height="1080" data-src="https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/3--vor-7281_deflex_sv-1080x1080.png" class="attachment-lrg-hero-product size-lrg-hero-product lazyload" alt="" decoding="async" loading="lazy" data-srcset="https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/3--vor-7281_deflex_sv-2048x2048.png 2048w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/3--vor-7281_deflex_sv-1536x1536.png 1536w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/3--vor-7281_deflex_sv-1440x1440.png 1440w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/3--vor-7281_deflex_sv-1080x1080.png 1080w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/3--vor-7281_deflex_sv-1024x1024.png 1024w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/3--vor-7281_deflex_sv-768x768.png 768w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/3--vor-7281_deflex_sv-400x400.png 400w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/3--vor-7281_deflex_sv-300x300.png 300w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/3--vor-7281_deflex_sv-150x150.png 150w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/3--vor-7281_deflex_sv-140x140.png 140w" data-sizes="(max-width: 1080px) 100vw, 1080px" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 1080px; --smush-placeholder-aspect-ratio: 1080/1080;" /><noscript><img width="1080" height="1080" src="https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/3--vor-7281_deflex_sv-1080x1080.png" class="attachment-lrg-hero-product size-lrg-hero-product" alt="" decoding="async" loading="lazy" srcset="https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/3--vor-7281_deflex_sv-2048x2048.png 2048w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/3--vor-7281_deflex_sv-1536x1536.png 1536w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/3--vor-7281_deflex_sv-1440x1440.png 1440w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/3--vor-7281_deflex_sv-1080x1080.png 1080w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/3--vor-7281_deflex_sv-1024x1024.png 1024w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/3--vor-7281_deflex_sv-768x768.png 768w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/3--vor-7281_deflex_sv-400x400.png 400w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/3--vor-7281_deflex_sv-300x300.png 300w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/3--vor-7281_deflex_sv-150x150.png 150w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/3--vor-7281_deflex_sv-140x140.png 140w" sizes="(max-width: 1080px) 100vw, 1080px" /></noscript>
+  </div>                              </div>
+      </div>
+              <div class="slider-thumbnails">
+                        <div class="slider-thumbnails__item">
+              <img width="400" height="400" data-src="https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-400x400.png" class="attachment-round-img size-round-img wp-post-image lazyload" alt="2 vor 7281 deflex pv2" decoding="async" loading="lazy" data-srcset="https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-2048x2048.png 2048w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-1536x1536.png 1536w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-1440x1440.png 1440w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-1080x1080.png 1080w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-1024x1024.png 1024w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-768x768.png 768w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-400x400.png 400w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-300x300.png 300w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-150x150.png 150w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-140x140.png 140w" data-sizes="(max-width: 400px) 100vw, 400px" title="Deflex" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 400px; --smush-placeholder-aspect-ratio: 400/400;"><noscript><img width="400" height="400" src="https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-400x400.png" class="attachment-round-img size-round-img wp-post-image" alt="2 vor 7281 deflex pv2" decoding="async" loading="lazy" srcset="https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-2048x2048.png 2048w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-1536x1536.png 1536w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-1440x1440.png 1440w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-1080x1080.png 1080w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-1024x1024.png 1024w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-768x768.png 768w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-400x400.png 400w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-300x300.png 300w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-150x150.png 150w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/2--vor-7281_deflex_pv2-140x140.png 140w" sizes="(max-width: 400px) 100vw, 400px" title="Deflex"></noscript>
+              </div>
+                          <div class="slider-thumbnails__item">
+              <img width="400" height="400" data-src="https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/4--en-only-dualspray-caroussel-en-400x400.png" class="attachment-round-img size-round-img lazyload" alt="" decoding="async" loading="lazy" data-srcset="https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/4--en-only-dualspray-caroussel-en-400x400.png 400w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/4--en-only-dualspray-caroussel-en-150x150.png 150w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/4--en-only-dualspray-caroussel-en-140x140.png 140w" data-sizes="(max-width: 400px) 100vw, 400px" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 400px; --smush-placeholder-aspect-ratio: 400/400;" /><noscript><img width="400" height="400" src="https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/4--en-only-dualspray-caroussel-en-400x400.png" class="attachment-round-img size-round-img" alt="" decoding="async" loading="lazy" srcset="https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/4--en-only-dualspray-caroussel-en-400x400.png 400w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/4--en-only-dualspray-caroussel-en-150x150.png 150w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/4--en-only-dualspray-caroussel-en-140x140.png 140w" sizes="(max-width: 400px) 100vw, 400px" /></noscript>
+              </div>
+                          <div class="slider-thumbnails__item">
+              <img width="400" height="400" data-src="https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/1--vor-7281_deflex_pv_combo2-400x400.png" class="attachment-round-img size-round-img lazyload" alt="" decoding="async" loading="lazy" data-srcset="https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/1--vor-7281_deflex_pv_combo2-2048x2048.png 2048w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/1--vor-7281_deflex_pv_combo2-1536x1536.png 1536w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/1--vor-7281_deflex_pv_combo2-1440x1440.png 1440w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/1--vor-7281_deflex_pv_combo2-1080x1080.png 1080w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/1--vor-7281_deflex_pv_combo2-1024x1024.png 1024w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/1--vor-7281_deflex_pv_combo2-768x768.png 768w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/1--vor-7281_deflex_pv_combo2-400x400.png 400w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/1--vor-7281_deflex_pv_combo2-300x300.png 300w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/1--vor-7281_deflex_pv_combo2-150x150.png 150w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/1--vor-7281_deflex_pv_combo2-140x140.png 140w" data-sizes="(max-width: 400px) 100vw, 400px" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 400px; --smush-placeholder-aspect-ratio: 400/400;" /><noscript><img width="400" height="400" src="https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/1--vor-7281_deflex_pv_combo2-400x400.png" class="attachment-round-img size-round-img" alt="" decoding="async" loading="lazy" srcset="https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/1--vor-7281_deflex_pv_combo2-2048x2048.png 2048w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/1--vor-7281_deflex_pv_combo2-1536x1536.png 1536w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/1--vor-7281_deflex_pv_combo2-1440x1440.png 1440w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/1--vor-7281_deflex_pv_combo2-1080x1080.png 1080w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/1--vor-7281_deflex_pv_combo2-1024x1024.png 1024w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/1--vor-7281_deflex_pv_combo2-768x768.png 768w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/1--vor-7281_deflex_pv_combo2-400x400.png 400w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/1--vor-7281_deflex_pv_combo2-300x300.png 300w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/1--vor-7281_deflex_pv_combo2-150x150.png 150w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/1--vor-7281_deflex_pv_combo2-140x140.png 140w" sizes="(max-width: 400px) 100vw, 400px" /></noscript>
+              </div>
+                          <div class="slider-thumbnails__item">
+              <img width="400" height="400" data-src="https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/3--vor-7281_deflex_sv-400x400.png" class="attachment-round-img size-round-img lazyload" alt="" decoding="async" loading="lazy" data-srcset="https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/3--vor-7281_deflex_sv-2048x2048.png 2048w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/3--vor-7281_deflex_sv-1536x1536.png 1536w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/3--vor-7281_deflex_sv-1440x1440.png 1440w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/3--vor-7281_deflex_sv-1080x1080.png 1080w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/3--vor-7281_deflex_sv-1024x1024.png 1024w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/3--vor-7281_deflex_sv-768x768.png 768w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/3--vor-7281_deflex_sv-400x400.png 400w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/3--vor-7281_deflex_sv-300x300.png 300w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/3--vor-7281_deflex_sv-150x150.png 150w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/3--vor-7281_deflex_sv-140x140.png 140w" data-sizes="(max-width: 400px) 100vw, 400px" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="--smush-placeholder-width: 400px; --smush-placeholder-aspect-ratio: 400/400;" /><noscript><img width="400" height="400" src="https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/3--vor-7281_deflex_sv-400x400.png" class="attachment-round-img size-round-img" alt="" decoding="async" loading="lazy" srcset="https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/3--vor-7281_deflex_sv-2048x2048.png 2048w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/3--vor-7281_deflex_sv-1536x1536.png 1536w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/3--vor-7281_deflex_sv-1440x1440.png 1440w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/3--vor-7281_deflex_sv-1080x1080.png 1080w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/3--vor-7281_deflex_sv-1024x1024.png 1024w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/3--vor-7281_deflex_sv-768x768.png 768w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/3--vor-7281_deflex_sv-400x400.png 400w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/3--vor-7281_deflex_sv-300x300.png 300w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/3--vor-7281_deflex_sv-150x150.png 150w, https://www.vortex-intl.com/wp-content/uploads/2025/03/inserted/3--vor-7281_deflex_sv-140x140.png 140w" sizes="(max-width: 400px) 100vw, 400px" /></noscript>
+              </div>
+                              </div>
+        <div class="slider-controls">
+          <div class="slider-controls__blobs">
+            <div class="slider-controls__prev">
+              <div class="btn-ctl">
+                <svg><use xlink:href="https://www.vortex-intl.com/wp-content/themes/vortex/dist/images/svg_map_68028944.svg#icon-interface-arrow-bold" /></svg>
+              </div>
+            </div>
+            <div class="slider-controls__next">
+              <div class="btn-ctl">
+                <svg><use xlink:href="https://www.vortex-intl.com/wp-content/themes/vortex/dist/images/svg_map_68028944.svg#icon-interface-arrow-bold" /></svg>
+              </div>
+            </div>
+          </div>
+          <div class="slider-controls__btns">
+            <div class="slider-controls__prev">
+              
+              <div class="tooltip">
+                Previous
+              </div>
+
+              <div class="btn-ctl owl-custom-prev">
+                <svg><use xlink:href="https://www.vortex-intl.com/wp-content/themes/vortex/dist/images/svg_map_68028944.svg#icon-interface-arrow-bold" /></svg>
+              </div>
+            </div>
+            <div class="slider-controls__next">
+              
+              <div class="tooltip">
+                Next
+              </div>
+
+              <div class="btn-ctl owl-custom-next">
+                <svg><use xlink:href="https://www.vortex-intl.com/wp-content/themes/vortex/dist/images/svg_map_68028944.svg#icon-interface-arrow-bold" /></svg>
+              </div>
+            </div>
+          </div>
+          <svg class="svg-filter" xmlns="http://www.w3.org/2000/svg" version="1.1">
+            <defs>
+              <filter id="goo">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -6" result="goo" />
+                <feBlend in="SourceGraphic" in2="goo" />
+              </filter>
+            </defs>
+          </svg>
+        </div>
+      
+    </div>
+            </div>
+    <div class="overview-content__features">
+          </div>
+    
+    <div class="control-email">
+      <a class="email-wrapper" href="mailto:info@vortex-intl.com?subject=Vortex Product Spotlight: Deflex">
+  <span class="opener">
+    <svg class="share-logo" viewBox="0 0 32 32" aria-hidden="true">
+      <use xlink:href="https://www.vortex-intl.com/wp-content/themes/vortex/dist/images/svg_map_68028944.svg#icon-interface-mail" />
+    </svg> 
+  </span>
+</a>    </div>
+
+  </div>
+
+  <div class="product-content__spacer"></div>
+
+  <div class="product-content">
+    <div class="entry-content">
+      <div class="content-wrapper">
+
+        <div class="assets-mobile mbot">
+                  </div>
+        <div id="description" data-view="description" class="prod-view">
+                      <div class="description-text">
+              <div class="description-text__wrapper"><p>DEFLEX offers a fun and surprising water experience. With DualSpray™, a tipping bucket, and a slanted SeeFlow™ panel, children enjoy unforgettable play moments.</p>
+</div>
+            </div>
+                            </div>
+
+                                 
+         
+              </div>
+    </div>
+  </div>
+</article>
+
+<div class="opt-btns">
+  
+  
+    <div class="container mtop mbot ">
+	<div class="cta-capsule">
+					<h2 class="cta-capsule_title">Ready to start your project?</h2>
+									<div class="cta-button-list row row--flex">
+													<div class="col-grid-auto">
+					<a class="linkround linkround--blue" href="/contact-us/?form=start-project#forms" target="_self">
+						Start a project
+					</a>
+				</div>
+																<div class="col-grid-auto">
+					<a class="linkround linkround--blueborder" href="/contact-us/#find-expert" target="_self">
+						Find your local expert
+					</a>
+				</div>
+						</div>
+			</div>
+</div>  
+</div>
+              </main>
+                      </div>
+        </div>
+                <!--<script src="https://mktdplp102cdn.azureedge.net/public/latest/js/form-loader.js?v=1.84.2007"></script>
+<div class="d365-mkt-config" style="display:none"
+    data-website-id="lEf5P1MU_RdEDrYYzpopNa8zeeKdXEisdK5hAlTJu4I"
+    data-hostname="32e1c196b86b46389d894d73c754838d.svc.dynamics.com">
+</div>-->
+
+<div class="container newsletter">
+	<div class="newsletter__inner">
+		<div class="newsletter__col">
+			<div class="newsletter__cta">Be the first to know</div>
+		</div>
+		
+		<div class="newsletter__col">
+			<p class="newsletter__desc">Sign up for exclusive content and product news.</p>
+		</div>
+
+		<form novalidate class="newsletter__col vortex-form vortex-form_newsletter_subscribe vortex-form_subscribe" id="newsletter_subscribe" data-action="newsletter_subscribe">
+			
+			<div class="field field_subscribe">
+				<div class="field__inner">
+					<input class="field__input field__input_text" type="email" name="email" placeholder="Enter your email">
+					<button name="submit" class="field__button vortex-form__submit linkround linkround--blue" type="submit">Ok</button>
+				</div>
+			</div>
+			
+			<input type="hidden" name="action" value="newsletter_subscribe">
+
+					</form>
+	</div>
+</div>
+        <footer class="container">
+  <div class="container-nopad">
+    <div id="left-side-footer" class="footer-col">
+      <h6>Follow Us</h6>
+      <dl id="footer-social">
+                  <dt>
+            <a rel="noopener" target="_blank" class="link-social" href="https://www.facebook.com/vortexintl/">
+              <span class="visually-hidden">Facebook</span>
+              <svg class="logo" viewBox="0 0 32 32" aria-hidden="true">
+                <use xlink:href="https://www.vortex-intl.com/wp-content/themes/vortex/dist/images/svg_map_68028944.svg#fb-logo" />
+              </svg>
+            </a>
+          </dt>
+                          <dt>
+            <a rel="noopener" target="_blank" class="link-social" href="https://www.instagram.com/vortexintl/">
+              <span class="visually-hidden">Instagram</span>
+              <svg class="logo" viewBox="0 0 32 32" aria-hidden="true">
+                <use xlink:href="https://www.vortex-intl.com/wp-content/themes/vortex/dist/images/svg_map_68028944.svg#insta-logo" />
+              </svg>
+            </a>
+          </dt>
+                          <dt>
+            <a rel="noopener" target="_blank" class="link-social" href="https://www.linkedin.com/company/vortex-aquatic-structures-international/">
+              <span class="visually-hidden">LinkedIn</span>
+              <svg class="logo" viewBox="0 0 32 32" aria-hidden="true">
+                <use xlink:href="https://www.vortex-intl.com/wp-content/themes/vortex/dist/images/svg_map_68028944.svg#linkedin-logo" />
+              </svg>
+            </a>
+          </dt>
+                          <dt>
+            <a rel="noopener" target="_blank" class="link-social" href="https://twitter.com/vortexintl">
+              <span class="visually-hidden">Twitter</span>
+              <svg class="logo" viewBox="0 0 24 24" aria-hidden="true">
+                <use xlink:href="https://www.vortex-intl.com/wp-content/themes/vortex/dist/images/svg_map_68028944.svg#twitterx-logo" />
+              </svg>
+            </a>
+          </dt>
+              </dl>
+      <div class="foot-start-project">
+                <a class="linkround--white" href="/contact-us/?form=start-project#forms">Start a project</a>
+      </div>
+      <div class="foot-contact">
+                <a class="linkround--grey" href="https://www.vortex-intl.com/contact-us/">Contact Vortex Aquatic Structures International</a>
+      </div>
+    </div>
+
+        <div id="first-footer-nav" class="footer-col">
+            <h5>Browse</h5>
+            <nav>
+                  <div class="menu-footer-browse-column-container"><ul id="menu-footer-browse-column" class="footer-primary-nav"><li id="menu-item-28135" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-28135"><a href="https://www.vortex-intl.com/inspiration/">Inspiration</a></li>
+<li id="menu-item-28136" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-28136"><a href="/projects/">Projects</a></li>
+<li id="menu-item-28137" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-28137"><a href="https://www.vortex-intl.com/venues/">Venues</a></li>
+<li id="menu-item-28138" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-28138"><a href="https://www.vortex-intl.com/product-types/">Products</a></li>
+<li id="menu-item-28139" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-28139"><a href="/expertise/">Expertise</a></li>
+<li id="menu-item-159879" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-159879 current-menu-item"><a href="/products/">All the Products</a></li>
+</ul></div>
+              </nav>
+    </div> 
+   
+    <div id="second-footer-nav" class="footer-col">
+            <h5>Venues</h5>
+            <nav>
+                  <div class="menu-footer-venues-menu-container"><ul id="menu-footer-venues-menu" class="footer-sec-nav"><li id="menu-item-28143" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-28143"><a href="/venues/municipal-parks/">Parks</a></li>
+<li id="menu-item-28144" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-28144"><a href="/venues/community-aquatic-centers/">Aquatic Centers</a></li>
+<li id="menu-item-28145" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-28145"><a href="/venues/hotels-or-resort/">Hotels, Resorts &#038; Campgrounds</a></li>
+<li id="menu-item-28146" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-28146"><a href="/venues/waterparks-amusement-parks/">Waterparks &#038; Amusement Parks</a></li>
+<li id="menu-item-28147" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-28147"><a href="/venues/special-projects/">Retail centers and family entertainment centers</a></li>
+</ul></div>
+              </nav>
+    </div>
+
+    <div id="third-footer-nav" class="footer-col">
+            <h5>Product Types</h5>
+            <nav>
+                  <div class="menu-footer-product-types-menu-container"><ul id="menu-footer-product-types-menu" class="menu"><li id="menu-item-28148" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-28148"><a href="/product-types/splashpad/">Splashpad</a>
+<ul class="sub-menu">
+	<li id="menu-item-175657" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-175657"><a href="https://www.vortex-intl.com/product-types/splashpad/vortex-collections/">Collections</a></li>
+	<li id="menu-item-182376" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-182376"><a href="https://www.vortex-intl.com/product-types/splashpad/faq/">FAQs</a></li>
+</ul>
+</li>
+<li id="menu-item-28149" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-28149"><a href="/product-types/waterslide/">Waterslide</a></li>
+<li id="menu-item-28150" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-28150"><a href="/product-types/elevations-playnuk/">Elevations and Play structures</a></li>
+<li id="menu-item-28151" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-28151"><a href="/product-types/playable-fountains/">Playable Fountains</a></li>
+<li id="menu-item-207051" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-207051"><a href="/product-types/coolhub/">CoolHub™</a></li>
+<li id="menu-item-154406" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-154406"><a href="/product-types/dream-tunnel/">Dream Tunnel™</a></li>
+<li id="menu-item-28152" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-28152"><a href="/product-types/water-management-solutions/">Water Management Solutions</a></li>
+</ul></div>
+              </nav> 
+    </div>
+
+    <div id="forth-footer-nav" class="footer-col">
+            <h5>Vortex</h5>
+            <nav>
+                  <div class="menu-footer-vortex-menu-container"><ul id="menu-footer-vortex-menu" class="menu"><li id="menu-item-12045" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-12045"><a href="https://www.vortex-intl.com/who-we-are/">The Company</a>
+<ul class="sub-menu">
+	<li id="menu-item-181663" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-181663"><a href="https://www.vortex-intl.com/who-we-are/faq/">FAQs</a></li>
+</ul>
+</li>
+<li id="menu-item-12046" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12046"><a href="https://www.vortex-intl.com/careers/">Careers</a></li>
+<li id="menu-item-12047" class="menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-12047"><a href="https://www.vortex-intl.com/news/">News</a></li>
+<li id="menu-item-205820" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-205820"><a href="/blog">Blog</a></li>
+<li id="menu-item-160973" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-160973"><a href="https://www.vortex-intl.com/in-the-media/">In the Media</a></li>
+<li id="menu-item-206392" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-206392"><a href="https://www.vortex-intl.com/us-locations/">US Locations</a></li>
+</ul></div>
+              </nav> 
+    </div>
+
+    <div id="fifth-footer-nav" class="footer-col">
+            <h5>Support</h5>
+            <nav>
+                  <div class="menu-footer-support-menu-container"><ul id="menu-footer-support-menu" class="menu"><li id="menu-item-28140" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-28140"><a href="https://www.vortex-intl.com/resource-center/">Resource Center</a></li>
+</ul></div>
+              </nav> 
+    </div>
+
+  </div>
+  <div id="legal-mention">
+    <p>
+      
+                      <a href="https://www.vortex-intl.com/privacy-policy/" title="Privacy Policy">Privacy Policy</a>
+                  <span class="hide">-</span>
+              
+      <span>Vortex Aquatic Structures International Inc.</span>
+      <br class="hide">
+      <span>© All rights reserved.</span>
+    </p>
+  </div>
+</footer>
+        <script type='text/javascript' src='https://www.vortex-intl.com/wp-content/plugins/wp-smushit/app/assets/js/smush-lazy-load.min.js?ver=3.16.2' id='smush-lazy-load-js'></script>
+<script type='text/javascript' src='https://www.vortex-intl.com/wp-content/themes/vortex/dist/scripts/DrawSVGPlugin_4d2020b1.js' id='drawsvg-js'></script>
+<script type='text/javascript' id='sage/main.js-js-extra'>
+/* <![CDATA[ */
+var wpvars = {"siteUrl":"https:\/\/www.vortex-intl.com","ajaxUrl":"https:\/\/www.vortex-intl.com\/wp-admin\/admin-ajax.php","themeUrl":"https:\/\/www.vortex-intl.com\/wp-content\/themes\/vortex\/resources"};
+var langStrings = {"support":{"add":"Add to selection","addsimple":"Add","added":"Added to selection","addedsimple":"Added","remove":"Remove from selection","removesimple":"Remove","removegroup":"Remove group from selection","selection":"Your selection","download":"Download selection"}};
+var job_application1 = {"endpoint":"https:\/\/www.vortex-intl.com\/wp-admin\/admin-ajax.php","action":"job_application1","nonce":"2c48db6e25","id":"job_application1","method":"POST","submitBtnClass":"vortex-form__submit"};
+var job_application2 = {"endpoint":"https:\/\/www.vortex-intl.com\/wp-admin\/admin-ajax.php","action":"job_application2","nonce":"834aa6e397","id":"job_application2","method":"POST","submitBtnClass":"vortex-form__submit"};
+var job_application3 = {"endpoint":"https:\/\/www.vortex-intl.com\/wp-admin\/admin-ajax.php","action":"job_application3","nonce":"66d265de76","id":"job_application3","method":"POST","submitBtnClass":"vortex-form__submit"};
+var send_your_cv = {"endpoint":"https:\/\/www.vortex-intl.com\/wp-admin\/admin-ajax.php","action":"send_your_cv","nonce":"78b4fdadad","id":"send_your_cv","method":"POST","submitBtnClass":"vortex-form__submit"};
+var send_your_cv = {"endpoint":"https:\/\/www.vortex-intl.com\/wp-admin\/admin-ajax.php","action":"send_your_cv","nonce":"78b4fdadad","id":"send_your_cv","method":"POST","submitBtnClass":"vortex-form__submit"};
+var newsletter_subscribe = {"endpoint":"https:\/\/www.vortex-intl.com\/wp-admin\/admin-ajax.php","action":"newsletter_subscribe","nonce":"b9e9b3dc67","id":"newsletter_subscribe","method":"POST","submitBtnClass":"vortex-form__submit"};
+var job_application1 = {"endpoint":"https:\/\/www.vortex-intl.com\/wp-admin\/admin-ajax.php","action":"job_application1","nonce":"2c48db6e25","id":"job_application1","method":"POST","submitBtnClass":"vortex-form__submit"};
+var job_application2 = {"endpoint":"https:\/\/www.vortex-intl.com\/wp-admin\/admin-ajax.php","action":"job_application2","nonce":"834aa6e397","id":"job_application2","method":"POST","submitBtnClass":"vortex-form__submit"};
+var job_application3 = {"endpoint":"https:\/\/www.vortex-intl.com\/wp-admin\/admin-ajax.php","action":"job_application3","nonce":"66d265de76","id":"job_application3","method":"POST","submitBtnClass":"vortex-form__submit"};
+var contact = {"endpoint":"https:\/\/www.vortex-intl.com\/wp-admin\/admin-ajax.php","action":"contact","nonce":"7fce1a8096","id":"contact","method":"POST","submitBtnClass":"vortex-form__submit"};
+var register = {"endpoint":"https:\/\/www.vortex-intl.com\/wp-admin\/admin-ajax.php","action":"register","nonce":"62d46bc527","id":"register","method":"POST","submitBtnClass":"vortex-form__submit"};
+var service_parts = {"endpoint":"https:\/\/www.vortex-intl.com\/wp-admin\/admin-ajax.php","action":"service_parts","nonce":"bd3d0d5c2d","id":"service_parts","method":"POST","submitBtnClass":"vortex-form__submit","hasCaptcha":"1","captchaTokenFieldName":"captcha_token","captchaSiteKey":"6LepeCEsAAAAAEMXmZBAbcRsCb5k7N9kixmhyfgW","captchaActionName":"form_submit"};
+var start_project = {"endpoint":"https:\/\/www.vortex-intl.com\/wp-admin\/admin-ajax.php","action":"start_project","nonce":"47b6051dd8","id":"start_project","method":"POST","submitBtnClass":"vortex-form__submit","hasCaptcha":"1","captchaTokenFieldName":"captcha_token","captchaSiteKey":"6LepeCEsAAAAAEMXmZBAbcRsCb5k7N9kixmhyfgW","captchaActionName":"form_submit"};
+var general_question = {"endpoint":"https:\/\/www.vortex-intl.com\/wp-admin\/admin-ajax.php","action":"general_question","nonce":"026b50631a","id":"general_question","method":"POST","submitBtnClass":"vortex-form__submit","hasCaptcha":"1","captchaTokenFieldName":"captcha_token","captchaSiteKey":"6LepeCEsAAAAAEMXmZBAbcRsCb5k7N9kixmhyfgW","captchaActionName":"form_submit"};
+var inspirations_page = {"endpoint":"https:\/\/www.vortex-intl.com\/wp-admin\/admin-ajax.php","page_id":"208992","preload_count":"10"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.vortex-intl.com/wp-content/themes/vortex/dist/scripts/main_4d2020b1.js' id='sage/main.js-js'></script>
+<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.7.2/jquery.matchHeight-min.js?ver=1.0.0' id='matchHeight-script-js'></script>
+      </div>
+    </div>
+    <div class="overlay">
+	<div class="overlay_content container">
+
+		<div class="container container--small">
+
+			<div class="overlay_content_wrapper">
+
+				
+
+			</div>
+
+			<p class="ta-center">
+				<span class="overlay_close underline">Cancel</span>
+			</p>
+
+		</div>
+
+	</div>
+</div>    <div id="cookie-consent" class="cookie-consent">
+	<div class="container cookie-consent_content mtop-xxs mbot-xxs">
+		<div class="row clearfix">
+			<div class="col-grid-mb-12 col-grid-mtb-8">
+				<p class="small">
+					This website uses cookies to improve your experience. We'll assume you're ok with this, but you can opt-out if you wish.
+				</p>
+			</div>
+			<div class="col-grid-mb-12 col-grid-mtb-4 ta-center ta-right--mtb">
+				<a href="https://www.vortex-intl.com/privacy-policy/ " class="linkround linkround--blueborder sm">
+					Privacy Policy
+				</a>
+				<button class="linkround linkround--blue sm cookie-consent_accept">
+					Accept
+				</button>
+			</div>
+		</div>
+	</div>
+</div>  </body>
+</html>
+
+<!-- Dynamic page generated in 1.086 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2026-04-20 14:26:53 -->
+
+<!-- super cache -->
