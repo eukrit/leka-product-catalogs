@@ -7,7 +7,7 @@
 
 substitutions:
   _REGION: asia-southeast1
-  _AR_REPO: asia-southeast1-docker.pkg.dev/$PROJECT_ID/leka-product-catalogs
+  _AR_REPO: asia-southeast1-docker.pkg.dev/ai-agents-go/leka-product-catalogs
 
 options:
   logging: CLOUD_LOGGING_ONLY
