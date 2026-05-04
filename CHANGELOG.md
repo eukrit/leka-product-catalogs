@@ -16,14 +16,15 @@ Product images for the 6 GCS-resident leka brands moved from the public `gs://ai
   - rampline: 127 + 127 = 254 URLs
   - vortex: 0 + 1,949 = 1,949 URLs (Firestore subcollection empty by design)
   - berliner: 3,969 + 3,969 = 7,938 URLs (8 external preserved)
-  - wisdom: re-run pending
+  - wisdom: 5,910 + 5,900 = 11,810 URLs (328 URLs on `storage.googleapis.com` but with an unrecognized path layout were left untouched — backlog)
+  - **Grand total: 26,163 URLs rewritten across both stores, 0 errors, 0 unknown hosts.**
 - **Cloud Build** — added [cloudbuild-storefront-only.yaml](cloudbuild-storefront-only.yaml) for storefront-only deploys when the backend hasn't changed (skips medusa-backend build + db-migrate). [cloudbuild.yaml](cloudbuild.yaml) hardcoded `_AR_REPO` project to `ai-agents-go` because `$PROJECT_ID` was not recursively expanding inside the substitution.
 - **.gcloudignore** added to keep `gcloud builds submit` archives small (807 KiB vs. 500+ MB unfiltered).
 
 ### Pending / known issues
 
 - 4soft pre-existing image-URL bug: the catalog scrape uploaded files with literal `%20` in object names; URLs in Medusa are single-encoded so GCS decodes them to spaces and 404s. Affected before and after this change. Fix is a one-time GCS rename or double-encoding the URLs.
-- Wisdom rewrite (5,071 products) was paused mid-run when the bucket-access issue was diagnosed; needs to be resumed targeting the proxy.
+- Wisdom 328 `no_match` URLs use an unrecognized `storage.googleapis.com/...` path layout (not the old or new bucket). Need a one-pass diagnostic to bucket them and a second-pass rewrite.
 - Phase 5 (archive + delete `leka-product-catalogs` Firestore DB) is gated on a 2-week green canary on `vortex-daily-refresh`.
 - `scripts/seed_medusa_api.py:16-17` still hardcodes admin password (Rule 12 violation, pre-existing).
 
