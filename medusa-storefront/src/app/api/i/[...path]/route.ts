@@ -43,16 +43,22 @@ async function getAccessToken(): Promise<string> {
   return cachedToken.value;
 }
 
-export async function GET(
-  req: NextRequest,
-  ctx: { params: Promise<{ path: string[] }> },
-) {
-  const { path } = await ctx.params;
-  console.log("[image-proxy] hit", JSON.stringify(path));
-  if (!path || path.length === 0) {
+const PREFIX = "/api/i/";
+
+export async function GET(req: NextRequest) {
+  // Preserve the URL path as-sent. Decoding via params and re-encoding loses
+  // distinctions like literal `%20` (filename has %, 2, 0 chars) vs. encoded
+  // space (filename has a space). 4soft's catalog has literal `%20` in object
+  // names, so we must pass the raw path through to GCS.
+  const url = new URL(req.url);
+  const idx = url.pathname.indexOf(PREFIX);
+  if (idx < 0) {
     return new Response("not found", { status: 404 });
   }
-  const objectPath = path.map(encodeURIComponent).join("/");
+  const objectPath = url.pathname.slice(idx + PREFIX.length);
+  if (!objectPath) {
+    return new Response("not found", { status: 404 });
+  }
   const gcsUrl = `https://storage.googleapis.com/${BUCKET}/${objectPath}`;
 
   let token: string;
@@ -75,7 +81,7 @@ export async function GET(
     console.error(
       "[image-proxy] upstream",
       upstream.status,
-      objectPath,
+      decodeURIComponent(objectPath),
     );
     return new Response("upstream error", { status: 502 });
   }

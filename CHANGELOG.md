@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.5.0] - 2026-05-05
+
+### Added — Phase 4: image bucket migration + private-via-proxy serving
+
+Product images for the 6 GCS-resident leka brands moved from the public `gs://ai-agents-go-documents/product-images/<slug>/` to a project-prefixed, **private** bucket `gs://ai-agents-go-vendors/<slug>/`. Public access prevention stays enabled on the new bucket; the Cloud Run storefront fronts it via a Next.js image proxy. Vinci images stay external (zamowienia.vinci-play.pl).
+
+- **GCS copy** — 5.30 GB across wisdom (2.29 GB), berliner (1.97 GB), vortex (953 MB), rampline (57 MB), eurotramp (17 MB), 4soft (8 MB), copied with `gcloud storage cp -r`. Slug-based folder names for consistency with existing `durasein/`, `gumtec/`, `zelk/` etc.
+- **Image proxy** [medusa-storefront/src/app/api/i/[...path]/route.ts](medusa-storefront/src/app/api/i/[...path]/route.ts) — Next 15 route handler. Reads private GCS via the Cloud Run runtime SA (`538978391890-compute@developer.gserviceaccount.com`, ADC token from metadata server, cached until ~5 min before expiry). Streams response with `Cache-Control: public, max-age=86400, immutable`. Preserves raw URL path so encoding (single vs double `%20`) survives end-to-end. Allowed in [next.config.js](medusa-storefront/next.config.js).
+- **URL rewriter** [scripts/rewrite_image_urls_to_vendors_bucket.py](scripts/rewrite_image_urls_to_vendors_bucket.py) — sweeps `vendors/{slug}/products` (Firestore DB `vendors`) AND Medusa Admin API for each brand's sales channel, rewriting `images[].url` (and Medusa `thumbnail`) from old-bucket public URLs to proxy URLs. Idempotent; supports `--target-base` so the same script can target direct GCS or the storefront proxy. Running counts:
+  - 4soft: 780 + 780 (firestore + medusa) = 1,560 URLs
+  - eurotramp: 1,326 + 1,326 = 2,652 URLs (79 external images preserved)
+  - rampline: 127 + 127 = 254 URLs
+  - vortex: 0 + 1,949 = 1,949 URLs (Firestore subcollection empty by design)
+  - berliner: 3,969 + 3,969 = 7,938 URLs (8 external preserved)
+  - wisdom: re-run pending
+- **Cloud Build** — added [cloudbuild-storefront-only.yaml](cloudbuild-storefront-only.yaml) for storefront-only deploys when the backend hasn't changed (skips medusa-backend build + db-migrate). [cloudbuild.yaml](cloudbuild.yaml) hardcoded `_AR_REPO` project to `ai-agents-go` because `$PROJECT_ID` was not recursively expanding inside the substitution.
+- **.gcloudignore** added to keep `gcloud builds submit` archives small (807 KiB vs. 500+ MB unfiltered).
+
+### Pending / known issues
+
+- 4soft pre-existing image-URL bug: the catalog scrape uploaded files with literal `%20` in object names; URLs in Medusa are single-encoded so GCS decodes them to spaces and 404s. Affected before and after this change. Fix is a one-time GCS rename or double-encoding the URLs.
+- Wisdom rewrite (5,071 products) was paused mid-run when the bucket-access issue was diagnosed; needs to be resumed targeting the proxy.
+- Phase 5 (archive + delete `leka-product-catalogs` Firestore DB) is gated on a 2-week green canary on `vortex-daily-refresh`.
+- `scripts/seed_medusa_api.py:16-17` still hardcodes admin password (Rule 12 violation, pre-existing).
+
 ## [2.4.0] - 2026-05-04
 
 ### Added — Migration to vendors-rooted Firestore architecture (Phases 0-3)
