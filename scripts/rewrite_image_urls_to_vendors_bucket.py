@@ -75,6 +75,14 @@ BRAND_FOLDER_MAP: dict[str, str] = {
     "4soft":     "4soft",
 }
 
+# Some brands have additional source folders under
+# gs://ai-agents-go-documents/product-images/<extra>/ that referenced products
+# in <slug>. Those were copied to gs://ai-agents-go-vendors/<folder>/<extra>/
+# so URLs map cleanly. Maintain (extra_old_segment, new_subfolder) per slug.
+BRAND_EXTRA_PREFIXES: dict[str, list[tuple[str, str]]] = {
+    "wisdom": [("verified", "verified")],
+}
+
 
 def verify_target_folders(brands: list[str]) -> None:
     client = storage.Client(project=PROJECT)
@@ -116,11 +124,21 @@ def rewrite_url(url: str, slug: str, target_base: str) -> tuple[str, str]:
     new_direct_prefix = f"{NEW_BUCKET}/{folder}/"
     if path.startswith(old_prefix):
         tail = path[len(old_prefix):]
-    elif path.startswith(new_direct_prefix):
+        return f"{target_base_clean}/{folder}/{tail}", "rewritten"
+    if path.startswith(new_direct_prefix):
         tail = path[len(new_direct_prefix):]
-    else:
-        return url, "no_match"
-    return f"{target_base_clean}/{folder}/{tail}", "rewritten"
+        return f"{target_base_clean}/{folder}/{tail}", "rewritten"
+    # Check brand extras (e.g. wisdom verified/ folder).
+    for extra_old, extra_new in BRAND_EXTRA_PREFIXES.get(slug, []):
+        old_extra = f"{OLD_BUCKET}/{OLD_PREFIX}/{extra_old}/"
+        new_extra = f"{NEW_BUCKET}/{folder}/{extra_new}/"
+        if path.startswith(old_extra):
+            tail = path[len(old_extra):]
+            return f"{target_base_clean}/{folder}/{extra_new}/{tail}", "rewritten"
+        if path.startswith(new_extra):
+            tail = path[len(new_extra):]
+            return f"{target_base_clean}/{folder}/{extra_new}/{tail}", "rewritten"
+    return url, "no_match"
 
 
 def _bump(counters: dict, key: str) -> None:
