@@ -16,8 +16,9 @@ Product images for the 6 GCS-resident leka brands moved from the public `gs://ai
   - rampline: 127 + 127 = 254 URLs
   - vortex: 0 + 1,949 = 1,949 URLs (Firestore subcollection empty by design)
   - berliner: 3,969 + 3,969 = 7,938 URLs (8 external preserved)
-  - wisdom: 5,910 + 5,900 = 11,810 URLs (328 URLs on `storage.googleapis.com` but with an unrecognized path layout were left untouched — backlog)
-  - **Grand total: 26,163 URLs rewritten across both stores, 0 errors, 0 unknown hosts.**
+  - wisdom: 5,910 + 5,900 = 11,810 URLs (first pass) + 328 + 328 = 656 URLs (verified/ mop-up) = 12,466 URLs
+  - **Grand total: 26,819 URLs rewritten across both stores, 0 errors, 0 unknown hosts, 0 `no_match` remaining.**
+  - Plus 582 4soft GCS objects renamed (`%20` → space).
 - **Cloud Build** — added [cloudbuild-storefront-only.yaml](cloudbuild-storefront-only.yaml) for storefront-only deploys when the backend hasn't changed (skips medusa-backend build + db-migrate). [cloudbuild.yaml](cloudbuild.yaml) hardcoded `_AR_REPO` project to `ai-agents-go` because `$PROJECT_ID` was not recursively expanding inside the substitution.
 - **.gcloudignore** added to keep `gcloud builds submit` archives small (807 KiB vs. 500+ MB unfiltered).
 
