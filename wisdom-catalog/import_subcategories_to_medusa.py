@@ -109,10 +109,14 @@ def main():
 
     client = MedusaImporter(base_url=args.medusa_url, api_key=args.api_key)
 
-    # 1) Look up parent ids (created by import_to_medusa.py).
+    # 1) Resolve every parent category we actually need from the data.
+    # `classify_category` returns "other" as a fallback for SKUs whose prefix
+    # doesn't match the brand map — that bucket isn't in CATEGORY_MAP.values()
+    # and is created lazily here.
     print("Resolving parent category ids...")
     parent_ids = {}
-    for cat in set(CATEGORY_MAP.values()):
+    needed_parents = sorted({cat for cat, _sub in pairs})
+    for cat in needed_parents:
         parent_ids[cat] = client.get_or_create_category(cat.replace("_", " ").title(), cat)
         print(f"  {cat:12s} -> {parent_ids[cat]}")
 
