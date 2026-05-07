@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.5.2] - 2026-05-07
+
+### Fixed — Cross-brand series badges showing on wrong brand pages
+
+**Root cause**: `medusa.store.collection.list()` returns all 56 collections globally regardless of the publishable API key's sales channel scope. Every brand with `hasCollections: true` was displaying all 56 collection badges from all vendors.
+
+- **Symptom**: Berliner Seilfabrik page showed Vinci series (Active, Arena, Castillo, etc.) alongside its own Berliner series — and vice versa for all 4 collection brands.
+- **Root cause**: Medusa's store collections API does not filter by sales channel — it returns all collections in the database regardless of which publishable key is used in the request header.
+- **Fix**: Added `collectionPrefix?: string` to `BrandConfig` interface and set a per-brand prefix. After the API fetch, collections are filtered client-side:
+  - `berliner-*` → Berliner Seilfabrik (15 collections → 18 after handle audit)
+  - `4soft-*` → 4soft (3 collections)
+  - `vortex-*` → Vortex Aquatics (8 collections)
+  - `undefined` (Vinci) → all handles that do NOT start with any other vendor's prefix (27 Vinci collections)
+- **Files changed**: `medusa-storefront/src/lib/medusa-client.ts`, `medusa-storefront/src/app/[brand]/catalog-content.tsx`
+- **Deployed**: Cloud Build `25da4b21`, storefront revision `accae83`
+
+### Verified (post-fix browser audit — all collection brands passing)
+| Brand | Series shown | Correct |
+|-------|-------------|---------|
+| Vinci Play | 27 (Vinci-only handles) | ✓ |
+| Berliner Seilfabrik | 18 (all "Berliner *") | ✓ |
+| 4soft | 3 (4soft Tunnels & Furniture, 3D Elements, 2D Graphics) | ✓ |
+| Vortex Aquatics | 8 (all "Vortex — *") | ✓ |
+
+---
+
 ## [2.5.1] - 2026-05-07
 
 ### Fixed — CORS misconfiguration blocking all brand catalogs + Vortex missing key
