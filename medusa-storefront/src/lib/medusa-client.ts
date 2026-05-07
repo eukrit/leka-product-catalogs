@@ -18,7 +18,7 @@ export const BRANDS: Record<string, BrandConfig> = {
     publishableKey: process.env.NEXT_PUBLIC_WISDOM_PUBLISHABLE_KEY || "",
     hasCollections: false,
     hasPricing: true,
-    productCount: 5056,
+    productCount: 5062,
   },
   vinci: {
     name: "Vinci Play",
@@ -29,7 +29,7 @@ export const BRANDS: Record<string, BrandConfig> = {
     publishableKey: process.env.NEXT_PUBLIC_VINCI_PUBLISHABLE_KEY || "",
     hasCollections: true,
     hasPricing: false,
-    productCount: 1095,
+    productCount: 1096,
     // Vinci collections have no vendor prefix — filter out all other vendors' prefixed handles
     collectionPrefix: undefined,
   },
@@ -88,7 +88,7 @@ export const BRANDS: Record<string, BrandConfig> = {
     publishableKey: process.env.NEXT_PUBLIC_VORTEX_PUBLISHABLE_KEY || "",
     hasCollections: true,
     hasPricing: false,
-    productCount: 272,
+    productCount: 521,
     collectionPrefix: "vortex-",
   },
 }
