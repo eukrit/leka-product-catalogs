@@ -2,6 +2,39 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.6.0] - 2026-05-07
+
+### Added — Per-brand corporate identity (logos, palettes, fonts) on storefront
+
+Each brand catalog page now renders the vendor's real corporate identity instead of a generic letter-badge.
+
+- **Logos** — scraped from each vendor's public homepage and stored under `medusa-storefront/public/brands/<slug>/`:
+  - Wisdom, Berliner, Eurotramp, Rampline, Vortex, WePlay → real logos
+  - Vinci → white logo on brand-magenta background wrapper
+  - 4soft → no public logo asset; falls back to letter badge styled with brand primary
+- **Palettes** — full 4-color palette (`primary`, `secondary`, `ink`, `paper`) per brand, exposed as CSS variables (`--brand-primary` etc.) set at the brand layout root. Tailwind exposes them as `bg-brand-primary`, `text-brand-ink`, etc.
+- **Fonts** — Manrope stays for body text across all brands; headings now use a brand-specific Google Font loaded once via `next/font/google`:
+  Wisdom→Poppins, Vinci→Montserrat, Berliner→Roboto, Eurotramp→Open Sans, Rampline→Lato, 4soft→Nunito (verified from 4soft.cz CSS), Vortex→Inter, WePlay→Nunito.
+- **Favicons** — each `/[brand]` page sets its own browser-tab icon via `generateMetadata`.
+- **WePlay (8th brand stub)** — added as a `BrandConfig` entry with `productCount: 0`. No Sales Channel yet, so the route renders a "Catalog coming soon" placeholder using the brand CI. `NEXT_PUBLIC_WEPLAY_PUBLISHABLE_KEY` placeholder added to `env.example`. Sales Channel + product import is a follow-up task.
+- **Components updated** — `SeriesBadges` and `ProductCard` now use `var(--brand-primary)` / `var(--brand-secondary)` instead of hardcoded `badge-purple` / `badge-navy` / `badge-amber` classes; series filters and price labels match the brand.
+
+**Files changed**:
+- NEW `medusa-storefront/src/lib/brand-ci.ts` — typed CI registry for 8 brands
+- NEW `medusa-storefront/public/brands/<slug>/{logo.*, favicon.*}` — 8 brand asset folders
+- `medusa-storefront/src/app/layout.tsx` — load 7 brand fonts, attach CSS variable classes to `<html>`
+- `medusa-storefront/src/app/[brand]/layout.tsx` — `<Image>` logo, brand CSS-var injection, `font-heading` on brand name
+- `medusa-storefront/src/app/[brand]/page.tsx` — per-brand favicon
+- `medusa-storefront/src/app/[brand]/catalog-content.tsx` — WePlay-style "coming soon" branch for stub brands
+- `medusa-storefront/src/components/series-badges.tsx` — brand-primary active state, drops hardcoded `BADGE_COLORS` array
+- `medusa-storefront/src/components/product-card.tsx` — series/NEW badges + price use brand palette
+- `medusa-storefront/src/lib/medusa-client.ts` — `weplay` entry added to `BRANDS`
+- `medusa-storefront/tailwind.config.ts` — `colors.brand.*` and `fontFamily.heading` mapped to CSS vars
+- `medusa-storefront/tsconfig.json` — `types: ["node"]` added to scope @types resolution (parent-root @types/caseless was breaking the build)
+- `medusa-storefront/env.example` — Vortex and WePlay publishable-key placeholders
+
+**Outcome**: clean `npm run build` (Next 15.5 / TS strict). Each `/[slug]` route is now visually distinct on a per-vendor basis. Letter-badge fallback keeps the page rendering even if a logo asset is missing.
+
 ## [2.5.2] - 2026-05-07
 
 ### Fixed — Cross-brand series badges showing on wrong brand pages
