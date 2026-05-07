@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.5.1] - 2026-05-07
+
+### Fixed — Vortex Aquatics missing publishable key in storefront build
+
+- **Bug**: `NEXT_PUBLIC_VORTEX_PUBLISHABLE_KEY` was never passed as a `--build-arg` in `cloudbuild.yaml` or `cloudbuild-storefront-only.yaml`. Since `NEXT_PUBLIC_*` env vars must be baked into the Next.js bundle at build time, the Vortex catalog page loaded with an empty publishable key, causing the Medusa store API to return 0 products.
+- **Fix**: Added `NEXT_PUBLIC_VORTEX_PUBLISHABLE_KEY=pk_df5eb6c3d0032c6baebe18bec7b3be1cdb024ba5efd3833cac2b8517432c56dc` to both `cloudbuild.yaml` and `cloudbuild-storefront-only.yaml`. Redeployed storefront via `cloudbuild-storefront-only.yaml` (Cloud Build `fa376c2b`).
+- **Files changed**: `cloudbuild.yaml`, `cloudbuild-storefront-only.yaml`
+
 ## [2.5.0] - 2026-05-05
 
 ### Added — Phase 4: image bucket migration + private-via-proxy serving
