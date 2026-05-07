@@ -63,6 +63,12 @@ class MedusaImporter:
         resp.raise_for_status()
         return resp.json()
 
+    def _patch(self, path: str, data: dict) -> dict:
+        """Medusa v2 admin updates use POST against /admin/<resource>/:id with the partial body."""
+        resp = self.session.post(f"{self.base_url}{path}", json=data)
+        resp.raise_for_status()
+        return resp.json()
+
     def create_product(
         self,
         title: str,
@@ -169,20 +175,50 @@ class MedusaImporter:
             print(f"  (warning: could not auto-link publishable key to sales channel: {e.response.status_code})")
         return {"id": key_id, "token": token}
 
-    def get_or_create_category(self, name: str, handle: str) -> str:
-        """Get existing category by handle or create new one. Returns category ID."""
+    def get_or_create_category(self, name: str, handle: str, parent_category_id: str = None) -> str:
+        """Get existing category by handle or create new one. Returns category ID.
+
+        Pass `parent_category_id` to create a child category under an existing parent.
+        Medusa v2 supports nested categories via `parent_category_id`.
+        """
         resp = self._get("/admin/product-categories", {"handle": handle, "limit": 1})
         categories = resp.get("product_categories", [])
         if categories:
             return categories[0]["id"]
 
-        result = self._post("/admin/product-categories", {
+        payload = {
             "name": name,
             "handle": handle,
             "is_active": True,
             "is_internal": False,
-        })
+        }
+        if parent_category_id:
+            payload["parent_category_id"] = parent_category_id
+
+        result = self._post("/admin/product-categories", payload)
         return result["product_category"]["id"]
+
+    def add_categories_to_product(self, product_id: str, category_ids: list) -> dict:
+        """Append category links to an existing product. Idempotent — Medusa de-dupes existing links."""
+        return self._patch(
+            f"/admin/products/{product_id}",
+            {"categories": [{"id": cid} for cid in category_ids]},
+        )
+
+    def list_products_by_category(self, category_id: str, limit: int = 200) -> list:
+        """Return all products linked to a category id (paginated)."""
+        out = []
+        offset = 0
+        while True:
+            resp = self._get(
+                "/admin/products",
+                {"category_id[]": category_id, "limit": limit, "offset": offset, "fields": "id,handle"},
+            )
+            batch = resp.get("products", [])
+            out.extend(batch)
+            if len(batch) < limit:
+                return out
+            offset += limit
 
     def get_or_create_collection(self, title: str, handle: str) -> str:
         """Get existing collection by handle or create new one. Returns collection ID."""
