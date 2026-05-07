@@ -4,11 +4,37 @@ All notable changes to this project will be documented in this file.
 
 ## [2.5.1] - 2026-05-07
 
-### Fixed — Vortex Aquatics missing publishable key in storefront build
+### Fixed — CORS misconfiguration blocking all brand catalogs + Vortex missing key
 
-- **Bug**: `NEXT_PUBLIC_VORTEX_PUBLISHABLE_KEY` was never passed as a `--build-arg` in `cloudbuild.yaml` or `cloudbuild-storefront-only.yaml`. Since `NEXT_PUBLIC_*` env vars must be baked into the Next.js bundle at build time, the Vortex catalog page loaded with an empty publishable key, causing the Medusa store API to return 0 products.
-- **Fix**: Added `NEXT_PUBLIC_VORTEX_PUBLISHABLE_KEY=pk_df5eb6c3d0032c6baebe18bec7b3be1cdb024ba5efd3833cac2b8517432c56dc` to both `cloudbuild.yaml` and `cloudbuild-storefront-only.yaml`. Redeployed storefront via `cloudbuild-storefront-only.yaml` (Cloud Build `fa376c2b`).
+**Root cause: all brand catalog pages showed "No products found"** due to two independent bugs found during a full frontend status audit.
+
+#### Bug 1 — STORE_CORS pointed to raw Cloud Run URL (critical, global)
+- **Symptom**: Every brand page returned 0 products. Browser console: `TypeError: Failed to fetch`. `no-cors` mode returned opaque response confirming CORS — not network — was failing.
+- **Root cause**: `STORE_CORS` env var on `leka-medusa-backend` was set to `https://leka-medusa-storefront-538978391890.asia-southeast1.run.app` (the raw Cloud Run URL from initial deploy), not the custom domain `https://catalogs.leka.studio`. The backend was never redeployed after the custom domain was configured. Preflight OPTIONS returned empty `Access-Control-Allow-Origin`.
+- **Fix**: `gcloud run services update leka-medusa-backend --update-env-vars STORE_CORS=https://catalogs.leka.studio,AUTH_CORS=...` — new revision `00012-6sh`. CORS now returns `Access-Control-Allow-Origin: https://catalogs.leka.studio`.
+- **Also note**: `cloudbuild.yaml` backend deploy step already had the correct `STORE_CORS=https://catalogs.leka.studio` — the stale value was from a pre-custom-domain manual deploy.
+
+#### Bug 2 — NEXT_PUBLIC_VORTEX_PUBLISHABLE_KEY missing from storefront build
+- **Symptom**: Vortex catalog specifically showed 0 products (would have been visible after Bug 1 was fixed).
+- **Root cause**: `NEXT_PUBLIC_VORTEX_PUBLISHABLE_KEY` build-arg was missing from both `cloudbuild.yaml` and `cloudbuild-storefront-only.yaml`. The key resolved to `""` in the bundle, so the Medusa store API rejected the auth.
+- **Fix**: Added `--build-arg NEXT_PUBLIC_VORTEX_PUBLISHABLE_KEY=pk_df5eb6c3d0032c6baebe18bec7b3be1cdb024ba5efd3833cac2b8517432c56dc` (retrieved from Medusa Admin API) to both Cloud Build files. Redeployed storefront (Cloud Build `fa376c2b`, revision `00011-mkn`).
 - **Files changed**: `cloudbuild.yaml`, `cloudbuild-storefront-only.yaml`
+
+### Verified (post-fix browser audit — all passing)
+| Brand | Products | Images | Status |
+|-------|----------|--------|--------|
+| Wisdom | 5,062 | ✓ (GCS proxy, ~8s warm-up) | ✓ |
+| Vinci Play | 1,096 | ✓ (external CDN) | ✓ |
+| Berliner Seilfabrik | 466 | ✓ (GCS proxy) | ✓ |
+| Eurotramp | 80 | ✓ (GCS proxy) | ✓ |
+| Rampline | 54 | ✓ (GCS proxy) | ✓ |
+| 4soft | 391 | ✓ (GCS proxy) | ✓ |
+| Vortex Aquatics | 521 | ✓ (GCS proxy) | ✓ |
+
+### Known issues (not blocking)
+- **Cross-brand series badges**: Brands with `hasCollections: true` (Vinci, Berliner, 4soft, Vortex) all show the same 56 series badges from ALL brands. Medusa's `store/collections` API returns all collections regardless of the publishable key's sales channel scope. Fix: scope collections to the sales channel in Medusa, or filter client-side by handle prefix.
+- **Vortex product count 521 vs 272**: Vortex Sales Channel appears to include products from multiple brands. Needs sales channel audit in Medusa Admin.
+- **Image warm-up latency**: `/_next/image` optimization on 512Mi Cloud Run takes ~5–8s for first-load batches of 48 large (2560×2560) images. Consider bumping storefront memory to 1Gi or pre-warming.
 
 ## [2.5.0] - 2026-05-05
 
