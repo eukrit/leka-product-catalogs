@@ -1,16 +1,35 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useMemo, useRef } from "react"
+
+export interface CategoryNode {
+  id: string
+  name: string
+  handle: string
+  children: Array<{ id: string; name: string; handle: string }>
+}
 
 interface FilterBarProps {
   search: string
   onSearchChange: (value: string) => void
-  categories: Array<{ id: string; name: string; handle: string }>
+  /** Top-level categories. Each may contain `children`. Brands without children render a flat list. */
+  categories: CategoryNode[]
   selectedCategory: string
   onCategoryChange: (value: string) => void
+  selectedSubcategory: string
+  onSubcategoryChange: (value: string) => void
   selectedAge: string
   onAgeChange: (value: string) => void
   showAgeFilter: boolean
+  /** Wisdom-style filters (price + material). */
+  showMaterialFilter?: boolean
+  materials?: string[]
+  selectedMaterial?: string
+  onMaterialChange?: (value: string) => void
+  showPriceFilter?: boolean
+  minPrice?: string
+  maxPrice?: string
+  onPriceChange?: (min: string, max: string) => void
   onReset: () => void
 }
 
@@ -20,9 +39,19 @@ export function FilterBar({
   categories,
   selectedCategory,
   onCategoryChange,
+  selectedSubcategory,
+  onSubcategoryChange,
   selectedAge,
   onAgeChange,
   showAgeFilter,
+  showMaterialFilter = false,
+  materials = [],
+  selectedMaterial = "",
+  onMaterialChange,
+  showPriceFilter = false,
+  minPrice = "",
+  maxPrice = "",
+  onPriceChange,
   onReset,
 }: FilterBarProps) {
   const debounceRef = useRef<ReturnType<typeof setTimeout>>(null)
@@ -38,6 +67,16 @@ export function FilterBar({
       if (ref) clearTimeout(ref)
     }
   }, [])
+
+  const selectedNode = useMemo(
+    () => categories.find((c) => c.id === selectedCategory),
+    [categories, selectedCategory]
+  )
+  const subcategories = selectedNode?.children ?? []
+  const hasAnySubcategories = useMemo(
+    () => categories.some((c) => c.children.length > 0),
+    [categories]
+  )
 
   return (
     <div className="flex flex-wrap items-center gap-3 mb-6">
@@ -55,7 +94,10 @@ export function FilterBar({
       {/* Category */}
       <select
         value={selectedCategory}
-        onChange={(e) => onCategoryChange(e.target.value)}
+        onChange={(e) => {
+          onCategoryChange(e.target.value)
+          onSubcategoryChange("")
+        }}
         className="px-4 py-2.5 bg-white border border-gray-200 rounded-button text-sm focus:outline-none focus:border-leka-purple"
       >
         <option value="">All Categories</option>
@@ -65,6 +107,27 @@ export function FilterBar({
           </option>
         ))}
       </select>
+
+      {/* Sub-category — only render when at least one parent has children */}
+      {hasAnySubcategories && (
+        <select
+          value={selectedSubcategory}
+          onChange={(e) => onSubcategoryChange(e.target.value)}
+          disabled={!selectedNode || subcategories.length === 0}
+          className="px-4 py-2.5 bg-white border border-gray-200 rounded-button text-sm focus:outline-none focus:border-leka-purple disabled:bg-gray-50 disabled:text-gray-400"
+        >
+          <option value="">
+            {selectedNode && subcategories.length > 0
+              ? "All Sub-categories"
+              : "Sub-category (pick a category first)"}
+          </option>
+          {subcategories.map((sub) => (
+            <option key={sub.id} value={sub.id}>
+              {sub.name}
+            </option>
+          ))}
+        </select>
+      )}
 
       {/* Age Group (Vinci-specific) */}
       {showAgeFilter && (
@@ -79,6 +142,48 @@ export function FilterBar({
           <option value="6+">6+ years</option>
           <option value="14+">14+ years</option>
         </select>
+      )}
+
+      {/* Material (Wisdom-specific) */}
+      {showMaterialFilter && materials.length > 0 && (
+        <select
+          value={selectedMaterial}
+          onChange={(e) => onMaterialChange?.(e.target.value)}
+          className="px-4 py-2.5 bg-white border border-gray-200 rounded-button text-sm focus:outline-none focus:border-leka-purple"
+        >
+          <option value="">All Materials</option>
+          {materials.map((m) => (
+            <option key={m} value={m}>
+              {m}
+            </option>
+          ))}
+        </select>
+      )}
+
+      {/* Price range (Wisdom-specific) */}
+      {showPriceFilter && (
+        <div className="flex items-center gap-1 text-sm">
+          <span className="text-gray-400 mr-1">USD</span>
+          <input
+            type="number"
+            inputMode="numeric"
+            min="0"
+            placeholder="Min"
+            value={minPrice}
+            onChange={(e) => onPriceChange?.(e.target.value, maxPrice)}
+            className="w-24 px-3 py-2.5 bg-white border border-gray-200 rounded-button text-sm focus:outline-none focus:border-leka-purple"
+          />
+          <span className="text-gray-300">–</span>
+          <input
+            type="number"
+            inputMode="numeric"
+            min="0"
+            placeholder="Max"
+            value={maxPrice}
+            onChange={(e) => onPriceChange?.(minPrice, e.target.value)}
+            className="w-24 px-3 py-2.5 bg-white border border-gray-200 rounded-button text-sm focus:outline-none focus:border-leka-purple"
+          />
+        </div>
       )}
 
       {/* Reset */}

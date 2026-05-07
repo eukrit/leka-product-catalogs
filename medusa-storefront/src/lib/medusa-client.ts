@@ -18,6 +18,7 @@ export const BRANDS: Record<string, BrandConfig> = {
     publishableKey: process.env.NEXT_PUBLIC_WISDOM_PUBLISHABLE_KEY || "",
     hasCollections: false,
     hasPricing: true,
+    hasMaterialFilter: true,
     productCount: 5062,
   },
   vinci: {
@@ -113,6 +114,8 @@ export interface BrandConfig {
   publishableKey: string
   hasCollections: boolean
   hasPricing: boolean
+  /** Show price-range + material filters in the catalog filter bar (Wisdom only today). */
+  hasMaterialFilter?: boolean
   productCount?: number
   // Prefix used to filter Medusa collections to this brand's own series.
   // undefined = show all unprefixed collections (i.e. Vinci — no vendor prefix).
