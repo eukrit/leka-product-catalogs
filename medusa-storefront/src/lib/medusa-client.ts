@@ -91,6 +91,17 @@ export const BRANDS: Record<string, BrandConfig> = {
     productCount: 521,
     collectionPrefix: "vortex-",
   },
+  weplay: {
+    name: "WePlay",
+    slug: "weplay",
+    description: "Sensory & Educational Play Equipment",
+    country: "Taiwan",
+    color: "#0099cc",
+    publishableKey: process.env.NEXT_PUBLIC_WEPLAY_PUBLISHABLE_KEY || "",
+    hasCollections: false,
+    hasPricing: false,
+    productCount: 0,
+  },
 }
 
 export interface BrandConfig {

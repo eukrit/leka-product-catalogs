@@ -6,6 +6,7 @@ import { medusa, getBrand, type BrandConfig } from "@/lib/medusa-client"
 import { ProductCard } from "@/components/product-card"
 import { FilterBar } from "@/components/filter-bar"
 import { SeriesBadges } from "@/components/series-badges"
+import { getBrandCI } from "@/lib/brand-ci"
 
 const PAGE_SIZE = 48
 
@@ -36,6 +37,28 @@ interface MedusaProduct {
 export default function CatalogPageClient({ brandSlug }: { brandSlug: string }) {
   const brand = getBrand(brandSlug)
   if (!brand) notFound()
+
+  // Stub brands (no Sales Channel yet, productCount === 0) skip Medusa fetches
+  // and render a "coming soon" placeholder using the brand's CI.
+  if (brand.productCount === 0 && !brand.publishableKey) {
+    const ci = getBrandCI(brandSlug)
+    return (
+      <main className="max-w-3xl mx-auto px-4 sm:px-6 py-16 sm:py-24 text-center">
+        <h1
+          className="text-3xl sm:text-4xl font-bold mb-4 font-heading"
+          style={{ color: "var(--brand-primary)" }}
+        >
+          {brand.name}
+        </h1>
+        <p className="text-leka-navy text-base sm:text-lg mb-2">
+          {ci?.tagline ?? brand.description}
+        </p>
+        <p className="text-gray-500 text-sm">
+          Catalog coming soon — products are being onboarded into Leka.
+        </p>
+      </main>
+    )
+  }
 
   return <CatalogContent brand={brand} />
 }

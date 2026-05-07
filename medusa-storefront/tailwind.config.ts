@@ -13,9 +13,16 @@ const config: Config = {
           amber: "#FFA900",
           "red-orange": "#E54822",
         },
+        brand: {
+          primary: "var(--brand-primary, #8003FF)",
+          secondary: "var(--brand-secondary, #182557)",
+          ink: "var(--brand-ink, #182557)",
+          paper: "var(--brand-paper, #FFFFFF)",
+        },
       },
       fontFamily: {
         sans: ["Manrope", "system-ui", "sans-serif"],
+        heading: ["var(--brand-heading, Manrope)", "Manrope", "system-ui", "sans-serif"],
       },
       borderRadius: {
         card: "16px",

@@ -57,12 +57,24 @@ export function ProductCard({ product, brandSlug, showPrice }: ProductCardProps)
           </div>
         )}
         {seriesName && (
-          <span className="absolute top-2 left-2 badge badge-navy text-xs px-2 py-0.5">
+          <span
+            className="absolute top-2 left-2 badge text-xs px-2 py-0.5"
+            style={{
+              backgroundColor: "var(--brand-primary)",
+              color: "var(--brand-paper, #fff)",
+            }}
+          >
             {seriesName}
           </span>
         )}
         {isNew && (
-          <span className="absolute top-2 right-2 badge badge-amber text-xs px-2 py-0.5">
+          <span
+            className="absolute top-2 right-2 badge text-xs px-2 py-0.5"
+            style={{
+              backgroundColor: "var(--brand-secondary)",
+              color: "var(--brand-paper, #fff)",
+            }}
+          >
             NEW
           </span>
         )}
@@ -98,7 +110,10 @@ export function ProductCard({ product, brandSlug, showPrice }: ProductCardProps)
             </span>
           )}
           {showPrice && price && (
-            <span className="text-sm font-semibold text-leka-purple">
+            <span
+              className="text-sm font-semibold"
+              style={{ color: "var(--brand-primary)" }}
+            >
               ${(price.amount / 100).toFixed(2)}
             </span>
           )}
