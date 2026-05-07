@@ -2,6 +2,66 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.5.2] - 2026-05-07
+
+### Fixed — Cross-brand series badges showing on wrong brand pages
+
+**Root cause**: `medusa.store.collection.list()` returns all 56 collections globally regardless of the publishable API key's sales channel scope. Every brand with `hasCollections: true` was displaying all 56 collection badges from all vendors.
+
+- **Symptom**: Berliner Seilfabrik page showed Vinci series (Active, Arena, Castillo, etc.) alongside its own Berliner series — and vice versa for all 4 collection brands.
+- **Root cause**: Medusa's store collections API does not filter by sales channel — it returns all collections in the database regardless of which publishable key is used in the request header.
+- **Fix**: Added `collectionPrefix?: string` to `BrandConfig` interface and set a per-brand prefix. After the API fetch, collections are filtered client-side:
+  - `berliner-*` → Berliner Seilfabrik (15 collections → 18 after handle audit)
+  - `4soft-*` → 4soft (3 collections)
+  - `vortex-*` → Vortex Aquatics (8 collections)
+  - `undefined` (Vinci) → all handles that do NOT start with any other vendor's prefix (27 Vinci collections)
+- **Files changed**: `medusa-storefront/src/lib/medusa-client.ts`, `medusa-storefront/src/app/[brand]/catalog-content.tsx`
+- **Deployed**: Cloud Build `25da4b21`, storefront revision `accae83`
+
+### Verified (post-fix browser audit — all collection brands passing)
+| Brand | Series shown | Correct |
+|-------|-------------|---------|
+| Vinci Play | 27 (Vinci-only handles) | ✓ |
+| Berliner Seilfabrik | 18 (all "Berliner *") | ✓ |
+| 4soft | 3 (4soft Tunnels & Furniture, 3D Elements, 2D Graphics) | ✓ |
+| Vortex Aquatics | 8 (all "Vortex — *") | ✓ |
+
+---
+
+## [2.5.1] - 2026-05-07
+
+### Fixed — CORS misconfiguration blocking all brand catalogs + Vortex missing key
+
+**Root cause: all brand catalog pages showed "No products found"** due to two independent bugs found during a full frontend status audit.
+
+#### Bug 1 — STORE_CORS pointed to raw Cloud Run URL (critical, global)
+- **Symptom**: Every brand page returned 0 products. Browser console: `TypeError: Failed to fetch`. `no-cors` mode returned opaque response confirming CORS — not network — was failing.
+- **Root cause**: `STORE_CORS` env var on `leka-medusa-backend` was set to `https://leka-medusa-storefront-538978391890.asia-southeast1.run.app` (the raw Cloud Run URL from initial deploy), not the custom domain `https://catalogs.leka.studio`. The backend was never redeployed after the custom domain was configured. Preflight OPTIONS returned empty `Access-Control-Allow-Origin`.
+- **Fix**: `gcloud run services update leka-medusa-backend --update-env-vars STORE_CORS=https://catalogs.leka.studio,AUTH_CORS=...` — new revision `00012-6sh`. CORS now returns `Access-Control-Allow-Origin: https://catalogs.leka.studio`.
+- **Also note**: `cloudbuild.yaml` backend deploy step already had the correct `STORE_CORS=https://catalogs.leka.studio` — the stale value was from a pre-custom-domain manual deploy.
+
+#### Bug 2 — NEXT_PUBLIC_VORTEX_PUBLISHABLE_KEY missing from storefront build
+- **Symptom**: Vortex catalog specifically showed 0 products (would have been visible after Bug 1 was fixed).
+- **Root cause**: `NEXT_PUBLIC_VORTEX_PUBLISHABLE_KEY` build-arg was missing from both `cloudbuild.yaml` and `cloudbuild-storefront-only.yaml`. The key resolved to `""` in the bundle, so the Medusa store API rejected the auth.
+- **Fix**: Added `--build-arg NEXT_PUBLIC_VORTEX_PUBLISHABLE_KEY=pk_df5eb6c3d0032c6baebe18bec7b3be1cdb024ba5efd3833cac2b8517432c56dc` (retrieved from Medusa Admin API) to both Cloud Build files. Redeployed storefront (Cloud Build `fa376c2b`, revision `00011-mkn`).
+- **Files changed**: `cloudbuild.yaml`, `cloudbuild-storefront-only.yaml`
+
+### Verified (post-fix browser audit — all passing)
+| Brand | Products | Images | Status |
+|-------|----------|--------|--------|
+| Wisdom | 5,062 | ✓ (GCS proxy, ~8s warm-up) | ✓ |
+| Vinci Play | 1,096 | ✓ (external CDN) | ✓ |
+| Berliner Seilfabrik | 466 | ✓ (GCS proxy) | ✓ |
+| Eurotramp | 80 | ✓ (GCS proxy) | ✓ |
+| Rampline | 54 | ✓ (GCS proxy) | ✓ |
+| 4soft | 391 | ✓ (GCS proxy) | ✓ |
+| Vortex Aquatics | 521 | ✓ (GCS proxy) | ✓ |
+
+### Known issues (not blocking)
+- **Cross-brand series badges**: Brands with `hasCollections: true` (Vinci, Berliner, 4soft, Vortex) all show the same 56 series badges from ALL brands. Medusa's `store/collections` API returns all collections regardless of the publishable key's sales channel scope. Fix: scope collections to the sales channel in Medusa, or filter client-side by handle prefix.
+- **Vortex product count 521 vs 272**: Vortex Sales Channel appears to include products from multiple brands. Needs sales channel audit in Medusa Admin.
+- **Image warm-up latency**: `/_next/image` optimization on 512Mi Cloud Run takes ~5–8s for first-load batches of 48 large (2560×2560) images. Consider bumping storefront memory to 1Gi or pre-warming.
+
 ## [2.5.0] - 2026-05-05
 
 ### Added — Phase 4: image bucket migration + private-via-proxy serving

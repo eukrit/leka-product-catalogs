@@ -117,7 +117,14 @@ function CatalogContent({ brand }: { brand: BrandConfig }) {
             { limit: 100 },
             { "x-publishable-api-key": brand.publishableKey } as any
           ) as any
-          setCollections(cols || [])
+          // Filter to only this brand's collections.
+          // Brands with a collectionPrefix match that prefix; Vinci (undefined) gets
+          // all handles that don't start with any other vendor's known prefix.
+          const OTHER_PREFIXES = ["berliner-", "4soft-", "vortex-"]
+          const filtered = brand.collectionPrefix !== undefined
+            ? (cols || []).filter((c: { handle: string }) => c.handle.startsWith(brand.collectionPrefix!))
+            : (cols || []).filter((c: { handle: string }) => !OTHER_PREFIXES.some(p => c.handle.startsWith(p)))
+          setCollections(filtered)
         }
       } catch (err) {
         console.error("Failed to load filters:", err)

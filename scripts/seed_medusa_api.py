@@ -12,9 +12,11 @@ import time
 import argparse
 import requests
 
-BACKEND_URL = "https://leka-medusa-backend-538978391890.asia-southeast1.run.app"
-ADMIN_EMAIL = "admin@leka.studio"
-ADMIN_PASSWORD = "LekaAdmin2026"
+BACKEND_URL = os.environ.get("MEDUSA_BACKEND_URL", "https://leka-medusa-backend-538978391890.asia-southeast1.run.app")
+ADMIN_EMAIL = os.environ.get("MEDUSA_ADMIN_EMAIL", "admin@leka.studio")
+ADMIN_PASSWORD = os.environ.get("MEDUSA_ADMIN_PASSWORD")
+if not ADMIN_PASSWORD:
+    sys.exit("Error: MEDUSA_ADMIN_PASSWORD env var is required. Set it before running this script.")
 MIGRATION_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "migration")
 
 WISDOM_SC = "sc_01KNKTHC0B7KFEDSZ3NNM49JQW"
