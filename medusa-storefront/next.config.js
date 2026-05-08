@@ -63,6 +63,16 @@ const nextConfig = {
         hostname: "www.vortex-intl.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "vortex-intl.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "cdn.vortex-intl.com",
+        pathname: "/**",
+      },
     ],
   },
   async redirects() {

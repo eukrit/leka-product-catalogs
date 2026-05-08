@@ -92,10 +92,38 @@ def _find_product_by_handle(token: str, handle: str) -> dict | None:
     return products[0] if products else None
 
 
+_IMG_PENALTY = re.compile(
+    r"(certificate|cert|tuv|iso|ce[-_]?mark|compliance|drawing|dwg|cad|blueprint"
+    r"|wireframe|line[-_]?art|spec|specification|tech(?:nical)?|datasheet|data[-_]?sheet"
+    r"|dim|dimension|measure|measurement|footprint|footing|installation"
+    r"|plan|elevation|side[-_]?view|top[-_]?view|front[-_]?view|section"
+    r"|sketch|schematic|diagram)",
+    re.IGNORECASE,
+)
+_IMG_REWARD = re.compile(r"(hero|main|primary|cover|featured|photo|render|lifestyle)", re.IGNORECASE)
+_IMG_FILE_BAD = re.compile(r"\.(svg|dwg|dxf|pdf)(\?|$)", re.IGNORECASE)
+
+
+def _score_image(url: str) -> int:
+    score = 0
+    if _IMG_PENALTY.search(url):
+        score -= 60
+    if _IMG_FILE_BAD.search(url):
+        score -= 30
+    if _IMG_REWARD.search(url):
+        score += 25
+    return score
+
+
+def _sort_images(urls: list[str]) -> list[str]:
+    return sorted(urls, key=lambda u: -_score_image(u))
+
+
 def _build_create_payload(slug: str, sc_id: str, p: dict) -> dict:
     """Map a vendors product doc → Medusa create-product payload."""
     handle = p["handle"]
-    images = [img["url"] for img in (p.get("images") or []) if img.get("url")]
+    raw_images = [img["url"] for img in (p.get("images") or []) if img.get("url")]
+    images = _sort_images(raw_images)
     fob = (p.get("pricing") or {}).get("fob_usd")
     metadata = {
         "brand_slug": slug,
