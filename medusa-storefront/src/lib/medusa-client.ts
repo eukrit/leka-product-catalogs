@@ -18,8 +18,7 @@ export const BRANDS: Record<string, BrandConfig> = {
     publishableKey: process.env.NEXT_PUBLIC_WISDOM_PUBLISHABLE_KEY || "",
     hasCollections: false,
     hasPricing: true,
-    hasMaterialFilter: true,
-    productCount: 5062,
+    productCount: 5056,
   },
   vinci: {
     name: "Vinci Play",
@@ -30,9 +29,7 @@ export const BRANDS: Record<string, BrandConfig> = {
     publishableKey: process.env.NEXT_PUBLIC_VINCI_PUBLISHABLE_KEY || "",
     hasCollections: true,
     hasPricing: false,
-    productCount: 1096,
-    // Vinci collections have no vendor prefix — filter out all other vendors' prefixed handles
-    collectionPrefix: undefined,
+    productCount: 1095,
   },
   berliner: {
     name: "Berliner Seilfabrik",
@@ -44,7 +41,6 @@ export const BRANDS: Record<string, BrandConfig> = {
     hasCollections: true,
     hasPricing: false,
     productCount: 466,
-    collectionPrefix: "berliner-",
   },
   eurotramp: {
     name: "Eurotramp",
@@ -78,7 +74,6 @@ export const BRANDS: Record<string, BrandConfig> = {
     hasCollections: true,
     hasPricing: false,
     productCount: 391,
-    collectionPrefix: "4soft-",
   },
   vortex: {
     name: "Vortex Aquatics",
@@ -89,19 +84,7 @@ export const BRANDS: Record<string, BrandConfig> = {
     publishableKey: process.env.NEXT_PUBLIC_VORTEX_PUBLISHABLE_KEY || "",
     hasCollections: true,
     hasPricing: false,
-    productCount: 521,
-    collectionPrefix: "vortex-",
-  },
-  weplay: {
-    name: "WePlay",
-    slug: "weplay",
-    description: "Sensory & Educational Play Equipment",
-    country: "Taiwan",
-    color: "#0099cc",
-    publishableKey: process.env.NEXT_PUBLIC_WEPLAY_PUBLISHABLE_KEY || "",
-    hasCollections: false,
-    hasPricing: false,
-    productCount: 0,
+    productCount: 272,
   },
 }
 
@@ -114,14 +97,7 @@ export interface BrandConfig {
   publishableKey: string
   hasCollections: boolean
   hasPricing: boolean
-  /** Show price-range + material filters in the catalog filter bar (Wisdom only today). */
-  hasMaterialFilter?: boolean
   productCount?: number
-  // Prefix used to filter Medusa collections to this brand's own series.
-  // undefined = show all unprefixed collections (i.e. Vinci — no vendor prefix).
-  // "" = show nothing (hasCollections: false brands never reach this).
-  // "berliner-" / "4soft-" / "vortex-" = strict prefix match.
-  collectionPrefix?: string
 }
 
 export function getBrand(slug: string): BrandConfig | undefined {

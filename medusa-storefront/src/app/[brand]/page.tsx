@@ -1,6 +1,5 @@
 import type { Metadata } from "next"
 import { getBrand } from "@/lib/medusa-client"
-import { getBrandCI } from "@/lib/brand-ci"
 import CatalogPageClient from "./catalog-content"
 
 interface Props {
@@ -11,7 +10,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { brand: brandSlug } = await params
   const brand = getBrand(brandSlug)
   if (!brand) return {}
-  const ci = getBrandCI(brandSlug)
 
   return {
     title: `${brand.name} — Leka Product Catalogs`,
@@ -21,7 +19,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: `${brand.description} from ${brand.country}`,
       type: "website",
     },
-    ...(ci?.favicon ? { icons: { icon: ci.favicon } } : {}),
   }
 }
 
