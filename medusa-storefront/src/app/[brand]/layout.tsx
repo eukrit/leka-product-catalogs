@@ -35,10 +35,14 @@ export default function BrandLayout({
   const brandStyle = {
     "--brand-primary": ci?.palette.primary ?? brand.color,
     "--brand-secondary": ci?.palette.secondary ?? brand.color,
+    "--brand-accent": ci?.palette.accent ?? ci?.palette.secondary ?? brand.color,
     "--brand-ink": ci?.palette.ink ?? "#182557",
     "--brand-paper": ci?.palette.paper ?? "#FFFFFF",
     "--brand-heading": ci?.fonts.headingVar
       ? `var(${ci.fonts.headingVar})`
+      : "Manrope",
+    "--brand-body": ci?.fonts.bodyVar
+      ? `var(${ci.fonts.bodyVar})`
       : "Manrope",
   } as React.CSSProperties
 

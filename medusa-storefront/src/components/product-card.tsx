@@ -1,5 +1,9 @@
+"use client"
+
+import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
+import { pickPrimaryImage } from "@/lib/image-scoring"
 
 interface ProductCardProps {
   product: {
@@ -25,7 +29,8 @@ interface ProductCardProps {
 
 export function ProductCard({ product, brandSlug, showPrice }: ProductCardProps) {
   const variant = product.variants?.[0]
-  const imageUrl = product.thumbnail || product.images?.[0]?.url
+  const initial = pickPrimaryImage(product.thumbnail, product.images)
+  const [imageUrl, setImageUrl] = useState<string | null>(initial)
   const price = variant?.prices?.find((p) => p.currency_code === "usd") || variant?.prices?.find((p) => p.currency_code === "nok")
   const meta = product.metadata || {} as Record<string, unknown>
   const specs = (meta.specifications || {}) as Record<string, unknown>
@@ -50,22 +55,18 @@ export function ProductCard({ product, brandSlug, showPrice }: ProductCardProps)
             fill
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 16vw"
             className="object-contain p-2 group-hover:scale-105 transition-transform"
+            onError={() => setImageUrl(null)}
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center text-4xl text-gray-200">
-            📦
+          <div className="w-full h-full flex items-center justify-center">
+            <Image
+              src="/placeholder-product.svg"
+              alt=""
+              width={56}
+              height={56}
+              className="opacity-40"
+            />
           </div>
-        )}
-        {seriesName && (
-          <span
-            className="absolute top-2 left-2 badge text-xs px-2 py-0.5"
-            style={{
-              backgroundColor: "var(--brand-primary)",
-              color: "var(--brand-paper, #fff)",
-            }}
-          >
-            {seriesName}
-          </span>
         )}
         {isNew && (
           <span
@@ -82,7 +83,18 @@ export function ProductCard({ product, brandSlug, showPrice }: ProductCardProps)
 
       {/* Body */}
       <div className="p-3">
-        <div className="text-xs text-gray-400 font-mono">{variant?.sku}</div>
+        <div className="flex items-center justify-between gap-2">
+          <div className="text-xs text-gray-400 font-mono truncate">{variant?.sku}</div>
+          {seriesName && (
+            <div
+              className="text-xs truncate max-w-[60%]"
+              style={{ color: "var(--brand-primary)" }}
+              title={seriesName}
+            >
+              {seriesName}
+            </div>
+          )}
+        </div>
         <div className="text-sm font-semibold text-leka-navy mt-0.5 line-clamp-2 group-hover:text-leka-purple transition-colors">
           {product.title}
         </div>

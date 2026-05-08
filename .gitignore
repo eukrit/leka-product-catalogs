@@ -79,3 +79,6 @@ Thumbs.db
 .claude/debug/
 .claude/downloads/
 .claude/telemetry/
+
+# Next.js TS incremental build cache
+*.tsbuildinfo

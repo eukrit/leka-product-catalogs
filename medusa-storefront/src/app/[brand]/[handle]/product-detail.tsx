@@ -6,6 +6,7 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import { medusa, getBrand } from "@/lib/medusa-client"
 import { addToCart } from "@/lib/cart"
+import { sortImagesByScore } from "@/lib/image-scoring"
 
 interface ProductDetail {
   id: string
@@ -95,7 +96,7 @@ export default function ProductDetailClient({
   const sourceUrl = (meta.source_url || meta.vendor_url) as string | undefined
   const price = variant?.prices?.find((p) => p.currency_code === "usd") || variant?.prices?.find((p) => p.currency_code === "nok")
   const priceCurrency = price?.currency_code?.toUpperCase() || "USD"
-  const images = product.images || []
+  const images = sortImagesByScore(product.images || [])
 
   const specEntries = [
     ["Length", (variant?.length || meta.length_cm) ? `${variant?.length || meta.length_cm} cm` : null],

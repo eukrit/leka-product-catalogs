@@ -1,114 +1,163 @@
-// Per-brand corporate identity (CI) registry — logos, favicons, palettes, fonts.
-// Sourced from each vendor's public homepage on 2026-05-07. See BUILD_LOG / CHANGELOG.
-// Keep entries small — one record per brand slug. Logos live under /public/brands/<slug>/.
+// Per-brand corporate identity (CI) registry — palettes, fonts, logo treatment.
+//
+// Palettes pulled directly from each vendor's production stylesheet (or
+// homepage HTML when CSS-vars are inlined). Confidence + evidence per brand
+// recorded inline so future audits can re-verify without re-running the
+// scrape. Last verified 2026-05-08.
+//
+// Substitutions: vendors using Adobe Typekit / proprietary display faces
+// (Berliner = myriad-pro, Vinci = VolteRounded, Rampline = motiva-sans,
+// WePlay = CJK system stack) cannot be redistributed via next/font/google,
+// so we pick the closest open-source alternative and keep the heading
+// distinct from body where the vendor does. Documented per brand so a
+// swap to a self-hosted file is a one-line change.
 
 export interface BrandPalette {
   primary: string
   secondary: string
+  accent?: string  // optional pop/CTA — Vortex hot-pink, Eurotramp red, etc.
   ink: string
   paper: string
 }
 
 export interface BrandFonts {
-  // CSS variable name set by next/font (e.g. "--font-poppins").
-  // Mapped to --brand-heading at the brand layout root so Tailwind's font-heading uses it.
+  // Heading next/font CSS variable. Mapped to --brand-heading at the brand
+  // layout root so Tailwind's `font-heading` utility resolves correctly.
   headingVar: string
-  // Body stays Manrope across all brands for consistent readability.
+  // Body next/font CSS variable. Mapped to --brand-body at the brand layout
+  // root. When omitted, body inherits the global Manrope.
+  bodyVar?: string
 }
 
 export interface BrandCI {
   slug: string
-  logo?: string         // /brands/<slug>/logo.{svg,png,jpg}; falls back to letter badge if undefined
+  logo?: string         // /brands/<slug>/logo.{svg,png,jpg}; falls back to letter badge
   logoSquare?: string   // optional icon mark
-  logoBg?: string       // optional fill for the logo wrapper (used when logo is white-on-transparent)
-  favicon?: string      // /brands/<slug>/favicon.{png,ico}
+  logoBg?: string       // wrapper fill — required when logo is white-on-transparent
+  favicon?: string
   palette: BrandPalette
   fonts: BrandFonts
   tagline: string
 }
 
 export const BRAND_CI: Record<string, BrandCI> = {
+  // Wisdom — site unreachable during 2026-05-08 audit (wisdomtoys.cn /
+  // wisdomtoys.com both ECONNREFUSED). Keeping previous theme as a
+  // placeholder. TODO: in-browser inspection of wisdomtoys.cn or vendor
+  // press kit to lock real palette + logo.
   wisdom: {
     slug: "wisdom",
     logo: "/brands/wisdom/logo.png",
     favicon: "/brands/wisdom/favicon.png",
     palette: {
-      primary: "#FCB822",
-      secondary: "#1D3A8A",
+      primary: "#FCB822",     // PLACEHOLDER — unverified
+      secondary: "#1D3A8A",   // PLACEHOLDER — unverified
       ink: "#0F1B3D",
       paper: "#FFFFFF",
     },
     fonts: { headingVar: "--font-poppins" },
     tagline: "Commercial playground equipment built for durability and safety.",
   },
+
+  // Vinci Play — verified from vinci-play.com/template/css/main.css:
+  // #8A3492 purple (56 hits, dominant) + #FBBE2F yellow (16) + #E9592C
+  // orange accent (8). Heading is custom VolteRounded-Bold; substitute
+  // Montserrat for similar geometric weight. Body Open Sans matches.
   vinci: {
     slug: "vinci",
     logo: "/brands/vinci/logo-white.png",
-    logoBg: "#970260",
+    logoBg: "#8A3492",
     favicon: "/brands/vinci/favicon.png",
     palette: {
-      primary: "#970260",
-      secondary: "#182557",
-      ink: "#1A1A1A",
+      primary: "#8A3492",     // verified — corporate purple
+      secondary: "#FBBE2F",   // verified — secondary yellow
+      accent: "#E9592C",      // verified — orange CTA
+      ink: "#2B2B2B",         // verified
       paper: "#FFFFFF",
     },
-    fonts: { headingVar: "--font-montserrat" },
+    fonts: { headingVar: "--font-montserrat", bodyVar: "--font-open-sans" },
     tagline: "Playground equipment producer — Vinci Play.",
   },
+
+  // Berliner Seilfabrik — verified from app.css + homepage HTML.
+  // Primary is the dark teal #00534F (header/footer wordmark), with
+  // #00827A as the lighter pair and #E6F3F2 as section cream. Typekit
+  // serves myriad-pro; substitute Inter (closest open Myriad humanist).
   berliner: {
     slug: "berliner",
     logo: "/brands/berliner/logo.png",
     favicon: "/brands/berliner/favicon.png",
     palette: {
-      primary: "#00827A",
-      secondary: "#00534F",
+      primary: "#00534F",     // verified — dark teal (was secondary, swapped)
+      secondary: "#00827A",   // verified — lighter teal
+      accent: "#E6F3F2",      // verified — section cream tint
       ink: "#0E1F1E",
       paper: "#FFFFFF",
     },
-    fonts: { headingVar: "--font-roboto" },
+    fonts: { headingVar: "--font-inter", bodyVar: "--font-inter" },
     tagline: "Rope play equipment — Berliner Seilfabrik.",
   },
+
+  // Eurotramp — verified from style_0933.min.css:
+  // #0062AF corporate blue (92 hits) + #63727F slate (62) + #C80000 red
+  // accent (9). Mask-icon color also #0062AF. Roboto Condensed sitewide.
   eurotramp: {
     slug: "eurotramp",
     logo: "/brands/eurotramp/logo.svg",
     favicon: "/brands/eurotramp/favicon.png",
     palette: {
-      primary: "#0062AF",
-      secondary: "#6B9950",
-      ink: "#0E1B33",
+      primary: "#0062AF",     // verified — corporate blue
+      secondary: "#63727F",   // verified — slate (was wrong green #6B9950)
+      accent: "#C80000",      // verified — red emphasis
+      ink: "#010101",
       paper: "#FFFFFF",
     },
-    fonts: { headingVar: "--font-open-sans" },
-    tagline:
-      "Worldwide leading trampoline manufacturer with 50+ years of experience.",
+    fonts: { headingVar: "--font-roboto-condensed", bodyVar: "--font-roboto-condensed" },
+    tagline: "Worldwide leading trampoline manufacturer with 50+ years of experience.",
   },
+
+  // Rampline — verified from rampline.com/wp-content/themes/rampline/style.css.
+  // Distinctive lime + forest palette: #B5BC00 (button base, 8) + #2D5346
+  // forest (12) on cream paper #F2F2EE (24). Typekit serves motiva-sans;
+  // substitute Inter. Previous theme (navy + magenta) was completely wrong.
   rampline: {
     slug: "rampline",
     logo: "/brands/rampline/logo.svg",
     favicon: "/brands/rampline/favicon.png",
     palette: {
-      primary: "#182557",
-      secondary: "#970260",
-      ink: "#0E1633",
-      paper: "#FFFFFF",
+      primary: "#B5BC00",     // verified — lime CTA
+      secondary: "#2D5346",   // verified — dark forest
+      accent: "#CED600",      // verified — lime hover
+      ink: "#313131",
+      paper: "#F2F2EE",       // verified — warm off-white
     },
-    fonts: { headingVar: "--font-lato" },
+    fonts: { headingVar: "--font-inter", bodyVar: "--font-inter" },
     tagline:
       "Equipment for physical play, recreation and training challenging balance.",
   },
+
+  // 4soft — verified from app-frontend.css:
+  // #0089CF corporate blue (85 hits) + #CF0026 red (32) + #F99D1C orange
+  // accent (20). Heading Nunito + body Lato loaded from Google Fonts on
+  // their site. Previous theme had primary as orange — actually blue.
   "4soft": {
     slug: "4soft",
-    // No logo asset on 4soft.cz public homepage (SPA). Falls back to letter badge.
-    favicon: undefined,
+    favicon: undefined,        // SPA — header/favicon rendered client-side
     palette: {
-      primary: "#FFA900",
-      secondary: "#182557",
-      ink: "#1A1A1A",
+      primary: "#0089CF",     // verified — corporate blue (was wrong #FFA900)
+      secondary: "#CF0026",   // verified — corporate red
+      accent: "#F99D1C",      // verified — orange
+      ink: "#212529",
       paper: "#FFFFFF",
     },
-    fonts: { headingVar: "--font-nunito" },
+    fonts: { headingVar: "--font-nunito", bodyVar: "--font-lato" },
     tagline: "EPDM playground surfaces & 3D elements.",
   },
+
+  // Vortex Aquatic Structures — verified from main_4d2020b1.css:
+  // #153CBA blue (132 hits, .--primary border) + #FF33D4 signature
+  // hot-pink secondary (95) + #FFE000 yellow accent (11). Splashpad® is a
+  // registered trademark. Heading Work Sans + body Nunito on their site.
   vortex: {
     slug: "vortex",
     logo: "/brands/vortex/logo.svg",
@@ -116,28 +165,35 @@ export const BRAND_CI: Record<string, BrandCI> = {
     logoBg: "#153CBA",
     favicon: "/brands/vortex/favicon.png",
     palette: {
-      primary: "#153CBA",
-      secondary: "#FFE000",
-      ink: "#161A48",
+      primary: "#153CBA",     // verified — corporate blue
+      secondary: "#FF33D4",   // verified — signature hot-pink (was wrong #FFE000)
+      accent: "#FFE000",      // verified — yellow accent (demoted from secondary)
+      ink: "#000732",         // verified
       paper: "#FFFFFF",
     },
-    fonts: { headingVar: "--font-inter" },
+    fonts: { headingVar: "--font-work-sans", bodyVar: "--font-nunito" },
     tagline:
       "Splashpad® and aquatic play solutions for municipal parks and commercial destinations.",
   },
+
+  // WePlay — verified from weplay.com.tw/css/style.css:
+  // #C7161E corporate red (42 hits) + #F0831E orange (25) + #FED52B yellow
+  // accent (12). CJK heading stack ('微軟正黑體' / Microsoft JhengHei);
+  // substitute Nunito for Latin storefront. Previous theme had primary as
+  // cyan — actually red.
   weplay: {
     slug: "weplay",
     logo: "/brands/weplay/logo.jpg",
     favicon: "/brands/weplay/favicon.ico",
     palette: {
-      primary: "#0099CC",
-      secondary: "#F9A825",
-      ink: "#0E2A33",
+      primary: "#C7161E",     // verified — corporate red (was wrong #0099CC)
+      secondary: "#F0831E",   // verified — corporate orange
+      accent: "#FED52B",      // verified — yellow accent
+      ink: "#202020",
       paper: "#FFFFFF",
     },
-    fonts: { headingVar: "--font-nunito" },
-    tagline:
-      "Sensory and educational play equipment helping children develop character and self-esteem.",
+    fonts: { headingVar: "--font-nunito", bodyVar: "--font-nunito" },
+    tagline: "We play. We learn.",
   },
 }
 

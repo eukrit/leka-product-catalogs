@@ -7,6 +7,8 @@ import {
   Open_Sans,
   Poppins,
   Roboto,
+  Roboto_Condensed,
+  Work_Sans,
 } from "next/font/google"
 import "./globals.css"
 
@@ -52,6 +54,18 @@ const inter = Inter({
   variable: "--font-inter",
   display: "swap",
 })
+const robotoCondensed = Roboto_Condensed({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-roboto-condensed",
+  display: "swap",
+})
+const workSans = Work_Sans({
+  subsets: ["latin"],
+  weight: ["400", "600", "700", "800"],
+  variable: "--font-work-sans",
+  display: "swap",
+})
 
 export const metadata: Metadata = {
   title: "Leka Product Catalogs",
@@ -71,6 +85,8 @@ export default function RootLayout({
     lato.variable,
     nunito.variable,
     inter.variable,
+    robotoCondensed.variable,
+    workSans.variable,
   ].join(" ")
 
   return (
