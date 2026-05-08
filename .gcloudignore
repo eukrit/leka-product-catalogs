@@ -47,6 +47,8 @@ migration
 *.webp
 *.gif
 *.md
+# Keep storefront brand assets — needed by Next.js public/ folder.
+!medusa-storefront/public/brands/**
 PROJECT_INDEX.md
 BUILD_LOG.md
 CHANGELOG.md
