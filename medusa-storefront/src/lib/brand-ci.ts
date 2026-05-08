@@ -41,22 +41,25 @@ export interface BrandCI {
 }
 
 export const BRAND_CI: Record<string, BrandCI> = {
-  // Wisdom — site unreachable during 2026-05-08 audit (wisdomtoys.cn /
-  // wisdomtoys.com both ECONNREFUSED). Keeping previous theme as a
-  // placeholder. TODO: in-browser inspection of wisdomtoys.cn or vendor
-  // press kit to lock real palette + logo.
+  // Wisdom Playgrounds — verified in-browser at wisdomplaygroundsint.com on
+  // 2026-05-08 via Chrome DevTools color histogram + computed styles:
+  // rgb(31,74,131) = #1F4A83 navy (167 hits, dominant — header pill, hero
+  // bg, footer); rgb(251,190,47) = #FBBE2F amber (52 hits — logo "i" dot,
+  // "O" letter, accent buttons). Body font Roboto sitewide. Logo is a
+  // navy "Wi" mark + WISDOM wordmark with the second "O" rendered amber;
+  // the previous theme had primary/secondary swapped.
   wisdom: {
     slug: "wisdom",
     logo: "/brands/wisdom/logo.png",
     favicon: "/brands/wisdom/favicon.png",
     palette: {
-      primary: "#FCB822",     // PLACEHOLDER — unverified
-      secondary: "#1D3A8A",   // PLACEHOLDER — unverified
+      primary: "#1F4A83",     // verified — corporate navy
+      secondary: "#FBBE2F",   // verified — accent amber
       ink: "#0F1B3D",
       paper: "#FFFFFF",
     },
-    fonts: { headingVar: "--font-poppins" },
-    tagline: "Commercial playground equipment built for durability and safety.",
+    fonts: { headingVar: "--font-roboto", bodyVar: "--font-roboto" },
+    tagline: "Playground equipment built for durability and safety.",
   },
 
   // Vinci Play — verified from vinci-play.com/template/css/main.css:
