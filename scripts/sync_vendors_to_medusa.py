@@ -46,6 +46,8 @@ TIMEOUT = 60
 TOKEN_REFRESH_EVERY = 400  # products
 
 # slug → Medusa Sales Channel id (lifted from medusa-storefront/src/lib/medusa-client.ts).
+# When a slug is missing here, fall back to env LEKA_<SLUG>_SALES_CHANNEL_ID
+# so a freshly-created brand can be imported without an extra commit.
 BRAND_SALES_CHANNELS: dict[str, str] = {
     "wisdom":    "sc_01KNKTHC0B7KFEDSZ3NNM49JQW",
     "vinci":     "sc_01KNKTHC77716EPCE3E2BKAMQP",
@@ -54,7 +56,22 @@ BRAND_SALES_CHANNELS: dict[str, str] = {
     "eurotramp": "sc_01KNQAA3Y72W17B7CP2VQ93T3M",
     "rampline":  "sc_01KNQAA448RY0YPR51FNPM2TVA",
     "4soft":     "sc_01KNQAA4A8SF4ZT9S8N0AHGY3Y",
+    # weplay: SC id pending — set LEKA_WEPLAY_SALES_CHANNEL_ID after creating
+    # the channel in Medusa Admin, then move the value into this dict.
 }
+
+
+def _resolve_sales_channel(slug: str) -> str:
+    if slug in BRAND_SALES_CHANNELS:
+        return BRAND_SALES_CHANNELS[slug]
+    env_key = f"LEKA_{slug.upper()}_SALES_CHANNEL_ID"
+    sc_id = os.environ.get(env_key)
+    if not sc_id:
+        raise RuntimeError(
+            f"No Medusa sales-channel id known for brand '{slug}'. "
+            f"Add it to BRAND_SALES_CHANNELS or export {env_key}=sc_..."
+        )
+    return sc_id
 
 
 def _load_admin_credentials() -> tuple[str, str]:
@@ -163,7 +180,7 @@ def _update_variant_price(token: str, variant_id: str, fob_usd: float, existing_
 
 
 def sync_brand(slug: str, dry_run: bool, limit: int | None) -> dict:
-    sc_id = BRAND_SALES_CHANNELS[slug]
+    sc_id = _resolve_sales_channel(slug)
     db = firestore.Client(project=PROJECT, database=SRC_DB)
     log.info("[%s] reading vendors/%s/products (db=%s)", slug, slug, SRC_DB)
     docs = list(db.collection("vendors").document(slug).collection("products").stream())
@@ -259,8 +276,10 @@ def main() -> int:
 
     brands = list(BRAND_SALES_CHANNELS) if args.brand == "all" else [args.brand]
     for b in brands:
-        if b not in BRAND_SALES_CHANNELS:
-            log.error("unknown brand: %s", b)
+        try:
+            _resolve_sales_channel(b)
+        except RuntimeError as e:
+            log.error("%s", e)
             return 2
 
     mode = "DRY-RUN" if args.dry_run else "WRITE"

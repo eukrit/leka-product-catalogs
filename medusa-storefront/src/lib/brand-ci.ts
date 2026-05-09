@@ -179,24 +179,29 @@ export const BRAND_CI: Record<string, BrandCI> = {
       "Splashpad® and aquatic play solutions for municipal parks and commercial destinations.",
   },
 
-  // WePlay — verified from weplay.com.tw/css/style.css:
-  // #C7161E corporate red (42 hits) + #F0831E orange (25) + #FED52B yellow
-  // accent (12). CJK heading stack ('微軟正黑體' / Microsoft JhengHei);
-  // substitute Nunito for Latin storefront. Previous theme had primary as
-  // cyan — actually red.
+  // WePlay — verified in Chrome at weplay.com.tw on 2026-05-09 via computed-
+  // style histogram across 3,000 elements:
+  //   rgb(199,22,30)  = #C7161E red    (126 hits — dominant brand: nav links,
+  //                                     CTA buttons, hero accent script)
+  //   rgb(240,131,30) = #F0831E orange (34 hits — secondary, hero "We play"
+  //                                     gradient, accent outlines)
+  //   rgb(254,213,43) = #FED52B yellow (5 hits  — pop accent, cookie banner)
+  // Body font is the Bootstrap system stack (Roboto fallback) — for the
+  // storefront we substitute Nunito to match the playful rounded feel
+  // without locking to a system face. Tagline pulled from the homepage hero.
   weplay: {
     slug: "weplay",
     logo: "/brands/weplay/logo.jpg",
     favicon: "/brands/weplay/favicon.ico",
     palette: {
-      primary: "#C7161E",     // verified — corporate red (was wrong #0099CC)
+      primary: "#C7161E",     // verified — corporate red
       secondary: "#F0831E",   // verified — corporate orange
-      accent: "#FED52B",      // verified — yellow accent
-      ink: "#202020",
+      accent: "#FED52B",      // verified — yellow pop
+      ink: "#212529",         // verified — Bootstrap-default body ink
       paper: "#FFFFFF",
     },
     fonts: { headingVar: "--font-nunito", bodyVar: "--font-nunito" },
-    tagline: "We play. We learn.",
+    tagline: "We play, we learn — for the future.",
   },
 }
 
