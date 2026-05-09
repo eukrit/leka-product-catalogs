@@ -11,7 +11,11 @@ substitutions:
 
 options:
   logging: CLOUD_LOGGING_ONLY
-  machineType: E2_MEDIUM
+  # E2_HIGHCPU_8 (8 vCPU / 8 GB) — required for Medusa v2 backend (~19k-line
+  # lockfile, `medusa build` TypeScript compile) running in parallel with
+  # Next.js storefront docker build. E2_MEDIUM (1 vCPU / 4 GB) timed out
+  # every push from 2026-05-05 onward at `npm ci` for medusa-backend.
+  machineType: E2_HIGHCPU_8
 
 availableSecrets:
   secretManager:
