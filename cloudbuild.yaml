@@ -52,11 +52,15 @@ steps:
     args: ['push', '--all-tags', '$_AR_REPO/medusa-backend']
     waitFor: ['build-medusa-backend']
 
-  # Step 3: Run Medusa DB migrations (main branch only)
+  # Step 3: Run Medusa DB migrations (main branch only).
+  # Use `npm run db:migrate` (package.json script) rather than `npx medusa
+  # db:migrate` — npx couldn't resolve the `medusa` bin in the production
+  # image even though the package.json script does. `npm run` is what the
+  # Dockerfile already uses for `npm run build`, so this matches.
   - name: '$_AR_REPO/medusa-backend:$SHORT_SHA'
     id: db-migrate
-    entrypoint: npx
-    args: ['medusa', 'db:migrate']
+    entrypoint: npm
+    args: ['run', 'db:migrate']
     secretEnv: ['DATABASE_URL', 'REDIS_URL', 'COOKIE_SECRET', 'JWT_SECRET']
     waitFor: ['push-medusa-backend']
 
