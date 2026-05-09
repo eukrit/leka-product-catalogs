@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.8.5] - 2026-05-10
+
+### Fixed — Cloud Build `db-migrate` step (Missing script error since v2.8.3)
+- v2.8.3 changed step 3 from `npx medusa db:migrate` to `npm run db:migrate` but didn't account for entrypoint-override behavior: when Cloud Build runs a step with a custom `entrypoint`, the container CWD is `/workspace` (the host workspace mount), NOT the image's WORKDIR (`/app`). So `npm run db:migrate` ran in `/workspace` where no `package.json` exists → `npm error Missing script: "db:migrate"`.
+- Every build since 4e31de5 failed at this step, including the `feat(weplay)` merge (build `66cfff32`).
+- Fix: switch to `entrypoint: bash` + `args: ['-c', 'cd /app && npm run db:migrate']` so CWD is explicitly set inside the container before npm runs.
+
+### Files changed
+- `cloudbuild.yaml`
+
+---
+
 ## [2.8.4] - 2026-05-10
 
 ### Added — Weplay catalog live (path 1B: imaged subset)

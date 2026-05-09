@@ -59,8 +59,11 @@ steps:
   # Dockerfile already uses for `npm run build`, so this matches.
   - name: '$_AR_REPO/medusa-backend:$SHORT_SHA'
     id: db-migrate
-    entrypoint: npm
-    args: ['run', 'db:migrate']
+    # Custom entrypoint overrides the image's WORKDIR; without `cd /app` first,
+    # npm runs in /workspace where there's no package.json (v2.8.3 bug — every
+    # build since 4e31de5 failed `npm error Missing script: "db:migrate"`).
+    entrypoint: bash
+    args: ['-c', 'cd /app && npm run db:migrate']
     secretEnv: ['DATABASE_URL', 'REDIS_URL', 'COOKIE_SECRET', 'JWT_SECRET']
     waitFor: ['push-medusa-backend']
 
