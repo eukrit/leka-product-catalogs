@@ -56,8 +56,7 @@ BRAND_SALES_CHANNELS: dict[str, str] = {
     "eurotramp": "sc_01KNQAA3Y72W17B7CP2VQ93T3M",
     "rampline":  "sc_01KNQAA448RY0YPR51FNPM2TVA",
     "4soft":     "sc_01KNQAA4A8SF4ZT9S8N0AHGY3Y",
-    # weplay: SC id pending — set LEKA_WEPLAY_SALES_CHANNEL_ID after creating
-    # the channel in Medusa Admin, then move the value into this dict.
+    "weplay":    "sc_01KR6Z0VBSXWYZDVGF30EAP0EQ",
 }
 
 
@@ -127,9 +126,9 @@ def _build_create_payload(slug: str, sc_id: str, p: dict) -> dict:
         "title": p.get("name") or handle,
         "sku": p.get("item_code") or handle,
         "manage_inventory": False,
+        # Medusa v2 requires `prices` to be present even when empty.
+        "prices": [{"amount": int(round(fob * 100)), "currency_code": "usd"}] if fob else [],
     }
-    if fob:
-        variant["prices"] = [{"amount": int(round(fob * 100)), "currency_code": "usd"}]
 
     payload = {
         "title": p.get("name") or handle,
@@ -179,11 +178,15 @@ def _update_variant_price(token: str, variant_id: str, fob_usd: float, existing_
         log.warning("price update failed for variant %s: %s %s", variant_id, r.status_code, r.text[:200])
 
 
-def sync_brand(slug: str, dry_run: bool, limit: int | None) -> dict:
+def sync_brand(slug: str, dry_run: bool, limit: int | None, skip_no_images: bool = False) -> dict:
     sc_id = _resolve_sales_channel(slug)
     db = firestore.Client(project=PROJECT, database=SRC_DB)
     log.info("[%s] reading vendors/%s/products (db=%s)", slug, slug, SRC_DB)
     docs = list(db.collection("vendors").document(slug).collection("products").stream())
+    if skip_no_images:
+        before = len(docs)
+        docs = [d for d in docs if (d.to_dict() or {}).get("images")]
+        log.info("[%s] --skip-no-images: kept %d / %d products with images", slug, len(docs), before)
     if limit:
         docs = docs[:limit]
     log.info("[%s] %d products to sync", slug, len(docs))
@@ -272,6 +275,9 @@ def main() -> int:
                     help="Brand slug or 'all' (one of: %s, all)" % ", ".join(BRAND_SALES_CHANNELS))
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--limit", type=int, default=None, help="Process only first N products (smoke test).")
+    ap.add_argument("--skip-no-images", action="store_true",
+                    help="Skip products whose images[] is empty. Used for Weplay path 1B "
+                         "(only sync the ~100 products that have URL-pattern-matched photos).")
     args = ap.parse_args()
 
     brands = list(BRAND_SALES_CHANNELS) if args.brand == "all" else [args.brand]
@@ -287,7 +293,7 @@ def main() -> int:
 
     grand: dict[str, int] = {"total": 0, "created": 0, "updated": 0, "priced": 0, "errors": 0}
     for slug in brands:
-        s = sync_brand(slug, args.dry_run, args.limit)
+        s = sync_brand(slug, args.dry_run, args.limit, skip_no_images=args.skip_no_images)
         for k, v in s.items():
             grand[k] += v
         time.sleep(1)
