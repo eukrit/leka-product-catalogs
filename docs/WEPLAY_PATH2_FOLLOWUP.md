@@ -1,6 +1,6 @@
 # Weplay Path 2 — image association for the remaining 1,095 products
 
-**Status:** OPEN — captured 2026-05-10 after Path 1B (`v2.8.4`) shipped 100 imaged Weplay products.
+**Status:** OPEN — Path 2 investigation 2026-05-10 confirmed local data alone cannot unlock new products. A live re-crawl is required.
 
 ## What's done (Path 1B, v2.8.4)
 
@@ -14,12 +14,34 @@ The upstream scrape stored 4,770 photos in `vendors/weplay/attachments/*` but ne
 
 Roughly 500 of the 1,095 un-imaged products have AI-inferred non-SKU IDs (`00B`, `3D-CRYSTAL-PUZZLE`, `4CM-SOFTWOOD-BLOCKS-152-PCS`) that no URL pattern can ever match. The other ~600 have plausible SKUs (`KB0001`, `EM5502`) but the corresponding `/Products/<XX>/<SKU>/` folders simply weren't crawled.
 
+## Path 2 attempts (2026-05-10) — what was tried and what we learned
+
+### Attempt A1: directory listing crawl (FAILED)
+Probed `https://www.e-weplay.com.tw/UserFiles/images/Products/<XX>/<SKU>/` for 12 unmatched real-SKU products (AT0002, ED0001, EM5502, EM5504, EM5513, KB0001, KB0007, KB0008, KB0020, KB1300, etc.). All returned 404 — the web server doesn't expose Apache-style directory listings. Path A1 only works if you already know the exact image filename, which is the join we're trying to recover.
+
+### Attempt A2: parse cached HTML pages for SKU↔image join
+The vendor scrape stored 1,453 cached HTML pages in `gs://ai-agents-go-vendors/weplay/pages/<sha>.html`. These ARE real product detail pages from `e-weplay.com.tw` (REQUEST_ID URLs, Chinese titles like "Weplay 萬象簡易組"). Each page references the SKU via image URLs in the body like `<img src=".../UserFiles/images/Products/KM/KM2000/6800KM2000.1-034-10.jpg">`.
+
+Built `scripts/enrich_weplay_attachments_from_pages.py` (since deleted — see git history at the time of writing). Heuristic: for each page, the "primary SKU" is whatever appears in `/Products/XX/SKU/` URLs (cap at 3 to skip category pages). Cross-reference all other `<img>` URLs on the page (including the opaque-named `/public/files/product/thumb/Bxxxx.jpg` thumbs) to that SKU.
+
+**Findings — and why we did NOT apply this:**
+- 1,453 pages scanned → 285 had a unique primary SKU (1–3 folders) → 95 unique SKU keys discovered
+- 1,449 attachments newly linkable to those 95 SKUs
+- BUT: the 95 page-derived SKU keys overlap **0** of the 144 draft products with real-SKU `item_code` values. They overlap **68 of the 100 already-active products** (subset; the 100 had 95 unique URL-encoded SKU folders to begin with).
+- 27 of the 95 page SKUs (KC1801, KC2008, KC2802, etc.) reference products that don't exist in our Firestore at all — they were missed by the upstream extractor.
+
+**Conclusion:** the cached pages cover only the same narrow slice of the catalog the URL-encoded attachments already covered. Running this enrichment would (a) add 1,449 mostly-low-res opaque thumb URLs to product cards that already have 3–10 high-res images each — adding noise, not value — and (b) unlock ZERO new products. So the script was abandoned.
+
+The fundamental gap: out of 5,266 `product_detail` pages catalogued in `vendors/weplay/site_structure/*`, only 1,453 were actually fetched and cached. The missing ~3,800 pages are presumably what would link the 1,095 draft products to their photos.
+
 ## Three paths forward (pick one when you tackle this)
 
-### A. Targeted re-crawl (recommended, lowest cost/highest fidelity)
-For each of the ~600 un-imaged real-SKU products, fetch `https://www.e-weplay.com.tw/UserFiles/images/Products/<XX>/<SKU>/` directly (the prefix is the first two letters of the SKU). Store new photos as `attachments` docs with `sha`, `gcs_path`, and **importantly** a new field `linked_skus: [<SKU>]` so the join is explicit. Then re-run the shaping pass + sync. Should resolve ~600 of the 1,095 cleanly.
+### A. Targeted re-crawl of the 3,800 missing product_detail pages (recommended)
+The site_structure already enumerates 5,266 `product_detail` URLs (REQUEST_ID-style URLs on `e-weplay.com.tw`); only 1,453 were cached. Re-run a crawler over the missing 3,800 URLs, fetch the HTML, and re-run the same `enrich_weplay_attachments_from_pages.py` heuristic on the *full* corpus. This time, the SKU folders found should overlap with the 144 draft real-SKU products. Once attachments carry `linked_skus`, re-run `scripts/shape_weplay_to_medusa_schema.py` (one-line tweak in `build_attachment_index` to also accept `linked_skus`) + `scripts/sync_vendors_to_medusa.py --brand=weplay --skip-no-images`.
 
-The ~500 AI-inferred-SKU products need a separate decision — either delete them as scrape noise, or hand-curate.
+Direct directory listings (Attempt A1 above) do NOT work — must crawl the per-product detail pages.
+
+The ~500 AI-inferred-SKU products (`00B`, `3D-CRYSTAL-PUZZLE`, etc.) need a separate decision — they have no real catalog SKU and likely need to be deleted as scrape noise or hand-curated.
 
 ### B. Vision-based image→product matching
 Use Gemini Vision to look at each of the 4,389 unmatched photos and match them to product names + descriptions. Estimate ~$30–60 in Vertex calls. Higher false-match risk; treat as a fallback only after path A.
