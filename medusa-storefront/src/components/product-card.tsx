@@ -29,8 +29,8 @@ interface ProductCardProps {
 
 export function ProductCard({ product, brandSlug, showPrice }: ProductCardProps) {
   const variant = product.variants?.[0]
-  const initialImage = pickPrimaryImage(product.thumbnail, product.images)
-  const [imageUrl, setImageUrl] = useState<string | null>(initialImage)
+  const initial = pickPrimaryImage(product.thumbnail, product.images)
+  const [imageUrl, setImageUrl] = useState<string | null>(initial)
   const price = variant?.prices?.find((p) => p.currency_code === "usd") || variant?.prices?.find((p) => p.currency_code === "nok")
   const meta = product.metadata || {} as Record<string, unknown>
   const specs = (meta.specifications || {}) as Record<string, unknown>
@@ -69,7 +69,13 @@ export function ProductCard({ product, brandSlug, showPrice }: ProductCardProps)
           </div>
         )}
         {isNew && (
-          <span className="absolute top-2 right-2 badge badge-amber text-xs px-2 py-0.5">
+          <span
+            className="absolute top-2 right-2 badge text-xs px-2 py-0.5"
+            style={{
+              backgroundColor: "var(--brand-secondary)",
+              color: "var(--brand-paper, #fff)",
+            }}
+          >
             NEW
           </span>
         )}
@@ -80,7 +86,11 @@ export function ProductCard({ product, brandSlug, showPrice }: ProductCardProps)
         <div className="flex items-center justify-between gap-2">
           <div className="text-xs text-gray-400 font-mono truncate">{variant?.sku}</div>
           {seriesName && (
-            <div className="text-xs text-gray-500 truncate max-w-[60%]" title={seriesName}>
+            <div
+              className="text-xs truncate max-w-[60%]"
+              style={{ color: "var(--brand-primary)" }}
+              title={seriesName}
+            >
               {seriesName}
             </div>
           )}
@@ -112,7 +122,10 @@ export function ProductCard({ product, brandSlug, showPrice }: ProductCardProps)
             </span>
           )}
           {showPrice && price && (
-            <span className="text-sm font-semibold text-leka-purple">
+            <span
+              className="text-sm font-semibold"
+              style={{ color: "var(--brand-primary)" }}
+            >
               ${(price.amount / 100).toFixed(2)}
             </span>
           )}

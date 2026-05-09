@@ -50,8 +50,6 @@ export function pickPrimaryImage(
       best = candidates[i]
     }
   }
-  // If every candidate scored worse than the original thumbnail tie, prefer the
-  // explicit thumbnail to preserve admin overrides.
   if (thumbnail && scoreImage(thumbnail) === bestScore) return thumbnail
   return best
 }
