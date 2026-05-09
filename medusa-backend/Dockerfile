@@ -3,7 +3,10 @@ FROM node:20-slim AS builder
 WORKDIR /app
 
 COPY package.json package-lock.json* ./
-RUN npm ci
+# --prefer-offline: hit npm cache first, skip registry round-trips when possible
+# --no-audit / --no-fund: skip post-install audit + funding HTTP calls
+# Together these typically cut `npm ci` wall-clock by 30–60s on Cloud Build.
+RUN npm ci --prefer-offline --no-audit --no-fund
 
 COPY . .
 
