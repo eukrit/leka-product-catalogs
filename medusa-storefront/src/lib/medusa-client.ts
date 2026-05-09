@@ -99,9 +99,9 @@ export const BRANDS: Record<string, BrandConfig> = {
     country: "Taiwan",
     color: "#C7161E",
     publishableKey: process.env.NEXT_PUBLIC_WEPLAY_PUBLISHABLE_KEY || "",
-    hasCollections: true,
+    hasCollections: false,
     hasPricing: false,
-    productCount: 0,
+    productCount: 100,
   },
 }
 

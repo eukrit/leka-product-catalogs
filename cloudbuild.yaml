@@ -122,6 +122,8 @@ steps:
       - 'NEXT_PUBLIC_4SOFT_PUBLISHABLE_KEY=pk_01650dad46210b8e881569841f33c7b0e3a536deb417e8109e69774bfc3ae77f'
       - '--build-arg'
       - 'NEXT_PUBLIC_VORTEX_PUBLISHABLE_KEY=pk_df5eb6c3d0032c6baebe18bec7b3be1cdb024ba5efd3833cac2b8517432c56dc'
+      - '--build-arg'
+      - 'NEXT_PUBLIC_WEPLAY_PUBLISHABLE_KEY=pk_2b18dd5670830702993445fe43f4269a406baab0b20f85cad15d43b9b9a9efbb'
 
   # Step 6: Push storefront image
   - name: 'gcr.io/cloud-builders/docker'
