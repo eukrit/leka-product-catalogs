@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.8.3] - 2026-05-09
+
+### Fixed — Cloud Build `db-migrate` step (npx could not resolve `medusa` bin)
+- `cloudbuild.yaml` Step 3: `entrypoint: npx; args: [medusa, db:migrate]` → `entrypoint: npm; args: [run, db:migrate]`. After [2.8.2] unblocked the worker, the next pipeline run got further: build/push backend SUCCESS in ~3 min, but `db-migrate` failed with `npm error could not determine executable to run`. The Medusa v2 production image apparently doesn't expose `medusa` directly via `npx`, but the `db:migrate` script in `package.json` works. The Dockerfile already uses `npm run build` for the same reason.
+
+---
+
 ## [2.8.2] - 2026-05-09
 
 ### Fixed — Cloud Build pipeline (10+ consecutive timeouts since 2026-05-05)
