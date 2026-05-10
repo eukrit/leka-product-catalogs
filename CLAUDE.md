@@ -11,12 +11,12 @@
 - GitHub Repo: https://github.com/eukrit/leka-product-catalogs
 - GCP Project ID: ai-agents-go
 - GCP Project Number: 538978391890
-- Cloud Run Services: leka-medusa-backend (Medusa v2), leka-medusa-storefront (Next.js)
+- Cloud Run Services: leka-medusa-backend (Medusa v2). **Storefront moved to `eukrit/leka-website` (`catalogs/`, Cloud Run service `leka-catalogs`) on 2026-05-10 (v2.9.0).**
 - Region: asia-southeast1
 - Service Account: claude@ai-agents-go.iam.gserviceaccount.com
 - Artifact Registry: asia-southeast1-docker.pkg.dev/ai-agents-go/leka-product-catalogs
 - Backend: Medusa Commerce v2 (TypeScript/Node.js)
-- Frontend: Next.js 15 (React/TypeScript)
+- Frontend: Next.js 15 (React/TypeScript) — lives in `eukrit/leka-website/catalogs/` since v2.9.0
 - Database: Cloud SQL PostgreSQL 15
 - Cache: Memorystore Redis
 

@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.9.0] - 2026-05-10
+
+### Removed — Next.js storefront migrated to `eukrit/leka-website`
+
+The multi-brand storefront moved to the leka-website repo on 2026-05-10 (commit
+`1cf31cf`, leka-website v0.7.0). It now ships from `catalogs/` in that repo,
+deploys to a new Cloud Run service `leka-catalogs`, and serves
+`https://catalogs.leka.studio/` (verified live, all 4 brand routes 200, TLS
+provisioned). The old service `leka-medusa-storefront` is cold-scaled
+(`min=0, max=1`) for 24h rollback safety; full deletion follows once the new
+stack is validated.
+
+This repo now owns only the Medusa v2 backend (`medusa-backend/`) and the
+data-prep / vendor-shaping scripts. Backend → Storefront contract unchanged:
+storefront still calls `https://leka-medusa-backend-538978391890.asia-southeast1.run.app`
+via per-brand publishable keys (which moved to leka-website's
+`cloudbuild-catalogs.yaml`).
+
+### Removed
+- `medusa-storefront/` — full Next.js app, public assets, configs, Dockerfile.
+- `cloudbuild-storefront.yaml`, `cloudbuild-storefront-only.yaml` — orphan pipelines.
+- `cloudbuild.yaml` Steps 5–7 (build-storefront, push-storefront, deploy-storefront)
+  + the `medusa-storefront` images output. Backend pipeline (Steps 1–4) is unchanged.
+
+### Out of scope (still TODO in this repo)
+- `medusa-backend/Dockerfile` — Medusa v2 `.medusa/server` structure mismatch.
+- `cloudbuild.yaml` `db-migrate` step — currently broken; backend deploys remain
+  red until this is fixed (independent of the storefront migration).
+- Wisdom palette audit (referenced by leka-website, not this repo).
+
 ## [2.8.5] - 2026-05-10
 
 ### Fixed — Cloud Build `db-migrate` step (Missing script error since v2.8.3)
