@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.9.1] - 2026-05-10
+
+### Verified — backend pipeline green end-to-end
+
+Manually submitted `cloudbuild.yaml` against `medusa-backend/` to validate the
+v2.8.5 db-migrate fix had actually been exercised — it had not, because no
+Cloud Build trigger exists for this repo (the storefront's build was driven
+manually too). Build [`5628a71c-3485-47dd-bf29-4eb99fdeefa4`](https://console.cloud.google.com/cloud-build/builds;region=asia-southeast1/5628a71c-3485-47dd-bf29-4eb99fdeefa4?project=538978391890):
+4m3s, **SUCCESS** through all four steps (build / push / db-migrate / deploy).
+Backend image `medusa-backend:fixmigratetest` is now serving on Cloud Run
+service `leka-medusa-backend`. Storefront at `https://catalogs.leka.studio/`
+continues to call this backend — no client-visible change.
+
+### Added
+- **Cloud Build trigger `deploy-leka-medusa-backend`** — watches `main` branch
+  on `eukrit/leka-product-catalogs`, build config `cloudbuild.yaml`, included
+  files `medusa-backend/**` + `cloudbuild.yaml`. So future backend changes
+  auto-deploy the same way the storefront now does. Service account
+  `claude@ai-agents-go.iam.gserviceaccount.com` runs the build.
+
+### Out of scope (still TODO)
+- `medusa-backend/Dockerfile` — Medusa v2 `.medusa/server` structure mismatch.
+  The fact that builds pass and the runtime works suggests the mismatch is
+  cosmetic / partial; flagged as a separate task to clean up the layered
+  COPY in stage 2 and confirm `.medusa/server` is the canonical location.
+- Wisdom palette audit (lives in `eukrit/leka-website`).
+
 ## [2.9.0] - 2026-05-10
 
 ### Removed — Next.js storefront migrated to `eukrit/leka-website`
