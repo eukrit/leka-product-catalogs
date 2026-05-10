@@ -19,6 +19,15 @@ Roughly 500 of the 1,095 un-imaged products have AI-inferred non-SKU IDs (`00B`,
 ### Attempt A1: directory listing crawl (FAILED)
 Probed `https://www.e-weplay.com.tw/UserFiles/images/Products/<XX>/<SKU>/` for 12 unmatched real-SKU products (AT0002, ED0001, EM5502, EM5504, EM5513, KB0001, KB0007, KB0008, KB0020, KB1300, etc.). All returned 404 — the web server doesn't expose Apache-style directory listings. Path A1 only works if you already know the exact image filename, which is the join we're trying to recover.
 
+### Attempt A3: re-crawl missing site_structure URLs (FAILED)
+After A2's diagnostic, tried the obvious next step: fetch the ~3,800 `product_detail` URLs in `vendors/weplay/site_structure/*` that aren't cached. Findings from a 5-URL pilot (2026-05-10):
+
+- Of 4,063 missing URLs labelled `product_detail`, ~2,400 are actually image URLs (`.jpg`) that the upstream extractor miscategorized; ~1,400 are real `e-weplay.com.tw/mod/product/index.php?REQUEST_ID=…` page URLs.
+- All 5 page URLs returned **HTTP 200, 51-52 KB, 0 SKU markers, 0 `/Products/XX/SKU/` image URLs**. Page `<title>` is `商品一覽` ("Product List") — every URL falls through to the default category-listing page rather than a specific product detail.
+- Likely root cause: the original scrape worked because it had session cookies / JS-rendered content; raw HTTP without that infrastructure all redirects to the index. The REQUEST_IDs encode `cGFnZT1kZXRhaWwmUE…` (base64 "page=detail&PE...") but the server appears to require additional state to render the actual product.
+
+So A3 needs either a headless browser (Playwright/Puppeteer) that can execute the page's JS, OR a recursive crawl from category pages that maintains valid session state. Both are real scraping projects beyond a quick script. Pilot script deleted.
+
 ### Attempt A2: parse cached HTML pages for SKU↔image join
 The vendor scrape stored 1,453 cached HTML pages in `gs://ai-agents-go-vendors/weplay/pages/<sha>.html`. These ARE real product detail pages from `e-weplay.com.tw` (REQUEST_ID URLs, Chinese titles like "Weplay 萬象簡易組"). Each page references the SKU via image URLs in the body like `<img src=".../UserFiles/images/Products/KM/KM2000/6800KM2000.1-034-10.jpg">`.
 
@@ -36,10 +45,17 @@ The fundamental gap: out of 5,266 `product_detail` pages catalogued in `vendors/
 
 ## Three paths forward (pick one when you tackle this)
 
-### A. Targeted re-crawl of the 3,800 missing product_detail pages (recommended)
-The site_structure already enumerates 5,266 `product_detail` URLs (REQUEST_ID-style URLs on `e-weplay.com.tw`); only 1,453 were cached. Re-run a crawler over the missing 3,800 URLs, fetch the HTML, and re-run the same `enrich_weplay_attachments_from_pages.py` heuristic on the *full* corpus. This time, the SKU folders found should overlap with the 144 draft real-SKU products. Once attachments carry `linked_skus`, re-run `scripts/shape_weplay_to_medusa_schema.py` (one-line tweak in `build_attachment_index` to also accept `linked_skus`) + `scripts/sync_vendors_to_medusa.py --brand=weplay --skip-no-images`.
+### A. Headless-browser recursive re-crawl (recommended)
+The 3,800 missing `product_detail` URLs in site_structure are actually unreachable via plain HTTP (Attempt A3 above) — they all fall through to the category-listing page. Need a headless-browser crawl (Playwright/Puppeteer) starting from `https://www.e-weplay.com.tw/` that:
+1. Walks the category menus (`?REQUEST_ID=FwtEDBkMWXJrLV4BcnJ*` URLs visible in cached pages' navbar HTML),
+2. Follows pagination,
+3. Extracts each product detail page with full JS execution,
+4. Saves HTML to `gs://ai-agents-go-vendors/weplay/pages/<sha>.html`,
+5. Writes attachments (or updates existing attachment docs) with `linked_skus: [...]` based on `/Products/XX/SKU/` image references on each page.
 
-Direct directory listings (Attempt A1 above) do NOT work — must crawl the per-product detail pages.
+Then run `scripts/shape_weplay_to_medusa_schema.py` (one-line tweak to also accept `linked_skus` in `build_attachment_index`) + `scripts/sync_vendors_to_medusa.py --brand=weplay --skip-no-images`.
+
+Estimate: 1-2 days of work. Probably belongs in a fresh repo (`weplay-recrawler`) rather than this catalog repo.
 
 The ~500 AI-inferred-SKU products (`00B`, `3D-CRYSTAL-PUZZLE`, etc.) need a separate decision — they have no real catalog SKU and likely need to be deleted as scrape noise or hand-curated.
 
