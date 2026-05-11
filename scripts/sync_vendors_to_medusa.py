@@ -108,11 +108,31 @@ def _find_product_by_handle(token: str, handle: str) -> dict | None:
     return products[0] if products else None
 
 
+def _build_variant_prices(pricing: dict) -> list[dict]:
+    """Build the variant.prices array from a pricing dict.
+
+    Preference order:
+      1. retail_thb / retail_usd / retail_eur (any subset) → push each present
+         currency (Vinci landed-cost pipeline writes all three).
+      2. fob_usd → push USD only (legacy path for other brands).
+      3. empty list (Medusa v2 still requires the key to exist).
+    """
+    prices: list[dict] = []
+    for key, ccy in (("retail_thb", "thb"), ("retail_usd", "usd"), ("retail_eur", "eur")):
+        amt = pricing.get(key)
+        if amt:
+            prices.append({"amount": int(round(amt * 100)), "currency_code": ccy})
+    if not prices and pricing.get("fob_usd"):
+        prices.append({"amount": int(round(pricing["fob_usd"] * 100)), "currency_code": "usd"})
+    return prices
+
+
 def _build_create_payload(slug: str, sc_id: str, p: dict) -> dict:
     """Map a vendors product doc → Medusa create-product payload."""
     handle = p["handle"]
     images = [img["url"] for img in (p.get("images") or []) if img.get("url")]
-    fob = (p.get("pricing") or {}).get("fob_usd")
+    pricing = p.get("pricing") or {}
+    fob = pricing.get("fob_usd")
     metadata = {
         "brand_slug": slug,
         "item_code": p.get("item_code"),
@@ -127,7 +147,7 @@ def _build_create_payload(slug: str, sc_id: str, p: dict) -> dict:
         "sku": p.get("item_code") or handle,
         "manage_inventory": False,
         # Medusa v2 requires `prices` to be present even when empty.
-        "prices": [{"amount": int(round(fob * 100)), "currency_code": "usd"}] if fob else [],
+        "prices": _build_variant_prices(pricing),
     }
 
     payload = {
@@ -162,20 +182,38 @@ def _build_update_payload(p: dict) -> dict:
     }
 
 
-def _update_variant_price(token: str, variant_id: str, fob_usd: float, existing_price_id: str | None) -> None:
-    """Upsert USD price on a variant. Medusa stores amount in minor units."""
-    amount = int(round(fob_usd * 100))
-    body = {"prices": [{"amount": amount, "currency_code": "usd"}]}
-    if existing_price_id:
-        body["prices"][0]["id"] = existing_price_id
+def _update_variant_prices(token: str, product_id: str, variant_id: str, pricing: dict, existing_prices: list[dict]) -> bool:
+    """Upsert variant prices (THB+USD+EUR or USD-only) on a Medusa v2 variant.
+
+    `existing_prices` is the list of {id, currency_code} dicts already attached
+    to the variant so we can preserve the price ids that match our currencies
+    (Medusa upserts by id when present).
+    """
+    new_prices = _build_variant_prices(pricing)
+    if not new_prices:
+        return False
+    by_ccy = {(p.get("currency_code") or "").lower(): p.get("id") for p in (existing_prices or [])}
+    for price in new_prices:
+        existing_id = by_ccy.get(price["currency_code"])
+        if existing_id:
+            price["id"] = existing_id
+    body = {"prices": new_prices}
     r = requests.post(
-        f"{BACKEND}/admin/products/variants/{variant_id}",
+        f"{BACKEND}/admin/products/{product_id}/variants/{variant_id}",
         json=body,
         headers=_headers(token),
         timeout=TIMEOUT,
     )
     if r.status_code >= 400:
         log.warning("price update failed for variant %s: %s %s", variant_id, r.status_code, r.text[:200])
+        return False
+    return True
+
+
+def _update_variant_price(token: str, product_id: str, variant_id: str, fob_usd: float, existing_price_id: str | None) -> None:
+    """Legacy USD-only helper kept for callers that pass raw fob_usd."""
+    existing = [{"id": existing_price_id, "currency_code": "usd"}] if existing_price_id else []
+    _update_variant_prices(token, product_id, variant_id, {"fob_usd": fob_usd}, existing)
 
 
 def sync_brand(slug: str, dry_run: bool, limit: int | None, skip_no_images: bool = False) -> dict:
@@ -238,18 +276,13 @@ def sync_brand(slug: str, dry_run: bool, limit: int | None, skip_no_images: bool
                     log.warning("[%s] UPDATE %s failed: %s %s", slug, handle, r.status_code, r.text[:200])
                     errors += 1
                     continue
-                fob = (p.get("pricing") or {}).get("fob_usd")
-                if fob:
+                pricing = p.get("pricing") or {}
+                if pricing.get("retail_thb") or pricing.get("retail_usd") or pricing.get("fob_usd"):
                     variants = existing.get("variants") or []
                     if variants:
                         primary = variants[0]
-                        existing_price_id = None
-                        for pr in primary.get("prices") or []:
-                            if (pr.get("currency_code") or "").lower() == "usd":
-                                existing_price_id = pr.get("id")
-                                break
-                        _update_variant_price(token, primary["id"], fob, existing_price_id)
-                        priced += 1
+                        if _update_variant_prices(token, existing["id"], primary["id"], pricing, primary.get("prices") or []):
+                            priced += 1
             updated += 1
 
         if i % 100 == 0:

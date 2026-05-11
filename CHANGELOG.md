@@ -2,6 +2,64 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.10.0] - 2026-05-11
+
+### Added — Vinci Play landed-cost pricelist pipeline (THB + USD + EUR retail)
+
+End-to-end ingestion of the **2026-05-11 Vinci pricelist** (1,234 SKUs, EUR FOB
+Poland) → landed cost in THB → 40% gross margin retail in THB / USD / EUR →
+Medusa product variants. Replaces the previous USD-only pricing path for Vinci
+on `catalogs.leka.studio`.
+
+- **NEW** [vinci-catalog/import_pricelist.py](vinci-catalog/import_pricelist.py)
+  — orchestrator. Reads the EUR pricelist, joins to scraped dimensions in
+  [vinci-catalog/web-app/public/data/products_all.json](vinci-catalog/web-app/public/data/products_all.json),
+  computes packing CBM (installed L×W×H × 0.15 factor), and calls
+  `shipping-automation/mcp-server/cost_engine.estimate_landed_cost()`
+  (EU LCL Gdynia → LCB route) with **live Baltic-rate calibration** averaging
+  the static rate card with FBX-derived LCL estimate. Writes to
+  `vendors/vinci/products/{vinci-<lc-code>}.pricing.*` in Firestore (db `vendors`).
+- **Tiered min/max logistics %** (`LOGISTICS_TIERS`) — caps total logistics
+  cost as a % of FOB-in-THB by FOB band: < €500 → 80–250%, < €2,000 → 60–180%,
+  < €10,000 → 45–120%, ≥ €10,000 → 35–80%. Floor prevents small SKUs being
+  priced near-FOB despite carrying fixed clearance/last-mile costs; cap
+  clamps outliers where scraped installed dimensions wildly overstate
+  packing CBM. Audit fields `landed_thb_raw`, `logistics_pct`,
+  `logistics_clamp` preserved on every row.
+- **Live FX** — `fx_rates.get_fx_rates(buffer_pct=2)` resolves USD=32.89,
+  EUR=38.71 from exchangerate-api.com with a 2% buffer.
+- **MODIFIED** [scripts/sync_vendors_to_medusa.py](scripts/sync_vendors_to_medusa.py)
+  — new `_build_variant_prices()` returns up to 3 currencies when `pricing.retail_thb`,
+  `pricing.retail_usd`, `pricing.retail_eur` are set; legacy `fob_usd` USD-only
+  path preserved for other brands. **Bug fix:** variant update endpoint
+  corrected from `/admin/products/variants/{id}` (404'd) to
+  `/admin/products/{product_id}/variants/{variant_id}` per Medusa v2 API.
+
+### Numbers
+- **Match rate**: 899 / 1,234 SKUs (73%) priced via scraped-dimension CBM
+  (`match_strategy=exact`). 335 priced via flat 35% landed-cost uplift
+  (`match_strategy=flat_uplift`) — no scraped dimensions available.
+- **Tier clamp outcomes**: 696 clean / 346 floored (small SKUs lifted to
+  carry fixed costs) / 192 capped (outliers from oversized installed dims).
+- **Retail/EUR-THB ratio**: median 3.00× (was unbounded at 16.9× max before
+  tiering); p90 5.63×, max 5.83×.
+- **Firestore**: 915 product docs updated. 319 pricelist SKUs have no
+  matching `vendors/vinci/products/*` doc (out of scope here).
+
+### Reads from sibling repo (no edits there)
+- `shipping-automation/mcp-server/cost_engine.py` — `estimate_landed_cost`,
+  `ROUTE_PROFILES["europe"]["lcl"]`
+- `shipping-automation/mcp-server/fx_rates.py` — `get_fx_rates(buffer_pct)`
+- `shipping-automation/mcp-server/rate_feeds.py` — `get_fbx_index` for Baltic
+  rate calibration
+
+### Out of scope (follow-ups)
+- Empirical packing-CBM ingestion — pull Vinci invoices/packing lists from
+  Gmail/Drive into Firestore `vinci_shipments` to replace the 0.15 packing
+  factor with per-series ratios.
+- Create `vendors/vinci/products/*` docs for the 319 pricelist SKUs the
+  current scrape doesn't cover.
+
 ## [2.9.1] - 2026-05-10
 
 ### Verified — backend pipeline green end-to-end
