@@ -2,6 +2,47 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.11.0] - 2026-05-12
+
+### Added — Authoritative English content for Weplay catalog
+- New `scripts/scrape_weplay_en.py` — BFS crawler for the English variant of Weplay's product detail pages on `www.weplay.com.tw` (parameter `?lang=en`). The Chinese e-commerce host `e-weplay.com.tw` has no working language switch, but the parent corporate site does — and serves the same product detail pages with full English copy: title (`Weplay <product name>`), structured spec fields (`<span class="ftit">Item No.</span><span class="ftxt">KM1003</span>` style), product description paragraph (under a `Product Feature` header in `<div class="pdesc fold-desc">`), and image gallery URLs.
+- Probed and rejected three other EN sources first (recorded in [docs/WEPLAY_PATH2_FOLLOWUP.md](docs/WEPLAY_PATH2_FOLLOWUP.md) lineage):
+  1. `download/EN/Catalog/2025/` — Adobe Flash flipbook, JS-extracted text covers 2 of 188 pages
+  2. `e-weplay.com.tw?lang=en` — query param ignored, content stays Chinese
+  3. site_structure URL re-crawl — all return generic "商品一覽" listing
+- Crawl ran in 52s (121 pages, polite 300ms): **100 detail SKUs** found, all with rich EN description (avg ~400 chars), full specs dict (age, max load, weights, package size), and 8–11 image URLs each.
+
+### Updated — Firestore + Medusa with EN content
+- 157 `vendors/weplay/products/*` docs touched (covers 100 unique SKU folders × 1.57 variant docs avg). Merge writes:
+  - `name` ← EN scraped title (e.g. `Pile Balance Up`, `Brick Me`, `Squishy Tactile Shell`)
+  - `description` ← per-product EN feature paragraph
+  - `description_orig` ← previous Anthropic-generated description (audit/rollback)
+  - `name_zh` ← original `product_name` only when it contained CJK chars (preserved)
+  - `specs` ← `{age, maximum_load, product_weight, package_size, package_weight}`
+  - `spec_block` ← components / dimensions / country-of-origin paragraph
+  - `source_url_en` ← provenance
+  - `source_image_urls_en` ← upstream URLs (image ingest is a follow-up)
+- Re-ran `python scripts/sync_vendors_to_medusa.py --brand=weplay --skip-no-images` — 100/100 Medusa products updated to English titles + descriptions, 0 errors.
+
+### Fixed — `SKU_TOKEN_RE` word-boundary bug
+First writeback only touched 126 docs (and only `kb0304` got the EN content for the 5 spot-checked products). Root cause: `\b([A-Z]{2}[0-9]{4,})\b`. For an item code like `6800KM1003`, there's no word boundary between `0` and `K` (both are `\w`), so the regex didn't match the inner SKU. Fixed by removing `\b` boundaries — now matches `KM1003` inside `6800KM1003`. Re-ran writeback: 157 docs.
+
+### Fixed — Description anchor ("Product Feature" extraction)
+Initial parser fell back to the `<meta description>` tag, which is the same generic Weplay marketing boilerplate on every page. Switched to anchor on `Product Feature` header inside `<div class="pdesc fold-desc">`. Now every product gets its own per-product description.
+
+### Coverage
+- 58/67 actives covered with EN content (87%)
+- 31/143 drafts get EN name+desc (still draft until image ingest)
+- 9 actives not in EN catalog (keep prior AI-generated descriptions)
+- 3 catalog SKUs have no Firestore product (`KT2005B, KP5001, EM5501`)
+- 112 drafts not in EN nav at all
+
+### Files changed
+- `scripts/scrape_weplay_en.py` (new)
+- `CHANGELOG.md`
+
+---
+
 ## [2.10.0] - 2026-05-11
 
 ### Added — Vinci Play landed-cost pricelist pipeline (THB + USD + EUR retail)
