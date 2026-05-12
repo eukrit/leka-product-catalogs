@@ -2,6 +2,67 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.14.0] - 2026-05-12
+
+### Investigated — local Google-Drive Weplay catalogs (closes upstream-data debate)
+
+Mined `C:\Users\Eukrit\My Drive\Catalogs GO\WePlay Catalogs\` (5 PDF
+catalogs 2020–2026, 2 Excel pricelists, 2 quotation PDFs). Built
+`scripts/ingest_weplay_local_catalogs.py` to parse all text-extractable
+sources and merge into Firestore using the same source-priority writeback
+as the cached and flipbook scripts.
+
+#### Result
+113 unique SKUs found across local sources → 100 already had richer
+source data (live/cached/flipbook) → only **1 truly new write**
+(KP4003 "Weplay Twinkle Stones" — pulled from the 2021 Powen pricelist).
+
+#### Definitive finding on the "uncovered drafts"
+Of the 113 draft products with extractable SKU tokens that had no
+catalog source attached:
+  - **112 are scrape artifacts** — synthetic SKUs like `KC0007`–`KC0030`
+    that don't exist in ANY of the five PDF catalogs (2020-2026), the
+    Excel pricelists, or the 2020 quotations. Real Weplay numbering
+    jumps from `KC0001`–`KC0006` directly to `KC1801`/`KC2001`/`KC2802`,
+    so the entire `KC0007`–`KC0030` range is upstream pipeline noise.
+  - **1 (KP4003)** is real but discontinued, recovered from 2021
+    pricelist.
+
+These 112 ghost SKUs should be archived/deleted as a future cleanup —
+they're polluting the `vendors/weplay/products/*` collection but will
+never become real products.
+
+#### 40 catalog-only SKUs (legitimate gap)
+Local catalogs surfaced 40 real SKUs we don't have Firestore docs for:
+EM5501–EM5531 (Edusante line), KC1801/KC2008/KC2009 (Creative Mat /
+Puzzle Fun), KC2803–KC2805, KE0014/KE0015 (Cot), KE0311/KE0312 (Modern
+Ball Chair), KF0005 (Tricky Fish), KM4001/KM5514, KP0002 (Circular
+Balancing Board), and others. These could become new active products
+in a future pass — they have names + sometimes prices, just need image
+sources matched.
+
+#### Image-only PDFs skipped
+2025 (95p), 2020-2021 (83p), 2022-2023 (91p), and New Products 2021-2023
+(61p) PDFs have ≤135 chars/page (image-only). Vision OCR via Gemini
+would cost ~$30-50 across 330+ pages — deferred unless the 40
+catalog-only SKUs warrant it.
+
+### Files changed
+- `scripts/ingest_weplay_local_catalogs.py` (new)
+- `CHANGELOG.md`
+
+### Composite catalog state on `catalogs.leka.studio/weplay`
+- **149 active products** (no change from v2.13.0 — local sources
+  largely overlap)
+- 1 more product with EN content (KP4003, still draft until image
+  ingest)
+- Catalog growth path is now exhausted from automated EN sources;
+  further growth requires (a) bulk-creating Firestore docs for the 40
+  catalog-only SKUs + sourcing their images, or (b) Vision OCR on the
+  330+ image-only catalog pages.
+
+---
+
 ## [2.13.0] - 2026-05-12
 
 ### Added — Weplay coverage closes follow-ups: catalog 136 → 149 + cached/flipbook fallback sources
