@@ -2,6 +2,85 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.12.0] - 2026-05-12
+
+### Added — Weplay catalog grew 100 → 136 + kids-first card photos
+
+Three small data-pipeline scripts, each one shippable, that close out the
+Weplay onboarding asks (rewrite English content, lift drafts to active,
+make the storefront cards lifestyle-led).
+
+#### `scripts/ingest_weplay_images.py` (new)
+Walks every `vendors/weplay/products/*` doc whose `source_image_urls_en` is
+non-empty (set by `scrape_weplay_en.py` at v2.11.0). For each upstream URL:
+fetch, sha256-hash, upload to `gs://ai-agents-go-vendors/weplay/media/<sha>.<ext>`
+(skip when the sha-named blob already exists), then append
+`{url: <proxy>, sha: <sha>}` to `images[]` via the existing storefront
+proxy at `https://catalogs.leka.studio/api/i/weplay/media/<sha>.<ext>`.
+Only fills products that currently have NO `images[]` (--enrich-actives
+opts in to also widen actives).
+
+**Result:** 122 products had EN-page URLs available; 36 of those were
+`draft_no_images` and got promoted to `status: "active"` after the ingest.
+Upload count was zero — every sha was already in GCS from the original
+pipeline scrape, just unlinked from product docs. Re-sync to Medusa
+created the 36 new SKUs (Edusante line, Pattern Cubes, School Set,
+Anti Burst Ball, Baby and Toddler Set, etc.). Catalog grew **100 → 136**
+active Weplay products on `catalogs.leka.studio/weplay`.
+
+#### `scripts/vision_rank_weplay_images.py` (new)
+For each active product's `images[]`, ask Gemini 2.5 Flash to score each
+image 0-100 on "kids/users in scene with the product" + tag it with one
+of `kids_using | adults_using | lifestyle_no_people | packshot_white_bg |
+technical_drawing | certification | logo | other`. Caches `score_kids` +
+`tag_kids` per image so re-runs are free; reorders `images[]` desc by
+score. Batches images in groups of 5 per call (max_output_tokens=800,
+thinking_budget=0) — single-call multi-image was hitting JSON truncation
+at ~17 images.
+
+**Run** processed all 136 active products: 490 images scored across
+~190 batched calls, **67 products reordered, 58 had their primary photo
+change**. Tag distribution: `kids_using: 319`, `packshot_white_bg: 62`,
+`certification: 29`, `technical_drawing: 25`, others ~30. The remaining
+~460 images weren't scored — Gemini free-tier returned 429 on the back
+half of the run; second pass (`--rescore` not needed) will pick them up
+when quota resets. `_sort_by_score` puts unscored images at the end so
+the storefront still gets a lifestyle-first card today.
+
+API key pulled from Secret Manager (`gemini-api-key`); ~$2-3 spend for
+the run.
+
+#### `scripts/sync_weplay_thumbnails.py` (new)
+`sync_vendors_to_medusa.py`'s update path only refreshes title /
+description / metadata on existing products — not `images[]` or
+`thumbnail`. This script fills the gap for Weplay: pulls all 136 SC
+products from Medusa, compares against Firestore-side image order, and
+POSTs `{thumbnail, images[]}` updates where they diverged. Run pushed
+**59 thumbnail changes + 70 image-order changes** to Medusa. 0 errors.
+
+#### Composite outcome
+- `catalogs.leka.studio/weplay` now serves **136 cards** (was 100).
+- 58 of the 100 pre-existing products got new card thumbnails — the
+  technical-drawing / packshot photos are now buried in PDP gallery,
+  lifestyle/kids shots lead.
+- All 136 carry English titles + descriptions from `weplay.com.tw`.
+
+### Out of scope (small follow-ups)
+- Re-run `vision_rank_weplay_images.py` for the ~460 images that hit 429
+  — should free-tier reset within an hour. Idempotent.
+- Some Gemini responses invented tag variants (e.g.
+  `isolated_product_on_patterned_background`) instead of the rubric's
+  canonical labels. Sort-by-score still works; tag normalization can be
+  a one-liner if needed.
+- 9 active products not in the EN catalog still carry their AI-generated
+  EN descriptions (`KB1303, KB1307, KC0001, KC3001, KC3004, KP1001,
+  KP1002, KP1003, KT0003`).
+- 112 draft products with real-SKU `item_code` not reachable via the EN
+  nav — would need a different source (older catalog, Vision OCR of the
+  Flash flipbook page JPGs, or hand curation).
+
+---
+
 ## [2.11.0] - 2026-05-12
 
 ### Added — Authoritative English content for Weplay catalog
