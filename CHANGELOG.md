@@ -2,6 +2,66 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.13.0] - 2026-05-12
+
+### Added — Weplay coverage closes follow-ups: catalog 136 → 149 + cached/flipbook fallback sources
+
+Three small follow-up scripts that close out the v2.12.0 out-of-scope items
+(missing actives, unreachable drafts, unscored vision images).
+
+#### `scripts/scrape_weplay_cached.py` (new)
+Mines `gs://ai-agents-go-vendors/weplay/pages/*.html` (1,453 pages from
+the original scrape) for English product detail content the live
+crawler missed. Same parser as `scrape_weplay_en.py`; only writes when
+the doc lacks both `source_url_en` and `source_url_cached`.
+
+**Result:** 597 cached HTML pages parsed → 181 unique SKUs → 31 new
+Firestore writes. Recovered EN content for 4 of the 9 originally-missing
+actives (KB1303 Gym Ball, KB1307 Gym Roll, KC3001 Learning Cube, KC3004
+Stepping Shape) plus 27 more drafts. After re-running the existing
+ingest pipeline + Medusa sync: **+13 new active products promoted**.
+Catalog grew **136 → 149**.
+
+The remaining 5 missing actives (KC0001, KP1001, KP1002, KP1003, KT0003)
+aren't in any cached page — likely never crawled.
+
+#### `scripts/ocr_weplay_flipbook.py` (new)
+OCRs the 188-page Weplay EN 2025 Flash flipbook (one high-res JPG per
+page at `weplay.com.tw/download/EN/Catalog/2025/files/mobile/N.jpg`)
+via Gemini 2.5 Flash. Per-page prompt asks for every product card on
+the page as `{sku, name_en, description_en, age_range}`.
+
+**Result:** 257 SKUs extracted, 251 matched to Firestore docs, 248
+already had richer source data (live or cached) and were skipped, **3
+new writes** (KM1004 Balance Rocking Ice, KM1006 Honey Hills, KM1007
+Coral Adventure). 103 catalog SKUs found with no matching Firestore
+doc — could become new products in a future pass. Cost ~$2-3.
+
+The 116 originally-uncovered drafts are mostly OLDER products
+(`KB0001`, `KC0007` style) discontinued before the 2025 catalog — the
+flipbook doesn't help them. They'd need an older catalog edition or
+hand-curation.
+
+#### Vision rerun (no new script — `vision_rank_weplay_images.py --apply` again)
+Second pass picked up the ~460 images Gemini 429'd on first run.
+**+110 images scored, +15 reordered, +8 primary changes.** Cumulative
+totals across the two passes: 600 images scored, 82 products
+reordered, 66 new card thumbnails.
+
+### Composite outcome
+- `catalogs.leka.studio/weplay`: **149 product cards** (was 136 in v2.12.0)
+- Provenance fields per product: `source_url_en` (live), `source_url_cached`
+  (GCS HTML), `source_url_flipbook` (page N OCR) — explicit lineage
+- Drafts left: 113 with real-SKU `item_code` not in any source we tried
+  (mostly KB0001-style discontinued products)
+
+### Files changed
+- `scripts/scrape_weplay_cached.py` (new)
+- `scripts/ocr_weplay_flipbook.py` (new)
+- `CHANGELOG.md`
+
+---
+
 ## [2.12.0] - 2026-05-12
 
 ### Added — Weplay catalog grew 100 → 136 + kids-first card photos
