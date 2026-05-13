@@ -54,6 +54,72 @@ backend-data-only.
 
 ---
 
+## [2.15.1] - 2026-05-13
+
+### Documented — the "remaining 103 uncovered drafts" are AI-Vision-inferred, not orphans
+
+The v2.15.0 followup report flagged "~91 real-SKU drafts still uncovered" as
+needing another image source or hand curation. Investigation surfaced the
+real story: those 103 docs were created by the **upstream Anthropic-Vision
+scrape pipeline** (well before this session) and already contain full
+English `name`, `description`, and `category` fields. They look "uncovered"
+only because they predate v2.13.0's source-priority guards and lack a
+`source_url_*` field.
+
+Examples of what's actually in these docs (sampled):
+- `AT0002` "Tactile Path - Nature" — full description, balance category
+- `ED0001` "Edusante Trike" — full description, motor-skill category
+- `KB0001` "Jumbo Blocks" — full description, construction category
+- `KB0007` "Translucent Honeycomb" — full description, sensory category
+- `KC0015` "Log & Roll", `KC0016` "Tai Chi Ball", `KC0018` "Step 'n' Stones",
+  `KC0019` "Wavy Tactile Path", `KC0021` "Tactile Board", `KC0022`
+  "Tactile Stepping Stone" — all with rich descriptions
+
+The docs even carry an audit trail in their `notes` field:
+"Product identified as Weplay X (SKU) based on visual appearance.
+Specifications are not available in the image."
+
+#### `scripts/stamp_weplay_ai_inferred.py` (new)
+Stamps these 103 docs with explicit lineage:
+  - `source_ai_inferred = True`
+  - `source_ai_pipeline = "anthropic_vision_v1"`
+  - `source_ai_sha = <existing source_sha>`
+
+Doesn't change `status` (kept as draft — SKU assignments are AI-inferred
+and may not match the real catalog), `name`, or `description`. Just makes
+the lineage visible so future enrichment passes know to treat these as
+"covered with caveat".
+
+By prefix: KC=55, KM=20, KP=13, KB=4, KS=4, KT=2, AT=1, ED=1, KF=1,
+KY=1, WJ=1.
+
+#### Why they stay drafts
+The AI inference IS plausible and the descriptions read well, but:
+1. SKU may not match Weplay's actual catalog (e.g. `KC0010` was AI-tagged
+   "Tai Chi Ball", but Vision OCR of the 2025 catalog also tagged
+   `KC0016` as "Tai Chi Ball" — same product, different inferred SKUs).
+2. No images attached — would render as placeholder cards on storefront.
+
+To promote any of these to active in a future pass would require:
+1. Cross-referencing the inferred SKU against the catalog OCR data
+   (`scripts/ocr_weplay_local_pdfs.py` dump) for confirmation.
+2. Image attachment (likely from `source_sha` page lookup).
+3. Probably a manual review step.
+
+Out of scope here. The stamp + documentation is enough to prevent future
+"~91 uncovered" reports and clarify the gap.
+
+### Composite catalog state (unchanged from v2.15.0)
+`catalogs.leka.studio/weplay`: still **200 active product cards**. The
+103 AI-inferred drafts remain drafts — high-quality candidates for a
+future manual review pass.
+
+### Files changed
+- `scripts/stamp_weplay_ai_inferred.py` (new)
+- `CHANGELOG.md`
+
+---
+
 ## [2.15.0] - 2026-05-13
 
 ### Added — Weplay catalog 149 → 200 via Vision OCR of image-only catalog PDFs
