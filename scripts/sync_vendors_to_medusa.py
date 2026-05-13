@@ -99,7 +99,11 @@ def _headers(token: str) -> dict:
 def _find_product_by_handle(token: str, handle: str) -> dict | None:
     r = requests.get(
         f"{BACKEND}/admin/products",
-        params={"handle": handle, "limit": 1, "fields": "id,handle,variants.id,variants.prices.id,variants.prices.currency_code"},
+        params={"handle": handle, "limit": 1,
+                "fields": "id,handle,options.id,options.title,options.values.value,"
+                          "variants.id,variants.title,variants.sku,"
+                          "variants.options.value,variants.options.option_id,"
+                          "variants.prices.id,variants.prices.currency_code,variants.prices.amount"},
         headers=_headers(token),
         timeout=TIMEOUT,
     )
@@ -108,47 +112,79 @@ def _find_product_by_handle(token: str, handle: str) -> dict | None:
     return products[0] if products else None
 
 
-def _build_variant_prices(pricing: dict) -> list[dict]:
-    """Build the variant.prices array from a pricing dict.
+# Pricing keys on `pricing.*` → Medusa currency code.
+_RETAIL_KEYS: tuple[tuple[str, str], ...] = (
+    ("retail_usd", "usd"),
+    ("retail_thb", "thb"),
+    ("retail_eur", "eur"),
+    ("retail_sgd", "sgd"),
+)
 
-    Preference order:
-      1. retail_thb / retail_usd / retail_eur (any subset) → push each present
-         currency (Vinci landed-cost pipeline writes all three).
-      2. fob_usd → push USD only (legacy path for other brands).
-      3. empty list (Medusa v2 still requires the key to exist).
+
+def _build_prices(pricing: dict) -> list[dict]:
+    """Build a Medusa `prices` array from a `pricing.*` map.
+
+    Preference order: retail_<ccy> (multi-currency, post-landed-calc pricing)
+    → fob_usd (legacy USD-only).
+    Amounts are minor units (cents/satang).
     """
-    prices: list[dict] = []
-    for key, ccy in (("retail_thb", "thb"), ("retail_usd", "usd"), ("retail_eur", "eur")):
-        amt = pricing.get(key)
-        if amt:
-            prices.append({"amount": int(round(amt * 100)), "currency_code": ccy})
-    if not prices and pricing.get("fob_usd"):
-        prices.append({"amount": int(round(pricing["fob_usd"] * 100)), "currency_code": "usd"})
-    return prices
+    if not pricing:
+        return []
+    out: list[dict] = []
+    for key, ccy in _RETAIL_KEYS:
+        val = pricing.get(key)
+        if val:
+            out.append({"amount": int(round(val * 100)), "currency_code": ccy})
+    if not out:
+        fob = pricing.get("fob_usd")
+        if fob:
+            out.append({"amount": int(round(fob * 100)), "currency_code": "usd"})
+    return out
 
 
 def _build_create_payload(slug: str, sc_id: str, p: dict) -> dict:
-    """Map a vendors product doc → Medusa create-product payload."""
+    """Map a vendors product doc → Medusa create-product payload.
+
+    If the doc carries a `variants[]` array (e.g. coating Standard / Additional
+    on Eurotramp Kids Tramp), emit one Medusa option + one variant per entry.
+    Otherwise emit a single Default variant.
+    """
     handle = p["handle"]
     images = [img["url"] for img in (p.get("images") or []) if img.get("url")]
     pricing = p.get("pricing") or {}
-    fob = pricing.get("fob_usd")
     metadata = {
         "brand_slug": slug,
         "item_code": p.get("item_code"),
+        "gtin": p.get("gtin"),
         "category": p.get("category"),
         "subcategory": p.get("subcategory"),
         "source_url": p.get("source_url"),
     }
     metadata = {k: v for k, v in metadata.items() if v is not None}
 
-    variant = {
-        "title": p.get("name") or handle,
-        "sku": p.get("item_code") or handle,
-        "manage_inventory": False,
-        # Medusa v2 requires `prices` to be present even when empty.
-        "prices": _build_variant_prices(pricing),
-    }
+    variants_array = p.get("variants") or []
+    if variants_array:
+        option_title = p.get("variant_option") or "Variant"
+        option_values = [v["title"] for v in variants_array]
+        med_variants = []
+        for v in variants_array:
+            med_variants.append({
+                "title": v["title"],
+                "sku": v.get("sku") or f"{p.get('item_code', handle)}-{v['title'][:10]}",
+                "manage_inventory": False,
+                "prices": _build_prices(v.get("pricing") or pricing),
+                "options": {option_title: v["title"]},
+            })
+        options = [{"title": option_title, "values": option_values}]
+    else:
+        med_variants = [{
+            "title": p.get("name") or handle,
+            "sku": p.get("item_code") or handle,
+            "manage_inventory": False,
+            "prices": _build_prices(pricing),
+            "options": {"Default": "Default"},
+        }]
+        options = [{"title": "Default", "values": ["Default"]}]
 
     payload = {
         "title": p.get("name") or handle,
@@ -157,8 +193,8 @@ def _build_create_payload(slug: str, sc_id: str, p: dict) -> dict:
         "status": "published" if (p.get("status") or "active") == "active" else "draft",
         "sales_channels": [{"id": sc_id}],
         "metadata": metadata,
-        "options": [{"title": "Default", "values": ["Default"]}],
-        "variants": [variant | {"options": {"Default": "Default"}}],
+        "options": options,
+        "variants": med_variants,
     }
     if images:
         payload["images"] = [{"url": u} for u in images]
@@ -182,21 +218,23 @@ def _build_update_payload(p: dict) -> dict:
     }
 
 
-def _update_variant_prices(token: str, product_id: str, variant_id: str, pricing: dict, existing_prices: list[dict]) -> bool:
-    """Upsert variant prices (THB+USD+EUR or USD-only) on a Medusa v2 variant.
+def _update_variant_prices(token: str, product_id: str, variant_id: str,
+                            pricing: dict, existing_prices: list[dict] | None) -> None:
+    """Upsert all currency prices on a variant.
 
-    `existing_prices` is the list of {id, currency_code} dicts already attached
-    to the variant so we can preserve the price ids that match our currencies
-    (Medusa upserts by id when present).
+    `pricing` is the `pricing.*` map from the Firestore product / variant doc.
+    Existing price rows are matched by `currency_code` so we PATCH the same row
+    rather than orphaning the previous one.
     """
-    new_prices = _build_variant_prices(pricing)
+    new_prices = _build_prices(pricing)
     if not new_prices:
-        return False
-    by_ccy = {(p.get("currency_code") or "").lower(): p.get("id") for p in (existing_prices or [])}
-    for price in new_prices:
-        existing_id = by_ccy.get(price["currency_code"])
-        if existing_id:
-            price["id"] = existing_id
+        return
+    existing_by_ccy = {(pr.get("currency_code") or "").lower(): pr.get("id")
+                      for pr in (existing_prices or [])}
+    for entry in new_prices:
+        eid = existing_by_ccy.get(entry["currency_code"])
+        if eid:
+            entry["id"] = eid
     body = {"prices": new_prices}
     r = requests.post(
         f"{BACKEND}/admin/products/{product_id}/variants/{variant_id}",
@@ -206,14 +244,54 @@ def _update_variant_prices(token: str, product_id: str, variant_id: str, pricing
     )
     if r.status_code >= 400:
         log.warning("price update failed for variant %s: %s %s", variant_id, r.status_code, r.text[:200])
-        return False
-    return True
 
 
-def _update_variant_price(token: str, product_id: str, variant_id: str, fob_usd: float, existing_price_id: str | None) -> None:
-    """Legacy USD-only helper kept for callers that pass raw fob_usd."""
-    existing = [{"id": existing_price_id, "currency_code": "usd"}] if existing_price_id else []
-    _update_variant_prices(token, product_id, variant_id, {"fob_usd": fob_usd}, existing)
+def _ensure_variants(token: str, product_id: str, p: dict,
+                     existing_variants: list[dict]) -> list[dict]:
+    """If the Firestore doc has multi-variant data and Medusa only has the
+    default variant, create the additional variants. Returns the updated
+    variants list (refetched lightly).
+    """
+    fs_variants = p.get("variants") or []
+    if not fs_variants:
+        return existing_variants
+    option_title = p.get("variant_option") or "Variant"
+    have_titles = {(v.get("title") or "").lower() for v in existing_variants}
+    # Need at least one variant per FS entry; skip if all titles already present.
+    missing = [v for v in fs_variants if (v["title"]).lower() not in have_titles]
+    if not missing:
+        return existing_variants
+    # Medusa v2: cannot append a new option to an existing product via the
+    # variants endpoint alone — the product needs the option defined. If the
+    # product was created without it (legacy default-option), we skip variant
+    # creation and log so the user knows.
+    has_option = False
+    for v in existing_variants:
+        if option_title in (v.get("options") or {}):
+            has_option = True
+            break
+    if not has_option:
+        log.info("[variants] %s lacks option '%s' — skipping variant fold "
+                 "(needs product re-create or admin migration)", p["handle"], option_title)
+        return existing_variants
+    for v in missing:
+        body = {
+            "title": v["title"],
+            "sku": v.get("sku"),
+            "manage_inventory": False,
+            "prices": _build_prices(v.get("pricing") or {}),
+            "options": {option_title: v["title"]},
+        }
+        r = requests.post(
+            f"{BACKEND}/admin/products/{product_id}/variants",
+            json=body,
+            headers=_headers(token),
+            timeout=TIMEOUT,
+        )
+        if r.status_code >= 400:
+            log.warning("variant create failed for %s/%s: %s %s",
+                        p["handle"], v["title"], r.status_code, r.text[:200])
+    return existing_variants  # caller will refetch on next pass
 
 
 def sync_brand(slug: str, dry_run: bool, limit: int | None, skip_no_images: bool = False) -> dict:
@@ -277,12 +355,23 @@ def sync_brand(slug: str, dry_run: bool, limit: int | None, skip_no_images: bool
                     errors += 1
                     continue
                 pricing = p.get("pricing") or {}
-                if pricing.get("retail_thb") or pricing.get("retail_usd") or pricing.get("fob_usd"):
+                if _build_prices(pricing):
                     variants = existing.get("variants") or []
+                    # Try to create any missing Firestore-declared variants first
+                    variants = _ensure_variants(token, existing["id"], p, variants)
+                    fs_variants_by_title = {
+                        (v.get("title") or "").lower(): v.get("pricing") or pricing
+                        for v in (p.get("variants") or [])
+                    }
                     if variants:
-                        primary = variants[0]
-                        if _update_variant_prices(token, existing["id"], primary["id"], pricing, primary.get("prices") or []):
-                            priced += 1
+                        for med_v in variants:
+                            t = (med_v.get("title") or "").lower()
+                            v_pricing = fs_variants_by_title.get(t, pricing)
+                            _update_variant_prices(
+                                token, existing["id"], med_v["id"], v_pricing,
+                                med_v.get("prices"),
+                            )
+                        priced += 1
             updated += 1
 
         if i % 100 == 0:

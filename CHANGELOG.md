@@ -2,6 +2,47 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.16.0] - 2026-05-13
+
+### Added — Multi-currency variant pricing + Firestore-driven variants in `sync_vendors_to_medusa.py`
+
+Extended the cross-brand Medusa sync to read 4-currency pricing (USD/THB/EUR/SGD)
+and Firestore-declared `variants[]` arrays, used by the new Eurotramp 2025
+pricelist pipeline in [eukrit/vendors](https://github.com/eukrit/vendors)
+`eurotramp-catalog/scripts/` (BUILD_LOG `[1.10.1]`).
+
+- `_build_prices()` (new) — emits a Medusa `prices[]` array from
+  `pricing.retail_{usd,thb,eur,sgd}` in minor units. Falls back to legacy
+  `pricing.fob_usd` (USD-only) so previously-seeded brands still work.
+- `_update_variant_prices()` (renamed from `_update_variant_price`) — PATCHes
+  all currencies in a single body, reusing existing `price.id` per
+  `currency_code` so price rows aren't orphaned. Endpoint corrected to
+  Medusa v2: `POST /admin/products/{product_id}/variants/{variant_id}`.
+- `_build_create_payload()` — when a Firestore doc carries `variants[]`,
+  emits one option (`variant_option` field, e.g. `Coating`) + one Medusa
+  variant per entry with per-variant `prices[]`. Single-variant docs
+  unchanged (Default/Default).
+- `_ensure_variants()` (new) — for existing Medusa products, upserts any
+  `variants[]` entries that aren't on the product yet; skips with a log
+  when the product was created with the legacy `Default` option only
+  (needs one-off admin migration to add the new option).
+- `_find_product_by_handle()` — now returns `options.{id,title,values.value}`,
+  `variants.{title,sku,options.value,options.option_id}`, and
+  `variants.prices.{id,currency_code,amount}`.
+
+Live run on Eurotramp (sales channel `sc_01KNQAA3Y72W17B7CP2VQ93T3M`):
+**187 products · 105 created · 187 updated · 123 priced · 0 errors**.
+Spot-check `eurotramp-kids-tramp-playground`: USD $3,572.10 / THB ฿118,047.75
+/ EUR €3,043.43 / SGD $4,544.84.
+
+One-off store config: PATCHed `store.supported_currencies` to add `sgd`
+(was `eur, thb, usd`).
+
+- **Files modified:** `scripts/sync_vendors_to_medusa.py`, `CHANGELOG.md`.
+- **Backwards compat:** brands without `pricing.retail_*` (vortex, wisdom,
+  vinci, berliner) keep USD-only pricing via the legacy `pricing.fob_usd`
+  path. No re-run required.
+
 ## [2.15.1] - 2026-05-13
 
 ### Changed — Berliner gross margin 40 % → 25 %
