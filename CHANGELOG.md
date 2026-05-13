@@ -2,6 +2,59 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.18.3] - 2026-05-13
+
+### Reverted — `DISABLE_ADMIN=false` in cloudbuild (Medusa start silent-crash on Cloud Run)
+
+v2.18.2 set `DISABLE_ADMIN=false` so the admin UI would be served at
+`https://catalogs.leka.studio/app`. After two rebuilds and three Cloud
+Run revisions (`00015`, `00016`, `00017`), the container failed every
+startup probe with no usable error: stdout shows `medusa start` printing
+its banner then exit(1) with nothing else on stdout / stderr / Cloud
+Logging. Revision `00018-mcq` is the working state — same new image
+(`medusa-backend:01addb0`), same MEDUSA_BACKEND_URL baked in, but
+`DISABLE_ADMIN=true` so the API stays healthy.
+
+This commit reverts the `DISABLE_ADMIN` default in `cloudbuild.yaml` back
+to `true` so the next Cloud Build doesn't break the service. Everything
+else from v2.18.1+2 stays:
+
+- `MEDUSA_ADMIN_PASSWORD` from Secret Manager (Rule 12 fix).
+- `MEDUSA_BACKEND_URL=https://catalogs.leka.studio` baked + at runtime
+  (harmless with admin disabled; ready for when admin is re-enabled).
+- `ADMIN_CORS` / `AUTH_CORS` include `catalogs.leka.studio` (also
+  harmless; future-proofs the storefront).
+- `cloudbuild.yaml` deploy `--set-env-vars` keeps the `^|^` delimiter so
+  comma-bearing values (AUTH_CORS) deploy cleanly.
+
+The `catalogs.leka.studio/admin/*` + `/auth/*` Next.js rewrites in
+[eukrit/leka-website](https://github.com/eukrit/leka-website) v0.8.8
+**do work** — the admin API + login are reachable through the catalogs
+domain. Only the admin UI HTML at `/app` is unavailable on Cloud Run.
+
+### Workaround
+
+Run the admin UI locally against prod credentials:
+
+```powershell
+cd medusa-backend
+# .env: DATABASE_URL / REDIS_URL / COOKIE_SECRET / JWT_SECRET copied
+# from Secret Manager (or use ADC via gcloud secrets versions access)
+npx medusa develop
+# Open http://localhost:9000/app
+```
+
+`medusa develop` builds + serves the admin in dev mode and bypasses the
+production startup issue.
+
+### Follow-up
+
+The silent `medusa start` exit needs local repro to surface stack
+traces. Likely candidates: missing admin asset, NODE_ENV=production +
+admin combination in this Medusa version, or a config validation that
+fails without printing. Out of scope for tonight; tracked for next
+session.
+
 ## [2.18.2] - 2026-05-13
 
 ### Changed — Wire Medusa admin to catalogs.leka.studio/app
