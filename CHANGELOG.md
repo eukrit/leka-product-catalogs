@@ -2,6 +2,50 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.18.4] - 2026-05-13
+
+### Fixed — Medusa admin UI silent-crash (start from `.medusa/server`, not `/app`)
+
+Root cause of the v2.18.2/2.18.3 silent-exit-on-start when
+`DISABLE_ADMIN=false`:
+
+Medusa v2's `medusa build` outputs the admin UI assets to
+`.medusa/server/public/admin/`. At runtime, the admin loader
+(`@medusajs/medusa/src/loaders/admin.ts:90`) looks for
+`<cwd>/.medusa/admin/index.html` — i.e. it assumes the CLI is being run
+from inside `.medusa/server`, not from the project root. Our `start.sh`
+was running `medusa start` from `/app`, so the loader looked for
+`/app/.medusa/admin/index.html` (doesn't exist) and crashed.
+
+The crash output never reached Cloud Logging because the medusa CLI
+catches the error and exits before its logger has flushed — only
+"Server is ready" + the error message appear, and only when started
+from the right cwd. We caught this by spinning up the image inside
+Cloud Build with verbose stdout capture and a wide `find .medusa`,
+which surfaced both the build output location (`.medusa/server/public/admin/`)
+and the loader's expectation (`.medusa/admin/`).
+
+### Changes
+
+- **`medusa-backend/start.sh`** — `cd /app/.medusa/server` before
+  `exec node /app/node_modules/.bin/medusa start`. The CLI is resolved
+  via the parent `/app/node_modules` so we don't need a second
+  `npm install` inside `.medusa/server`.
+- **`cloudbuild.yaml`** — restored `DISABLE_ADMIN=false` in the deploy
+  step's `--set-env-vars` (was reverted to `true` in v2.18.3 as a
+  hotfix when we couldn't isolate the crash).
+
+After Cloud Build picks this up, the admin UI lives at
+https://catalogs.leka.studio/app . Login with `admin@leka.studio` +
+the password in Secret Manager (`medusa-admin-password`).
+
+### Debug artefact
+
+`cloudbuild-debug-admin.yaml` (new) — pulls the production image and
+runs `medusa start` inside Cloud Build with stdout/stderr captured,
+useful for surfacing silent crashes that Cloud Run obscures. Keep
+around for future debugging.
+
 ## [2.18.3] - 2026-05-13
 
 ### Reverted — `DISABLE_ADMIN=false` in cloudbuild (Medusa start silent-crash on Cloud Run)
