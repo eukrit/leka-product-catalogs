@@ -63,6 +63,32 @@
         { "fieldPath": "catalog_source", "order": "ASCENDING" },
         { "fieldPath": "catalog_page", "order": "ASCENDING" }
       ]
+    },
+    {
+      "collectionGroup": "products_epdm",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "status", "order": "ASCENDING" },
+        { "fieldPath": "cfh_m", "order": "ASCENDING" },
+        { "fieldPath": "pricing.quote_thb_per_sqm", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "products_epdm",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "system", "order": "ASCENDING" },
+        { "fieldPath": "cfh_m", "order": "ASCENDING" },
+        { "fieldPath": "thickness_mm", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "products_infill",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "system", "order": "ASCENDING" },
+        { "fieldPath": "pricing.quote_thb_per_sqm", "order": "ASCENDING" }
+      ]
     }
   ],
   "fieldOverrides": []

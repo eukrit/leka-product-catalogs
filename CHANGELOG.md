@@ -2,6 +2,78 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.18.0] - 2026-05-13
+
+### Added — EPDM/Infill pricer + new shared product categories
+
+Converted the live "EPDM 2024 / Pricelist" Google Sheet
+(`1wXGZoseE4PWEiY14BmtrYaHkkCJJEPyLQnUte7qUGrg`, tab `Pricelist`) into a
+configurable HTML pricer and a Firestore product catalog so other projects can
+query Critical Fall Height (CFH) without ever opening the spreadsheet.
+
+(Originally landed locally as v2.10.0 commit `2d96cd0`, lost to a
+`git reset --hard origin/main` that brought in v2.14–v2.16, re-applied as
+v2.17.0 then renumbered to **v2.18.0** to clear the version collision with
+the remote-side Wisdom → Leka Project rebrand that also took v2.17.0.)
+
+- **`scripts/sync_epdm_pricelist.py`** — pulls the sheet via the Sheets API
+  (SA `claude@ai-agents-go`), re-implements the formula chain locally
+  (`H = G·C`, `J = H·I`, `L = J·K`, `P = (J+L)·(1+O)·N`, `R = P·Q`,
+  `V = P·(V₃/12)·U`, `AD = H·AB·AC`, `AE = W of SBR-Shreded[thk=D]`,
+  `W = P+R+T+V+AD+AE`, `Y = W/(1−X)`, `Quote = CEIL(Y/(1−Z), step)`),
+  and writes (a) `docs/forms/data/epdm-pricelist.json` plus (b) one Firestore
+  doc per row. Two-pass compute handles the AE backing lookup for layered
+  EPDM/TPV. **Quote parity vs the sheet: 10/10 spot-checked rows match
+  exactly** (SBR Granule, Sand Infill, Rubber Infill, SBR Shreded, EPDM Miroad,
+  EPDM Eurosia Non-UV, EPDM Eurosia UV, TPV UV).
+- **`scripts/import_categories_shared.py`** — writes two new
+  brand-agnostic category docs (`product_categories/epdm`,
+  `product_categories/infill`) in the `leka-product-catalogs` database,
+  parallel to the existing per-brand `product_categories_{brand}` ones.
+  `brand: null` marks them shared.
+- **Firestore** (`leka-product-catalogs` database):
+  - `products_epdm` — 53 docs (SBR Granule + SBR Shreded + EPDM Miroad +
+    EPDM Eurosia Non-UV/UV + EPDM Custom Graphic + TPV UV)
+  - `products_infill` — 5 docs (Sand 16/30 + 20/40 + SBR 4/7 kg/sqm + TPE 4 kg/sqm)
+  - Each doc carries `cfh_m: number` at top level so other projects can ask
+    "given fall height ≥ X m, which thickness/SBR/system is the cheapest
+    compliant option?" via
+    `db.collection("products_epdm").where("cfh_m", ">=", X)
+       .order_by("cfh_m").order_by("pricing.quote_thb_per_sqm").limit(1)`.
+- **`docs/forms/epdm-pricer.html`** — single-file static page, Leka Design
+  System styled (Manrope, `#8003FF`, 16px cards, navy header, amber CFH
+  badge). Left pane: product picker + per-row inputs. Right pane: global
+  params + live cost breakdown ending in the boxed final Quote. Pure
+  client-side JS mirrors the same 2-pass calc so changing globals re-flows
+  every backing lookup. Served via gateway at
+  `https://gateway.goco.bz/leka-product-catalogs/forms/epdm-pricer`
+  (private, sign-in-gated per Rule 14).
+- **`firestore/firestore.indexes.json`** — three new composite indexes:
+  `products_epdm(status, cfh_m, pricing.quote_thb_per_sqm)`,
+  `products_epdm(system, cfh_m, thickness_mm)`,
+  `products_infill(system, pricing.quote_thb_per_sqm)`. All deployed.
+- **`hub.config.json`** — classification hint so the pricer lands under
+  Forms on the regenerated `docs/hub.html`.
+
+### CFH lookup contract for downstream projects
+
+Database: `leka-product-catalogs` · Collection: `products_epdm` ·
+Query: `where status==active and cfh_m >= <required>` ordered by
+`cfh_m ASC, pricing.quote_thb_per_sqm ASC`. Smoke-tested live:
+`cfh_m >= 1.5` returns `EPDM Blk 50/0` (1.6 m, 5,155 THB/sqm) and
+`EPDM E 10/40` (1.6 m, 3,195 THB/sqm) — cheapest Eurosia Non-UV option.
+
+### Files
+- NEW `scripts/sync_epdm_pricelist.py`
+- NEW `scripts/import_categories_shared.py`
+- NEW `docs/forms/epdm-pricer.html`
+- NEW `docs/forms/data/epdm-pricelist.json` (58 products + defaults + source)
+- MOD `firestore/firestore.indexes.json` (+3 composites)
+- MOD `hub.config.json` (classification_hints)
+- MOD `PROJECT_INDEX.md` (CFH lookup contract section)
+- REGEN `docs/hub.html`, `docs/build-summary.html`, `docs/architecture.html`
+- BUMP `VERSION` 2.17.0 → 2.18.0
+
 ## [2.17.0] - 2026-05-13
 
 ### Changed — Wisdom → Leka Project rebrand (customer-facing)

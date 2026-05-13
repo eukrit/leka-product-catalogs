@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EPDM / Infill Pricer · Leka</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple: #8003FF; --navy: #182557; --cream: #FFF9E6;
+    --magenta: #970260; --amber: #FFA900; --red-orange: #E54822;
+    --white: #FFFFFF; --bg: #F5F3EF;
+    --navy-08: rgba(24, 37, 87, 0.08);
+    --navy-40: rgba(24, 37, 87, 0.40);
+    --navy-60: rgba(24, 37, 87, 0.60);
+    --radius-sm: 8px; --radius-md: 16px; --radius-full: 9999px;
+    --shadow: 0 2px 8px rgba(24, 37, 87, 0.08);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Manrope',sans-serif; background:var(--bg); color:var(--navy); min-height:100vh; }
+  header { background:var(--navy); padding:20px 32px; display:flex; align-items:center; gap:16px; position:sticky; top:0; z-index:10; }
+  .accent { width:6px; height:40px; background:var(--purple); border-radius:4px; }
+  .h-title { color:var(--cream); font-size:22px; font-weight:800; letter-spacing:-0.3px; }
+  .h-subtitle { color:var(--cream); opacity:0.6; font-size:13px; }
+  .h-link { margin-left:auto; color:var(--cream); text-decoration:none; font-size:13px; opacity:0.8; }
+  .h-link:hover { opacity:1; }
+
+  main { max-width:1400px; margin:32px auto; padding:0 32px; display:grid; grid-template-columns: 1fr 1.1fr; gap:24px; }
+  @media (max-width:980px) { main { grid-template-columns:1fr; } }
+
+  .card { background:var(--white); border-radius:var(--radius-md); box-shadow:var(--shadow); padding:24px; }
+  .card h2 { font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--navy-60); margin-bottom:16px; }
+
+  .product-pick { display:flex; flex-direction:column; gap:8px; margin-bottom:20px; }
+  .product-pick label { font-size:13px; font-weight:600; color:var(--navy-60); }
+  .product-pick select {
+    font-family:inherit; font-size:15px; font-weight:600; color:var(--navy);
+    padding:12px 14px; border:1px solid var(--navy-08); border-radius:var(--radius-sm); background:var(--white);
+  }
+  .product-pick select:focus { outline:2px solid var(--purple); border-color:transparent; }
+
+  .meta { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px; }
+  .badge {
+    display:inline-flex; align-items:center; gap:6px;
+    padding:6px 12px; border-radius:var(--radius-full);
+    background:var(--cream); color:var(--navy); font-size:12px; font-weight:600;
+  }
+  .badge.purple { background:var(--purple); color:var(--white); }
+  .badge.amber { background:var(--amber); color:var(--navy); }
+
+  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .field { display:flex; flex-direction:column; gap:4px; }
+  .field label { font-size:12px; font-weight:600; color:var(--navy-60); }
+  .field input {
+    font-family:inherit; font-size:15px; font-weight:600; color:var(--navy);
+    padding:10px 12px; border:1px solid var(--navy-08); border-radius:var(--radius-sm); background:var(--white);
+  }
+  .field input:focus { outline:2px solid var(--purple); border-color:transparent; }
+  .field .hint { font-size:11px; color:var(--navy-40); }
+
+  .section-title { font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--navy-60); margin:20px 0 12px; }
+
+  table.breakdown { width:100%; border-collapse:collapse; margin-top:8px; font-size:14px; }
+  table.breakdown td { padding:9px 0; border-bottom:1px solid var(--navy-08); }
+  table.breakdown td:last-child { text-align:right; font-variant-numeric:tabular-nums; font-weight:600; }
+  table.breakdown tr.subtotal td { background:#FAF8F3; padding-left:8px; padding-right:8px; font-weight:700; }
+  table.breakdown tr.quote td {
+    background:var(--purple); color:var(--white); font-size:18px; font-weight:800;
+    padding:14px 12px; border-radius:var(--radius-sm);
+  }
+  table.breakdown tr.quote td:last-child { font-size:22px; }
+
+  .reset-btn {
+    margin-top:16px; padding:10px 18px; font-family:inherit; font-size:13px; font-weight:600;
+    background:var(--cream); color:var(--navy); border:1px solid var(--navy-08); border-radius:var(--radius-sm);
+    cursor:pointer;
+  }
+  .reset-btn:hover { background:#F8F2D8; }
+
+  footer { max-width:1400px; margin:24px auto 40px; padding:0 32px; color:var(--navy-40); font-size:12px; }
+  footer a { color:var(--navy-60); }
+</style>
+</head>
+<body>
+<header>
+  <div class="accent"></div>
+  <div>
+    <div class="h-title">EPDM / Infill Pricer</div>
+    <div class="h-subtitle">Live quote from the GO Corp pricing model · brand-agnostic</div>
+  </div>
+  <a class="h-link" id="src-link" target="_blank" rel="noopener">Source sheet ↗</a>
+</header>
+
+<main>
+  <section class="card">
+    <h2>Product & per-row inputs</h2>
+    <div class="product-pick">
+      <label for="product">Product</label>
+      <select id="product"></select>
+    </div>
+
+    <div class="meta" id="meta"></div>
+
+    <div class="grid2">
+      <div class="field">
+        <label>Thickness (mm)</label>
+        <input type="number" id="thickness_mm" step="0.1" min="0">
+      </div>
+      <div class="field">
+        <label>SBR backing (mm)</label>
+        <input type="number" id="sbr_mm" step="1" min="0">
+        <span class="hint">For infill, this column is 0 (use kg/sq.m. via Thickness).</span>
+      </div>
+      <div class="field">
+        <label>CFH (m) — fall height rating</label>
+        <input type="number" id="cfh_m" step="0.1" min="0">
+      </div>
+      <div class="field">
+        <label>Density (kg / L)</label>
+        <input type="number" id="density" step="0.01" min="0">
+      </div>
+      <div class="field">
+        <label>EXW cost ($ or local / kg)</label>
+        <input type="number" id="exw_per_kg" step="0.01" min="0">
+      </div>
+      <div class="field">
+        <label>Sea freight (%)</label>
+        <input type="number" id="freight_pct" step="0.01" min="0">
+      </div>
+      <div class="field">
+        <label>Tax (%)</label>
+        <input type="number" id="tax_pct" step="0.01" min="0">
+      </div>
+      <div class="field">
+        <label>FX rate (× to THB)</label>
+        <input type="number" id="fx_rate" step="0.0001" min="0">
+        <span class="hint">1.00 for THB-priced rows; ~36 for USD.</span>
+      </div>
+      <div class="field">
+        <label>Installation (THB / sqm)</label>
+        <input type="number" id="install_thb_sqm" step="1" min="0">
+      </div>
+      <div class="field">
+        <label>Margin (%)</label>
+        <input type="number" id="margin_pct" step="0.01" min="0">
+      </div>
+      <div class="field">
+        <label>Binder ratio (kg binder / kg granule)</label>
+        <input type="number" id="binder_ratio" step="0.01" min="0">
+      </div>
+      <div class="field">
+        <label>Binder unit cost (THB / kg)</label>
+        <input type="number" id="binder_unit_cost_thb" step="1" min="0">
+      </div>
+    </div>
+
+    <div class="section-title">Global parameters (apply to every row)</div>
+    <div class="grid2">
+      <div class="field">
+        <label>Wastage (%)</label>
+        <input type="number" id="g_wastage" step="0.01" min="0" value="0.02">
+      </div>
+      <div class="field">
+        <label>Markup (%)</label>
+        <input type="number" id="g_markup" step="0.01" min="0" value="0.05">
+      </div>
+      <div class="field">
+        <label>Interest — months held</label>
+        <input type="number" id="g_interest_months" step="0.1" min="0" value="3.0">
+      </div>
+      <div class="field">
+        <label>Interest — annual rate (%)</label>
+        <input type="number" id="g_annual_interest" step="0.0001" min="0" value="0.0875">
+      </div>
+      <div class="field">
+        <label>Quote rounding step (THB)</label>
+        <input type="number" id="g_ceiling" step="1" min="1" value="5">
+      </div>
+      <div class="field">
+        <label>USD → THB (for USD rows)</label>
+        <input type="number" id="g_usd_thb" step="0.01" min="0" value="36.0">
+      </div>
+    </div>
+
+    <button class="reset-btn" id="reset-btn">Reset to sheet values</button>
+  </section>
+
+  <section class="card">
+    <h2>Cost breakdown · THB per square metre</h2>
+    <table class="breakdown" id="breakdown">
+      <tbody>
+        <tr><td>Kg per sqm (H)</td><td id="b_kg">—</td></tr>
+        <tr><td>EXW cost per sqm (J)</td><td id="b_j">—</td></tr>
+        <tr><td>Sea freight (L)</td><td id="b_l">—</td></tr>
+        <tr><td><strong>A. Landed cost (P)</strong></td><td id="b_p">—</td></tr>
+        <tr><td>1. Wastage (R)</td><td id="b_r">—</td></tr>
+        <tr><td>2. Installation (T)</td><td id="b_t">—</td></tr>
+        <tr><td>3. Interest (V)</td><td id="b_v">—</td></tr>
+        <tr><td>4. Binder (AD)</td><td id="b_ad">—</td></tr>
+        <tr><td>5. SBR backing lookup (AE)</td><td id="b_ae">—</td></tr>
+        <tr class="subtotal"><td>Cost (W)</td><td id="b_w">—</td></tr>
+        <tr><td>Cost + margin (Y)</td><td id="b_y">—</td></tr>
+        <tr class="quote"><td>Final quote (rounded)</td><td id="b_quote">—</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:14px; font-size:12px; color:var(--navy-40); line-height:1.6;">
+      Formula chain (verbatim from the sheet):<br>
+      H = G·C · J = H·I · L = J·K · P = (J+L)·(1+O)·N · R = P·Q ·
+      V = P·(V<sub>3</sub>/12)·U · AD = H·AB·AC · AE = W of SBR-Shreded[thickness=D] ·
+      W = P+R+T+V+AD+AE · Y = W/(1−X) · <strong>Quote = CEILING( Y/(1−Z), step )</strong>
+    </p>
+  </section>
+</main>
+
+<footer>
+  Data snapshot: <span id="meta-generated">…</span> ·
+  Re-sync with <code>python scripts/sync_epdm_pricelist.py</code> ·
+  Categories <code>epdm</code> and <code>infill</code> live in Firestore database
+  <code>leka-product-catalogs</code>, collections <code>products_epdm</code> /
+  <code>products_infill</code> — query by <code>cfh_m</code> to find compliant
+  thicknesses for a given playground fall height.
+</footer>
+
+<script>
+let DATA = null;
+let CURRENT = null;
+let SHREDED_W = {};  // {thickness_mm -> cost W THB/sqm}  for backing lookup
+
+async function load() {
+  const res = await fetch('data/epdm-pricelist.json', { cache: 'no-store' });
+  DATA = await res.json();
+  document.getElementById('src-link').href = DATA.source.url;
+  document.getElementById('meta-generated').textContent = DATA.generated_at;
+  const sel = document.getElementById('product');
+  for (const p of DATA.products) {
+    const opt = document.createElement('option');
+    opt.value = p.item_code;
+    opt.textContent = `${p.system} · ${p.item_code} — ${p.description}`;
+    sel.appendChild(opt);
+  }
+  sel.addEventListener('change', () => selectProduct(sel.value));
+  document.getElementById('reset-btn').addEventListener('click', () => selectProduct(CURRENT.item_code));
+  ['thickness_mm','sbr_mm','cfh_m','density','exw_per_kg','freight_pct','tax_pct','fx_rate',
+   'install_thb_sqm','margin_pct','binder_ratio','binder_unit_cost_thb',
+   'g_wastage','g_markup','g_interest_months','g_annual_interest','g_ceiling','g_usd_thb']
+   .forEach(id => document.getElementById(id).addEventListener('input', recompute));
+  selectProduct(DATA.products[0].item_code);
+}
+
+function selectProduct(code) {
+  CURRENT = DATA.products.find(p => p.item_code === code);
+  const set = (id, v) => { document.getElementById(id).value = v ?? 0; };
+  set('thickness_mm', CURRENT.thickness_mm);
+  set('sbr_mm', CURRENT.sbr_mm);
+  set('cfh_m', CURRENT.cfh_m ?? '');
+  set('density', CURRENT.density_kg_per_litre);
+  set('exw_per_kg', CURRENT.exw_usd_per_kg);
+  set('freight_pct', CURRENT.freight_pct);
+  set('tax_pct', CURRENT.tax_pct);
+  set('fx_rate', CURRENT.fx_rate);
+  set('install_thb_sqm', CURRENT.install_thb_per_sqm);
+  set('margin_pct', CURRENT.margin_pct ?? DATA.defaults.margin_pct);
+  set('binder_ratio', CURRENT.binder_ratio ?? 0);
+  set('binder_unit_cost_thb', CURRENT.binder_unit_cost_thb ?? 0);
+  document.getElementById('g_wastage').value = DATA.defaults.wastage_pct;
+  document.getElementById('g_markup').value = DATA.defaults.markup_pct;
+  document.getElementById('g_interest_months').value = DATA.defaults.interest_months;
+  document.getElementById('g_annual_interest').value = DATA.defaults.annual_interest_pct;
+  document.getElementById('g_ceiling').value = DATA.defaults.ceiling_step;
+  document.getElementById('g_usd_thb').value = DATA.defaults.usd_to_thb;
+  renderMeta();
+  recompute();
+}
+
+function renderMeta() {
+  const el = document.getElementById('meta');
+  el.innerHTML = '';
+  const tags = [
+    { label: CURRENT.category.toUpperCase(), cls: 'purple' },
+    { label: CURRENT.system, cls: '' },
+  ];
+  if (CURRENT.cfh_m) tags.push({ label: `CFH ${CURRENT.cfh_m.toFixed(2)} m`, cls: 'amber' });
+  for (const t of tags) {
+    const b = document.createElement('span');
+    b.className = 'badge ' + t.cls;
+    b.textContent = t.label;
+    el.appendChild(b);
+  }
+}
+
+function num(id) { return parseFloat(document.getElementById(id).value) || 0; }
+
+function recomputeBacking(globals_) {
+  // 1st pass: compute W for every SBR-Shreded row using CURRENT globals (not the live form),
+  // because SBR-Shreded products typically aren't the one selected. We use their own
+  // stored input values + the global params on screen.
+  SHREDED_W = {};
+  for (const p of DATA.products) {
+    if (p.system !== 'SBR Shreded' || !p.thickness_mm) continue;
+    const r = chain({
+      C: p.thickness_mm, G: p.density_kg_per_litre, I: p.exw_usd_per_kg,
+      K: p.freight_pct, N: p.fx_rate, O: p.tax_pct,
+      T: p.install_thb_per_sqm, U: globals_.U, V3: globals_.V3, Q: globals_.Q,
+      X: p.margin_pct ?? globals_.X, Z: globals_.Z, AA2: globals_.AA2,
+      AB: p.binder_ratio ?? 0, AC: p.binder_unit_cost_thb ?? 0, AE: 0,
+    });
+    SHREDED_W[p.thickness_mm] = r.W;
+  }
+}
+
+function chain(v) {
+  const H = v.G * v.C;
+  const J = H * v.I;
+  const L = J * v.K;
+  const P = (J + L) * (1 + v.O) * v.N;
+  const R = P * v.Q;
+  const V = P * (v.V3 / 12) * v.U;
+  const AD = H * v.AB * v.AC;
+  const AE = v.AE || 0;
+  const W = P + R + v.T + V + AD + AE;
+  const Y = (v.X > 0 && v.X < 1) ? W / (1 - v.X) : W;
+  const quote = Y > 0 ? Math.ceil(Y / (1 - v.Z) / v.AA2) * v.AA2 : 0;
+  return { H, J, L, P, R, V, AD, AE, W, Y, quote, T: v.T };
+}
+
+function fmt(n, d = 2) {
+  if (!isFinite(n)) return '—';
+  return n.toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d });
+}
+
+function recompute() {
+  const globals_ = {
+    Q: num('g_wastage'), Z: num('g_markup'),
+    U: num('g_interest_months'), V3: num('g_annual_interest'),
+    AA2: num('g_ceiling'), X: num('margin_pct'),
+  };
+  recomputeBacking(globals_);
+
+  const layered = ['Miroad', 'Eurosia Non-UV', 'Eurosia UV', 'Custom Graphic', 'TPV UV'];
+  const sbrMm = num('sbr_mm');
+  const AE = (layered.includes(CURRENT.system) && SHREDED_W[sbrMm]) ? SHREDED_W[sbrMm] : 0;
+
+  const r = chain({
+    C: num('thickness_mm'),
+    G: num('density'),
+    I: num('exw_per_kg'),
+    K: num('freight_pct'),
+    N: num('fx_rate'),
+    O: num('tax_pct'),
+    T: num('install_thb_sqm'),
+    U: globals_.U, V3: globals_.V3, Q: globals_.Q,
+    X: num('margin_pct'), Z: globals_.Z, AA2: globals_.AA2,
+    AB: num('binder_ratio'), AC: num('binder_unit_cost_thb'),
+    AE,
+  });
+
+  document.getElementById('b_kg').textContent = fmt(r.H, 3) + ' kg';
+  document.getElementById('b_j').textContent = fmt(r.J);
+  document.getElementById('b_l').textContent = fmt(r.L);
+  document.getElementById('b_p').textContent = fmt(r.P);
+  document.getElementById('b_r').textContent = fmt(r.R);
+  document.getElementById('b_t').textContent = fmt(r.T);
+  document.getElementById('b_v').textContent = fmt(r.V);
+  document.getElementById('b_ad').textContent = fmt(r.AD);
+  document.getElementById('b_ae').textContent = fmt(r.AE);
+  document.getElementById('b_w').textContent = fmt(r.W);
+  document.getElementById('b_y').textContent = fmt(r.Y);
+  document.getElementById('b_quote').textContent = fmt(r.quote, 0) + '  THB / sqm';
+}
+
+load();
+</script>
+</body>
+</html>
