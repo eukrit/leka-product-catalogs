@@ -205,6 +205,13 @@ class MedusaImporter:
             {"categories": [{"id": cid} for cid in category_ids]},
         )
 
+    def set_product_collection(self, product_id: str, collection_id: Optional[str]) -> dict:
+        """Set (or clear) the collection link on an existing product."""
+        return self._patch(
+            f"/admin/products/{product_id}",
+            {"collection_id": collection_id},
+        )
+
     def list_products_by_category(self, category_id: str, limit: int = 200) -> list:
         """Return all products linked to a category id (paginated)."""
         out = []

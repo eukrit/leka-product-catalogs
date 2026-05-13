@@ -2,6 +2,58 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.14.1] - 2026-05-13
+
+### Fixed — Vinci series filter (badges + `/vinci/series/<slug>` page) returned 0 products
+
+**Symptom:** On `catalogs.leka.studio/vinci`, clicking any series badge emptied the
+product grid; deep-linking to `/vinci/series/<slug>` also rendered 0 products.
+Berliner / 4soft / Vortex were unaffected.
+
+**Root cause:** All 1,096 Vinci products had `collection_id = null` on the Medusa
+backend, while their `metadata.series_slug` / `metadata.series_name` were
+populated and the 27 Vinci collections (`pcol_…`) themselves still existed. An
+earlier Vinci re-import wrote products under a flattened handle scheme
+(`vinci-{item_code}` instead of `vinci-{series_slug}-{item_code}`) and dropped
+the `collection_id` field — the badges queried `?collection_id=pcol_…` and got
+0 matches. Probed via the four brands' publishable keys: Berliner / 4soft /
+Vortex returned 100% `collection.id` populated; Vinci returned 0/100.
+
+**Fix:**
+- Added `MedusaImporter.set_product_collection(product_id, collection_id)` —
+  one-line wrapper around `POST /admin/products/:id` to set the collection link.
+- New script `vinci-catalog/relink_collections.py` — paginates all products in
+  the Vinci Sales Channel via Admin API, reads `metadata.series_slug`,
+  get-or-creates the matching collection (idempotent), and PATCHes each product
+  with the correct `collection_id`. Run with `--dry-run` first.
+
+**Result:** 1,096 / 1,096 products relinked, 0 errors. Verified post-fix:
+- `ACTIVE` (pcol_01KNKVFBG2WD4GHG6GRR86QSFF) → 11 products
+- `ROBINIA` (pcol_01KNKVHCSNDZGHQWAFVJVTR49F) → 255 products
+- All 27 Vinci series filters now functional.
+
+### Verified — all four collection-bearing brands
+
+| Brand | Own collections | Sample filter | Products |
+|---|---|---|---|
+| Vinci Play | 27 | `workout` | 54 |
+| Berliner Seilfabrik | 18 | `berliner-univers` | 1 |
+| 4soft | 3 | `4soft-tunnels-furniture` | 48 |
+| Vortex Aquatics | 8 | `vortex-uncategorized` | 272 |
+
+### Files changed
+- `shared/medusa_importer.py` — `set_product_collection` helper
+- `vinci-catalog/relink_collections.py` — new one-off relink script
+- `CHANGELOG.md`
+
+### Storefront note
+No `leka-website/catalogs/` changes were needed; the storefront's
+`collection_id` filter call (`catalog-content.tsx:141`,
+`series/[slug]/page.tsx:36`) was already correct. The fix is
+backend-data-only.
+
+---
+
 ## [2.14.0] - 2026-05-12
 
 ### Investigated — local Google-Drive Weplay catalogs (closes upstream-data debate)
@@ -124,183 +176,6 @@ reordered, 66 new card thumbnails.
 ---
 
 ## [2.12.0] - 2026-05-12
-
-### Added — Weplay catalog grew 100 → 136 + kids-first card photos
-
-Three small data-pipeline scripts, each one shippable, that close out the
-Weplay onboarding asks (rewrite English content, lift drafts to active,
-make the storefront cards lifestyle-led).
-
-#### `scripts/ingest_weplay_images.py` (new)
-Walks every `vendors/weplay/products/*` doc whose `source_image_urls_en` is
-non-empty (set by `scrape_weplay_en.py` at v2.11.0). For each upstream URL:
-fetch, sha256-hash, upload to `gs://ai-agents-go-vendors/weplay/media/<sha>.<ext>`
-(skip when the sha-named blob already exists), then append
-`{url: <proxy>, sha: <sha>}` to `images[]` via the existing storefront
-proxy at `https://catalogs.leka.studio/api/i/weplay/media/<sha>.<ext>`.
-Only fills products that currently have NO `images[]` (--enrich-actives
-opts in to also widen actives).
-
-**Result:** 122 products had EN-page URLs available; 36 of those were
-`draft_no_images` and got promoted to `status: "active"` after the ingest.
-Upload count was zero — every sha was already in GCS from the original
-pipeline scrape, just unlinked from product docs. Re-sync to Medusa
-created the 36 new SKUs (Edusante line, Pattern Cubes, School Set,
-Anti Burst Ball, Baby and Toddler Set, etc.). Catalog grew **100 → 136**
-active Weplay products on `catalogs.leka.studio/weplay`.
-
-#### `scripts/vision_rank_weplay_images.py` (new)
-For each active product's `images[]`, ask Gemini 2.5 Flash to score each
-image 0-100 on "kids/users in scene with the product" + tag it with one
-of `kids_using | adults_using | lifestyle_no_people | packshot_white_bg |
-technical_drawing | certification | logo | other`. Caches `score_kids` +
-`tag_kids` per image so re-runs are free; reorders `images[]` desc by
-score. Batches images in groups of 5 per call (max_output_tokens=800,
-thinking_budget=0) — single-call multi-image was hitting JSON truncation
-at ~17 images.
-
-**Run** processed all 136 active products: 490 images scored across
-~190 batched calls, **67 products reordered, 58 had their primary photo
-change**. Tag distribution: `kids_using: 319`, `packshot_white_bg: 62`,
-`certification: 29`, `technical_drawing: 25`, others ~30. The remaining
-~460 images weren't scored — Gemini free-tier returned 429 on the back
-half of the run; second pass (`--rescore` not needed) will pick them up
-when quota resets. `_sort_by_score` puts unscored images at the end so
-the storefront still gets a lifestyle-first card today.
-
-API key pulled from Secret Manager (`gemini-api-key`); ~$2-3 spend for
-the run.
-
-#### `scripts/sync_weplay_thumbnails.py` (new)
-`sync_vendors_to_medusa.py`'s update path only refreshes title /
-description / metadata on existing products — not `images[]` or
-`thumbnail`. This script fills the gap for Weplay: pulls all 136 SC
-products from Medusa, compares against Firestore-side image order, and
-POSTs `{thumbnail, images[]}` updates where they diverged. Run pushed
-**59 thumbnail changes + 70 image-order changes** to Medusa. 0 errors.
-
-#### Composite outcome
-- `catalogs.leka.studio/weplay` now serves **136 cards** (was 100).
-- 58 of the 100 pre-existing products got new card thumbnails — the
-  technical-drawing / packshot photos are now buried in PDP gallery,
-  lifestyle/kids shots lead.
-- All 136 carry English titles + descriptions from `weplay.com.tw`.
-
-### Out of scope (small follow-ups)
-- Re-run `vision_rank_weplay_images.py` for the ~460 images that hit 429
-  — should free-tier reset within an hour. Idempotent.
-- Some Gemini responses invented tag variants (e.g.
-  `isolated_product_on_patterned_background`) instead of the rubric's
-  canonical labels. Sort-by-score still works; tag normalization can be
-  a one-liner if needed.
-- 9 active products not in the EN catalog still carry their AI-generated
-  EN descriptions (`KB1303, KB1307, KC0001, KC3001, KC3004, KP1001,
-  KP1002, KP1003, KT0003`).
-- 112 draft products with real-SKU `item_code` not reachable via the EN
-  nav — would need a different source (older catalog, Vision OCR of the
-  Flash flipbook page JPGs, or hand curation).
-
----
-
-## [2.11.0] - 2026-05-12
-
-### Added — Authoritative English content for Weplay catalog
-- New `scripts/scrape_weplay_en.py` — BFS crawler for the English variant of Weplay's product detail pages on `www.weplay.com.tw` (parameter `?lang=en`). The Chinese e-commerce host `e-weplay.com.tw` has no working language switch, but the parent corporate site does — and serves the same product detail pages with full English copy: title (`Weplay <product name>`), structured spec fields (`<span class="ftit">Item No.</span><span class="ftxt">KM1003</span>` style), product description paragraph (under a `Product Feature` header in `<div class="pdesc fold-desc">`), and image gallery URLs.
-- Probed and rejected three other EN sources first (recorded in [docs/WEPLAY_PATH2_FOLLOWUP.md](docs/WEPLAY_PATH2_FOLLOWUP.md) lineage):
-  1. `download/EN/Catalog/2025/` — Adobe Flash flipbook, JS-extracted text covers 2 of 188 pages
-  2. `e-weplay.com.tw?lang=en` — query param ignored, content stays Chinese
-  3. site_structure URL re-crawl — all return generic "商品一覽" listing
-- Crawl ran in 52s (121 pages, polite 300ms): **100 detail SKUs** found, all with rich EN description (avg ~400 chars), full specs dict (age, max load, weights, package size), and 8–11 image URLs each.
-
-### Updated — Firestore + Medusa with EN content
-- 157 `vendors/weplay/products/*` docs touched (covers 100 unique SKU folders × 1.57 variant docs avg). Merge writes:
-  - `name` ← EN scraped title (e.g. `Pile Balance Up`, `Brick Me`, `Squishy Tactile Shell`)
-  - `description` ← per-product EN feature paragraph
-  - `description_orig` ← previous Anthropic-generated description (audit/rollback)
-  - `name_zh` ← original `product_name` only when it contained CJK chars (preserved)
-  - `specs` ← `{age, maximum_load, product_weight, package_size, package_weight}`
-  - `spec_block` ← components / dimensions / country-of-origin paragraph
-  - `source_url_en` ← provenance
-  - `source_image_urls_en` ← upstream URLs (image ingest is a follow-up)
-- Re-ran `python scripts/sync_vendors_to_medusa.py --brand=weplay --skip-no-images` — 100/100 Medusa products updated to English titles + descriptions, 0 errors.
-
-### Fixed — `SKU_TOKEN_RE` word-boundary bug
-First writeback only touched 126 docs (and only `kb0304` got the EN content for the 5 spot-checked products). Root cause: `\b([A-Z]{2}[0-9]{4,})\b`. For an item code like `6800KM1003`, there's no word boundary between `0` and `K` (both are `\w`), so the regex didn't match the inner SKU. Fixed by removing `\b` boundaries — now matches `KM1003` inside `6800KM1003`. Re-ran writeback: 157 docs.
-
-### Fixed — Description anchor ("Product Feature" extraction)
-Initial parser fell back to the `<meta description>` tag, which is the same generic Weplay marketing boilerplate on every page. Switched to anchor on `Product Feature` header inside `<div class="pdesc fold-desc">`. Now every product gets its own per-product description.
-
-### Coverage
-- 58/67 actives covered with EN content (87%)
-- 31/143 drafts get EN name+desc (still draft until image ingest)
-- 9 actives not in EN catalog (keep prior AI-generated descriptions)
-- 3 catalog SKUs have no Firestore product (`KT2005B, KP5001, EM5501`)
-- 112 drafts not in EN nav at all
-
-### Files changed
-- `scripts/scrape_weplay_en.py` (new)
-- `CHANGELOG.md`
-
----
-
-## [2.10.0] - 2026-05-11
-
-### Added — Vinci Play landed-cost pricelist pipeline (THB + USD + EUR retail)
-
-End-to-end ingestion of the **2026-05-11 Vinci pricelist** (1,234 SKUs, EUR FOB
-Poland) → landed cost in THB → 40% gross margin retail in THB / USD / EUR →
-Medusa product variants. Replaces the previous USD-only pricing path for Vinci
-on `catalogs.leka.studio`.
-
-- **NEW** [vinci-catalog/import_pricelist.py](vinci-catalog/import_pricelist.py)
-  — orchestrator. Reads the EUR pricelist, joins to scraped dimensions in
-  [vinci-catalog/web-app/public/data/products_all.json](vinci-catalog/web-app/public/data/products_all.json),
-  computes packing CBM (installed L×W×H × 0.15 factor), and calls
-  `shipping-automation/mcp-server/cost_engine.estimate_landed_cost()`
-  (EU LCL Gdynia → LCB route) with **live Baltic-rate calibration** averaging
-  the static rate card with FBX-derived LCL estimate. Writes to
-  `vendors/vinci/products/{vinci-<lc-code>}.pricing.*` in Firestore (db `vendors`).
-- **Tiered min/max logistics %** (`LOGISTICS_TIERS`) — caps total logistics
-  cost as a % of FOB-in-THB by FOB band: < €500 → 80–250%, < €2,000 → 60–180%,
-  < €10,000 → 45–120%, ≥ €10,000 → 35–80%. Floor prevents small SKUs being
-  priced near-FOB despite carrying fixed clearance/last-mile costs; cap
-  clamps outliers where scraped installed dimensions wildly overstate
-  packing CBM. Audit fields `landed_thb_raw`, `logistics_pct`,
-  `logistics_clamp` preserved on every row.
-- **Live FX** — `fx_rates.get_fx_rates(buffer_pct=2)` resolves USD=32.89,
-  EUR=38.71 from exchangerate-api.com with a 2% buffer.
-- **MODIFIED** [scripts/sync_vendors_to_medusa.py](scripts/sync_vendors_to_medusa.py)
-  — new `_build_variant_prices()` returns up to 3 currencies when `pricing.retail_thb`,
-  `pricing.retail_usd`, `pricing.retail_eur` are set; legacy `fob_usd` USD-only
-  path preserved for other brands. **Bug fix:** variant update endpoint
-  corrected from `/admin/products/variants/{id}` (404'd) to
-  `/admin/products/{product_id}/variants/{variant_id}` per Medusa v2 API.
-
-### Numbers
-- **Match rate**: 899 / 1,234 SKUs (73%) priced via scraped-dimension CBM
-  (`match_strategy=exact`). 335 priced via flat 35% landed-cost uplift
-  (`match_strategy=flat_uplift`) — no scraped dimensions available.
-- **Tier clamp outcomes**: 696 clean / 346 floored (small SKUs lifted to
-  carry fixed costs) / 192 capped (outliers from oversized installed dims).
-- **Retail/EUR-THB ratio**: median 3.00× (was unbounded at 16.9× max before
-  tiering); p90 5.63×, max 5.83×.
-- **Firestore**: 915 product docs updated. 319 pricelist SKUs have no
-  matching `vendors/vinci/products/*` doc (out of scope here).
-
-### Reads from sibling repo (no edits there)
-- `shipping-automation/mcp-server/cost_engine.py` — `estimate_landed_cost`,
-  `ROUTE_PROFILES["europe"]["lcl"]`
-- `shipping-automation/mcp-server/fx_rates.py` — `get_fx_rates(buffer_pct)`
-- `shipping-automation/mcp-server/rate_feeds.py` — `get_fbx_index` for Baltic
-  rate calibration
-
-### Out of scope (follow-ups)
-- Empirical packing-CBM ingestion — pull Vinci invoices/packing lists from
-  Gmail/Drive into Firestore `vinci_shipments` to replace the 0.15 packing
-  factor with per-series ratios.
-- Create `vendors/vinci/products/*` docs for the 319 pricelist SKUs the
-  current scrape doesn't cover.
-
 ## [2.9.1] - 2026-05-10
 
 ### Verified — backend pipeline green end-to-end
