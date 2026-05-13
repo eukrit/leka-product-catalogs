@@ -2,6 +2,80 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.19.0] - 2026-05-13
+
+### Added — Rampline pricelist → landed cost + retail (Firestore audit)
+
+Rampline's 2025 NOK pricelist (Google Drive, 31 KB, 127 article codes
+across 13 product families) now flows through the same landed-cost +
+40 % GM retail formula as Vinci Play, with results audited in Firestore
+at `vendors/rampline/pricelists/2026-05-13`.
+
+### Pipeline
+
+1. `rampline-catalog/import_pricelist.py` fetches/reads the xlsx,
+   parses section headers (each carries the wholesale discount), reads
+   the **Net price 2025** column as EXW (NOK).
+2. NOK → EUR via `open.er-api.com` (live ECB-backed, fallback
+   `frankfurter.app`, then hardcoded 0.087). Today: 0.09277 EUR/NOK.
+3. EUR FOB → THB landed via `shared/landed_pricing.py` (shipping-automation
+   `estimate_landed_cost` LCL Europe → Laem Chabang, Baltic-rate
+   calibrated).
+4. Tiered logistics clamp (80 / 60 / 45 / 35 % floor by FOB band).
+5. Retail THB = landed / 0.60 (40 % GM); USD/EUR at live FX.
+
+### Output
+
+- CSV: `rampline-catalog/data/pricelist_2026-05-13_landed.csv` (127 rows).
+- Firestore: `vendors/rampline/pricelists/2026-05-13` — single audit doc
+  with `variants` map keyed by sanitized article code, plus
+  `fx_snapshot`, `nok_eur_rate`, `baltic_rate_snapshot`, `logistics_tiers`.
+
+### Spot-check
+
+| SKU | NOK net | EUR FOB | Landed THB | Retail USD |
+|---|---:|---:|---:|---:|
+| SD 02 (SHOCKDECK smallest) | 73 | 6 | 442 | $22 |
+| RB35 (Rampball wet-pour) | 13,910 | 1,290 | 80,083 | $4,039 |
+| BP 15 LF (SHOCKDECK largest) | 1,199,380 | 111,259 | 5,826,041 | $293,820 |
+
+94/127 SKUs hit the floor clamp (small parts dominated by fixed
+shipping costs), 33/127 within band, 0 capped. Realized GM uniformly 40 %.
+
+### Shared module
+
+Lifted the Vinci landed-cost + retail formula into
+`shared/landed_pricing.py` so both brands share one canonical
+implementation. `vinci-catalog/import_pricelist.py` refactored
+(427 → 219 lines) — zero behaviour change.
+
+### Medusa push — DEFERRED
+
+Rampline's 54 Medusa products each have a single "Default" variant
+keyed on the WooCommerce numeric ID. The pricelist's 127 article
+codes are variant-level SKUs that don't yet exist in Medusa. Creating
+per-article variants is a separate migration (also needs new products
+for SHOCKDECK / climbing pole / balance arch families). For now we
+only audit landed + retail in Firestore.
+
+### Files
+
+- NEW: `shared/landed_pricing.py`,
+  `rampline-catalog/import_pricelist.py`,
+  `rampline-catalog/data/source/rampline_pricelist_2025_fetched-2026-05-13.xlsx`,
+  `rampline-catalog/data/pricelist_2026-05-13_landed.csv`,
+  `docs/rampline.html`.
+- CHANGED: `vinci-catalog/import_pricelist.py`, `CHANGELOG.md`, `VERSION`.
+
+### Next
+
+- Decide whether to create per-article Medusa variants (127 new
+  variants across 13 families) — needs family-name → Medusa-product
+  map and probably new products for SHOCKDECK / climbing pole /
+  balance arch.
+- Source per-SKU dimensions (Rampline tech-sheet PDFs are scraped but
+  not parsed yet). Would shift most rows off the flat-uplift branch.
+
 ## [2.18.4] - 2026-05-13
 
 ### Fixed — Medusa admin UI silent-crash (start from `.medusa/server`, not `/app`)

@@ -28,9 +28,8 @@ import csv
 import json
 import logging
 import os
-import re
 import sys
-from dataclasses import dataclass, asdict
+from dataclasses import asdict
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -42,100 +41,23 @@ DEFAULT_PRICELIST = Path(
     r"\2026-05-11 Vinci pricelist_export_1778483593.xlsx"
 )
 
-# Mount shipping-automation as a library (read-only this run).
-SHIPPING_AUTO = Path(
-    r"C:\Users\Eukrit\OneDrive\Documents\Claude Code\shipping-automation\mcp-server"
+# Shared landed-cost + retail pricing pipeline (mounts shipping-automation lib).
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+from shared.landed_pricing import (  # noqa: E402
+    GROSS_MARGIN,
+    LOGISTICS_TIERS,
+    PricedRow,
+    calibrate_baltic_rate,
+    get_fx_rates,
+    parse_dim,
+    price_row,
 )
-sys.path.insert(0, str(SHIPPING_AUTO))
-
-import cost_engine  # noqa: E402  shipping-automation/mcp-server/cost_engine.py
-from cost_engine import estimate_landed_cost  # noqa: E402
-from fx_rates import get_fx_rates  # noqa: E402
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s: %(message)s")
 log = logging.getLogger("vinci_pricelist")
 
-GROSS_MARGIN = 0.40  # 40% GM → divide landed by (1 - 0.40)
-PRODUCT_CATEGORY = "playground_equipment"
-ORIGIN_ROUTE = "europe"
-METHOD = "lcl"
-UNMATCHED_LANDED_UPLIFT = 1.35  # 35% flat uplift on EUR-THB FOB when no CBM
 PRICELIST_DATE = "2026-05-11"
-
-# Tiered minimum/maximum logistics cost as a % of FOB-in-THB.
-# Floor ensures every SKU carries a reasonable share of fixed costs
-# (clearance, last-mile, insurance). Ceiling clamps outliers where installed
-# dimensions wildly overstate packing CBM.
-#
-# Tuple = (fob_eur_max_inclusive, min_logistics_pct, max_logistics_pct)
-LOGISTICS_TIERS: list[tuple[float, float, float]] = [
-    (500,         0.80, 2.50),   # < EUR 500 FOB  → logistics 80–250% (small parts dominated by fixed costs)
-    (2_000,       0.60, 1.80),   # < EUR 2,000    → 60–180%
-    (10_000,      0.45, 1.20),   # < EUR 10,000   → 45–120%
-    (float("inf"),0.35, 0.80),   # ≥ EUR 10,000   → 35–80% (large structures, fixed costs amortized)
-]
-
-
-def logistics_band(eur_fob: float) -> tuple[float, float]:
-    for cap, lo, hi in LOGISTICS_TIERS:
-        if eur_fob <= cap:
-            return lo, hi
-    return LOGISTICS_TIERS[-1][1], LOGISTICS_TIERS[-1][2]
-
-
-@dataclass
-class PricedRow:
-    item_code: str
-    eur_fob: float
-    matched: bool
-    match_strategy: str          # "exact" | "fuzzy_alpha" | "flat_uplift"
-    cbm: float
-    cbm_method: str              # "dims_scaled" | "flat_uplift"
-    landed_thb: float
-    landed_thb_raw: float        # before tier clamp (audit trail)
-    logistics_pct: float         # final logistics_thb / fob_thb
-    logistics_clamp: str         # "" | "floored" | "capped"
-    retail_thb: float
-    retail_usd: float
-    retail_eur: float
-    freight_thb: float
-    duty_thb: float
-    vat_thb: float
-    note: str = ""
-
-
-def parse_dim(value):
-    """Coerce a length/width/height_cm field into a sane single cm value.
-
-    Vinci scrape produces several formats:
-      * int/float (clean): 950
-      * string range: '390, 540 cm' (multiple platform heights)
-      * int with concatenated heights: 90120180210 (= 90, 120, 180, 210 cm)
-    For multi-value cases we take the MIN — packing CBM should be the minimum
-    rectangular envelope. Anything > 1500 cm (15 m) is treated as unparseable
-    and returned as None so the caller falls back to flat-uplift pricing.
-    """
-    MAX_CM = 1500
-    if value is None:
-        return None
-    if isinstance(value, (int, float)):
-        v = float(value)
-        if 0 < v <= MAX_CM:
-            return v
-        # Concatenated digits like 90120180210 — try splitting into 2/3-digit chunks.
-        s = str(int(v))
-        for chunk in (3, 2):
-            parts = [s[i:i+chunk] for i in range(0, len(s), chunk)]
-            try:
-                nums = [int(p) for p in parts if p]
-                if nums and all(0 < n <= MAX_CM for n in nums):
-                    return float(min(nums))
-            except ValueError:
-                continue
-        return None
-    nums = [float(n) for n in re.findall(r"\d+(?:\.\d+)?", str(value))]
-    nums = [n for n in nums if 0 < n <= MAX_CM]
-    return min(nums) if nums else None
 
 
 def load_dim_index() -> dict[str, dict]:
@@ -154,30 +76,6 @@ def load_dim_index() -> dict[str, dict]:
     return index
 
 
-def fuzzy_lookup(code: str, index: dict[str, dict]) -> tuple[dict | None, str]:
-    if code in index:
-        return index[code], "exact"
-    stripped = re.sub(r"[A-Za-z]+$", "", code)
-    if stripped and stripped != code and stripped in index:
-        return index[stripped], "fuzzy_alpha"
-    if code.lstrip("0") in index:
-        return index[code.lstrip("0")], "fuzzy_alpha"
-    upper = code.upper()
-    if upper in index:
-        return index[upper], "fuzzy_alpha"
-    return None, "flat_uplift"
-
-
-def compute_cbm(dims: dict | None, packing_factor: float) -> float | None:
-    if not dims:
-        return None
-    L, W, H = dims.get("length_cm"), dims.get("width_cm"), dims.get("height_cm")
-    if not (L and W and H):
-        return None
-    raw_m3 = (L * W * H) / 1_000_000.0
-    return round(raw_m3 * packing_factor, 4)
-
-
 def read_pricelist(path: Path) -> list[tuple[str, float]]:
     import openpyxl
     wb = openpyxl.load_workbook(path, read_only=True, data_only=True)
@@ -194,113 +92,6 @@ def read_pricelist(path: Path) -> list[tuple[str, float]]:
             continue
         rows.append((code, price))
     return rows
-
-
-def calibrate_baltic_rate(fx: dict) -> dict:
-    """Best-effort live Baltic LCL THB/CBM. Falls back to static 5,500 THB/CBM."""
-    sources: list[dict] = []
-    static_per_cbm = cost_engine.ROUTE_PROFILES["europe"]["methods"]["lcl"]["rates"]["per_cbm"]
-    sources.append({"source": "cost_engine static EU LCL", "per_cbm_thb": static_per_cbm})
-
-    try:
-        from rate_feeds import get_fbx_index
-        fbx = get_fbx_index()
-        feu = fbx.get("FBX_GLOBAL", {}).get("rate_usd_feu")
-        if feu:
-            usd_thb = fx.get("USD", 35.0)
-            # FCL FEU → LCL per-CBM rule of thumb: ~50 CBM/FEU, LCL premium ≈ 1.8x.
-            per_cbm_thb = (feu * usd_thb / 50.0) * 1.8
-            sources.append({"source": "FBX Global → LCL est", "per_cbm_thb": round(per_cbm_thb, 2)})
-    except Exception as e:
-        log.warning("FBX lookup failed (non-fatal): %s", e)
-
-    avg = round(sum(s["per_cbm_thb"] for s in sources) / len(sources), 2)
-    return {"per_cbm_thb": avg, "sources": sources, "method": "avg"}
-
-
-def price_row(
-    code: str,
-    eur: float,
-    dim_index: dict,
-    fx: dict,
-    baltic: dict,
-    packing_factor: float,
-) -> PricedRow:
-    dims, strategy = fuzzy_lookup(code, dim_index)
-    cbm = compute_cbm(dims, packing_factor) if dims else None
-
-    if cbm and cbm > 0:
-        # Monkey-patched per-CBM rate for this call (Baltic calibration).
-        original = cost_engine.ROUTE_PROFILES["europe"]["methods"]["lcl"]["rates"]["per_cbm"]
-        try:
-            cost_engine.ROUTE_PROFILES["europe"]["methods"]["lcl"]["rates"]["per_cbm"] = baltic["per_cbm_thb"]
-            est = estimate_landed_cost(
-                origin=ORIGIN_ROUTE, method=METHOD,
-                goods_value=eur, goods_currency="EUR",
-                cbm=cbm, kg=0,
-                product_category=PRODUCT_CATEGORY,
-                fx_rates=fx,
-            )
-        finally:
-            cost_engine.ROUTE_PROFILES["europe"]["methods"]["lcl"]["rates"]["per_cbm"] = original
-
-        landed_thb = est["total_landed_thb"]
-        freight_thb = est["freight"]["thb"]
-        duty_thb = est["customs"]["duty_thb"]
-        vat_thb = est["customs"]["vat_thb"]
-        cbm_method = "dims_scaled"
-        matched = strategy != "flat_uplift"
-        match_strategy = strategy
-    else:
-        # No dimensions: flat 35% landed uplift on EUR-THB FOB.
-        eur_thb = fx.get("EUR", 38.0)
-        landed_thb = round(eur * eur_thb * UNMATCHED_LANDED_UPLIFT, 2)
-        freight_thb = 0.0
-        duty_thb = 0.0
-        vat_thb = 0.0
-        cbm = 0.0
-        cbm_method = "flat_uplift"
-        matched = False
-        match_strategy = "flat_uplift"
-
-    # Tiered logistics clamp: floor + cap as % of FOB-in-THB.
-    fob_thb = eur * fx.get("EUR", 38.0)
-    landed_thb_raw = landed_thb
-    lo_pct, hi_pct = logistics_band(eur)
-    floor_landed = fob_thb * (1 + lo_pct)
-    cap_landed = fob_thb * (1 + hi_pct)
-    logistics_clamp = ""
-    if landed_thb < floor_landed:
-        landed_thb = floor_landed
-        logistics_clamp = "floored"
-    elif landed_thb > cap_landed:
-        landed_thb = cap_landed
-        logistics_clamp = "capped"
-    landed_thb = round(landed_thb, 2)
-    logistics_pct = round((landed_thb - fob_thb) / fob_thb, 4) if fob_thb else 0.0
-
-    retail_thb = round(landed_thb / (1 - GROSS_MARGIN), 2)
-    retail_usd = round(retail_thb / fx.get("USD", 35.0), 2)
-    retail_eur = round(retail_thb / fx.get("EUR", 38.0), 2)
-
-    return PricedRow(
-        item_code=code,
-        eur_fob=eur,
-        matched=matched,
-        match_strategy=match_strategy,
-        cbm=cbm or 0.0,
-        cbm_method=cbm_method,
-        landed_thb=landed_thb,
-        landed_thb_raw=round(landed_thb_raw, 2),
-        logistics_pct=logistics_pct,
-        logistics_clamp=logistics_clamp,
-        retail_thb=retail_thb,
-        retail_usd=retail_usd,
-        retail_eur=retail_eur,
-        freight_thb=freight_thb,
-        duty_thb=duty_thb,
-        vat_thb=vat_thb,
-    )
 
 
 def write_csv(rows: list[PricedRow], path: Path):
