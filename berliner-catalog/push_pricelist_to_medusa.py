@@ -221,9 +221,16 @@ def main() -> int:
         is_on_request = (not list_eur)
         medusa_status = "draft" if is_on_request else "published"
 
-        # 1) SKU match → UPDATE prices
-        if item_code and item_code in sku_map:
-            info = sku_map[item_code]
+        # 1) SKU match → UPDATE prices.
+        # For rows with item_code we look up by the real SKU; name-only rows
+        # use the CSV's `handle` field as the synthetic SKU — that's exactly
+        # what create_product wrote earlier (sku = sku or handle), and it's
+        # unique per CSV row (parse_pricelist.py disambiguates collisions
+        # with -2/-3 suffixes), so it round-trips cleanly on every re-run.
+        csv_handle = (r.get("handle") or "").strip()
+        lookup_sku = item_code or csv_handle
+        if lookup_sku and lookup_sku in sku_map:
+            info = sku_map[lookup_sku]
             if is_on_request:
                 skipped += 1
                 continue

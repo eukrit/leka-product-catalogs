@@ -46,7 +46,7 @@ log = logging.getLogger("berliner_pricelist")
 
 # Pipeline constants — match Vinci.
 EXW_DISCOUNT = 0.15           # our cost = list * (1 - 0.15)
-GROSS_MARGIN = 0.40           # retail = landed / (1 - 0.40)
+GROSS_MARGIN = 0.25           # retail = landed / (1 - 0.25); Berliner-specific (Vinci uses 0.40)
 PRODUCT_CATEGORY = "playground_equipment"
 ORIGIN_ROUTE = "europe"
 METHOD = "lcl"

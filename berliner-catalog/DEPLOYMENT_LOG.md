@@ -1,5 +1,25 @@
 # Berliner Seilfabrik Catalog — Deployment Log
 
+## 2026-05-13b — Margin retune to 25 % GM
+
+- Lowered `GROSS_MARGIN` from 0.40 → **0.25** in
+  `berliner-catalog/import_pricelist.py` (Berliner-only; Vinci stays at 0.40).
+- Re-ran `import_pricelist.py` → `pricelist_2026-01-01_landed.csv`
+  refreshed; 801 Firestore docs updated in place.
+- **Push bug + recovery**: first re-push (`push_pricelist_to_medusa.py` v1) only
+  looked up rows by `item_code`. Name-only rows (405 of them) bypassed the
+  SKU lookup and CREATEd `-3`/`-4` suffixed duplicates instead of UPDATEing
+  the originals from the v2.15.0 load. Fixed the script to use the CSV's
+  already-uniquified `handle` field as the synthetic SKU lookup key (the
+  CREATE path writes `variant.sku = handle` for name-only rows, so it
+  round-trips), then ran `delete_duplicate_products.py --since 2026-05-13T09:07:00Z`
+  to remove the 405 duplicates (filtered by created_at to protect real
+  product SKUs like Spaceball L.02 → `berliner-spaceball-l-02`).
+- **Final re-push**: 722 updated + 6 created + 73 skipped + **0 errors**.
+- Sample: LU.001.001 retail THB 2,546,873 → **2,037,498** (USD 77,068 →
+  **61,654**, EUR 65,662 → **52,529**). Solar Explorer THB 52,312 → **41,849**.
+- Total Berliner SC products in Medusa: 944.
+
 ## 2026-05-13 — Initial pricelist load (Compendium 11, 2026)
 
 - **Source**: `2025-12-17 20251217_Preisliste_Compendium 11_EN_Ausland.pdf`
