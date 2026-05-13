@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Berliner Seilfabrik — 2026 Pricelist Load Summary</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+    :root {
+      --leka-purple: #8003FF;
+      --leka-navy: #182557;
+      --leka-cream: #FFF9E6;
+      --leka-magenta: #970260;
+      --leka-amber: #FFA900;
+      --leka-redorange: #E54822;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 32px 20px 80px;
+      color: var(--leka-navy);
+      background: var(--leka-cream);
+    }
+    h1, h2, h3 { margin: 0 0 12px; font-weight: 800; }
+    h1 { font-size: 30px; color: var(--leka-navy); }
+    h2 { color: var(--leka-purple); margin-top: 32px; font-size: 20px; }
+    h3 { font-size: 16px; color: var(--leka-navy); }
+    .hero {
+      background: linear-gradient(135deg, var(--leka-purple), var(--leka-navy));
+      color: #fff;
+      padding: 28px 28px;
+      border-radius: 16px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 8px rgba(24,37,87,0.08);
+    }
+    .hero h1 { color: #fff; margin-bottom: 6px; }
+    .hero .sub { opacity: 0.88; font-size: 13px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
+    .badge {
+      display: inline-block; padding: 4px 12px; border-radius: 9999px;
+      font-weight: 700; font-size: 12px; letter-spacing: 0.03em; text-transform: uppercase;
+    }
+    .b-active   { background: var(--leka-amber); color: #000; }
+    .b-draft    { background: var(--leka-magenta); color: #fff; }
+    .b-ok       { background: #1f8a32; color: #fff; }
+    .card {
+      background: #fff; border-radius: 16px; padding: 20px 24px;
+      margin: 16px 0; box-shadow: 0 2px 8px rgba(24,37,87,0.08);
+    }
+    table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 14px; }
+    th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid rgba(24,37,87,0.08); }
+    th { font-weight: 700; color: var(--leka-purple); }
+    code { background: #f3eaff; color: var(--leka-purple); padding: 1px 6px; border-radius: 4px; font-size: 13px; }
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 12px 0; }
+    .stat { background: #fff; border-radius: 12px; padding: 14px 16px; box-shadow: 0 2px 8px rgba(24,37,87,0.08); }
+    .stat .n { font-size: 28px; font-weight: 800; color: var(--leka-purple); line-height: 1; }
+    .stat .l { font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--leka-navy); opacity: 0.7; margin-top: 4px; }
+    a { color: var(--leka-purple); }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <h1>Berliner Seilfabrik — 2026 Pricelist Load</h1>
+    <div class="sub">Compendium 11 · EXW · 15 % vendor discount · Landed THB / USD / EUR</div>
+  </div>
+
+  <div class="card">
+    <p><strong>Date:</strong> 2026-05-13 &nbsp;·&nbsp; <strong>Status:</strong> <span class="badge b-ok">Complete</span></p>
+    <p><strong>Source:</strong> <code>2025-12-17 20251217_Preisliste_Compendium 11_EN_Ausland.pdf</code> (11 pages)</p>
+    <p><strong>Pipeline:</strong> mirrors <code>vinci-catalog/import_pricelist.py</code> — LCL EU → THB with Baltic-rate calibration, tier-clamped logistics, 40 % gross margin.</p>
+  </div>
+
+  <h2>Row counts</h2>
+  <div class="stats">
+    <div class="stat"><div class="n">801</div><div class="l">Total rows parsed</div></div>
+    <div class="stat"><div class="n">728</div><div class="l">Priced</div></div>
+    <div class="stat"><div class="n">73</div><div class="l">On-request</div></div>
+    <div class="stat"><div class="n">498</div><div class="l">Existing in Medusa</div></div>
+  </div>
+  <table>
+    <thead><tr><th>Status</th><th>Count</th><th>Medusa</th></tr></thead>
+    <tbody>
+      <tr><td><span class="badge b-active">active</span> priced + SKU</td><td>380</td><td>published, THB + USD + EUR retail</td></tr>
+      <tr><td><span class="badge b-active">name-only active</span> priced, no SKU</td><td>348</td><td>published, retail prices, synthetic handle</td></tr>
+      <tr><td><span class="badge b-draft">on-request</span> SKU but quoted per-project</td><td>16</td><td>draft, no price</td></tr>
+      <tr><td><span class="badge b-draft">name-only on-request</span></td><td>57</td><td>draft, no price</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Landed-cost formula</h2>
+  <div class="card">
+    <p><strong>EXW cost</strong> = list price × <code>0.85</code> (15 % vendor discount)</p>
+    <p><strong>Landed THB</strong> via <code>shipping-automation/cost_engine</code>: origin <code>europe</code>, method <code>lcl</code>, Baltic-rate calibrated, with the same tiered floor/cap as Vinci:</p>
+    <table>
+      <thead><tr><th>FOB band (EUR)</th><th>Min logistics</th><th>Max logistics</th></tr></thead>
+      <tbody>
+        <tr><td>&lt; 500</td><td>80 %</td><td>250 %</td></tr>
+        <tr><td>&lt; 2 000</td><td>60 %</td><td>180 %</td></tr>
+        <tr><td>&lt; 10 000</td><td>45 %</td><td>120 %</td></tr>
+        <tr><td>≥ 10 000</td><td>35 %</td><td>80 %</td></tr>
+      </tbody>
+    </table>
+    <p><strong>Retail</strong> = landed / (1 − 0.25) &nbsp; · &nbsp; USD/EUR derived at live FX (USD = 33.05, EUR = 38.79). Berliner uses a 25 % gross margin (Vinci uses 40 %).</p>
+  </div>
+
+  <h2>Verified sample</h2>
+  <div class="card">
+    <p><strong>berliner-levelup-01-1</strong> (LevelUp.01.1 / SKU LU.001.001)</p>
+    <p>list EUR 34 333 → EXW EUR 29 183 → landed THB 1 528 124 → retail THB <strong>2 037 498</strong> / USD <strong>61 654</strong> / EUR <strong>52 529</strong> (25 % GM)</p>
+  </div>
+
+  <h2>Artifacts</h2>
+  <ul>
+    <li><code>berliner-catalog/parse_pricelist.py</code> — PDF → CSV (PyMuPDF tables)</li>
+    <li><code>berliner-catalog/import_pricelist.py</code> — landed cost + Firestore upsert</li>
+    <li><code>berliner-catalog/push_pricelist_to_medusa.py</code> — SKU-keyed Medusa push (handles the prior scrape's <code>berliner-&lt;slug(name)&gt;</code> convention)</li>
+    <li><code>berliner-catalog/data/pricelist_2026-01-01.csv</code></li>
+    <li><code>berliner-catalog/data/pricelist_2026-01-01_landed.csv</code></li>
+    <li><code>berliner-catalog/DEPLOYMENT_LOG.md</code></li>
+  </ul>
+
+  <h2>Targets</h2>
+  <ul>
+    <li><strong>Firestore</strong>: <code>ai-agents-go</code> · DB <code>vendors</code> · <code>vendors/berliner/products/{handle}</code></li>
+    <li><strong>Medusa</strong>: <code>leka-medusa-backend</code> · sales channel <code>sc_01KNQAA3QDYHP15Y9K4PPRMDF0</code></li>
+  </ul>
+</body>
+</html>
