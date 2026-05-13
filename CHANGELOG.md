@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.18.1] - 2026-05-13
+
+### Changed — Medusa admin UI enabled + admin password moved to Secret Manager (Rule 12 fix)
+
+- **Dockerfile (`medusa-backend/Dockerfile`):** add `ARG MEDUSA_BACKEND_URL`
+  + `ENV MEDUSA_BACKEND_URL` before `npm run build` so the admin UI bundle is
+  built with the production backend URL hard-coded into its API client.
+- **`cloudbuild.yaml` (build step):** pass
+  `--build-arg=MEDUSA_BACKEND_URL=https://leka-medusa-backend-538978391890.asia-southeast1.run.app`
+  so the bundle that lands in the image points at the live Cloud Run URL.
+- **`cloudbuild.yaml` (deploy step):**
+  - `--set-secrets` adds `MEDUSA_ADMIN_PASSWORD=medusa-admin-password:latest`
+    (previously plain text — visible to anyone with `run.services.get`,
+    Rule 12 violation).
+  - `--set-env-vars` adds `NODE_ENV=production`, `DISABLE_ADMIN=false`
+    (was `true` — admin UI now served at `/app`), and
+    `MEDUSA_ADMIN_EMAIL=admin@leka.studio` so the deploy matches what the
+    earlier out-of-band `gcloud run services update` runs had to set
+    manually.
+
+### Other
+
+- Granted `roles/secretmanager.secretAccessor` to the runtime SA
+  `538978391890-compute@developer.gserviceaccount.com` on the
+  `medusa-admin-password` secret (so the new revision can resolve the
+  secret binding at start).
+- Revision `leka-medusa-backend-00014-w4s` already has the secret binding
+  + Rule-12 fix live; this commit makes that state reproducible from
+  Cloud Build and unlocks the admin UI on the next image rebuild.
+
 ## [2.18.0] - 2026-05-13
 
 ### Added — EPDM/Infill pricer + new shared product categories
