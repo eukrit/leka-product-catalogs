@@ -2,6 +2,62 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.15.0] - 2026-05-13
+
+### Added — Berliner Seilfabrik pricelist load (Compendium 11, 2026)
+
+First Berliner data load. Parses the 2026 Compendium 11 EN-Ausland pricelist PDF
+(11 pages, 801 SKUs/lines) and pushes products + THB/USD/EUR retail prices
+through the same landed-cost pipeline Vinci uses. Trade terms are EXW; our EXW
+cost is 15 % off the published list, then the Vinci EU-LCL cost engine
+(Baltic-rate calibrated, tier-clamped, 40 % GM) produces THB landed and retail.
+
+**New code**
+- `berliner-catalog/parse_pricelist.py` — PyMuPDF `find_tables()` extraction.
+  Detects 4- and 5-column schemas (some tables drop the leading "Page" col).
+  Synthesizes handles from item code; falls back to slugified name when an
+  accessory row has no SKU. Disambiguates collisions with a counter suffix.
+- `berliner-catalog/import_pricelist.py` — mirrors
+  `vinci-catalog/import_pricelist.py`. Reads pricelist CSV, applies 15 % EXW
+  discount, computes landed THB via the shared
+  `shipping-automation/mcp-server/cost_engine`, applies the standard Vinci
+  `LOGISTICS_TIERS` floor/cap, marks up to 40 % GM, and upserts
+  `vendors/berliner/products/{handle}` in Firestore. Reads existing dimensions
+  if a prior website scrape populated them; otherwise every row takes the
+  `flat_uplift` path. `GOOGLE_APPLICATION_CREDENTIALS` is read from env (no
+  hardcoded SA path).
+
+**New artifacts**
+- `berliner-catalog/data/pricelist_2026-01-01.csv` — parsed PDF
+- `berliner-catalog/data/pricelist_2026-01-01_landed.csv` — landed cost
+- `berliner-catalog/DEPLOYMENT_LOG.md` — initial load
+- `docs/berliner.html` — Leka-styled summary page
+
+**Counts**
+- 801 rows: 380 priced+SKU, 348 priced/name-only, 16 SKU on-request, 57
+  name-only on-request
+- 728 `flat_uplift` + 73 `n/a` (on-request) — 0 dim-matched (no scrape yet)
+- Firestore: 801 docs under `vendors/berliner/products`
+- Medusa: 801 rows reconciled with the existing Berliner sales channel
+  (`sc_01KNQAA3QDYHP15Y9K4PPRMDF0`, ~498 pre-scrape products): **349 updated**
+  + **440 created** + **12 skipped** + **0 errors**. On-request rows pushed as
+  `draft` with no price; priced rows carry THB+USD+EUR retail.
+
+**Mismatch discovery**: the generic `scripts/sync_vendors_to_medusa.py` couldn't
+be used as-is because the prior Berliner scrape used `berliner-<slug(name)>`
+handles (e.g. `berliner-swingo-02`) while our pricelist parser produced
+`berliner-<slug(item_code)>` (e.g. `berliner-90-160-141`). Lookup by handle
+missed every existing product, then CREATE collided on the duplicate SKU.
+`push_pricelist_to_medusa.py` solves this by paginating the SC, building a
+SKU → variant map, and routing each row to UPDATE-by-SKU or CREATE-with-
+slug-of-name.
+
+**Sample math (verified)**
+- berliner-lu-001-001 (LevelUp.01.1) list EUR 34,333 → EXW EUR 29,183 (×0.85)
+  → THB FOB 1,131,931 → landed THB 1,528,124 (flat_uplift) → tier-band cap
+  (EUR≥10 k → 35-80 % logistics, clamp inactive) → retail THB 2,546,873 / USD
+  77,068 / EUR 65,662 (÷0.60 GM)
+
 ## [2.14.1] - 2026-05-13
 
 ### Fixed — Vinci series filter (badges + `/vinci/series/<slug>` page) returned 0 products

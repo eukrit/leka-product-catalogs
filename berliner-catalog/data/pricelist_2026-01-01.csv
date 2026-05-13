@@ -1,0 +1,840 @@
+handle,item_code,name,page,list_eur,remarks,status
+berliner-lu-001-001,LU.001.001,LevelUp.01.1,46,34333.0,,active
+berliner-lu-002-002,LU.002.002,LevelUp.02.2,47,45218.0,,active
+berliner-lu-003-001,LU.003.001,LevelUp.03.1,48,92614.0,,active
+berliner-lu-004-004,LU.004.004,LevelUp.04.4,49,103561.0,,active
+berliner-lu-005-002,LU.005.002,LevelUp.05.2,50,138501.0,,active
+berliner-solar-explorer,,Solar Explorer,51,595.0,,name_only_active
+berliner-tile-slide-fish,,Tile Slide Fish,51,531.0,,name_only_active
+berliner-maze-slider,,Maze Slider,51,531.0,,name_only_active
+berliner-roller-ball,,Roller Ball,51,595.0,,name_only_active
+berliner-spin-maze,,Spin Maze,51,531.0,,name_only_active
+berliner-level-3,,Level 3,51,531.0,,name_only_active
+berliner-tumble-turn,,Tumble Turn,51,531.0,,name_only_active
+berliner-make-it-rain,,Make It Rain,51,595.0,,name_only_active
+berliner-spin-dice,,Spin Dice,51,595.0,,name_only_active
+berliner-spin-maracas,,Spin Maracas,51,1063.0,,name_only_active
+berliner-chimes,,Chimes,51,1265.0,,name_only_active
+berliner-bongos,,Bongos,51,950.0,,name_only_active
+berliner-arc-ladder,,Arc Ladder,52,,Price depends on individual project,name_only_on_request
+berliner-vine,,Vine,52,,Price depends on individual project,name_only_on_request
+berliner-horizontal-arc-ladder,,Horizontal Arc Ladder,52,,Price depends on individual project,name_only_on_request
+berliner-access-net,,Access Net,52,,Price depends on individual project,name_only_on_request
+berliner-net-climber,,Net Climber,52,,Price depends on individual project,name_only_on_request
+berliner-rope-ladder,,Rope Ladder,52,,Price depends on individual project,name_only_on_request
+berliner-climbing-plates,,Climbing Plates,52,,Price depends on individual project,name_only_on_request
+berliner-rocking-plate-seat,,Rocking Plate Seat,52,,Price depends on individual project,name_only_on_request
+berliner-access-rungs,,Access Rungs,52,,Price depends on individual project,name_only_on_request
+berliner-balancing-balls,,Balancing Balls,52,,Price depends on individual project,name_only_on_request
+berliner-s-ladder,,S-Ladder,52,,Price depends on individual project,name_only_on_request
+berliner-climbing-ring-stairs,,Climbing Ring Stairs,52,,Price depends on individual project,name_only_on_request
+berliner-spiral,,Spiral,52,,Price depends on individual project,name_only_on_request
+berliner-climbing-rings,,Climbing Rings,52,,Price depends on individual project,name_only_on_request
+berliner-vertical-access-rings,,Vertical Access Rings,52,,Price depends on individual project,name_only_on_request
+berliner-horizontal-access-rings,,Horizontal Access Rings,52,,Price depends on individual project,name_only_on_request
+berliner-satellights,,Satellights,52,,Price depends on individual project,name_only_on_request
+berliner-chessboard-bridge,,Chessboard Bridge,52,,Price depends on individual project,name_only_on_request
+berliner-fast-lane-slide,,Fast Lane Slide,52,,Price depends on individual project,name_only_on_request
+berliner-90-292-400-2,90.292.400.2,Triitopia.02,59,322686.0,,active
+berliner-90-292-402-0,90.292.402.0,Triitopia.20,60,181089.0,Price with stainless steel slide,active
+berliner-90-292-400-4,90.292.400.4,Triitopia.04,61,62938.0,,active
+berliner-90-292-400-7,90.292.400.7,Triitopia.07,61,55080.0,,active
+berliner-90-292-400-8,90.292.400.8,Triitopia.08,62,186657.0,,active
+berliner-90-292-400-5,90.292.400.5,Triitopia.05,62,80603.0,,active
+berliner-90-292-402-1,90.292.402.1,Triitopia.21,63,104447.0,,active
+berliner-90-292-010,90.292.010,Trii Base,65,7200.0,,active
+berliner-trii1,,Trii1,65,14172.0,,name_only_active
+berliner-trii2,,Trii2,65,13907.0,,name_only_active
+berliner-trii3,,Trii3,65,15291.0,,name_only_active
+berliner-quii,,Quii,65,9600.0,,name_only_active
+berliner-90-292-100-1,90.292.100.1,Trii1.01,66,15148.0,,active
+berliner-90-292-200-8,90.292.200.8,Trii2.08,66,26396.0,,active
+berliner-90-292-300-3,90.292.300.3,Trii3.03,67,36098.0,,active
+berliner-90-292-201-4,90.292.201.4,Trii2.14,67,15333.0,,active
+berliner-90-293-102,90.293.102,Greenville Combi.102,68,40430.0,,active
+berliner-90-293-061,90.293.061,Greenville Combi.061,69,26375.0,,active
+berliner-90-293-039,90.293.039,Greenville Combi.039,70,78305.0,,active
+berliner-90-293-362,90.293.362,Greenville Combi.362,70,61926.0,Price with stainless steel box slide,active
+berliner-90-293-207,90.293.207,Greenville Combi.207,71,115786.0,,active
+berliner-90-293-155,90.293.155,Greenville Combi.155,72,38306.0,,active
+berliner-90-293-307,90.293.307,Greenville Combi.307,73,54030.0,Price with straight concave stainless steel slide,active
+berliner-90-293-641,90.293.641,Greenville Combi.641,73,77922.0,,active
+berliner-90-293-077,90.293.077,Greenville Combi.077,75,,Upon request,on_request
+berliner-90-293-479,90.293.479,Greenville Combi.479,76,56984.0,,active
+berliner-ladder-trii1,,Ladder Trii1,77,976.0,,name_only_active
+berliner-ladder-trii2,,Ladder Trii2,77,1427.0,,name_only_active
+berliner-ladder-trii3,,Ladder Trii3,77,1940.0,,name_only_active
+berliner-rope-ladder-trii1,,Rope Ladder Trii1,77,447.0,,name_only_active
+berliner-rope-ladder-trii2,,Rope Ladder Trii2,77,669.0,,name_only_active
+berliner-rope-ladder-trii3,,Rope Ladder Trii3,77,810.0,,name_only_active
+berliner-ramp-trii1,,Ramp Trii1,77,2877.0,,name_only_active
+berliner-ramp-trii2,,Ramp Trii2,77,4205.0,,name_only_active
+berliner-ramp-trii3,,Ramp Trii3,77,5717.0,,name_only_active
+berliner-stairway-trii1,,Stairway Trii1,77,2630.0,,name_only_active
+berliner-inner-net-trii1,,Inner Net Trii1,77,824.0,,name_only_active
+berliner-inner-net-trii2,,Inner Net Trii2,77,1425.0,,name_only_active
+berliner-inner-net-trii3,,Inner Net Trii3,77,2239.0,,name_only_active
+berliner-access-net-trii1,,Access Net Trii1,77,2215.0,,name_only_active
+berliner-access-net-trii2,,Access Net Trii2,77,2412.0,,name_only_active
+berliner-access-net-trii3,,Access Net Trii3,77,2898.0,,name_only_active
+berliner-twisted-net,,Twisted Net,77,2399.0,Price without posts,name_only_active
+berliner-suspension-bridge,,Suspension Bridge,77,3234.0,Length 3 m,name_only_active
+berliner-rubber-bridge,,Rubber Bridge,77,2200.0,Length 3 m,name_only_active
+berliner-net-tunnel,,Net Tunnel,77,14717.0,Length 3 m,name_only_active
+berliner-sliding-pole-trii1,,Sliding Pole Trii1,77,562.0,,name_only_active
+berliner-sliding-pole-trii2,,Sliding Pole Trii2,77,671.0,,name_only_active
+berliner-banister-trii1,,Banister Trii1,77,2138.0,,name_only_active
+berliner-banister-trii2,,Banister Trii2,77,3353.0,,name_only_active
+berliner-stainless-steel-slide-trii1,,Stainless Steel Slide Trii1,77,5660.0,Straight box stainless steel slide,name_only_active
+berliner-stainless-steel-slide-trii1-2,,Stainless Steel Slide Trii1,77,6543.0,Straight concave stainless steel slide,name_only_active
+berliner-stainless-steel-slide-trii2,,Stainless Steel Slide Trii2,77,6621.0,Straight box stainless steel slide,name_only_active
+berliner-stainless-steel-slide-trii2-2,,Stainless Steel Slide Trii2,77,9405.0,Straight concave stainless steel slide,name_only_active
+berliner-stainless-steel-slide-trii3,,Stainless Steel Slide Trii3,77,14434.0,Straight concave stainless steel slide,name_only_active
+berliner-fast-lane-slide-trii1,,Fast Lane Slide Trii1,77,4589.0,Attachment height approx. 1 m,name_only_active
+berliner-fast-lane-slide-boo-doubleboo-triitopia-02,,"Fast Lane Slide Boo, DoubleBoo, Triitopia.02",77,5743.0,"Attachment height approx. 1,5 m",name_only_active
+berliner-fast-lane-slide-trii2-bam-splash-peak,,"Fast Lane Slide Trii2, Bam, Splash, Peak",77,7084.0,Attachment height approx. 2 m,name_only_active
+berliner-triangular-net-with-small-sand-workshop,,Triangular Net with Small Sand Workshop,77,3351.0,,name_only_active
+berliner-flag,,Flag,77,674.0,,name_only_active
+berliner-90-294-001-237,90.294.001.237,Leaf L,77,1072.0,Price without fixings,active
+berliner-90-294-001-236,90.294.001.236,Leaf M,77,906.0,Price without fixings,active
+berliner-90-294-001-235,90.294.001.235,Leaf S,77,845.0,Price without fixings,active
+berliner-90-295-002,90.295.002,Tower2,82,120485.0,,active
+berliner-90-295-007,90.295.007,Tower7,82,210443.0,,active
+berliner-90-295-003,90.295.003,Tower3,83,86604.0,,active
+berliner-90-295-005,90.295.005,Tower5,83,98435.0,,active
+berliner-90-295-001,90.295.001,Tower1,84,55475.0,,active
+berliner-90-295-006,90.295.006,Tower6,84,45054.0,,active
+berliner-90-295-004,90.295.004,Tower4,85,202854.0,,active
+berliner-90-280-004,90.280.004,QuadroBoo,87,78551.0,,active
+berliner-peak,,Peak,87,8513.0,,name_only_active
+berliner-splash,,Splash,87,8470.0,,name_only_active
+berliner-90-270-001,90.270.001,Bam.01,88,42612.0,,active
+berliner-90-270-000,90.270.000,Bam,88,29175.0,,active
+berliner-90-280-000,90.280.000,Boo,89,22868.0,,active
+berliner-90-280-002,90.280.002,Boo.02,89,30492.0,,active
+berliner-90-280-000-2,90.280.000.2,DoubleBoo,90,42246.0,,active
+berliner-90-280-000-3,90.280.000.3,TripleBoo,90,63815.0,,active
+berliner-90-280-014,90.280.014,QuadroBoo.14,91,85363.0,,active
+berliner-90-292-001,90.292.001,Peak.01,92,13431.0,,active
+berliner-90-291-001,90.291.001,Splash.01,92,14627.0,,active
+berliner-91-200-022,91.200.022,PentaBoo M,93,48005.0,,active
+berliner-91-200-033,91.200.033,PentaBoo L,,48849.0,,active
+berliner-90-293-006,90.293.006,Greenville Combi.06,94,108789.0,,active
+berliner-90-293-002,90.293.002,Greenville Combi.02,95,63012.0,,active
+berliner-90-293-003,90.293.003,Greenville Combi.03,95,47318.0,,active
+berliner-90-293-795,90.293.795,Greenville Combi.795,96,267865.0,,active
+berliner-90-293-793,90.293.793,Greenville Combi.793,97,115560.0,,active
+berliner-90-293-045,90.293.045,Greenville Combi.045,97,36155.0,,active
+berliner-90-293-700,90.293.700,Greenville Combi.700,98,141847.0,Price with stainless steel slide and Fast Lane Slide,active
+berliner-90-293-024,90.293.024,Greenville Combi.024,99,62294.0,,active
+berliner-90-293-444,90.293.444,Greenville Combi.444,100,296198.0,,active
+berliner-90-224-100-2,90.224.100.2,Woodville Combi.02,107,44489.0,,active
+berliner-90-224-100-3,90.224.100.3,Woodville Combi.03,108,58411.0,,active
+berliner-90-224-103-3,90.224.103.3,Woodville Combi.033,109,44053.0,,active
+berliner-90-224-100-4,90.224.100.4,Woodville Combi.04,110,37535.0,,active
+berliner-90-224-100-5,90.224.100.5,Woodville Combi.05,111,44469.0,Price with stainless steel slide,active
+berliner-90-224-010-1,90.224.010.1,Shack1.01,112,19786.0,,active
+berliner-90-224-030-100-02,90.224.030.100.02,Shack3.02,112,16920.0,,active
+berliner-90-224-020-1,90.224.020.1,Shack2.01,113,24057.0,,active
+berliner-90-224-040-100-02,90.224.040.100.02,Shack4.02,113,18019.0,,active
+berliner-access-net-shack1,,Access Net Shack1,114,943.0,,name_only_active
+berliner-access-net-shack2,,Access Net Shack2,114,1121.0,,name_only_active
+berliner-rope-ladder-shack1,,Rope Ladder Shack1,114,470.0,,name_only_active
+berliner-rope-ladder-shack2,,Rope Ladder Shack2,114,565.0,,name_only_active
+berliner-climbing-rope-shack1,,Climbing Rope Shack1,114,251.0,,name_only_active
+berliner-climbing-rope-shack2,,Climbing Rope Shack2,114,317.0,,name_only_active
+berliner-access-bridge,,Access Bridge,114,,Price depends on individual project,name_only_on_request
+berliner-banister-shack1,,Banister Shack1,114,2570.0,,name_only_active
+berliner-banister-shack2,,Banister Shack2,114,3353.0,,name_only_active
+berliner-rocking-plates-shack1,,Rocking Plates Shack1,114,224.0,,name_only_active
+berliner-rocking-plates-shack2,,Rocking Plates Shack2,114,280.0,,name_only_active
+berliner-ramp-shack1,,Ramp Shack1,114,3745.0,,name_only_active
+berliner-ramp-shack2,,Ramp Shack2,114,5282.0,,name_only_active
+berliner-panel-bridge,,Panel Bridge,114,1563.0,Length 3 m,name_only_active
+berliner-suspension-bridge-2,,Suspension Bridge,114,3234.0,Length 3 m,name_only_active
+berliner-suspension-net,,Suspension Net,114,713.0,,name_only_active
+berliner-transfer-station,,Transfer Station,114,6893.0,,name_only_active
+berliner-sand-table,,Sand Table,114,658.0,,name_only_active
+berliner-sliding-pole-shack1,,Sliding Pole Shack1,114,596.0,,name_only_active
+berliner-sliding-pole-shack2,,Sliding Pole Shack2,114,671.0,,name_only_active
+berliner-straight-box-slide,,Straight Box Slide,114,5981.0,"Attachment height approx. 1,5 m",name_only_active
+berliner-curved-concave-slide,,Curved Concave Slide,114,11536.0,"Attachment height approx. 1,9 m",name_only_active
+berliner-window,,Window,134,862.0,,name_only_active
+berliner-sand-crane,,Sand Crane,134,608.0,,name_only_active
+berliner-slide,,Slide,134,2014.0,For Spoo M & Roo M,name_only_active
+berliner-fast-lane-slide-2,,Fast Lane Slide,134,4589.0,For Spoo M & Roo M,name_only_active
+berliner-small-sand-workshop,,Small Sand Workshop,134,1829.0,,name_only_active
+berliner-small-ramp,,Small Ramp,134,1037.0,,name_only_active
+berliner-track-the-mouse,,Track the Mouse,134,556.0,,name_only_active
+berliner-counter,,Counter,134,800.0,,name_only_active
+berliner-tic-tac-toe,,Tic-Tac-Toe,134,763.0,,name_only_active
+berliner-90-139-005,90.139.005,Lunia XL,142,264761.0,Price with wide-meshed railing net,active
+berliner-90-137-005,90.137.005,Lunia L,143,207747.0,Price with wide-meshed railing net,active
+berliner-90-135-005,90.135.005,Lunia M,143,183307.0,Price with wide-meshed railing net,active
+berliner-lunia-xl-small-meshed-net-in-basket,,Lunia XL small-meshed net in basket,,12656.0,Extra charges,name_only_active
+berliner-lunia-l-small-meshed-net-in-basket,,Lunia L small-meshed net in basket,,5696.0,Extra charges,name_only_active
+berliner-lunia-m-small-meshed-net-in-basket,,Lunia M small-meshed net in basket,,3797.0,Extra charges,name_only_active
+berliner-lunia-xl-basket-not-climbable,,Lunia XL basket not climbable,,3647.0,"Extra charges
+Only viable with small-meshed net",name_only_active
+berliner-lunia-l-basket-not-climbable,,Lunia L basket not climbable,,2819.0,,name_only_active
+berliner-lunia-m-basket-not-climbable,,Lunia M basket not climbable,,2320.0,,name_only_active
+berliner-lunia-xl-individual-printed-membrane,,Lunia XL individual printed membrane,,7594.0,Extra charges,name_only_active
+berliner-lunia-l-individual-printed-membrane,,Lunia L individual printed membrane,,6328.0,Extra charges,name_only_active
+berliner-lunia-m-individual-printed-membrane,,Lunia M individual printed membrane,,5062.0,Extra charges,name_only_active
+berliner-sliding-pole-dna-l,,Sliding Pole DNA L,145,671.0,,name_only_active
+berliner-sliding-pole-dna-xl,,Sliding Pole DNA XL,145,807.0,,name_only_active
+berliner-duck-jibe-dna-l,,Duck Jibe DNA L,145,6717.0,,name_only_active
+berliner-duck-jibe-dna-xl,,Duck Jibe DNA XL,145,9291.0,,name_only_active
+berliner-tube-slide-4th-level-dna-l,,Tube Slide 4th level DNA L,145,28041.0,,name_only_active
+berliner-tube-slide-4th-level-dna-xl,,Tube Slide 4th level DNA XL,145,32966.0,,name_only_active
+berliner-tube-slide-3rd-level-dna-l,,Tube Slide 3rd level DNA L,145,23119.0,,name_only_active
+berliner-tube-slide-3rd-level-dna-xl,,Tube Slide 3rd level DNA XL,145,28041.0,,name_only_active
+berliner-access-net-dna-l,,Access Net DNA L,145,2412.0,,name_only_active
+berliner-access-net-dna-xl,,Access Net DNA XL,145,2898.0,,name_only_active
+berliner-fast-lane-slide-dna-l,,Fast Lane Slide DNA L,145,5743.0,"Attachment height approx. 1,5 m",name_only_active
+berliner-fast-lane-slide-dna-xl,,Fast Lane Slide DNA XL,145,7084.0,Attachment height approx. 2 m,name_only_active
+berliner-banister-dna-l,,Banister DNA L,145,2570.0,,name_only_active
+berliner-banister-dna-xl,,Banister DNA XL,145,3353.0,,name_only_active
+berliner-suspension-bridge-dna-l,,Suspension Bridge DNA L,145,3234.0,Length 3 m,name_only_active
+berliner-suspension-bridge-dna-xl,,Suspension Bridge DNA XL,145,3882.0,Length 3 m,name_only_active
+berliner-net-tunnel-dna-l,,Net Tunnel DNA L,145,14717.0,Length 3 m,name_only_active
+berliner-net-tunnel-dna-xl,,Net Tunnel DNA XL,145,19133.0,Length 3 m,name_only_active
+berliner-90-295-012,90.295.012,DNA Tower L.02,146,32966.0,,active
+berliner-90-293-463,90.293.463,DNA Tower L.03.02,146,64826.0,,active
+berliner-90-295-064,90.295.064,DNA Tower L.03.01,147,56281.0,,active
+berliner-90-295-013,90.295.013,DNA Tower L.03,,52368.0,,active
+berliner-90-295-014,90.295.014,DNA Tower L.04,147,66344.0,,active
+berliner-90-295-025,90.295.025,DNA Tower XL.03,148,77681.0,,active
+berliner-90-295-024,90.295.024,DNA Tower XL.02,148,55357.0,,active
+berliner-90-295-026,90.295.026,DNA Tower XL.04,149,95903.0,,active
+berliner-90-293-561,90.293.561,DNA Combi.04,150,157219.0,,active
+berliner-90-100-043-1,90.100.043.1,The Globe,154,29163.0,,active
+berliner-90-295-700-1,90.295.700.1,Wonderwalls.01,122,12529.0,,active
+berliner-90-295-700-2,90.295.700.2,Wonderwalls.02,125,17151.0,,active
+berliner-90-295-700-3,90.295.700.3,Wonderwalls.03,126,15200.0,,active
+berliner-90-295-000-1,90.295.000.1,Spoo S.01 (Ragged-Style),129,13209.0,"Extra charge 5 % for Mixed-Style, extra charge 9 % for
+­Greenville-Style",active
+berliner-90-295-100-1,90.295.100.1,Spoo M.01 (Ragged-Style),129,14962.0,,active
+berliner-90-295-100-3,90.295.100.3,Spoo M.03 (Ragged-Style),130,23986.0,,active
+berliner-90-295-100-6,90.295.100.6,Spoo M.06 (Ragged-Style),130,19383.0,,active
+berliner-90-295-100-8,90.295.100.8,Spoo M.08 (Ragged-Style),130,19894.0,,active
+berliner-90-295-600-3,90.295.600.3,Roo M.03 (Ragged-Style),131,17868.0,,active
+berliner-90-295-500-1,90.295.500.1,Roo S.01 (Ragged-Style),131,14250.0,,active
+berliner-90-295-600-2,90.295.600.2,Roo M.02 (Ragged-Style),132,17482.0,,active
+berliner-90-296-001,90.296.001,SpooRoo Combi.01 (Ragged-Style),132,39874.0,,active
+berliner-90-296-002,90.296.002,SpooRoo Combi.02 (Ragged-Style),133,19488.0,,active
+berliner-90-296-003,90.296.003,SpooRoo Combi.03 (Ragged-Style),133,29416.0,,active
+berliner-ladder-s,,Ladder S,134,500.0,,name_only_active
+berliner-ladder-m,,Ladder M,134,868.0,,name_only_active
+berliner-ramp-s,,Ramp S,134,1103.0,,name_only_active
+berliner-ramp-m,,Ramp M,134,2641.0,,name_only_active
+berliner-stairway-s,,Stairway S,134,1591.0,,name_only_active
+berliner-stairway-m,,Stairway M,134,2630.0,,name_only_active
+berliner-access-net-with-handrail-s,,Access Net with Handrail S,134,1089.0,,name_only_active
+berliner-access-net-with-handrail-m,,Access Net with Handrail M,134,1970.0,,name_only_active
+berliner-suspension-bridge-3,,Suspension Bridge,134,2640.0,Length 2 m,name_only_active
+berliner-rubber-bridge-2,,Rubber Bridge,134,2200.0,,name_only_active
+berliner-90-100-043-3,90.100.043.3,The Cube L,156,30889.0,,active
+berliner-90-100-043-2,90.100.043.2,The Cube M,157,26631.0,,active
+berliner-90-100-043-6,90.100.043.6,Cubiron L,158,37101.0,,active
+berliner-90-100-043-5,90.100.043.5,Cubiron M,159,31991.0,,active
+berliner-climbing-wall-hdpe-cosmo,,Climbing Wall (HDPE) Cosmo,160,2594.0,,name_only_active
+berliner-climbing-wall-hdpe-cosmo-s,,Climbing Wall (HDPE) Cosmo S,160,2169.0,,name_only_active
+berliner-climbing-ramp-hdpe-cosmo,,Climbing Ramp (HDPE) Cosmo,160,2842.0,,name_only_active
+berliner-climbing-ramp-hdpe-cosmo-s,,Climbing Ramp (HDPE) Cosmo S,160,2395.0,,name_only_active
+berliner-sliding-pole-cosmo,,Sliding Pole Cosmo,160,671.0,,name_only_active
+berliner-access-net-cosmo,,Access Net Cosmo,160,1528.0,,name_only_active
+berliner-access-net-cosmo-s,,Access Net Cosmo S,160,1239.0,,name_only_active
+berliner-rubber-mats-cosmo,,Rubber Mats Cosmo,160,1858.0,,name_only_active
+berliner-rubber-mats-cosmo-s,,Rubber Mats Cosmo S,160,1858.0,,name_only_active
+berliner-duck-jibe-cosmo,,Duck Jibe Cosmo,160,6717.0,,name_only_active
+berliner-net-wall-cosmo,,Net Wall Cosmo,160,2229.0,,name_only_active
+berliner-net-wall-cosmo-s,,Net Wall Cosmo S,160,1856.0,,name_only_active
+berliner-net-ramp-cosmo,,Net Ramp Cosmo,160,1615.0,,name_only_active
+berliner-net-ramp-cosmo-s,,Net Ramp Cosmo S,160,1374.0,,name_only_active
+berliner-chalkboard-cosmo,,Chalkboard Cosmo,160,2594.0,,name_only_active
+berliner-banister-cosmo,,Banister Cosmo,160,2570.0,,name_only_active
+berliner-banister-cosmo-s,,Banister Cosmo S,160,1899.0,,name_only_active
+berliner-90-112-200,90.112.200,Cosmo.20,161,39949.0,Extra charge 5 % for coloured tubes,active
+berliner-90-112-390,90.112.390,Cosmo.39,162,32654.0,,active
+berliner-90-110-120,90.110.120,Cosmo Base (without Rubber Mats),162,21170.0,,active
+berliner-90-112-99-105,90.112.99.105,Cosmo.105,163,27797.0,,active
+berliner-90-112-99-111,90.112.99.111,Cosmo.111,164,23765.0,,active
+berliner-90-111-040,90.111.040,Cosmo S.04,164,24529.0,,active
+berliner-90-111-050,90.111.050,Cosmo S.05,165,22673.0,,active
+berliner-90-111-000,90.111.000,Cosmo S Base,165,18110.0,,active
+berliner-satellights-2,,Satellights,166,25367.0,,name_only_active
+berliner-duck-jibe,,Duck Jibe,166,9292.0,,name_only_active
+berliner-dangle-arc,,Dangle Arc,166,3276.0,,name_only_active
+berliner-net-tunnel-2,,Net Tunnel,166,13632.0,,name_only_active
+berliner-net-arc,,Net Arc,166,8680.0,,name_only_active
+berliner-net-arc-with-climbing-ropes,,Net Arc with Climbing Ropes,166,10754.0,,name_only_active
+berliner-chessboard-arc,,Chessboard Arc,166,11478.0,,name_only_active
+berliner-wobble-way,,Wobble Way,166,11475.0,,name_only_active
+berliner-rubber-mats,,Rubber Mats,166,185.0,each,name_only_active
+berliner-banister,,Banister,166,3353.0,,name_only_active
+berliner-71-133-000,71.133.000,Quadrifol Base,167,13198.0,,active
+berliner-71-133-004,71.133.004,Quadrifol.04,168,25843.0,,active
+berliner-71-133-006,71.133.006,Quadrifol.06,168,28024.0,,active
+berliner-71-133-001,71.133.001,Quadrifol.01,169,54634.0,,active
+berliner-71-133-002,71.133.002,Quadrifol.02,170,53507.0,,active
+berliner-71-133-003,71.133.003,Quadrifol.03,171,61510.0,,active
+berliner-90-100-045,90.100.045,Pluto,173,27589.0,,active
+berliner-90-100-115,90.100.115,Phoenix,173,32071.0,,active
+berliner-90-100-145,90.100.145,Pegasus,173,52123.0,,active
+berliner-90-140-224,90.140.224,Neptun XXL,174,121640.0,,active
+berliner-90-100-110,90.100.110,Neptun,175,17308.0,,active
+berliner-90-141-020,90.141.020,Neptun.17,175,82208.0,Price with stainless steel slide,active
+berliner-90-141-429,90.141.429,Neptun.20,176,59541.0,Price with stainless steel slide,active
+berliner-90-141-336,90.141.336,Neptun.22,176,49258.0,Price with stainless steel slide,active
+berliner-90-141-227,90.141.227,Irrland,177,173646.0,,active
+berliner-90-141-232,90.141.232,Jupiter XXL,178,98156.0,,active
+berliner-90-100-040,90.100.040,Jupiter,179,15247.0,,active
+berliner-98-100-040,98.100.040,Mini Jupiter,179,12822.0,,active
+berliner-90-140-027,90.140.027,Jupiter.03,179,22606.0,,active
+berliner-90-140-712,90.140.712,Jupiter.13,180,31637.0,,active
+berliner-90-140-001,90.140.001,Jupiter.07,180,45259.0,,active
+berliner-90-140-030,90.140.030,Jupiter.02,181,17891.0,,active
+berliner-90-140-921,90.140.921,Phoenix.02,181,71240.0,,active
+berliner-90-100-601-000-10,90.100.601.000.10,Spaceball XL,182,21104.0,,active
+berliner-90-100-601-000-19,90.100.601.000.19,Spaceball XL,182,25778.0,stainless steel,active
+berliner-90-134-066,90.134.066,Spaceball M.01,182,28227.0,,active
+berliner-90-100-111-000-10,90.100.111.000.10,Spaceball L,183,16503.0,,active
+berliner-90-100-111-900-10,90.100.111.900.10,Spaceball L,183,19498.0,stainless steel,active
+berliner-90-100-041-000-10,90.100.041.000.10,Spaceball M,183,14861.0,,active
+berliner-90-100-041-000-19,90.100.041.000.19,Spaceball M,183,18139.0,stainless steel,active
+berliner-90-100-031-000-10,90.100.031.000.10,Spaceball S,183,13786.0,,active
+berliner-90-100-031-900-00,90.100.031.900.00,Spaceball S,183,16051.0,stainless steel,active
+berliner-90-100-020,90.100.020,Venus,184,10063.0,,active
+berliner-90-141-413,90.141.413,Mini Mars.03,184,13468.0,,active
+berliner-99-100-015,99.100.015,Maxi Mars,185,7289.0,,active
+berliner-90-100-010,90.100.010,Mars,185,6558.0,,active
+berliner-98-100-010,98.100.010,Mini Mars,185,5098.0,,active
+berliner-90-140-845,90.140.845,Pegasus.02,186,80742.0,,active
+berliner-90-100-075,90.100.075,Uranus,186,41111.0,,active
+berliner-90-141-248,90.141.248,Roanoke Park,187,110553.0,,active
+berliner-transfer-station-2,,Transfer Station,188,6893.0,,name_only_active
+berliner-duck-jibe-spaceball-xl,,Duck Jibe Spaceball XL,188,9292.0,,name_only_active
+berliner-hammock,,Hammock,188,2454.0,Incl. swivel joints,name_only_active
+berliner-hand-over-hand-ladder,,Hand-over-Hand Ladder,188,389.0,Price first meter incl. all end fixings,name_only_active
+berliner-hand-over-hand-ladder-2,,Hand-over-Hand Ladder,188,176.0,Every additional linear meter up to 7 m total length,name_only_active
+berliner-loop-rope,,Loop Rope,188,202.0,Price first meter incl. all end fixings,name_only_active
+berliner-loop-rope-2,,Loop Rope,188,106.0,Every additional linear meter up to 7 m total length,name_only_active
+berliner-rope-ladder-spaceball-xl,,Rope Ladder Spaceball XL,188,505.0,Incl. fixings to structure and incl. ground fixings,name_only_active
+berliner-rope-ladder-spaceball-l-neptun-phoenix,,Rope Ladder Spaceball L/Neptun/Phoenix,188,389.0,Incl. fixings to structure and incl. ground fixings,name_only_active
+berliner-rope-ladder-spaceball-m-jupiter-pluto,,Rope Ladder Spaceball M/Jupiter/Pluto,188,329.0,Incl. fixings to structure and incl. ground fixings,name_only_active
+berliner-rope-ladder-spaceball-s-mini-jupiter,,Rope Ladder Spaceball S/Mini Jupiter,188,278.0,Incl. fixings to structure and incl. ground fixings,name_only_active
+berliner-climbing-rope-spaceball-xl,,Climbing Rope Spaceball XL,188,477.0,Incl. fixings to structure and incl. ground fixings,name_only_active
+berliner-climbing-rope-spaceball-l-neptun-phoenix,,Climbing Rope Spaceball L/Neptun/Phoenix,188,261.0,Incl. fixings to structure and incl. ground fixings,name_only_active
+berliner-climbing-rope-spaceball-m-jupiter-pluto,,Climbing Rope Spaceball M/Jupiter/Pluto,188,227.0,Incl. fixings to structure and incl. ground fixings,name_only_active
+berliner-climbing-rope-spaceball-s-mini-jupiter,,Climbing Rope Spaceball S/Mini Jupiter,188,192.0,Incl. fixings to structure and incl. ground fixings,name_only_active
+berliner-balancing-cable-bridge,,Balancing Cable Bridge,188,2188.0,3 m with bridge stand,name_only_active
+berliner-jungle-bridge,,Jungle Bridge,188,1424.0,Price first meter incl. all end fixings,name_only_active
+berliner-jungle-bridge-2,,Jungle Bridge,188,672.0,Every additional linear meter up to 7 m total length,name_only_active
+berliner-net-tunnel-3,,Net Tunnel,188,1097.0,Price first meter incl. all end fixings,name_only_active
+berliner-net-tunnel-4,,Net Tunnel,188,577.0,Every additional linear meter up to 7 m total length,name_only_active
+berliner-rubber-bridge-3,,Rubber Bridge,188,4009.0,3 m with stands,name_only_active
+berliner-rubber-ramp,,Rubber Ramp,188,3621.0,Incl. handgrips and bottom tube anchoring,name_only_active
+berliner-twisted-net-2,,Twisted Net,188,,Price depends on individual project,name_only_on_request
+berliner-rubber-mat-hexagon,,Rubber Mat Hexagon,188,438.0,,name_only_active
+berliner-rubber-mat-square,,Rubber Mat Square,188,184.0,,name_only_active
+berliner-quadropolis-for-jupiter,,Quadropolis for Jupiter,188,,Price depends on individual project,name_only_on_request
+berliner-quadropolis-for-mars,,Quadropolis for Mars,188,,Price depends on individual project,name_only_on_request
+berliner-hdpe-fort-for-neptun,,HDPE Fort for Neptun,188,16270.0,"Incl. rubber membranes, panels and safety nets",name_only_active
+berliner-hdpe-flag,,HDPE Flag,188,674.0,Incl. tube and fixings,name_only_active
+berliner-system-net-for-spaceball-xl,,System Net for Spaceball XL,189,2593.0,,name_only_active
+berliner-system-net-for-spaceball-l-neptun-maxi-mars-venus,,"System Net for Spaceball L/Neptun/Maxi Mars/
+Venus",189,1593.0,,name_only_active
+berliner-system-net-for-spaceball-m-jupiter-mars,,System Net for Spaceball M/Jupiter/Mars,189,951.0,,name_only_active
+berliner-system-net-for-spaceball-s,,System Net for Spaceball S,189,819.0,,name_only_active
+berliner-system-net-for-mini-jupiter-mini-mars,,System Net for Mini Jupiter/Mini Mars,189,833.0,,name_only_active
+berliner-access-net-small-type-for-spaceball-xl,,Access Net (Small Type) for Spaceball XL,189,3052.0,,name_only_active
+berliner-access-net-small-type-for-spaceball-l,,Access Net (Small Type) for Spaceball L,189,2083.0,,name_only_active
+berliner-access-net-small-type-for-spaceball-m,,Access Net (Small Type) for Spaceball M,189,1395.0,,name_only_active
+berliner-access-net-small-type-for-spaceball-s,,Access Net (Small Type) for Spaceball S,189,964.0,,name_only_active
+berliner-access-net-small-type-for-neptun-phoenix,,Access Net (Small Type) for Neptun/Phoenix,189,1966.0,,name_only_active
+berliner-access-net-small-type-for-jupiter-pluto,,Access Net (Small Type) for Jupiter/Pluto,189,1452.0,,name_only_active
+berliner-access-net-small-type-for-mini-jupiter,,Access Net (Small Type) for Mini Jupiter,189,1395.0,,name_only_active
+berliner-access-net-wide-type-for-neptun-phoenix,,Access Net (Wide Type) for Neptun/Phoenix,189,4031.0,,name_only_active
+berliner-access-net-wide-type-for-jupiter-pluto,,Access Net (Wide Type) for Jupiter/Pluto,189,2862.0,,name_only_active
+berliner-access-net-wide-type-for-mini-jupiter,,Access Net (Wide Type) for Mini Jupiter,189,2702.0,,name_only_active
+berliner-trapeze-access-net-wide-side-up-for-neptun-phoenix,,"Trapeze Access Net Wide Side Up for Neptun/
+Phoenix",189,2870.0,,name_only_active
+berliner-trapeze-access-net-wide-side-up-for-jupiter-pluto,,Trapeze Access Net Wide Side Up for Jupiter/Pluto,189,2038.0,,name_only_active
+berliner-trapeze-access-net-wide-side-up-for-mini-jupiter,,Trapeze Access Net Wide Side Up for Mini Jupiter,189,1695.0,,name_only_active
+berliner-trapeze-access-net-wide-side-down-for-spaceball-xl,,"Trapeze Access Net Wide Side Down for
+Spaceball XL",189,4191.0,,name_only_active
+berliner-trapeze-access-net-wide-side-down-for-spaceball-l,,Trapeze Access Net Wide Side Down for Spaceball L,189,2229.0,,name_only_active
+berliner-trapeze-access-net-wide-side-down-for-spaceball-m,,Trapeze Access Net Wide Side Down for ­Spaceball M,189,1518.0,,name_only_active
+berliner-trapeze-access-net-wide-side-down-for-spaceball-s-trapeze-access-net-wide-side-down-for-neptun-phoenix,,"Trapeze Access Net Wide Side Down for Spaceball S
+Trapeze Access Net Wide Side Down for Neptun/
+Phoenix","189
+189",,,name_only_on_request
+berliner-trapeze-access-net-wide-side-down-for-jupiter-pluto,,"Trapeze Access Net Wide Side Down for Jupiter/
+Pluto",189,1826.0,,name_only_active
+berliner-trapeze-access-net-wide-side-down-for-mini-jupiter,,Trapeze Access Net Wide Side Down for Mini Jupiter,189,1723.0,,name_only_active
+berliner-curved-tunnel-slide-for-neptun,,Curved Tunnel Slide for Neptun,189,17930.0,1/3 tube stainless steel,name_only_active
+berliner-tube-slide-for-neptun,,Tube Slide for Neptun,189,22352.0,stainless steel,name_only_active
+berliner-straight-box-slide-system-slide-narrow-type-for-neptun,,"Straight Box Slide (system slide narrow type)
+for Neptun",189,6621.0,stainless steel,name_only_active
+berliner-straight-box-slide-system-slide-wide-type-for-neptun,,"Straight Box Slide (system slide wide type)
+for Neptun",190,8304.0,stainless steel,name_only_active
+berliner-curved-tunnel-slide-for-jupiter,,Curved Tunnel Slide for Jupiter,189,15106.0,1/3 tube stainless steel,name_only_active
+berliner-tube-slide-for-jupiter,,Tube Slide for Jupiter,189,19528.0,stainless steel,name_only_active
+berliner-straight-box-slide-system-slide-narrow-type-for-jupiter,,"Straight Box Slide (system slide narrow type)
+for Jupiter",189,5981.0,stainless steel,name_only_active
+berliner-straight-box-slide-system-slide-wide-type-for-jupiter,,"Straight Box Slide (system slide wide type)
+for Jupiter",190,7511.0,stainless steel,name_only_active
+berliner-straight-box-slide-system-slide-narrow-type-for-mini-jupiter,,"Straight Box Slide (system slide narrow type)
+for Mini Jupiter",189,5660.0,stainless steel,name_only_active
+berliner-straight-box-slide-system-slide-wide-type-for-mini-jupiter,,"Straight Box Slide (system slide wide type)
+for Mini Jupiter",190,7233.0,stainless steel,name_only_active
+berliner-straight-box-slide-system-slide-narrow-type-for-spaceball-xl,,"Straight Box Slide (system slide narrow type)
+for Spaceball XL",189,7330.0,stainless steel,name_only_active
+berliner-straight-box-slide-system-slide-narrow-type-for-spaceball-l,,"Straight Box Slide (system slide narrow type)
+for Spaceball L",189,6621.0,stainless steel,name_only_active
+berliner-straight-box-slide-system-slide-narrow-type-for-spaceball-m,,"Straight Box Slide (system slide narrow type)
+for Spaceball M",189,5981.0,stainless steel,name_only_active
+berliner-straight-box-slide-system-slide-narrow-type-for-spaceball-s,,"Straight Box Slide (system slide narrow type)
+for Spaceball S",189,5660.0,stainless steel,name_only_active
+berliner-straight-box-slide-system-slide-wide-type-for-spaceball-xl,,"Straight Box Slide (system slide wide type)
+for Spaceball XL",190,9173.0,stainless steel,name_only_active
+berliner-straight-box-slide-system-slide-wide-type-for-spaceball-l,,"Straight Box Slide (system slide wide type)
+for Spaceball L",190,8304.0,stainless steel,name_only_active
+berliner-straight-box-slide-system-slide-narrow-type-for-mars,,"Straight Box Slide (system slide narrow type)
+for Mars",189,5981.0,stainless steel,name_only_active
+berliner-straight-concave-slide,,Straight Concave Slide,189,,Upon request,name_only_on_request
+berliner-curved-concave-slide-2,,Curved Concave Slide,189,,Upon request,name_only_on_request
+berliner-straight-banister-for-jupiter,,Straight Banister for Jupiter,189,2570.0,,name_only_active
+berliner-straight-banister-for-neptun,,Straight Banister for Neptun,189,2862.0,,name_only_active
+berliner-curved-banister-for-jupiter,,Curved Banister for Jupiter,189,2570.0,,name_only_active
+berliner-curved-banister-for-neptun,,Curved Banister for Neptun,189,2862.0,,name_only_active
+berliner-suspension-bridge-4,,Suspension Bridge,189,769.0,Price first meter incl. all end fixings,name_only_active
+berliner-suspension-bridge-5,,Suspension Bridge,189,526.0,Every additional linear meter up to 7 m total length,name_only_active
+berliner-dormer-entrance,,Dormer Entrance,189,3797.0,,name_only_active
+berliner-net-fort,,Net Fort,189,7962.0,,name_only_active
+berliner-rubber-nest,,Rubber Nest,189,1930.0,"Consists of 4 × Rubber Mat Hexagon and
+1 × Rubber Mat Square",name_only_active
+berliner-fast-lane-slide-hdpe-mini-jupiter-mini-mars,,Fast Lane Slide (HDPE) Mini Jupiter/Mini Mars,190,4927.0,"Attachment height approx. 1,2 m",name_only_active
+berliner-fast-lane-slide-hdpe-jupiter-mars-net-house-spaceball-m,,"Fast Lane Slide (HDPE) Jupiter/Mars/Net House/
+Spaceball M",190,5743.0,"Attachment height approx. 1,5 m",name_only_active
+berliner-fast-lane-slide-hdpe-neptun-maxi-mars-spaceball-l,,"Fast Lane Slide (HDPE) Neptun/Maxi Mars/
+Spaceball L",190,6596.0,"Attachment height approx. 1,8 m",name_only_active
+berliner-91-200-040,91.200.040,Pentagode XL,198,27251.0,,active
+berliner-91-200-030,91.200.030,Pentagode L,199,19921.0,,active
+berliner-91-200-020,91.200.020,Pentagode M,199,18388.0,,active
+berliner-91-200-010,91.200.010,Pentagode S,199,14592.0,,active
+berliner-712-000-5350,712.000.5350,Tetragode 5350,202,15977.0,,active
+berliner-712-000-9300,712.000.9300,Tetragode 9300,202,44724.0,,active
+berliner-712-000-7400,712.000.7400,Tetragode 7400,203,24259.0,,active
+berliner-712-000-6100,712.000.6100,Tetragode 6100,203,18915.0,,active
+berliner-712-000-3850,712.000.3850,Tetragode 3850,203,13524.0,,active
+berliner-712-000-7461-003,712.000.7461.003,Tetragode 7461.03 (with crow’s nest),204,62838.0,,active
+berliner-712-000-3852,712.000.3852,Tetragode 3852,205,23891.0,,active
+berliner-712-000-3854,712.000.3854,Tetragode 3854,205,47363.0,,active
+berliner-712-000-2901,712.000.2901,Trigode 2901,206,7388.0,,active
+berliner-access-net-2,,Access Net,208,,Price depends on individual project,name_only_on_request
+berliner-flag-2,,Flag,208,674.0,,name_only_active
+berliner-greenville-house,,Greenville House,208,,Price depends on individual project,name_only_on_request
+berliner-rubber-nest-2,,Rubber Nest,208,,Price depends on individual project,name_only_on_request
+berliner-rubber-seat,,Rubber Seat,208,348.0,Incl. all fixings to structure,name_only_active
+berliner-rubber-sleave,,Rubber Sleave,208,438.0,Incl. all fixings to structure,name_only_active
+berliner-rubber-mats-2,,Rubber Mats,208,184.0,Incl. all fixings to structure,name_only_active
+berliner-hdpe-panels,,HDPE Panels,208,190.0,Incl. all fixings to structure,name_only_active
+berliner-climbing-rope,,Climbing Rope,208,,Price depends on individual project,name_only_on_request
+berliner-crow-s-nest,,Crow’s Nest,208,21233.0,,name_only_active
+berliner-crow-s-nest-with-flag,,Crow’s Nest with Flag,208,21908.0,,name_only_active
+berliner-net-sack,,Net Sack,208,2097.0,,name_only_active
+berliner-pendulum-seat,,Pendulum Seat,208,886.0,Incl. all fixings to structure,name_only_active
+berliner-slide-2,,Slide,208,,Price depends on individual project,name_only_on_request
+berliner-sling-bridge,,Sling Bridge,208,,Price depends on individual project,name_only_on_request
+berliner-rubber-sling-seat,,Rubber Sling Seat,208,,Price depends on individual project,name_only_on_request
+berliner-slackline,,Slackline,208,,Price depends on individual project,name_only_on_request
+berliner-twisted-net-3,,Twisted Net,208,,Price depends on individual project,name_only_on_request
+berliner-ladder-curly1,,Ladder Curly1,235,976.0,,name_only_active
+berliner-ladder-curly2,,Ladder Curly2,235,1428.0,,name_only_active
+berliner-ladder-curly3,,Ladder Curly3,235,1940.0,,name_only_active
+berliner-suspension-bridge-6,,Suspension Bridge,235,3234.0,,name_only_active
+berliner-net-tunnel-5,,Net Tunnel,235,14717.0,,name_only_active
+berliner-small-ramp-curly045,,Small Ramp Curly045,235,1103.0,,name_only_active
+berliner-small-ramp-curly1,,Small Ramp Curly1,235,2641.0,,name_only_active
+berliner-90-293-787,90.293.787,Curly045.01,236,14969.0,,active
+berliner-90-293-784,90.293.784,Curly1.02,236,17757.0,,active
+berliner-90-293-786,90.293.786,Curly2.02,237,25907.0,,active
+berliner-90-293-711,90.293.711,Curly3.01,237,25702.0,,active
+berliner-90-293-789,90.293.789,CurlyCombi.01,238,166879.0,,active
+berliner-90-293-791,90.293.791,CurlyCombi.02,239,45748.0,,active
+berliner-crossed-stairway,,Crossed Stairway,242,2806.0,"Length: 4,24 m | price without posts",name_only_active
+berliner-crossed-stairway-2,,Crossed Stairway,242,3316.0,"Length: 6,00 m | price without posts",name_only_active
+berliner-crossed-rubber,,Crossed Rubber,242,3637.0,"Length: 4,24 m | price without posts",name_only_active
+berliner-crossed-rubber-2,,Crossed Rubber,242,4324.0,"Length: 6,00 m | price without posts",name_only_active
+berliner-air-walk,,Air Walk,242,2330.0,"Length: 4,24 m | price without posts",name_only_active
+berliner-air-walk-2,,Air Walk,242,2731.0,"Length: 6,00 m | price without posts",name_only_active
+berliner-layaway-walk-layaway-walk,,"Layaway Walk
+Layaway Walk","242
+242",,"Length: 4,24 m | price without posts
+Length: 6,00 m | price without posts",name_only_on_request
+berliner-floating-net,,Floating Net,242,3272.0,"Length: 4,24 m | price without posts",name_only_active
+berliner-floating-net-2,,Floating Net,242,3609.0,"Length: 6,00 m | price without posts",name_only_active
+berliner-sway-bridge,,Sway Bridge,242,2892.0,"Length: 4,24 m | price without posts",name_only_active
+berliner-sway-bridge-2,,Sway Bridge,242,3475.0,"Length: 6,00 m | price without posts",name_only_active
+berliner-net-helix,,Net Helix,242,1402.0,"Length: 4,24 m | price without posts",name_only_active
+berliner-net-helix-2,,Net Helix,242,1652.0,"Length: 6,00 m | price without posts",name_only_active
+berliner-inverted-ladder,,Inverted Ladder,242,2673.0,"Length: 4,24 m | price without posts",name_only_active
+berliner-inverted-ladder-2,,Inverted Ladder,242,3067.0,"Length: 6,00 m | price without posts",name_only_active
+berliner-panel-bridge-2,,Panel Bridge,242,2209.0,"Length: 4,24 m | price without posts",name_only_active
+berliner-panel-bridge-3,,Panel Bridge,242,3125.0,"Length: 6,00 m | price without posts",name_only_active
+berliner-rope-sweep,,Rope Sweep,242,1227.0,"Length: 4,24 m | price without posts",name_only_active
+berliner-rope-sweep-2,,Rope Sweep,242,1734.0,"Length: 6,00 m | price without posts",name_only_active
+berliner-balancing-cable-with-handrail,,Balancing Cable with Handrail,242,490.0,3 m straight Terranos system length,name_only_active
+berliner-balancing-cable-with-handrail-2,,Balancing Cable with Handrail,242,526.0,"4,24 m diagonal Terranos system length",name_only_active
+berliner-balancing-cable-with-loop-rope,,Balancing Cable with Loop Rope,242,729.0,Length 3 m | price without posts,name_only_active
+berliner-loop-rope-3,,Loop Rope,242,300.0,Price first meter incl. all end fixings,name_only_active
+berliner-loop-rope-4,,Loop Rope,242,93.0,Every additional linear meter up to 7 m total length,name_only_active
+berliner-loop-rope-5,,Loop Rope,242,484.0,3 m straight Terranos system length,name_only_active
+berliner-loop-rope-6,,Loop Rope,242,595.0,"4,24 m diagonal Terranos system length",name_only_active
+berliner-balancing-cable-with-hand-over-hand-ladder,,Balancing Cable with Hand-over-Hand Ladder,242,889.0,Length 3 m | Price without posts,name_only_active
+berliner-hand-over-hand-ladder-3,,Hand-over-Hand Ladder,242,383.0,Price first meter incl. all end fixings,name_only_active
+berliner-hand-over-hand-ladder-4,,Hand-over-Hand Ladder,242,130.0,Every additional linear meter up to 7 m total length,name_only_active
+berliner-climbing-rope-2,,Climbing Rope,242,510.0,"3 m straight Terranos system length, 1 × vertical rope
+with rubber cylinders",name_only_active
+berliner-climbing-rope-3,,Climbing Rope,242,650.0,"4,24 m diagonal Terranos system length, 2 × vertical
+ropes with rubber cylinders",name_only_active
+berliner-climbing-rope-several,,Climbing Rope (several),242,,Price depends on individual project,name_only_on_request
+berliner-slope-climbing-rope,,Slope Climbing Rope,242,,Price depends on individual project,name_only_on_request
+berliner-hammock-2,,Hammock,242,2454.0,Price without posts,name_only_active
+berliner-rubber-hammock,,Rubber Hammock,242,2454.0,Price without posts,name_only_active
+berliner-chessboard-bridge-2,,Chessboard Bridge,243,2629.0,Length 3 m | Price without posts,name_only_active
+berliner-rubber-bridge-4,,Rubber Bridge,243,1820.0,Length 3 m | Price without posts,name_only_active
+berliner-95-173-294,95.173.294,Terrano.3294,216,85937.0,,active
+berliner-95-173-295,95.173.295,Terrano.3295,217,46804.0,,active
+berliner-95-171-728,95.171.728,Terrano.1728,218,46850.0,,active
+berliner-95-171-250,95.171.250,Terrano.1250,219,64113.0,,active
+berliner-95-172-059,95.172.059,Terrano.2059,219,55757.0,,active
+berliner-95-172-696,95.172.696,Terrano.2696,220,30321.0,,active
+berliner-95-171-895,95.171.895,Terrano.1895,220,18343.0,,active
+berliner-95-171-893,95.171.893,Terrano.1893,221,64330.0,,active
+berliner-95-172-474,95.172.474,Terrano.2474,221,17285.0,,active
+berliner-95-171-970,95.171.970,Terrano.1970,222,48875.0,,active
+berliner-95-171-627,95.171.627,Chessboard Cube.01,222,14893.0,,active
+berliner-95-173-532,95.173.532,Chessboard Cube.02,223,26990.0,,active
+berliner-95-180-010-95-180-020,"95.180.010
+95.180.020","Sculptura.01
+Sculptura.02","224
+224",,,on_request
+berliner-95-180-030,95.180.030,Sculptura.03,224,10574.0,,active
+berliner-95-171-684,95.171.684,Octagon Star Climber,225,10734.0,,active
+berliner-95-170-658,95.170.658,Terrano.658,225,6484.0,,active
+berliner-95-171-726,95.171.726,Terrano.1726,226,10340.0,,active
+berliner-95-172-477,95.172.477,Terrano.2477,226,16920.0,,active
+berliner-95-171-935,95.171.935,Terrano.1935,227,38702.0,,active
+berliner-96-180-003,96.180.003,Terranova.3,228,59741.0,,active
+berliner-96-180-004,96.180.004,Terranova.4,229,27261.0,,active
+berliner-96-180-006,96.180.006,Terranova.6,230,16365.0,,active
+berliner-96-180-014,96.180.014,Terranova.14,231,23884.0,,active
+berliner-96-180-009,96.180.009,Terranova.9,231,50446.0,,active
+berliner-96-180-141,96.180.141,Terranova.141,232,16080.0,,active
+berliner-96-180-179,96.180.179,Terranova.179,232,11231.0,,active
+berliner-96-180-104,96.180.104,Terranova.104,233,23922.0,,active
+berliner-96-180-159,96.180.159,Terranova.159,233,6326.0,,active
+berliner-banister-curly1,,Banister Curly1,235,2140.0,,name_only_active
+berliner-banister-curly2,,Banister Curly2,235,3355.0,,name_only_active
+berliner-fast-lane-slide-curly1,,Fast Lane Slide Curly1,235,4589.0,Attachment height approx. 1 m,name_only_active
+berliner-fast-lane-slide-curly2,,Fast Lane Slide Curly2,235,7084.0,Attachment height approx. 2 m,name_only_active
+berliner-stainless-steel-slide-curly3,,Stainless Steel Slide Curly3,235,19528.0,,name_only_active
+berliner-sliding-pole-curly1,,Sliding Pole Curly1,235,562.0,,name_only_active
+berliner-sliding-pole-curly2,,Sliding Pole Curly2,235,671.0,,name_only_active
+berliner-climbing-ascent-curly1,,Climbing Ascent Curly1,235,1564.0,,name_only_active
+berliner-climbing-ascent-curly2,,Climbing Ascent Curly2,235,2823.0,,name_only_active
+berliner-climbing-ascent-curly3,,Climbing Ascent Curly3,235,4924.0,,name_only_active
+berliner-rope-ladder-curly1,,Rope Ladder Curly1,235,447.0,,name_only_active
+berliner-rope-ladder-curly2,,Rope Ladder Curly2,235,669.0,,name_only_active
+berliner-rope-ladder-curly3,,Rope Ladder Curly3,235,810.0,,name_only_active
+berliner-rung-bridge,,Rung Bridge,243,1052.0,Length 3 m | Price without posts,name_only_active
+berliner-suspension-bridge-with-security-net,,Suspension Bridge with Security Net,243,,Upon request,name_only_on_request
+berliner-jungle-bridge-3,,Jungle Bridge,243,2768.0,Length 3 m | Price without posts,name_only_active
+berliner-suspension-bridge-7,,Suspension Bridge,243,769.0,Price first meter incl. all end fixings,name_only_active
+berliner-suspension-bridge-8,,Suspension Bridge,243,526.0,Every addional running meter up to 7 m total length,name_only_active
+berliner-liana-tunnel-3m,,Liana Tunnel 3m,243,3331.0,Price without posts,name_only_active
+berliner-liana-bridge-3m,,Liana Bridge 3m,243,2658.0,Price without posts,name_only_active
+berliner-rubber-tube-3m,,Rubber Tube 3m,243,4645.0,Price without posts,name_only_active
+berliner-harp-net,,Harp Net,243,914.0,3 m straight Terranos system length,name_only_active
+berliner-harp-net-2,,Harp Net,243,1341.0,"4,24 m diagonal Terranos system length",name_only_active
+berliner-spider-s-web-vertical,,Spider’s Web (vertical),243,2293.0,Price without posts,name_only_active
+berliner-spider-s-web-horizontal,,Spider’s Web (horizontal),243,3092.0,Price without posts,name_only_active
+berliner-quad-net-vertical,,Quad Net (vertical),243,1212.0,Price without posts,name_only_active
+berliner-quad-net-horizontal,,Quad Net (horizontal),243,1943.0,Railing ropes not included,name_only_active
+berliner-folded-net,,Folded Net,243,1374.0,Railing ropes not included,name_only_active
+berliner-net-funnel,,Net Funnel,243,2257.0,Price without posts,name_only_active
+berliner-double-net-funnel,,Double Net Funnel,243,4390.0,Price without posts,name_only_active
+berliner-space-cell,,Space Cell,243,2580.0,Price without posts,name_only_active
+berliner-octagon-star-climber,,Octagon Star Climber,243,10734.0,,name_only_active
+berliner-net-passage,,Net Passage,243,2133.0,Price without posts,name_only_active
+berliner-triangular-net,,Triangular Net,243,1139.0,Railing ropes not included,name_only_active
+berliner-double-trapeze-net,,Double Trapeze Net,243,2862.0,Railing ropes not included,name_only_active
+berliner-net-sack-2,,Net Sack,243,2257.0,Railing ropes not included,name_only_active
+berliner-slide-3,,Slide,243,,Price depends on individual project,name_only_on_request
+berliner-chessboard-cube,,Chessboard Cube,244,14893.0,Price incl. posts,name_only_active
+berliner-rubber-quad-net,,Rubber Quad Net,244,2259.0,Price without posts,name_only_active
+berliner-rubber-space-cell,,Rubber Space Cell,244,6400.0,Price without posts,name_only_active
+berliner-climbing-pole,,Climbing Pole,244,,Price depends on individual project,name_only_on_request
+berliner-rocking-plates,,Rocking Plates,244,,Price depends on individual project,name_only_on_request
+berliner-posts-labyrinth,,Posts Labyrinth,244,,Price depends on individual project,name_only_on_request
+berliner-balancing-balls-2,,Balancing Balls,244,,Price depends on individual project,name_only_on_request
+berliner-slackline-2,,Slackline,244,798.0,"Length: 4,24 m | price without posts",name_only_active
+berliner-slackline-3,,Slackline,244,1001.0,"Length: 6,00 m | price without posts",name_only_active
+berliner-triangular-slackline,,Triangular Slackline,244,3464.0,"Length: 5,00 m | price including clamps & tensioning
+device, without posts",name_only_active
+berliner-rubber-slackline,,Rubber Slackline,244,1787.0,"Length: 3,00 m | price with platforms",name_only_active
+berliner-shade-l,,Shade L,244,15043.0,,name_only_active
+berliner-shade-s,,Shade S,244,12781.0,,name_only_active
+berliner-leaf-s,,Leaf S,244,845.0,Price without fixings,name_only_active
+berliner-leaf-m,,Leaf M,244,906.0,Price without fixings,name_only_active
+berliner-leaf-l,,Leaf L,244,1072.0,Price without fixings,name_only_active
+berliner-satellights-3,,Satellights,244,25283.0,,name_only_active
+berliner-solar-explorer-2,,Solar Explorer,244,595.0,Price without base panel,name_only_active
+berliner-tile-slide-fish-2,,Tile Slide Fish,244,531.0,Price without base panel,name_only_active
+berliner-maze-slider-2,,Maze Slider,244,531.0,Price without base panel,name_only_active
+berliner-roller-ball-2,,Roller Ball,244,595.0,Price without base panel,name_only_active
+berliner-spin-maze-2,,Spin Maze,244,531.0,Price without base panel,name_only_active
+berliner-level-3-2,,Level 3,244,531.0,Price without base panel,name_only_active
+berliner-tumble-turn-2,,Tumble Turn,244,531.0,Price without base panel,name_only_active
+berliner-make-it-rain-2,,Make It Rain,244,595.0,Price without base panel,name_only_active
+berliner-spin-dice-2,,Spin Dice,244,595.0,Price without base panel,name_only_active
+berliner-spin-maracas-2,,Spin Maracas,244,1063.0,Price without base panel,name_only_active
+berliner-chimes-2,,Chimes,244,1265.0,Price without base panel,name_only_active
+berliner-bongos-2,,Bongos,244,950.0,Price without base panel,name_only_active
+berliner-standard-swing-seat,,Standard Swing Seat,251,49.0,Price without chains & swivels,name_only_active
+berliner-toddler-seat,,Toddler Seat,251,188.0,Price without chains & swivels,name_only_active
+berliner-toddler-couple-seat,,Toddler-Couple-Seat,251,3165.0,Price incl. chains & swivels,name_only_active
+berliner-couple-seat,,Couple Seat,251,3026.0,Price incl. chains & swivels,name_only_active
+berliner-nest-seat,,Nest Seat,251,,Price depends on individual project,name_only_on_request
+berliner-inclusion-seat,,Inclusion Seat,251,2185.0,Price without swivels,name_only_active
+berliner-90-260-501,90.260.501,Swingo.2.1,252,2147.0,,active
+berliner-90-260-503,90.260.503,Swingo.2.3,252,2995.0,,active
+berliner-90-260-502,90.260.502,Swingo.2.2,252,3607.0,,active
+berliner-90-260-504,90.260.504,Swingo.2.4,252,4072.0,,active
+berliner-90-160-140,90.160.140,Swingo.01,253,2114.0,,active
+berliner-90-160-150,90.160.150,Swingo.03,253,3582.0,,active
+berliner-90-160-141,90.160.141,Swingo.02,253,3050.0,,active
+berliner-90-160-151,90.160.151,Swingo.04,253,3448.0,,active
+berliner-90-340-049,90.340.049,Double Swingo 2.2,254,7259.0,"1 × Standard Swing Seat, 2 × Toddler Seat,
+1 × Inclusion Seat",active
+berliner-90-340-049-2,90.340.049,Double Swingo 2.2,254,5578.0,4 × Standard Swing Seat,active
+berliner-95-190-484,95.190.484,Elbow Swing,255,4761.0,,active
+berliner-90-260-510,90.260.510,Sky Swing,255,4904.0,,active
+berliner-90-260-520,90.260.520,Face-to-Face Swing,256,14479.0,,active
+berliner-90-260-533,90.260.533,Net Swing,257,5609.0,,active
+berliner-95-170-196,95.170.196,Hammock,257,4046.0,With balls,active
+berliner-95-190-263,95.190.263,Palmetto Saucer,258,2534.0,,active
+berliner-97-100-025,97.100.025,Cloud 9,259,4950.0,,active
+berliner-95-171-311,95.171.311,Double Cloud 9,259,8987.0,,active
+berliner-90-260-532,90.260.532,Bowl Swing,260,5303.0,,active
+berliner-90-260-531,90.260.531,Cup Swing,260,5303.0,,active
+berliner-90-260-534,90.260.534,Arch Swing,261,6416.0,,active
+berliner-90-340-055,90.340.055,Side-by-Side Swing,261,12002.0,,active
+berliner-95-190-725-001,95.190.725.001,Float Swing,262,28412.0,,active
+berliner-95-190-809,95.190.809,VIP Swing 2.0,262,10344.0,,active
+berliner-97-100-026,97.100.026,VIP Swing,263,6104.0,,active
+berliner-95-190-605,95.190.605,Liana,263,5529.0,,active
+berliner-90-261-100,90.261.100,Monkey Jibe,264,8395.0,,active
+berliner-90-340-097,90.340.097,O’Tannebaum 3.1,265,7867.0,,active
+berliner-90-340-045,90.340.045,O’Tannebaum 2.5,265,5813.0,,active
+berliner-90-260-101,90.260.101,Eddie.01,266,2057.0,,active
+berliner-90-260-102,90.260.102,Eddie.02,266,2057.0,,active
+berliner-90-260-103,90.260.103,Eddie.03,266,2057.0,,active
+berliner-90-260-104,90.260.104,Eddie.04,267,2057.0,,active
+berliner-90-260-105,90.260.105,Eddie.05,267,2500.0,,active
+berliner-90-260-301-2,90.260.301.2,Disk XL,268,11902.0,,active
+berliner-90-260-301-1,90.260.301.1,Disk L,268,7459.0,,active
+berliner-90-260-304,90.260.304,Picadilly Circle.2.2,269,7459.0,,active
+berliner-90-260-305,90.260.305,Little Big Ben.2.2,269,5038.0,,active
+berliner-90-261-200,90.261.200,Access Whirl,270,,Upon request,on_request
+berliner-90-260-308,90.260.308,Fireball.3.1,270,5101.0,,active
+berliner-95-200-010,95.200.010,Albero.01,271,9765.0,,active
+berliner-95-200-020-90-260-801,"95.200.020
+90.260.801","Albero.02
+Abakus.2.1","271
+272",,,on_request
+berliner-90-260-803,90.260.803,Butterfly,273,6025.0,,active
+berliner-90-260-802,90.260.802,Freeride,273,6338.0,,active
+berliner-90-260-960,90.260.960,Windrider,274,6977.0,,active
+berliner-90-260-201,90.260.201,Cat Tail.01,274,3059.0,,active
+berliner-90-260-202,90.260.202,Cat Tail.02,274,3059.0,,active
+berliner-90-260-203,90.260.203,Cat Tail.03,274,3059.0,,active
+berliner-90-260-930,90.260.930,Hula-Loop.01,275,2878.0,,active
+berliner-90-260-940,90.260.940,Hula-Loop.02,275,2878.0,,active
+berliner-90-260-615-1,90.260.615.1,Over Easy,276,4316.0,,active
+berliner-90-260-920,90.260.920,Swallow Tail,277,2868.0,,active
+berliner-90-260-910,90.260.910,Pin Tail,277,2868.0,,active
+berliner-90-260-614-1,90.260.614.1,Beetle.01,278,1383.0,,active
+berliner-90-260-614-2,90.260.614.2,Beetle.02,278,1383.0,,active
+berliner-90-260-614-3,90.260.614.3,Beetle.03,278,1383.0,,active
+berliner-90-261,90.261,Number.0 - 9,279,3433.0,Price per piece,active
+berliner-95-172-475,95.172.475,Parallelo,281,3555.0,,active
+berliner-95-190-010,95.190.010,Horizonto.3,281,3637.0,,active
+berliner-95-190-481,95.190.481,Calisthenics.02,282,44607.0,,active
+berliner-95-190-713,95.190.713,Calisthenics.05,282,26654.0,,active
+berliner-95-190-564,95.190.564,Calisthenics.03,283,31333.0,,active
+berliner-95-190-507,95.190.507,Calisthenics.04,283,31333.0,,active
+berliner-90-660-012-410-51,90.660.012.410.51,Bouncers.01,284,4772.0,Incl. special coating,active
+berliner-90-660-012-410-61,90.660.012.410.61,Bouncers.02,284,6428.0,Incl. special coating,active
+berliner-90-660-012-410-71,90.660.012.410.71,Bouncers.03,285,4801.0,Incl. special coating,active
+berliner-90-660-012-410-81,90.660.012.410.81,Bouncers.04,285,6255.0,Incl. special coating,active
+berliner-90-160-201-000-01,90.160.201.000.01,Cherry.100,286,1134.0,,active
+berliner-90-160-202-000-01,90.160.202.000.01,Cherry.140,286,1216.0,,active
+berliner-90-160-210-000-01,90.160.210.000.01,Orbit.01,287,1991.0,,active
+berliner-90-160-210-000-02,90.160.210.000.02,Orbit.02,287,2722.0,,active
+berliner-90-340-184,90.340.184,Dome.01,288,,Upon request,on_request
+berliner-90-340-185,90.340.185,Dome.02,288,,Upon request,on_request
+berliner-90-260-601,90.260.601,White Water.04,288,17864.0,,active
+berliner-90-260-602,90.260.602,White Water.02,288,10587.0,,active
+berliner-90-260-603,90.260.603,White Water.03,288,14218.0,,active
+berliner-90-260-401,90.260.401,Spirelli.01,289,1270.0,,active
+berliner-90-260-402,90.260.402,Spirelli.02,289,1801.0,,active
+berliner-90-160-226-000-01,90.160.226.000.01,Champignon.60,289,466.0,,active
+berliner-90-160-224-000-01,90.160.224.000.01,Champignon.40,289,444.0,,active
+berliner-90-160-228-000-01,90.160.228.000.01,Champignon.80,289,488.0,,active
+berliner-90-340-127,90.340.127,Satellights.01,291,25283.0,,active
+berliner-90-340-128,90.340.128,Satellights.02,291,26440.0,,active
+berliner-97-110-004,97.110.004,Speedway.004,292,11027.0,Without launch platform max. 30 m,active
+berliner-97-110-013,97.110.013,Speedway.013,292,15526.0,With launch platform max. 30 m,active
+berliner-95-200-120,95.200.120,Wasp’s Nest.120,293,10107.0,With balls,active
+berliner-90-130-003,90.130.003,Net House.02,293,15321.0,,active
+berliner-96-180-094,96.180.094,Sand Workshop,294,4294.0,,active
+berliner-96-180-094-00020,96.180.094.00020,Sand Workshop,294,5032.0,CSA compliant version,active
+berliner-90-220-060,90.220.060,UFO.M6,301,28436.0,Extra charge 5 % for coloured tubes,active
+berliner-90-220-030,90.220.030,UFO.M3,302,16460.0,,active
+berliner-90-220-090,90.220.090,UFO.M9,303,42557.0,,active
+berliner-90-220-020,90.220.020,UFO.M2,304,11641.0,,active
+berliner-90-220-010,90.220.010,UFO.M1,304,6104.0,,active
+berliner-hammock-3,,Hammock,309,,Price depends on individual project,name_only_on_request
+berliner-rubber-mats-3,,Rubber Mats,309,,Price depends on individual project,name_only_on_request
+berliner-hdpe-panels-2,,HDPE Panels,309,,Price depends on individual project,name_only_on_request
+berliner-climbing-plates-2,,Climbing Plates,309,,Price depends on individual project,name_only_on_request
+berliner-climbing-rope-4,,Climbing Rope,309,,Price depends on individual project,name_only_on_request
+berliner-rocking-plates-2,,Rocking Plates,309,,Price depends on individual project,name_only_on_request
+berliner-chessboard-field,,Chessboard Field,309,,Price depends on individual project,name_only_on_request
+berliner-nest-seat-2,,Nest Seat,309,,Price depends on individual project,name_only_on_request
+berliner-rope-ladder-2,,Rope Ladder,309,,Price depends on individual project,name_only_on_request
+berliner-net-funnel-2,,Net Funnel,309,,Price depends on individual project,name_only_on_request
+berliner-90-100-043-4,90.100.043.4,Cloverwood,311,90470.0,,active
+berliner-90-297-001,90.297.001,Twist.01,312,27073.0,,active
+berliner-90-297-002,90.297.002,Twist.02,313,19020.0,,active
+berliner-90-297-003,90.297.003,Twist.03,314,16915.0,,active
+berliner-90-297-018,90.297.018,Twist.18,314,26296.0,,active
+berliner-90-297-029,90.297.029,Twist.29,315,55425.0,,active
+berliner-90-297-004,90.297.004,Twist.04,316,40380.0,,active
+berliner-90-297-005,90.297.005,Twist.05,317,71481.0,,active
+berliner-90-297-015,90.297.015,Twist.15,317,39084.0,,active
+berliner-95-190-458,95.190.458,Shout.11,318,,Upon request,on_request
+berliner-95-190-406,95.190.406,Shout.02,319,,Upon request,on_request
+berliner-95-190-603,95.190.603,Shout.08,320,,Upon request,on_request
+berliner-95-190-606,95.190.606,Shout.07,321,,Upon request,on_request
+berliner-95-190-480,95.190.480,Shout.12,322,,Upon request,on_request
+berliner-95-190-972,95.190.972,Shout.09,323,,Upon request,on_request
+berliner-95-190-449,95.190.449,Shout.04,323,,Upon request,on_request
+berliner-95-190-409,95.190.409,Shout.06,324,,Upon request,on_request
+berliner-95-190-131,95.190.131,Geoarena.01,331,129978.0,,active
+berliner-95-130-229,95.130.229,Geoball.029,332,63747.0,,active
+berliner-95-130-216,95.130.216,Geoball.16,333,58325.0,,active
+berliner-95-130-220,95.130.220,Geoball.20,333,54359.0,,active
+berliner-95-130-204,95.130.204,Geoball.04,334,49787.0,,active
+berliner-95-130-304,95.130.304,Geodom.04,335,357806.0,,active
+berliner-fort,,Fort,336,,Price depends on individual project,name_only_on_request
+berliner-loop-rope-7,,Loop Rope,336,314.0,,name_only_active
+berliner-hammock-4,,Hammock,336,1335.0,,name_only_active
+berliner-hdpe-panels-3,,HDPE Panels,336,806.0,,name_only_active
+berliner-climbing-rope-5,,Climbing Rope,336,250.0,,name_only_active
+berliner-net-sack-3,,Net Sack,336,1768.0,,name_only_active
+berliner-rope-ladder-3,,Rope Ladder,336,307.0,,name_only_active
+berliner-net-funnel-3,,Net Funnel,336,2675.0,,name_only_active
+berliner-intermediate-floor-net,,Intermediate Floor Net,336,,Price depends on individual project,name_only_on_request
+berliner-90-293-790,90.293.790,Fairview.05,344,123547.0,,active
+berliner-90-180-757,90.180.757,Köln,345,,Upon request,on_request
+berliner-90-180-519,90.180.519,Den Haag,346,127313.0,,active
+berliner-95-190-474,95.190.474,Genk,347,,Upon request,on_request
+berliner-90-293-368,90.293.368,Orlando,348,97210.0,Price with stainless steel slide,active
+berliner-90-293-617,90.293.617,Livermore,349,193258.0,Price with stainless steel slides,active
+berliner-90-180-708,90.180.708,Fair Oaks,350,42600.0,,active
+berliner-90-136-124,90.136.124,Silver Lake,350,46781.0,Price with Fast Lane Slide,active
+berliner-90-293-277,90.293.277,Luxemburg,351,148141.0,,active
+berliner-90-180-525,90.180.525,Folsom,352,51672.0,Price with stainless steel slide,active
+berliner-90-293-032,90.293.032,Celle,352,37780.0,,active
+berliner-95-190-338,95.190.338,Bobbejaanland,353,43209.0,,active
+berliner-90-293-480,90.293.480,Monheim,355,128435.0,,active
+berliner-90-180-620,90.180.620,Sacramento.01,356,24445.0,,active
+berliner-90-293-254,90.293.254,Offenbach,356,45628.0,,active
+berliner-90-180-647,90.180.647,Dublin,357,90759.0,,active
+berliner-90-180-764,90.180.764,Springfield.05,358,51544.0,,active
+berliner-90-180-766,90.180.766,Fairview.06,359,116117.0,,active
+berliner-90-180-767,90.180.767,Franklin.04,360,156124.0,,active
+berliner-90-180-765,90.180.765,Riverside.05,361,62379.0,,active
+berliner-90-180-329,90.180.329,Grandview,362,182913.0,,active
+berliner-90-180-673,90.180.673,Sacramento.02,362,37213.0,,active
+berliner-90-180-486,90.180.486,Landsberger Allee,363,184293.0,,active
+berliner-90-141-273,90.141.273,Greensboro,364,387133.0,,active
+berliner-90-180-313,90.180.313,South Jordan,366,54951.0,,active
+berliner-90-180-291,90.180.291,Arlington,366,112184.0,Price with stainless steel slide,active
+berliner-98-140-094,98.140.094,Mountain House,367,42248.0,Price with stainless steel slide,active
+berliner-90-150-350-003,90.150.350.003,Warneburg,367,72445.0,,active
+berliner-90-180-358,90.180.358,Vancouver.01,368,44786.0,,active
+berliner-90-136-097,90.136.097,Boston,368,30681.0,,active
+berliner-90-180-596,90.180.596,Regensburg,369,59027.0,,active
+berliner-95-190-413,95.190.413,Bad Schwalbach,370,152233.0,,active
+berliner-90-180-311,90.180.311,Walldorf,371,99641.0,,active
+berliner-90-180-761,90.180.761,Berlin.11,372,151047.0,,active
+berliner-replacement-net-for-merkur,,Replacement net for Merkur,,8098.0,,name_only_active
+berliner-replacement-net-for-saturn,,Replacement net for Saturn,,9643.0,,name_only_active
+berliner-95-191-107,95.191.107,WaggaWagga.01,,129032.0,,active
+berliner-95-191-161,95.191.161,WaggaWagga.02,,65111.0,,active
+berliner-95-191-162,95.191.162,WaggaWagga.03,,121993.0,,active
+berliner-95-191-112,95.191.112,LaGrange,,258065.0,,active
+berliner-90-260-307,90.260.307,Fireball2.2,,4844.0,,active
+berliner-90-340-071,90.340.071,Palmetto Basket,,2039.0,,active
+berliner-vll-002-001,VLL.002.001,Villago Beach L,,304305.0,,active
+berliner-vlm-002-001,VLM.002.001,Villago Beach M.01,,155436.0,,active
+berliner-vlm-002-002,VLM.002.002,Villago Beach M.02,,152746.0,,active
+berliner-vlm-002-003,VLM.002.003,Villago Beach M.03,,141777.0,,active
+berliner-vlm-006-002,VLM.006.002,Villago Candy M.02,,160342.0,,active
+berliner-vlm-006-001,VLM.006.001,Villago Candy M,,158274.0,,active
+berliner-vlm-005-002,VLM.005.002,Villago Classic M.02,,145871.0,,active
+berliner-vlm-005-001,VLM.005.001,Villago Classic M,,139925.0,,active
+berliner-vll-004-001,VLL.004.001,Villago Green L,,261644.0,,active
+berliner-vlm-004-001,VLM.004.001,Villago Green M,,137538.0,,active
+berliner-vll-003-002,VLL.003.002,Villago Home L.02,,276613.0,,active
+berliner-vlm-003-001,VLM.003.001,Villago Home M,,144157.0,,active
+berliner-vll-001-001,VLL.001.001,Villago LaGrange L,,258065.0,,active
+berliner-vlm-001-001,VLM.001.001,Villago LaGrange M,,136295.0,,active
+berliner-90-295-019,90.295.019,DNA Tower L.04.01,,94385.0,,active
+berliner-90-180-716,90.180.716,Donauwörth,,51245.0,,active
+berliner-90-180-608,90.180.608,Fairview.01,,24720.0,,active
+berliner-90-293-145,90.293.145,Greenville Combi.145,,62355.0,,active
+berliner-90-293-562,90.293.562,Greenville Combi.562,,123500.0,,active
+berliner-90-293-859,90.293.859,Greenville Combi.859,,114404.0,,active
+berliner-90-293-956,90.293.956,Greenville Combi.956,,58964.0,,active
+berliner-90-340-170,90.340.170,Gunzenhausen,,13557.0,,active
+berliner-90-141-455,90.141.455,Nürnberg,,152629.0,,active
+berliner-90-180-783,90.180.783,Nürnberg.02,,224244.0,,active
+berliner-90-180-544,90.180.544,Nürnberg.03,,135071.0,,active
+berliner-90-136-222,90.136.222,Spaceball L.07,,31514.0,,active
+berliner-95-173-417,95.173.417,Terrano.3417,,11695.0,,active
+berliner-93-180-232,93.180.232,Terranova.232,,84240.0,,active
+berliner-96-180-231,96.180.231,Terranova.231,,9934.0,,active
+berliner-90-224-101-2,90.224.101.2,Woodville Combi.012,,42213.0,,active
+berliner-98-101-010,98.101.010,Replacement net for Mini Mars,,2892.0,Incl. all fixings to structure,active
+berliner-90-101-010,90.101.010,Replacement net for Mars,,3462.0,Incl. all fixings to structure,active
+berliner-90-101-015,90.101.015,Replacement net for Maxi Mars,,3826.0,Incl. all fixings to structure,active
+berliner-90-101-020,90.101.020,Replacement net for Venus,,5813.0,Incl. all fixings to structure,active
+berliner-90-101-040,90.101.040,Replacement net for Jupiter,,10195.0,Incl. all fixings to structure,active
+berliner-98-101-040,98.101.040,Replacement net for Mini Jupiter,,9375.0,Incl. all fixings to structure,active
+berliner-90-101-110,90.101.110,Replacement net for Neptun,,11320.0,Incl. all fixings to structure,active
+berliner-90-101-031,90.101.031,Replacement net for Spaceball S,,8295.0,Incl. all fixings to structure,active
+berliner-90-101-041,90.101.041,Replacement net for Spaceball M,,10195.0,Incl. all fixings to structure,active
+berliner-90-101-111,90.101.111,Replacement net for Spaceball L,,11363.0,Incl. all fixings to structure,active
+berliner-90-101-601,90.101.601,Replacement net for Spaceball XL,,12094.0,Incl. all fixings to structure,active
+berliner-90-101-075,90.101.075,Replacement net for Uranus,,11609.0,Incl. all fixings to structure,active
+berliner-92-112-001,92.112.001,Replacement net for Cosmo,,8982.0,Incl. all fixings to structure,active
+berliner-90-101-045,90.101.045,Replacement net for Pluto,,10195.0,Incl. all fixings to structure,active
+berliner-90-101-115,90.101.115,Replacement net for Phoenix,,11320.0,Incl. all fixings to structure,active
+berliner-90-101-145,90.101.145,Replacement net for Pegasus,,12094.0,Incl. all fixings to structure,active
