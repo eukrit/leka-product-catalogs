@@ -2,6 +2,103 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.17.0] - 2026-05-13
+
+### Changed — Wisdom → Leka Project rebrand (customer-facing)
+
+Customers now see the formerly-Wisdom vendor's 5,062 products as the in-house
+"Leka Project" brand. The upstream supplier identity is hidden behind Leka's
+own house brand across every customer-visible surface in Medusa.
+
+### Medusa data changes (live, scripted, idempotent)
+
+- **Sales channel `sc_01KNKTHC0B7KFEDSZ3NNM49JQW`**: name `"Wisdom"` →
+  `"Leka Project"`; description updated. ID unchanged so the publishable key
+  binding and storefront env vars stay valid.
+- **Publishable API key `apk_01KNKTHXDJ344T8V131SKJPNEK`**: title
+  `"Wisdom Storefront"` → `"Leka Project Storefront"` (token unchanged — no
+  storefront re-deploy required).
+- **5,061 products** got fresh opaque handles `leka-project-{nanoid8}` and
+  fresh opaque variant SKUs `LP-{NANOID8}`. Old handle preserved in
+  `metadata.legacy_handle`; old SKU in `variant.metadata.legacy_sku` for
+  procurement / quotation cross-reference. One stray `test-swing` product
+  was skipped (not a real Wisdom product).
+- **32 titles + 32 descriptions** had embedded "Wisdom" / "WISDOM" /
+  "Wisdom Toys" strings stripped.
+- **6,228 product image URLs + 2,835 thumbnails** rewritten from
+  `https://catalogs.leka.studio/api/i/wisdom/...` →
+  `https://catalogs.leka.studio/api/i/leka-project/...`.
+
+### Image bucket (Gemini-cleaned)
+
+- New cleaned-image prefix `gs://ai-agents-go-vendors/leka-project/` populated
+  by `scripts/strip_wisdom_logos.py`. Originals kept untouched at
+  `gs://ai-agents-go-vendors/wisdom/` for audit + rollback.
+- **Pass-1 (logo detection):** 37,975 / 37,976 images classified via Gemini
+  2.5 Flash. **814 images contain Wisdom branding** (2.14%); 37,161 are clean.
+  Per-image checkpoint persisted in Firestore `image_logo_scan/{sha1(path)}`.
+- **Pass-2 (logo removal):** 814 hits fed to Gemini 2.5 Flash Image
+  (Nano Banana Pro) at `location=global`. Final counts after error mop-up:
+  ~625 OK / ~185 manual_review / ~5 hard errors. QA-failed edits routed to
+  `gs://ai-agents-go-vendors/manual_review/` for human follow-up. Per-image
+  state in Firestore `image_logo_edit/{sha1(path)}`.
+- **Bulk copy:** 37,161 no-logo blobs server-side-copied to `leka-project/`
+  in 4.5 minutes (zero Gemini cost).
+- **Cost:** ≈ $5 Flash + ≈ $30 Nano Banana Pro = ~$35 in Vertex AI.
+
+### Storefront-side coordination (next: leka-website)
+
+- The leka-website image proxy at `catalogs/src/app/api/i/[...path]/route.ts`
+  is already prefix-agnostic (`/api/i/<vendor>/...` →
+  `gs://ai-agents-go-vendors/<vendor>/...`), so the new
+  `/api/i/leka-project/...` URLs resolve with **zero code changes**.
+- Outstanding for leka-website (separate PR): rename the `wisdom` brand-route
+  to `leka-project`, swap the brand registry entry, replace the logo asset,
+  and 301 the old `/catalogs/wisdom/*` URLs. The redirect map for product
+  handles ships with this commit at `migration/wisdom-handle-redirects.json`
+  (5,061 entries) for storefront middleware to consume.
+
+### Added — three new scripts
+
+- `scripts/strip_wisdom_logos.py` — three-phase pipeline (`--scan-only`,
+  `--edit-only`, `--copy-only`). Idempotent + resumable via Firestore
+  checkpoints. Tolerant JSON parser, exponential-backoff retry on 429/5xx,
+  schema flattened to avoid Vertex `Nested arrays are not allowed` rejection.
+- `scripts/rebrand_wisdom_to_leka_project.py` — orchestrates SC rename,
+  publishable-key rename, product handle/SKU regeneration. `--dry-run` and
+  `--revert` supported. Writes `migration/wisdom-handle-redirects.json`.
+- `scripts/rewrite_wisdom_image_urls.py` — flips Medusa product
+  `images[].url` and `thumbnail` from `/api/i/wisdom/...` to
+  `/api/i/leka-project/...`. Idempotent.
+
+### Notable lessons learned
+
+- Gemini Flash schema with nested arrays (`bboxes: array of array of number`)
+  hits a hard `400 Nested arrays are not allowed` server-side validator. Use
+  array of objects or a flat numeric array instead.
+- Gemini image-edit refuses prompts that name a third-party trademark
+  ("remove the Wisdom logo" → policy refusal). Brand-neutral framing
+  ("remove overlay text and small graphics, preserve product") works.
+- Vertex `gemini-2.5-flash` at `location=global` has tight quota
+  (~5 RPM-effective with bursts). Concurrency above 4 reliably trips
+  RESOURCE_EXHAUSTED storms.
+
+### Files changed
+- `scripts/strip_wisdom_logos.py` (new)
+- `scripts/rebrand_wisdom_to_leka_project.py` (new)
+- `scripts/rewrite_wisdom_image_urls.py` (new)
+- `migration/wisdom-handle-redirects.json` (new, force-tracked)
+- `CHANGELOG.md`, `VERSION`
+
+### Outcome
+
+Live Medusa Production: 5,061 Wisdom products rebranded to Leka Project on
+2026-05-13. Storefront images resolve via the existing image proxy.
+~185 manual_review + ~5 hard-error images need human inpainting follow-up
+(<0.5% of catalog).
+
+---
+
 ## [2.16.0] - 2026-05-13
 
 ### Added — Multi-currency variant pricing + Firestore-driven variants in `sync_vendors_to_medusa.py`
@@ -500,6 +597,8 @@ continues to call this backend — no client-visible change.
   cosmetic / partial; flagged as a separate task to clean up the layered
   COPY in stage 2 and confirm `.medusa/server` is the canonical location.
 - Wisdom palette audit (lives in `eukrit/leka-website`).
+
+---
 
 ## [2.9.0] - 2026-05-10
 
