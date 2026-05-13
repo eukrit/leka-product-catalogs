@@ -42,7 +42,10 @@ steps:
     id: build-medusa-backend
     args:
       - 'build'
-      - '--build-arg=MEDUSA_BACKEND_URL=https://leka-medusa-backend-538978391890.asia-southeast1.run.app'
+      # Bake catalogs.leka.studio into the admin bundle so its API calls
+      # land on the same origin as the storefront (Next.js rewrites proxy
+      # /app, /admin, /auth → leka-medusa-backend). One origin = no CORS.
+      - '--build-arg=MEDUSA_BACKEND_URL=https://catalogs.leka.studio'
       - '-t'
       - '$_AR_REPO/medusa-backend:$SHORT_SHA'
       - '-t'
@@ -91,7 +94,7 @@ steps:
             --min-instances 1 \
             --max-instances 5 \
             --set-secrets="DATABASE_URL=medusa-database-url:latest,REDIS_URL=medusa-redis-url:latest,COOKIE_SECRET=medusa-cookie-secret:latest,JWT_SECRET=medusa-jwt-secret:latest,MEDUSA_ADMIN_PASSWORD=medusa-admin-password:latest" \
-            --set-env-vars="NODE_ENV=production,DISABLE_ADMIN=false,MEDUSA_ADMIN_EMAIL=admin@leka.studio,STORE_CORS=https://catalogs.leka.studio,ADMIN_CORS=https://leka-medusa-backend-538978391890.$_REGION.run.app,AUTH_CORS=https://catalogs.leka.studio\,https://leka-medusa-backend-538978391890.$_REGION.run.app"
+            --set-env-vars="^|^NODE_ENV=production|DISABLE_ADMIN=false|MEDUSA_ADMIN_EMAIL=admin@leka.studio|STORE_CORS=https://catalogs.leka.studio|ADMIN_CORS=https://catalogs.leka.studio,https://leka-medusa-backend-538978391890.$_REGION.run.app|AUTH_CORS=https://catalogs.leka.studio,https://leka-medusa-backend-538978391890.$_REGION.run.app"
           echo "Deployed medusa-backend:$SHORT_SHA"
         else
           echo "Branch $BRANCH_NAME: skipping deploy"

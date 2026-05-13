@@ -2,6 +2,39 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.18.2] - 2026-05-13
+
+### Changed — Wire Medusa admin to catalogs.leka.studio/app
+
+- **`cloudbuild.yaml`**:
+  - `--build-arg=MEDUSA_BACKEND_URL=https://catalogs.leka.studio` — admin
+    bundle now calls its API on the catalogs domain, not the raw Cloud Run
+    URL. Combined with the storefront's Next.js rewrites, every admin
+    request stays on one origin (no CORS).
+  - `--set-env-vars` switched to `^|^` delimiter syntax. The previous
+    `\,` escape inside `AUTH_CORS` was being rejected by gcloud as
+    `Bad syntax for dict arg: [https://leka-medusa-backend-...]`, which is
+    why v2.18.1's build step succeeded but the deploy step silently
+    failed (the bash wrapper echoed "Deployed..." regardless of exit
+    code). The new `^|^` delimiter lets values contain literal commas.
+  - `ADMIN_CORS` and `AUTH_CORS` both now include
+    `https://catalogs.leka.studio` (plus the Cloud Run direct URL for
+    fall-back during DNS / domain-mapping cutover).
+
+### Companion change
+
+[eukrit/leka-website](https://github.com/eukrit/leka-website)
+`catalogs/next.config.js` — new `rewrites()`:
+```
+/app           → ${MEDUSA}/app
+/app/:path*    → ${MEDUSA}/app/:path*
+/admin/:path*  → ${MEDUSA}/admin/:path*
+/auth/:path*   → ${MEDUSA}/auth/:path*
+```
+After both deploys land, the admin lives at
+https://catalogs.leka.studio/app (HTML+assets) and the bundle's API
+calls (`/admin/*`, `/auth/*`) hit the same origin via the rewrites.
+
 ## [2.18.1] - 2026-05-13
 
 ### Changed — Medusa admin UI enabled + admin password moved to Secret Manager (Rule 12 fix)
