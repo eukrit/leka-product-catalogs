@@ -54,6 +54,109 @@ backend-data-only.
 
 ---
 
+## [2.15.0] - 2026-05-13
+
+### Added — Weplay catalog 149 → 200 via Vision OCR of image-only catalog PDFs
+
+Two new scripts that close the last open growth path: Gemini-Vision-OCR
+of the four image-only PDFs in the local Drive folder that v2.14.0
+skipped (`2025-2026`, `2020-2021`, `2022-2023`, `New Products 2021-2023`,
+totaling 330 pages, ≤135 chars/page text-extractable).
+
+#### `scripts/ocr_weplay_local_pdfs.py` (new)
+PyMuPDF renders each PDF page to a 180-DPI JPG; Gemini 2.5 Flash extracts
+`{sku, name_en, description_en, age_range}` per visible product card.
+Resumable via JSON checkpoint dump every 5 pages. Same writeback safety
+as flipbook: only writes when no `source_url_*` is set.
+
+**Run:** 330 pages processed, **198 unique SKU tokens** extracted,
+148 with rich descriptions (>30 chars), 174 with age ranges. Source
+attribution: 2025 (516 mentions), 2022-2023 (381), 2020-2021 (314),
+New Products (9 — mostly section dividers).
+
+Writeback: 162 matched to existing docs → 153 already covered →
+**9 new draft writes** (KC0007 Icy Ice Building Set, KC0008 Forever
+Up-Down, KC0009 Infinite Loop, KC0010 Tai Chi Ball, KC0011 Putt Putt
+Balance Board, KC0013 Tai-Chi Balance Board, etc).
+
+#### `scripts/create_weplay_pdf_only_docs.py` (new)
+For the 77 SKUs the OCR found that DON'T have any Firestore product
+yet, create new docs with `status="draft_no_images"`, EN name +
+description from OCR, category inferred from SKU prefix
+(`PREFIX_CATEGORY` map: KB=balance, KM=motor-skill, KT=sensory,
+KP=construction, KC=construction, KE=classroom-furniture,
+KF=ball-play, EM=motor-skill).
+
+Notable additions: KT7001-KT7006 (Helix Balance Path, Jungle Trial,
+Coral Adventure, Rainbow River Stones, Wavy Tactile Path, Tactile
+Curve Path), KC0012 (Maze Balance Board), KM4001 (Team Walker),
+KT0001 (Stepping Stones), KT0004 (Tactile Straight Path).
+
+URL-safe handle slugifier added (`re.sub(r"[^a-z0-9._-]+", "-")`)
+after first sync attempt rejected `kt3310-(l)` / `ke0311...(l)..(s)`
+handles with `Invalid product handle` errors.
+
+#### Bug fixed — `shape_weplay_to_medusa_schema.py` was clobbering data
+The original shaping script (v2.8.4) wrote `name = product_name or sku`
+unconditionally, then `images = []` when no URL-encoded SKU folder match
+existed. Re-running it after EN content + thumb-image ingest had landed
+**clobbered** the EN names back to Chinese product_name and **nuked**
+the thumb images on the 36 promoted-via-thumb drafts.
+
+Detected via spot-check after running shape post-PDF-OCR. Recovered by
+re-running scrape_weplay_en + scrape_weplay_cached + ingest_weplay_images
+(all idempotent). Patched the shape script to be safe by default:
+  - `name` only set if doc has no existing `name` (so EN scraper writes
+    win on re-run).
+  - `images` only set when this run finds attachments AND doc has no
+    existing `images[]` (preserves thumbs).
+  - `status` only flipped TO active — never demoted by this script.
+
+The recovery turned out to be a net win: re-running the cached scrape
+caught additional drafts the prior pass had missed, raising the
+post-recovery active count from the pre-shape 149 to **200**.
+
+#### Vision rank rerun + thumbnail sync
+After the catalog grew to 200, vision_rank_weplay_images.py picked up
+the previously-unscored ~460 images plus all the new actives:
+**+462 scored, +74 reordered, +71 primary photo changes**. Cumulative
+across all session runs: ~1,060 images scored.
+
+`sync_weplay_thumbnails.py` pushed the 71 thumbnail changes + 70+ image
+order updates to Medusa. End-state dry-run: 200/200 in sync, 0 changes
+needed, 0 errors.
+
+#### Final composite catalog
+- **`catalogs.leka.studio/weplay`: 200 active product cards** (was 149
+  in v2.14.0, +34% jump)
+- All 200 carry English names + descriptions (sourced from `.tw?lang=en`
+  live, GCS-cached HTML, 2025 flipbook OCR, OR 2020/2022/2025 PDF
+  Vision OCR)
+- 71 lifestyle/kids-using primary photos picked by Gemini Vision
+- Provenance fields per product: `source_url_en`, `source_url_cached`,
+  `source_url_flipbook`, `source_url_local`, `source_url_pdf_ocr`
+
+#### Reversed prior conclusion (v2.14.0)
+v2.14.0 concluded that `KC0007`–`KC0030` were "scrape artifacts" because
+none of the text-extractable sources had them. Vision OCR proved them
+**real Weplay products** (Icy Ice Building Set, Tai Chi Ball, Infinite
+Loop, etc.) just hidden inside image-only PDFs. The previous
+"definitive answer" was definitively wrong.
+
+### Files changed
+- `scripts/ocr_weplay_local_pdfs.py` (new)
+- `scripts/create_weplay_pdf_only_docs.py` (new)
+- `scripts/shape_weplay_to_medusa_schema.py` (safety patch)
+- `CHANGELOG.md`
+
+### Remaining (small)
+- ~91 Firestore draft tokens still uncovered (real-SKU `item_code`
+  with no source). Need another image-only catalog edition or hand
+  curation. Many likely color variants (e.g. `KC0013-B`) that match
+  the parent SKU's URL pattern but have separate Firestore docs.
+
+---
+
 ## [2.14.0] - 2026-05-12
 
 ### Investigated — local Google-Drive Weplay catalogs (closes upstream-data debate)
