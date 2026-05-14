@@ -217,6 +217,9 @@ def price_row(
                 cbm=cbm, kg=0,
                 product_category=product_category,
                 fx_rates=fx,
+                # User 2026-05-14 rule: 10% duty for non-China origins.
+                # Overrides the cost_engine's Europe-playground default.
+                duty_rate=DUTY_RATE_NON_CHINA,
             )
         finally:
             cost_engine.ROUTE_PROFILES["europe"]["methods"]["lcl"]["rates"]["per_cbm"] = original
