@@ -62,7 +62,14 @@ get_fx_rates = _get_fx_rates_impl
 
 
 # --- Constants (mirror vinci-catalog/import_pricelist.py exactly) -----------
-GROSS_MARGIN = 0.40                    # 40% GM → divide landed by (1 - 0.40)
+# User revision 2026-05-14:
+#   Vinci moves 40% → 35% GM; non-China duty fixed at 10%; 7% Thai VAT layer added.
+# Brand-specific consumers override GROSS_MARGIN in their own import script
+# (e.g. Berliner stays 0.25, Rampline / Eurotramp 0.30).
+GROSS_MARGIN = 0.35                    # 35% GM → divide landed by (1 - 0.35)
+DUTY_RATE_NON_CHINA = 0.10             # Thai import duty for non-China origins (user rule)
+DUTY_RATE_CHINA = 0.0                  # ASEAN-China FTA Form E
+THAI_VAT_RATE = 0.07                   # Thai VAT applied on (CIF + duty)
 DEFAULT_PRODUCT_CATEGORY = "playground_equipment"
 ORIGIN_ROUTE = "europe"
 METHOD = "lcl"
@@ -222,12 +229,15 @@ def price_row(
         matched = strategy != "flat_uplift"
         match_strategy = strategy
     else:
-        # No dimensions: flat 35% landed uplift on EUR-THB FOB.
+        # No dimensions: flat 35% logistics + non-China 10% duty + 7% Thai VAT
+        # (user 2026-05-14 rule). VAT applied on (CIF + duty).
         eur_thb = fx.get("EUR", 38.0)
-        landed_thb = round(eur * eur_thb * UNMATCHED_LANDED_UPLIFT, 2)
-        freight_thb = 0.0
-        duty_thb = 0.0
-        vat_thb = 0.0
+        fob_thb = eur * eur_thb
+        cif_thb = fob_thb * UNMATCHED_LANDED_UPLIFT  # +35% logistics
+        freight_thb = cif_thb - fob_thb
+        duty_thb = round(cif_thb * DUTY_RATE_NON_CHINA, 2)
+        vat_thb = round((cif_thb + duty_thb) * THAI_VAT_RATE, 2)
+        landed_thb = round(cif_thb + duty_thb + vat_thb, 2)
         cbm = 0.0
         cbm_method = "flat_uplift"
         matched = False

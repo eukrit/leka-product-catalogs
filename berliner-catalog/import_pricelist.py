@@ -46,7 +46,9 @@ log = logging.getLogger("berliner_pricelist")
 
 # Pipeline constants — match Vinci.
 EXW_DISCOUNT = 0.15           # our cost = list * (1 - 0.15)
-GROSS_MARGIN = 0.25           # retail = landed / (1 - 0.25); Berliner-specific (Vinci uses 0.40)
+GROSS_MARGIN = 0.25           # retail = landed / (1 - 0.25); Berliner-specific (Vinci 0.35)
+DUTY_RATE_NON_CHINA = 0.10    # User 2026-05-14: 10% Thai duty for EU imports
+THAI_VAT_RATE = 0.07          # User 2026-05-14: 7% Thai VAT on (CIF + duty)
 PRODUCT_CATEGORY = "playground_equipment"
 ORIGIN_ROUTE = "europe"
 METHOD = "lcl"
@@ -218,11 +220,14 @@ def price_row(
         vat_thb = est["customs"]["vat_thb"]
         cbm_method = "dims_scaled"
     else:
+        # User 2026-05-14: flat 35% logistics + 10% duty + 7% VAT.
         eur_thb = fx.get("EUR", 38.0)
-        landed_thb = round(eur_fob * eur_thb * UNMATCHED_LANDED_UPLIFT, 2)
-        freight_thb = 0.0
-        duty_thb = 0.0
-        vat_thb = 0.0
+        fob_thb = eur_fob * eur_thb
+        cif_thb = fob_thb * UNMATCHED_LANDED_UPLIFT
+        freight_thb = cif_thb - fob_thb
+        duty_thb = round(cif_thb * DUTY_RATE_NON_CHINA, 2)
+        vat_thb = round((cif_thb + duty_thb) * THAI_VAT_RATE, 2)
+        landed_thb = round(cif_thb + duty_thb + vat_thb, 2)
         cbm = 0.0
         cbm_method = "flat_uplift"
 

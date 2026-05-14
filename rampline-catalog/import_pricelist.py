@@ -58,7 +58,6 @@ BRAND = "rampline"
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 from shared.landed_pricing import (  # noqa: E402
-    GROSS_MARGIN,
     LOGISTICS_TIERS,
     PricedRow,
     calibrate_baltic_rate,
@@ -66,6 +65,15 @@ from shared.landed_pricing import (  # noqa: E402
     parse_dim,
     price_row,
 )
+
+# User 2026-05-14: Rampline GM 40% → 30% (shadowing shared's 35% baseline);
+# canonical formula uses flat 35% logistics + 10% duty + 7% VAT, same as the
+# proposal's `src/reprice_all_brands_canonical.py`. Note: while `price_row`
+# still uses shared's per-CBM cost_engine path, the GROSS_MARGIN local
+# override below pins the retail divisor to 30%.
+GROSS_MARGIN = 0.30
+DUTY_RATE_NON_CHINA = 0.10
+THAI_VAT_RATE = 0.07
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s: %(message)s")
 log = logging.getLogger("rampline_pricelist")
@@ -404,9 +412,15 @@ def main():
         norm = normalize_sku(sku)
         if norm in dim_index_for_call and sku not in dim_index_for_call:
             dim_index_for_call[sku] = dim_index_for_call[norm]
-        priced.append(
-            price_row(sku, eur, dim_index_for_call, fx, baltic, args.packing_factor)
-        )
+        pr = price_row(sku, eur, dim_index_for_call, fx, baltic,
+                        args.packing_factor)
+        # Re-derive retail_thb at Rampline's 30% GM (price_row uses
+        # shared.GROSS_MARGIN = 0.35). Local override keeps the catalog
+        # output aligned with the proposal's canonical re-pricer.
+        pr.retail_thb = round(pr.landed_thb / (1 - GROSS_MARGIN), 2)
+        pr.retail_usd = round(pr.retail_thb / fx.get("USD", 35.0), 2)
+        pr.retail_eur = round(pr.retail_thb / fx.get("EUR", 38.0), 2)
+        priced.append(pr)
 
     by_strategy: dict[str, int] = {}
     for r in priced:
