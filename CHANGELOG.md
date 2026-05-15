@@ -2,6 +2,104 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.20.0] - 2026-05-15
+
+### Added — DesignPark onboarding (9th brand, full Gen-3 pipeline scaffolding)
+
+DesignPark (DESIGN PARK Co., Ltd., South Korea — playground, water play,
+outdoor fitness, themed installations) onboarded via the same
+`vendors/<slug>` → `sync_vendors_to_medusa.py` path the other 8 brands use.
+This version lands the **code + dry-run validation**; the actual
+`--apply` runs against live Firestore / GCS / Medusa are gated on
+credentials and follow as a v2.20.1 deploy entry.
+
+### Pipeline
+
+1. **`scripts/bootstrap_designpark.py`** — creates the Medusa Sales Channel
+   "Design Park" via `MedusaImporter.get_or_create_sales_channel`, then
+   merge-writes `vendors/designpark` root doc to Firestore DB `vendors`
+   (origin_route=`japan_korea`, currency_native=USD, FOB port=Busan,
+   duty_rate_thai=0.10 — non-China per landed_pricing rule).
+2. **`scripts/ingest_designpark_pricelist.py`** — parses
+   `Design Park Pricelist D'Park Price List (USD-2024).xlsx` (12 sheets,
+   178 component SKUs across Slides & Tubes, Fitness Premium/Universal/
+   Elderly/SMART/Senior/CrossFit, Speed Racers, Play Dry/GRC/Aquatic)
+   plus the 33-theme manifest at
+   `2024-03-18 D'Park 2D CAD & Images/2023 Theme dry&waterplay list ... .xlsx`.
+   211 product docs written to `vendors/designpark/products`.
+3. **USD FOB → THB landed → retail (THB/USD/EUR)** — same formula spine as
+   Vinci/Rampline, but currency-agnostic per row: cost_engine origin =
+   `japan_korea` (LCL Busan → Bangkok), DUTY_RATE_NON_CHINA=10%,
+   THAI_VAT_RATE=7%, UNMATCHED_LANDED_UPLIFT=1.35x (no CBM data in the
+   pricelist; tightens when B2 supplies DWG-derived dimensions),
+   GROSS_MARGIN=0.35. Formula version stamped `designpark-v1-2026-05-15`.
+4. **`scripts/ingest_designpark_assets.py`** — discovers 620 assets across
+   four sources: CAD bundle (66 numbered `<N>_<theme>.{jpg,dwg}` files),
+   `Catalogs GO/DesignPark/IMAGE/*.zip` (197 images across 11 line zips),
+   `Catalogs GO/DesignPark/DRAWING/*.zip` (337 DWGs across 10 zips),
+   `Suppliers GO/DesignPark/*.zip` (16 per-SKU drops). Uploads to
+   `gs://ai-agents-go-vendors/designpark/media/<sha>.<ext>` (UBLA, PAP),
+   serves via `https://catalogs.leka.studio/api/i/designpark/media/<sha>.<ext>`,
+   joins to products by SKU regex (SDM/PTC/PTM/DPM/DPF/DPS) or theme-name
+   slug match.
+5. **`scripts/ingest_designpark_catalog_pdfs.py`** — pdfplumber-extracts
+   text from the 2024 ENG catalog (and 2022 fallback); backfills empty
+   `description` fields by matching SKU tokens / product names against
+   the product index. Image-only pages are reported but skipped (Gemini
+   Vision OCR path deferred to follow-up if needed).
+6. **`scripts/shape_designpark_to_medusa_schema.py`** — finalizes invariants
+   (`handle`, `images[]` deduped by sha, `thumbnail`, `status` promoted to
+   `active` when ≥1 image attached else `draft_no_images`).
+7. **`scripts/sync_vendors_to_medusa.py`** — added `designpark` placeholder
+   to `BRAND_SALES_CHANNELS`; the bootstrap script provides the `sc_…` id.
+
+### Phase C deferred
+
+Slack `#vendor-design-park` ingest deferred to v2.20.1 — depends on Slack
+OAuth setup not yet in place for this brand. Plan placeholder lives at
+`~/.claude/plans/inspect-new-vendor-scraping-stateful-octopus.md` §C1.
+Website scrape (originally Phase D) skipped per plan §7 decision #1.
+
+### Dry-run output (2026-05-15)
+
+```
+ingest_designpark_pricelist.py --dry-run
+  FX: USD=33.0119 THB/USD, EUR=38.5735 THB/EUR
+  parsed 11/12 component sheets (Modern Igloo header non-standard, skipped)
+  parsed 33 themes
+  built 211 product docs
+  sample: PE SINGLE SLIDE 900 — fob_usd=$375 → retail_usd=$916.70
+
+ingest_designpark_assets.py --dry-run
+  total assets discovered: 620
+  by kind:   {'image': 389, 'drawing': 211}
+  by source: {'cad-bundle': 66, 'image-zips': 197, 'drawing-zips': 337, 'suppliers': 16}
+  has sku:   78 / no sku: 522 (theme/line match)
+```
+
+### Files
+
+- new: `scripts/bootstrap_designpark.py`
+- new: `scripts/ingest_designpark_pricelist.py`
+- new: `scripts/ingest_designpark_assets.py`
+- new: `scripts/ingest_designpark_catalog_pdfs.py`
+- new: `scripts/shape_designpark_to_medusa_schema.py`
+- modified: `scripts/sync_vendors_to_medusa.py` — `BRAND_SALES_CHANNELS` entry placeholder.
+- modified: `VERSION` → `2.20.0`
+
+### Apply sequence (for v2.20.1 deploy)
+
+```
+py scripts/bootstrap_designpark.py --apply                      # SC + root doc
+py scripts/ingest_designpark_pricelist.py --apply               # 211 products
+py scripts/ingest_designpark_assets.py --apply                  # GCS uploads + image[] join
+py scripts/ingest_designpark_catalog_pdfs.py --apply            # descriptions
+py scripts/shape_designpark_to_medusa_schema.py --apply         # status promote
+# Update BRAND_SALES_CHANNELS["designpark"] with sc_ id printed by bootstrap.
+py scripts/sync_vendors_to_medusa.py --brand=designpark --dry-run
+py scripts/sync_vendors_to_medusa.py --brand=designpark
+```
+
 ## [2.19.0] - 2026-05-13
 
 ### Added — Rampline pricelist → landed cost + retail (Firestore audit)

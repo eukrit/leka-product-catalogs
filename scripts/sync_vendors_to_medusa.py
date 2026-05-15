@@ -57,6 +57,9 @@ BRAND_SALES_CHANNELS: dict[str, str] = {
     "rampline":  "sc_01KNQAA448RY0YPR51FNPM2TVA",
     "4soft":     "sc_01KNQAA4A8SF4ZT9S8N0AHGY3Y",
     "weplay":    "sc_01KR6Z0VBSXWYZDVGF30EAP0EQ",
+    # designpark: id is set by scripts/bootstrap_designpark.py; until that
+    # runs, sync_brand falls back to env LEKA_DESIGNPARK_SALES_CHANNEL_ID.
+    # "designpark": "sc_…",
 }
 
 
