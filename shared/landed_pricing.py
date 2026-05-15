@@ -57,17 +57,23 @@ import cost_engine  # noqa: E402  shipping-automation/mcp-server/cost_engine.py
 from cost_engine import estimate_landed_cost  # noqa: E402
 from fx_rates import get_fx_rates as _get_fx_rates_impl  # noqa: E402
 
+from shared.pricing_config import get_pricing_config  # noqa: E402
+
 # Re-export so brand files import everything from this module.
 get_fx_rates = _get_fx_rates_impl
 
 
-# --- Constants (mirror vinci-catalog/import_pricelist.py exactly) -----------
+# --- Module-level fallback constants ---------------------------------------
+# Source of truth lives in Firestore (`pricing_config/canonical`, edited via
+# the gateway-served form `docs/forms/pricing-config.html`). These are only
+# used when Firestore is unreachable (no ADC / offline / PRICING_CONFIG_DISABLE=1)
+# or when a brand has no override. They MUST stay in sync with the seed in
+# scripts/seed_pricing_config.py — otherwise `--force` re-seed would drift.
+#
 # User revision 2026-05-14:
 #   Vinci moves 40% → 35% GM; non-China duty fixed at 10%; 7% Thai VAT layer added.
-# Brand-specific consumers override GROSS_MARGIN in their own import script
-# (e.g. Berliner stays 0.25, Rampline / Eurotramp 0.30).
-GROSS_MARGIN = 0.35                    # 35% GM → divide landed by (1 - 0.35)
-DUTY_RATE_NON_CHINA = 0.10             # Thai import duty for non-China origins (user rule)
+GROSS_MARGIN = 0.35                    # Vinci default; brands override
+DUTY_RATE_NON_CHINA = 0.10             # Thai import duty for non-China origins
 DUTY_RATE_CHINA = 0.0                  # ASEAN-China FTA Form E
 THAI_VAT_RATE = 0.07                   # Thai VAT applied on (CIF + duty)
 DEFAULT_PRODUCT_CATEGORY = "playground_equipment"
@@ -89,11 +95,43 @@ LOGISTICS_TIERS: list[tuple[float, float, float]] = [
 ]
 
 
-def logistics_band(eur_fob: float) -> tuple[float, float]:
-    for cap, lo, hi in LOGISTICS_TIERS:
+def _resolve_params(brand: str) -> dict:
+    """Merge Firestore overrides on top of module-level defaults.
+
+    Returns a dict with every key the price_row() pipeline needs. Brand
+    is required ("vinci" / "berliner" / "rampline") so we pull the right
+    GROSS_MARGIN even though most other knobs are global.
+    """
+    cfg = get_pricing_config(brand)
+    tiers_raw = cfg.get("logistics_tiers")
+    tiers: list[tuple[float, float, float]]
+    if tiers_raw:
+        tiers = [
+            (
+                float("inf") if t.get("fob_eur_max") in (None, "inf") else float(t["fob_eur_max"]),
+                float(t["min_pct"]),
+                float(t["max_pct"]),
+            )
+            for t in tiers_raw
+        ]
+    else:
+        tiers = LOGISTICS_TIERS
+    return {
+        "gross_margin": float(cfg.get("gross_margin", GROSS_MARGIN)),
+        "duty_rate_non_china": float(cfg.get("duty_rate_non_china", DUTY_RATE_NON_CHINA)),
+        "duty_rate_china": float(cfg.get("duty_rate_china", DUTY_RATE_CHINA)),
+        "thai_vat_rate": float(cfg.get("thai_vat_rate", THAI_VAT_RATE)),
+        "unmatched_landed_uplift": float(cfg.get("unmatched_landed_uplift", UNMATCHED_LANDED_UPLIFT)),
+        "logistics_tiers": tiers,
+    }
+
+
+def logistics_band(eur_fob: float, tiers: list[tuple[float, float, float]] | None = None) -> tuple[float, float]:
+    t = tiers if tiers is not None else LOGISTICS_TIERS
+    for cap, lo, hi in t:
         if eur_fob <= cap:
             return lo, hi
-    return LOGISTICS_TIERS[-1][1], LOGISTICS_TIERS[-1][2]
+    return t[-1][1], t[-1][2]
 
 
 @dataclass
@@ -202,7 +240,9 @@ def price_row(
     baltic: dict,
     packing_factor: float = DEFAULT_PACKING_FACTOR,
     product_category: str = DEFAULT_PRODUCT_CATEGORY,
+    brand: str = "vinci",
 ) -> PricedRow:
+    p = _resolve_params(brand)
     dims, strategy = fuzzy_lookup(code, dim_index)
     cbm = compute_cbm(dims, packing_factor) if dims else None
 
@@ -219,7 +259,7 @@ def price_row(
                 fx_rates=fx,
                 # User 2026-05-14 rule: 10% duty for non-China origins.
                 # Overrides the cost_engine's Europe-playground default.
-                duty_rate=DUTY_RATE_NON_CHINA,
+                duty_rate=p["duty_rate_non_china"],
             )
         finally:
             cost_engine.ROUTE_PROFILES["europe"]["methods"]["lcl"]["rates"]["per_cbm"] = original
@@ -236,10 +276,10 @@ def price_row(
         # (user 2026-05-14 rule). VAT applied on (CIF + duty).
         eur_thb = fx.get("EUR", 38.0)
         fob_thb = eur * eur_thb
-        cif_thb = fob_thb * UNMATCHED_LANDED_UPLIFT  # +35% logistics
+        cif_thb = fob_thb * p["unmatched_landed_uplift"]
         freight_thb = cif_thb - fob_thb
-        duty_thb = round(cif_thb * DUTY_RATE_NON_CHINA, 2)
-        vat_thb = round((cif_thb + duty_thb) * THAI_VAT_RATE, 2)
+        duty_thb = round(cif_thb * p["duty_rate_non_china"], 2)
+        vat_thb = round((cif_thb + duty_thb) * p["thai_vat_rate"], 2)
         landed_thb = round(cif_thb + duty_thb + vat_thb, 2)
         cbm = 0.0
         cbm_method = "flat_uplift"
@@ -249,7 +289,7 @@ def price_row(
     # Tiered logistics clamp: floor + cap as % of FOB-in-THB.
     fob_thb = eur * fx.get("EUR", 38.0)
     landed_thb_raw = landed_thb
-    lo_pct, hi_pct = logistics_band(eur)
+    lo_pct, hi_pct = logistics_band(eur, p["logistics_tiers"])
     floor_landed = fob_thb * (1 + lo_pct)
     cap_landed = fob_thb * (1 + hi_pct)
     logistics_clamp = ""
@@ -262,7 +302,7 @@ def price_row(
     landed_thb = round(landed_thb, 2)
     logistics_pct = round((landed_thb - fob_thb) / fob_thb, 4) if fob_thb else 0.0
 
-    retail_thb = round(landed_thb / (1 - GROSS_MARGIN), 2)
+    retail_thb = round(landed_thb / (1 - p["gross_margin"]), 2)
     retail_usd = round(retail_thb / fx.get("USD", 35.0), 2)
     retail_eur = round(retail_thb / fx.get("EUR", 38.0), 2)
 

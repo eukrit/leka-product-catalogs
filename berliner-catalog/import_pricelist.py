@@ -41,10 +41,17 @@ import cost_engine  # noqa: E402
 from cost_engine import estimate_landed_cost  # noqa: E402
 from fx_rates import get_fx_rates  # noqa: E402
 
+# Repo root may not be on sys.path when this script runs standalone.
+sys.path.insert(0, str(REPO_ROOT))
+from shared.pricing_config import get_pricing_config  # noqa: E402
+
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s: %(message)s")
 log = logging.getLogger("berliner_pricelist")
 
-# Pipeline constants — match Vinci.
+# Module-level fallbacks. Source of truth lives in Firestore
+# (pricing_config/canonical, brands.berliner + global). Keep these in
+# sync with scripts/seed_pricing_config.py — they are only consulted
+# when Firestore is unreachable.
 EXW_DISCOUNT = 0.15           # our cost = list * (1 - 0.15)
 GROSS_MARGIN = 0.25           # retail = landed / (1 - 0.25); Berliner-specific (Vinci 0.35)
 DUTY_RATE_NON_CHINA = 0.10    # User 2026-05-14: 10% Thai duty for EU imports
@@ -54,6 +61,18 @@ ORIGIN_ROUTE = "europe"
 METHOD = "lcl"
 UNMATCHED_LANDED_UPLIFT = 1.35  # 35% flat uplift on EUR-THB FOB when no CBM
 PRICELIST_DATE = "2026-01-01"
+
+
+def _berliner_params() -> dict:
+    """Merge Firestore overrides on top of module-level defaults."""
+    cfg = get_pricing_config("berliner")
+    return {
+        "exw_discount": float(cfg.get("exw_discount", EXW_DISCOUNT)),
+        "gross_margin": float(cfg.get("gross_margin", GROSS_MARGIN)),
+        "duty_rate_non_china": float(cfg.get("duty_rate_non_china", DUTY_RATE_NON_CHINA)),
+        "thai_vat_rate": float(cfg.get("thai_vat_rate", THAI_VAT_RATE)),
+        "unmatched_landed_uplift": float(cfg.get("unmatched_landed_uplift", UNMATCHED_LANDED_UPLIFT)),
+    }
 
 # Tiered logistics-cost band (% of FOB-in-THB). Identical to Vinci.
 LOGISTICS_TIERS: list[tuple[float, float, float]] = [
@@ -195,7 +214,8 @@ def price_row(
             remarks=remarks,
         )
 
-    eur_fob = round(list_eur * (1 - EXW_DISCOUNT), 2)
+    p = _berliner_params()
+    eur_fob = round(list_eur * (1 - p["exw_discount"]), 2)
 
     # Look up dims by handle, then by item_code.
     dims = dim_index.get(handle) or (dim_index.get(item_code) if item_code else None)
@@ -212,7 +232,7 @@ def price_row(
                 product_category=PRODUCT_CATEGORY,
                 fx_rates=fx,
                 # User 2026-05-14: 10% duty for non-China origins.
-                duty_rate=DUTY_RATE_NON_CHINA,
+                duty_rate=p["duty_rate_non_china"],
             )
         finally:
             cost_engine.ROUTE_PROFILES["europe"]["methods"]["lcl"]["rates"]["per_cbm"] = original
@@ -225,10 +245,10 @@ def price_row(
         # User 2026-05-14: flat 35% logistics + 10% duty + 7% VAT.
         eur_thb = fx.get("EUR", 38.0)
         fob_thb = eur_fob * eur_thb
-        cif_thb = fob_thb * UNMATCHED_LANDED_UPLIFT
+        cif_thb = fob_thb * p["unmatched_landed_uplift"]
         freight_thb = cif_thb - fob_thb
-        duty_thb = round(cif_thb * DUTY_RATE_NON_CHINA, 2)
-        vat_thb = round((cif_thb + duty_thb) * THAI_VAT_RATE, 2)
+        duty_thb = round(cif_thb * p["duty_rate_non_china"], 2)
+        vat_thb = round((cif_thb + duty_thb) * p["thai_vat_rate"], 2)
         landed_thb = round(cif_thb + duty_thb + vat_thb, 2)
         cbm = 0.0
         cbm_method = "flat_uplift"
@@ -248,7 +268,7 @@ def price_row(
     landed_thb = round(landed_thb, 2)
     logistics_pct = round((landed_thb - fob_thb) / fob_thb, 4) if fob_thb else 0.0
 
-    retail_thb = round(landed_thb / (1 - GROSS_MARGIN), 2)
+    retail_thb = round(landed_thb / (1 - p["gross_margin"]), 2)
     retail_usd = round(retail_thb / fx.get("USD", 35.0), 2)
     retail_eur = round(retail_thb / fx.get("EUR", 38.0), 2)
 
@@ -282,6 +302,7 @@ def write_firestore(rows: list[PricedRow], fx: dict, baltic: dict) -> None:
     os.environ.setdefault("GOOGLE_CLOUD_PROJECT", "ai-agents-go")
     from google.cloud import firestore  # type: ignore
 
+    p = _berliner_params()
     db = firestore.Client(project="ai-agents-go", database="vendors")
     coll = db.collection("vendors").document("berliner").collection("products")
     now = datetime.now(timezone.utc).isoformat()
@@ -304,9 +325,9 @@ def write_firestore(rows: list[PricedRow], fx: dict, baltic: dict) -> None:
         pricing: dict = {
             "list_eur": r.list_eur,
             "eur_fob": r.eur_fob,
-            "exw_discount": EXW_DISCOUNT,
+            "exw_discount": p["exw_discount"],
             "trade_terms": "EXW",
-            "gross_margin": GROSS_MARGIN,
+            "gross_margin": p["gross_margin"],
             "pricelist_date": PRICELIST_DATE,
             "calculated_at": now,
             "fx_snapshot": fx_snapshot,

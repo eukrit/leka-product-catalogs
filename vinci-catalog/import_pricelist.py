@@ -53,6 +53,12 @@ from shared.landed_pricing import (  # noqa: E402
     parse_dim,
     price_row,
 )
+from shared.pricing_config import get_pricing_config  # noqa: E402
+
+
+def _vinci_gross_margin() -> float:
+    """Live GM for the Firestore writes; falls back to the shared default."""
+    return float(get_pricing_config("vinci").get("gross_margin", GROSS_MARGIN))
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s: %(message)s")
 log = logging.getLogger("vinci_pricelist")
@@ -139,7 +145,7 @@ def write_firestore(rows: list[PricedRow], fx: dict, baltic: dict):
             "pricing.duty_thb": r.duty_thb,
             "pricing.vat_thb": r.vat_thb,
             "pricing.match_strategy": r.match_strategy,
-            "pricing.gross_margin": GROSS_MARGIN,
+            "pricing.gross_margin": _vinci_gross_margin(),
             "pricing.fx_snapshot": {k: fx.get(k) for k in ("USD", "EUR", "THB")},
             "pricing.fx_source": fx.get("_source"),
             "pricing.baltic_rate_snapshot": baltic,
@@ -189,7 +195,7 @@ def main():
         log.info("  - %s: %.2f", s["source"], s["per_cbm_thb"])
 
     priced = [
-        price_row(c, p, dim_index, fx, baltic, args.packing_factor)
+        price_row(c, p, dim_index, fx, baltic, args.packing_factor, brand="vinci")
         for c, p in rows_raw
     ]
 

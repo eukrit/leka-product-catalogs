@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing Config Editor · Leka</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple: #8003FF; --navy: #182557; --cream: #FFF9E6;
+    --magenta: #970260; --amber: #FFA900; --red-orange: #E54822;
+    --green: #1F8A4D;
+    --white: #FFFFFF; --bg: #F5F3EF;
+    --navy-08: rgba(24, 37, 87, 0.08);
+    --navy-40: rgba(24, 37, 87, 0.40);
+    --navy-60: rgba(24, 37, 87, 0.60);
+    --radius-sm: 8px; --radius-md: 16px; --radius-full: 9999px;
+    --shadow: 0 2px 8px rgba(24, 37, 87, 0.08);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Manrope', sans-serif; background: var(--bg); color: var(--navy); min-height: 100vh; }
+  header {
+    background: var(--navy); padding: 20px 32px;
+    display: flex; align-items: center; gap: 16px;
+    position: sticky; top: 0; z-index: 10;
+  }
+  .accent { width: 6px; height: 40px; background: var(--purple); border-radius: 4px; }
+  .h-title { color: var(--cream); font-size: 22px; font-weight: 800; letter-spacing: -0.3px; }
+  .h-subtitle { color: var(--cream); opacity: 0.6; font-size: 13px; }
+  .audit { margin-left: auto; color: var(--cream); font-size: 12px; opacity: 0.8; text-align: right; }
+  .audit strong { display: block; opacity: 1; font-size: 13px; font-weight: 700; }
+
+  main { max-width: 1100px; margin: 32px auto; padding: 0 32px; display: grid; gap: 20px; }
+
+  .card { background: var(--white); border-radius: var(--radius-md); box-shadow: var(--shadow); padding: 24px; }
+  .card h2 {
+    font-size: 13px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1px; color: var(--navy-60); margin-bottom: 6px;
+  }
+  .card .desc { color: var(--navy-60); font-size: 13px; margin-bottom: 18px; }
+
+  .grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+  .field { display: flex; flex-direction: column; gap: 4px; }
+  .field label { font-size: 12px; font-weight: 600; color: var(--navy-60); }
+  .field input {
+    font-family: inherit; font-size: 15px; font-weight: 600; color: var(--navy);
+    padding: 10px 12px; border: 1px solid var(--navy-08);
+    border-radius: var(--radius-sm); background: var(--white);
+  }
+  .field input:focus { outline: 2px solid var(--purple); border-color: transparent; }
+  .field .hint { font-size: 11px; color: var(--navy-40); }
+
+  .brand-block { padding: 16px; border: 1px solid var(--navy-08); border-radius: var(--radius-sm); margin-bottom: 12px; }
+  .brand-block h3 {
+    font-size: 14px; font-weight: 700; margin-bottom: 12px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .brand-pill {
+    display: inline-block; padding: 4px 10px; border-radius: var(--radius-full);
+    font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .brand-pill.vinci    { background: var(--purple);     color: var(--white); }
+  .brand-pill.berliner { background: var(--navy);       color: var(--cream); }
+  .brand-pill.rampline { background: var(--amber);      color: var(--navy); }
+  .brand-pill.wisdom   { background: var(--red-orange); color: var(--white); }
+
+  table.tiers { width: 100%; border-collapse: collapse; margin-top: 8px; }
+  table.tiers th, table.tiers td {
+    text-align: left; padding: 8px 6px;
+    border-bottom: 1px solid var(--navy-08); font-size: 13px;
+  }
+  table.tiers th { font-weight: 700; color: var(--navy-60); font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+  table.tiers input {
+    font-family: inherit; font-size: 14px; font-weight: 600; color: var(--navy);
+    padding: 6px 8px; border: 1px solid var(--navy-08);
+    border-radius: var(--radius-sm); background: var(--white); width: 100%;
+  }
+  table.tiers .infinity { color: var(--navy-40); font-style: italic; font-size: 12px; }
+
+  .actions { display: flex; gap: 12px; align-items: center; margin-top: 8px; flex-wrap: wrap; }
+  .btn {
+    padding: 12px 22px; font-family: inherit; font-size: 14px; font-weight: 700;
+    border-radius: var(--radius-sm); cursor: pointer; border: 0;
+  }
+  .btn.primary { background: var(--purple); color: var(--white); }
+  .btn.primary:hover { background: #6B02D6; }
+  .btn.secondary {
+    background: var(--cream); color: var(--navy);
+    border: 1px solid var(--navy-08);
+  }
+  .btn.secondary:hover { background: #F8F2D8; }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .status {
+    flex: 1; min-width: 200px;
+    padding: 10px 14px; border-radius: var(--radius-sm);
+    font-size: 13px; font-weight: 600;
+  }
+  .status.ok    { background: rgba(31, 138, 77, 0.10); color: var(--green); }
+  .status.err   { background: rgba(229, 72, 34, 0.10); color: var(--red-orange); }
+  .status.info  { background: var(--cream); color: var(--navy-60); }
+
+  .raw { margin-top: 16px; font-size: 11px; color: var(--navy-40); }
+  .raw pre {
+    background: #FAF8F3; padding: 12px; border-radius: var(--radius-sm);
+    overflow: auto; font-size: 11px; max-height: 240px;
+  }
+
+  footer {
+    max-width: 1100px; margin: 24px auto 40px; padding: 0 32px;
+    color: var(--navy-40); font-size: 12px;
+  }
+  footer a { color: var(--navy-60); }
+</style>
+</head>
+<body>
+<header>
+  <div class="accent"></div>
+  <div>
+    <div class="h-title">Pricing Config Editor</div>
+    <div class="h-subtitle">Source of truth for landed-cost + retail pricing across all brands</div>
+  </div>
+  <div class="audit" id="audit">
+    <strong id="audit-by">…</strong>
+    <span id="audit-at">loading</span>
+  </div>
+</header>
+
+<main>
+  <section class="card">
+    <h2>Global rates</h2>
+    <p class="desc">Apply to every brand unless overridden below. <strong>Decimals</strong> (0.07 = 7%).</p>
+    <div class="grid" id="global-grid"></div>
+  </section>
+
+  <section class="card">
+    <h2>Brand overrides</h2>
+    <p class="desc">Brand-specific values shadow the globals. Gross margin is per-brand by design.</p>
+    <div id="brands"></div>
+  </section>
+
+  <section class="card">
+    <h2>Logistics tiers</h2>
+    <p class="desc">FOB-band floor/cap on logistics percentage of FOB-in-THB. Empty <code>FOB EUR max</code> = catch-all (no upper bound).</p>
+    <table class="tiers">
+      <thead>
+        <tr><th>FOB EUR max</th><th>Min %</th><th>Max %</th></tr>
+      </thead>
+      <tbody id="tiers-body"></tbody>
+    </table>
+  </section>
+
+  <div class="actions">
+    <button class="btn primary" id="save-btn" disabled>Save changes</button>
+    <button class="btn secondary" id="reload-btn">Reload from Firestore</button>
+    <div class="status info" id="status">Loading…</div>
+  </div>
+
+  <details class="raw">
+    <summary>Raw JSON (debug)</summary>
+    <pre id="raw"></pre>
+  </details>
+</main>
+
+<footer>
+  <a href="/leka-product-catalogs/">← Hub</a> &nbsp;·&nbsp;
+  Edits are live the moment you save. Catalog import scripts read this doc on next run.
+</footer>
+
+<script>
+const GLOBAL_FIELDS = [
+  ["thai_vat_rate",            "Thai VAT rate",            "Applied on (CIF + duty). e.g. 0.07"],
+  ["duty_rate_non_china",      "Duty rate (non-China)",    "EU/Norway origins. e.g. 0.10"],
+  ["duty_rate_china",          "Duty rate (China)",        "ASEAN-China FTA. e.g. 0.0"],
+  ["unmatched_landed_uplift",  "Unmatched landed uplift",  "Flat multiplier when no CBM. e.g. 1.35 = +35%"],
+  ["default_packing_factor",   "Default packing factor",   "L*W*H * factor. e.g. 0.15"],
+];
+
+const BRANDS = ["vinci", "berliner", "rampline", "wisdom"];
+const BRAND_FIELDS = {
+  vinci:    [["gross_margin", "Gross margin"]],
+  berliner: [["gross_margin", "Gross margin"], ["exw_discount", "EXW discount (off list)"]],
+  rampline: [["gross_margin", "Gross margin"]],
+  wisdom:   [["gross_margin", "Gross margin"], ["import_duty_rate", "Import duty rate"], ["default_usd_thb", "Default USD/THB"]],
+};
+
+let original = null;
+
+function el(tag, attrs = {}, ...children) {
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (k === "class") e.className = v;
+    else if (k === "html") e.innerHTML = v;
+    else e.setAttribute(k, v);
+  }
+  for (const c of children) e.append(c);
+  return e;
+}
+
+function fmt(v) {
+  if (v === null || v === undefined) return "";
+  return String(v);
+}
+
+function setStatus(msg, kind = "info") {
+  const s = document.getElementById("status");
+  s.className = "status " + kind;
+  s.textContent = msg;
+}
+
+function render(doc) {
+  // Audit
+  document.getElementById("audit-by").textContent = doc.updated_by || "—";
+  document.getElementById("audit-at").textContent = doc.updated_at
+    ? "Last edited " + new Date(doc.updated_at).toLocaleString()
+    : "Never edited";
+
+  // Global
+  const g = document.getElementById("global-grid");
+  g.innerHTML = "";
+  const gv = doc.global || {};
+  for (const [key, label, hint] of GLOBAL_FIELDS) {
+    const field = el("div", { class: "field" },
+      el("label", { for: "g_" + key }, label),
+      el("input", { id: "g_" + key, type: "number", step: "0.001", value: fmt(gv[key]), "data-scope": "global", "data-key": key }),
+      el("span", { class: "hint" }, hint),
+    );
+    g.append(field);
+  }
+
+  // Brands
+  const b = document.getElementById("brands");
+  b.innerHTML = "";
+  const bd = doc.brands || {};
+  for (const brand of BRANDS) {
+    const block = el("div", { class: "brand-block" });
+    block.append(
+      el("h3", {},
+        el("span", { class: "brand-pill " + brand }, brand),
+        document.createTextNode(""),
+      ),
+    );
+    const grid = el("div", { class: "grid" });
+    const bv = bd[brand] || {};
+    for (const [key, label] of BRAND_FIELDS[brand]) {
+      const f = el("div", { class: "field" },
+        el("label", { for: brand + "_" + key }, label),
+        el("input", {
+          id: brand + "_" + key, type: "number", step: "0.001",
+          value: fmt(bv[key]),
+          "data-scope": "brand", "data-brand": brand, "data-key": key,
+        }),
+      );
+      grid.append(f);
+    }
+    block.append(grid);
+    b.append(block);
+  }
+
+  // Tiers
+  const tb = document.getElementById("tiers-body");
+  tb.innerHTML = "";
+  const tiers = doc.logistics_tiers || [];
+  tiers.forEach((t, i) => {
+    const isInf = t.fob_eur_max === null || t.fob_eur_max === undefined;
+    const row = el("tr",
+      { "data-tier-index": i },
+      el("td", {},
+        el("input", {
+          type: "number", step: "1", placeholder: "(no max)",
+          value: isInf ? "" : fmt(t.fob_eur_max),
+          "data-scope": "tier", "data-key": "fob_eur_max",
+        }),
+      ),
+      el("td", {},
+        el("input", { type: "number", step: "0.01", value: fmt(t.min_pct), "data-scope": "tier", "data-key": "min_pct" }),
+      ),
+      el("td", {},
+        el("input", { type: "number", step: "0.01", value: fmt(t.max_pct), "data-scope": "tier", "data-key": "max_pct" }),
+      ),
+    );
+    tb.append(row);
+  });
+
+  // Raw
+  document.getElementById("raw").textContent = JSON.stringify(doc, null, 2);
+
+  // Wire change tracking
+  document.querySelectorAll("input").forEach(inp => {
+    inp.addEventListener("input", () => {
+      document.getElementById("save-btn").disabled = false;
+      setStatus("Unsaved changes", "info");
+    });
+  });
+  document.getElementById("save-btn").disabled = true;
+}
+
+function collect() {
+  const doc = { global: {}, brands: {}, logistics_tiers: [] };
+  document.querySelectorAll('input[data-scope="global"]').forEach(inp => {
+    if (inp.value !== "") doc.global[inp.dataset.key] = parseFloat(inp.value);
+  });
+  for (const brand of BRANDS) {
+    doc.brands[brand] = {};
+    document.querySelectorAll(`input[data-scope="brand"][data-brand="${brand}"]`).forEach(inp => {
+      if (inp.value !== "") doc.brands[brand][inp.dataset.key] = parseFloat(inp.value);
+    });
+  }
+  document.querySelectorAll("tr[data-tier-index]").forEach(row => {
+    const tier = {};
+    row.querySelectorAll('input[data-scope="tier"]').forEach(inp => {
+      const k = inp.dataset.key;
+      if (k === "fob_eur_max") {
+        tier[k] = inp.value === "" ? null : parseFloat(inp.value);
+      } else {
+        tier[k] = parseFloat(inp.value);
+      }
+    });
+    doc.logistics_tiers.push(tier);
+  });
+  return doc;
+}
+
+async function load() {
+  setStatus("Loading…", "info");
+  try {
+    const r = await fetch("/api/pricing-config");
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    original = await r.json();
+    render(original);
+    setStatus("Loaded", "ok");
+  } catch (e) {
+    setStatus("Load failed: " + e.message, "err");
+  }
+}
+
+async function save() {
+  setStatus("Saving…", "info");
+  document.getElementById("save-btn").disabled = true;
+  try {
+    const payload = collect();
+    const r = await fetch("/api/pricing-config", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    const body = await r.json();
+    if (!r.ok) throw new Error(body.error || ("HTTP " + r.status));
+    original = body;
+    render(original);
+    setStatus("Saved · catalog imports will see this on next run", "ok");
+  } catch (e) {
+    setStatus("Save failed: " + e.message, "err");
+    document.getElementById("save-btn").disabled = false;
+  }
+}
+
+document.getElementById("save-btn").addEventListener("click", save);
+document.getElementById("reload-btn").addEventListener("click", load);
+load();
+</script>
+</body>
+</html>

@@ -2,9 +2,16 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-RUN pip install --no-cache-dir flask gunicorn
+# Pinned versions match requirements.txt for the Firestore-backed
+# pricing-config editor (src/main.py routes /api/pricing-config).
+RUN pip install --no-cache-dir \
+    flask==3.1.* \
+    gunicorn==23.* \
+    google-cloud-firestore==2.19.*
 
 COPY src/ ./src/
+COPY shared/ ./shared/
+COPY docs/forms/ ./docs/forms/
 COPY vinci-catalog/web-app/public/ ./vinci-catalog/web-app/public/
 
 EXPOSE 8080

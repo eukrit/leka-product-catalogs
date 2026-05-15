@@ -2,6 +2,86 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.20.1] - 2026-05-15
+
+### Added — Firestore-backed pricing config + gateway-fronted editor UI
+
+Pricing parameters are no longer scattered Python module-level constants
+edited via PR. They now live in **`pricing_config/canonical`** in the
+`leka-product-catalogs` Firestore database and are editable through a
+form behind the access gateway.
+
+#### Reader side
+- `shared/pricing_config.py` (new) — process-cached Firestore loader.
+  `get_pricing_config(brand)` merges global keys with per-brand overrides;
+  returns `{}` when Firestore unreachable so module-level constants act
+  as fallbacks. `PRICING_CONFIG_DISABLE=1` short-circuits in CI/tests.
+- `shared/landed_pricing.py` — `price_row()` gains `brand: str = "vinci"`
+  kwarg; pulls GROSS_MARGIN, DUTY_RATE_NON_CHINA, THAI_VAT_RATE,
+  UNMATCHED_LANDED_UPLIFT, and LOGISTICS_TIERS from the live cfg.
+- `shared/wisdom_pricing.py` — `compute_wisdom_retail()` and
+  `pricing_metadata()` consult the live cfg via `_params()`.
+- `vinci-catalog/import_pricelist.py` — passes `brand="vinci"` into
+  `price_row()`; metadata writes use `_vinci_gross_margin()` (live).
+- `berliner-catalog/import_pricelist.py` — `_berliner_params()` returns
+  live cfg merged with Berliner's local fallbacks; both `price_row()` and
+  `write_firestore()` consume it.
+- `rampline-catalog/import_pricelist.py` — passes `brand="rampline"`
+  into `price_row()`; `_rampline_params()` covers the post-call retail
+  re-derivation.
+
+#### Writer side
+- `src/main.py` — adds `/forms/pricing-config`, `GET /api/pricing-config`,
+  `POST /api/pricing-config`. Auth boundary is the gateway IAP; we trust
+  `X-Goog-Authenticated-User-Email` / `X-Goco-User-Email` for the audit
+  field. Range-validates payloads (catches "35" entered as percent vs
+  "0.35"). `VERSION` bumped 0.5.0 → 0.6.0.
+- `docs/forms/pricing-config.html` — Manrope + Leka palette editor with
+  brand pills, logistics-tier table, save/reload buttons, audit footer
+  ("Last edited by … at …"), and a raw-JSON debug pane.
+- `Dockerfile` — installs `google-cloud-firestore`, copies `shared/` and
+  `docs/forms/` so the Flask service can serve the editor.
+- `cloudbuild-admin.yaml` (new) — manual-trigger build that deploys the
+  Flask service as Cloud Run service `leka-catalogs-admin`,
+  `--no-allow-unauthenticated`, ready for the gateway invoker-binding.
+
+#### Seed
+- `scripts/seed_pricing_config.py` — one-shot. Reads current module-level
+  constants from shared + brand scripts and writes them to
+  `pricing_config/canonical`. `--force` to overwrite, `--dry-run` to print.
+
+#### Hub
+- `hub.config.json` — `pricing-config.html` added to
+  `classification_hints`. `live.enabled` stays `false` until the
+  Cloud Run admin service is deployed and gateway-routed.
+
+### Verification
+- `PRICING_CONFIG_DISABLE=1 python -c "..."` confirms the fallback path
+  resolves to module defaults (Vinci 0.35 GM, non-China duty 0.10, etc.).
+- Flask test_client smoke: GET returns seed (5 globals, 4 brands, 4
+  tiers); bad payload (`thai_vat_rate=7`) → 400; valid payload → 500
+  with sanitized Firestore error (expected — local ADC expired).
+- Form route serves the 13.5 KB HTML editor.
+
+### Deploy plan (one-time, manual)
+```bash
+gcloud builds submit --config=cloudbuild-admin.yaml
+gcloud run services add-iam-policy-binding leka-catalogs-admin \
+  --region=asia-southeast1 \
+  --member="serviceAccount:go-access-gateway@ai-agents-go.iam.gserviceaccount.com" \
+  --role="roles/run.invoker"
+python scripts/seed_pricing_config.py
+# Then in go-access-gateway/registry, point project_id "leka-product-catalogs"
+# at this Cloud Run URL and flip hub.config.json hub.live.enabled to true.
+```
+
+### Outcome
+- The 2026-05-14 pricing canonicalization (commits `e0c5c75` + `4316d8f`)
+  is now live-editable. Next tweak is one form save + one re-run of
+  `<brand>/import_pricelist.py` — no PR required.
+- Closes the Rules 2 + 4 gap from the v1.32.0 sibling work
+  (CHANGELOG + build-summary were left stale by `e0c5c75` + `4316d8f`).
+
 ## [2.20.0] - 2026-05-15
 
 ### Added — DesignPark onboarding (9th brand, full Gen-3 pipeline scaffolding)

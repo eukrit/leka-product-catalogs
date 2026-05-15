@@ -24,12 +24,28 @@ import logging
 import os
 from dataclasses import dataclass
 
+from shared.pricing_config import get_pricing_config
+
 log = logging.getLogger(__name__)
 
+# Module-level fallbacks. Source of truth lives in Firestore
+# (pricing_config/canonical, brands.wisdom + global). These constants are
+# only consulted when Firestore is unreachable — keep them in sync with
+# scripts/seed_pricing_config.py.
 IMPORT_DUTY_RATE: float = 0.07
 THAI_VAT_RATE: float = 0.07
 GROSS_MARGIN: float = 0.50
 DEFAULT_USD_THB: float = 35.0
+
+
+def _params() -> dict:
+    cfg = get_pricing_config("wisdom")
+    return {
+        "import_duty_rate": float(cfg.get("import_duty_rate", IMPORT_DUTY_RATE)),
+        "thai_vat_rate": float(cfg.get("thai_vat_rate", THAI_VAT_RATE)),
+        "gross_margin": float(cfg.get("gross_margin", GROSS_MARGIN)),
+        "default_usd_thb": float(cfg.get("default_usd_thb", DEFAULT_USD_THB)),
+    }
 
 
 def get_usd_thb() -> float:
@@ -62,9 +78,10 @@ def get_usd_thb() -> float:
         if usd and usd > 0:
             return float(usd)
     except Exception as e:
-        log.warning("FX lookup failed (non-fatal): %s — using %.2f", e, DEFAULT_USD_THB)
+        fallback = _params()["default_usd_thb"]
+        log.warning("FX lookup failed (non-fatal): %s — using %.2f", e, fallback)
 
-    return DEFAULT_USD_THB
+    return _params()["default_usd_thb"]
 
 
 @dataclass
@@ -93,12 +110,13 @@ def compute_wisdom_retail(fob_usd: float, usd_thb: float | None = None) -> Wisdo
     if not fob_usd or fob_usd <= 0:
         return None
 
+    p = _params()
     rate = usd_thb if usd_thb and usd_thb > 0 else get_usd_thb()
     fob_thb = fob_usd * rate
-    duty_thb = round(fob_thb * IMPORT_DUTY_RATE, 2)
-    vat_thb = round((fob_thb + duty_thb) * THAI_VAT_RATE, 2)
+    duty_thb = round(fob_thb * p["import_duty_rate"], 2)
+    vat_thb = round((fob_thb + duty_thb) * p["thai_vat_rate"], 2)
     landed_thb = round(fob_thb + duty_thb + vat_thb, 2)
-    retail_thb = round(landed_thb / (1 - GROSS_MARGIN), 2)
+    retail_thb = round(landed_thb / (1 - p["gross_margin"]), 2)
     retail_usd = round(retail_thb / rate, 2)
 
     return WisdomPricedRow(
@@ -141,6 +159,7 @@ def compute_wisdom_retail_batch(
 
 def pricing_metadata(row: WisdomPricedRow, price_date: str) -> dict:
     """Return the Firestore pricing sub-map for a priced row."""
+    p = _params()
     return {
         "fob_usd": row.fob_usd,
         "usd_thb": row.usd_thb,
@@ -149,9 +168,9 @@ def pricing_metadata(row: WisdomPricedRow, price_date: str) -> dict:
         "landed_thb": row.landed_thb,
         "retail_thb": row.retail_thb,
         "retail_usd": row.retail_usd,
-        "import_duty_rate": IMPORT_DUTY_RATE,
-        "thai_vat_rate": THAI_VAT_RATE,
-        "gross_margin": GROSS_MARGIN,
+        "import_duty_rate": p["import_duty_rate"],
+        "thai_vat_rate": p["thai_vat_rate"],
+        "gross_margin": p["gross_margin"],
         "price_date": price_date,
         "currency": "USD",
     }

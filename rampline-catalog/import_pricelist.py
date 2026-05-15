@@ -66,14 +66,23 @@ from shared.landed_pricing import (  # noqa: E402
     price_row,
 )
 
-# User 2026-05-14: Rampline GM 40% → 30% (shadowing shared's 35% baseline);
-# canonical formula uses flat 35% logistics + 10% duty + 7% VAT, same as the
-# proposal's `src/reprice_all_brands_canonical.py`. Note: while `price_row`
-# still uses shared's per-CBM cost_engine path, the GROSS_MARGIN local
-# override below pins the retail divisor to 30%.
+# Module-level fallbacks. Source of truth lives in Firestore
+# (pricing_config/canonical, brands.rampline + global). When Firestore
+# is reachable, _rampline_params() returns the live values.
 GROSS_MARGIN = 0.30
 DUTY_RATE_NON_CHINA = 0.10
 THAI_VAT_RATE = 0.07
+
+from shared.pricing_config import get_pricing_config  # noqa: E402
+
+
+def _rampline_params() -> dict:
+    cfg = get_pricing_config("rampline")
+    return {
+        "gross_margin": float(cfg.get("gross_margin", GROSS_MARGIN)),
+        "duty_rate_non_china": float(cfg.get("duty_rate_non_china", DUTY_RATE_NON_CHINA)),
+        "thai_vat_rate": float(cfg.get("thai_vat_rate", THAI_VAT_RATE)),
+    }
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s: %(message)s")
 log = logging.getLogger("rampline_pricelist")
@@ -403,6 +412,7 @@ def main():
     log.info("Baltic LCL rate: %.2f THB/CBM (sources=%d)",
              baltic["per_cbm_thb"], len(baltic["sources"]))
 
+    p = _rampline_params()
     priced: list[PricedRow] = []
     for row in parsed:
         sku = row["sku"]
@@ -412,12 +422,13 @@ def main():
         norm = normalize_sku(sku)
         if norm in dim_index_for_call and sku not in dim_index_for_call:
             dim_index_for_call[sku] = dim_index_for_call[norm]
+        # Pass brand="rampline" so price_row pulls Rampline's GM (30%)
+        # from Firestore directly. The retail re-derivation below stays
+        # as a defensive belt-and-suspenders for the Firestore-unreachable
+        # path where shared falls back to its 0.35 default.
         pr = price_row(sku, eur, dim_index_for_call, fx, baltic,
-                        args.packing_factor)
-        # Re-derive retail_thb at Rampline's 30% GM (price_row uses
-        # shared.GROSS_MARGIN = 0.35). Local override keeps the catalog
-        # output aligned with the proposal's canonical re-pricer.
-        pr.retail_thb = round(pr.landed_thb / (1 - GROSS_MARGIN), 2)
+                       args.packing_factor, brand="rampline")
+        pr.retail_thb = round(pr.landed_thb / (1 - p["gross_margin"]), 2)
         pr.retail_usd = round(pr.retail_thb / fx.get("USD", 35.0), 2)
         pr.retail_eur = round(pr.retail_thb / fx.get("EUR", 38.0), 2)
         priced.append(pr)
