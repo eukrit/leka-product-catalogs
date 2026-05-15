@@ -2,6 +2,71 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.20.2] - 2026-05-16
+
+### Deployed — pricing-config UI live at gateway
+
+Followed the v2.20.1 deploy plan and pushed a new revision of the
+existing `leka-catalogs-gateway` Cloud Run service (asia-southeast1).
+The page that previously returned the gateway's `not_found_in_repo` 404
+now resolves because the v0.5.0 revision didn't have the
+`/forms/pricing-config` route — the new revision (image
+`gateway:3d640e7`) does.
+
+#### Decisions
+- **Reused `leka-catalogs-gateway`** instead of creating a separate
+  `leka-catalogs-admin` service. The access-gateway already proxies
+  `https://gateway.goco.bz/leka-product-catalogs/...` to it, and that's
+  what the user actually calls.
+- **Kept `--allow-unauthenticated`** on the service. Tightening to
+  invoker-only requires a coordinated change in `go-access-gateway`
+  routing so it mints an ID token before proxying — out of scope for
+  this deploy. The form's POST handler already trusts the gateway's
+  forwarded `X-Goog-Authenticated-User-Email` for the audit trail.
+
+#### Changes
+- `cloudbuild-admin.yaml` — retargeted to `_SERVICE: leka-catalogs-gateway`
+  + image `_IMAGE: gateway`. Removed `--no-allow-unauthenticated` flip.
+- `.gcloudignore` — root `Dockerfile` build context needs `src/`,
+  `shared/`, `docs/forms/`, and `vinci-catalog/web-app/public/`. Removed
+  the wholesale `docs`, `shared`, `scripts`, `/src`, `/vinci-catalog`
+  exclusions (gitignore semantics — can't re-include children of an
+  excluded parent); added narrow per-file exclusions for the heavy
+  non-runtime parts that we don't need in the image.
+- `.dockerignore` — same fix on the Docker side: removed `docs/` and
+  `shared/`, added narrow exclusions for non-runtime docs files.
+
+#### Build sequence (today)
+1. Cloud Build `4b7964fa` — FAIL: `$SHORT_SHA` empty on manual submit.
+   Fix: pass `--substitutions=SHORT_SHA=$(git rev-parse --short HEAD)`.
+2. Cloud Build `708f2b37` — FAIL: `COPY shared/` not found
+   (`.gcloudignore` excluded `shared`). Fix: see above.
+3. Cloud Build `e65c0c30` — FAIL: `COPY docs/forms/` not found
+   (gitignore parent-dir rule defeated `!/docs/forms/**`). Fix: removed
+   the blanket `docs` exclusion.
+4. Cloud Build `a2642143` — **SUCCESS** (2m1s). Image
+   `asia-southeast1-docker.pkg.dev/ai-agents-go/leka-product-catalogs/gateway:3d640e7`
+   deployed as revision `leka-catalogs-gateway-00002-?`.
+
+#### Smoke test (direct Cloud Run URL)
+- `GET /health` → `{"version":"0.6.0", ...}` ✅ (was `0.5.0`)
+- `GET /api/pricing-config` → 200 with the seed (5 globals, 4 brands,
+  4 tiers) ✅
+- `GET /forms/pricing-config` → 200, 13.9 KB of HTML ✅
+
+Gateway URL `https://gateway.goco.bz/leka-product-catalogs/forms/pricing-config`
+returned the Google sign-in flow on unauthenticated curl — IAP working
+as expected. Authenticated browser sessions get the editor.
+
+### Outstanding (not blocking the editor)
+- `pricing_config/canonical` Firestore doc doesn't exist yet. The form
+  serves `_empty_config()` defaults until either:
+  - The user clicks **Save changes** in the editor (writes the doc with
+    their email as `updated_by`), or
+  - `python scripts/seed_pricing_config.py` is run locally (writes the
+    doc with `scripts/seed_pricing_config.py` as `updated_by`).
+- `--no-allow-unauthenticated` tightening — see Decisions above.
+
 ## [2.20.1] - 2026-05-15
 
 ### Added — Firestore-backed pricing config + gateway-fronted editor UI

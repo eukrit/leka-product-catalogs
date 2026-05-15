@@ -19,10 +19,7 @@ extracted_images
 *Slack Downloads*
 **/*Slack Downloads*
 **/Slack Downloads*
-docs
 data
-scripts
-shared
 firestore
 migration
 /4soft
@@ -31,10 +28,27 @@ migration
 /berliner-catalog
 /eurotramp-catalog
 /rampline-catalog
-/vinci-catalog
 /vortex-catalog
 /wisdom-catalog
-/src
+# vinci-catalog/web-app/public/ is needed by the root Dockerfile (Flask
+# serves /vinciplay/ from it). Exclude only the heavy non-runtime parts.
+/vinci-catalog/scrape_catalog.py
+/vinci-catalog/import_to_firestore.py
+/vinci-catalog/import_pricelist.py
+/vinci-catalog/firestore_schema.json
+/vinci-catalog/data
+# docs/ is mostly generated HTML not needed at runtime; only docs/forms/
+# is needed for the Flask /forms/* routes.
+/docs/architecture.html
+/docs/build-summary.html
+/docs/hub.html
+/docs/BuildPlans
+/docs/reports
+/docs/summaries
+/docs/*.md
+# scripts/ + shared/: shared/ IS needed at runtime (src/main.py imports
+# shared.pricing_config); scripts/ is not.
+/scripts
 **/build_output
 **/dist
 **/.cache

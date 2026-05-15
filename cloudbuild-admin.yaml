@@ -1,30 +1,30 @@
 # cloudbuild-admin.yaml
-# Leka Product Catalogs — Admin / Pricing-Config Editor service
+# Leka Product Catalogs — Flask gateway / pricing-config editor service.
 #
-# Builds the root Dockerfile (Flask) and deploys it as Cloud Run service
-# `leka-catalogs-admin` in asia-southeast1.
+# Deploys a new revision of the EXISTING Cloud Run service
+# `leka-catalogs-gateway` (image `/gateway`) — that's what the
+# go-access-gateway already proxies to under
+# https://gateway.goco.bz/leka-product-catalogs/. The v0.5.0 revision
+# currently in production predates the /forms/pricing-config and
+# /api/pricing-config routes added in v2.20.1, which is why opening the
+# editor page returns the gateway's `not_found_in_repo` 404.
 #
-# Auth model (Rule 14):
-#   --no-allow-unauthenticated; only the go-access-gateway service account
-#   has roles/run.invoker. Public traffic reaches us via
-#   https://gateway.goco.bz/leka-product-catalogs/...
-#
-# Trigger this manually for now:
+# Trigger manually:
 #   gcloud builds submit --config=cloudbuild-admin.yaml
 #
-# After first successful deploy, grant the gateway SA invoker (one-time):
-#   gcloud run services add-iam-policy-binding leka-catalogs-admin \
-#     --region=asia-southeast1 \
-#     --member="serviceAccount:go-access-gateway@ai-agents-go.iam.gserviceaccount.com" \
-#     --role="roles/run.invoker"
-#
-# Then in go-access-gateway/registry, point project_id "leka-product-catalogs"
-# at this Cloud Run URL.
+# Auth model: this service is currently --allow-unauthenticated (set up
+# before Rule 14). The pricing-config POST handler trusts the
+# X-Goog-Authenticated-User-Email / X-Goco-User-Email headers forwarded
+# by the access gateway. Tightening to --no-allow-unauthenticated +
+# invoker-only-on-claude@ requires a coordinated change in
+# go-access-gateway's routing config so it mints a service-to-service
+# ID token before proxying — out of scope for this deploy.
 
 substitutions:
   _REGION: asia-southeast1
   _AR_REPO: asia-southeast1-docker.pkg.dev/ai-agents-go/leka-product-catalogs
-  _SERVICE: leka-catalogs-admin
+  _SERVICE: leka-catalogs-gateway
+  _IMAGE: gateway
 
 options:
   logging: CLOUD_LOGGING_ONLY
@@ -32,33 +32,32 @@ options:
 
 steps:
   - name: 'gcr.io/cloud-builders/docker'
-    id: build-admin
+    id: build-gateway
     args:
       - 'build'
       - '-t'
-      - '$_AR_REPO/$_SERVICE:$SHORT_SHA'
+      - '$_AR_REPO/$_IMAGE:$SHORT_SHA'
       - '-t'
-      - '$_AR_REPO/$_SERVICE:latest'
+      - '$_AR_REPO/$_IMAGE:latest'
       - '-f'
       - 'Dockerfile'
       - '.'
 
   - name: 'gcr.io/cloud-builders/docker'
-    id: push-admin
-    args: ['push', '--all-tags', '$_AR_REPO/$_SERVICE']
-    waitFor: ['build-admin']
+    id: push-gateway
+    args: ['push', '--all-tags', '$_AR_REPO/$_IMAGE']
+    waitFor: ['build-gateway']
 
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    id: deploy-admin
+    id: deploy-gateway
     entrypoint: bash
     args:
       - '-c'
       - |
         gcloud run deploy $_SERVICE \
-          --image $_AR_REPO/$_SERVICE:$SHORT_SHA \
+          --image $_AR_REPO/$_IMAGE:$SHORT_SHA \
           --region $_REGION \
           --platform managed \
-          --no-allow-unauthenticated \
           --service-account claude@ai-agents-go.iam.gserviceaccount.com \
           --port 8080 \
           --memory 512Mi \
@@ -67,13 +66,13 @@ steps:
           --max-instances 3 \
           --set-env-vars="GOOGLE_CLOUD_PROJECT=ai-agents-go"
         echo "Deployed $_SERVICE:$SHORT_SHA"
-    waitFor: ['push-admin']
+    waitFor: ['push-gateway']
 
 images:
-  - '$_AR_REPO/$_SERVICE:$SHORT_SHA'
-  - '$_AR_REPO/$_SERVICE:latest'
+  - '$_AR_REPO/$_IMAGE:$SHORT_SHA'
+  - '$_AR_REPO/$_IMAGE:latest'
 
 tags:
   - 'leka-product-catalogs'
-  - 'admin'
+  - 'gateway'
   - '$SHORT_SHA'
