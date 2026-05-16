@@ -84,7 +84,16 @@ IMAGE_ZIPS_DIR = DRIVE_CATALOGS / "IMAGE"
 DRAWING_ZIPS_DIR = DRIVE_CATALOGS / "DRAWING"
 
 # --- Matching helpers -----------------------------------------------------
-SKU_RE = re.compile(r"((?:SDM\d+|PTC\d+|PTM\d+|DPM\d+|DPF\d+|DPS\d+)[-_]?\d{2,4}(?:[-_]\d{1,4})?)", re.IGNORECASE)
+# Generic SKU regex — matches the union of pricelist SKU shapes observed in
+# Firestore audit (SM12-XX, SDM12-XXXX, PTC21-XXX, PTM12-XX, BOA12-XX,
+# BTA12-XX, BKA12-XX, BGA15-XX, BTA17-XX, UTM-XX, DPx-XX). Numeric-prefix
+# slide SKUs like 5P090-58A30A00-00 / 5W092-58A16A21-00 are handled by the
+# known-SKU substring matcher (load_product_index), not this regex.
+SKU_RE = re.compile(
+    r"((?:SDM|PTC|PTM|SM|BOA|BTA|BKA|BGA|UTM|DPM|DPF|DPS|DP)[-_ ]?\d{2,5}"
+    r"(?:[-_ ]?[A-Z0-9]{1,5})*)",
+    re.IGNORECASE,
+)
 NUMBERED_PREFIX_RE = re.compile(r"^(\d{1,3})[_\-\s](.+?)\.(jpg|jpeg|png|webp|dwg)$", re.IGNORECASE)
 SLUG_BAD_CHARS = re.compile(r"[^a-z0-9]+")
 IMAGE_EXTS = {".jpg", ".jpeg", ".png", ".webp"}
@@ -250,11 +259,34 @@ def content_type_for(ext: str) -> str:
 
 
 # --- Product matching ----------------------------------------------------
+# Manual theme aliases — 2024 CAD bundle uses different theme names than the
+# 2023 manifest. Maps CAD theme slug (left) → manifest product name slug (right).
+# Only fills gaps the substring-overlap matcher misses.
+THEME_ALIASES: dict[str, str] = {
+    "twin-tower": "twin-star",                     # CAD #1 → manifest "Twin star"
+    "art-playground": "art-playground",            # exact (no-op, but explicit)
+    "rainbow-tower": "twin-star",                  # CAD #20 → manifest "Twin star"
+    "windmill-in-the-sky": "the-sun-is-fickle",    # CAD #22 → manifest cloud-theme proxy
+    "hiding-alligator": "hut-in-the-forest",       # CAD #23 → nature-theme proxy
+    "hunter-s-hut": "hut-in-the-forest",           # CAD #14 → manifest "Hut in the forest"
+    "hunters-hut": "hut-in-the-forest",
+    "honeybear-house": "indian-village",           # CAD #21 → ETC-themed proxy
+    "honeybee-house": "indian-village",            # CAD #29
+    "spring-garden": "art-playground",             # CAD #11 fallback
+    "forsythia-garden": "art-playground",          # CAD #30 fallback
+    "peterpan-world": "art-playground",            # CAD #12 fallback
+    "marine-guard": "marine-guard",                # exact
+    "twin-star": "twin-star",                      # CAD #1 alt spelling
+}
+
+
 def load_product_index(db: firestore.Client) -> dict:
-    """Build lookup tables: {item_code_upper: handle}, {theme_slug: handle}."""
+    """Build lookup tables and an upper-cased known-SKU set for substring
+    matching against arbitrary filenames."""
     coll = db.collection("vendors").document(SLUG).collection("products")
     by_sku: dict[str, str] = {}
     by_theme: dict[str, str] = {}
+    sku_set: list[str] = []  # sorted longest-first for greedy substring match
     n = 0
     for snap in coll.stream():
         d = snap.to_dict() or {}
@@ -262,33 +294,67 @@ def load_product_index(db: firestore.Client) -> dict:
         item_code = (d.get("item_code") or "").upper()
         if item_code:
             by_sku[item_code] = handle
-            # Also index a stripped variant (drop trailing -00 / -001 suffixes).
+            sku_set.append(item_code)
+            # Stripped variants (drop trailing -00 / -001 / parenthetical).
             stripped = re.sub(r"[-_]\d{1,4}$", "", item_code)
             if stripped and stripped not in by_sku:
                 by_sku[stripped] = handle
+                sku_set.append(stripped)
         if d.get("is_theme") and d.get("name"):
             by_theme[slugify(d["name"])] = handle
         n += 1
+    # Longest first so "SDM12-B112" wins over "SDM12-B".
+    sku_set = sorted(set(sku_set), key=len, reverse=True)
     log.info("loaded product index: %d products, %d skus, %d themes",
              n, len(by_sku), len(by_theme))
-    return {"sku": by_sku, "theme": by_theme}
+    return {"sku": by_sku, "theme": by_theme, "sku_set": sku_set}
+
+
+def find_sku_in_text(text: str, sku_set: list[str]) -> str | None:
+    """Greedy longest-match against the known-SKU set. Case-insensitive,
+    tolerant of spaces/dashes/underscores between segments."""
+    t = re.sub(r"[\s_]+", "-", text.upper())
+    for sku in sku_set:
+        # Build a tolerant variant of the SKU (allow optional separators
+        # to be missing or replaced, e.g. "SM12-04B" matches "SM12 - 04B").
+        pat = re.sub(r"[-_]", r"[-_ ]?", sku)
+        if re.search(rf"(?<![A-Z0-9]){pat}(?![A-Z0-9])", t):
+            return sku
+    return None
 
 
 def match_product(asset: dict, idx: dict) -> str | None:
+    # 1) Pre-detected SKU (cheap path from discovery time).
     if asset.get("sku_match"):
-        sku = asset["sku_match"].upper()
+        sku = asset["sku_match"].upper().replace(" ", "-")
         if sku in idx["sku"]:
             return idx["sku"][sku]
         stripped = re.sub(r"[-_]\d{1,4}$", "", sku)
         if stripped in idx["sku"]:
             return idx["sku"][stripped]
+
+    # 2) Substring match against the known-SKU set using the filename.
+    name = asset.get("name") or ""
+    hit = find_sku_in_text(name, idx["sku_set"])
+    if hit and hit in idx["sku"]:
+        asset["sku_match"] = hit  # backfill so attachment doc records it
+        return idx["sku"][hit]
+
+    # 3) Theme match with alias table.
     if asset.get("theme_match"):
         ts = asset["theme_match"]
-        if ts in idx["theme"]:
-            return idx["theme"][ts]
-        # Allow partial overlap (e.g. "twin-tower" matches "twin-star" — no).
+        # Alias rewrite.
+        canonical = THEME_ALIASES.get(ts, ts)
+        if canonical in idx["theme"]:
+            return idx["theme"][canonical]
+        # Token-overlap (e.g. "twin-tower" ↔ "twin-star" no longer matches —
+        # too aggressive — but still let "art-playground" ↔ "art-playground"
+        # exact and "marine-guard" ↔ "marine-guard" hit naturally).
         for theme_slug, handle in idx["theme"].items():
-            if ts in theme_slug or theme_slug in ts:
+            # Require both sides to share at least 2 tokens for a "fuzzy" hit.
+            a = set(ts.split("-"))
+            b = set(theme_slug.split("-"))
+            if len(a & b) >= 2:
                 return handle
     return None
 

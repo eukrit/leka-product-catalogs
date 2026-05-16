@@ -143,21 +143,55 @@ def parse_sheet(sheet_name: str, ws) -> list[dict]:
                     col_map["unit_price_label"] = col_idx  # remember text too
             break
     if header_idx is None or "item_code" not in col_map or "unit_price" not in col_map:
-        log.warning("[%s] no parseable header — skipping (max_row=%s)", sheet_name, ws.max_row)
-        return []
+        # Fallback path for category-only sheets like "Modern Igloo" that lack
+        # a MODEL NO column. We scan for a header with Category + Description
+        # + Unit Price (no Model No) and synthesize SKUs from the sheet name.
+        if "item_code" not in (col_map or {}) and header_idx is None:
+            for r_idx in range(1, min(13, ws.max_row + 1)):
+                row = [c.value for c in ws[r_idx]]
+                cells_lc = [(str(c).strip().lower() if c is not None else "") for c in row]
+                has_desc = "description" in cells_lc
+                has_cat = "category" in cells_lc
+                has_price = any(UNIT_PRICE_RE.search(c) for c in cells_lc if c)
+                if has_desc and has_price and (has_cat or sheet_name.lower() in ("modern igloo",)):
+                    header_idx = r_idx
+                    col_map = {}
+                    for col_idx, cell in enumerate(cells_lc):
+                        if not cell:
+                            continue
+                        if cell == "description":
+                            col_map["description"] = col_idx
+                        elif cell == "category":
+                            col_map["category"] = col_idx
+                        elif UNIT_PRICE_RE.search(cell):
+                            col_map["unit_price"] = col_idx
+                    col_map["item_code"] = -1  # synthetic
+                    break
+        if header_idx is None or "unit_price" not in col_map:
+            log.warning("[%s] no parseable header — skipping (max_row=%s)", sheet_name, ws.max_row)
+            return []
 
     rows: list[dict] = []
+    synthetic_sku = col_map.get("item_code") == -1
     for r_idx in range(header_idx + 1, ws.max_row + 1):
         row = [c.value for c in ws[r_idx]]
         if not row:
             continue
-        item_code = row[col_map["item_code"]]
-        if item_code is None or str(item_code).strip() == "":
-            continue
-        item_code_s = str(item_code).strip()
 
         desc = row[col_map["description"]] if "description" in col_map else ""
         desc_s = str(desc).strip() if desc is not None else ""
+
+        if synthetic_sku:
+            # No MODEL NO column — derive item_code from sheet name + description.
+            if not desc_s or desc_s.lower().startswith(("1)", "2)", "3)", "4)", "5)", "this does not")):
+                # Skip note/footer rows.
+                continue
+            item_code_s = "DP-" + slugify(sheet_name).upper() + "-" + slugify(desc_s).upper()[:32]
+        else:
+            item_code = row[col_map["item_code"]]
+            if item_code is None or str(item_code).strip() == "":
+                continue
+            item_code_s = str(item_code).strip()
 
         price = row[col_map["unit_price"]]
         if isinstance(price, str):
