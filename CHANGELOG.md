@@ -2,6 +2,48 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.23.9] - 2026-05-16
+
+### Added — 5 themed collections for Leka Project (auto-generated)
+
+Wisdom never had a "series" concept (unlike Vinci or Berliner), so the
+storefront's collection filter was disabled for Leka Project. This adds
+5 curated themed collections by mapping each product's top-level
+category to the first matching collection from a priority list.
+
+Created collections (handle prefix `leka-project-`):
+- `leka-project-furniture-collection`     — 1,261 products (from `furniture`)
+- `leka-project-outdoor-and-nature-play`  — 618 products  (from `outdoor`, `nature_play`, `water_play`)
+- `leka-project-active-play`              — 1,278 products (from `playground`, `balance`, `climbing`, `sports`)
+- `leka-project-early-years-collection`   — 83 products   (from `early_years`)
+- `leka-project-creative-and-loose-parts` — 130 products  (from `creative`, `loose_parts`)
+
+**3,370 of 5,062 products (67%) assigned**, 0 errors, elapsed 20m 25s.
+The remaining 1,692 products in the catch-all `other` category stay
+uncollected — discoverable via category and search only. Future curation
+can claim them.
+
+Medusa v2 only supports one collection per product (`collection_id`
+is singular), so priority order matters: Furniture first (most specific),
+then Outdoor & Nature, Active Play, Early Years, Creative & Loose Parts.
+
+### Storefront coordination
+- Pairs with leka-website v0.10.0 which flips
+  `BRANDS["leka-project"].hasCollections: true` and sets
+  `collectionPrefix: "leka-project-"` so the existing filter UI picks
+  them up without any rendering changes.
+
+### Added
+- `scripts/create_leka_project_collections.py` — idempotent; `--revert`
+  clears `collection_id` on every Leka Project product (does not delete
+  the empty collections).
+
+### Files changed
+- `scripts/create_leka_project_collections.py` (new)
+- `CHANGELOG.md`, `VERSION`
+
+---
+
 ## [2.23.8] - 2026-05-16
 
 ### Changed — Renamed 80 `wisdom-*` Medusa product categories to `leka-project-*`
