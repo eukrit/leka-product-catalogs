@@ -2,6 +2,84 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.23.6] - 2026-05-16
+
+### Improved — DesignPark follow-ups (image coverage, Modern Igloo, Slack)
+
+Tightens the v2.20.0 / v2.23.5 DesignPark pipeline along the three open
+follow-ups. Net live result: **87 active products** (up from 15, +480 %)
+and **87 / 191 published in Medusa** (up from 15).
+
+#### 1. Asset matcher overhaul (`scripts/ingest_designpark_assets.py`)
+
+The original SKU regex covered only 6 prefixes (`SDM|PTC|PTM|DPM|DPF|DPS`)
+which missed the majority of pricelist SKUs. New strategy:
+
+- **Generic regex** widened to all pricelist prefixes:
+  `SDM, PTC, PTM, SM, BOA, BTA, BKA, BGA, UTM, DPM, DPF, DPS, DP`.
+- **Known-SKU substring matcher** (`find_sku_in_text`) — `load_product_index()`
+  now exports a longest-first SKU list; `match_product()` searches filenames
+  (and Slack message context) against the live set, tolerant of
+  spaces/dashes/underscores between SKU segments. This is what unlocks
+  `SM12 - 04B - Upright Cycle EMERALD GREEN.jpg` and
+  `BTA12-06 금광.jpg` matches that the regex alone couldn't reach.
+- **Theme alias table** (`THEME_ALIASES`) — manual map from the 2024 CAD
+  bundle theme slugs (`twin-tower`, `hunter-s-hut`, …) to the 2023 manifest
+  product slugs (`twin-star`, `hut-in-the-forest`, …). Plus a 2-token
+  Jaccard-style fallback for partial overlap.
+- **Result**: 109 matched → **288 matched** (+179 joins, +165 %).
+
+#### 2. Modern Igloo sheet handling (`scripts/ingest_designpark_pricelist.py`)
+
+The 12th pricelist sheet uses a 4-column layout (No / Category /
+Description / Unit Price) with no MODEL NO column, which the original
+parser skipped. New fallback path: synthesize
+`item_code = "DP-<SHEET-SLUG>-<DESC-SLUG>"` and filter out the
+trailing 1)/2)/3) footer rows. **Result**: +1 product.
+
+#### 3. Slack ingest live (`scripts/ingest_designpark_slack.py`)
+
+Replaces the v2.20.0 manifest-driven scaffold with a direct Slack API
+client that pages `files.list?channel=C0AESCDCZRQ` and fetches
+`conversations.history` for per-file message context. Auth via
+`slack-bot-token` from Secret Manager. Channel state (2026-02-13 →
+2026-05-16): 3 files, all PDFs, all brochures (no per-product photos
+yet). Run yield: 3 PDFs uploaded to GCS, attached to
+`vendors/designpark.brochures[]` (vendor-level — multi-product catalogs).
+
+#### 4. Status promotion (`scripts/promote_designpark_published.py`)
+
+`sync_vendors_to_medusa.py::_build_update_payload` intentionally omits
+`status` so manual Medusa Admin curation isn't overwritten on every sync.
+This new idempotent helper closes the loop: for every product with
+`status="active"` in Firestore that's still `draft` in Medusa, POST
+`{status: "published"}`. This run: **72 promoted** + 15 already published
+= **87 published** total.
+
+#### Files
+
+- modified: `scripts/ingest_designpark_assets.py`
+- modified: `scripts/ingest_designpark_pricelist.py`
+- added: `scripts/ingest_designpark_slack.py`
+- added: `scripts/promote_designpark_published.py`
+- modified: `VERSION` → `2.23.6`
+
+#### Live final state (verified via Medusa Admin API)
+
+- Total in `Design Park` SC: **191** products.
+- Status: **87 published**, **104 draft**.
+- 178 priced (USD + THB + EUR); 13 themes / no-FOB rows carry no `retail_*`.
+- GCS blobs: 518 (no new uploads this run — re-ingest path is fully idempotent).
+- Slack brochures attached at vendor level: 3.
+
+#### Remaining gaps (smaller than before)
+
+1. **230 unmatched assets** (down from 411) — mostly Korean-language
+   drawings and loose CAD. Would need OCR-on-DWG or a manual mapping pass.
+2. **104 draft products** — components/themes without imagery. When the
+   partner sends more photos (Slack drop or Drive update), re-running B2 +
+   E1 + sync + this version's promote helper picks them up automatically.
+
 ## [2.23.5] - 2026-05-16
 
 ### Deployed — DesignPark v2.20.0 apply run (9th brand live in Medusa)
