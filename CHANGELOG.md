@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.23.8] - 2026-05-16
+
+### Changed — Renamed 80 `wisdom-*` Medusa product categories to `leka-project-*`
+
+Final cleanup for the Wisdom → Leka Project rebrand (v2.17.0). Product
+categories were left behind in that pass: 80 subcategory handles like
+`wisdom-furniture-cabinet`, `wisdom-balance-house`, etc. continued to
+surface in storefront URLs as `?subcategory=wisdom-...`, leaking the
+upstream supplier identity. The category *names* ("Furniture", "Climbing",
+etc.) were already clean — only the handles needed updating.
+
+- 80 / 80 categories renamed via Medusa Admin API in 26 seconds.
+- Old handle preserved in `metadata.legacy_handle` for revert.
+- Verified live: Store API returns 0 `wisdom-*` handles to the Leka Project
+  publishable key, 76 `leka-project-*` subcategories present and visible
+  on `catalogs.leka.studio/leka-project`.
+
+### Added
+- `scripts/rename_wisdom_categories.py` — idempotent rename + `--revert`.
+
+### Files changed
+- `scripts/rename_wisdom_categories.py` (new)
+- `CHANGELOG.md`, `VERSION`
+
+---
+
 ## [2.23.7] - 2026-05-16
 
 ### Added — Wisdom / Leka Project Medusa price refresh tooling
