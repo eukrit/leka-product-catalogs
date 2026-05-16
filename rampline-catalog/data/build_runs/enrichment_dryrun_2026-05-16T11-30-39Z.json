@@ -1,0 +1,605 @@
+{
+  "timestamp": "2026-05-16T11-30-39Z",
+  "dry_run": true,
+  "limit_family": null,
+  "crawl_path": "C:\\Users\\eukri\\OneDrive\\Documents\\Claude Code\\vendors\\rampline-catalog\\parsed\\products.json",
+  "min_match_score": 0.55,
+  "description_overwrite_threshold": 80,
+  "totals": {
+    "ENRICH": 28
+  },
+  "actions_count": 28,
+  "unmatched_count": 1,
+  "unmatched": [
+    {
+      "crawl_sku": "slakklinesystem",
+      "crawl_name": "Slakklinesystem",
+      "crawl_url": "",
+      "best_score": 0.485,
+      "reason": "no_match"
+    }
+  ],
+  "errors": [],
+  "actions": [
+    {
+      "op": "ENRICH",
+      "crawl_sku": "shock-absorber",
+      "crawl_name": "ShockDeck\u2122 - Shock absorber excl. foot",
+      "crawl_url": "http://rampline.com/en/product/shockdeck",
+      "handle": "rampline-shockdeck",
+      "product_id": "prod_01KNQ3QD2GBH3E6ZKMBNBYHHJR",
+      "match_score": 1.0,
+      "match_basis": "slug:shockdeck\u2194shockdeck",
+      "runner_ups": 3,
+      "md_changes": {
+        "source_url": "http://rampline.com/en/product/shockdeck",
+        "crawled_at": "2026-05-16T11:30:39.188762+00:00",
+        "crawl_sha": "5635398686121516147413009581729618147413009581729618147413009581",
+        "crawl_category": "surfacing",
+        "crawl_subcategory": "Components",
+        "crawl_variant_skus": "expansion-bolt-for-fixed-egde-8mm-x-95mm,shock-absorber-excl-foot,shock-absorber-w-adjustable-foot"
+      },
+      "description_set": false,
+      "description_chars": 0
+    },
+    {
+      "op": "ENRICH",
+      "crawl_sku": "23488",
+      "crawl_name": "Floating Bench\u2122 (Lighting Included)",
+      "crawl_url": "https://rampline.com/en/product/floating-bench/",
+      "handle": "rampline-floating-bench",
+      "product_id": "prod_01KNQ3PYBRMC0ET0BRFTRCZS82",
+      "match_score": 1.0,
+      "match_basis": "slug:floating-bench\u2194floating-bench",
+      "runner_ups": 1,
+      "md_changes": {
+        "source_url": "https://rampline.com/en/product/floating-bench/",
+        "crawled_at": "2026-05-16T11:30:39.188798+00:00",
+        "crawl_category": "balance",
+        "crawl_subcategory": "Lighting Included",
+        "crawl_variant_skus": "23485"
+      },
+      "description_set": false,
+      "description_chars": 0
+    },
+    {
+      "op": "ENRICH",
+      "crawl_sku": "jane-jump-for-grass-or-loose-fills",
+      "crawl_name": "JANE JUMP - For Grass or loose fills",
+      "crawl_url": "https://rampline.com/en/product/jane-jump/",
+      "handle": "rampline-jane-jump",
+      "product_id": "prod_01KNQ3Q43MAVKZBW4CHNEVJ752",
+      "match_score": 1.0,
+      "match_basis": "slug:jane-jump\u2194jane-jump",
+      "runner_ups": 3,
+      "md_changes": {
+        "source_url": "https://rampline.com/en/product/jane-jump/",
+        "crawled_at": "2026-05-16T11:30:39.188815+00:00",
+        "crawl_sha": "8711425121289110729381665422810111111111111111111111111111111111",
+        "crawl_category": "motor-skill-park",
+        "crawl_subcategory": "Grass or loose fills",
+        "crawl_variant_skus": "jane-jump-for-artificial-grass,jane-jump-for-shockdeck,jane-jump-for-wet-pour"
+      },
+      "description_set": false,
+      "description_chars": 0
+    },
+    {
+      "op": "ENRICH",
+      "crawl_sku": "trip-for-shockdeck",
+      "crawl_name": "TRIP",
+      "crawl_url": "https://rampline.com/en/product/trip/",
+      "handle": "rampline-trip",
+      "product_id": "prod_01KNQ3Q7AN15JD9A2VXXYFJ69T",
+      "match_score": 1.0,
+      "match_basis": "slug:trip\u2194trip",
+      "runner_ups": 3,
+      "md_changes": {
+        "source_url": "https://rampline.com/en/product/trip/",
+        "crawled_at": "2026-05-16T11:30:39.188827+00:00",
+        "crawl_sha": "a597551061730076725225026980313886548771141708893457088824792683",
+        "crawl_category": "motor-skill-park",
+        "crawl_subcategory": "For ShockDeck\u2122",
+        "crawl_variant_skus": "trip-for-artificial-grass,trip-for-grass-or-loose-fills,trip-for-wet-pour"
+      },
+      "description_set": false,
+      "description_chars": 0
+    },
+    {
+      "op": "ENRICH",
+      "crawl_sku": "flight-shockdeck",
+      "crawl_name": "FLIGHT (for ShockDeck\u2122)",
+      "crawl_url": "https://rampline.com/en/product/flight/",
+      "handle": "rampline-flight",
+      "product_id": "prod_01KNQ3Q9NCN8MARBJN6Q9FZ36R",
+      "match_score": 1.0,
+      "match_basis": "slug:flight\u2194flight",
+      "runner_ups": 3,
+      "md_changes": {
+        "source_url": "https://rampline.com/en/product/flight/",
+        "crawled_at": "2026-05-16T11:30:39.188838+00:00",
+        "crawl_sha": "5512217036329402517596541620025732115315112111111111111111111111",
+        "crawl_category": "motor-skill-park",
+        "crawl_subcategory": "For ground cover",
+        "crawl_variant_skus": "flight-artificial-grass,flight-grass-or-loose-fills,flight-wet-pour"
+      },
+      "description_set": false,
+      "description_chars": 0
+    },
+    {
+      "op": "ENRICH",
+      "crawl_sku": "24536",
+      "crawl_name": "CLASSIC JUMP (for Grass or loose fills)",
+      "crawl_url": "https://rampline.com/en/product/classic-jump/",
+      "handle": "rampline-classic-jump",
+      "product_id": "prod_01KNQ3Q64WYH74RJZDYCXP62EN",
+      "match_score": 1.0,
+      "match_basis": "slug:classic-jump\u2194classic-jump",
+      "runner_ups": 3,
+      "md_changes": {
+        "source_url": "https://rampline.com/en/product/classic-jump/",
+        "crawled_at": "2026-05-16T11:30:39.188848+00:00",
+        "crawl_sha": "9814496229343391782255452251321111011111111111111111111111111111",
+        "crawl_category": "motor-skill-park",
+        "crawl_subcategory": "Ground Cover: Grass or loose fills",
+        "crawl_variant_skus": "24537,25874,36491"
+      },
+      "description_set": false,
+      "description_chars": 0
+    },
+    {
+      "op": "ENRICH",
+      "crawl_sku": "bounce-for-shockdeck",
+      "crawl_name": "BOUNCE",
+      "crawl_url": "https://rampline.com/en/product/bounce/",
+      "handle": "rampline-bounce",
+      "product_id": "prod_01KNQ3Q8T1G0DCX9P83Q2M8Q6D",
+      "match_score": 1.0,
+      "match_basis": "slug:bounce\u2194bounce",
+      "runner_ups": 3,
+      "md_changes": {
+        "source_url": "https://rampline.com/en/product/bounce/",
+        "crawled_at": "2026-05-16T11:30:39.188857+00:00",
+        "crawl_sha": "d384877797746536098028710777979023",
+        "crawl_category": "motor-skill-park",
+        "crawl_subcategory": "For ShockDeck\u2122",
+        "crawl_variant_skus": "bounce-for-artificial-grass,bounce-for-grass-or-loose-fills,bounce-for-wet-pour"
+      },
+      "description_set": false,
+      "description_chars": 0
+    },
+    {
+      "op": "ENRICH",
+      "crawl_sku": "fearless-grass-or-loose-fills",
+      "crawl_name": "FEARLESS (Grass or loose fills)",
+      "crawl_url": "https://rampline.com/en/product/fearless/",
+      "handle": "rampline-fearless",
+      "product_id": "prod_01KNQ3Q4P0M2GMX702R4NFH653",
+      "match_score": 1.0,
+      "match_basis": "slug:fearless\u2194fearless",
+      "runner_ups": 3,
+      "md_changes": {
+        "source_url": "https://rampline.com/en/product/fearless/",
+        "crawled_at": "2026-05-16T11:30:39.188867+00:00",
+        "crawl_sha": "1632349781845115286591321111111111111111111111111111111111111111",
+        "crawl_category": "motor-skill-park",
+        "crawl_subcategory": "Grass or loose fills",
+        "crawl_variant_skus": "fearless-artificial-grass,fearless-shockdeck,fearless-wet-pour"
+      },
+      "description_set": false,
+      "description_chars": 0
+    },
+    {
+      "op": "ENRICH",
+      "crawl_sku": "24500",
+      "crawl_name": "FAST and CURIOUS",
+      "crawl_url": "https://rampline.com/en/product/fast-and-curious/",
+      "handle": "rampline-fast-and-curious",
+      "product_id": "prod_01KNQ3Q4YXWB6MJ97CBHVXWT3Z",
+      "match_score": 1.0,
+      "match_basis": "slug:fast-and-curious\u2194fast-and-curious",
+      "runner_ups": 3,
+      "md_changes": {
+        "source_url": "https://rampline.com/en/product/fast-and-curious/",
+        "crawled_at": "2026-05-16T11:30:39.188877+00:00",
+        "crawl_category": "motor-skill-park",
+        "crawl_subcategory": "Grass or loose fills",
+        "crawl_variant_skus": "24501,25860,36513"
+      },
+      "description_set": false,
+      "description_chars": 0
+    },
+    {
+      "op": "ENRICH",
+      "crawl_sku": "24522-24527",
+      "crawl_name": "CLIFFHANGER",
+      "crawl_url": "https://rampline.com/en/product/cliffhanger/",
+      "handle": "rampline-cliffhanger",
+      "product_id": "prod_01KNQ3Q5VECVNKD1ECW13MZQNX",
+      "match_score": 1.0,
+      "match_basis": "slug:cliffhanger\u2194cliffhanger",
+      "runner_ups": 3,
+      "md_changes": {
+        "source_url": "https://rampline.com/en/product/cliffhanger/",
+        "crawled_at": "2026-05-16T11:30:39.188887+00:00",
+        "crawl_category": "motor-skill-park",
+        "crawl_subcategory": "For Grass or loose fills",
+        "crawl_variant_skus": "24522-24528,24522-25871,24522-36495"
+      },
+      "description_set": false,
+      "description_chars": 0
+    },
+    {
+      "op": "ENRICH",
+      "crawl_sku": "impact-for-wet-pour-or-artificial-grass",
+      "crawl_name": "IMPACT (for Wet pour or artificial grass)",
+      "crawl_url": "https://rampline.com/en/product/impact/",
+      "handle": "rampline-impact",
+      "product_id": "prod_01KNQ3Q8654QHQCPGJ1JBTZN1N",
+      "match_score": 1.0,
+      "match_basis": "slug:impact\u2194impact",
+      "runner_ups": 2,
+      "md_changes": {
+        "source_url": "https://rampline.com/en/product/impact/",
+        "crawled_at": "2026-05-16T11:30:39.188896+00:00",
+        "crawl_category": "motor-skill-park",
+        "crawl_subcategory": "Wet pour or artificial grass",
+        "crawl_variant_skus": "impact-for-grass-or-loose-fills,impact-for-shockdeck"
+      },
+      "description_set": false,
+      "description_chars": 0
+    },
+    {
+      "op": "ENRICH",
+      "crawl_sku": "24473",
+      "crawl_name": "HUNTING HIGH and LOW (for Grass or loose fills)",
+      "crawl_url": "https://rampline.com/en/product/hunting-high-and-low/",
+      "handle": "rampline-hunting-high-and-low",
+      "product_id": "prod_01KNQ3Q4CR772KXTRM90W6W05H",
+      "match_score": 1.0,
+      "match_basis": "slug:hunting-high-and-low\u2194hunting-high-and-low",
+      "runner_ups": 3,
+      "md_changes": {
+        "source_url": "https://rampline.com/en/product/hunting-high-and-low/",
+        "crawled_at": "2026-05-16T11:30:39.188905+00:00",
+        "crawl_sha": "7488344799046714571994353400114092490104112101111111111111111111",
+        "crawl_category": "motor-skill-park",
+        "crawl_subcategory": "Grass or loose fills",
+        "crawl_variant_skus": "24474,25853,36530"
+      },
+      "description_set": false,
+      "description_chars": 0
+    },
+    {
+      "op": "ENRICH",
+      "crawl_sku": "crouching-tiger-wet-pour-or-shockdeck",
+      "crawl_name": "CROUCHING TIGER - Wet pour or ShockDeck\u2122",
+      "crawl_url": "https://rampline.com/en/product/crouching-tiger/",
+      "handle": "rampline-crouching-tiger",
+      "product_id": "prod_01KNQ3Q5JDPYAN021MQRWYK3RC",
+      "match_score": 1.0,
+      "match_basis": "slug:crouching-tiger\u2194crouching-tiger",
+      "runner_ups": 2,
+      "md_changes": {
+        "source_url": "https://rampline.com/en/product/crouching-tiger/",
+        "crawled_at": "2026-05-16T11:30:39.188914+00:00",
+        "crawl_sha": "9814120392067753556041763172205565538316310010111111111111111111",
+        "crawl_category": "motor-skill-park",
+        "crawl_subcategory": "Wet pour or ShockDeck\u2122",
+        "crawl_variant_skus": "crouching-tiger-artificial-grass,crouching-tiger-grass-or-loose-fills"
+      },
+      "description_set": false,
+      "description_chars": 0
+    },
+    {
+      "op": "ENRICH",
+      "crawl_sku": "agile-artificial-grass",
+      "crawl_name": "AGILE - Artificial grass",
+      "crawl_url": "https://rampline.com/en/product/agile/",
+      "handle": "rampline-agile",
+      "product_id": "prod_01KNQ3Q9C8Z1MPZWAYQKDJHF8N",
+      "match_score": 1.0,
+      "match_basis": "slug:agile\u2194agile",
+      "runner_ups": 2,
+      "md_changes": {
+        "source_url": "https://rampline.com/en/product/agile/",
+        "crawled_at": "2026-05-16T11:30:39.188944+00:00",
+        "crawl_sha": "02581643445017122176435384110191777979023",
+        "crawl_category": "motor-skill-park",
+        "crawl_subcategory": "Playspot",
+        "crawl_variant_skus": "agile-grass-or-loose-fills,agile-wet-pour-or-shockdeck"
+      },
+      "description_set": false,
+      "description_chars": 0
+    },
+    {
+      "op": "ENRICH",
+      "crawl_sku": "25795",
+      "crawl_name": "TAKE 5",
+      "crawl_url": "https://rampline.com/en/product/take-5/",
+      "handle": "rampline-take-5",
+      "product_id": "prod_01KNQ3Q1AXR41GNYBKKXHQG3DK",
+      "match_score": 1.0,
+      "match_basis": "slug:take-5\u2194take-5",
+      "runner_ups": 3,
+      "md_changes": {
+        "source_url": "https://rampline.com/en/product/take-5/",
+        "crawled_at": "2026-05-16T11:30:39.188955+00:00",
+        "crawl_sha": "5578768078028713291583097873961103730312693892748882035985834884",
+        "crawl_category": "motor-skill-park",
+        "crawl_subcategory": "For Artificial grass",
+        "crawl_variant_skus": "24343,24344,36566"
+      },
+      "description_set": false,
+      "description_chars": 0
+    },
+    {
+      "op": "ENRICH",
+      "crawl_sku": "24419",
+      "crawl_name": "MONKEY BUSINESS",
+      "crawl_url": "https://rampline.com/en/product/monkey-business/",
+      "handle": "rampline-monkey-business",
+      "product_id": "prod_01KNQ3Q2N1MDM04CGMBKW2QMYD",
+      "match_score": 1.0,
+      "match_basis": "slug:monkey-business\u2194monkey-business",
+      "runner_ups": 1,
+      "md_changes": {
+        "source_url": "https://rampline.com/en/product/monkey-business/",
+        "crawled_at": "2026-05-16T11:30:39.188963+00:00",
+        "crawl_sha": "3491290141662446738982855146524113111053111111111111111111111111",
+        "crawl_category": "motor-skill-park",
+        "crawl_subcategory": "Grass or loose fills",
+        "crawl_variant_skus": "24420"
+      },
+      "description_set": false,
+      "description_chars": 0
+    },
+    {
+      "op": "ENRICH",
+      "crawl_sku": "junior-power-ii-grass-or-loose-fills",
+      "crawl_name": "JUNIOR POWER II - For Grass or loose fills",
+      "crawl_url": "https://rampline.com/en/product/junior-power-ii/",
+      "handle": "rampline-junior-power-ii",
+      "product_id": "prod_01KNQ3Q3GTMGFNGC5DJDXZHV3G",
+      "match_score": 1.0,
+      "match_basis": "slug:junior-power-ii\u2194junior-power-ii",
+      "runner_ups": 2,
+      "md_changes": {
+        "source_url": "https://rampline.com/en/product/junior-power-ii/",
+        "crawled_at": "2026-05-16T11:30:39.188971+00:00",
+        "crawl_category": "motor-skill-park",
+        "crawl_subcategory": "Grass or loose fills",
+        "crawl_variant_skus": "junior-power-ii-artificial-grass,junior-power-ii-wet-pour-or-shockdeck"
+      },
+      "description_set": false,
+      "description_chars": 0
+    },
+    {
+      "op": "ENRICH",
+      "crawl_sku": "24455",
+      "crawl_name": "JUNIOR POWER (For Grass or loose fills)",
+      "crawl_url": "https://rampline.com/en/product/junior-power/",
+      "handle": "rampline-junior-power",
+      "product_id": "prod_01KNQ3Q3TQ5MWQYTXR0KZ87W4G",
+      "match_score": 1.0,
+      "match_basis": "slug:junior-power\u2194junior-power",
+      "runner_ups": 2,
+      "md_changes": {
+        "source_url": "https://rampline.com/en/product/junior-power/",
+        "crawled_at": "2026-05-16T11:30:39.188980+00:00",
+        "crawl_sha": "0381665675549040333333333333333333333333333333333333333333333333",
+        "crawl_category": "motor-skill-park",
+        "crawl_subcategory": "Grass or loose fills",
+        "crawl_variant_skus": "24456,25843"
+      },
+      "description_set": false,
+      "description_chars": 0
+    },
+    {
+      "op": "ENRICH",
+      "crawl_sku": "26199",
+      "crawl_name": "SKILL",
+      "crawl_url": "https://rampline.com/en/product/skill/",
+      "handle": "rampline-skill",
+      "product_id": "prod_01KNQ3Q71RDGMYQS3QBHFX8EW1",
+      "match_score": 1.0,
+      "match_basis": "slug:skill\u2194skill",
+      "runner_ups": 2,
+      "md_changes": {
+        "source_url": "https://rampline.com/en/product/skill/",
+        "crawled_at": "2026-05-16T11:30:39.188988+00:00",
+        "crawl_sha": "9799203304494396342898754117822452285165935706509930999518883900",
+        "crawl_category": "motor-skill-park",
+        "crawl_subcategory": "For Artificial grass",
+        "crawl_variant_skus": "26201,26202"
+      },
+      "description_set": false,
+      "description_chars": 0
+    },
+    {
+      "op": "ENRICH",
+      "crawl_sku": "rock-wet-pour-or-shockdeck",
+      "crawl_name": "ROCK",
+      "crawl_url": "https://rampline.com/en/product/rock/",
+      "handle": "rampline-rock",
+      "product_id": "prod_01KNQ3Q7KKAWAE7540X87GADKT",
+      "match_score": 1.0,
+      "match_basis": "slug:rock\u2194rock",
+      "runner_ups": 2,
+      "md_changes": {
+        "source_url": "https://rampline.com/en/product/rock/",
+        "crawled_at": "2026-05-16T11:30:39.188996+00:00",
+        "crawl_sha": "5174315266847055743152668470557431526684705574315266847055743152",
+        "crawl_category": "motor-skill-park",
+        "crawl_subcategory": "Wet pour or ShockDeck\u2122",
+        "crawl_variant_skus": "rock-artificial-grass,rock-grass-or-loose-fills"
+      },
+      "description_set": false,
+      "description_chars": 0
+    },
+    {
+      "op": "ENRICH",
+      "crawl_sku": "26355",
+      "crawl_name": "TWIST",
+      "crawl_url": "https://rampline.com/en/product/twist/",
+      "handle": "rampline-twist",
+      "product_id": "prod_01KNQ3Q7X8Q1HR6HJ52HMGMVTE",
+      "match_score": 1.0,
+      "match_basis": "slug:twist\u2194twist",
+      "runner_ups": 2,
+      "md_changes": {
+        "source_url": "https://rampline.com/en/product/twist/",
+        "crawled_at": "2026-05-16T11:30:39.189004+00:00",
+        "crawl_category": "motor-skill-park",
+        "crawl_subcategory": "For wet pour or ShockDeck\u2122",
+        "crawl_variant_skus": "26353,26354"
+      },
+      "description_set": false,
+      "description_chars": 0
+    },
+    {
+      "op": "ENRICH",
+      "crawl_sku": "power-for-wet-pour-or-shockdeck",
+      "crawl_name": "POWER (For Wet pour or ShockDeck\u2122)",
+      "crawl_url": "https://rampline.com/en/product/power/",
+      "handle": "rampline-power",
+      "product_id": "prod_01KNQ3Q93PZD7Z78HBJ2BAX3SD",
+      "match_score": 1.0,
+      "match_basis": "slug:power\u2194power",
+      "runner_ups": 2,
+      "md_changes": {
+        "source_url": "https://rampline.com/en/product/power/",
+        "crawled_at": "2026-05-16T11:30:39.189012+00:00",
+        "crawl_sha": "5573434608316335359288114381180218113111111111111111111111111111",
+        "crawl_category": "motor-skill-park",
+        "crawl_subcategory": "For Wet pour or ShockDeck\u2122",
+        "crawl_variant_skus": "power-for-artificial-grass,power-for-grass-or-loose-fills"
+      },
+      "description_set": false,
+      "description_chars": 0
+    },
+    {
+      "op": "ENRICH",
+      "crawl_sku": "dynamic-wet-pour-or-artificial-grass",
+      "crawl_name": "DYNAMIC",
+      "crawl_url": "https://rampline.com/en/product/dynamic/",
+      "handle": "rampline-dynamic",
+      "product_id": "prod_01KNQ3QA6Z3ACP40TQADEAGXMG",
+      "match_score": 1.0,
+      "match_basis": "slug:dynamic\u2194dynamic",
+      "runner_ups": 2,
+      "md_changes": {
+        "source_url": "https://rampline.com/en/product/dynamic/",
+        "crawled_at": "2026-05-16T11:30:39.189020+00:00",
+        "crawl_sha": "0424564293910012759902341512211911311111111111111111111111111111",
+        "crawl_category": "motor-skill-park",
+        "crawl_subcategory": "Wet pour or artificial grass",
+        "crawl_variant_skus": "dynamic-grass-or-loose-fills,dynamic-shockdeck"
+      },
+      "description_set": false,
+      "description_chars": 0
+    },
+    {
+      "op": "ENRICH",
+      "crawl_sku": "juice-wet-pour-or-artificial-grass",
+      "crawl_name": "JUICE (Wet pour or artificial grass)",
+      "crawl_url": "https://rampline.com/en/product/juice/",
+      "handle": "rampline-juice",
+      "product_id": "prod_01KNQ3QAGERHBFK2Z02NXZNSFE",
+      "match_score": 1.0,
+      "match_basis": "slug:juice\u2194juice",
+      "runner_ups": 2,
+      "md_changes": {
+        "source_url": "https://rampline.com/en/product/juice/",
+        "crawled_at": "2026-05-16T11:30:39.189032+00:00",
+        "crawl_sha": "d825224364121226055530263889155202868280628046892694775432924468",
+        "crawl_category": "motor-skill-park",
+        "crawl_subcategory": "Wet pour or artificial grass",
+        "crawl_variant_skus": "juice-grass-or-loose-fills,juice-shockdeck"
+      },
+      "description_set": false,
+      "description_chars": 0
+    },
+    {
+      "op": "ENRICH",
+      "crawl_sku": "36477",
+      "crawl_name": "ABILITY - ShockDeck\u2122",
+      "crawl_url": "https://rampline.com/en/product/ability/",
+      "handle": "rampline-ability",
+      "product_id": "prod_01KNQ3QAT5TT157NFRDKEHGMJM",
+      "match_score": 1.0,
+      "match_basis": "slug:ability\u2194ability",
+      "runner_ups": 2,
+      "md_changes": {
+        "source_url": "https://rampline.com/en/product/ability/",
+        "crawled_at": "2026-05-16T11:30:39.189040+00:00",
+        "crawl_sha": "0103734994269785461233842130386762312648784860271165383183883733",
+        "crawl_category": "motor-skill-park",
+        "crawl_subcategory": "ShockDeck\u2122",
+        "crawl_variant_skus": "26463,26464"
+      },
+      "description_set": false,
+      "description_chars": 0
+    },
+    {
+      "op": "ENRICH",
+      "crawl_sku": "26471",
+      "crawl_name": "GRIP (for Grass or loose fills)",
+      "crawl_url": "https://rampline.com/en/product/grip/",
+      "handle": "rampline-grip",
+      "product_id": "prod_01KNQ3QB4ZWCXACZXWP154MF6N",
+      "match_score": 1.0,
+      "match_basis": "slug:grip\u2194grip",
+      "runner_ups": 1,
+      "md_changes": {
+        "source_url": "https://rampline.com/en/product/grip/",
+        "crawled_at": "2026-05-16T11:30:39.189048+00:00",
+        "crawl_sha": "5505343468080922851484252327421318111111111111111111111111111111",
+        "crawl_category": "motor-skill-park",
+        "crawl_subcategory": "Grass or loose fills",
+        "crawl_variant_skus": "26472"
+      },
+      "description_set": false,
+      "description_chars": 0
+    },
+    {
+      "op": "ENRICH",
+      "crawl_sku": "26520",
+      "crawl_name": "SPEED",
+      "crawl_url": "https://rampline.com/en/product/speed/",
+      "handle": "rampline-speed",
+      "product_id": "prod_01KNQ3QBEMQ8B2F64HC8BD56ZW",
+      "match_score": 1.0,
+      "match_basis": "slug:speed\u2194speed",
+      "runner_ups": 2,
+      "md_changes": {
+        "source_url": "https://rampline.com/en/product/speed/",
+        "crawled_at": "2026-05-16T11:30:39.189057+00:00",
+        "crawl_sha": "4722668581694085448332924195120352219412111111111111111111111111",
+        "crawl_category": "motor-skill-park",
+        "crawl_subcategory": "Wet pour or ShockDeck\u2122",
+        "crawl_variant_skus": "26518,26519"
+      },
+      "description_set": false,
+      "description_chars": 0
+    },
+    {
+      "op": "ENRICH",
+      "crawl_sku": "rampball-street-standard-eng",
+      "crawl_name": "Rampball Street standard ENG",
+      "crawl_url": "https://rampline.com/en/product/rampball-street/",
+      "handle": "rampline-rampball",
+      "product_id": "prod_01KNQ3PW9PMY591KPNQXDQ3738",
+      "match_score": 0.85,
+      "match_basis": "slug:rampball-street\u2194rampball",
+      "runner_ups": 0,
+      "md_changes": {
+        "source_url": "https://rampline.com/en/product/rampball-street/",
+        "crawled_at": "2026-05-16T11:30:39.189064+00:00",
+        "crawl_sha": "1468695027599026414902381222410313134111311111111111111111111111",
+        "crawl_category": "other"
+      },
+      "description_set": false,
+      "description_chars": 0
+    }
+  ]
+}

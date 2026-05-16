@@ -2,6 +2,67 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.23.0] - 2026-05-16
+
+### Added — Rampline enrichment bridge: `vendors/rampline/*` → Medusa
+
+Per the 2026-05-16 architecture statement ("`leka-product-catalogs` is
+canonical; `vendors/*` mirrors external sources and ENRICHES the canonical
+layer"), this commit wires the rampline.com website crawl output into the
+Medusa product catalog.
+
+### What shipped
+
+- `rampline-catalog/enrich_from_vendors.py` (NEW, 360 lines) — reads
+  `vendors/rampline-catalog/parsed/products.json` (91 crawled products
+  from rampline.com), matches each to a Medusa product on the Rampline
+  sales channel by URL/title slug similarity (winner-takes-all per Medusa
+  product), and upserts:
+    - `metadata.source_url` — canonical rampline.com PDP URL
+    - `metadata.crawled_at` — first-write timestamp
+    - `metadata.crawl_sha` — SHA-256 of the source HTML
+    - `metadata.crawl_category`, `metadata.crawl_subcategory`
+    - `metadata.crawl_variant_skus` — comma-joined sibling SKUs from the
+      same PDP (preserves the surface-variant breakdown for traceability)
+  Description is preserved if Medusa's existing value is ≥80 chars (the
+  rich descriptions migrated from earlier work stay intact); only short
+  pricelist-title stubs would be overwritten.
+- Three run modes: `--report-only` (reconciliation CSV), `--dry-run`,
+  `--apply`. Audit logs land in `rampline-catalog/data/build_runs/` with
+  the same shape as `build_variants.py` + `sync_variant_prices.py`.
+
+### Run results (2026-05-16)
+
+| Stage | File | Counts |
+|---|---|---|
+| Reconciliation | `reconciliation_2026-05-16T11-28-24Z.csv` | 125 rows: 90 matched · 1 crawl-only (`slakklinesystem`, no URL) · 34 medusa-only |
+| Dry-run | `enrichment_dryrun_2026-05-16T11-30-39Z.json` | 28 ENRICH planned (winner-takes-all collapses 90 → 28 unique Medusa products) |
+| Apply | `enrichment_applied_2026-05-16T11-31-42Z.json` | **28 ENRICH applied · 0 errors** |
+
+The 34 medusa-only entries are genuinely absent from the crawl: products
+like Rampit, BalanceBuddy, Jumpstone, Fungi are referenced inside other
+PDPs on rampline.com but do not have their own standalone PDP pages, so
+the crawl could not extract them as discrete products. Not a matcher
+defect.
+
+### Spot-check (live Medusa, post-apply)
+
+- `rampline-shockdeck` ← `shock-absorber`: `source_url` ✓, `crawl_sha` ✓,
+  `crawl_variant_skus` lists 3 sibling components.
+- `rampline-trip` ← `trip-for-shockdeck`: `source_url` https://rampline.com/en/product/trip/,
+  `crawl_variant_skus` covers 3 surface variants.
+- `rampline-classic-jump` ← `24536`: `crawl_variant_skus` lists 3 article codes.
+
+### Out of scope (deferred to future versions)
+
+- Image enrichment: the crawl captured 239 media artifacts under
+  `gs://ai-agents-go-vendors/rampline/media/`. v2.22.3 just landed the
+  image-sync fix in `sync_vendors_to_medusa.py`. Wiring crawl media →
+  Medusa images is the natural follow-up.
+- Brand-CI enrichment (`vendors/rampline/brand_ci/latest` → Medusa
+  collection metadata or storefront theme tokens).
+- Landed-cost refinement using crawled tech-sheet PDFs for per-SKU CBM.
+
 ## [2.22.3] - 2026-05-16
 
 ### Fixed — `sync_vendors_to_medusa.py` UPDATE path now syncs images
