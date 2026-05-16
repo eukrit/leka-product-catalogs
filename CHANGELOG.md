@@ -2,6 +2,82 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.23.5] - 2026-05-16
+
+### Deployed — DesignPark v2.20.0 apply run (9th brand live in Medusa)
+
+Executed the v2.20.0 scaffolding against live Firestore + GCS + Medusa.
+
+#### Live state
+
+- **Medusa Sales Channel:** `Design Park` → `sc_01KRRK0N4ET8QZHX6QB3KZ84YD`.
+  Registered in `scripts/sync_vendors_to_medusa.py::BRAND_SALES_CHANNELS`.
+- **Firestore `vendors/designpark` root doc:** written with `origin_route=japan_korea`,
+  `currency_native=USD`, `fob_port="Busan, South Korea"`, `duty_rate_thai=0.10`.
+- **Firestore `vendors/designpark/products`:** **190 docs** (211 pricelist rows
+  collapsed to 190 unique handles; duplicate `MODEL NO` entries across sheets
+  resolved by last-write-wins on merge). 178 priced via the USD-FOB →
+  THB-landed → retail-USD/THB/EUR formula (formula_version `designpark-v1-2026-05-15`);
+  12 themes carry `status=draft_no_images` and no `pricing.retail_*` (quoted
+  per project, not catalog-priced).
+- **GCS `gs://ai-agents-go-vendors/designpark/media/`:** **518 blobs uploaded**
+  (PE images + DWG drawings). UBLA + PAP. Served via storefront proxy at
+  `https://catalogs.leka.studio/api/i/designpark/media/<sha>.<ext>`.
+- **Firestore `vendors/designpark/attachments/`:** 518 attachment docs.
+- **Image-to-product joins:** **109 matches** (15 products with ≥1 image now
+  `status=active`, 175 remain `draft_no_images`). Coverage is intentionally
+  low for v1 — see Follow-ups #1.
+- **Descriptions:** **97 backfills** from 4 catalog PDFs (2024-05-30 ENG,
+  2023-09-14 ENG 2022, D.PARK_Catalog_EN, DesignPark-Catalogue). 100
+  text-extractable pages processed, 41 image-only pages skipped.
+- **Medusa Admin verified:** `GET /admin/products?sales_channel_id[]=sc_01KRRK0N4ET8QZHX6QB3KZ84YD&limit=5`
+  returned `count=190` with multi-currency prices on every variant.
+
+#### Sample verification (live data, FX 2026-05-16 USD=33.29, EUR=38.70 THB)
+
+| Handle | FOB USD | Retail USD | Retail THB | Retail EUR |
+|---|---:|---:|---:|---:|
+| `designpark-3p090-40b0300a-00` | $455 | $1,112.27 | ฿37,028.31 | €956.71 |
+| `designpark-3p090-40b0600a-00` | $650 | $1,588.95 | ฿52,897.57 | €1,366.73 |
+| `designpark-5p090-58a30a00-00` | $100 | $244.45 | ฿8,138.09 | €210.27 |
+
+#### Run order executed
+
+```
+py scripts/bootstrap_designpark.py --apply
+py scripts/ingest_designpark_pricelist.py --apply --dump-csv=docs/designpark-pricelist-2026-05-16.csv
+py scripts/ingest_designpark_assets.py --apply       # 518 uploads, 109 matched
+py scripts/ingest_designpark_catalog_pdfs.py --apply # 97 description writes
+py scripts/shape_designpark_to_medusa_schema.py --apply
+py scripts/sync_vendors_to_medusa.py --brand=designpark   # 190 created, 0 errors
+```
+
+Total wall-clock: ~5 min (asset upload dominates).
+
+#### Files
+
+- modified: `scripts/sync_vendors_to_medusa.py` — `BRAND_SALES_CHANNELS["designpark"] = "sc_01KRRK0N4ET8QZHX6QB3KZ84YD"`
+- added (audit): `docs/designpark-pricelist-2026-05-16.csv` (211-row pricelist audit dump)
+- modified: `VERSION` → `2.23.5`
+
+#### Follow-ups (not in this entry)
+
+1. **Image-join coverage (109/518 matched).** Most unmatched assets are DWG
+   drawings whose filenames carry no SKU token (CAD bundle uses
+   `<N>_<theme>.dwg` naming, theme zips use line names). Two fixes:
+   (a) tighten the SKU regex to also accept the pricelist's own SKU shapes
+   (`5W092-…`, `5P091-…`, `3P090-…`); (b) reconcile the 2024 CAD-bundle
+   theme list with the 2023 theme manifest (different theme names —
+   e.g. CAD says `Twin Tower`, manifest says `Twin star`).
+2. **Modern Igloo sheet.** 12th pricelist sheet uses a non-standard header
+   and was skipped (11 rows lost). Easy patch.
+3. **Slack `#vendor-design-park` ingest.** Phase C was deferred at v2.20.0;
+   not in this deploy entry.
+4. **Status promotion.** 175 products remain `draft_no_images`. They sync
+   to Medusa as `draft` (correct). After image-join coverage improves, run
+   `shape_designpark_to_medusa_schema.py --apply` again and re-sync — they
+   will be promoted to `active` → `published`.
+
 ## [2.23.4] - 2026-05-16
 
 ### Added — Rampline specifications enrichment
