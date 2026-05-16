@@ -165,11 +165,18 @@
 </main>
 
 <footer>
-  <a href="/leka-product-catalogs/">← Hub</a> &nbsp;·&nbsp;
+  <a href="../">← Hub</a> &nbsp;·&nbsp;
   Edits are live the moment you save. Catalog import scripts read this doc on next run.
 </footer>
 
 <script>
+// API base is derived from the current page URL so the form works
+// whether served via the access gateway
+// (https://gateway.goco.bz/leka-product-catalogs/forms/pricing-config →
+// /leka-product-catalogs/api/pricing-config) or directly from local Flask
+// (http://localhost:8080/forms/pricing-config → /api/pricing-config).
+const API_URL = location.pathname.replace(/\/forms\/[^/]+$/, "/api") + "/pricing-config";
+
 const GLOBAL_FIELDS = [
   ["thai_vat_rate",            "Thai VAT rate",            "Applied on (CIF + duty). e.g. 0.07"],
   ["duty_rate_non_china",      "Duty rate (non-China)",    "EU/Norway origins. e.g. 0.10"],
@@ -326,7 +333,7 @@ function collect() {
 async function load() {
   setStatus("Loading…", "info");
   try {
-    const r = await fetch("/api/pricing-config");
+    const r = await fetch(API_URL);
     if (!r.ok) throw new Error("HTTP " + r.status);
     original = await r.json();
     render(original);
@@ -341,7 +348,7 @@ async function save() {
   document.getElementById("save-btn").disabled = true;
   try {
     const payload = collect();
-    const r = await fetch("/api/pricing-config", {
+    const r = await fetch(API_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),

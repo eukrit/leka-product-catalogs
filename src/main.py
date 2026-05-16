@@ -24,7 +24,7 @@ if BASE_DIR not in sys.path:
 app = Flask(__name__)
 
 SERVICE_NAME = "leka-product-catalogs"
-VERSION = "0.6.0"
+VERSION = "0.6.1"
 
 # Brand catalog paths (relative to BASE_DIR)
 BRANDS = {

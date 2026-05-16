@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.20.3] - 2026-05-16
+
+### Fixed — pricing-config form Load failed HTTP 404
+
+The editor page loaded but `fetch("/api/pricing-config")` 404'd because
+the gateway strips the `/leka-product-catalogs` prefix on the way to the
+backend, and the browser resolved the absolute path against the gateway
+host (`https://gateway.goco.bz/api/pricing-config`) instead of the
+project-prefixed path. Two follow-ups from v2.20.2:
+
+- `docs/forms/pricing-config.html` — added `API_URL` derived from
+  `location.pathname` so the same HTML works whether served via
+  `gateway.goco.bz/leka-product-catalogs/forms/pricing-config` or
+  directly from local Flask. Footer "← Hub" link is now path-relative
+  (`../`) instead of hardcoded `/leka-product-catalogs/`.
+- `src/main.py` — `VERSION` 0.6.0 → 0.6.1 for traceability.
+
+Also adds a separate gateway-side change merged in PR
+[go-access-gateway#6](https://github.com/eukrit/go-access-gateway/pull/6) —
+script sync for `register-all-projects.sh` (live registry was already
+patched via Firestore REST when the user hit the v2.20.2
+`not_found_in_repo` error).
+
+### Build
+- Cloud Build `aaa11d4c` SUCCESS (1m48s). Image
+  `gateway:3eac0a2-dirty` deployed as new revision of
+  `leka-catalogs-gateway`. `/health` returns `0.6.1`.
+
 ## [2.20.2] - 2026-05-16
 
 ### Deployed — pricing-config UI live at gateway
