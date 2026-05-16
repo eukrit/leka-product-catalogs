@@ -11,31 +11,42 @@ visual storefront check.
 
 ## 1 · Email Rampline for packing-list CBM (blocks B — landed-cost refinement)
 
+**Status (2026-05-16):** Draft is ready in your Gmail Drafts folder.
+Subject: *"2025 Rampline per-SKU packing list - request for Thai landed-cost
+pricing"*. To `kolbjorn@rampline.no`. Review the body and click Send.
+
 **Why:** v2.22.2 priced 127 Medusa variants at 30 % GM but used a **35 %
 flat shipping uplift** in lieu of per-SKU CBM. The crawl, Drive folder,
-and 2025 pricelist all only publish *installed* dimensions (diameters,
-playground areas) — never packing/shipping volume. Without real CBM,
-some bulky parks are likely under-priced and small components over-
-priced.
+and past Gmail correspondence (including the June 2025 NIST offer
+74670 which only carried a lump-sum airfreight estimate) confirm we
+have **no per-SKU packing data anywhere**. Without it, some bulky parks
+are likely under-priced and small components over-priced.
 
-**Suggested email (drop in your sent-folder template):**
+**Email draft body (already in Gmail Drafts):**
 
-> Hi Rampline team,
+> Dear Kolbjørn,
 >
-> We're finalising landed-cost pricing for the Thai market and are
-> missing per-SKU packing data. Could you share an updated packing list
-> for the 2025 NOK pricelist that includes, for each article code:
+> I hope all is well at Talgje. We're finalising the Thai retail
+> pricing for the 2025 Rampline range and need per-SKU packing data so
+> that our landed-cost calculation reflects real freight rather than a
+> flat uplift. I've checked our shared Drive folder and our past
+> correspondence (including the 74670 offer to NIST Yangma), and we
+> don't yet have a complete packing reference.
 >
-> - Packed dimensions (L × W × H, cm)
-> - Packed weight (kg)
-> - Number of packages per SKU (if more than one box)
-> - Whether the unit ships flat-packed or pre-assembled
+> Could you share, for each of the 127 article codes in the 2025 NOK
+> pricelist:
+>   - Packed dimensions (L x W x H, in cm) per package
+>   - Packed (gross) weight in kg per package
+>   - Number of packages per SKU when an item ships in more than one box
+>   - Whether the unit ships flat-packed or pre-assembled
+>   - Volumetric weight or chargeable weight if you already compute it
+>     for DAP quotes
 >
-> XLSX or CSV is fine. We'll feed this into our landed-cost calculator
-> so retail prices on catalogs.leka.studio reflect real shipping costs
-> rather than a flat uplift.
+> XLSX or CSV is ideal, but any format is fine. If a master packing
+> list already exists internally, that would save you the trouble of
+> compiling one fresh.
 >
-> Thanks,
+> Many thanks,
 > Eukrit
 
 **Where to drop the response:**
@@ -107,19 +118,25 @@ I can write a one-off importer when you have those files.
 
 ## 3 · Storefront visual check (after v2.23.x landings)
 
-The storefront is at `https://catalogs.leka.studio/rampline/`. The
-front-door 403 on direct `WebFetch` is expected — it requires the
-publishable key (`pk_efdd49…`) as a header which only the browser
-client sets. **Use a real browser** to verify:
+**Note (2026-05-16):** URLs without the brand prefix — like
+`/rampline/floating-bench` — used to 404 because Medusa stores handles
+with the prefix (`rampline-floating-bench`). The bug was fixed in
+`leka-website` commit `8886c7d` (now on `main`, deploying via Cloud
+Build). Both URL forms should work once the deploy lands. If you're
+checking before the deploy completes, use the prefixed form.
 
-- [ ] Open `https://catalogs.leka.studio/rampline/floating-bench` —
-      should show 14 product photos, not the placeholder.
-- [ ] Open `https://catalogs.leka.studio/rampline/take-5` — should show
-      the rampline.com 360-viewer photo (1 image, thumbnail set).
-- [ ] Open `https://catalogs.leka.studio/rampline/shockdeck` — should
-      show 26 photos.
-- [ ] On any Rampline PDP, confirm brand tokens (palette `#B5BC00` / logo)
-      render IF the storefront has been wired to read
+Use a real browser to verify (the front-door requires the publishable
+key as a request header, only the browser client sets it):
+
+- [ ] Open `https://catalogs.leka.studio/rampline/rampline-floating-bench`
+      (or `/rampline/floating-bench` after the deploy) — should show
+      14 product photos.
+- [ ] Open `https://catalogs.leka.studio/rampline/rampline-take-5` —
+      should show the rampline.com 360-viewer photo (1 image, thumb).
+- [ ] Open `https://catalogs.leka.studio/rampline/rampline-shockdeck` —
+      should show 26 photos.
+- [ ] On any Rampline PDP, confirm brand tokens (palette `#B5BC00` /
+      logo) render IF the storefront has been wired to read
       `sales_channel.metadata.brand_ci`. If it ignores those tokens, the
       storefront still needs a tweak in `leka-website/catalogs/`.
 
