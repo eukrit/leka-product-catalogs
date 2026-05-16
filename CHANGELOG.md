@@ -2,6 +2,43 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.22.3] - 2026-05-16
+
+### Fixed — `sync_vendors_to_medusa.py` UPDATE path now syncs images
+
+Bug found while verifying the Eurotramp v1.11.2 image enrichment landed
+in Medusa. After uploading 404 product images to GCS and writing
+`images[]` to 105 Firestore docs, the storefront still showed the 📦
+placeholder for those products. Root cause: `_build_update_payload()`
+only emitted `title`, `description`, and `metadata` — it never touched
+`images` or `thumbnail`, so any product that already existed in Medusa
+(the UPDATE path) had its Firestore images silently dropped on every
+sync. Only the CREATE path included images.
+
+### Changes (`scripts/sync_vendors_to_medusa.py`)
+
+- `_build_update_payload()` gains an `existing_image_urls` kwarg. When
+  the caller passes it (the set of URLs Medusa already has), the payload
+  appends any Firestore URLs not already present (union semantics, so
+  Medusa's existing image ids — including reverse-imported ones — are
+  preserved). Also writes `thumbnail` when the product has none.
+- `metadata` now carries `dimensions` and `gtin` so the v1.11.3
+  structured-data backfill propagates to Medusa without a separate sync.
+- `_find_product_by_handle()` fetches `thumbnail` + `images.url` so the
+  caller can pass them into the update payload.
+- Call site in `sync_brand()` builds `existing_img_urls` from the lookup
+  response and passes it through.
+
+Idempotent: re-running the sync with no new Firestore images is a no-op
+on the image axis (everything already in `existing_image_urls`).
+
+### Outcome
+
+After this fix, `sync_vendors_to_medusa.py --brand=eurotramp` should
+push the 404 images uploaded in [eukrit/vendors#12](https://github.com/eukrit/vendors/pull/12)
+to Medusa, and the storefront PDPs for the 105 enriched SKUs will
+finally render real product photos instead of the placeholder.
+
 ## [2.22.2] - 2026-05-16
 
 ### Changed — Re-priced Rampline at v2.20.1 pricing constants (30% GM, 7% VAT)

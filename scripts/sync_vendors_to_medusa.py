@@ -103,7 +103,8 @@ def _find_product_by_handle(token: str, handle: str) -> dict | None:
     r = requests.get(
         f"{BACKEND}/admin/products",
         params={"handle": handle, "limit": 1,
-                "fields": "id,handle,options.id,options.title,options.values.value,"
+                "fields": "id,handle,thumbnail,images.url,"
+                          "options.id,options.title,options.values.value,"
                           "variants.id,variants.title,variants.sku,"
                           "variants.options.value,variants.options.option_id,"
                           "variants.prices.id,variants.prices.currency_code,variants.prices.amount"},
@@ -205,20 +206,47 @@ def _build_create_payload(slug: str, sc_id: str, p: dict) -> dict:
     return payload
 
 
-def _build_update_payload(p: dict) -> dict:
-    """Update payload — fields safe to refresh on every sync."""
+def _build_update_payload(p: dict, *, existing_image_urls: set[str] | None = None) -> dict:
+    """Update payload — fields safe to refresh on every sync.
+
+    Includes `images` and `thumbnail` when the Firestore doc carries images
+    the Medusa product doesn't already have. We don't replace images blindly
+    because Medusa preserves image ids; instead, we APPEND any new URLs by
+    submitting the full union (Medusa de-dupes by URL on its end). When
+    `existing_image_urls` is None we skip the image patch (caller didn't
+    want to touch images).
+
+    Includes `dimensions` and `source_url` in `metadata` so the storefront
+    can render spec tables + outbound mfr links without re-querying Firestore.
+    """
     metadata = {
         "brand_slug": p.get("slug"),
         "item_code": p.get("item_code"),
+        "gtin": p.get("gtin"),
         "category": p.get("category"),
         "source_url": p.get("source_url"),
+        "dimensions": p.get("dimensions"),
     }
     metadata = {k: v for k, v in metadata.items() if v is not None}
-    return {
+
+    out: dict = {
         "title": p.get("name") or p["handle"],
         "description": p.get("description") or "",
         "metadata": metadata,
     }
+
+    # Image sync — only if caller passed the existing-URL set (i.e. we
+    # fetched it from Medusa) so we can compute the union without overwriting.
+    if existing_image_urls is not None:
+        fs_urls = [img["url"] for img in (p.get("images") or []) if img.get("url")]
+        new_urls = [u for u in fs_urls if u not in existing_image_urls]
+        if new_urls:
+            union = list(existing_image_urls) + new_urls
+            out["images"] = [{"url": u} for u in union]
+            # First image becomes thumbnail when there isn't one yet
+            if fs_urls:
+                out["thumbnail"] = fs_urls[0]
+    return out
 
 
 def _update_variant_prices(token: str, product_id: str, variant_id: str,
@@ -347,9 +375,16 @@ def sync_brand(slug: str, dry_run: bool, limit: int | None, skip_no_images: bool
             if dry_run:
                 log.info("[%s] UPDATE %s (dry)", slug, handle)
             else:
+                # Pass existing image URLs so the update payload can compute
+                # the union and append-only new images (preserves Medusa's
+                # image ids; avoids dropping reverse-imported ones).
+                existing_img_urls = {
+                    im.get("url") for im in (existing.get("images") or [])
+                    if im.get("url")
+                }
                 r = requests.post(
                     f"{BACKEND}/admin/products/{existing['id']}",
-                    json=_build_update_payload(p),
+                    json=_build_update_payload(p, existing_image_urls=existing_img_urls),
                     headers=_headers(token),
                     timeout=TIMEOUT,
                 )
