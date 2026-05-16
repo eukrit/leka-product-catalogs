@@ -1,4 +1,4 @@
-import { defineConfig, loadEnv } from "@medusajs/framework/utils"
+import { defineConfig, loadEnv, Modules } from "@medusajs/framework/utils"
 
 loadEnv(process.env.NODE_ENV || "development", process.cwd())
 
@@ -11,6 +11,31 @@ if (IS_PROD) {
       throw new Error(`Missing required environment variable: ${key}`)
     }
   }
+}
+
+const googleConfigured =
+  !!process.env.GOOGLE_CLIENT_ID &&
+  !!process.env.GOOGLE_CLIENT_SECRET &&
+  !!process.env.GOOGLE_CALLBACK_URL
+
+const authProviders: Array<Record<string, any>> = [
+  {
+    resolve: "@medusajs/medusa/auth-emailpass",
+    id: "emailpass",
+    options: {},
+  },
+]
+
+if (googleConfigured) {
+  authProviders.push({
+    resolve: "@medusajs/medusa/auth-google",
+    id: "google",
+    options: {
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackUrl: process.env.GOOGLE_CALLBACK_URL,
+    },
+  })
 }
 
 export default defineConfig({
@@ -27,4 +52,12 @@ export default defineConfig({
     backendUrl: process.env.MEDUSA_BACKEND_URL || "http://localhost:9000",
     disable: process.env.DISABLE_ADMIN === "true",
   },
+  modules: [
+    {
+      resolve: "@medusajs/medusa/auth",
+      options: {
+        providers: authProviders,
+      },
+    },
+  ],
 })
