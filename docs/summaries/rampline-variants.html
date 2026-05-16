@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rampline variant migration — 127 SKUs live · v2.21.0</title>
+<style>
+  :root {
+    --purple: #8003FF; --navy: #182557; --cream: #FFF9E6;
+    --magenta: #970260; --amber: #FFA900; --red: #E54822;
+    --shadow: 0 2px 8px rgba(24,37,87,.08);
+  }
+  * { box-sizing: border-box; }
+  body { font-family: Manrope, -apple-system, system-ui, sans-serif;
+         background: var(--cream); color: var(--navy); margin: 0;
+         padding: 32px 24px; line-height: 1.55; }
+  .wrap { max-width: 980px; margin: 0 auto; }
+  h1 { font-size: 28px; font-weight: 800; color: var(--purple); margin: 0 0 4px; }
+  h2 { font-size: 18px; font-weight: 700; margin: 32px 0 12px; color: var(--navy); }
+  h3 { font-size: 13px; font-weight: 700; margin: 18px 0 6px; color: var(--magenta);
+       text-transform: uppercase; letter-spacing: .04em; }
+  .sub { color: var(--navy); opacity: .7; margin: 0 0 24px; font-size: 14px; }
+  .card { background: #fff; border-radius: 16px; padding: 20px 24px;
+          box-shadow: var(--shadow); margin: 16px 0; }
+  .pill { display: inline-block; background: var(--purple); color: #fff;
+          padding: 4px 12px; border-radius: 9999px; font-size: 12px;
+          font-weight: 600; margin-right: 8px; }
+  .pill.amber { background: var(--amber); color: var(--navy); }
+  .pill.green { background: #2C8E50; }
+  table { width: 100%; border-collapse: collapse; margin: 8px 0; font-size: 13px; }
+  th, td { padding: 8px 10px; text-align: left; border-bottom: 1px solid #eee; }
+  th { background: var(--cream); color: var(--navy); font-weight: 700; }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  code { background: #f4f0e0; padding: 2px 6px; border-radius: 4px;
+         font-family: SFMono-Regular, Consolas, monospace; font-size: 12.5px; }
+  ul { margin: 8px 0; padding-left: 22px; }
+  li { margin: 4px 0; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+          gap: 12px; margin: 12px 0; }
+  .stat { background: #fff; border-radius: 8px; padding: 14px 16px;
+          box-shadow: var(--shadow); }
+  .stat .v { font-size: 22px; font-weight: 800; color: var(--purple); }
+  .stat .l { font-size: 12px; color: var(--navy); opacity: .7;
+             text-transform: uppercase; letter-spacing: .04em; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>Rampline variant migration</h1>
+<p class="sub">v2.21.0 · 2026-05-16 · 127 pricelist article codes wired into Medusa as proper variants. Zero missing, zero unexpected.</p>
+
+<div class="grid">
+  <div class="stat"><div class="v">127</div><div class="l">Pricelist SKUs migrated</div></div>
+  <div class="stat"><div class="v">62</div><div class="l">Rampline products (was 54)</div></div>
+  <div class="stat"><div class="v">8</div><div class="l">New size sub-products</div></div>
+  <div class="stat"><div class="v">40</div><div class="l">Sub-products touched</div></div>
+</div>
+
+<div class="card">
+<h3>Action breakdown</h3>
+<table>
+<thead><tr><th>Action</th><th class="num">Count</th></tr></thead>
+<tbody>
+<tr><td><code>CREATE_PRODUCT</code> (Rampball/Jumpstone sizes)</td><td class="num">8</td></tr>
+<tr><td><code>CREATE_VARIANT</code> (95 standalone + 32 embedded)</td><td class="num">127</td></tr>
+<tr><td><code>ADD_OPTION</code> (Surface / Size / Component / Type / Length / Style)</td><td class="num">25</td></tr>
+<tr><td><code>DELETE_PLACEHOLDER_VARIANT</code> (WooCommerce-ID defaults)</td><td class="num">24</td></tr>
+<tr><td><code>DELETE_DEFAULT_OPTION</code></td><td class="num">25</td></tr>
+<tr><td>Variants skipped (already existed from pilot)</td><td class="num">16</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2>Variant model — two shapes</h2>
+
+<div class="card">
+<h3>Shape A — Size becomes its own product</h3>
+<p>Used for clean Size × Surface families. Each size is a standalone Medusa product with a single <code>Surface</code> option (4 values).</p>
+<table>
+<thead><tr><th>Parent</th><th>New size sub-products</th><th class="num">Variants</th></tr></thead>
+<tbody>
+<tr><td><code>rampline-rampball</code></td><td><code>-35</code>, <code>-50</code>, <code>-50r</code>, <code>-70r</code></td><td class="num">16</td></tr>
+<tr><td><code>rampline-jumpstone-en</code></td><td><code>-27</code>, <code>-50</code>, <code>-3</code>, <code>-5</code></td><td class="num">16</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="card">
+<h3>Shape B — Single product, options for size/config/surface/type</h3>
+<table>
+<thead><tr><th>Product</th><th>Options</th><th class="num">Variants</th></tr></thead>
+<tbody>
+<tr><td><code>rampline-balancebuddy-en</code></td><td>Length × Style</td><td class="num">6</td></tr>
+<tr><td><code>rampline-balancebuddy-wave</code></td><td>Surface</td><td class="num">2</td></tr>
+<tr><td><code>rampline-fungi-eng</code></td><td>Size</td><td class="num">3</td></tr>
+<tr><td><code>rampline-rampit</code></td><td>Size</td><td class="num">3</td></tr>
+<tr><td><code>rampline-rampit-hopper</code></td><td>Component × Surface</td><td class="num">6</td></tr>
+<tr><td><code>rampline-rampit-swing</code></td><td>Size</td><td class="num">2</td></tr>
+<tr><td><code>rampline-rampit-storm-en</code></td><td>Type (synthetic)</td><td class="num">1</td></tr>
+<tr><td><code>rampline-rampbow</code></td><td>Surface</td><td class="num">2</td></tr>
+<tr><td><code>rampline-rampline-slackline</code></td><td>Surface</td><td class="num">2</td></tr>
+<tr><td><code>rampline-floating-bench</code></td><td>Type (Bench/LED/Customization/Rigging)</td><td class="num">4</td></tr>
+<tr><td><code>rampline-shockdeck</code></td><td>Type (Standard)</td><td class="num">1</td></tr>
+<tr><td>21 SHOCKDECK-priced parks (Kangaroo, Marathon Play, …)</td><td>Surface</td><td class="num">63</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2><span class="pill amber">Out of scope</span> Untouched products</h2>
+<div class="card">
+<ul>
+<li><strong>17 legacy parks</strong> not in 2025 pricelist (ABILITY, AGILE, BOUNCE, DOUBLE TROUBLE, DYNAMIC, FLIGHT, GO, GRIP, IMPACT, JUICE, POWER, ROCK, SKILL, SPEED, TRIP, TRIPLE SLACK FUN, TWIST) — pre-2025 product lineup, kept as-is with their placeholder defaults.</li>
+<li><strong>3 unpriced equipment</strong> — <code>rampline-spare-parts-for-slackline</code>, <code>rampline-spare-parts-kids-tramp-playground-loop</code>, <code>rampline-trampoline-loop-en</code> (Playground Loop = Eurotramp-distributed trampoline).</li>
+<li>Total: 22 placeholder default variants remain in the Rampline channel (17 + 3 + 2 family parents <code>rampline-rampball</code> + <code>rampline-jumpstone-en</code> which kept their placeholder).</li>
+</ul>
+</div>
+
+<h2>Variant metadata (audit fields)</h2>
+<div class="card">
+<p>Each new variant carries this metadata for downstream reconciliation with the Firestore audit doc <code>vendors/rampline/pricelists/2026-05-13</code> and the source xlsx:</p>
+<ul>
+<li><code>article_code</code> — original pricelist code (e.g. <code>RB35 AG</code>)</li>
+<li><code>family</code> — pricelist family name</li>
+<li><code>family_discount</code> — wholesale discount fraction</li>
+<li><code>net_nok</code>, <code>recommended_nok</code> — pricelist amounts</li>
+<li><code>description</code> — pricelist row description</li>
+<li><code>pricelist_date</code> — <code>2026-05-13</code></li>
+<li><code>source</code> — <code>rampline-pricelist-2025</code></li>
+</ul>
+<p><strong>No prices on variants</strong> — pricing handled separately via the Firestore-backed pricing-config flow (v2.20.1) and a follow-up sync script. New size sub-products are <code>status=draft</code> until prices land.</p>
+</div>
+
+<h2>What's next</h2>
+<div class="card">
+<ul>
+<li>Wire the 127 variants to per-currency prices (THB / USD / EUR / NOK) via a sync_vendors_to_medusa extension reading <code>vendors/rampline/pricelists/&lt;date&gt;</code>.</li>
+<li>Re-run the landed-cost computation with the updated 0.30 GM + duty/VAT layers (post-v2.20.1) once the new Rampline cfg is locked.</li>
+<li>Flip Rampball/Jumpstone size sub-products from <code>draft</code> to <code>published</code>.</li>
+<li>Possibly clean up the remaining placeholder defaults on the 2 family parents (<code>rampline-rampball</code>, <code>rampline-jumpstone-en</code>) — currently retained as navigational pages.</li>
+<li>Parse Rampline tech-sheet PDFs for per-SKU dimensions so the landed-cost engine uses real CBM rather than the 35% flat uplift.</li>
+</ul>
+</div>
+
+<h2>Artifacts</h2>
+<div class="card">
+<ul>
+<li><a href="../../rampline-catalog/build_variants.py"><code>rampline-catalog/build_variants.py</code></a> — Medusa write script (<code>--dry-run</code> / <code>--apply</code> / <code>--limit-family</code>)</li>
+<li><a href="../../rampline-catalog/data/mapping/generate_mapping_drafts.py"><code>generate_mapping_drafts.py</code></a> — parser + scaffold generator</li>
+<li><a href="../../rampline-catalog/data/mapping/family_mapping_draft.csv">family_mapping_draft.csv</a> (40 sub-products)</li>
+<li><a href="../../rampline-catalog/data/mapping/variant_scaffold_draft.csv">variant_scaffold_draft.csv</a> (127 article codes, full option breakdown)</li>
+<li><a href="../../rampline-catalog/data/build_runs/">build_runs/</a> — full dry-run + applied action logs (audit trail)</li>
+<li><a href="../../rampline-catalog/CHANGELOG_ENTRY_v2.21.0.md">CHANGELOG_ENTRY_v2.21.0.md</a> — fold into CHANGELOG.md after resolving the pre-existing merge conflict</li>
+</ul>
+</div>
+
+</div>
+</body>
+</html>
