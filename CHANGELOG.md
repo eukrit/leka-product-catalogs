@@ -2,6 +2,58 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.23.4] - 2026-05-16
+
+### Added — Rampline specifications enrichment
+
+New `rampline-catalog/enrich_specifications.py` reads
+`vendors/rampline-catalog/parsed/products.json` and pushes
+storefront-useful product specs to Medusa via product metadata. Winner-
+takes-all per product on a richness score (presence of raw dimensions,
+certifications, downloads, notes; tiebreak on description length).
+
+### Fields written to `metadata`
+
+- `installed_dimensions` — `{raw, length, width, height, unit}`. **NOT
+  packing CBM** — rampline.com only publishes installed footprint (e.g.
+  "Approx. 8 x 10 m", "Area: 46 m²"). Sufficient for storefront product
+  pages.
+- `installed_area_raw` — captured separately when the raw line says
+  "Area: NN m²" (Trip, Twist, Dynamic, Grip, Speed).
+- `certifications` — joined string of EN-standard certs (e.g. "EN 1176").
+- `downloads_json` — JSON-encoded list of `{type, url, filename}` for
+  Rampline-supplied DWG/PDF reference docs. Many point at public Drive
+  folders Rampline themselves host.
+- `downloads_count` — convenience count for storefront badges.
+- `crawl_notes` — free-text "notes" field from the crawl (often the
+  equipment-list "Area: NN m². Equipment: …" lines from PDPs).
+
+### Run results (2026-05-16)
+
+| Stage | Counts |
+|---|---|
+| Dry-run | 28 ENRICH_SPECS planned · 0 skipped |
+| Apply | **28 ENRICH_SPECS applied · 0 errors** |
+
+| Field | Products updated |
+|---|---|
+| `installed_dimensions` | 18 |
+| `installed_area_raw` | 5 (Trip, Twist, Dynamic, Grip, Speed) |
+| `certifications` | 7 |
+| `downloads_json` + count | 14 |
+| `crawl_notes` | 26 |
+
+### Why this is NOT landed-cost CBM
+
+The plan's item B asked for landed-cost refinement using crawled tech-
+sheet PDFs (replace the 35 % flat uplift). Investigation: the crawled
+`docs/` bucket contains 6 CAD `.zip` files + 1 installation manual — no
+dimensional packing data. The 2025 NOK pricelist PDF in the Drive folder
+contains diameters and installed heights, but no packing CBM. The
+crawled `products.json` specifications.dimensions field stores installed
+footprint, not box size. **Real CBM still requires supplier-supplied
+packing lists from Rampline.** See `MANUAL_TASKS.md` for what to ask for.
+
 ## [2.23.3] - 2026-05-16
 
 ### Added — Rampline brand-CI enrichment → Sales Channel metadata
