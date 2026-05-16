@@ -1,0 +1,6163 @@
+{
+  "timestamp": "2026-05-16T08-47-52Z",
+  "dry_run": true,
+  "limit_family": null,
+  "audit_meta": {
+    "gross_margin": 0.3,
+    "source_file": "rampline_pricelist_2025_fetched-2026-05-13.xlsx",
+    "medusa_status": "deferred - per-variant migration not yet done",
+    "fx_snapshot": {
+      "THB": null,
+      "USD": 33.2909,
+      "EUR": 38.7038
+    },
+    "baltic_rate_snapshot": {
+      "per_cbm_thb": 5350.68,
+      "sources": [
+        {
+          "per_cbm_thb": 5500,
+          "source": "cost_engine static EU LCL"
+        },
+        {
+          "source": "FBX Global \u2192 LCL est",
+          "per_cbm_thb": 5201.37
+        }
+      ],
+      "method": "avg"
+    },
+    "logistics_tiers": [
+      {
+        "min_pct": 0.8,
+        "max_pct": 2.5,
+        "fob_eur_max": 500
+      },
+      {
+        "fob_eur_max": 2000,
+        "min_pct": 0.6,
+        "max_pct": 1.8
+      },
+      {
+        "min_pct": 0.45,
+        "max_pct": 1.2,
+        "fob_eur_max": 10000
+      },
+      {
+        "fob_eur_max": null,
+        "min_pct": 0.35,
+        "max_pct": 0.8
+      }
+    ],
+    "row_count": 127,
+    "brand": "rampline",
+    "calculated_at": "2026-05-16T08:46:12.813023+00:00",
+    "sheet_name": "Price list 2025",
+    "nok_eur_rate": 0.092357,
+    "fx_source": "exchangerate-api.com (live)",
+    "pricelist_date": "2026-05-13",
+    "nok_eur_source": "open.er-api.com Sat, 16 May 2026 00:02:31 +0000"
+  },
+  "totals": {
+    "SET_VARIANT_PRICES": 127
+  },
+  "unmatched_in_audit": [],
+  "errors": [],
+  "actions_count": 127,
+  "actions": [
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 03 AG",
+      "handle": "rampline-jane-jump",
+      "product_id": "prod_01KNQ3Q43MAVKZBW4CHNEVJ752",
+      "variant_id": "variant_01KRQPX46NP25HQHGRY8ZBAW51",
+      "sku": "BP 03 AG",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 162346764
+        },
+        {
+          "currency_code": "usd",
+          "amount": 4876611
+        },
+        {
+          "currency_code": "eur",
+          "amount": 4194595
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 162346764
+          },
+          161991462
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 4876611
+          },
+          4901821
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 4194595
+          },
+          4176362
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 06 AG",
+      "handle": "rampline-all-in",
+      "product_id": "prod_01KNQ3Q6EA9VCKZNJ7Y6RMP6ZC",
+      "variant_id": "variant_01KRQPX61Z4M8KNS2FWQSYERG5",
+      "sku": "BP 06 AG",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 487057331
+        },
+        {
+          "currency_code": "usd",
+          "amount": 14630344
+        },
+        {
+          "currency_code": "eur",
+          "amount": 12584225
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 487057331
+          },
+          485991385
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 14630344
+          },
+          14705978
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 12584225
+          },
+          12529523
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 19",
+      "handle": "rampline-classic-jump",
+      "product_id": "prod_01KNQ3Q64WYH74RJZDYCXP62EN",
+      "variant_id": "variant_01KRQPXCDJ4CVEPNY7K1HZ13RY",
+      "sku": "BP 19",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 129587254
+        },
+        {
+          "currency_code": "usd",
+          "amount": 3892573
+        },
+        {
+          "currency_code": "eur",
+          "amount": 3348179
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 129587254
+          },
+          129303647
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 3892573
+          },
+          3912696
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 3348179
+          },
+          3333625
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "4562 EXT 1002 E",
+      "handle": "rampline-rampit-hopper",
+      "product_id": "prod_01KNQ3PZ1VEKPD1WTK83PHRG2D",
+      "variant_id": "variant_01KRQPR1D06JT1W2W7G7ANF4VF",
+      "sku": "4562 EXT 1002 E",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 28595561
+        },
+        {
+          "currency_code": "usd",
+          "amount": 858960
+        },
+        {
+          "currency_code": "eur",
+          "amount": 738831
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 28595561
+          },
+          30646533
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 858960
+          },
+          927356
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 738831
+          },
+          790110
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 10",
+      "handle": "rampline-dont-step-into-the-water",
+      "product_id": "prod_01KNQ3Q07FQE5F0EDK26ATYX6X",
+      "variant_id": "variant_01KRQPX7H2CZPTF2ARHSZREZ35",
+      "sku": "BP 10",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 92364227
+        },
+        {
+          "currency_code": "usd",
+          "amount": 2774459
+        },
+        {
+          "currency_code": "eur",
+          "amount": 2386438
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 92364227
+          },
+          92162083
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 2774459
+          },
+          2788802
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 2386438
+          },
+          2376065
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "RB50R AG",
+      "handle": "rampline-rampball-50r",
+      "product_id": "prod_01KRQPJKKCT4VB1G929MXXS2BA",
+      "variant_id": "variant_01KRQPJKP639BPE778E79ZG9AQ",
+      "sku": "RB50R AG",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 19044397
+        },
+        {
+          "currency_code": "usd",
+          "amount": 572060
+        },
+        {
+          "currency_code": "eur",
+          "amount": 492055
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 19044397
+          },
+          20410325
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 572060
+          },
+          617611
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 492055
+          },
+          526206
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "RB70R AG",
+      "handle": "rampline-rampball-70r",
+      "product_id": "prod_01KRQPJM187TMCDY5MQSWSXVRP",
+      "variant_id": "variant_01KRQPJM3BTNNK2X26ZYE4YVN6",
+      "sku": "RB70R AG",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 26481537
+        },
+        {
+          "currency_code": "usd",
+          "amount": 795459
+        },
+        {
+          "currency_code": "eur",
+          "amount": 684210
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 26481537
+          },
+          28380883
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 795459
+          },
+          858798
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 684210
+          },
+          731698
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "JS3 G",
+      "handle": "rampline-jumpstone-en-3",
+      "product_id": "prod_01KRQPQSDGM9F5K4DDW44WR2G6",
+      "variant_id": "variant_01KRQPQSFKG542R1ARM8435YS2",
+      "sku": "JS3 G",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 24000597
+        },
+        {
+          "currency_code": "usd",
+          "amount": 720936
+        },
+        {
+          "currency_code": "eur",
+          "amount": 620110
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 24000597
+          },
+          25722002
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 720936
+          },
+          778341
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 620110
+          },
+          663148
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "F3 1002",
+      "handle": "rampline-fungi-eng",
+      "product_id": "prod_01KNQ3PZNVCTERYNETK0X5KK4H",
+      "variant_id": "variant_01KRQPQXT01B4ZY09385NDA1ZB",
+      "sku": "F3 1002",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 16274289
+        },
+        {
+          "currency_code": "usd",
+          "amount": 488851
+        },
+        {
+          "currency_code": "eur",
+          "amount": 420483
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 16274289
+          },
+          19112915
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 488851
+          },
+          578352
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 420483
+          },
+          492757
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "4560 6011 EXT",
+      "handle": "rampline-rampbow",
+      "product_id": "prod_01KNQ3Q6RD32BDZY331E776W9Q",
+      "variant_id": "variant_01KRQPX0AYKD5B6HCDMX91RSV5",
+      "sku": "4560 6011 EXT",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 21866693
+        },
+        {
+          "currency_code": "usd",
+          "amount": 656837
+        },
+        {
+          "currency_code": "eur",
+          "amount": 564975
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 21866693
+          },
+          23435047
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 656837
+          },
+          709139
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 564975
+          },
+          604188
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 21 AG",
+      "handle": "rampline-fearless",
+      "product_id": "prod_01KNQ3Q4P0M2GMX702R4NFH653",
+      "variant_id": "variant_01KRQPXDT5XVJK0M0XM8VW3PDW",
+      "sku": "BP 21 AG",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 291713316
+        },
+        {
+          "currency_code": "usd",
+          "amount": 8762554
+        },
+        {
+          "currency_code": "eur",
+          "amount": 7537072
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 291713316
+          },
+          291074890
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 8762554
+          },
+          8807853
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 7537072
+          },
+          7504309
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "4553 6011",
+      "handle": "rampline-rampit",
+      "product_id": "prod_01KNQ3PWK71087H7XPX54DJ2VJ",
+      "variant_id": "variant_01KRQPQZSNVE2FMMY7VZ9MBZR8",
+      "sku": "4553 6011",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 13793824
+        },
+        {
+          "currency_code": "usd",
+          "amount": 414342
+        },
+        {
+          "currency_code": "eur",
+          "amount": 356395
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 13793824
+          },
+          16199800
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 414342
+          },
+          490202
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 356395
+          },
+          417653
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 08 AG",
+      "handle": "rampline-the-floor-is-lava",
+      "product_id": "prod_01KNQ3Q0W4M5BR27MG9XDWS0KF",
+      "variant_id": "variant_01KRQPX6ZDCSDENJMTZ7SZRG1K",
+      "sku": "BP 08 AG",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 296861657
+        },
+        {
+          "currency_code": "usd",
+          "amount": 8917201
+        },
+        {
+          "currency_code": "eur",
+          "amount": 7670091
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 296861657
+          },
+          296211963
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 8917201
+          },
+          8963300
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 7670091
+          },
+          7636750
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BB316W",
+      "handle": "rampline-balancebuddy-wave",
+      "product_id": "prod_01KNQ3PZC8GHBPZPHSM7A97VJZ",
+      "variant_id": "variant_01KRQPQWS7C0MKXWTDNVH53VMA",
+      "sku": "BB316W",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 18860939
+        },
+        {
+          "currency_code": "usd",
+          "amount": 566549
+        },
+        {
+          "currency_code": "eur",
+          "amount": 487315
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 18860939
+          },
+          20213710
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 566549
+          },
+          611662
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 487315
+          },
+          521137
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 05 LF",
+      "handle": "rampline-monkey-business",
+      "product_id": "prod_01KNQ3Q2N1MDM04CGMBKW2QMYD",
+      "variant_id": "variant_01KRQPX4YA2JXKC467FFG27F7B",
+      "sku": "BP 05 LF",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 136312959
+        },
+        {
+          "currency_code": "usd",
+          "amount": 4094601
+        },
+        {
+          "currency_code": "eur",
+          "amount": 3521953
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 136312959
+          },
+          136014632
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 4094601
+          },
+          4115769
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 3521953
+          },
+          3506643
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "4560 6011",
+      "handle": "rampline-rampbow",
+      "product_id": "prod_01KNQ3Q6RD32BDZY331E776W9Q",
+      "variant_id": "variant_01KRQPX04822RE31F7MD57E9PF",
+      "sku": "4560 6011",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 19215360
+        },
+        {
+          "currency_code": "usd",
+          "amount": 577196
+        },
+        {
+          "currency_code": "eur",
+          "amount": 496472
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 19215360
+          },
+          20593550
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 577196
+          },
+          623156
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 496472
+          },
+          530930
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "4551 9001",
+      "handle": "rampline-rampit-swing",
+      "product_id": "prod_01KNQ3PWVYRPJSVT7YGTXFXF4T",
+      "variant_id": "variant_01KRQPQYV0BF3Y6RNP6GDHRBR2",
+      "sku": "4551 9001",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 18945567
+        },
+        {
+          "currency_code": "usd",
+          "amount": 569091
+        },
+        {
+          "currency_code": "eur",
+          "amount": 489501
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 18945567
+          },
+          20304408
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 569091
+          },
+          614406
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 489501
+          },
+          523475
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 01",
+      "handle": "rampline-kangaroo",
+      "product_id": "prod_01KNQ3Q37RWH4RFHFVSTFTD9YE",
+      "variant_id": "variant_01KRQPX2WZEZN2QSKCDKY99KSC",
+      "sku": "BP 01",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 278728464
+        },
+        {
+          "currency_code": "usd",
+          "amount": 8372512
+        },
+        {
+          "currency_code": "eur",
+          "amount": 7201579
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 278728464
+          },
+          278118455
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 8372512
+          },
+          8415795
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 7201579
+          },
+          7170274
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 32 LF",
+      "handle": "rampline-fast-and-curious",
+      "product_id": "prod_01KNQ3Q4YXWB6MJ97CBHVXWT3Z",
+      "variant_id": "variant_01KRQPXM1FMTSTEWHVR2EAB6C5",
+      "sku": "BP 32 LF",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 231020511
+        },
+        {
+          "currency_code": "usd",
+          "amount": 6939449
+        },
+        {
+          "currency_code": "eur",
+          "amount": 5968936
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 231020511
+          },
+          230514913
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 6939449
+          },
+          6975324
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 5968936
+          },
+          5942990
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 01 LF",
+      "handle": "rampline-kangaroo",
+      "product_id": "prod_01KNQ3Q37RWH4RFHFVSTFTD9YE",
+      "variant_id": "variant_01KRQPX32BJTRKZZ5JVWYVP9FG",
+      "sku": "BP 01 LF",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 283480030
+        },
+        {
+          "currency_code": "usd",
+          "amount": 8515241
+        },
+        {
+          "currency_code": "eur",
+          "amount": 7324346
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 283480030
+          },
+          282859622
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 8515241
+          },
+          8559261
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 7324346
+          },
+          7292508
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 22 AG",
+      "handle": "rampline-crouching-tiger",
+      "product_id": "prod_01KNQ3Q5JDPYAN021MQRWYK3RC",
+      "variant_id": "variant_01KRQPXEQ9X6B27AKM3N6H0RPD",
+      "sku": "BP 22 AG",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 197847187
+        },
+        {
+          "currency_code": "usd",
+          "amount": 5942981
+        },
+        {
+          "currency_code": "eur",
+          "amount": 5111828
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 197847187
+          },
+          197414190
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 5942981
+          },
+          5973704
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 5111828
+          },
+          5089608
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 34 LF",
+      "handle": "rampline-flex-forest",
+      "product_id": "prod_01KNQ3QBRC24H8WPRX4G80YMZG",
+      "variant_id": "variant_01KRQPXNV4ZAX1FJZJF964NS8R",
+      "sku": "BP 34 LF",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 346268684
+        },
+        {
+          "currency_code": "usd",
+          "amount": 10401301
+        },
+        {
+          "currency_code": "eur",
+          "amount": 8946633
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 346268684
+          },
+          345510860
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 10401301
+          },
+          10455072
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 8946633
+          },
+          8907743
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "RB35 AG",
+      "handle": "rampline-rampball-35",
+      "product_id": "prod_01KRQPJJ31C9PFMWC0ASJWC549",
+      "variant_id": "variant_01KRQPJJB6H86RA6Q5FAWF1DHJ",
+      "sku": "RB35 AG",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 12042001
+        },
+        {
+          "currency_code": "usd",
+          "amount": 361721
+        },
+        {
+          "currency_code": "eur",
+          "amount": 311132
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 12042001
+          },
+          14142415
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 361721
+          },
+          427946
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 311132
+          },
+          364611
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 31",
+      "handle": "rampline-defying-gravity",
+      "product_id": "prod_01KNQ3Q58098ZYQXR2YK3YZJVQ",
+      "variant_id": "variant_01KRQPXJYC5HEF60J32XY14N2D",
+      "sku": "BP 31",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 234843834
+        },
+        {
+          "currency_code": "usd",
+          "amount": 7054295
+        },
+        {
+          "currency_code": "eur",
+          "amount": 6067720
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 234843834
+          },
+          234329868
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 7054295
+          },
+          7090763
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 6067720
+          },
+          6041345
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 32",
+      "handle": "rampline-fast-and-curious",
+      "product_id": "prod_01KNQ3Q4YXWB6MJ97CBHVXWT3Z",
+      "variant_id": "variant_01KRQPXKVZHXG1E5T5XNDQK909",
+      "sku": "BP 32",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 216021760
+        },
+        {
+          "currency_code": "usd",
+          "amount": 6488913
+        },
+        {
+          "currency_code": "eur",
+          "amount": 5581410
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 216021760
+          },
+          215548988
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 6488913
+          },
+          6522458
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 5581410
+          },
+          5557148
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 19 LF",
+      "handle": "rampline-classic-jump",
+      "product_id": "prod_01KNQ3Q64WYH74RJZDYCXP62EN",
+      "variant_id": "variant_01KRQPXCJR20A4TMFRSH7S6JH9",
+      "sku": "BP 19 LF",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 140684787
+        },
+        {
+          "currency_code": "usd",
+          "amount": 4225923
+        },
+        {
+          "currency_code": "eur",
+          "amount": 3634909
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 140684787
+          },
+          140376893
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 4225923
+          },
+          4247770
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 3634909
+          },
+          3619108
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 22 LF",
+      "handle": "rampline-crouching-tiger",
+      "product_id": "prod_01KNQ3Q5JDPYAN021MQRWYK3RC",
+      "variant_id": "variant_01KRQPXEHFJ0CTX1YTQ0Q4TK8Z",
+      "sku": "BP 22 LF",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 212685279
+        },
+        {
+          "currency_code": "usd",
+          "amount": 6388691
+        },
+        {
+          "currency_code": "eur",
+          "amount": 5495204
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 212685279
+          },
+          212219808
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 6388691
+          },
+          6421718
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 5495204
+          },
+          5471317
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 03",
+      "handle": "rampline-jane-jump",
+      "product_id": "prod_01KNQ3Q43MAVKZBW4CHNEVJ752",
+      "variant_id": "variant_01KRQPX3VC3HXQ2Q2VHYKQAFH7",
+      "sku": "BP 03",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 159384339
+        },
+        {
+          "currency_code": "usd",
+          "amount": 4787625
+        },
+        {
+          "currency_code": "eur",
+          "amount": 4118054
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 159384339
+          },
+          159035518
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 4787625
+          },
+          4812375
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 4118054
+          },
+          4100153
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "RL410",
+      "handle": "rampline-rampline-slackline",
+      "product_id": "prod_01KNQ3PYP224DRZPM2Y893RDTC",
+      "variant_id": "variant_01KRQPQ166YVZQ00QN01X99C6H",
+      "sku": "RL410",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 22280750
+        },
+        {
+          "currency_code": "usd",
+          "amount": 669274
+        },
+        {
+          "currency_code": "eur",
+          "amount": 575673
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 22280750
+          },
+          23878802
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 669274
+          },
+          722567
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 575673
+          },
+          615628
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "RB50R",
+      "handle": "rampline-rampball-50r",
+      "product_id": "prod_01KRQPJKKCT4VB1G929MXXS2BA",
+      "variant_id": "variant_01KRQPJKP5W4N7E2WECBX033RE",
+      "sku": "RB50R",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 18371907
+        },
+        {
+          "currency_code": "usd",
+          "amount": 551860
+        },
+        {
+          "currency_code": "eur",
+          "amount": 474680
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 18371907
+          },
+          19689603
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 551860
+          },
+          595802
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 474680
+          },
+          507625
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 30 AG",
+      "handle": "rampline-hunting-high-and-low",
+      "product_id": "prod_01KNQ3Q4CR772KXTRM90W6W05H",
+      "variant_id": "variant_01KRQPXJC0MPXS909ZJ3Z7RM5M",
+      "sku": "BP 30 AG",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 348215234
+        },
+        {
+          "currency_code": "usd",
+          "amount": 10459772
+        },
+        {
+          "currency_code": "eur",
+          "amount": 8996926
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 348215234
+          },
+          347453152
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 10459772
+          },
+          10513845
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 8996926
+          },
+          8957818
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "4552 6011",
+      "handle": "rampline-rampit",
+      "product_id": "prod_01KNQ3PWK71087H7XPX54DJ2VJ",
+      "variant_id": "variant_01KRQPQZKFVG6CS2984MQTHHNT",
+      "sku": "4552 6011",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 12520134
+        },
+        {
+          "currency_code": "usd",
+          "amount": 376083
+        },
+        {
+          "currency_code": "eur",
+          "amount": 323486
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 12520134
+          },
+          14703948
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 376083
+          },
+          444938
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 323486
+          },
+          379088
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "F5 1002",
+      "handle": "rampline-fungi-eng",
+      "product_id": "prod_01KNQ3PZNVCTERYNETK0X5KK4H",
+      "variant_id": "variant_01KRQPQY09KD9VPYJRMQMXNR81",
+      "sku": "F5 1002",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 19940670
+        },
+        {
+          "currency_code": "usd",
+          "amount": 598983
+        },
+        {
+          "currency_code": "eur",
+          "amount": 515212
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 19940670
+          },
+          21370883
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 598983
+          },
+          646678
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 515212
+          },
+          550971
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "RB35 LF",
+      "handle": "rampline-rampball-35",
+      "product_id": "prod_01KRQPJJ31C9PFMWC0ASJWC549",
+      "variant_id": "variant_01KRQPJJB7JRSCPTBWJ4J5P94Q",
+      "sku": "RB35 LF",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 13190437
+        },
+        {
+          "currency_code": "usd",
+          "amount": 396217
+        },
+        {
+          "currency_code": "eur",
+          "amount": 340805
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 13190437
+          },
+          15491168
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 396217
+          },
+          468759
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 340805
+          },
+          399384
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BB316R EXT",
+      "handle": "rampline-balancebuddy-en",
+      "product_id": "prod_01KNQ3PXPN3EKZBWZTHSBCSYGC",
+      "variant_id": "variant_01KRQPQVK7W8XHQZEJESWZAEB8",
+      "sku": "BB316R EXT",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 16563113
+        },
+        {
+          "currency_code": "usd",
+          "amount": 497527
+        },
+        {
+          "currency_code": "eur",
+          "amount": 427945
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 16563113
+          },
+          19452118
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 497527
+          },
+          588616
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 427945
+          },
+          501502
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "F5 EXT 1002",
+      "handle": "rampline-fungi-eng",
+      "product_id": "prod_01KNQ3PZNVCTERYNETK0X5KK4H",
+      "variant_id": "variant_01KRQPQY6Z8XW1FEAMTKK0X7YG",
+      "sku": "F5 EXT 1002",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 21745713
+        },
+        {
+          "currency_code": "usd",
+          "amount": 653203
+        },
+        {
+          "currency_code": "eur",
+          "amount": 561850
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 21745713
+          },
+          23305390
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 653203
+          },
+          705215
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 561850
+          },
+          600845
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 17 LF",
+      "handle": "rampline-junior-power",
+      "product_id": "prod_01KNQ3Q3TQ5MWQYTXR0KZ87W4G",
+      "variant_id": "variant_01KRQPXASWX8NWHQ8J9DWCP6T9",
+      "sku": "BP 17 LF",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 124614174
+        },
+        {
+          "currency_code": "usd",
+          "amount": 3743190
+        },
+        {
+          "currency_code": "eur",
+          "amount": 3219688
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 124614174
+          },
+          124341453
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 3743190
+          },
+          3762541
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 3219688
+          },
+          3205693
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 01 AG",
+      "handle": "rampline-kangaroo",
+      "product_id": "prod_01KNQ3Q37RWH4RFHFVSTFTD9YE",
+      "variant_id": "variant_01KRQPX38S7RM640AAJZR1PV9H",
+      "sku": "BP 01 AG",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 278728464
+        },
+        {
+          "currency_code": "usd",
+          "amount": 8372512
+        },
+        {
+          "currency_code": "eur",
+          "amount": 7201579
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 278728464
+          },
+          278118455
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 8372512
+          },
+          8415795
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 7201579
+          },
+          7170274
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "4554 9001",
+      "handle": "rampline-rampit",
+      "product_id": "prod_01KNQ3PWK71087H7XPX54DJ2VJ",
+      "variant_id": "variant_01KRQPQZZQY8F4E22ZZEQ8GZMG",
+      "sku": "4554 9001",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 14524751
+        },
+        {
+          "currency_code": "usd",
+          "amount": 436298
+        },
+        {
+          "currency_code": "eur",
+          "amount": 375280
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 14524751
+          },
+          17058218
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 436298
+          },
+          516177
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 375280
+          },
+          439784
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 06 LF",
+      "handle": "rampline-all-in",
+      "product_id": "prod_01KNQ3Q6EA9VCKZNJ7Y6RMP6ZC",
+      "variant_id": "variant_01KRQPX5VR9G2R7ZT6WWDN8DXS",
+      "sku": "BP 06 LF",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 508144024
+        },
+        {
+          "currency_code": "usd",
+          "amount": 15263751
+        },
+        {
+          "currency_code": "eur",
+          "amount": 13129047
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 508144024
+          },
+          507031930
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 15263751
+          },
+          15342659
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 13129047
+          },
+          13071977
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "RB50R LF",
+      "handle": "rampline-rampball-50r",
+      "product_id": "prod_01KRQPJKKCT4VB1G929MXXS2BA",
+      "variant_id": "variant_01KRQPJKP6FC0JQX249BS88ZBQ",
+      "sku": "RB50R LF",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 20184900
+        },
+        {
+          "currency_code": "usd",
+          "amount": 606319
+        },
+        {
+          "currency_code": "eur",
+          "amount": 521522
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 20184900
+          },
+          21632632
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 606319
+          },
+          654598
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 521522
+          },
+          557719
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "4562 1002 E",
+      "handle": "rampline-rampit-hopper",
+      "product_id": "prod_01KNQ3PZ1VEKPD1WTK83PHRG2D",
+      "variant_id": "variant_01KRQPR0NWX2YA3RBP63Z2GYF1",
+      "sku": "4562 1002 E",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 26485513
+        },
+        {
+          "currency_code": "usd",
+          "amount": 795578
+        },
+        {
+          "currency_code": "eur",
+          "amount": 684313
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 26485513
+          },
+          28385145
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 795578
+          },
+          858927
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 684313
+          },
+          731808
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "JS5 AG",
+      "handle": "rampline-jumpstone-en-5",
+      "product_id": "prod_01KRQPQSNT106QGFDHRE3MRQZ1",
+      "variant_id": "variant_01KRQPQSQHMADWJ6KJDKE7GNKM",
+      "sku": "JS5 AG",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 33242781
+        },
+        {
+          "currency_code": "usd",
+          "amount": 998555
+        },
+        {
+          "currency_code": "eur",
+          "amount": 858902
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 33242781
+          },
+          35627067
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 998555
+          },
+          1078066
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 858902
+          },
+          918515
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 18 LF",
+      "handle": "rampline-never-stop-playing",
+      "product_id": "prod_01KNQ3Q2BG3AANSC8F1WBB7730",
+      "variant_id": "variant_01KRQPXBPTN05KVH17VNNQ0YJS",
+      "sku": "BP 18 LF",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 365601129
+        },
+        {
+          "currency_code": "usd",
+          "amount": 10982014
+        },
+        {
+          "currency_code": "eur",
+          "amount": 9446130
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 365601129
+          },
+          364800995
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 10982014
+          },
+          11038787
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 9446130
+          },
+          9405069
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 11 LF",
+      "handle": "rampline-junior-power-ii",
+      "product_id": "prod_01KNQ3Q3GTMGFNGC5DJDXZHV3G",
+      "variant_id": "variant_01KRQPX8TT04AAX02R1J1H2T6D",
+      "sku": "BP 11 LF",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 229563236
+        },
+        {
+          "currency_code": "usd",
+          "amount": 6895675
+        },
+        {
+          "currency_code": "eur",
+          "amount": 5931284
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 229563236
+          },
+          229060825
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 6895675
+          },
+          6931323
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 5931284
+          },
+          5905502
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BB316W LF",
+      "handle": "rampline-balancebuddy-wave",
+      "product_id": "prod_01KNQ3PZC8GHBPZPHSM7A97VJZ",
+      "variant_id": "variant_01KRQPQWZ51M7711K80ZFGMXT7",
+      "sku": "BB316W LF",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 20066193
+        },
+        {
+          "currency_code": "usd",
+          "amount": 602753
+        },
+        {
+          "currency_code": "eur",
+          "amount": 518455
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 20066193
+          },
+          21505410
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 602753
+          },
+          650748
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 518455
+          },
+          554439
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 34",
+      "handle": "rampline-flex-forest",
+      "product_id": "prod_01KNQ3QBRC24H8WPRX4G80YMZG",
+      "variant_id": "variant_01KRQPXNNG1NBJFRBP3PQGQ215",
+      "sku": "BP 34",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 321784654
+        },
+        {
+          "currency_code": "usd",
+          "amount": 9665844
+        },
+        {
+          "currency_code": "eur",
+          "amount": 8314033
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 321784654
+          },
+          321080415
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 9665844
+          },
+          9715813
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 8314033
+          },
+          8277893
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 03 LF",
+      "handle": "rampline-jane-jump",
+      "product_id": "prod_01KNQ3Q43MAVKZBW4CHNEVJ752",
+      "variant_id": "variant_01KRQPX40VNR84QR5WZN6NAQDW",
+      "sku": "BP 03 LF",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 169374309
+        },
+        {
+          "currency_code": "usd",
+          "amount": 5087706
+        },
+        {
+          "currency_code": "eur",
+          "amount": 4376167
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 169374309
+          },
+          169003627
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 5087706
+          },
+          5114007
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 4376167
+          },
+          4357145
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BB316S",
+      "handle": "rampline-balancebuddy-en",
+      "product_id": "prod_01KNQ3PXPN3EKZBWZTHSBCSYGC",
+      "variant_id": "variant_01KRQPQVWXMKJEGJZPPYRRFPMB",
+      "sku": "BB316S",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 15424971
+        },
+        {
+          "currency_code": "usd",
+          "amount": 463339
+        },
+        {
+          "currency_code": "eur",
+          "amount": 398539
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 15424971
+          },
+          18115457
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 463339
+          },
+          548169
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 398539
+          },
+          467041
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 24",
+      "handle": "rampline-cliffhanger",
+      "product_id": "prod_01KNQ3Q5VECVNKD1ECW13MZQNX",
+      "variant_id": "variant_01KRQPXF9KM3NG3B823JQGR81W",
+      "sku": "BP 24",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 453740389
+        },
+        {
+          "currency_code": "usd",
+          "amount": 13629562
+        },
+        {
+          "currency_code": "eur",
+          "amount": 11723407
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 453740389
+          },
+          452747358
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 13629562
+          },
+          13700022
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 11723407
+          },
+          11672447
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 30 LF",
+      "handle": "rampline-hunting-high-and-low",
+      "product_id": "prod_01KNQ3Q4CR772KXTRM90W6W05H",
+      "variant_id": "variant_01KRQPXJ5X7S57D9Z27R0T56V6",
+      "sku": "BP 30 LF",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 367381341
+        },
+        {
+          "currency_code": "usd",
+          "amount": 11035488
+        },
+        {
+          "currency_code": "eur",
+          "amount": 9492126
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 367381341
+          },
+          366577312
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 11035488
+          },
+          11092538
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 9492126
+          },
+          9450865
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "JS3 LF",
+      "handle": "rampline-jumpstone-en-3",
+      "product_id": "prod_01KRQPQSDGM9F5K4DDW44WR2G6",
+      "variant_id": "variant_01KRQPQSFKSHTJESTFX5VX9TT7",
+      "sku": "JS3 LF",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 24000597
+        },
+        {
+          "currency_code": "usd",
+          "amount": 720936
+        },
+        {
+          "currency_code": "eur",
+          "amount": 620110
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 24000597
+          },
+          25722002
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 720936
+          },
+          778341
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 620110
+          },
+          663148
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 17",
+      "handle": "rampline-junior-power",
+      "product_id": "prod_01KNQ3Q3TQ5MWQYTXR0KZ87W4G",
+      "variant_id": "variant_01KRQPXAKBB74YRTD1GF9VTY3E",
+      "sku": "BP 17",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 113255373
+        },
+        {
+          "currency_code": "usd",
+          "amount": 3401992
+        },
+        {
+          "currency_code": "eur",
+          "amount": 2926208
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 113255373
+          },
+          113007508
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 3401992
+          },
+          3419579
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 2926208
+          },
+          2913488
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 15",
+      "handle": "rampline-marathon-play",
+      "product_id": "prod_01KNQ3Q2YFDAP3PG22VKM99G4P",
+      "variant_id": "variant_01KRQPX9MYB63N3NT3D5Q13R5M",
+      "sku": "BP 15",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 937432026
+        },
+        {
+          "currency_code": "usd",
+          "amount": 28158807
+        },
+        {
+          "currency_code": "eur",
+          "amount": 24220672
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 937432026
+          },
+          935380418
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 28158807
+          },
+          28304377
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 24220672
+          },
+          24115388
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 25",
+      "handle": "rampline-take-5",
+      "product_id": "prod_01KNQ3Q1AXR41GNYBKKXHQG3DK",
+      "variant_id": "variant_01KRQPXG6NRRJ30R312TRMQB26",
+      "sku": "BP 25",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 182738899
+        },
+        {
+          "currency_code": "usd",
+          "amount": 5489155
+        },
+        {
+          "currency_code": "eur",
+          "amount": 4721472
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 182738899
+          },
+          182338965
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 5489155
+          },
+          5517531
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 4721472
+          },
+          4700948
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 33 AG",
+      "handle": "rampline-play-tag",
+      "product_id": "prod_01KNQ3Q20HBZMCNXC6C0BF6F9M",
+      "variant_id": "variant_01KRQPXN3R4PWY6Z7JEDS3PY18",
+      "sku": "BP 33 AG",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 364709397
+        },
+        {
+          "currency_code": "usd",
+          "amount": 10955228
+        },
+        {
+          "currency_code": "eur",
+          "amount": 9423090
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 364709397
+          },
+          363911217
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 10955228
+          },
+          11011862
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 9423090
+          },
+          9382129
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "RB35 G",
+      "handle": "rampline-rampball-35",
+      "product_id": "prod_01KRQPJJ31C9PFMWC0ASJWC549",
+      "variant_id": "variant_01KRQPJJB66HKD1J0MX3NVQ2MM",
+      "sku": "RB35 G",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 13190437
+        },
+        {
+          "currency_code": "usd",
+          "amount": 396217
+        },
+        {
+          "currency_code": "eur",
+          "amount": 340805
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 13190437
+          },
+          15491168
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 396217
+          },
+          468759
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 340805
+          },
+          399384
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 33",
+      "handle": "rampline-play-tag",
+      "product_id": "prod_01KNQ3Q20HBZMCNXC6C0BF6F9M",
+      "variant_id": "variant_01KRQPXMRNVH4ENFB3TZSN8NJ6",
+      "sku": "BP 33",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 352789104
+        },
+        {
+          "currency_code": "usd",
+          "amount": 10597163
+        },
+        {
+          "currency_code": "eur",
+          "amount": 9115102
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 352789104
+          },
+          352017010
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 10597163
+          },
+          10651947
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 9115102
+          },
+          9075480
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 25 LF",
+      "handle": "rampline-take-5",
+      "product_id": "prod_01KNQ3Q1AXR41GNYBKKXHQG3DK",
+      "variant_id": "variant_01KRQPXGC6W6MKPE2E6TWE5J8Z",
+      "sku": "BP 25 LF",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 201951254
+        },
+        {
+          "currency_code": "usd",
+          "amount": 6066260
+        },
+        {
+          "currency_code": "eur",
+          "amount": 5217866
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 201951254
+          },
+          201509275
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 6066260
+          },
+          6097620
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 5217866
+          },
+          5195185
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 10 LF",
+      "handle": "rampline-dont-step-into-the-water",
+      "product_id": "prod_01KNQ3Q07FQE5F0EDK26ATYX6X",
+      "variant_id": "variant_01KRQPX7PQE7RMH0V6B2X2QXHR",
+      "sku": "BP 10 LF",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 98710194
+        },
+        {
+          "currency_code": "usd",
+          "amount": 2965080
+        },
+        {
+          "currency_code": "eur",
+          "amount": 2550401
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 98710194
+          },
+          98494163
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 2965080
+          },
+          2980409
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 2550401
+          },
+          2539314
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "RB50 LF",
+      "handle": "rampline-rampball-50",
+      "product_id": "prod_01KRQPJK5YY06TWJC126KGX571",
+      "variant_id": "variant_01KRQPJK8SWVS955N4MRC06AV3",
+      "sku": "RB50 LF",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 16757570
+        },
+        {
+          "currency_code": "usd",
+          "amount": 503368
+        },
+        {
+          "currency_code": "eur",
+          "amount": 432970
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 16757570
+          },
+          19680493
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 503368
+          },
+          595527
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 432970
+          },
+          507390
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 33 LF",
+      "handle": "rampline-play-tag",
+      "product_id": "prod_01KNQ3Q20HBZMCNXC6C0BF6F9M",
+      "variant_id": "variant_01KRQPXMY0AY4YXGEQQ9VG3G52",
+      "sku": "BP 33 LF",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 388033934
+        },
+        {
+          "currency_code": "usd",
+          "amount": 11655856
+        },
+        {
+          "currency_code": "eur",
+          "amount": 10025732
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 388033934
+          },
+          387184707
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 11655856
+          },
+          11716112
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 10025732
+          },
+          9982152
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 17 AG",
+      "handle": "rampline-junior-power",
+      "product_id": "prod_01KNQ3Q3TQ5MWQYTXR0KZ87W4G",
+      "variant_id": "variant_01KRQPXAZKCG5A91PQTMK4WK2S",
+      "sku": "BP 17 AG",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 117228803
+        },
+        {
+          "currency_code": "usd",
+          "amount": 3521347
+        },
+        {
+          "currency_code": "eur",
+          "amount": 3028871
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 117228803
+          },
+          116972243
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 3521347
+          },
+          3539551
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 3028871
+          },
+          3015705
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "RB50 G",
+      "handle": "rampline-rampball-50",
+      "product_id": "prod_01KRQPJK5YY06TWJC126KGX571",
+      "variant_id": "variant_01KRQPJK8SHFMR690WVQNPDHNP",
+      "sku": "RB50 G",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 16757570
+        },
+        {
+          "currency_code": "usd",
+          "amount": 503368
+        },
+        {
+          "currency_code": "eur",
+          "amount": 432970
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 16757570
+          },
+          19680493
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 503368
+          },
+          595527
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 432970
+          },
+          507390
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 32 AG",
+      "handle": "rampline-fast-and-curious",
+      "product_id": "prod_01KNQ3Q4YXWB6MJ97CBHVXWT3Z",
+      "variant_id": "variant_01KRQPXM704FZK6W63F35TNAW5",
+      "sku": "BP 32 AG",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 220064161
+        },
+        {
+          "currency_code": "usd",
+          "amount": 6610340
+        },
+        {
+          "currency_code": "eur",
+          "amount": 5685854
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 220064161
+          },
+          219582542
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 6610340
+          },
+          6644513
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 5685854
+          },
+          5661139
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BB216S",
+      "handle": "rampline-balancebuddy-en",
+      "product_id": "prod_01KNQ3PXPN3EKZBWZTHSBCSYGC",
+      "variant_id": "variant_01KRQPQV5111HPXNGCXMVE08YQ",
+      "sku": "BB216S",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 11755463
+        },
+        {
+          "currency_code": "usd",
+          "amount": 353113
+        },
+        {
+          "currency_code": "eur",
+          "amount": 303729
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 11755463
+          },
+          13805900
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 353113
+          },
+          417763
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 303729
+          },
+          355935
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 11 AG",
+      "handle": "rampline-junior-power-ii",
+      "product_id": "prod_01KNQ3Q3GTMGFNGC5DJDXZHV3G",
+      "variant_id": "variant_01KRQPX90WH53VBGW37KW0Q7RM",
+      "sku": "BP 11 AG",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 211407323
+        },
+        {
+          "currency_code": "usd",
+          "amount": 6350304
+        },
+        {
+          "currency_code": "eur",
+          "amount": 5462185
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 211407323
+          },
+          210944648
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 6350304
+          },
+          6383132
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 5462185
+          },
+          5438442
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 30",
+      "handle": "rampline-hunting-high-and-low",
+      "product_id": "prod_01KNQ3Q4CR772KXTRM90W6W05H",
+      "variant_id": "variant_01KRQPXJ05M4D2MC42FW2N5J99",
+      "sku": "BP 30",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 340738984
+        },
+        {
+          "currency_code": "usd",
+          "amount": 10235199
+        },
+        {
+          "currency_code": "eur",
+          "amount": 8803760
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 340738984
+          },
+          339993263
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 10235199
+          },
+          10288111
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 8803760
+          },
+          8765492
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "FB33-1",
+      "handle": "rampline-floating-bench",
+      "product_id": "prod_01KNQ3PYBRMC0ET0BRFTRCZS82",
+      "variant_id": "variant_01KRQPX1HPT189YEZK3WCGEHMZ",
+      "sku": "FB33-1",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 17001049
+        },
+        {
+          "currency_code": "usd",
+          "amount": 510682
+        },
+        {
+          "currency_code": "eur",
+          "amount": 439260
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 17001049
+          },
+          19966442
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 510682
+          },
+          604180
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 439260
+          },
+          514762
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "4561 EXT-1 1002",
+      "handle": "rampline-rampit-hopper",
+      "product_id": "prod_01KNQ3PZ1VEKPD1WTK83PHRG2D",
+      "variant_id": "variant_01KRQPR29CST0G8FE7MHEE5EM5",
+      "sku": "4561 EXT-1 1002",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 5266339
+        },
+        {
+          "currency_code": "usd",
+          "amount": 158192
+        },
+        {
+          "currency_code": "eur",
+          "amount": 136068
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 5266339
+          },
+          6184913
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 158192
+          },
+          187154
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 136068
+          },
+          159456
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "JS5",
+      "handle": "rampline-jumpstone-en-5",
+      "product_id": "prod_01KRQPQSNT106QGFDHRE3MRQZ1",
+      "variant_id": "variant_01KRQPQSQHR5WDTRSNSK1B31A0",
+      "sku": "JS5",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 29292473
+        },
+        {
+          "currency_code": "usd",
+          "amount": 879894
+        },
+        {
+          "currency_code": "eur",
+          "amount": 756837
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 29292473
+          },
+          31393430
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 879894
+          },
+          949957
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 756837
+          },
+          809366
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "JS3 AG",
+      "handle": "rampline-jumpstone-en-3",
+      "product_id": "prod_01KRQPQSDGM9F5K4DDW44WR2G6",
+      "variant_id": "variant_01KRQPQSFKYF8J96MXJZ48HVDQ",
+      "sku": "JS3 AG",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 22175674
+        },
+        {
+          "currency_code": "usd",
+          "amount": 666118
+        },
+        {
+          "currency_code": "eur",
+          "amount": 572959
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 22175674
+          },
+          23766190
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 666118
+          },
+          719159
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 572959
+          },
+          612725
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "JS3",
+      "handle": "rampline-jumpstone-en-3",
+      "product_id": "prod_01KRQPQSDGM9F5K4DDW44WR2G6",
+      "variant_id": "variant_01KRQPQSFK9GG278908Y0BVSWG",
+      "sku": "JS3",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 19649296
+        },
+        {
+          "currency_code": "usd",
+          "amount": 590230
+        },
+        {
+          "currency_code": "eur",
+          "amount": 507684
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 19649296
+          },
+          21058610
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 590230
+          },
+          637228
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 507684
+          },
+          542920
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "SD 02",
+      "handle": "rampline-shockdeck",
+      "product_id": "prod_01KNQ3QD2GBH3E6ZKMBNBYHHJR",
+      "variant_id": "variant_01KRQPX2BKN8D6P635E5D9KDKV",
+      "sku": "SD 02",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 66916
+        },
+        {
+          "currency_code": "usd",
+          "amount": 2010
+        },
+        {
+          "currency_code": "eur",
+          "amount": 1729
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 66916
+          },
+          78588
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 2010
+          },
+          2378
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 1729
+          },
+          2026
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "4561-1 1002",
+      "handle": "rampline-rampit-hopper",
+      "product_id": "prod_01KNQ3PZ1VEKPD1WTK83PHRG2D",
+      "variant_id": "variant_01KRQPR148S67P4NZCQXNT8VMM",
+      "sku": "4561-1 1002",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 5266339
+        },
+        {
+          "currency_code": "usd",
+          "amount": 158192
+        },
+        {
+          "currency_code": "eur",
+          "amount": 136068
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 5266339
+          },
+          6184913
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 158192
+          },
+          187154
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 136068
+          },
+          159456
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "JS50 AG",
+      "handle": "rampline-jumpstone-en-50",
+      "product_id": "prod_01KRQPQS5JYE68E75780CN350K",
+      "variant_id": "variant_01KRQPQS7G3ZKRNF01ZD4QF9SG",
+      "sku": "JS50 AG",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 11901877
+        },
+        {
+          "currency_code": "usd",
+          "amount": 357511
+        },
+        {
+          "currency_code": "eur",
+          "amount": 307512
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 11901877
+          },
+          13977852
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 357511
+          },
+          422966
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 307512
+          },
+          360368
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 11",
+      "handle": "rampline-junior-power-ii",
+      "product_id": "prod_01KNQ3Q3GTMGFNGC5DJDXZHV3G",
+      "variant_id": "variant_01KRQPX8MV3ZMJSGPZ6YAQD964",
+      "sku": "BP 11",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 204609404
+        },
+        {
+          "currency_code": "usd",
+          "amount": 6146106
+        },
+        {
+          "currency_code": "eur",
+          "amount": 5286546
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 204609404
+          },
+          204161608
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 6146106
+          },
+          6177879
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 5286546
+          },
+          5263566
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "RB70R G",
+      "handle": "rampline-rampball-70r",
+      "product_id": "prod_01KRQPJM187TMCDY5MQSWSXVRP",
+      "variant_id": "variant_01KRQPJM3BVEA84HGDGH2YZT9F",
+      "sku": "RB70R G",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 27523214
+        },
+        {
+          "currency_code": "usd",
+          "amount": 826749
+        },
+        {
+          "currency_code": "eur",
+          "amount": 711124
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 27523214
+          },
+          29497273
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 826749
+          },
+          892580
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 711124
+          },
+          760480
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "FB33LED",
+      "handle": "rampline-floating-bench",
+      "product_id": "prod_01KNQ3PYBRMC0ET0BRFTRCZS82",
+      "variant_id": "variant_01KRQPX1AP4XJDSX8QGK8NHCK4",
+      "sku": "FB33LED",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 3890864
+        },
+        {
+          "currency_code": "usd",
+          "amount": 116875
+        },
+        {
+          "currency_code": "eur",
+          "amount": 100529
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 3890864
+          },
+          4569525
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 116875
+          },
+          138273
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 100529
+          },
+          117809
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 06",
+      "handle": "rampline-all-in",
+      "product_id": "prod_01KNQ3Q6EA9VCKZNJ7Y6RMP6ZC",
+      "variant_id": "variant_01KRQPX5P57NF9C0Y8B32KAHSC",
+      "sku": "BP 06",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 479581080
+        },
+        {
+          "currency_code": "usd",
+          "amount": 14405771
+        },
+        {
+          "currency_code": "eur",
+          "amount": 12391059
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 479581080
+          },
+          478531497
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 14405771
+          },
+          14480243
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 12391059
+          },
+          12337197
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 18 AG",
+      "handle": "rampline-never-stop-playing",
+      "product_id": "prod_01KNQ3Q2BG3AANSC8F1WBB7730",
+      "variant_id": "variant_01KRQPXBW4EC47CV6TVPT4EWBX",
+      "sku": "BP 18 AG",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 349382030
+        },
+        {
+          "currency_code": "usd",
+          "amount": 10494821
+        },
+        {
+          "currency_code": "eur",
+          "amount": 9027073
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 349382030
+          },
+          348617393
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 10494821
+          },
+          10549075
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 9027073
+          },
+          8987834
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 31 LF",
+      "handle": "rampline-defying-gravity",
+      "product_id": "prod_01KNQ3Q58098ZYQXR2YK3YZJVQ",
+      "variant_id": "variant_01KRQPXK4EN5ND80YRS7SGPBKY",
+      "sku": "BP 31 LF",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 247077329
+        },
+        {
+          "currency_code": "usd",
+          "amount": 7421768
+        },
+        {
+          "currency_code": "eur",
+          "amount": 6383800
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 247077329
+          },
+          246536590
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 7421768
+          },
+          7460136
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 6383800
+          },
+          6356051
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "RB35",
+      "handle": "rampline-rampball-35",
+      "product_id": "prod_01KRQPJJ31C9PFMWC0ASJWC549",
+      "variant_id": "variant_01KRQPJJB68K5GPM4YJSMQRW15",
+      "sku": "RB35",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 11364834
+        },
+        {
+          "currency_code": "usd",
+          "amount": 341380
+        },
+        {
+          "currency_code": "eur",
+          "amount": 293636
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 11364834
+          },
+          13347135
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 341380
+          },
+          403881
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 293636
+          },
+          344107
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "JS27 LF",
+      "handle": "rampline-jumpstone-en-27",
+      "product_id": "prod_01KRQPQRWMXGTM9MBTY6X7CBWT",
+      "variant_id": "variant_01KRQPQRYT7PAD3KJ7JBDEJNCH",
+      "sku": "JS27 LF",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 9153751
+        },
+        {
+          "currency_code": "usd",
+          "amount": 274963
+        },
+        {
+          "currency_code": "eur",
+          "amount": 236508
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 9153751
+          },
+          10750385
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 274963
+          },
+          325304
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 236508
+          },
+          277160
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "JS50",
+      "handle": "rampline-jumpstone-en-50",
+      "product_id": "prod_01KRQPQS5JYE68E75780CN350K",
+      "variant_id": "variant_01KRQPQS7FWQKCTC8XTDPMAJAY",
+      "sku": "JS50",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 10076276
+        },
+        {
+          "currency_code": "usd",
+          "amount": 302674
+        },
+        {
+          "currency_code": "eur",
+          "amount": 260343
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 10076276
+          },
+          11833820
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 302674
+          },
+          358088
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 260343
+          },
+          305092
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "JS27",
+      "handle": "rampline-jumpstone-en-27",
+      "product_id": "prod_01KRQPQRWMXGTM9MBTY6X7CBWT",
+      "variant_id": "variant_01KRQPQRYSCQ6KZA27HD8KN6CF",
+      "sku": "JS27",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 7328149
+        },
+        {
+          "currency_code": "usd",
+          "amount": 220125
+        },
+        {
+          "currency_code": "eur",
+          "amount": 189339
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 7328149
+          },
+          8606353
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 220125
+          },
+          260426
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 189339
+          },
+          221884
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BB216R EXT",
+      "handle": "rampline-balancebuddy-en",
+      "product_id": "prod_01KNQ3PXPN3EKZBWZTHSBCSYGC",
+      "variant_id": "variant_01KRQPQTYXJA703QTWGZFSYXC4",
+      "sku": "BB216R EXT",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 12893606
+        },
+        {
+          "currency_code": "usd",
+          "amount": 387301
+        },
+        {
+          "currency_code": "eur",
+          "amount": 333135
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 12893606
+          },
+          15142562
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 387301
+          },
+          458210
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 333135
+          },
+          390396
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "RB70R",
+      "handle": "rampline-rampball-70r",
+      "product_id": "prod_01KRQPJM187TMCDY5MQSWSXVRP",
+      "variant_id": "variant_01KRQPJM3BJ6EPHGGW0GH964H3",
+      "sku": "RB70R",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 25710219
+        },
+        {
+          "currency_code": "usd",
+          "amount": 772290
+        },
+        {
+          "currency_code": "eur",
+          "amount": 664282
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 25710219
+          },
+          27554243
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 772290
+          },
+          833784
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 664282
+          },
+          710386
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "RB70R LF",
+      "handle": "rampline-rampball-70r",
+      "product_id": "prod_01KRQPJM187TMCDY5MQSWSXVRP",
+      "variant_id": "variant_01KRQPJM3BQNPGGXBV4WBXZ4R8",
+      "sku": "RB70R LF",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 27523214
+        },
+        {
+          "currency_code": "usd",
+          "amount": 826749
+        },
+        {
+          "currency_code": "eur",
+          "amount": 711124
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 27523214
+          },
+          29497273
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 826749
+          },
+          892580
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 711124
+          },
+          760480
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "JS50 G",
+      "handle": "rampline-jumpstone-en-50",
+      "product_id": "prod_01KRQPQS5JYE68E75780CN350K",
+      "variant_id": "variant_01KRQPQS7G03WA6TTK81YR4CHA",
+      "sku": "JS50 G",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 11901877
+        },
+        {
+          "currency_code": "usd",
+          "amount": 357511
+        },
+        {
+          "currency_code": "eur",
+          "amount": 307512
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 11901877
+          },
+          13977852
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 357511
+          },
+          422966
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 307512
+          },
+          360368
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 22",
+      "handle": "rampline-crouching-tiger",
+      "product_id": "prod_01KNQ3Q5JDPYAN021MQRWYK3RC",
+      "variant_id": "variant_01KRQPXEC4N05BT3EBY1PAMKG4",
+      "sku": "BP 22",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 189969293
+        },
+        {
+          "currency_code": "usd",
+          "amount": 5706343
+        },
+        {
+          "currency_code": "eur",
+          "amount": 4908285
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 189969293
+          },
+          189553537
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 5706343
+          },
+          5735843
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 4908285
+          },
+          4886950
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 08 LF",
+      "handle": "rampline-the-floor-is-lava",
+      "product_id": "prod_01KNQ3Q0W4M5BR27MG9XDWS0KF",
+      "variant_id": "variant_01KRQPX6SP3M8EXHP441MBHBT0",
+      "sku": "BP 08 LF",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 323109671
+        },
+        {
+          "currency_code": "usd",
+          "amount": 9705645
+        },
+        {
+          "currency_code": "eur",
+          "amount": 8348267
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 323109671
+          },
+          322402533
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 9705645
+          },
+          9755820
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 8348267
+          },
+          8311979
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 19 AG",
+      "handle": "rampline-classic-jump",
+      "product_id": "prod_01KNQ3Q64WYH74RJZDYCXP62EN",
+      "variant_id": "variant_01KRQPXCQXCFRDF4CRSC2PDRZA",
+      "sku": "BP 19 AG",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 132010909
+        },
+        {
+          "currency_code": "usd",
+          "amount": 3965375
+        },
+        {
+          "currency_code": "eur",
+          "amount": 3410800
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 132010909
+          },
+          131721998
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 3965375
+          },
+          3985875
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 3410800
+          },
+          3395973
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 27",
+      "handle": "rampline-pulse-zone",
+      "product_id": "prod_01KNQ3Q1PYKXNZA7PGM9VVKMKR",
+      "variant_id": "variant_01KRQPXH3AB6P25JTFV3Y1E6Z8",
+      "sku": "BP 27",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 192595800
+        },
+        {
+          "currency_code": "usd",
+          "amount": 5785239
+        },
+        {
+          "currency_code": "eur",
+          "amount": 4976147
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 192595800
+          },
+          192174295
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 5785239
+          },
+          5815146
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 4976147
+          },
+          4954516
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 24 LF",
+      "handle": "rampline-cliffhanger",
+      "product_id": "prod_01KNQ3Q5VECVNKD1ECW13MZQNX",
+      "variant_id": "variant_01KRQPXFFDCHCPGGKBAG9MPYRS",
+      "sku": "BP 24 LF",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 483644579
+        },
+        {
+          "currency_code": "usd",
+          "amount": 14527831
+        },
+        {
+          "currency_code": "eur",
+          "amount": 12496049
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 483644579
+          },
+          482586102
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 14527831
+          },
+          14602935
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 12496049
+          },
+          12441730
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 34 AG",
+      "handle": "rampline-flex-forest",
+      "product_id": "prod_01KNQ3QBRC24H8WPRX4G80YMZG",
+      "variant_id": "variant_01KRQPXP157YGHEXACECF0BGPT",
+      "sku": "BP 34 AG",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 326838059
+        },
+        {
+          "currency_code": "usd",
+          "amount": 9817640
+        },
+        {
+          "currency_code": "eur",
+          "amount": 8444599
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 326838059
+          },
+          326122762
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 9817640
+          },
+          9868393
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 8444599
+          },
+          8407891
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 10 AG",
+      "handle": "rampline-dont-step-into-the-water",
+      "product_id": "prod_01KNQ3Q07FQE5F0EDK26ATYX6X",
+      "variant_id": "variant_01KRQPX7X2M0AP52KVCXZFF41Q",
+      "sku": "BP 10 AG",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 94856851
+        },
+        {
+          "currency_code": "usd",
+          "amount": 2849333
+        },
+        {
+          "currency_code": "eur",
+          "amount": 2450841
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 94856851
+          },
+          94649253
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 2849333
+          },
+          2864063
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 2450841
+          },
+          2440187
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BB216R",
+      "handle": "rampline-balancebuddy-en",
+      "product_id": "prod_01KNQ3PXPN3EKZBWZTHSBCSYGC",
+      "variant_id": "variant_01KRQPQTRYP5VC5PZJV48JDNCE",
+      "sku": "BB216R",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 11755463
+        },
+        {
+          "currency_code": "usd",
+          "amount": 353113
+        },
+        {
+          "currency_code": "eur",
+          "amount": 303729
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 11755463
+          },
+          13805900
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 353113
+          },
+          417763
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 303729
+          },
+          355935
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 27 AG",
+      "handle": "rampline-pulse-zone",
+      "product_id": "prod_01KNQ3Q1PYKXNZA7PGM9VVKMKR",
+      "variant_id": "variant_01KRQPXHERCRW601398MVPSX3C",
+      "sku": "BP 27 AG",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 197649204
+        },
+        {
+          "currency_code": "usd",
+          "amount": 5937034
+        },
+        {
+          "currency_code": "eur",
+          "amount": 5106713
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 197649204
+          },
+          197216642
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 5937034
+          },
+          5967726
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 5106713
+          },
+          5084515
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 21 LF",
+      "handle": "rampline-fearless",
+      "product_id": "prod_01KNQ3Q4P0M2GMX702R4NFH653",
+      "variant_id": "variant_01KRQPXDN05BM4DN7DNNK2Z276",
+      "sku": "BP 21 LF",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 309672059
+        },
+        {
+          "currency_code": "usd",
+          "amount": 9302003
+        },
+        {
+          "currency_code": "eur",
+          "amount": 8001076
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 309672059
+          },
+          308994328
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 9302003
+          },
+          9350091
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 8001076
+          },
+          7966297
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BB316R",
+      "handle": "rampline-balancebuddy-en",
+      "product_id": "prod_01KNQ3PXPN3EKZBWZTHSBCSYGC",
+      "variant_id": "variant_01KRQPQVBXMF2KYKYDQ9EMG865",
+      "sku": "BB316R",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 15424971
+        },
+        {
+          "currency_code": "usd",
+          "amount": 463339
+        },
+        {
+          "currency_code": "eur",
+          "amount": 398539
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 15424971
+          },
+          18115457
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 463339
+          },
+          548169
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 398539
+          },
+          467041
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 24 AG",
+      "handle": "rampline-cliffhanger",
+      "product_id": "prod_01KNQ3Q5VECVNKD1ECW13MZQNX",
+      "variant_id": "variant_01KRQPXFMWTHJ6X66EX6JDXC66",
+      "sku": "BP 24 AG",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 460205633
+        },
+        {
+          "currency_code": "usd",
+          "amount": 13823767
+        },
+        {
+          "currency_code": "eur",
+          "amount": 11890451
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 460205633
+          },
+          459198453
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 13823767
+          },
+          13895230
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 11890451
+          },
+          11838765
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 18",
+      "handle": "rampline-never-stop-playing",
+      "product_id": "prod_01KNQ3Q2BG3AANSC8F1WBB7730",
+      "variant_id": "variant_01KRQPXBHAK9B5MS6P4FKCNGDX",
+      "sku": "BP 18",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 346350634
+        },
+        {
+          "currency_code": "usd",
+          "amount": 10403763
+        },
+        {
+          "currency_code": "eur",
+          "amount": 8948750
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 346350634
+          },
+          345592633
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 10403763
+          },
+          10457547
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 8948750
+          },
+          8909851
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "4561 EXT 1002",
+      "handle": "rampline-rampit-hopper",
+      "product_id": "prod_01KNQ3PZ1VEKPD1WTK83PHRG2D",
+      "variant_id": "variant_01KRQPR201QNP9SC8CBJ1VJAJW",
+      "sku": "4561 EXT 1002",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 4108893
+        },
+        {
+          "currency_code": "usd",
+          "amount": 123424
+        },
+        {
+          "currency_code": "eur",
+          "amount": 106163
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 4108893
+          },
+          4825583
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 123424
+          },
+          146021
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 106163
+          },
+          124410
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "RB50 AG",
+      "handle": "rampline-rampball-50",
+      "product_id": "prod_01KRQPJK5YY06TWJC126KGX571",
+      "variant_id": "variant_01KRQPJK8RT1QFT0FGWH6PMBRX",
+      "sku": "RB50 AG",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 15609133
+        },
+        {
+          "currency_code": "usd",
+          "amount": 468871
+        },
+        {
+          "currency_code": "eur",
+          "amount": 403297
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 15609133
+          },
+          18331742
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 468871
+          },
+          554714
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 403297
+          },
+          472617
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 31 AG",
+      "handle": "rampline-defying-gravity",
+      "product_id": "prod_01KNQ3Q58098ZYQXR2YK3YZJVQ",
+      "variant_id": "variant_01KRQPXKAA25R90VC1SC0JB53C",
+      "sku": "BP 31 AG",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 237806259
+        },
+        {
+          "currency_code": "usd",
+          "amount": 7143281
+        },
+        {
+          "currency_code": "eur",
+          "amount": 6144261
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 237806259
+          },
+          237285810
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 7143281
+          },
+          7180209
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 6144261
+          },
+          6117553
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 05",
+      "handle": "rampline-monkey-business",
+      "product_id": "prod_01KNQ3Q2N1MDM04CGMBKW2QMYD",
+      "variant_id": "variant_01KRQPX4S80D0E3NH83RG575GZ",
+      "sku": "BP 05",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 129428220
+        },
+        {
+          "currency_code": "usd",
+          "amount": 3887796
+        },
+        {
+          "currency_code": "eur",
+          "amount": 3344070
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 129428220
+          },
+          129144960
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 3887796
+          },
+          3907894
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 3344070
+          },
+          3329534
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 25 AG",
+      "handle": "rampline-take-5",
+      "product_id": "prod_01KNQ3Q1AXR41GNYBKKXHQG3DK",
+      "variant_id": "variant_01KRQPXGHNBPJEHKFBRNJQ2VME",
+      "sku": "BP 25 AG",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 187251910
+        },
+        {
+          "currency_code": "usd",
+          "amount": 5624718
+        },
+        {
+          "currency_code": "eur",
+          "amount": 4838076
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 187251910
+          },
+          186842102
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 5624718
+          },
+          5653795
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 4838076
+          },
+          4817045
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 15 AG",
+      "handle": "rampline-marathon-play",
+      "product_id": "prod_01KNQ3Q2YFDAP3PG22VKM99G4P",
+      "variant_id": "variant_01KRQPXA0KCBV3KVB0PNKAD76J",
+      "sku": "BP 15 AG",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 948812739
+        },
+        {
+          "currency_code": "usd",
+          "amount": 28500664
+        },
+        {
+          "currency_code": "eur",
+          "amount": 24514718
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 948812739
+          },
+          946736223
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 28500664
+          },
+          28648001
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 24514718
+          },
+          24408156
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 05 AG",
+      "handle": "rampline-monkey-business",
+      "product_id": "prod_01KNQ3Q2N1MDM04CGMBKW2QMYD",
+      "variant_id": "variant_01KRQPX546RKJQRFHY8P2M0XPT",
+      "sku": "BP 05 AG",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 129428220
+        },
+        {
+          "currency_code": "usd",
+          "amount": 3887796
+        },
+        {
+          "currency_code": "eur",
+          "amount": 3344070
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 129428220
+          },
+          129144960
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 3887796
+          },
+          3907894
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 3344070
+          },
+          3329534
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 21",
+      "handle": "rampline-fearless",
+      "product_id": "prod_01KNQ3Q4P0M2GMX702R4NFH653",
+      "variant_id": "variant_01KRQPXDFRZ968TY1AD3Z359CK",
+      "sku": "BP 21",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 284776649
+        },
+        {
+          "currency_code": "usd",
+          "amount": 8554189
+        },
+        {
+          "currency_code": "eur",
+          "amount": 7357847
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 284776649
+          },
+          284153403
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 8554189
+          },
+          8598411
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 7357847
+          },
+          7325864
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 27 LF",
+      "handle": "rampline-pulse-zone",
+      "product_id": "prod_01KNQ3Q1PYKXNZA7PGM9VVKMKR",
+      "variant_id": "variant_01KRQPXH959K3B8AQ5NDTF03JN",
+      "sku": "BP 27 LF",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 211878746
+        },
+        {
+          "currency_code": "usd",
+          "amount": 6364464
+        },
+        {
+          "currency_code": "eur",
+          "amount": 5474365
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 211878746
+          },
+          211415042
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 6364464
+          },
+          6397366
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 5474365
+          },
+          5450569
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "RB50R G",
+      "handle": "rampline-rampball-50r",
+      "product_id": "prod_01KRQPJKKCT4VB1G929MXXS2BA",
+      "variant_id": "variant_01KRQPJKP6NE6X53SSFXWJTE60",
+      "sku": "RB50R G",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 20184900
+        },
+        {
+          "currency_code": "usd",
+          "amount": 606319
+        },
+        {
+          "currency_code": "eur",
+          "amount": 521522
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 20184900
+          },
+          21632632
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 606319
+          },
+          654598
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 521522
+          },
+          557719
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "RL410 EXT",
+      "handle": "rampline-rampline-slackline",
+      "product_id": "prod_01KNQ3PYP224DRZPM2Y893RDTC",
+      "variant_id": "variant_01KRQPQ1D6K9X3G203YYN0SDS6",
+      "sku": "RL410 EXT",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 24656616
+        },
+        {
+          "currency_code": "usd",
+          "amount": 740641
+        },
+        {
+          "currency_code": "eur",
+          "amount": 637059
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 24656616
+          },
+          26425072
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 740641
+          },
+          799616
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 637059
+          },
+          681275
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "4561 1002",
+      "handle": "rampline-rampit-hopper",
+      "product_id": "prod_01KNQ3PZ1VEKPD1WTK83PHRG2D",
+      "variant_id": "variant_01KRQPR0WTDT0P1RHQ709NXNXW",
+      "sku": "4561 1002",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 3630830
+        },
+        {
+          "currency_code": "usd",
+          "amount": 109064
+        },
+        {
+          "currency_code": "eur",
+          "amount": 93811
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 3630830
+          },
+          4264135
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 109064
+          },
+          129032
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 93811
+          },
+          109935
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 08",
+      "handle": "rampline-the-floor-is-lava",
+      "product_id": "prod_01KNQ3Q0W4M5BR27MG9XDWS0KF",
+      "variant_id": "variant_01KRQPX6M5VESX8KGRSHMZPRAP",
+      "sku": "BP 08",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 284345794
+        },
+        {
+          "currency_code": "usd",
+          "amount": 8541247
+        },
+        {
+          "currency_code": "eur",
+          "amount": 7346715
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 284345794
+          },
+          283723492
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 8541247
+          },
+          8585402
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 7346715
+          },
+          7314780
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "RB50",
+      "handle": "rampline-rampball-50",
+      "product_id": "prod_01KRQPJK5YY06TWJC126KGX571",
+      "variant_id": "variant_01KRQPJK8RNTQRBYDEGTRVZYM9",
+      "sku": "RB50",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 14931967
+        },
+        {
+          "currency_code": "usd",
+          "amount": 448530
+        },
+        {
+          "currency_code": "eur",
+          "amount": 385801
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 14931967
+          },
+          17536462
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 448530
+          },
+          530649
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 385801
+          },
+          452114
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "FB33",
+      "handle": "rampline-floating-bench",
+      "product_id": "prod_01KNQ3PYBRMC0ET0BRFTRCZS82",
+      "variant_id": "variant_01KRQPX14KVC3ZHZ4QPCHFE4TY",
+      "sku": "FB33",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 10057564
+        },
+        {
+          "currency_code": "usd",
+          "amount": 302112
+        },
+        {
+          "currency_code": "eur",
+          "amount": 259860
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 10057564
+          },
+          11811847
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 302112
+          },
+          357424
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 259860
+          },
+          304526
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "JS27 AG",
+      "handle": "rampline-jumpstone-en-27",
+      "product_id": "prod_01KRQPQRWMXGTM9MBTY6X7CBWT",
+      "variant_id": "variant_01KRQPQRYTPCRMY8H714Y5WFW5",
+      "sku": "JS27 AG",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 8005314
+        },
+        {
+          "currency_code": "usd",
+          "amount": 240466
+        },
+        {
+          "currency_code": "eur",
+          "amount": 206835
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 8005314
+          },
+          9401633
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 240466
+          },
+          284491
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 206835
+          },
+          242387
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "BP 15 LF",
+      "handle": "rampline-marathon-play",
+      "product_id": "prod_01KNQ3Q2YFDAP3PG22VKM99G4P",
+      "variant_id": "variant_01KRQPX9TV3ZS2P4VWN31BBT7M",
+      "sku": "BP 15 LF",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 973178304
+        },
+        {
+          "currency_code": "usd",
+          "amount": 29232562
+        },
+        {
+          "currency_code": "eur",
+          "amount": 25144257
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 973178304
+          },
+          971048463
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 29232562
+          },
+          29383683
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 25144257
+          },
+          25034959
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "4551 EXT",
+      "handle": "rampline-rampit-swing",
+      "product_id": "prod_01KNQ3PWVYRPJSVT7YGTXFXF4T",
+      "variant_id": "variant_01KRQPQZ0SHCFGSM8ZMHYYMVYX",
+      "sku": "4551 EXT",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 19924200
+        },
+        {
+          "currency_code": "usd",
+          "amount": 598488
+        },
+        {
+          "currency_code": "eur",
+          "amount": 514787
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 19924200
+          },
+          21353230
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 598488
+          },
+          646143
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 514787
+          },
+          550515
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "JS27 G",
+      "handle": "rampline-jumpstone-en-27",
+      "product_id": "prod_01KRQPQRWMXGTM9MBTY6X7CBWT",
+      "variant_id": "variant_01KRQPQRYTDAWNM6NC994BEQDD",
+      "sku": "JS27 G",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 9153751
+        },
+        {
+          "currency_code": "usd",
+          "amount": 274963
+        },
+        {
+          "currency_code": "eur",
+          "amount": 236508
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 9153751
+          },
+          10750385
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 274963
+          },
+          325304
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 236508
+          },
+          277160
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "4556 9001",
+      "handle": "rampline-rampit-storm-en",
+      "product_id": "prod_01KNQ3PY0DJKE37NSSN1D8SDP2",
+      "variant_id": "variant_01KRQPWZFMNM1H494CW43HDAS9",
+      "sku": "4556 9001",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 21762751
+        },
+        {
+          "currency_code": "usd",
+          "amount": 653715
+        },
+        {
+          "currency_code": "eur",
+          "amount": 562290
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 21762751
+          },
+          23323652
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 653715
+          },
+          705768
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 562290
+          },
+          601316
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "JS5 G",
+      "handle": "rampline-jumpstone-en-5",
+      "product_id": "prod_01KRQPQSNT106QGFDHRE3MRQZ1",
+      "variant_id": "variant_01KRQPQSQJ8Z1J02KS1BZDPAC1",
+      "sku": "JS5 G",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 35637957
+        },
+        {
+          "currency_code": "usd",
+          "amount": 1070501
+        },
+        {
+          "currency_code": "eur",
+          "amount": 920787
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 35637957
+          },
+          38194032
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 1070501
+          },
+          1155742
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 920787
+          },
+          984694
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "FB33-2",
+      "handle": "rampline-floating-bench",
+      "product_id": "prod_01KNQ3PYBRMC0ET0BRFTRCZS82",
+      "variant_id": "variant_01KRQPX1R8FSEGHP10KH025Y62",
+      "sku": "FB33-2",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 17001049
+        },
+        {
+          "currency_code": "usd",
+          "amount": 510682
+        },
+        {
+          "currency_code": "eur",
+          "amount": 439260
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 17001049
+          },
+          19966442
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 510682
+          },
+          604180
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 439260
+          },
+          514762
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "JS5 LF",
+      "handle": "rampline-jumpstone-en-5",
+      "product_id": "prod_01KRQPQSNT106QGFDHRE3MRQZ1",
+      "variant_id": "variant_01KRQPQSQJ2GQP9QAK4P8AVYVM",
+      "sku": "JS5 LF",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 35637957
+        },
+        {
+          "currency_code": "usd",
+          "amount": 1070501
+        },
+        {
+          "currency_code": "eur",
+          "amount": 920787
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 35637957
+          },
+          38194032
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 1070501
+          },
+          1155742
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 920787
+          },
+          984694
+        ]
+      ]
+    },
+    {
+      "op": "SET_VARIANT_PRICES",
+      "article_code": "JS50 LF",
+      "handle": "rampline-jumpstone-en-50",
+      "product_id": "prod_01KRQPQS5JYE68E75780CN350K",
+      "variant_id": "variant_01KRQPQS7GZQY2SQNHB9V5FHJ1",
+      "sku": "JS50 LF",
+      "target_prices": [
+        {
+          "currency_code": "thb",
+          "amount": 11901877
+        },
+        {
+          "currency_code": "usd",
+          "amount": 357511
+        },
+        {
+          "currency_code": "eur",
+          "amount": 307512
+        }
+      ],
+      "changes": [
+        [
+          "update",
+          {
+            "currency_code": "thb",
+            "amount": 11901877
+          },
+          13977852
+        ],
+        [
+          "update",
+          {
+            "currency_code": "usd",
+            "amount": 357511
+          },
+          422966
+        ],
+        [
+          "update",
+          {
+            "currency_code": "eur",
+            "amount": 307512
+          },
+          360368
+        ]
+      ]
+    }
+  ]
+}

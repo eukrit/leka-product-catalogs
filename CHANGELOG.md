@@ -2,6 +2,71 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.22.2] - 2026-05-16
+
+### Changed — Re-priced Rampline at v2.20.1 pricing constants (30% GM, 7% VAT)
+
+Re-ran the landed-cost + retail pipeline against the Rampline-specific
+constants (`GROSS_MARGIN=0.30`, `DUTY_RATE_NON_CHINA=0.10`,
+`THAI_VAT_RATE=0.07`) introduced in v2.20.1, refreshed the Firestore
+audit doc, and pushed the new prices to all 127 Medusa variants on
+the Rampline sales channel.
+
+Also flipped the 8 new Rampball/Jumpstone size sub-products
+`draft → published` so they're now visible on the storefront.
+
+#### Pricing-config note
+
+Firestore `pricing_config/canonical` is not yet seeded — the run used
+`PRICING_CONFIG_DISABLE=1` to skip the live cfg lookup and resolve to
+the module-level fallbacks in
+`rampline-catalog/import_pricelist.py` and
+`shared/landed_pricing.py`. Once `scripts/seed_pricing_config.py`
+populates the Firestore doc, this caveat goes away and the import
+script reads the cfg automatically.
+
+#### Price delta vs v2.22.1
+
+Net effect of 0.40 → 0.30 GM (plus today's FX): roughly
+**-15 % on retail across the board**, modulated by minor
+NOK→EUR drift (0.09277 → 0.09236 today).
+
+| SKU | Family | THB v2.22.1 | THB v2.22.2 | Δ |
+|---|---|---:|---:|---:|
+| `RB35` | Rampball 35 (wet pour) | 133,471 | **113,648** | -14.85 % |
+| `SD 02` | ShockDeck U-piece | 786 | **669** | -14.89 % |
+| `BP 15 LF` | Marathon Play (loose fills) | 9,710,485 | **9,731,783** | +0.22 % (FX drift > GM cut for clamped tiers) |
+
+#### Status changes
+
+| Handle | Before | After |
+|---|---|---|
+| `rampline-rampball-{35,50,50r,70r}` | draft | **published** |
+| `rampline-jumpstone-en-{27,50,3,5}` | draft | **published** |
+
+#### Verification
+
+```
+Audit doc: vendors/rampline/pricelists/2026-05-13
+  calculated_at: 2026-05-16T08:46:12  (refreshed)
+  gross_margin: 0.30
+  row_count: 127
+
+sync_variant_prices.py --apply
+  SET_VARIANT_PRICES: 127
+  errors: 0
+  unmatched audit codes: 0
+
+8 sub-products status flipped draft → published, 0 NOT FOUND
+```
+
+#### Files
+
+- REGENERATED: `rampline-catalog/data/pricelist_2026-05-13_landed.csv`
+  (overwritten with 30 % GM numbers).
+- NEW: `rampline-catalog/data/build_runs/prices_dryrun_2026-05-16T08-47-52Z.json`,
+  `prices_applied_2026-05-16T08-48-43Z.json`.
+
 ## [2.22.1] - 2026-05-16
 
 ### Added — Rampline variant prices pushed to Medusa (THB / USD / EUR)
