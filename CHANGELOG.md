@@ -2,6 +2,45 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.23.2] - 2026-05-16
+
+### Added — Playwright fallback for Rampline image enrichment
+
+Follows v2.23.1. The static crawl missed product photos on 11 PDPs
+because rampline.com lazy-loads its 360 viewer / gallery images via JS,
+and those URLs (`rampline.com/wp-content/uploads/360-uploads/...`) never
+appeared in the static HTML. The carousel-only candidates were correctly
+filtered out as sibling products, leaving those 11 with 0 images.
+
+New `rampline-catalog/enrich_images_playwright.py`:
+- Opens each target product page in headless Chromium
+  (`wait_until="domcontentloaded"` + best-effort `networkidle` 20 s) and
+  scrolls 4× to trigger lazy-load.
+- Reads `document.querySelectorAll('img')` → `src` + `currentSrc` +
+  `srcset` after JS hydration.
+- Whitelist: `rampline.imgix.net` + `rampline.com/wp-content/uploads/`.
+  Same name-token filter as v2.23.1 keeps sibling-carousel images out.
+- PATCHes Medusa product with new images + thumbnail (when missing).
+
+### Run results (2026-05-16)
+
+| Stage | Counts |
+|---|---|
+| Dry-run | 11 ADD_IMAGES, 1 image each |
+| Apply | **11 ADD_IMAGES applied · 11 thumbnails set · 0 errors** |
+
+Products enriched (all picked up the rampline.com 360-viewer reference image):
+`rampline-take-5`, `rampline-monkey-business`, `rampline-junior-power-ii`,
+`rampline-junior-power`, `rampline-jane-jump`, `rampline-hunting-high-and-low`,
+`rampline-fearless`, `rampline-fast-and-curious`, `rampline-crouching-tiger`,
+`rampline-cliffhanger`, `rampline-classic-jump`.
+
+Combined post-v2.23 totals: 28 Rampline products now have crawl-derived
+images on Medusa (3 from v2.23.1 static crawl + 11 from v2.23.2 Playwright +
+14 already had images from earlier work). The remaining 34 Medusa-only
+products (Rampit, BalanceBuddy, Jumpstone, …) have no rampline.com
+counterpart so they still need manual or pricelist-supplied artwork.
+
 ## [2.23.1] - 2026-05-16
 
 ### Added — Rampline image enrichment from website crawl
