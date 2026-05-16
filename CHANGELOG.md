@@ -2,6 +2,116 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.21.0] - 2026-05-16
+
+### Added — Cost cascade dashboard with TH/SG destination pricing
+
+The pricing-config editor at `/forms/pricing-config` now shows the full
+FOB → Landed → Retail cascade for one product per logistics tier per
+brand, live FX, and side-by-side TH-VAT-inclusive vs SG-via-Nubo
+retail prices. Schema additions are backward-compatible.
+
+#### New global config fields
+- `th_customer_vat_rate` (default `0.07`) — added to retail base for
+  TH-destination sales. The import 7% VAT inside `landed_thb` remains;
+  this is an additional sales VAT charged to the customer.
+- `sg_customer_gst_rate` (default `0.09`) — applied on SG-destination
+  retail **only when** `sg_nubo_gst_registered` is true.
+- `sg_nubo_gst_registered` (default `false`) — checkbox. Nubo is not
+  yet GST-registered in Singapore; the dashboard ships with this off
+  so SG retail is GST-free until that registration completes.
+
+#### New per-brand config fields
+- `source_pricelist_url` — file path or URL for the EXW/FOB pricelist.
+  Defaults:
+  - `vinci`: 2026-05-11 xlsx in Eukrit's Drive (Partners Playground/…)
+  - `berliner`: `berliner-catalog/data/pricelist_2026-01-01.csv`
+  - `rampline`: Rampline 2025 NOK pricelist (Google Drive)
+  - `wisdom`: `wisdom-catalog/data/` (Excel catalogs)
+- `source_pricelist_label` — display name for the link in the UI.
+
+#### Live cost cascade
+- `GET /api/pricing-context` — new endpoint returning:
+  - `fx`: live USD/EUR/SGD vs THB from frankfurter.app (ECB-backed,
+    no key), cached 1h server-side, with hardcoded fallback if the
+    feed fails.
+  - `brands`: for each brand, 1 example product per logistics tier
+    (4 examples × 4 brands = 16). For Vinci/Berliner, examples come
+    from `vendors/<brand>/products` with stored pricing. For Rampline,
+    from `vendors/rampline/pricelists/<date>` variants. For Wisdom,
+    from per-product fob_usd. Cascade recomputed against current
+    Firestore config so config changes flow through.
+- Each cascade row shows: source FOB (native ccy), THB FOB, logistics
+  uplift, duty, import VAT, landed, retail-pre-tax (÷ (1 − GM)),
+  retail TH (VAT-inclusive), retail SG (SGD).
+
+#### UI
+- `docs/forms/pricing-config.html` — major rewrite:
+  - Live FX strip in the header (USD/EUR/SGD per THB).
+  - All rate fields now display as **percentages** (`7`, not `0.07`),
+    stored as decimals.
+  - New "Cost cascade — live examples" card under the config form,
+    one table per brand.
+  - New "Source pricelist" URL + label per brand (clickable; flagged
+    if the value is a local Windows path the browser can't open).
+  - "Refresh FX + examples" button.
+  - Inline formula card explaining the math.
+- `src/main.py` VERSION `0.6.1` → `0.7.1`.
+
+#### Formula recap (visible in the dashboard)
+
+```
+landed_thb         = (FOB × EUR/THB × unmatched_landed_uplift)
+                   + (CIF × duty_rate)
+                   + ((CIF + duty) × thai_vat_rate)
+retail_pre_tax_thb = landed_thb / (1 − gross_margin)
+retail_th_thb      = retail_pre_tax_thb × (1 + th_customer_vat_rate)
+retail_sg_thb      = retail_pre_tax_thb × (1 + sg_customer_gst_rate)   (if Nubo GST-registered)
+                   = retail_pre_tax_thb                                 (otherwise)
+retail_sg_sgd      = retail_sg_thb / (THB/SGD)
+```
+
+Wisdom (China-origin) skips the EU-logistics uplift + tier clamp; uses
+`brands.wisdom.import_duty_rate` instead of `global.duty_rate_non_china`.
+
+#### Build sequence
+1. `a7a41738` SUCCESS (2m1s) — v0.7.0 first cut. Rampline examples
+   came back empty.
+2. *(diagnosed)* — variant key was `article_code`, not `article`;
+   `eur_fob` was pre-computed (no NOK→EUR multiply needed).
+3. `bwp6k17ne` — fixed variant field names. Rampline still 0 — caused
+   by `order_by("__name__")` returning empty on the named DB.
+4. v0.7.1 — switched to `stream() + Python sort by doc id`. All four
+   brands now return 4 examples.
+
+#### Smoke output (2026-05-16, live FX EUR=37.99 SGD=25.52 USD=32.67)
+
+```
+berliner | tier0 (EUR ≤ 500)  | EUR 163   → landed ฿9,487   → retail_TH ฿13,535  → retail_SG SGD 496
+berliner | tier3 (EUR > 10k)  | EUR 10117 → landed ฿519,137 → retail_TH ฿740,635 → retail_SG SGD 27,120
+vinci    | tier0              | EUR 116   → landed ฿7,933   → retail_TH ฿13,059  → retail_SG SGD 478
+vinci    | tier3              | EUR 10184 → landed ฿614,812 → retail_TH ฿1.01M   → retail_SG SGD 37,059
+rampline | tier0              | NOK 73    → landed ฿462     → retail_TH ฿706     → retail_SG SGD 26
+rampline | tier3              | NOK 113833 → landed ฿637,529 → retail_TH ฿974,508 → retail_SG SGD 35,683
+wisdom   | tier0              | USD 3     → landed ฿120     → retail_TH ฿257     → retail_SG SGD 9
+wisdom   | tier3              | USD 11640 → landed ฿435,382 → retail_TH ฿931,717 → retail_SG SGD 34,117
+```
+
+#### Notes for the user to verify
+- The 7% Thai customer VAT is **stacked on top** of the import VAT
+  (per your direction). If the convention is actually that retail
+  already absorbs the import VAT and only the 7% customer VAT is
+  shown to the buyer, set `th_customer_vat_rate = 0` and the formula
+  collapses to `retail_th = retail_pre_tax`.
+- Nubo SG GST: dashboard ships with the flag OFF. Flip when Nubo is
+  registered and the 9% multiplier kicks in automatically.
+- Source pricelist links: Vinci's default is a local Windows path that
+  browsers can't open. Replace with the Drive share URL once you have
+  it (the field is right above the link).
+- Wisdom values look low because `wisdom-b2-2255` has a `fob_usd` of
+  $3 — that's likely a SKU with a misparsed unit price (catalog default
+  is per-piece, not per-pack). Catalog data, not formula bug.
+
 ## [2.20.3] - 2026-05-16
 
 ### Fixed — pricing-config form Load failed HTTP 404
