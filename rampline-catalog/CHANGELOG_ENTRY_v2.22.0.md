@@ -1,12 +1,16 @@
-# CHANGELOG entry for v2.21.0 (Rampline variant migration)
+# CHANGELOG entry for v2.22.0 (Rampline variant migration)
 
-Pre-existing merge conflict in `CHANGELOG.md` (lines 5–309, `Updated upstream`
-vs `Stashed changes`) prevented inserting this directly. Resolve the conflict,
-then paste this block immediately under the `# Changelog` / intro header.
+Originally drafted as v2.21.0; bumped to v2.22.0 after rebase because
+`871b480 feat(pricing-config): cost cascade dashboard + TH/SG pricing
+(v2.21.0)` claimed the v2.21.0 slot on `origin/main`.
+
+This entry has been folded into `CHANGELOG.md` as part of the same
+commit that bumps `VERSION` 2.21.0 → 2.22.0. Kept here for traceability
+of the Rampline-variant-only delta.
 
 ---
 
-## [2.21.0] - 2026-05-16
+## [2.22.0] - 2026-05-16
 
 ### Added — Rampline pricelist → Medusa variants
 

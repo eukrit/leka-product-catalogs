@@ -2,6 +2,91 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.22.0] - 2026-05-16
+
+### Added — Rampline pricelist → Medusa variants
+
+127 article codes from the 2025 NOK pricelist now live as Medusa
+variants across 40 Rampline sub-products. Default placeholder variants
+(keyed on the WooCommerce post IDs from the original `rampline.com`
+scrape) are removed from every product that received real variants.
+
+#### Structure (per user decision 2026-05-16)
+
+- **Size-as-product** for clean Size × Surface families:
+  - `rampline-rampball` → 4 new size sub-products `-35`, `-50`, `-50r`,
+    `-70r` (4 surface variants each = 16 variants).
+  - `rampline-jumpstone-en` → 4 new size sub-products `-27`, `-50`,
+    `-3`, `-5` (4 surface variants each = 16 variants).
+- **Single-product-with-options** for multi-axis / service families
+  (`balancebuddy-en`, `balancebuddy-wave`, `fungi-eng`, `rampit`,
+  `rampit-hopper`, `rampit-swing`, `rampit-storm-en`, `rampbow`,
+  `rampline-slackline`, `floating-bench`, `shockdeck`). Axes per
+  family: Length × Style, Surface, Size, Component × Surface, Type, or
+  synthetic Type (Medusa v2 forbids option-less products).
+- **Group B park bundles** — each of 21 SHOCKDECK-priced parks
+  (Kangaroo, Marathon Play, …) gains 3-surface variants on top of the
+  existing product.
+
+#### Counts
+
+- Products: 54 → **62** (8 new Rampball/Jumpstone size sub-products,
+  `status=draft`).
+- Variants: **149** total (127 from pricelist + 22 untouched
+  placeholders on legacy parks / unpriced equipment / family parents).
+- Cleanup: 24 placeholder defaults deleted, 25 "Default" options
+  removed.
+- Reconciliation: 0 pricelist SKUs missing, 0 unexpected real SKUs.
+
+#### Out of scope (intentional)
+
+- 17 legacy parks not in the 2025 pricelist (ABILITY, AGILE, BOUNCE,
+  …, TWIST) — pre-2025 lineup, kept as-is.
+- 3 unpriced equipment products (Spare parts ×2, Playground Loop
+  trampoline) — kept as-is.
+- Variants carry full audit `metadata` (`article_code`, `family`,
+  `family_discount`, `net_nok`, `recommended_nok`, `description`,
+  `pricelist_date`, `source`) but **no prices** — pricing handled
+  separately via the Firestore-backed pricing-config flow (v2.20.1) +
+  a follow-up sync script.
+
+#### Files
+
+- NEW: `rampline-catalog/build_variants.py` (Medusa write script,
+  `--dry-run` / `--apply` / `--limit-family`).
+- NEW: `rampline-catalog/data/mapping/generate_mapping_drafts.py`
+  (parser + scaffold generator).
+- NEW: `rampline-catalog/data/mapping/family_mapping_draft.csv`
+  (40 sub-product rows).
+- NEW: `rampline-catalog/data/mapping/variant_scaffold_draft.csv`
+  (127 article codes, full option breakdown).
+- NEW: `rampline-catalog/data/mapping/medusa_snapshot_2026-05-14.json`
+  (read-only Medusa state at planning time).
+- NEW: `rampline-catalog/data/build_runs/*.json` (dry-run + applied
+  action logs, full audit trail).
+- NEW: `docs/summaries/rampline-variants.html` (Leka-styled summary).
+
+#### Verification
+
+```
+Total Rampline products: 62  (was 54 + 8 new size sub-products)
+Total variants: 149  (127 from pricelist + 22 untouched placeholders)
+Pricelist SKUs missing from Medusa: 0
+Unexpected non-placeholder SKUs in Medusa: 0
+```
+
+#### Next
+
+- Set per-currency prices (THB/USD/EUR/NOK) on the 127 new variants
+  via a sync_vendors_to_medusa extension reading
+  `vendors/rampline/pricelists/<date>`.
+- Flip Rampball/Jumpstone size sub-products `draft` → `published`
+  once prices land.
+- Re-run the landed-cost computation against the post-v2.20.1 pricing
+  config (0.30 GM + duty/VAT layers) once Rampline cfg is locked.
+- Parse Rampline tech-sheet PDFs for per-SKU dimensions so the
+  landed-cost engine uses real CBM rather than the 35% flat uplift.
+
 ## [2.21.0] - 2026-05-16
 
 ### Added — Cost cascade dashboard with TH/SG destination pricing
