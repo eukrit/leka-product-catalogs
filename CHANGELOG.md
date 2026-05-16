@@ -2,6 +2,74 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.22.1] - 2026-05-16
+
+### Added — Rampline variant prices pushed to Medusa (THB / USD / EUR)
+
+127 / 127 Medusa variants on the Rampline sales channel now carry
+retail prices in three currencies, sourced from the
+`vendors/rampline/pricelists/2026-05-13` Firestore audit doc.
+
+#### Pipeline
+
+`rampline-catalog/sync_variant_prices.py`:
+1. Reads the audit doc via Firestore REST (uses
+   `LEKA_FIRESTORE_ACCESS_TOKEN` env or ADC fallback — no SA key on disk).
+2. Indexes Rampline variants by `metadata.article_code` (set during the
+   v2.22.0 variant creation) → falls back to `variants.sku`.
+3. For each pricelist row, computes the price delta vs current variant
+   state and emits one of `SET_VARIANT_PRICES` / `PRICES_UPTODATE`.
+4. Pushes per-variant prices via `POST /admin/products/{pid}/variants/{vid}`,
+   stamping each variant with provenance metadata
+   (`prices_synced_at`, `prices_synced_from`, `prices_formula_version`).
+5. Writes a full audit log under
+   `rampline-catalog/data/build_runs/prices_*.json`.
+
+#### Currencies + carve-outs
+
+- **Pushed**: `thb`, `usd`, `eur` (storefront-facing).
+- **Not pushed**: `nok`. Wholesale net stays in `variant.metadata.net_nok`
+  to avoid confusing customers with supplier currency.
+- 8 Rampball/Jumpstone size sub-products remain `status=draft` — flip to
+  `published` after a final sanity check.
+
+#### Caveat (intentional)
+
+Prices use the v2.19.0 formula constants from the 2026-05-13 audit doc
+(`gross_margin=0.40`, no separate Thai VAT layer). The post-v2.20.1
+pricing-config (per-brand GMs + 7% Thai VAT) supersedes this; once the
+config is locked, re-run `rampline-catalog/import_pricelist.py` to
+refresh the audit doc, then re-run `sync_variant_prices.py` — it's
+idempotent and only POSTs deltas.
+
+#### Spot-check
+
+| SKU | Family | Retail THB | Retail USD | Retail EUR |
+|---|---|---:|---:|---:|
+| RB35 | Rampball 35 (wet pour) | 133,471 | 4,039 | 3,441 |
+| SD 02 | ShockDeck U-piece | 786 | 24 | 20 |
+| BP 15 LF | Marathon Play (loose fills) | 9,710,485 | 293,837 | 250,350 |
+
+#### Verification
+
+```
+Total variants on Rampline channel: 149  (127 real + 22 placeholder)
+Variants with prices_synced_at metadata: 127
+SET_VARIANT_PRICES actions: 127
+PRICES_UPTODATE: 0
+errors: 0
+unmatched audit codes (no Medusa variant): 0
+```
+
+#### Files
+
+- NEW: `rampline-catalog/sync_variant_prices.py` (Medusa price-push
+  script with `--dry-run` / `--apply` / `--limit-family`).
+- NEW: `rampline-catalog/data/build_runs/prices_dryrun_*.json`,
+  `prices_applied_*.json` (full audit trail).
+- REGENERATED: `docs/build-summary.html`, `docs/architecture.html`,
+  `docs/hub.html` (v2.22.x pickup).
+
 ## [2.22.0] - 2026-05-16
 
 ### Added — Rampline pricelist → Medusa variants
