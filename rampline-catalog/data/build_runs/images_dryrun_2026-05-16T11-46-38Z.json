@@ -1,0 +1,197 @@
+{
+  "timestamp": "2026-05-16T11-46-38Z",
+  "dry_run": true,
+  "max_images": 8,
+  "limit_family": null,
+  "crawl_root": "C:\\Users\\eukri\\OneDrive\\Documents\\Claude Code\\vendors\\rampline-catalog",
+  "totals": {
+    "IMAGES_UPTODATE": 25,
+    "ADD_IMAGES": 3
+  },
+  "actions_count": 28,
+  "skipped_count": 0,
+  "skipped": [],
+  "errors": [],
+  "actions": [
+    {
+      "op": "IMAGES_UPTODATE",
+      "handle": "rampline-rampball",
+      "existing_count": 30,
+      "crawl_candidates": 0
+    },
+    {
+      "op": "ADD_IMAGES",
+      "handle": "rampline-floating-bench",
+      "product_id": "prod_01KNQ3PYBRMC0ET0BRFTRCZS82",
+      "existing_count": 6,
+      "new_count": 8,
+      "total_count": 14,
+      "crawl_candidates": 11,
+      "thumbnail_set": false
+    },
+    {
+      "op": "IMAGES_UPTODATE",
+      "handle": "rampline-take-5",
+      "existing_count": 0,
+      "crawl_candidates": 0
+    },
+    {
+      "op": "IMAGES_UPTODATE",
+      "handle": "rampline-monkey-business",
+      "existing_count": 0,
+      "crawl_candidates": 0
+    },
+    {
+      "op": "IMAGES_UPTODATE",
+      "handle": "rampline-junior-power-ii",
+      "existing_count": 0,
+      "crawl_candidates": 0
+    },
+    {
+      "op": "IMAGES_UPTODATE",
+      "handle": "rampline-junior-power",
+      "existing_count": 0,
+      "crawl_candidates": 0
+    },
+    {
+      "op": "IMAGES_UPTODATE",
+      "handle": "rampline-jane-jump",
+      "existing_count": 0,
+      "crawl_candidates": 0
+    },
+    {
+      "op": "IMAGES_UPTODATE",
+      "handle": "rampline-hunting-high-and-low",
+      "existing_count": 0,
+      "crawl_candidates": 0
+    },
+    {
+      "op": "IMAGES_UPTODATE",
+      "handle": "rampline-fearless",
+      "existing_count": 0,
+      "crawl_candidates": 0
+    },
+    {
+      "op": "IMAGES_UPTODATE",
+      "handle": "rampline-fast-and-curious",
+      "existing_count": 0,
+      "crawl_candidates": 0
+    },
+    {
+      "op": "IMAGES_UPTODATE",
+      "handle": "rampline-crouching-tiger",
+      "existing_count": 0,
+      "crawl_candidates": 0
+    },
+    {
+      "op": "IMAGES_UPTODATE",
+      "handle": "rampline-cliffhanger",
+      "existing_count": 0,
+      "crawl_candidates": 0
+    },
+    {
+      "op": "IMAGES_UPTODATE",
+      "handle": "rampline-classic-jump",
+      "existing_count": 0,
+      "crawl_candidates": 0
+    },
+    {
+      "op": "IMAGES_UPTODATE",
+      "handle": "rampline-skill",
+      "existing_count": 1,
+      "crawl_candidates": 0
+    },
+    {
+      "op": "ADD_IMAGES",
+      "handle": "rampline-trip",
+      "product_id": "prod_01KNQ3Q7AN15JD9A2VXXYFJ69T",
+      "existing_count": 1,
+      "new_count": 1,
+      "total_count": 2,
+      "crawl_candidates": 1,
+      "thumbnail_set": false
+    },
+    {
+      "op": "IMAGES_UPTODATE",
+      "handle": "rampline-rock",
+      "existing_count": 1,
+      "crawl_candidates": 0
+    },
+    {
+      "op": "IMAGES_UPTODATE",
+      "handle": "rampline-twist",
+      "existing_count": 1,
+      "crawl_candidates": 0
+    },
+    {
+      "op": "IMAGES_UPTODATE",
+      "handle": "rampline-impact",
+      "existing_count": 1,
+      "crawl_candidates": 0
+    },
+    {
+      "op": "IMAGES_UPTODATE",
+      "handle": "rampline-bounce",
+      "existing_count": 1,
+      "crawl_candidates": 0
+    },
+    {
+      "op": "IMAGES_UPTODATE",
+      "handle": "rampline-power",
+      "existing_count": 1,
+      "crawl_candidates": 0
+    },
+    {
+      "op": "IMAGES_UPTODATE",
+      "handle": "rampline-agile",
+      "existing_count": 1,
+      "crawl_candidates": 0
+    },
+    {
+      "op": "IMAGES_UPTODATE",
+      "handle": "rampline-flight",
+      "existing_count": 1,
+      "crawl_candidates": 0
+    },
+    {
+      "op": "IMAGES_UPTODATE",
+      "handle": "rampline-dynamic",
+      "existing_count": 1,
+      "crawl_candidates": 0
+    },
+    {
+      "op": "IMAGES_UPTODATE",
+      "handle": "rampline-juice",
+      "existing_count": 1,
+      "crawl_candidates": 0
+    },
+    {
+      "op": "IMAGES_UPTODATE",
+      "handle": "rampline-ability",
+      "existing_count": 1,
+      "crawl_candidates": 0
+    },
+    {
+      "op": "IMAGES_UPTODATE",
+      "handle": "rampline-grip",
+      "existing_count": 1,
+      "crawl_candidates": 0
+    },
+    {
+      "op": "IMAGES_UPTODATE",
+      "handle": "rampline-speed",
+      "existing_count": 1,
+      "crawl_candidates": 0
+    },
+    {
+      "op": "ADD_IMAGES",
+      "handle": "rampline-shockdeck",
+      "product_id": "prod_01KNQ3QD2GBH3E6ZKMBNBYHHJR",
+      "existing_count": 18,
+      "new_count": 8,
+      "total_count": 26,
+      "crawl_candidates": 15,
+      "thumbnail_set": false
+    }
+  ]
+}

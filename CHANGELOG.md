@@ -2,6 +2,57 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.23.1] - 2026-05-16
+
+### Added — Rampline image enrichment from website crawl
+
+Follows v2.23.0 metadata enrichment. New `rampline-catalog/enrich_images.py`
+reads `vendors/rampline-catalog/source-files/_manifest.json` + per-page
+HTML, parses each Medusa product's source_url page for `<img>` tags, and
+attaches new photos to Medusa.
+
+### Image resolution paths
+
+1. **Crawled (preferred):** image is in `vendors/rampline` manifest → use
+   GCS proxy URL `https://catalogs.leka.studio/api/i/rampline/media/<sha>.<ext>`
+   (served by `leka-website/catalogs/src/app/api/i/[...path]/route.ts` from
+   the private `ai-agents-go-vendors` bucket).
+2. **External whitelist (fallback):** image is on `rampline.imgix.net` →
+   link directly. The crawler skipped imgix because it's off-host; the
+   imgix CDN is publicly cached and stable, so direct linking is fine.
+
+### Carousel filter (key correctness fix)
+
+Initial dry-run pulled sibling-product photos from rampline.com's "you
+might also like" carousel onto wrong products (e.g. `rampline-take-5`
+getting PulseZone + FastandCurious shots). Filter now requires each
+candidate image's filename to share at least one token with the Medusa
+product handle (or its dehyphenated variant for CamelCase imgix names).
+Result: 28 → 3 ADD_IMAGES, all genuinely matching.
+
+### Run results (2026-05-16)
+
+| Stage | Counts |
+|---|---|
+| Dry-run | 3 ADD_IMAGES · 25 IMAGES_UPTODATE · 0 skipped |
+| Apply | **3 ADD_IMAGES applied · 0 errors** · 17 new images total |
+
+| Product | Existing → New |
+|---|---|
+| `rampline-floating-bench` | 6 → 14 (+8 imgix product photos) |
+| `rampline-shockdeck` | 18 → 26 (+8 imgix product photos) |
+| `rampline-trip` | 1 → 2 (+1 Trip_Produktbilde) |
+
+The other 25 products with crawl metadata are `IMAGES_UPTODATE`: either
+they already have images from earlier work, OR the carousel filter
+screened out all candidates (their PDPs only showed sibling-park photos,
+not their own). To enrich those further we'd need either (a) a Playwright
+re-render of step3 to capture lazy-loaded photos, or (b) a more aggressive
+image-mining pass over the rampline.com sitemap.
+
+Idempotent: images are added by union (never replaces). Re-runs are
+no-ops.
+
 ## [2.23.0] - 2026-05-16
 
 ### Added — Rampline enrichment bridge: `vendors/rampline/*` → Medusa
