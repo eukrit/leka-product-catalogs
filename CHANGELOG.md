@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.23.3] - 2026-05-16
+
+### Added — Rampline brand-CI enrichment → Sales Channel metadata
+
+New `rampline-catalog/enrich_brand_ci.py` reads
+`vendors/rampline-catalog/parsed/brand_ci.json` (palette + logos extracted
+by step3) and writes a canonical `brand_ci` token block to the Rampline
+Sales Channel (`sc_01KNQAA448RY0YPR51FNPM2TVA`) metadata in Medusa. The
+storefront can now render Rampline-branded product pages using these
+tokens instead of the generic Leka theme.
+
+### Tokens written (live on Medusa, 2026-05-16)
+
+| Token | Value |
+|---|---|
+| `primary_color` | `#B5BC00` (Rampline green) |
+| `secondary_color` | `#2D5346` |
+| `accent_color` | `#0073AA` |
+| `text_color` | `#313131` |
+| `background_color` | `#E6E6E6` |
+| `surface_color` | `#EEEEEE` |
+| `neutral_color` | `#DDDDDD` |
+| `primary_logo_url` | `https://catalogs.leka.studio/api/i/rampline/design-system/logos/<sha>.svg` |
+| `fonts` | `[]` (typography extraction was a Playwright miss; static CSS only had font-family rules that didn't parse cleanly — to be revisited if/when step3 re-renders with the fixed Playwright timeout) |
+| `source` | `vendors/rampline/brand_ci/latest` |
+
+Idempotent: re-runs are no-ops when tokens are unchanged.
+
 ## [2.23.2] - 2026-05-16
 
 ### Added — Playwright fallback for Rampline image enrichment
