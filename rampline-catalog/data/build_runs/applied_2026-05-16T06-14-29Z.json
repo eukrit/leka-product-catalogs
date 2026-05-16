@@ -1,0 +1,3521 @@
+{
+  "timestamp": "2026-05-16T06-14-29Z",
+  "dry_run": false,
+  "limit_family": null,
+  "totals": {
+    "VARIANT_EXISTS": 18,
+    "CREATE_PRODUCT": 4,
+    "DELETE_PLACEHOLDER_VARIANT": 7,
+    "DELETE_DEFAULT_OPTION": 6,
+    "ADD_OPTION": 8,
+    "CREATE_VARIANT": 23
+  },
+  "errors": [
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3PY0DJKE37NSSN1D8SDP2",
+      "handle": "rampline-rampit-storm-en",
+      "sku": "4556 9001",
+      "title": "Default",
+      "option_values": [],
+      "metadata": {
+        "article_code": "4556 9001",
+        "family": "Powder coated climbing pole, with bell on top",
+        "family_discount": 0.3,
+        "net_nok": 26821.2,
+        "recommended_nok": 38316.0,
+        "description": "Rampit Storm | Climbing pole, inkl anchoring system",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      },
+      "error": "500 Server Error: Internal Server Error for url: https://leka-medusa-backend-538978391890.asia-southeast1.run.app/admin/products/prod_01KNQ3PY0DJKE37NSSN1D8SDP2/variants"
+    }
+  ],
+  "actions": [
+    {
+      "op": "VARIANT_EXISTS",
+      "product_id": "prod_01KRQPJJ31C9PFMWC0ASJWC549",
+      "handle": "rampline-rampball-35",
+      "sku": "RB35"
+    },
+    {
+      "op": "VARIANT_EXISTS",
+      "product_id": "prod_01KRQPJJ31C9PFMWC0ASJWC549",
+      "handle": "rampline-rampball-35",
+      "sku": "RB35 AG"
+    },
+    {
+      "op": "VARIANT_EXISTS",
+      "product_id": "prod_01KRQPJJ31C9PFMWC0ASJWC549",
+      "handle": "rampline-rampball-35",
+      "sku": "RB35 G"
+    },
+    {
+      "op": "VARIANT_EXISTS",
+      "product_id": "prod_01KRQPJJ31C9PFMWC0ASJWC549",
+      "handle": "rampline-rampball-35",
+      "sku": "RB35 LF"
+    },
+    {
+      "op": "VARIANT_EXISTS",
+      "product_id": "prod_01KRQPJK5YY06TWJC126KGX571",
+      "handle": "rampline-rampball-50",
+      "sku": "RB50"
+    },
+    {
+      "op": "VARIANT_EXISTS",
+      "product_id": "prod_01KRQPJK5YY06TWJC126KGX571",
+      "handle": "rampline-rampball-50",
+      "sku": "RB50 AG"
+    },
+    {
+      "op": "VARIANT_EXISTS",
+      "product_id": "prod_01KRQPJK5YY06TWJC126KGX571",
+      "handle": "rampline-rampball-50",
+      "sku": "RB50 G"
+    },
+    {
+      "op": "VARIANT_EXISTS",
+      "product_id": "prod_01KRQPJK5YY06TWJC126KGX571",
+      "handle": "rampline-rampball-50",
+      "sku": "RB50 LF"
+    },
+    {
+      "op": "VARIANT_EXISTS",
+      "product_id": "prod_01KRQPJKKCT4VB1G929MXXS2BA",
+      "handle": "rampline-rampball-50r",
+      "sku": "RB50R"
+    },
+    {
+      "op": "VARIANT_EXISTS",
+      "product_id": "prod_01KRQPJKKCT4VB1G929MXXS2BA",
+      "handle": "rampline-rampball-50r",
+      "sku": "RB50R AG"
+    },
+    {
+      "op": "VARIANT_EXISTS",
+      "product_id": "prod_01KRQPJKKCT4VB1G929MXXS2BA",
+      "handle": "rampline-rampball-50r",
+      "sku": "RB50R G"
+    },
+    {
+      "op": "VARIANT_EXISTS",
+      "product_id": "prod_01KRQPJKKCT4VB1G929MXXS2BA",
+      "handle": "rampline-rampball-50r",
+      "sku": "RB50R LF"
+    },
+    {
+      "op": "VARIANT_EXISTS",
+      "product_id": "prod_01KRQPJM187TMCDY5MQSWSXVRP",
+      "handle": "rampline-rampball-70r",
+      "sku": "RB70R"
+    },
+    {
+      "op": "VARIANT_EXISTS",
+      "product_id": "prod_01KRQPJM187TMCDY5MQSWSXVRP",
+      "handle": "rampline-rampball-70r",
+      "sku": "RB70R AG"
+    },
+    {
+      "op": "VARIANT_EXISTS",
+      "product_id": "prod_01KRQPJM187TMCDY5MQSWSXVRP",
+      "handle": "rampline-rampball-70r",
+      "sku": "RB70R G"
+    },
+    {
+      "op": "VARIANT_EXISTS",
+      "product_id": "prod_01KRQPJM187TMCDY5MQSWSXVRP",
+      "handle": "rampline-rampball-70r",
+      "sku": "RB70R LF"
+    },
+    {
+      "op": "VARIANT_EXISTS",
+      "product_id": "prod_01KNQ3PYP224DRZPM2Y893RDTC",
+      "handle": "rampline-rampline-slackline",
+      "sku": "RL410"
+    },
+    {
+      "op": "VARIANT_EXISTS",
+      "product_id": "prod_01KNQ3PYP224DRZPM2Y893RDTC",
+      "handle": "rampline-rampline-slackline",
+      "sku": "RL410 EXT"
+    },
+    {
+      "op": "CREATE_PRODUCT",
+      "handle": "rampline-jumpstone-en-27",
+      "title": "Jumpstone 27",
+      "parent_handle": "rampline-jumpstone-en",
+      "parent_id": "prod_01KNQ3PXDX28415XPZAQ5FFH6S",
+      "parent_status": "published",
+      "parent_description": "The spring attached Jumpstone\u2122 gives a delightful response to the user. When jumping from pad to pad it triggers an exciting and creative play that challenges speed and balance. The modest height makes it safe, even for young children, to make huge leaps and run at high speed.\n\nJumpstone\u2122 natural rubber jump pads with a\u00a0rough surface. The Jumpstone is popular for a wide age range.\n\nJumpstone\u2122 27\nDiameter: 27 cm\nHeight: 18 cm\nWeight: 8 kg\n\nJumpstone\u2122 50\nDiameter: 50 cm\nHeight: 18 cm\nWeight: 20 kg\n\nArtificial grass/wet pour covers\u00a0(cork or rubber)\n\nGrass/loose-fill ground covers\u00a0(wood chips, sand, etc.)\n\nSuggested distances between Jumpstones (center to center)\n\nThe links will open Google Drive folders where you can choose to download the desired product variant.",
+      "parent_thumbnail": "https://catalogs.leka.studio/api/i/rampline/rampline-jumpstone-en/produktopplisting-jumpstone.png",
+      "parent_images": [
+        "https://catalogs.leka.studio/api/i/rampline/rampline-jumpstone-en/produktopplisting-jumpstone.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-jumpstone-en/safety-tuv-150x150.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-jumpstone-en/js-suldal-hoppestein-balanselek-lekeplass.jpg"
+      ],
+      "parent_category_ids": [
+        "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B"
+      ],
+      "options": [
+        {
+          "title": "Surface",
+          "values": [
+            "Artificial grass",
+            "Grass",
+            "Loose fills",
+            "Wet pour"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "sku": "JS27",
+          "title": "Wet pour",
+          "option_values": [
+            [
+              "Surface",
+              "Wet pour"
+            ]
+          ],
+          "metadata": {
+            "article_code": "JS27",
+            "family": "Natural rubber jump pads with a rough surface.",
+            "family_discount": 0.3,
+            "net_nok": 8969.1,
+            "recommended_nok": 12813.0,
+            "description": "Jumpstone\u2122 27 for wet pour surfaces | \u00f8 27 cm",
+            "pricelist_date": "2026-05-13",
+            "source": "rampline-pricelist-2025"
+          }
+        },
+        {
+          "sku": "JS27 AG",
+          "title": "Artificial grass",
+          "option_values": [
+            [
+              "Surface",
+              "Artificial grass"
+            ]
+          ],
+          "metadata": {
+            "article_code": "JS27 AG",
+            "family": "Natural rubber jump pads with a rough surface.",
+            "family_discount": 0.3,
+            "net_nok": 9797.9,
+            "recommended_nok": 13997.0,
+            "description": "Jumpstone\u2122 27 for artificial grass | \u00f8 27 cm. incl. PETG mounting ring",
+            "pricelist_date": "2026-05-13",
+            "source": "rampline-pricelist-2025"
+          }
+        },
+        {
+          "sku": "JS27 G",
+          "title": "Grass",
+          "option_values": [
+            [
+              "Surface",
+              "Grass"
+            ]
+          ],
+          "metadata": {
+            "article_code": "JS27 G",
+            "family": "Natural rubber jump pads with a rough surface.",
+            "family_discount": 0.3,
+            "net_nok": 11203.5,
+            "recommended_nok": 16005.0,
+            "description": "Jumpstone\u2122 27 for grass | \u00f8 27 cm. incl mounting bracket for 21,5 cm depth",
+            "pricelist_date": "2026-05-13",
+            "source": "rampline-pricelist-2025"
+          }
+        },
+        {
+          "sku": "JS27 LF",
+          "title": "Loose fills",
+          "option_values": [
+            [
+              "Surface",
+              "Loose fills"
+            ]
+          ],
+          "metadata": {
+            "article_code": "JS27 LF",
+            "family": "Natural rubber jump pads with a rough surface.",
+            "family_discount": 0.3,
+            "net_nok": 11203.5,
+            "recommended_nok": 16005.0,
+            "description": "Jumpstone\u2122 27 for loose fills | \u00f8 27 cm. incl mounting bracket for 30 cm depth",
+            "pricelist_date": "2026-05-13",
+            "source": "rampline-pricelist-2025"
+          }
+        }
+      ],
+      "family": "Natural rubber jump pads with a rough surface.",
+      "article_codes": [
+        "JS27",
+        "JS27 AG",
+        "JS27 G",
+        "JS27 LF"
+      ]
+    },
+    {
+      "op": "CREATE_PRODUCT",
+      "handle": "rampline-jumpstone-en-50",
+      "title": "Jumpstone 50",
+      "parent_handle": "rampline-jumpstone-en",
+      "parent_id": "prod_01KNQ3PXDX28415XPZAQ5FFH6S",
+      "parent_status": "published",
+      "parent_description": "The spring attached Jumpstone\u2122 gives a delightful response to the user. When jumping from pad to pad it triggers an exciting and creative play that challenges speed and balance. The modest height makes it safe, even for young children, to make huge leaps and run at high speed.\n\nJumpstone\u2122 natural rubber jump pads with a\u00a0rough surface. The Jumpstone is popular for a wide age range.\n\nJumpstone\u2122 27\nDiameter: 27 cm\nHeight: 18 cm\nWeight: 8 kg\n\nJumpstone\u2122 50\nDiameter: 50 cm\nHeight: 18 cm\nWeight: 20 kg\n\nArtificial grass/wet pour covers\u00a0(cork or rubber)\n\nGrass/loose-fill ground covers\u00a0(wood chips, sand, etc.)\n\nSuggested distances between Jumpstones (center to center)\n\nThe links will open Google Drive folders where you can choose to download the desired product variant.",
+      "parent_thumbnail": "https://catalogs.leka.studio/api/i/rampline/rampline-jumpstone-en/produktopplisting-jumpstone.png",
+      "parent_images": [
+        "https://catalogs.leka.studio/api/i/rampline/rampline-jumpstone-en/produktopplisting-jumpstone.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-jumpstone-en/safety-tuv-150x150.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-jumpstone-en/js-suldal-hoppestein-balanselek-lekeplass.jpg"
+      ],
+      "parent_category_ids": [
+        "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B"
+      ],
+      "options": [
+        {
+          "title": "Surface",
+          "values": [
+            "Artificial grass",
+            "Grass",
+            "Loose fills",
+            "Wet pour"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "sku": "JS50",
+          "title": "Wet pour",
+          "option_values": [
+            [
+              "Surface",
+              "Wet pour"
+            ]
+          ],
+          "metadata": {
+            "article_code": "JS50",
+            "family": "Natural rubber jump pads with a rough surface.",
+            "family_discount": 0.3,
+            "net_nok": 12332.6,
+            "recommended_nok": 17618.0,
+            "description": "Jumpstone\u2122 50 for wet pour surfaces | \u00f8 50 cm",
+            "pricelist_date": "2026-05-13",
+            "source": "rampline-pricelist-2025"
+          }
+        },
+        {
+          "sku": "JS50 AG",
+          "title": "Artificial grass",
+          "option_values": [
+            [
+              "Surface",
+              "Artificial grass"
+            ]
+          ],
+          "metadata": {
+            "article_code": "JS50 AG",
+            "family": "Natural rubber jump pads with a rough surface.",
+            "family_discount": 0.3,
+            "net_nok": 14567.0,
+            "recommended_nok": 20810.0,
+            "description": "Jumpstone\u2122 50 for artificial grass | \u00f8 50 cm. incl. PETG  mounting ring",
+            "pricelist_date": "2026-05-13",
+            "source": "rampline-pricelist-2025"
+          }
+        },
+        {
+          "sku": "JS50 G",
+          "title": "Grass",
+          "option_values": [
+            [
+              "Surface",
+              "Grass"
+            ]
+          ],
+          "metadata": {
+            "article_code": "JS50 G",
+            "family": "Natural rubber jump pads with a rough surface.",
+            "family_discount": 0.3,
+            "net_nok": 14567.0,
+            "recommended_nok": 20810.0,
+            "description": "Jumpstone\u2122 50 for grass | \u00f8 50 cm. incl mounting bracket for 21,5 cm depth",
+            "pricelist_date": "2026-05-13",
+            "source": "rampline-pricelist-2025"
+          }
+        },
+        {
+          "sku": "JS50 LF",
+          "title": "Loose fills",
+          "option_values": [
+            [
+              "Surface",
+              "Loose fills"
+            ]
+          ],
+          "metadata": {
+            "article_code": "JS50 LF",
+            "family": "Natural rubber jump pads with a rough surface.",
+            "family_discount": 0.3,
+            "net_nok": 14567.0,
+            "recommended_nok": 20810.0,
+            "description": "Jumpstone\u2122 50 for loose fills | \u00f8 50 cm. incl mounting bracket for 30 cm depth",
+            "pricelist_date": "2026-05-13",
+            "source": "rampline-pricelist-2025"
+          }
+        }
+      ],
+      "family": "Natural rubber jump pads with a rough surface.",
+      "article_codes": [
+        "JS50",
+        "JS50 AG",
+        "JS50 G",
+        "JS50 LF"
+      ]
+    },
+    {
+      "op": "CREATE_PRODUCT",
+      "handle": "rampline-jumpstone-en-3",
+      "title": "Jumpstone 3",
+      "parent_handle": "rampline-jumpstone-en",
+      "parent_id": "prod_01KNQ3PXDX28415XPZAQ5FFH6S",
+      "parent_status": "published",
+      "parent_description": "The spring attached Jumpstone\u2122 gives a delightful response to the user. When jumping from pad to pad it triggers an exciting and creative play that challenges speed and balance. The modest height makes it safe, even for young children, to make huge leaps and run at high speed.\n\nJumpstone\u2122 natural rubber jump pads with a\u00a0rough surface. The Jumpstone is popular for a wide age range.\n\nJumpstone\u2122 27\nDiameter: 27 cm\nHeight: 18 cm\nWeight: 8 kg\n\nJumpstone\u2122 50\nDiameter: 50 cm\nHeight: 18 cm\nWeight: 20 kg\n\nArtificial grass/wet pour covers\u00a0(cork or rubber)\n\nGrass/loose-fill ground covers\u00a0(wood chips, sand, etc.)\n\nSuggested distances between Jumpstones (center to center)\n\nThe links will open Google Drive folders where you can choose to download the desired product variant.",
+      "parent_thumbnail": "https://catalogs.leka.studio/api/i/rampline/rampline-jumpstone-en/produktopplisting-jumpstone.png",
+      "parent_images": [
+        "https://catalogs.leka.studio/api/i/rampline/rampline-jumpstone-en/produktopplisting-jumpstone.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-jumpstone-en/safety-tuv-150x150.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-jumpstone-en/js-suldal-hoppestein-balanselek-lekeplass.jpg"
+      ],
+      "parent_category_ids": [
+        "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B"
+      ],
+      "options": [
+        {
+          "title": "Surface",
+          "values": [
+            "Artificial grass",
+            "Grass",
+            "Loose fills",
+            "Wet pour"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "sku": "JS3",
+          "title": "Wet pour",
+          "option_values": [
+            [
+              "Surface",
+              "Wet pour"
+            ]
+          ],
+          "metadata": {
+            "article_code": "JS3",
+            "family": "Natural rubber jump pads with a rough surface.",
+            "family_discount": 0.3,
+            "net_nok": 24216.5,
+            "recommended_nok": 34595.0,
+            "description": "Jumpstone\u2122 obstacle cource for wet pour surfaces",
+            "pricelist_date": "2026-05-13",
+            "source": "rampline-pricelist-2025"
+          }
+        },
+        {
+          "sku": "JS3 AG",
+          "title": "Artificial grass",
+          "option_values": [
+            [
+              "Surface",
+              "Artificial grass"
+            ]
+          ],
+          "metadata": {
+            "article_code": "JS3 AG",
+            "family": "Natural rubber jump pads with a rough surface.",
+            "family_discount": 0.3,
+            "net_nok": 27330.1,
+            "recommended_nok": 39043.0,
+            "description": "Jumpstone\u2122 obstacle cource for artificial grass | incl. PETG  mounting ring",
+            "pricelist_date": "2026-05-13",
+            "source": "rampline-pricelist-2025"
+          }
+        },
+        {
+          "sku": "JS3 G",
+          "title": "Grass",
+          "option_values": [
+            [
+              "Surface",
+              "Grass"
+            ]
+          ],
+          "metadata": {
+            "article_code": "JS3 G",
+            "family": "Natural rubber jump pads with a rough surface.",
+            "family_discount": 0.3,
+            "net_nok": 29579.2,
+            "recommended_nok": 42256.0,
+            "description": "Jumpstone\u2122 obstacle cource for grass | incl mounting bracket for 21,5 cm depth",
+            "pricelist_date": "2026-05-13",
+            "source": "rampline-pricelist-2025"
+          }
+        },
+        {
+          "sku": "JS3 LF",
+          "title": "Loose fills",
+          "option_values": [
+            [
+              "Surface",
+              "Loose fills"
+            ]
+          ],
+          "metadata": {
+            "article_code": "JS3 LF",
+            "family": "Natural rubber jump pads with a rough surface.",
+            "family_discount": 0.3,
+            "net_nok": 29579.2,
+            "recommended_nok": 42256.0,
+            "description": "Jumpstone\u2122 obstacle cource for loose fills  | incl mounting bracket for 30 cm depth",
+            "pricelist_date": "2026-05-13",
+            "source": "rampline-pricelist-2025"
+          }
+        }
+      ],
+      "family": "Natural rubber jump pads with a rough surface.",
+      "article_codes": [
+        "JS3",
+        "JS3 AG",
+        "JS3 G",
+        "JS3 LF"
+      ]
+    },
+    {
+      "op": "CREATE_PRODUCT",
+      "handle": "rampline-jumpstone-en-5",
+      "title": "Jumpstone 5",
+      "parent_handle": "rampline-jumpstone-en",
+      "parent_id": "prod_01KNQ3PXDX28415XPZAQ5FFH6S",
+      "parent_status": "published",
+      "parent_description": "The spring attached Jumpstone\u2122 gives a delightful response to the user. When jumping from pad to pad it triggers an exciting and creative play that challenges speed and balance. The modest height makes it safe, even for young children, to make huge leaps and run at high speed.\n\nJumpstone\u2122 natural rubber jump pads with a\u00a0rough surface. The Jumpstone is popular for a wide age range.\n\nJumpstone\u2122 27\nDiameter: 27 cm\nHeight: 18 cm\nWeight: 8 kg\n\nJumpstone\u2122 50\nDiameter: 50 cm\nHeight: 18 cm\nWeight: 20 kg\n\nArtificial grass/wet pour covers\u00a0(cork or rubber)\n\nGrass/loose-fill ground covers\u00a0(wood chips, sand, etc.)\n\nSuggested distances between Jumpstones (center to center)\n\nThe links will open Google Drive folders where you can choose to download the desired product variant.",
+      "parent_thumbnail": "https://catalogs.leka.studio/api/i/rampline/rampline-jumpstone-en/produktopplisting-jumpstone.png",
+      "parent_images": [
+        "https://catalogs.leka.studio/api/i/rampline/rampline-jumpstone-en/produktopplisting-jumpstone.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-jumpstone-en/safety-tuv-150x150.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-jumpstone-en/js-suldal-hoppestein-balanselek-lekeplass.jpg"
+      ],
+      "parent_category_ids": [
+        "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B"
+      ],
+      "options": [
+        {
+          "title": "Surface",
+          "values": [
+            "Artificial grass",
+            "Grass",
+            "Loose fills",
+            "Wet pour"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "sku": "JS5",
+          "title": "Wet pour",
+          "option_values": [
+            [
+              "Surface",
+              "Wet pour"
+            ]
+          ],
+          "metadata": {
+            "article_code": "JS5",
+            "family": "Natural rubber jump pads with a rough surface.",
+            "family_discount": 0.3,
+            "net_nok": 36101.1,
+            "recommended_nok": 51573.0,
+            "description": "Jumpstone\u2122 obstacle cource for wet pour surfaces (5)",
+            "pricelist_date": "2026-05-13",
+            "source": "rampline-pricelist-2025"
+          }
+        },
+        {
+          "sku": "JS5 AG",
+          "title": "Artificial grass",
+          "option_values": [
+            [
+              "Surface",
+              "Artificial grass"
+            ]
+          ],
+          "metadata": {
+            "article_code": "JS5 AG",
+            "family": "Natural rubber jump pads with a rough surface.",
+            "family_discount": 0.3,
+            "net_nok": 40969.6,
+            "recommended_nok": 58528.0,
+            "description": "Jumpstone\u2122 obstacle cource for artificial grass | incl. PETG  mounting ring",
+            "pricelist_date": "2026-05-13",
+            "source": "rampline-pricelist-2025"
+          }
+        },
+        {
+          "sku": "JS5 G",
+          "title": "Grass",
+          "option_values": [
+            [
+              "Surface",
+              "Grass"
+            ]
+          ],
+          "metadata": {
+            "article_code": "JS5 G",
+            "family": "Natural rubber jump pads with a rough surface.",
+            "family_discount": 0.3,
+            "net_nok": 43921.5,
+            "recommended_nok": 62745.0,
+            "description": "Jumpstone\u2122 obstacle cource for grass | incl mounting bracket for 21,5 cm depth",
+            "pricelist_date": "2026-05-13",
+            "source": "rampline-pricelist-2025"
+          }
+        },
+        {
+          "sku": "JS5 LF",
+          "title": "Loose fills",
+          "option_values": [
+            [
+              "Surface",
+              "Loose fills"
+            ]
+          ],
+          "metadata": {
+            "article_code": "JS5 LF",
+            "family": "Natural rubber jump pads with a rough surface.",
+            "family_discount": 0.3,
+            "net_nok": 43921.5,
+            "recommended_nok": 62745.0,
+            "description": "Jumpstone\u2122 obstacle cource for loose fills  | incl mounting bracket for 30 cm depth",
+            "pricelist_date": "2026-05-13",
+            "source": "rampline-pricelist-2025"
+          }
+        }
+      ],
+      "family": "Natural rubber jump pads with a rough surface.",
+      "article_codes": [
+        "JS5",
+        "JS5 AG",
+        "JS5 G",
+        "JS5 LF"
+      ]
+    },
+    {
+      "op": "DELETE_PLACEHOLDER_VARIANT",
+      "product_id": "prod_01KNQ3PXPN3EKZBWZTHSBCSYGC",
+      "handle": "rampline-balancebuddy-en",
+      "variant_id": "variant_01KNQ3PXQPF8H1VRPZHGQ85KRC",
+      "sku": "6732"
+    },
+    {
+      "op": "DELETE_DEFAULT_OPTION",
+      "product_id": "prod_01KNQ3PXPN3EKZBWZTHSBCSYGC",
+      "handle": "rampline-balancebuddy-en",
+      "option_id": "opt_01KNQ3PXPP14NC11XXM6S7V4X0"
+    },
+    {
+      "op": "ADD_OPTION",
+      "product_id": "prod_01KNQ3PXPN3EKZBWZTHSBCSYGC",
+      "handle": "rampline-balancebuddy-en",
+      "option_title": "Length",
+      "values": [
+        "216 cm",
+        "316 cm"
+      ]
+    },
+    {
+      "op": "ADD_OPTION",
+      "product_id": "prod_01KNQ3PXPN3EKZBWZTHSBCSYGC",
+      "handle": "rampline-balancebuddy-en",
+      "option_title": "Style",
+      "values": [
+        "Slanted (wet pour)",
+        "Straight (loose fills)",
+        "Straight (wet pour)"
+      ]
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3PXPN3EKZBWZTHSBCSYGC",
+      "handle": "rampline-balancebuddy-en",
+      "sku": "BB216R",
+      "title": "216 cm / Straight (wet pour)",
+      "option_values": [
+        [
+          "Length",
+          "216 cm"
+        ],
+        [
+          "Style",
+          "Straight (wet pour)"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BB216R",
+        "family": "Balance beam, with shock absorbing natural rubber padding",
+        "family_discount": 0.3,
+        "net_nok": 14387.8,
+        "recommended_nok": 20554.0,
+        "description": "BalanceBuddy\u2122 216 straight | Length 216 cm. for installation in wet pour surfaces and artificial grass.",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3PXPN3EKZBWZTHSBCSYGC",
+      "handle": "rampline-balancebuddy-en",
+      "sku": "BB216R EXT",
+      "title": "216 cm / Straight (loose fills)",
+      "option_values": [
+        [
+          "Length",
+          "216 cm"
+        ],
+        [
+          "Style",
+          "Straight (loose fills)"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BB216R EXT",
+        "family": "Balance beam, with shock absorbing natural rubber padding",
+        "family_discount": 0.3,
+        "net_nok": 15780.8,
+        "recommended_nok": 22544.0,
+        "description": "BalanceBuddy\u2122 216 straight, extended | Length 216 cm. for installation in grass and loose fills.",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3PXPN3EKZBWZTHSBCSYGC",
+      "handle": "rampline-balancebuddy-en",
+      "sku": "BB216S",
+      "title": "216 cm / Slanted (wet pour)",
+      "option_values": [
+        [
+          "Length",
+          "216 cm"
+        ],
+        [
+          "Style",
+          "Slanted (wet pour)"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BB216S",
+        "family": "Balance beam, with shock absorbing natural rubber padding",
+        "family_discount": 0.3,
+        "net_nok": 14387.8,
+        "recommended_nok": 20554.0,
+        "description": "BalanceBuddy\u2122 216 slanted | Length 216 cm. for installation in wet pour surfaces and artificial grass.",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3PXPN3EKZBWZTHSBCSYGC",
+      "handle": "rampline-balancebuddy-en",
+      "sku": "BB316R",
+      "title": "316 cm / Straight (wet pour)",
+      "option_values": [
+        [
+          "Length",
+          "316 cm"
+        ],
+        [
+          "Style",
+          "Straight (wet pour)"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BB316R",
+        "family": "Balance beam, with shock absorbing natural rubber padding",
+        "family_discount": 0.3,
+        "net_nok": 18879.0,
+        "recommended_nok": 26970.0,
+        "description": "BalanceBuddy\u2122 316 straight | Length 316 cm. for installation in wet pour surfaces and artificial grass.",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3PXPN3EKZBWZTHSBCSYGC",
+      "handle": "rampline-balancebuddy-en",
+      "sku": "BB316R EXT",
+      "title": "316 cm / Straight (loose fills)",
+      "option_values": [
+        [
+          "Length",
+          "316 cm"
+        ],
+        [
+          "Style",
+          "Straight (loose fills)"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BB316R EXT",
+        "family": "Balance beam, with shock absorbing natural rubber padding",
+        "family_discount": 0.3,
+        "net_nok": 20272.0,
+        "recommended_nok": 28960.0,
+        "description": "BalanceBuddy\u2122 316 straight, extended | Length 316 cm. for installation in grass and loose fills.",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3PXPN3EKZBWZTHSBCSYGC",
+      "handle": "rampline-balancebuddy-en",
+      "sku": "BB316S",
+      "title": "316 cm / Slanted (wet pour)",
+      "option_values": [
+        [
+          "Length",
+          "316 cm"
+        ],
+        [
+          "Style",
+          "Slanted (wet pour)"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BB316S",
+        "family": "Balance beam, with shock absorbing natural rubber padding",
+        "family_discount": 0.3,
+        "net_nok": 18879.0,
+        "recommended_nok": 26970.0,
+        "description": "BalanceBuddy\u2122 316 slanted | Length 316 cm. for installation in wet pour surfaces and artificial grass.",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "DELETE_PLACEHOLDER_VARIANT",
+      "product_id": "prod_01KNQ3PZC8GHBPZPHSM7A97VJZ",
+      "handle": "rampline-balancebuddy-wave",
+      "variant_id": "variant_01KNQ3PZD86S7BCNBRZRBAN6PY",
+      "sku": "20707"
+    },
+    {
+      "op": "DELETE_DEFAULT_OPTION",
+      "product_id": "prod_01KNQ3PZC8GHBPZPHSM7A97VJZ",
+      "handle": "rampline-balancebuddy-wave",
+      "option_id": "opt_01KNQ3PZC9FP9S7GTV2STV61W7"
+    },
+    {
+      "op": "ADD_OPTION",
+      "product_id": "prod_01KNQ3PZC8GHBPZPHSM7A97VJZ",
+      "handle": "rampline-balancebuddy-wave",
+      "option_title": "Surface",
+      "values": [
+        "Loose fills",
+        "Wet pour"
+      ]
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3PZC8GHBPZPHSM7A97VJZ",
+      "handle": "rampline-balancebuddy-wave",
+      "sku": "BB316W",
+      "title": "Wet pour",
+      "option_values": [
+        [
+          "Surface",
+          "Wet pour"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BB316W",
+        "family": "Zig-Zag balance beam, with shock absorbing natural rubber padding",
+        "family_discount": 0.3,
+        "net_nok": 23244.9,
+        "recommended_nok": 33207.0,
+        "description": "BalanceBuddy Wave\u2122  | Balance beam",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3PZC8GHBPZPHSM7A97VJZ",
+      "handle": "rampline-balancebuddy-wave",
+      "sku": "BB316W LF",
+      "title": "Loose fills",
+      "option_values": [
+        [
+          "Surface",
+          "Loose fills"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BB316W LF",
+        "family": "Zig-Zag balance beam, with shock absorbing natural rubber padding",
+        "family_discount": 0.3,
+        "net_nok": 24730.3,
+        "recommended_nok": 35329.0,
+        "description": "BalanceBuddy Wave\u2122 | Balance beam loose fills",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "DELETE_PLACEHOLDER_VARIANT",
+      "product_id": "prod_01KNQ3PZNVCTERYNETK0X5KK4H",
+      "handle": "rampline-fungi-eng",
+      "variant_id": "variant_01KNQ3PZQ5TJ42BVHCPKHRT3PG",
+      "sku": "23806"
+    },
+    {
+      "op": "DELETE_DEFAULT_OPTION",
+      "product_id": "prod_01KNQ3PZNVCTERYNETK0X5KK4H",
+      "handle": "rampline-fungi-eng",
+      "option_id": "opt_01KNQ3PZNW7KGAFQD2HKPZWEJY"
+    },
+    {
+      "op": "ADD_OPTION",
+      "product_id": "prod_01KNQ3PZNVCTERYNETK0X5KK4H",
+      "handle": "rampline-fungi-eng",
+      "option_title": "Size",
+      "values": [
+        "3 stems (wet pour)",
+        "5 stems (loose fills)",
+        "5 stems (wet pour)"
+      ]
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3PZNVCTERYNETK0X5KK4H",
+      "handle": "rampline-fungi-eng",
+      "sku": "F3 1002",
+      "title": "3 stems (wet pour)",
+      "option_values": [
+        [
+          "Size",
+          "3 stems (wet pour)"
+        ]
+      ],
+      "metadata": {
+        "article_code": "F3 1002",
+        "family": "Climbing mushrooms",
+        "family_discount": 0.3,
+        "net_nok": 19918.5,
+        "recommended_nok": 28455.0,
+        "description": "Fungi\u2122 3 | Climbing mushroom with 3 stems",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3PZNVCTERYNETK0X5KK4H",
+      "handle": "rampline-fungi-eng",
+      "sku": "F5 1002",
+      "title": "5 stems (wet pour)",
+      "option_values": [
+        [
+          "Size",
+          "5 stems (wet pour)"
+        ]
+      ],
+      "metadata": {
+        "article_code": "F5 1002",
+        "family": "Climbing mushrooms",
+        "family_discount": 0.3,
+        "net_nok": 24575.6,
+        "recommended_nok": 35108.0,
+        "description": "Fungi\u2122 5 | Climbing mushroom with 5 stems",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3PZNVCTERYNETK0X5KK4H",
+      "handle": "rampline-fungi-eng",
+      "sku": "F5 EXT 1002",
+      "title": "5 stems (loose fills)",
+      "option_values": [
+        [
+          "Size",
+          "5 stems (loose fills)"
+        ]
+      ],
+      "metadata": {
+        "article_code": "F5 EXT 1002",
+        "family": "Climbing mushrooms",
+        "family_discount": 0.3,
+        "net_nok": 26800.2,
+        "recommended_nok": 38286.0,
+        "description": "Fungi\u2122 5 extended | Climbing mushroom with 5 stems for grass and loose fills",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "DELETE_PLACEHOLDER_VARIANT",
+      "product_id": "prod_01KNQ3PWVYRPJSVT7YGTXFXF4T",
+      "handle": "rampline-rampit-swing",
+      "variant_id": "variant_01KNQ3PWWYYMV9WR765N731VPF",
+      "sku": "7074"
+    },
+    {
+      "op": "DELETE_DEFAULT_OPTION",
+      "product_id": "prod_01KNQ3PWVYRPJSVT7YGTXFXF4T",
+      "handle": "rampline-rampit-swing",
+      "option_id": "opt_01KNQ3PWVZ02S16DSZ8NECS3DP"
+    },
+    {
+      "op": "ADD_OPTION",
+      "product_id": "prod_01KNQ3PWVYRPJSVT7YGTXFXF4T",
+      "handle": "rampline-rampit-swing",
+      "option_title": "Size",
+      "values": [
+        "200 cm",
+        "220 cm"
+      ]
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3PWVYRPJSVT7YGTXFXF4T",
+      "handle": "rampline-rampit-swing",
+      "sku": "4551 9001",
+      "title": "200 cm",
+      "option_values": [
+        [
+          "Size",
+          "200 cm"
+        ]
+      ],
+      "metadata": {
+        "article_code": "4551 9001",
+        "family": "Fully welded, and powdercoated gim barr",
+        "family_discount": 0.3,
+        "net_nok": 23349.2,
+        "recommended_nok": 33356.0,
+        "description": "Rampit Twin\u2122 200 | Height installed in wet pour surfaces or artificial grass: 200 cm",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3PWVYRPJSVT7YGTXFXF4T",
+      "handle": "rampline-rampit-swing",
+      "sku": "4551 EXT",
+      "title": "220 cm",
+      "option_values": [
+        [
+          "Size",
+          "220 cm"
+        ]
+      ],
+      "metadata": {
+        "article_code": "4551 EXT",
+        "family": "Fully welded, and powdercoated gim barr",
+        "family_discount": 0.3,
+        "net_nok": 24555.3,
+        "recommended_nok": 35079.0,
+        "description": "Rampit Twin\u2122 220 | Height installed in wet pour surfaces/artificial grass: 220 cm - loose fills: 200 cm",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "DELETE_PLACEHOLDER_VARIANT",
+      "product_id": "prod_01KNQ3PWK71087H7XPX54DJ2VJ",
+      "handle": "rampline-rampit",
+      "variant_id": "variant_01KNQ3PWMA8Z5XWBRHX3SVAVNW",
+      "sku": "7097"
+    },
+    {
+      "op": "DELETE_DEFAULT_OPTION",
+      "product_id": "prod_01KNQ3PWK71087H7XPX54DJ2VJ",
+      "handle": "rampline-rampit",
+      "option_id": "opt_01KNQ3PWK7YG83DBFX5ERDQEV3"
+    },
+    {
+      "op": "ADD_OPTION",
+      "product_id": "prod_01KNQ3PWK71087H7XPX54DJ2VJ",
+      "handle": "rampline-rampit",
+      "option_title": "Size",
+      "values": [
+        "120 cm",
+        "150 cm",
+        "85 cm"
+      ]
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3PWK71087H7XPX54DJ2VJ",
+      "handle": "rampline-rampit",
+      "sku": "4552 6011",
+      "title": "85 cm",
+      "option_values": [
+        [
+          "Size",
+          "85 cm"
+        ]
+      ],
+      "metadata": {
+        "article_code": "4552 6011",
+        "family": "Fully welded, and powdercoated activity rack",
+        "family_discount": 0.3,
+        "net_nok": 15323.7,
+        "recommended_nok": 21891.0,
+        "description": "Rampit\u2122 85 | Height installed in wet pour surfaces/artificial grass: 85 cm",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3PWK71087H7XPX54DJ2VJ",
+      "handle": "rampline-rampit",
+      "sku": "4553 6011",
+      "title": "120 cm",
+      "option_values": [
+        [
+          "Size",
+          "120 cm"
+        ]
+      ],
+      "metadata": {
+        "article_code": "4553 6011",
+        "family": "Fully welded, and powdercoated activity rack",
+        "family_discount": 0.3,
+        "net_nok": 16882.6,
+        "recommended_nok": 24118.0,
+        "description": "Rampit\u2122 120 | Height installed in wet pour surfaces/artificial grass: 120 cm - grass/loose fills: 95 cm",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3PWK71087H7XPX54DJ2VJ",
+      "handle": "rampline-rampit",
+      "sku": "4554 9001",
+      "title": "150 cm",
+      "option_values": [
+        [
+          "Size",
+          "150 cm"
+        ]
+      ],
+      "metadata": {
+        "article_code": "4554 9001",
+        "family": "Fully welded, and powdercoated activity rack",
+        "family_discount": 0.3,
+        "net_nok": 17777.2,
+        "recommended_nok": 25396.0,
+        "description": "Rampit\u2122 150 | Height installed in wet pour surfaces/artificial grass: 150 cm - loose fills: 126 cm",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "DELETE_PLACEHOLDER_VARIANT",
+      "product_id": "prod_01KNQ3PZ1VEKPD1WTK83PHRG2D",
+      "handle": "rampline-rampit-hopper",
+      "variant_id": "variant_01KNQ3PZ2YRZRM86G2HHA2W3RV",
+      "sku": "32238"
+    },
+    {
+      "op": "DELETE_DEFAULT_OPTION",
+      "product_id": "prod_01KNQ3PZ1VEKPD1WTK83PHRG2D",
+      "handle": "rampline-rampit-hopper",
+      "option_id": "opt_01KNQ3PZ1VG46TRNZ0XKWHNA32"
+    },
+    {
+      "op": "ADD_OPTION",
+      "product_id": "prod_01KNQ3PZ1VEKPD1WTK83PHRG2D",
+      "handle": "rampline-rampit-hopper",
+      "option_title": "Component",
+      "values": [
+        "Activity bars",
+        "Rack",
+        "Turning pads"
+      ]
+    },
+    {
+      "op": "ADD_OPTION",
+      "product_id": "prod_01KNQ3PZ1VEKPD1WTK83PHRG2D",
+      "handle": "rampline-rampit-hopper",
+      "option_title": "Surface",
+      "values": [
+        "Loose fills",
+        "Wet pour"
+      ]
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3PZ1VEKPD1WTK83PHRG2D",
+      "handle": "rampline-rampit-hopper",
+      "sku": "4562 1002 E",
+      "title": "Activity bars / Wet pour",
+      "option_values": [
+        [
+          "Component",
+          "Activity bars"
+        ],
+        [
+          "Surface",
+          "Wet pour"
+        ]
+      ],
+      "metadata": {
+        "article_code": "4562 1002 E",
+        "family": "Fully welded, and powdercoated activity bars and turning pads",
+        "family_discount": 0.3,
+        "net_nok": 32641.7,
+        "recommended_nok": 46631.0,
+        "description": "Rampit Hopper\u2122 activity bars - RAL 1002 Sand Yellow (STD)",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3PZ1VEKPD1WTK83PHRG2D",
+      "handle": "rampline-rampit-hopper",
+      "sku": "4561 1002",
+      "title": "Rack / Wet pour",
+      "option_values": [
+        [
+          "Component",
+          "Rack"
+        ],
+        [
+          "Surface",
+          "Wet pour"
+        ]
+      ],
+      "metadata": {
+        "article_code": "4561 1002",
+        "family": "Fully welded, and powdercoated activity bars and turning pads",
+        "family_discount": 0.3,
+        "net_nok": 3950.1,
+        "recommended_nok": 5643.0,
+        "description": "Hopper\u2122 rack",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3PZ1VEKPD1WTK83PHRG2D",
+      "handle": "rampline-rampit-hopper",
+      "sku": "4561-1 1002",
+      "title": "Turning pads / Wet pour",
+      "option_values": [
+        [
+          "Component",
+          "Turning pads"
+        ],
+        [
+          "Surface",
+          "Wet pour"
+        ]
+      ],
+      "metadata": {
+        "article_code": "4561-1 1002",
+        "family": "Fully welded, and powdercoated activity bars and turning pads",
+        "family_discount": 0.3,
+        "net_nok": 6445.6,
+        "recommended_nok": 9208.0,
+        "description": "Hopper\u2122 turning pads",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3PZ1VEKPD1WTK83PHRG2D",
+      "handle": "rampline-rampit-hopper",
+      "sku": "4562 EXT 1002 E",
+      "title": "Activity bars / Loose fills",
+      "option_values": [
+        [
+          "Component",
+          "Activity bars"
+        ],
+        [
+          "Surface",
+          "Loose fills"
+        ]
+      ],
+      "metadata": {
+        "article_code": "4562 EXT 1002 E",
+        "family": "Fully welded, and powdercoated activity bars and turning pads",
+        "family_discount": 0.3,
+        "net_nok": 35242.2,
+        "recommended_nok": 50346.0,
+        "description": "Rampit Hopper\u2122 activity bars (for loose fills) - RAL 1002 Sand Yellow (STD)",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3PZ1VEKPD1WTK83PHRG2D",
+      "handle": "rampline-rampit-hopper",
+      "sku": "4561 EXT 1002",
+      "title": "Rack / Loose fills",
+      "option_values": [
+        [
+          "Component",
+          "Rack"
+        ],
+        [
+          "Surface",
+          "Loose fills"
+        ]
+      ],
+      "metadata": {
+        "article_code": "4561 EXT 1002",
+        "family": "Fully welded, and powdercoated activity bars and turning pads",
+        "family_discount": 0.3,
+        "net_nok": 4470.2,
+        "recommended_nok": 6386.0,
+        "description": "Hopper\u2122 rack for loose fills",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3PZ1VEKPD1WTK83PHRG2D",
+      "handle": "rampline-rampit-hopper",
+      "sku": "4561 EXT-1 1002",
+      "title": "Turning pads / Loose fills",
+      "option_values": [
+        [
+          "Component",
+          "Turning pads"
+        ],
+        [
+          "Surface",
+          "Loose fills"
+        ]
+      ],
+      "metadata": {
+        "article_code": "4561 EXT-1 1002",
+        "family": "Fully welded, and powdercoated activity bars and turning pads",
+        "family_discount": 0.3,
+        "net_nok": 6445.6,
+        "recommended_nok": 9208.0,
+        "description": "Hopper\u2122 turning pads for loose fills",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "DELETE_PLACEHOLDER_VARIANT",
+      "product_id": "prod_01KNQ3PY0DJKE37NSSN1D8SDP2",
+      "handle": "rampline-rampit-storm-en",
+      "variant_id": "variant_01KNQ3PY1H575EYV2Z98JZ7CRW",
+      "sku": "7508"
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3PY0DJKE37NSSN1D8SDP2",
+      "handle": "rampline-rampit-storm-en",
+      "sku": "4556 9001",
+      "title": "Default",
+      "option_values": [],
+      "metadata": {
+        "article_code": "4556 9001",
+        "family": "Powder coated climbing pole, with bell on top",
+        "family_discount": 0.3,
+        "net_nok": 26821.2,
+        "recommended_nok": 38316.0,
+        "description": "Rampit Storm | Climbing pole, inkl anchoring system",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "DELETE_PLACEHOLDER_VARIANT",
+      "product_id": "prod_01KNQ3Q6RD32BDZY331E776W9Q",
+      "handle": "rampline-rampbow",
+      "variant_id": "variant_01KNQ3Q6SJC0K2NRPH1GX5KP13",
+      "sku": "25475"
+    },
+    {
+      "op": "DELETE_DEFAULT_OPTION",
+      "product_id": "prod_01KNQ3Q6RD32BDZY331E776W9Q",
+      "handle": "rampline-rampbow",
+      "option_id": "opt_01KNQ3Q6REKEQ2M8SM3FCN279C"
+    },
+    {
+      "op": "ADD_OPTION",
+      "product_id": "prod_01KNQ3Q6RD32BDZY331E776W9Q",
+      "handle": "rampline-rampbow",
+      "option_title": "Surface",
+      "values": [
+        "Loose fills",
+        "Wet pour"
+      ]
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q6RD32BDZY331E776W9Q",
+      "handle": "rampline-rampbow",
+      "sku": "4560 6011",
+      "title": "Wet pour",
+      "option_values": [
+        [
+          "Surface",
+          "Wet pour"
+        ]
+      ],
+      "metadata": {
+        "article_code": "4560 6011",
+        "family": "Powder coated balance arch",
+        "family_discount": 0.3,
+        "net_nok": 23681.7,
+        "recommended_nok": 33831.0,
+        "description": "Rampbow | Balance arch",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q6RD32BDZY331E776W9Q",
+      "handle": "rampline-rampbow",
+      "sku": "4560 6011 EXT",
+      "title": "Loose fills",
+      "option_values": [
+        [
+          "Surface",
+          "Loose fills"
+        ]
+      ],
+      "metadata": {
+        "article_code": "4560 6011 EXT",
+        "family": "Powder coated balance arch",
+        "family_discount": 0.3,
+        "net_nok": 26949.3,
+        "recommended_nok": 38499.0,
+        "description": "Rampbow | Balance arch for loose fills",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "DELETE_PLACEHOLDER_VARIANT",
+      "product_id": "prod_01KNQ3PYBRMC0ET0BRFTRCZS82",
+      "handle": "rampline-floating-bench",
+      "variant_id": "variant_01KNQ3PYCSMS8QZAP16HJGTB3K",
+      "sku": "8036"
+    },
+    {
+      "op": "DELETE_DEFAULT_OPTION",
+      "product_id": "prod_01KNQ3PYBRMC0ET0BRFTRCZS82",
+      "handle": "rampline-floating-bench",
+      "option_id": "opt_01KNQ3PYBRY46HCMBBVVCK78V0"
+    },
+    {
+      "op": "ADD_OPTION",
+      "product_id": "prod_01KNQ3PYBRMC0ET0BRFTRCZS82",
+      "handle": "rampline-floating-bench",
+      "option_title": "Type",
+      "values": [
+        "Bench",
+        "Customization / site adaptation",
+        "LED strip (per meter)",
+        "Rigging & operation"
+      ]
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3PYBRMC0ET0BRFTRCZS82",
+      "handle": "rampline-floating-bench",
+      "sku": "FB33",
+      "title": "Bench",
+      "option_values": [
+        [
+          "Type",
+          "Bench"
+        ]
+      ],
+      "metadata": {
+        "article_code": "FB33",
+        "family": "Individually adapted bench that floats and rolls through the landscape, inspiring the user to creative physical movements",
+        "family_discount": 0.15,
+        "net_nok": 12309.7,
+        "recommended_nok": 14482.0,
+        "description": "FloatingBench\u2122 |  Acticity bench incl installation. Minimum delivery is 30 lm (unit = meter)",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3PYBRMC0ET0BRFTRCZS82",
+      "handle": "rampline-floating-bench",
+      "sku": "FB33LED",
+      "title": "LED strip (per meter)",
+      "option_values": [
+        [
+          "Type",
+          "LED strip (per meter)"
+        ]
+      ],
+      "metadata": {
+        "article_code": "FB33LED",
+        "family": "Individually adapted bench that floats and rolls through the landscape, inspiring the user to creative physical movements",
+        "family_discount": 0.15,
+        "net_nok": 4233.0,
+        "recommended_nok": 4980.0,
+        "description": "LED-strip| incl. drivers (unit = meter)",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3PYBRMC0ET0BRFTRCZS82",
+      "handle": "rampline-floating-bench",
+      "sku": "FB33-1",
+      "title": "Customization / site adaptation",
+      "option_values": [
+        [
+          "Type",
+          "Customization / site adaptation"
+        ]
+      ],
+      "metadata": {
+        "article_code": "FB33-1",
+        "family": "Individually adapted bench that floats and rolls through the landscape, inspiring the user to creative physical movements",
+        "family_discount": 0.15,
+        "net_nok": 20808.0,
+        "recommended_nok": 20808.0,
+        "description": "Customization/site addaption",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3PYBRMC0ET0BRFTRCZS82",
+      "handle": "rampline-floating-bench",
+      "sku": "FB33-2",
+      "title": "Rigging & operation",
+      "option_values": [
+        [
+          "Type",
+          "Rigging & operation"
+        ]
+      ],
+      "metadata": {
+        "article_code": "FB33-2",
+        "family": "Individually adapted bench that floats and rolls through the landscape, inspiring the user to creative physical movements",
+        "family_discount": 0.15,
+        "net_nok": 20808.0,
+        "recommended_nok": 20808.0,
+        "description": "Rigging & Operation",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "DELETE_PLACEHOLDER_VARIANT",
+      "product_id": "prod_01KNQ3QD2GBH3E6ZKMBNBYHHJR",
+      "handle": "rampline-shockdeck",
+      "variant_id": "variant_01KNQ3QD3YJEXHVBTQ19BH3TD1",
+      "sku": "36172"
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3QD2GBH3E6ZKMBNBYHHJR",
+      "handle": "rampline-shockdeck",
+      "sku": "SD 02",
+      "title": "U-piece",
+      "option_values": [],
+      "metadata": {
+        "article_code": "SD 02",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 72.8,
+        "recommended_nok": 104.0,
+        "description": "ShockDeck\u2122 U-piece | shock absorbing component of natural rubber",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "DELETE_PLACEHOLDER_VARIANT",
+      "product_id": "prod_01KNQ3Q37RWH4RFHFVSTFTD9YE",
+      "handle": "rampline-kangaroo",
+      "variant_id": "variant_01KNQ3Q38SDHCDXV1GM0SARBA3",
+      "sku": "24432"
+    },
+    {
+      "op": "DELETE_DEFAULT_OPTION",
+      "product_id": "prod_01KNQ3Q37RWH4RFHFVSTFTD9YE",
+      "handle": "rampline-kangaroo",
+      "option_id": "opt_01KNQ3Q37SCSCX6SY8DS0CHZ4B"
+    },
+    {
+      "op": "ADD_OPTION",
+      "product_id": "prod_01KNQ3Q37RWH4RFHFVSTFTD9YE",
+      "handle": "rampline-kangaroo",
+      "option_title": "Surface",
+      "values": [
+        "Artificial grass",
+        "Loose fills",
+        "Wet pour"
+      ]
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q37RWH4RFHFVSTFTD9YE",
+      "handle": "rampline-kangaroo",
+      "sku": "BP 01",
+      "title": "Wet pour",
+      "option_values": [
+        [
+          "Surface",
+          "Wet pour"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 01",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 343515.0,
+        "recommended_nok": 367052.0,
+        "description": "Kangaaro",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q37RWH4RFHFVSTFTD9YE",
+      "handle": "rampline-kangaroo",
+      "sku": "BP 01 LF",
+      "title": "Loose fills",
+      "option_values": [
+        [
+          "Surface",
+          "Loose fills"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 01 LF",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 349371.0,
+        "recommended_nok": 375418.0,
+        "description": "- for installation in grass/loose fills",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q37RWH4RFHFVSTFTD9YE",
+      "handle": "rampline-kangaroo",
+      "sku": "BP 01 AG",
+      "title": "Artificial grass",
+      "option_values": [
+        [
+          "Surface",
+          "Artificial grass"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 01 AG",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 343515.0,
+        "recommended_nok": 367052.0,
+        "description": "- for installation in artificial grass",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "DELETE_PLACEHOLDER_VARIANT",
+      "product_id": "prod_01KNQ3Q43MAVKZBW4CHNEVJ752",
+      "handle": "rampline-jane-jump",
+      "variant_id": "variant_01KNQ3Q44N83X4BYEDBTPB943F",
+      "sku": "24459"
+    },
+    {
+      "op": "DELETE_DEFAULT_OPTION",
+      "product_id": "prod_01KNQ3Q43MAVKZBW4CHNEVJ752",
+      "handle": "rampline-jane-jump",
+      "option_id": "opt_01KNQ3Q43NV07BS5DXJBP3B5P2"
+    },
+    {
+      "op": "ADD_OPTION",
+      "product_id": "prod_01KNQ3Q43MAVKZBW4CHNEVJ752",
+      "handle": "rampline-jane-jump",
+      "option_title": "Surface",
+      "values": [
+        "Artificial grass",
+        "Loose fills",
+        "Wet pour"
+      ]
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q43MAVKZBW4CHNEVJ752",
+      "handle": "rampline-jane-jump",
+      "sku": "BP 03",
+      "title": "Wet pour",
+      "option_values": [
+        [
+          "Surface",
+          "Wet pour"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 03",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 196431.0,
+        "recommended_nok": 262946.0,
+        "description": "Jane Jump",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q43MAVKZBW4CHNEVJ752",
+      "handle": "rampline-jane-jump",
+      "sku": "BP 03 LF",
+      "title": "Loose fills",
+      "option_values": [
+        [
+          "Surface",
+          "Loose fills"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 03 LF",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 208743.0,
+        "recommended_nok": 280535.0,
+        "description": "- for installation in grass/loose fills",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q43MAVKZBW4CHNEVJ752",
+      "handle": "rampline-jane-jump",
+      "sku": "BP 03 AG",
+      "title": "Artificial grass",
+      "option_values": [
+        [
+          "Surface",
+          "Artificial grass"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 03 AG",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 200082.0,
+        "recommended_nok": 268162.0,
+        "description": "- for installation in artificial grass",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "DELETE_PLACEHOLDER_VARIANT",
+      "product_id": "prod_01KNQ3Q2N1MDM04CGMBKW2QMYD",
+      "handle": "rampline-monkey-business",
+      "variant_id": "variant_01KNQ3Q2P424B917SK35X4XHXP",
+      "sku": "24414"
+    },
+    {
+      "op": "DELETE_DEFAULT_OPTION",
+      "product_id": "prod_01KNQ3Q2N1MDM04CGMBKW2QMYD",
+      "handle": "rampline-monkey-business",
+      "option_id": "opt_01KNQ3Q2N1PNNE5ZCFMWATQVY3"
+    },
+    {
+      "op": "ADD_OPTION",
+      "product_id": "prod_01KNQ3Q2N1MDM04CGMBKW2QMYD",
+      "handle": "rampline-monkey-business",
+      "option_title": "Surface",
+      "values": [
+        "Artificial grass",
+        "Loose fills",
+        "Wet pour"
+      ]
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q2N1MDM04CGMBKW2QMYD",
+      "handle": "rampline-monkey-business",
+      "sku": "BP 05",
+      "title": "Wet pour",
+      "option_values": [
+        [
+          "Surface",
+          "Wet pour"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 05",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 159512.0,
+        "recommended_nok": 227875.0,
+        "description": "Monkey Business",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q2N1MDM04CGMBKW2QMYD",
+      "handle": "rampline-monkey-business",
+      "sku": "BP 05 LF",
+      "title": "Loose fills",
+      "option_values": [
+        [
+          "Surface",
+          "Loose fills"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 05 LF",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 167997.0,
+        "recommended_nok": 239996.0,
+        "description": "- for installation in grass/loose fills",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q2N1MDM04CGMBKW2QMYD",
+      "handle": "rampline-monkey-business",
+      "sku": "BP 05 AG",
+      "title": "Artificial grass",
+      "option_values": [
+        [
+          "Surface",
+          "Artificial grass"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 05 AG",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 159512.0,
+        "recommended_nok": 227875.0,
+        "description": "- for installation in artificial grass",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "DELETE_PLACEHOLDER_VARIANT",
+      "product_id": "prod_01KNQ3Q6EA9VCKZNJ7Y6RMP6ZC",
+      "handle": "rampline-all-in",
+      "variant_id": "variant_01KNQ3Q6FF70VVDG75AGK55H9X",
+      "sku": "24540"
+    },
+    {
+      "op": "DELETE_DEFAULT_OPTION",
+      "product_id": "prod_01KNQ3Q6EA9VCKZNJ7Y6RMP6ZC",
+      "handle": "rampline-all-in",
+      "option_id": "opt_01KNQ3Q6EBQR78Q3WPK4QJB6Y1"
+    },
+    {
+      "op": "ADD_OPTION",
+      "product_id": "prod_01KNQ3Q6EA9VCKZNJ7Y6RMP6ZC",
+      "handle": "rampline-all-in",
+      "option_title": "Surface",
+      "values": [
+        "Artificial grass",
+        "Loose fills",
+        "Wet pour"
+      ]
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q6EA9VCKZNJ7Y6RMP6ZC",
+      "handle": "rampline-all-in",
+      "sku": "BP 06",
+      "title": "Wet pour",
+      "option_values": [
+        [
+          "Surface",
+          "Wet pour"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 06",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 591053.0,
+        "recommended_nok": 773685.0,
+        "description": "All'In",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q6EA9VCKZNJ7Y6RMP6ZC",
+      "handle": "rampline-all-in",
+      "sku": "BP 06 LF",
+      "title": "Loose fills",
+      "option_values": [
+        [
+          "Surface",
+          "Loose fills"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 06 LF",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 626255.0,
+        "recommended_nok": 823973.0,
+        "description": "- for installation in grass/loose fills",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q6EA9VCKZNJ7Y6RMP6ZC",
+      "handle": "rampline-all-in",
+      "sku": "BP 06 AG",
+      "title": "Artificial grass",
+      "option_values": [
+        [
+          "Surface",
+          "Artificial grass"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 06 AG",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 600267.0,
+        "recommended_nok": 786848.0,
+        "description": "- for installation in artificial grass",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "DELETE_PLACEHOLDER_VARIANT",
+      "product_id": "prod_01KNQ3Q0W4M5BR27MG9XDWS0KF",
+      "handle": "rampline-the-floor-is-lava",
+      "variant_id": "variant_01KNQ3Q0X4P6V0STGEZPMRNM7Q",
+      "sku": "24320"
+    },
+    {
+      "op": "DELETE_DEFAULT_OPTION",
+      "product_id": "prod_01KNQ3Q0W4M5BR27MG9XDWS0KF",
+      "handle": "rampline-the-floor-is-lava",
+      "option_id": "opt_01KNQ3Q0W5DMJXC47JF3JBE6G8"
+    },
+    {
+      "op": "ADD_OPTION",
+      "product_id": "prod_01KNQ3Q0W4M5BR27MG9XDWS0KF",
+      "handle": "rampline-the-floor-is-lava",
+      "option_title": "Surface",
+      "values": [
+        "Artificial grass",
+        "Loose fills",
+        "Wet pour"
+      ]
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q0W4M5BR27MG9XDWS0KF",
+      "handle": "rampline-the-floor-is-lava",
+      "sku": "BP 08",
+      "title": "Wet pour",
+      "option_values": [
+        [
+          "Surface",
+          "Wet pour"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 08",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 350438.0,
+        "recommended_nok": 500626.0,
+        "description": "The floor is lava",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q0W4M5BR27MG9XDWS0KF",
+      "handle": "rampline-the-floor-is-lava",
+      "sku": "BP 08 LF",
+      "title": "Loose fills",
+      "option_values": [
+        [
+          "Surface",
+          "Loose fills"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 08 LF",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 398212.0,
+        "recommended_nok": 568874.0,
+        "description": "- for installation in grass/loose fills",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q0W4M5BR27MG9XDWS0KF",
+      "handle": "rampline-the-floor-is-lava",
+      "sku": "BP 08 AG",
+      "title": "Artificial grass",
+      "option_values": [
+        [
+          "Surface",
+          "Artificial grass"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 08 AG",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 365863.0,
+        "recommended_nok": 522662.0,
+        "description": "- for installation in artificial grass",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "DELETE_PLACEHOLDER_VARIANT",
+      "product_id": "prod_01KNQ3Q07FQE5F0EDK26ATYX6X",
+      "handle": "rampline-dont-step-into-the-water",
+      "variant_id": "variant_01KNQ3Q08EHKCMYN19GJX29DZB",
+      "sku": "24308"
+    },
+    {
+      "op": "DELETE_DEFAULT_OPTION",
+      "product_id": "prod_01KNQ3Q07FQE5F0EDK26ATYX6X",
+      "handle": "rampline-dont-step-into-the-water",
+      "option_id": "opt_01KNQ3Q07GSGWGBW2YK305YHCG"
+    },
+    {
+      "op": "ADD_OPTION",
+      "product_id": "prod_01KNQ3Q07FQE5F0EDK26ATYX6X",
+      "handle": "rampline-dont-step-into-the-water",
+      "option_title": "Surface",
+      "values": [
+        "Artificial grass",
+        "Loose fills",
+        "Wet pour"
+      ]
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q07FQE5F0EDK26ATYX6X",
+      "handle": "rampline-dont-step-into-the-water",
+      "sku": "BP 10",
+      "title": "Wet pour",
+      "option_values": [
+        [
+          "Surface",
+          "Wet pour"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 10",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 113833.0,
+        "recommended_nok": 162619.0,
+        "description": "Don't step \u2026.",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q07FQE5F0EDK26ATYX6X",
+      "handle": "rampline-dont-step-into-the-water",
+      "sku": "BP 10 LF",
+      "title": "Loose fills",
+      "option_values": [
+        [
+          "Surface",
+          "Loose fills"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 10 LF",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 121654.0,
+        "recommended_nok": 173791.0,
+        "description": "- for installation in grass/loose fills",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q07FQE5F0EDK26ATYX6X",
+      "handle": "rampline-dont-step-into-the-water",
+      "sku": "BP 10 AG",
+      "title": "Artificial grass",
+      "option_values": [
+        [
+          "Surface",
+          "Artificial grass"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 10 AG",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 116905.0,
+        "recommended_nok": 167007.0,
+        "description": "- for installation in artificial grass",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "DELETE_PLACEHOLDER_VARIANT",
+      "product_id": "prod_01KNQ3Q3GTMGFNGC5DJDXZHV3G",
+      "handle": "rampline-junior-power-ii",
+      "variant_id": "variant_01KNQ3Q3HYMGTAEZSMH9Q8RZ8Y",
+      "sku": "24441"
+    },
+    {
+      "op": "DELETE_DEFAULT_OPTION",
+      "product_id": "prod_01KNQ3Q3GTMGFNGC5DJDXZHV3G",
+      "handle": "rampline-junior-power-ii",
+      "option_id": "opt_01KNQ3Q3GVC65D62BBRFK4379C"
+    },
+    {
+      "op": "ADD_OPTION",
+      "product_id": "prod_01KNQ3Q3GTMGFNGC5DJDXZHV3G",
+      "handle": "rampline-junior-power-ii",
+      "option_title": "Surface",
+      "values": [
+        "Artificial grass",
+        "Loose fills",
+        "Wet pour"
+      ]
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q3GTMGFNGC5DJDXZHV3G",
+      "handle": "rampline-junior-power-ii",
+      "sku": "BP 11",
+      "title": "Wet pour",
+      "option_values": [
+        [
+          "Surface",
+          "Wet pour"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 11",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 252168.0,
+        "recommended_nok": 360240.0,
+        "description": "Junior Power 2",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q3GTMGFNGC5DJDXZHV3G",
+      "handle": "rampline-junior-power-ii",
+      "sku": "BP 11 LF",
+      "title": "Loose fills",
+      "option_values": [
+        [
+          "Surface",
+          "Loose fills"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 11 LF",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 282922.0,
+        "recommended_nok": 404174.0,
+        "description": "- for installation in grass/loose fills",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q3GTMGFNGC5DJDXZHV3G",
+      "handle": "rampline-junior-power-ii",
+      "sku": "BP 11 AG",
+      "title": "Artificial grass",
+      "option_values": [
+        [
+          "Surface",
+          "Artificial grass"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 11 AG",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 260546.0,
+        "recommended_nok": 372208.0,
+        "description": "- for installation in artificial grass",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "DELETE_PLACEHOLDER_VARIANT",
+      "product_id": "prod_01KNQ3Q2YFDAP3PG22VKM99G4P",
+      "handle": "rampline-marathon-play",
+      "variant_id": "variant_01KNQ3Q2ZK9QQTMJYJ9JM4RVW8",
+      "sku": "24423"
+    },
+    {
+      "op": "DELETE_DEFAULT_OPTION",
+      "product_id": "prod_01KNQ3Q2YFDAP3PG22VKM99G4P",
+      "handle": "rampline-marathon-play",
+      "option_id": "opt_01KNQ3Q2YG09PS2XW6T6G5NKJT"
+    },
+    {
+      "op": "ADD_OPTION",
+      "product_id": "prod_01KNQ3Q2YFDAP3PG22VKM99G4P",
+      "handle": "rampline-marathon-play",
+      "option_title": "Surface",
+      "values": [
+        "Artificial grass",
+        "Loose fills",
+        "Wet pour"
+      ]
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q2YFDAP3PG22VKM99G4P",
+      "handle": "rampline-marathon-play",
+      "sku": "BP 15",
+      "title": "Wet pour",
+      "option_values": [
+        [
+          "Surface",
+          "Wet pour"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 15",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 1155325.0,
+        "recommended_nok": 1321055.0,
+        "description": "Marathon Play",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q2YFDAP3PG22VKM99G4P",
+      "handle": "rampline-marathon-play",
+      "sku": "BP 15 LF",
+      "title": "Loose fills",
+      "option_values": [
+        [
+          "Surface",
+          "Loose fills"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 15 LF",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 1199380.0,
+        "recommended_nok": 1383990.0,
+        "description": "- for installation in grass/loose fills",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q2YFDAP3PG22VKM99G4P",
+      "handle": "rampline-marathon-play",
+      "sku": "BP 15 AG",
+      "title": "Artificial grass",
+      "option_values": [
+        [
+          "Surface",
+          "Artificial grass"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 15 AG",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 1169351.0,
+        "recommended_nok": 1341092.0,
+        "description": "- for installation in artificial grass",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "DELETE_PLACEHOLDER_VARIANT",
+      "product_id": "prod_01KNQ3Q3TQ5MWQYTXR0KZ87W4G",
+      "handle": "rampline-junior-power",
+      "variant_id": "variant_01KNQ3Q3VQ4R93XXY11SVY82Y8",
+      "sku": "24450"
+    },
+    {
+      "op": "DELETE_DEFAULT_OPTION",
+      "product_id": "prod_01KNQ3Q3TQ5MWQYTXR0KZ87W4G",
+      "handle": "rampline-junior-power",
+      "option_id": "opt_01KNQ3Q3TRHBF10W258WREQ0A5"
+    },
+    {
+      "op": "ADD_OPTION",
+      "product_id": "prod_01KNQ3Q3TQ5MWQYTXR0KZ87W4G",
+      "handle": "rampline-junior-power",
+      "option_title": "Surface",
+      "values": [
+        "Artificial grass",
+        "Loose fills",
+        "Wet pour"
+      ]
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q3TQ5MWQYTXR0KZ87W4G",
+      "handle": "rampline-junior-power",
+      "sku": "BP 17",
+      "title": "Wet pour",
+      "option_values": [
+        [
+          "Surface",
+          "Wet pour"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 17",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 139580.0,
+        "recommended_nok": 199400.0,
+        "description": "Junior Power",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q3TQ5MWQYTXR0KZ87W4G",
+      "handle": "rampline-junior-power",
+      "sku": "BP 17 LF",
+      "title": "Loose fills",
+      "option_values": [
+        [
+          "Surface",
+          "Loose fills"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 17 LF",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 153579.0,
+        "recommended_nok": 219398.0,
+        "description": "- for installation in grass/loose fills",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q3TQ5MWQYTXR0KZ87W4G",
+      "handle": "rampline-junior-power",
+      "sku": "BP 17 AG",
+      "title": "Artificial grass",
+      "option_values": [
+        [
+          "Surface",
+          "Artificial grass"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 17 AG",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 144477.0,
+        "recommended_nok": 206396.0,
+        "description": "- for installation in artificial grass",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "DELETE_PLACEHOLDER_VARIANT",
+      "product_id": "prod_01KNQ3Q2BG3AANSC8F1WBB7730",
+      "handle": "rampline-never-stop-playing",
+      "variant_id": "variant_01KNQ3Q2CGBNN7SR9E2EM9A93Z",
+      "sku": "24404"
+    },
+    {
+      "op": "DELETE_DEFAULT_OPTION",
+      "product_id": "prod_01KNQ3Q2BG3AANSC8F1WBB7730",
+      "handle": "rampline-never-stop-playing",
+      "option_id": "opt_01KNQ3Q2BHB17SGDAYBGSXRDVH"
+    },
+    {
+      "op": "ADD_OPTION",
+      "product_id": "prod_01KNQ3Q2BG3AANSC8F1WBB7730",
+      "handle": "rampline-never-stop-playing",
+      "option_title": "Surface",
+      "values": [
+        "Artificial grass",
+        "Loose fills",
+        "Wet pour"
+      ]
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q2BG3AANSC8F1WBB7730",
+      "handle": "rampline-never-stop-playing",
+      "sku": "BP 18",
+      "title": "Wet pour",
+      "option_values": [
+        [
+          "Surface",
+          "Wet pour"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 18",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 426855.0,
+        "recommended_nok": 574454.0,
+        "description": "Never Stop Playing",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q2BG3AANSC8F1WBB7730",
+      "handle": "rampline-never-stop-playing",
+      "sku": "BP 18 LF",
+      "title": "Loose fills",
+      "option_values": [
+        [
+          "Surface",
+          "Loose fills"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 18 LF",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 450580.0,
+        "recommended_nok": 608347.0,
+        "description": "- for installation in grass/loose fills",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q2BG3AANSC8F1WBB7730",
+      "handle": "rampline-never-stop-playing",
+      "sku": "BP 18 AG",
+      "title": "Artificial grass",
+      "option_values": [
+        [
+          "Surface",
+          "Artificial grass"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 18 AG",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 430591.0,
+        "recommended_nok": 579792.0,
+        "description": "- for installation in artificial grass",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "DELETE_PLACEHOLDER_VARIANT",
+      "product_id": "prod_01KNQ3Q64WYH74RJZDYCXP62EN",
+      "handle": "rampline-classic-jump",
+      "variant_id": "variant_01KNQ3Q65ZFCEXZ2JA2R5BDVCB",
+      "sku": "24531"
+    },
+    {
+      "op": "DELETE_DEFAULT_OPTION",
+      "product_id": "prod_01KNQ3Q64WYH74RJZDYCXP62EN",
+      "handle": "rampline-classic-jump",
+      "option_id": "opt_01KNQ3Q64WZJFZRJ7HNFZRHB7C"
+    },
+    {
+      "op": "ADD_OPTION",
+      "product_id": "prod_01KNQ3Q64WYH74RJZDYCXP62EN",
+      "handle": "rampline-classic-jump",
+      "option_title": "Surface",
+      "values": [
+        "Artificial grass",
+        "Loose fills",
+        "Wet pour"
+      ]
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q64WYH74RJZDYCXP62EN",
+      "handle": "rampline-classic-jump",
+      "sku": "BP 19",
+      "title": "Wet pour",
+      "option_values": [
+        [
+          "Surface",
+          "Wet pour"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 19",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 159708.0,
+        "recommended_nok": 228155.0,
+        "description": "Classic Jump",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q64WYH74RJZDYCXP62EN",
+      "handle": "rampline-classic-jump",
+      "sku": "BP 19 LF",
+      "title": "Loose fills",
+      "option_values": [
+        [
+          "Surface",
+          "Loose fills"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 19 LF",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 173385.0,
+        "recommended_nok": 247693.0,
+        "description": "- for installation in grass/loose fills",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q64WYH74RJZDYCXP62EN",
+      "handle": "rampline-classic-jump",
+      "sku": "BP 19 AG",
+      "title": "Artificial grass",
+      "option_values": [
+        [
+          "Surface",
+          "Artificial grass"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 19 AG",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 162695.0,
+        "recommended_nok": 232421.0,
+        "description": "- for installation in artificial grass",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "DELETE_PLACEHOLDER_VARIANT",
+      "product_id": "prod_01KNQ3Q4P0M2GMX702R4NFH653",
+      "handle": "rampline-fearless",
+      "variant_id": "variant_01KNQ3Q4Q3ARJ1CM0VETEA79RJ",
+      "sku": "24486"
+    },
+    {
+      "op": "DELETE_DEFAULT_OPTION",
+      "product_id": "prod_01KNQ3Q4P0M2GMX702R4NFH653",
+      "handle": "rampline-fearless",
+      "option_id": "opt_01KNQ3Q4P0R4TBH6FN66NWYVNS"
+    },
+    {
+      "op": "ADD_OPTION",
+      "product_id": "prod_01KNQ3Q4P0M2GMX702R4NFH653",
+      "handle": "rampline-fearless",
+      "option_title": "Surface",
+      "values": [
+        "Artificial grass",
+        "Loose fills",
+        "Wet pour"
+      ]
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q4P0M2GMX702R4NFH653",
+      "handle": "rampline-fearless",
+      "sku": "BP 21",
+      "title": "Wet pour",
+      "option_values": [
+        [
+          "Surface",
+          "Wet pour"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 21",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 350969.0,
+        "recommended_nok": 466046.0,
+        "description": "Fearless",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q4P0M2GMX702R4NFH653",
+      "handle": "rampline-fearless",
+      "sku": "BP 21 LF",
+      "title": "Loose fills",
+      "option_values": [
+        [
+          "Surface",
+          "Loose fills"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 21 LF",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 381651.0,
+        "recommended_nok": 509877.0,
+        "description": "- for installation in grass/loose fills",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q4P0M2GMX702R4NFH653",
+      "handle": "rampline-fearless",
+      "sku": "BP 21 AG",
+      "title": "Artificial grass",
+      "option_values": [
+        [
+          "Surface",
+          "Artificial grass"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 21 AG",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 359518.0,
+        "recommended_nok": 478259.0,
+        "description": "- for installation in artificial grass",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "DELETE_PLACEHOLDER_VARIANT",
+      "product_id": "prod_01KNQ3Q5JDPYAN021MQRWYK3RC",
+      "handle": "rampline-crouching-tiger",
+      "variant_id": "variant_01KNQ3Q5KBK1DSB1EKSYY4CBNH",
+      "sku": "24513"
+    },
+    {
+      "op": "DELETE_DEFAULT_OPTION",
+      "product_id": "prod_01KNQ3Q5JDPYAN021MQRWYK3RC",
+      "handle": "rampline-crouching-tiger",
+      "option_id": "opt_01KNQ3Q5JEM9XEKKAQAPVPCF62"
+    },
+    {
+      "op": "ADD_OPTION",
+      "product_id": "prod_01KNQ3Q5JDPYAN021MQRWYK3RC",
+      "handle": "rampline-crouching-tiger",
+      "option_title": "Surface",
+      "values": [
+        "Artificial grass",
+        "Loose fills",
+        "Wet pour"
+      ]
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q5JDPYAN021MQRWYK3RC",
+      "handle": "rampline-crouching-tiger",
+      "sku": "BP 22",
+      "title": "Wet pour",
+      "option_values": [
+        [
+          "Surface",
+          "Wet pour"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 22",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 234125.0,
+        "recommended_nok": 334464.0,
+        "description": "Crouching Tiger",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q5JDPYAN021MQRWYK3RC",
+      "handle": "rampline-crouching-tiger",
+      "sku": "BP 22 LF",
+      "title": "Loose fills",
+      "option_values": [
+        [
+          "Surface",
+          "Loose fills"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 22 LF",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 262121.0,
+        "recommended_nok": 374459.0,
+        "description": "- for installation in grass/loose fills",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q5JDPYAN021MQRWYK3RC",
+      "handle": "rampline-crouching-tiger",
+      "sku": "BP 22 AG",
+      "title": "Artificial grass",
+      "option_values": [
+        [
+          "Surface",
+          "Artificial grass"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 22 AG",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 243834.0,
+        "recommended_nok": 348334.0,
+        "description": "- for installation in artificial grass",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "DELETE_PLACEHOLDER_VARIANT",
+      "product_id": "prod_01KNQ3Q5VECVNKD1ECW13MZQNX",
+      "handle": "rampline-cliffhanger",
+      "variant_id": "variant_01KNQ3Q5WJF4PKY8Q8DJ9THHYJ",
+      "sku": "24522"
+    },
+    {
+      "op": "DELETE_DEFAULT_OPTION",
+      "product_id": "prod_01KNQ3Q5VECVNKD1ECW13MZQNX",
+      "handle": "rampline-cliffhanger",
+      "option_id": "opt_01KNQ3Q5VF0VRWEYB3Z392CD3D"
+    },
+    {
+      "op": "ADD_OPTION",
+      "product_id": "prod_01KNQ3Q5VECVNKD1ECW13MZQNX",
+      "handle": "rampline-cliffhanger",
+      "option_title": "Surface",
+      "values": [
+        "Artificial grass",
+        "Loose fills",
+        "Wet pour"
+      ]
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q5VECVNKD1ECW13MZQNX",
+      "handle": "rampline-cliffhanger",
+      "sku": "BP 24",
+      "title": "Wet pour",
+      "option_values": [
+        [
+          "Surface",
+          "Wet pour"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 24",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 559206.0,
+        "recommended_nok": 728189.0,
+        "description": "Cliffhanger",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q5VECVNKD1ECW13MZQNX",
+      "handle": "rampline-cliffhanger",
+      "sku": "BP 24 LF",
+      "title": "Loose fills",
+      "option_values": [
+        [
+          "Surface",
+          "Loose fills"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 24 LF",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 596061.0,
+        "recommended_nok": 780839.0,
+        "description": "- for installation in grass/loose fills",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q5VECVNKD1ECW13MZQNX",
+      "handle": "rampline-cliffhanger",
+      "sku": "BP 24 AG",
+      "title": "Artificial grass",
+      "option_values": [
+        [
+          "Surface",
+          "Artificial grass"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 24 AG",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 567174.0,
+        "recommended_nok": 739572.0,
+        "description": "- for installation in artificial grass",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "DELETE_PLACEHOLDER_VARIANT",
+      "product_id": "prod_01KNQ3Q1AXR41GNYBKKXHQG3DK",
+      "handle": "rampline-take-5",
+      "variant_id": "variant_01KNQ3Q1BYFKSP34B18F21SRHB",
+      "sku": "24339"
+    },
+    {
+      "op": "DELETE_DEFAULT_OPTION",
+      "product_id": "prod_01KNQ3Q1AXR41GNYBKKXHQG3DK",
+      "handle": "rampline-take-5",
+      "option_id": "opt_01KNQ3Q1AYHCG4PSWY14S4CGCQ"
+    },
+    {
+      "op": "ADD_OPTION",
+      "product_id": "prod_01KNQ3Q1AXR41GNYBKKXHQG3DK",
+      "handle": "rampline-take-5",
+      "option_title": "Surface",
+      "values": [
+        "Artificial grass",
+        "Loose fills",
+        "Wet pour"
+      ]
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q1AXR41GNYBKKXHQG3DK",
+      "handle": "rampline-take-5",
+      "sku": "BP 25",
+      "title": "Wet pour",
+      "option_values": [
+        [
+          "Surface",
+          "Wet pour"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 25",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 225214.0,
+        "recommended_nok": 321734.0,
+        "description": "Take 5",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q1AXR41GNYBKKXHQG3DK",
+      "handle": "rampline-take-5",
+      "sku": "BP 25 LF",
+      "title": "Loose fills",
+      "option_values": [
+        [
+          "Surface",
+          "Loose fills"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 25 LF",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 248892.0,
+        "recommended_nok": 355560.0,
+        "description": "- for installation in grass/loose fills",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q1AXR41GNYBKKXHQG3DK",
+      "handle": "rampline-take-5",
+      "sku": "BP 25 AG",
+      "title": "Artificial grass",
+      "option_values": [
+        [
+          "Surface",
+          "Artificial grass"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 25 AG",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 230776.0,
+        "recommended_nok": 329680.0,
+        "description": "- for installation in artificial grass",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "DELETE_PLACEHOLDER_VARIANT",
+      "product_id": "prod_01KNQ3Q1PYKXNZA7PGM9VVKMKR",
+      "handle": "rampline-pulse-zone",
+      "variant_id": "variant_01KNQ3Q1R086XN501GGC1GEFSN",
+      "sku": "24377"
+    },
+    {
+      "op": "DELETE_DEFAULT_OPTION",
+      "product_id": "prod_01KNQ3Q1PYKXNZA7PGM9VVKMKR",
+      "handle": "rampline-pulse-zone",
+      "option_id": "opt_01KNQ3Q1PZ3T316ZK0P854JTSB"
+    },
+    {
+      "op": "ADD_OPTION",
+      "product_id": "prod_01KNQ3Q1PYKXNZA7PGM9VVKMKR",
+      "handle": "rampline-pulse-zone",
+      "option_title": "Surface",
+      "values": [
+        "Artificial grass",
+        "Loose fills",
+        "Wet pour"
+      ]
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q1PYKXNZA7PGM9VVKMKR",
+      "handle": "rampline-pulse-zone",
+      "sku": "BP 27",
+      "title": "Wet pour",
+      "option_values": [
+        [
+          "Surface",
+          "Wet pour"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 27",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 237362.0,
+        "recommended_nok": 321420.0,
+        "description": "Pulse Zone",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q1PYKXNZA7PGM9VVKMKR",
+      "handle": "rampline-pulse-zone",
+      "sku": "BP 27 LF",
+      "title": "Loose fills",
+      "option_values": [
+        [
+          "Surface",
+          "Loose fills"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 27 LF",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 261127.0,
+        "recommended_nok": 355369.0,
+        "description": "- for installation in grass/loose fills",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q1PYKXNZA7PGM9VVKMKR",
+      "handle": "rampline-pulse-zone",
+      "sku": "BP 27 AG",
+      "title": "Artificial grass",
+      "option_values": [
+        [
+          "Surface",
+          "Artificial grass"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 27 AG",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 243590.0,
+        "recommended_nok": 330317.0,
+        "description": "- for installation in artificial grass",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "DELETE_PLACEHOLDER_VARIANT",
+      "product_id": "prod_01KNQ3Q4CR772KXTRM90W6W05H",
+      "handle": "rampline-hunting-high-and-low",
+      "variant_id": "variant_01KNQ3Q4DS0MX3XW824HB88M4J",
+      "sku": "24468"
+    },
+    {
+      "op": "DELETE_DEFAULT_OPTION",
+      "product_id": "prod_01KNQ3Q4CR772KXTRM90W6W05H",
+      "handle": "rampline-hunting-high-and-low",
+      "option_id": "opt_01KNQ3Q4CSN02CYEVESDEN8SF1"
+    },
+    {
+      "op": "ADD_OPTION",
+      "product_id": "prod_01KNQ3Q4CR772KXTRM90W6W05H",
+      "handle": "rampline-hunting-high-and-low",
+      "option_title": "Surface",
+      "values": [
+        "Artificial grass",
+        "Loose fills",
+        "Wet pour"
+      ]
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q4CR772KXTRM90W6W05H",
+      "handle": "rampline-hunting-high-and-low",
+      "sku": "BP 30",
+      "title": "Wet pour",
+      "option_values": [
+        [
+          "Surface",
+          "Wet pour"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 30",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 419939.0,
+        "recommended_nok": 546905.0,
+        "description": "Hunting H&L",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q4CR772KXTRM90W6W05H",
+      "handle": "rampline-hunting-high-and-low",
+      "sku": "BP 30 LF",
+      "title": "Loose fills",
+      "option_values": [
+        [
+          "Surface",
+          "Loose fills"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 30 LF",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 452774.0,
+        "recommended_nok": 593812.0,
+        "description": "- for installation in grass/loose fills",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q4CR772KXTRM90W6W05H",
+      "handle": "rampline-hunting-high-and-low",
+      "sku": "BP 30 AG",
+      "title": "Artificial grass",
+      "option_values": [
+        [
+          "Surface",
+          "Artificial grass"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 30 AG",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 429153.0,
+        "recommended_nok": 560068.0,
+        "description": "- for installation in artificial grass",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "DELETE_PLACEHOLDER_VARIANT",
+      "product_id": "prod_01KNQ3Q58098ZYQXR2YK3YZJVQ",
+      "handle": "rampline-defying-gravity",
+      "variant_id": "variant_01KNQ3Q58ZZSBWEKWBPSE0JTM2",
+      "sku": "24504"
+    },
+    {
+      "op": "DELETE_DEFAULT_OPTION",
+      "product_id": "prod_01KNQ3Q58098ZYQXR2YK3YZJVQ",
+      "handle": "rampline-defying-gravity",
+      "option_id": "opt_01KNQ3Q580KR60V0B9S295MXB5"
+    },
+    {
+      "op": "ADD_OPTION",
+      "product_id": "prod_01KNQ3Q58098ZYQXR2YK3YZJVQ",
+      "handle": "rampline-defying-gravity",
+      "option_title": "Surface",
+      "values": [
+        "Artificial grass",
+        "Loose fills",
+        "Wet pour"
+      ]
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q58098ZYQXR2YK3YZJVQ",
+      "handle": "rampline-defying-gravity",
+      "sku": "BP 31",
+      "title": "Wet pour",
+      "option_values": [
+        [
+          "Surface",
+          "Wet pour"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 31",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 289430.0,
+        "recommended_nok": 378133.0,
+        "description": "Defying Gravity",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q58098ZYQXR2YK3YZJVQ",
+      "handle": "rampline-defying-gravity",
+      "sku": "BP 31 LF",
+      "title": "Loose fills",
+      "option_values": [
+        [
+          "Surface",
+          "Loose fills"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 31 LF",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 304507.0,
+        "recommended_nok": 399672.0,
+        "description": "- for installation in grass/loose fills",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q58098ZYQXR2YK3YZJVQ",
+      "handle": "rampline-defying-gravity",
+      "sku": "BP 31 AG",
+      "title": "Artificial grass",
+      "option_values": [
+        [
+          "Surface",
+          "Artificial grass"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 31 AG",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 293081.0,
+        "recommended_nok": 383349.0,
+        "description": "- for installation in artificial grass",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "DELETE_PLACEHOLDER_VARIANT",
+      "product_id": "prod_01KNQ3Q4YXWB6MJ97CBHVXWT3Z",
+      "handle": "rampline-fast-and-curious",
+      "variant_id": "variant_01KNQ3Q4ZW078SXQ307522D5MG",
+      "sku": "24495"
+    },
+    {
+      "op": "DELETE_DEFAULT_OPTION",
+      "product_id": "prod_01KNQ3Q4YXWB6MJ97CBHVXWT3Z",
+      "handle": "rampline-fast-and-curious",
+      "option_id": "opt_01KNQ3Q4YY934CK1RCV9SJSZNW"
+    },
+    {
+      "op": "ADD_OPTION",
+      "product_id": "prod_01KNQ3Q4YXWB6MJ97CBHVXWT3Z",
+      "handle": "rampline-fast-and-curious",
+      "option_title": "Surface",
+      "values": [
+        "Artificial grass",
+        "Loose fills",
+        "Wet pour"
+      ]
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q4YXWB6MJ97CBHVXWT3Z",
+      "handle": "rampline-fast-and-curious",
+      "sku": "BP 32",
+      "title": "Wet pour",
+      "option_values": [
+        [
+          "Surface",
+          "Wet pour"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 32",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 266233.0,
+        "recommended_nok": 344995.0,
+        "description": "Fast & Curious",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q4YXWB6MJ97CBHVXWT3Z",
+      "handle": "rampline-fast-and-curious",
+      "sku": "BP 32 LF",
+      "title": "Loose fills",
+      "option_values": [
+        [
+          "Surface",
+          "Loose fills"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 32 LF",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 284718.0,
+        "recommended_nok": 371402.0,
+        "description": "- for installation in grass/loose fills",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q4YXWB6MJ97CBHVXWT3Z",
+      "handle": "rampline-fast-and-curious",
+      "sku": "BP 32 AG",
+      "title": "Artificial grass",
+      "option_values": [
+        [
+          "Surface",
+          "Artificial grass"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 32 AG",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 271215.0,
+        "recommended_nok": 352112.0,
+        "description": "- for installation in artificial grass",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "DELETE_PLACEHOLDER_VARIANT",
+      "product_id": "prod_01KNQ3Q20HBZMCNXC6C0BF6F9M",
+      "handle": "rampline-play-tag",
+      "variant_id": "variant_01KNQ3Q21JMXD0QDARQTVN8B8G",
+      "sku": "24395"
+    },
+    {
+      "op": "DELETE_DEFAULT_OPTION",
+      "product_id": "prod_01KNQ3Q20HBZMCNXC6C0BF6F9M",
+      "handle": "rampline-play-tag",
+      "option_id": "opt_01KNQ3Q20J90WMZ1PMGJQAXE3K"
+    },
+    {
+      "op": "ADD_OPTION",
+      "product_id": "prod_01KNQ3Q20HBZMCNXC6C0BF6F9M",
+      "handle": "rampline-play-tag",
+      "option_title": "Surface",
+      "values": [
+        "Artificial grass",
+        "Loose fills",
+        "Wet pour"
+      ]
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q20HBZMCNXC6C0BF6F9M",
+      "handle": "rampline-play-tag",
+      "sku": "BP 33",
+      "title": "Wet pour",
+      "option_values": [
+        [
+          "Surface",
+          "Wet pour"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 33",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 434790.0,
+        "recommended_nok": 585790.0,
+        "description": "Play Tag",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q20HBZMCNXC6C0BF6F9M",
+      "handle": "rampline-play-tag",
+      "sku": "BP 33 LF",
+      "title": "Loose fills",
+      "option_values": [
+        [
+          "Surface",
+          "Loose fills"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 33 LF",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 478227.0,
+        "recommended_nok": 647843.0,
+        "description": "- for installation in grass/loose fills",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3Q20HBZMCNXC6C0BF6F9M",
+      "handle": "rampline-play-tag",
+      "sku": "BP 33 AG",
+      "title": "Artificial grass",
+      "option_values": [
+        [
+          "Surface",
+          "Artificial grass"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 33 AG",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 449481.0,
+        "recommended_nok": 606777.0,
+        "description": "- for installation in artificial grass",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "DELETE_PLACEHOLDER_VARIANT",
+      "product_id": "prod_01KNQ3QBRC24H8WPRX4G80YMZG",
+      "handle": "rampline-flex-forest",
+      "variant_id": "variant_01KNQ3QBSKM4E1DXBC4XK7AC8Y",
+      "sku": "28152"
+    },
+    {
+      "op": "DELETE_DEFAULT_OPTION",
+      "product_id": "prod_01KNQ3QBRC24H8WPRX4G80YMZG",
+      "handle": "rampline-flex-forest",
+      "option_id": "opt_01KNQ3QBRCMEAVJB20MM0K4KJH"
+    },
+    {
+      "op": "ADD_OPTION",
+      "product_id": "prod_01KNQ3QBRC24H8WPRX4G80YMZG",
+      "handle": "rampline-flex-forest",
+      "option_title": "Surface",
+      "values": [
+        "Artificial grass",
+        "Loose fills",
+        "Wet pour"
+      ]
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3QBRC24H8WPRX4G80YMZG",
+      "handle": "rampline-flex-forest",
+      "sku": "BP 34",
+      "title": "Wet pour",
+      "option_values": [
+        [
+          "Surface",
+          "Wet pour"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 34",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 396579.0,
+        "recommended_nok": 531203.0,
+        "description": "Flex Forest",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3QBRC24H8WPRX4G80YMZG",
+      "handle": "rampline-flex-forest",
+      "sku": "BP 34 LF",
+      "title": "Loose fills",
+      "option_values": [
+        [
+          "Surface",
+          "Loose fills"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 34 LF",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 426754.0,
+        "recommended_nok": 574311.0,
+        "description": "- for installation in grass/loose fills",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3QBRC24H8WPRX4G80YMZG",
+      "handle": "rampline-flex-forest",
+      "sku": "BP 34 AG",
+      "title": "Artificial grass",
+      "option_values": [
+        [
+          "Surface",
+          "Artificial grass"
+        ]
+      ],
+      "metadata": {
+        "article_code": "BP 34 AG",
+        "family": "SHOCKDECK\u2122",
+        "family_discount": 0.3,
+        "net_nok": 402807.0,
+        "recommended_nok": 540100.0,
+        "description": "- for installation in artificial grass",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    }
+  ]
+}

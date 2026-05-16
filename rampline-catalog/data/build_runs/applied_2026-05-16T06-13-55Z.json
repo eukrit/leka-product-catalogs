@@ -1,0 +1,72 @@
+{
+  "timestamp": "2026-05-16T06-13-55Z",
+  "dry_run": false,
+  "limit_family": "slackline",
+  "totals": {
+    "DELETE_PLACEHOLDER_VARIANT": 1,
+    "DELETE_DEFAULT_OPTION": 1,
+    "CREATE_VARIANT": 2
+  },
+  "errors": [],
+  "actions": [
+    {
+      "op": "DELETE_PLACEHOLDER_VARIANT",
+      "product_id": "prod_01KNQ3PYP224DRZPM2Y893RDTC",
+      "handle": "rampline-rampline-slackline",
+      "variant_id": "variant_01KNQ3PYQ89RF8MSE9ADA1VFXC",
+      "sku": "24083"
+    },
+    {
+      "op": "DELETE_DEFAULT_OPTION",
+      "product_id": "prod_01KNQ3PYP224DRZPM2Y893RDTC",
+      "handle": "rampline-rampline-slackline",
+      "option_id": "opt_01KNQ3PYP2NJGJG0JC2CZEV2FN"
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3PYP224DRZPM2Y893RDTC",
+      "handle": "rampline-rampline-slackline",
+      "sku": "RL410",
+      "title": "Wet pour",
+      "option_values": [
+        [
+          "Surface",
+          "Wet pour"
+        ]
+      ],
+      "metadata": {
+        "article_code": "RL410",
+        "family": "Slack line rack with padded ramps and dynamic line",
+        "family_discount": 0.3,
+        "net_nok": 27459.6,
+        "recommended_nok": 39228.0,
+        "description": "Rampline\u00ae slack line | for wet pour surfaces or artificial grass.",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    },
+    {
+      "op": "CREATE_VARIANT",
+      "product_id": "prod_01KNQ3PYP224DRZPM2Y893RDTC",
+      "handle": "rampline-rampline-slackline",
+      "sku": "RL410 EXT",
+      "title": "Loose fills",
+      "option_values": [
+        [
+          "Surface",
+          "Loose fills"
+        ]
+      ],
+      "metadata": {
+        "article_code": "RL410 EXT",
+        "family": "Slack line rack with padded ramps and dynamic line",
+        "family_discount": 0.3,
+        "net_nok": 30387.7,
+        "recommended_nok": 43411.0,
+        "description": "Rampline\u00ae slack line extended | For grass and loose fills.",
+        "pricelist_date": "2026-05-13",
+        "source": "rampline-pricelist-2025"
+      }
+    }
+  ]
+}
