@@ -2,6 +2,49 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.23.7] - 2026-05-16
+
+### Added — Wisdom / Leka Project Medusa price refresh tooling
+
+New bulk updater that pushes the canonical FOB → CIF → duty + VAT → landed
+→ retail formula (already in `shared/wisdom_pricing.py`) to Firestore
+`products_wisdom` documents AND the corresponding Medusa variants in the
+Leka Project sales channel.
+
+Key wrinkle this handles: products were rebranded from Wisdom to Leka
+Project in May 2026, so Medusa SKUs are now `LP-XXXXXXXX` while Wisdom
+item codes survive in `variants[].metadata.legacy_sku`. The updater
+indexes the sales channel once by `legacy_sku` and then matches each
+Firestore row in O(1).
+
+### Files
+
+- `shared/medusa_importer.py` — added 4 methods:
+  - `get_product_with_variants(handle)` — fetch product including variants
+  - `get_variant_by_sku(sku)` — current-SKU lookup with legacy handle fallback
+  - `build_legacy_sku_index(sales_channel_id)` — O(N) page through SC,
+    O(1) lookup keyed by `metadata.legacy_sku`
+  - `update_variant_prices(product_id, variant_id, prices)` — replace
+    variant price list (e.g. set THB retail alongside USD FOB)
+- `wisdom-catalog/update_pricing.py` **(new)** — Firestore + Medusa bulk
+  updater. Supports `--dry-run`, `--skip-medusa`, `--usd-thb` overrides.
+  Writes `pricing.{landed_thb,retail_thb,retail_usd,duty_thb,vat_thb,
+  usd_thb,import_duty_rate,thai_vat_rate,gross_margin,price_date}` to
+  Firestore and `{usd: FOB, thb: retail}` prices to each Leka Project
+  variant.
+
+### Usage
+
+```powershell
+python wisdom-catalog/update_pricing.py --dry-run                  # preview
+python wisdom-catalog/update_pricing.py --usd-thb 35.20            # live
+python wisdom-catalog/update_pricing.py --skip-medusa              # FS only
+```
+
+Effective multiplier on FOB-USD at USD/THB 35.0: `35 × 1.07 × 1.07 × 2.0 ≈ 80.14` THB/USD.
+
+---
+
 ## [2.23.6] - 2026-05-16
 
 ### Improved — DesignPark follow-ups (image coverage, Modern Igloo, Slack)
@@ -79,6 +122,8 @@ This new idempotent helper closes the loop: for every product with
 2. **104 draft products** — components/themes without imagery. When the
    partner sends more photos (Slack drop or Drive update), re-running B2 +
    E1 + sync + this version's promote helper picks them up automatically.
+
+---
 
 ## [2.23.5] - 2026-05-16
 
