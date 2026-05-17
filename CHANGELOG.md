@@ -2,6 +2,50 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.24.0] - 2026-05-17
+
+### Fixed — Backfilled 190 missing `leka-project/` image paths (storefront 404s)
+
+After the Wisdom → Leka Project rebrand, 190 product images 404'd on
+`catalogs.leka.studio` because their Pass-2 Gemini edits had landed in
+`gs://ai-agents-go-vendors/manual_review/` (partial logo removal, QA
+rejected) or `error` (Gemini refused / 429 / 499) instead of the
+customer-facing `leka-project/` prefix.
+
+`scripts/backfill_missing_leka_images.py` resolves them:
+- **184 manual_review docs** — server-side copied `manual_review/<path>`
+  → `leka-project/<path>`. Tagged `backfill_source: "manual_review"` on
+  the `image_logo_edit` checkpoint. The Wisdom mark may still be partly
+  visible on these; a human reviewer can finish them later. Better than
+  a 404.
+- **6 error docs** — retried via Gemini Nano Banana Pro at concurrency=1
+  with the existing brand-neutral `EDIT_PROMPT`. **5 came back fully
+  clean** (QA `logo_gone=true` and `product_intact=true`); **1 came back
+  partial** and was promoted from `manual_review/` to `leka-project/`.
+  **Zero `wisdom-original` fallbacks were needed** — no Wisdom logos
+  leaked through the rebrand boundary.
+
+Live verification: `curl -I https://catalogs.leka.studio/api/i/leka-project/catalog/KB1-HDSA016-V01-30_img0.jpeg`
+returns `200 OK` (previously 404). `leka-project/` blob count now
+**37,975**.
+
+Idempotent. Re-running is a no-op via Firestore checkpoint + destination
+existence check.
+
+### Added
+- `scripts/backfill_missing_leka_images.py` — new; imports the Pass-2
+  building blocks (`edit_one`, `gemini_client`, `Blob`) from
+  `strip_wisdom_logos.py` so behavior stays consistent with the original
+  pipeline.
+- `migration/wisdom-image-backfill-report.json` — backfill summary.
+
+### Files changed
+- `scripts/backfill_missing_leka_images.py` (new)
+- `migration/wisdom-image-backfill-report.json` (new)
+- `CHANGELOG.md`, `VERSION`
+
+---
+
 ## [2.23.9] - 2026-05-16
 
 ### Added — 5 themed collections for Leka Project (auto-generated)
