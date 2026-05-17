@@ -468,7 +468,12 @@ def _empty_config() -> dict:
             "default_packing_factor": 0.15,
             # Customer-facing destination taxes. Independent of the
             # import VAT already in `landed_thb`.
-            "th_customer_vat_rate": 0.07,    # 7% Thai sales VAT
+            #
+            # User direction 2026-05-17: retail price is always quoted
+            # VAT-inclusive in TH, so the 7% sales VAT is folded into
+            # retail_pre_tax (i.e. retail = landed / (1 - GM) already
+            # represents the customer-facing TH price). Hence default 0.
+            "th_customer_vat_rate": 0.0,
             "sg_customer_gst_rate": 0.09,    # 9% SG GST (Nubo not yet
                                              # GST-registered → see flag)
             "sg_nubo_gst_registered": False, # When True, SG retail
@@ -477,8 +482,8 @@ def _empty_config() -> dict:
         },
         "brands": {
             "vinci":    {"gross_margin": 0.35,
-                         "source_pricelist_url": "C:\\Users\\Eukrit\\My Drive\\Partners Playground\\Vinci\\Vinci Play Prices\\2026-05-11 Vinci pricelist_export_1778483593.xlsx",
-                         "source_pricelist_label": "Vinci pricelist 2026-05-11 (xlsx)"},
+                         "source_pricelist_url": "https://drive.google.com/drive/folders/1ZiRZknbz0XlE9RMIbDwe9MC1oXegMyfl",
+                         "source_pricelist_label": "Vinci Play master folder (Google Drive)"},
             "berliner": {"gross_margin": 0.25, "exw_discount": 0.15,
                          "source_pricelist_url": "berliner-catalog/data/pricelist_2026-01-01.csv",
                          "source_pricelist_label": "Berliner pricelist 2026-01-01 (in-repo CSV)"},

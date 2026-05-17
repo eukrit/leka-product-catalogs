@@ -2,6 +2,44 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.24.0] - 2026-05-17
+
+### Changed — TH retail = VAT-inclusive by default + Vinci → Vinci Play rename
+
+Per user direction:
+- `global.th_customer_vat_rate` default `0.07` → **`0.0`**. Retail price
+  is always quoted VAT-inclusive in Thailand; the 7% Thai import VAT is
+  already folded into `landed_thb` so no additional customer-VAT line
+  is needed. With this change, `retail_th_thb == retail_pre_tax_thb`.
+- `brands.vinci.source_pricelist_url` changed to the renamed
+  Google Drive folder
+  `https://drive.google.com/drive/folders/1ZiRZknbz0XlE9RMIbDwe9MC1oXegMyfl`
+  (label: "Vinci Play master folder (Google Drive)"). Old local
+  Windows path was browser-broken; this URL opens cleanly.
+
+### Synced in this commit
+- `src/main.py` `_empty_config()` matches the live Firestore state.
+- `scripts/seed_pricing_config.py` extended to seed all v2.21.0
+  schema additions (TH/SG tax fields + per-brand source URLs) so
+  `--force` re-seed no longer regresses them.
+- Live Firestore was patched directly via the deployed
+  `POST /api/pricing-config` (audit footer now shows
+  `eukrit@gmail.com (via claude)` at 2026-05-17T08:50:05Z).
+
+### Companion — `vendors` repo
+Drive folder rename `My Drive/Partners Playground/Vinci/Vinci Play Prices`
+→ `My Drive/Partners Playground/Vinci Play/Vinci Play Prices`. Three
+scripts in `vendors/vinci-play-catalog/scripts/` hardcoded the old path
+and were updated in the same change-set:
+`import_pricelist.py`, `enrich_schema.py`, `run_enrichment_pipeline.py`.
+Cloud Build job `vinci-pricelist-enrich` is unaffected — it resolves
+the Drive folder by ID via the `vinci-play-pricelist-folder-id` Secret
+Manager secret (folder ID didn't change, only the display name).
+
+> *Note: bumped from the originally-prepared v2.21.1 to v2.24.0 to stay
+> above the v2.22.x / v2.23.x rebrand work that landed on `main` in
+> parallel.*
+
 ## [2.23.9] - 2026-05-16
 
 ### Added — 5 themed collections for Leka Project (auto-generated)

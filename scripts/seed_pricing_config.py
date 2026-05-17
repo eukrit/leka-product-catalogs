@@ -79,18 +79,38 @@ def build_seed_doc() -> dict:
             "duty_rate_china": _lp.DUTY_RATE_CHINA,
             "unmatched_landed_uplift": _lp.UNMATCHED_LANDED_UPLIFT,
             "default_packing_factor": _lp.DEFAULT_PACKING_FACTOR,
+            # Customer-facing destination taxes (v2.21.0 schema additions).
+            # Per user 2026-05-17: retail is always quoted VAT-inclusive in
+            # TH, so the customer-VAT line stays at 0 (the 7% import VAT is
+            # already inside landed_thb). SG GST is gated on a Nubo
+            # registration flag — ships off.
+            "th_customer_vat_rate": 0.0,
+            "sg_customer_gst_rate": 0.09,
+            "sg_nubo_gst_registered": False,
         },
         "brands": {
-            "vinci":    {"gross_margin": _lp.GROSS_MARGIN},
+            "vinci":    {
+                "gross_margin": _lp.GROSS_MARGIN,
+                "source_pricelist_url": "https://drive.google.com/drive/folders/1ZiRZknbz0XlE9RMIbDwe9MC1oXegMyfl",
+                "source_pricelist_label": "Vinci Play master folder (Google Drive)",
+            },
             "berliner": {
                 "gross_margin": berliner.get("gross_margin", 0.25),
                 "exw_discount": berliner.get("exw_discount", 0.15),
+                "source_pricelist_url": "berliner-catalog/data/pricelist_2026-01-01.csv",
+                "source_pricelist_label": "Berliner pricelist 2026-01-01 (in-repo CSV)",
             },
-            "rampline": {"gross_margin": rampline.get("gross_margin", 0.30)},
+            "rampline": {
+                "gross_margin": rampline.get("gross_margin", 0.30),
+                "source_pricelist_url": "https://drive.google.com/drive/folders/Rampline%20Price%20list%202025",
+                "source_pricelist_label": "Rampline 2025 NOK pricelist (Google Drive)",
+            },
             "wisdom": {
                 "gross_margin": _wp.GROSS_MARGIN,
                 "import_duty_rate": _wp.IMPORT_DUTY_RATE,
                 "default_usd_thb": _wp.DEFAULT_USD_THB,
+                "source_pricelist_url": "wisdom-catalog/data/",
+                "source_pricelist_label": "Wisdom Excel catalogs (in-repo)",
             },
         },
         "logistics_tiers": tiers,
