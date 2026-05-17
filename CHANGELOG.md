@@ -2,6 +2,84 @@
 
 All notable changes to this project will be documented in this file.
 
+---
+
+## [2.25.0] - 2026-05-17
+
+### Removed — 38 duplicate Weplay products (Medusa 200 → 162)
+
+Inspection of the live Medusa Weplay SC surfaced **34 SKU tokens with
+>1 doc**, producing **62 active duplicate products** on
+`catalogs.leka.studio/weplay`. Each was a separate scrape-pass artifact
+showing the same product as multiple cards:
+
+  - `KM2802`: 11 docs all named "Soft Gym (7 pcs)"
+  - `KC0002`: 4 docs all named "Brick Me" (6800KC0002.1-090, KC0002,
+    KC0002.1, WE-KC0002)
+  - `KC2003`: 3 "Fun with Curves" (kc2003, kc2003-00b, we-kc2003)
+  - `KP1001`: 3 "Seesaw (A)"
+  - `KM1003`: 2 "Pile Balance Up" (6800km1003, km1003)
+  - `KM2016`: 2 "Over The Mountain"
+  - `KT0017`: 2 "Squishy Tactile Shell"
+  - `KC0004`: 2 "Q-blocks (64 pcs)"
+  - And 18 more groups
+
+#### `scripts/merge_weplay_duplicates.py` (new)
+Groups docs by `(sku_token, normalized_name)`. Within each group picks
+a canonical doc using priority `active+images > active > has_images >
+shortest doc_id`. For non-canonical docs:
+  - Sets `status = "merged_duplicate"`
+  - Sets `merged_into = <canonical_doc_id>`
+  - Sets `merged_canonical_sku` for audit
+  - DELETEs the corresponding Medusa product (if found by handle)
+
+Run: 26 dedup groups identified, **40 Firestore docs marked merged**,
+**38 Medusa products deleted** (2 didn't have matching handles —
+likely never synced). **Medusa Weplay catalog: 200 → 162 products.**
+
+Idempotent. Doesn't touch tokens where docs have DIFFERENT names
+(those are likely real variants or AI-misinferred SKUs needing
+human review — see HTML report).
+
+#### `scripts/generate_weplay_review_html.py` (new)
+Static HTML page at `docs/weplay-review.html` (95KB) for the user
+to review:
+
+1. **AI-inferred drafts tab** — all 103 docs stamped by v2.15.1's
+   `stamp_weplay_ai_inferred.py`. Grouped by category (balance,
+   construction, motor-skill, sensory, etc.), each card shows
+   SKU + doc_id + name + description + AI notes (the Anthropic
+   Vision pipeline's audit trail like "Product identified as
+   Weplay X based on visual appearance").
+
+2. **Variant groups tab** — every SKU token that still has >1 doc
+   after the dedup pass (mostly mixed-name groups that need
+   human eye). Each group shows all docs side-by-side with status
+   badge + thumbnail.
+
+Searchable + tabbed. Two-color borders distinguish AI-inferred
+(purple) from variant-group cards (red).
+
+Served at `https://gateway.goco.bz/leka-product-catalogs/weplay-review.html`
+(after deploy) and from local docs/ folder. Hub regenerated.
+
+### Composite catalog state
+- **`catalogs.leka.studio/weplay`: 162 product cards** (was 200 with
+  dupes, now de-duped)
+- 103 AI-inferred drafts still draft, now visible in HTML review for
+  human decisions
+- 8 multi-doc variant groups remaining (mixed names — need review,
+  visible in HTML)
+
+### Files changed
+- `scripts/merge_weplay_duplicates.py` (new)
+- `scripts/generate_weplay_review_html.py` (new)
+- `docs/weplay-review.html` (new)
+- `docs/hub.html` (regenerated)
+- `CHANGELOG.md`
+
+---
+
 ## [2.24.0] - 2026-05-17
 
 ### Changed — TH retail = VAT-inclusive by default + Vinci → Vinci Play rename
