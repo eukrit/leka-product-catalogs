@@ -1,0 +1,38 @@
+2026-05-16 21:22:29,389 INFO: Indexing Rampline products with source_url + 0 images …
+2026-05-16 21:22:30,468 INFO: Targets: 11
+2026-05-16 21:22:30,469 INFO: [1/11] rampline-take-5 \u2190 https://rampline.com/en/product/take-5/
+2026-05-16 21:22:40,696 INFO:   rendered=10  kept=1  new=1
+2026-05-16 21:22:40,696 INFO: [2/11] rampline-monkey-business \u2190 https://rampline.com/en/product/monkey-business/
+2026-05-16 21:22:49,453 INFO:   rendered=10  kept=1  new=1
+2026-05-16 21:22:49,453 INFO: [3/11] rampline-junior-power-ii \u2190 https://rampline.com/en/product/junior-power-ii/
+2026-05-16 21:22:57,873 INFO:   rendered=10  kept=1  new=1
+2026-05-16 21:22:57,873 INFO: [4/11] rampline-junior-power \u2190 https://rampline.com/en/product/junior-power/
+2026-05-16 21:23:07,097 INFO:   rendered=10  kept=1  new=1
+2026-05-16 21:23:07,097 INFO: [5/11] rampline-jane-jump \u2190 https://rampline.com/en/product/jane-jump/
+2026-05-16 21:23:15,567 INFO:   rendered=10  kept=1  new=1
+2026-05-16 21:23:15,567 INFO: [6/11] rampline-hunting-high-and-low \u2190 https://rampline.com/en/product/hunting-high-and-low/
+2026-05-16 21:23:25,297 INFO:   rendered=10  kept=1  new=1
+2026-05-16 21:23:25,297 INFO: [7/11] rampline-fearless \u2190 https://rampline.com/en/product/fearless/
+2026-05-16 21:23:33,964 INFO:   rendered=10  kept=1  new=1
+2026-05-16 21:23:33,964 INFO: [8/11] rampline-fast-and-curious \u2190 https://rampline.com/en/product/fast-and-curious/
+2026-05-16 21:23:43,531 INFO:   rendered=10  kept=1  new=1
+2026-05-16 21:23:43,531 INFO: [9/11] rampline-crouching-tiger \u2190 https://rampline.com/en/product/crouching-tiger/
+2026-05-16 21:23:51,904 INFO:   rendered=10  kept=1  new=1
+2026-05-16 21:23:51,904 INFO: [10/11] rampline-cliffhanger \u2190 https://rampline.com/en/product/cliffhanger/
+2026-05-16 21:24:02,073 INFO:   rendered=10  kept=1  new=1
+2026-05-16 21:24:02,073 INFO: [11/11] rampline-classic-jump \u2190 https://rampline.com/en/product/classic-jump/
+2026-05-16 21:24:12,054 INFO:   rendered=10  kept=1  new=1
+2026-05-16 21:24:12,054 INFO: Planned: {'ADD_IMAGES': 11}   (skipped=0)
+2026-05-16 21:24:12,054 INFO: APPLYING 11 ADD_IMAGES …
+2026-05-16 21:24:13,208 INFO:   \u2713 rampline-take-5 +1 new  [thumb]
+2026-05-16 21:24:13,470 INFO:   \u2713 rampline-monkey-business +1 new  [thumb]
+2026-05-16 21:24:13,696 INFO:   \u2713 rampline-junior-power-ii +1 new  [thumb]
+2026-05-16 21:24:13,957 INFO:   \u2713 rampline-junior-power +1 new  [thumb]
+2026-05-16 21:24:14,203 INFO:   \u2713 rampline-jane-jump +1 new  [thumb]
+2026-05-16 21:24:14,441 INFO:   \u2713 rampline-hunting-high-and-low +1 new  [thumb]
+2026-05-16 21:24:14,700 INFO:   \u2713 rampline-fearless +1 new  [thumb]
+2026-05-16 21:24:14,930 INFO:   \u2713 rampline-fast-and-curious +1 new  [thumb]
+2026-05-16 21:24:15,166 INFO:   \u2713 rampline-crouching-tiger +1 new  [thumb]
+2026-05-16 21:24:15,387 INFO:   \u2713 rampline-cliffhanger +1 new  [thumb]
+2026-05-16 21:24:15,919 INFO:   \u2713 rampline-classic-jump +1 new  [thumb]
+2026-05-16 21:24:15,921 INFO: Run log: C:\Users\eukri\OneDrive\Documents\Claude Code\leka-product-catalogs\rampline-catalog\data\build_runs\images_pw_applied_2026-05-16T14-24-15Z.json

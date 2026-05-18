@@ -1,0 +1,27 @@
+2026-05-16 21:20:12,731 INFO: Indexing Rampline products with source_url + 0 images …
+2026-05-16 21:20:13,716 INFO: Targets: 11
+2026-05-16 21:20:13,717 INFO: [1/11] rampline-take-5 \u2190 https://rampline.com/en/product/take-5/
+2026-05-16 21:20:25,060 INFO:   rendered=10  kept=1  new=1
+2026-05-16 21:20:25,060 INFO: [2/11] rampline-monkey-business \u2190 https://rampline.com/en/product/monkey-business/
+2026-05-16 21:20:34,135 INFO:   rendered=10  kept=1  new=1
+2026-05-16 21:20:34,135 INFO: [3/11] rampline-junior-power-ii \u2190 https://rampline.com/en/product/junior-power-ii/
+2026-05-16 21:20:42,995 INFO:   rendered=10  kept=1  new=1
+2026-05-16 21:20:42,996 INFO: [4/11] rampline-junior-power \u2190 https://rampline.com/en/product/junior-power/
+2026-05-16 21:20:52,365 INFO:   rendered=10  kept=1  new=1
+2026-05-16 21:20:52,365 INFO: [5/11] rampline-jane-jump \u2190 https://rampline.com/en/product/jane-jump/
+2026-05-16 21:21:01,170 INFO:   rendered=10  kept=1  new=1
+2026-05-16 21:21:01,170 INFO: [6/11] rampline-hunting-high-and-low \u2190 https://rampline.com/en/product/hunting-high-and-low/
+2026-05-16 21:21:11,295 INFO:   rendered=10  kept=1  new=1
+2026-05-16 21:21:11,295 INFO: [7/11] rampline-fearless \u2190 https://rampline.com/en/product/fearless/
+2026-05-16 21:21:22,260 INFO:   rendered=10  kept=1  new=1
+2026-05-16 21:21:22,260 INFO: [8/11] rampline-fast-and-curious \u2190 https://rampline.com/en/product/fast-and-curious/
+2026-05-16 21:21:30,760 INFO:   rendered=10  kept=1  new=1
+2026-05-16 21:21:30,760 INFO: [9/11] rampline-crouching-tiger \u2190 https://rampline.com/en/product/crouching-tiger/
+2026-05-16 21:21:39,582 INFO:   rendered=10  kept=1  new=1
+2026-05-16 21:21:39,582 INFO: [10/11] rampline-cliffhanger \u2190 https://rampline.com/en/product/cliffhanger/
+2026-05-16 21:21:48,889 INFO:   rendered=10  kept=1  new=1
+2026-05-16 21:21:48,889 INFO: [11/11] rampline-classic-jump \u2190 https://rampline.com/en/product/classic-jump/
+2026-05-16 21:21:57,773 INFO:   rendered=10  kept=1  new=1
+2026-05-16 21:21:57,773 INFO: Planned: {'ADD_IMAGES': 11}   (skipped=0)
+2026-05-16 21:21:57,775 INFO: Run log: C:\Users\eukri\OneDrive\Documents\Claude Code\leka-product-catalogs\rampline-catalog\data\build_runs\images_pw_dryrun_2026-05-16T14-21-57Z.json
+2026-05-16 21:21:57,776 INFO: DRY RUN — no Medusa writes

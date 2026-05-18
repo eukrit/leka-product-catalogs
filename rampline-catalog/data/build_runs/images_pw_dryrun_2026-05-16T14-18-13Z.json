@@ -1,0 +1,30 @@
+{
+  "timestamp": "2026-05-16T14-18-13Z",
+  "dry_run": true,
+  "max_images": 8,
+  "limit": 3,
+  "totals": {
+    "NO_IMAGES_FOUND": 3
+  },
+  "actions_count": 3,
+  "skipped_count": 0,
+  "skipped": [],
+  "errors": [],
+  "actions": [
+    {
+      "op": "NO_IMAGES_FOUND",
+      "handle": "rampline-take-5",
+      "rendered_count": 10
+    },
+    {
+      "op": "NO_IMAGES_FOUND",
+      "handle": "rampline-monkey-business",
+      "rendered_count": 10
+    },
+    {
+      "op": "NO_IMAGES_FOUND",
+      "handle": "rampline-junior-power-ii",
+      "rendered_count": 10
+    }
+  ]
+}
