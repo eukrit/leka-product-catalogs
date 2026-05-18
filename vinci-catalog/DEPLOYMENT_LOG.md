@@ -1,5 +1,19 @@
 # Vinci Play Catalog — Deployment Log
 
+## 2026-05-11 — Pricelist v2.10.0 (EUR FOB → landed → THB/USD/EUR retail)
+
+- **Source**: `2026-05-11 Vinci pricelist_export_1778483593.xlsx` (1,234 SKUs, EUR FOB Poland)
+- **Run**: `python vinci-catalog/import_pricelist.py` then
+  `python scripts/sync_vendors_to_medusa.py --brand=vinci`
+- **FX snapshot**: USD=32.8915 EUR=38.7082 (exchangerate-api.com + 2% buffer)
+- **Baltic LCL rate**: 5,319.49 THB/CBM (avg of 5,500 static + 5,138.97 FBX-derived)
+- **Match outcomes**: 899 exact-dim / 335 flat-uplift / 0 fuzzy
+- **Tier clamps**: 696 clean / 346 floored / 192 capped
+- **Firestore**: 915 product docs written to `vendors/vinci/products/`
+- **Medusa**: 915 product variants on `leka-medusa-backend` updated with THB+USD+EUR retail
+- **Sample**: vinci-2211 EUR 1,868 → THB 222,551 / USD 6,766 / EUR 5,749 (verified live)
+- **Audit trail**: `vinci-catalog/data/pricelist_2026-05-11_landed.csv`
+
 ## 2026-03-30 — Initial Setup
 
 ### Changes

@@ -24,4 +24,11 @@ fi
 
 echo ""
 echo "Starting Medusa server on port ${PORT:-9000}..."
-exec npm run start
+# Medusa v2 expects to start from .medusa/server (where the built admin assets
+# live alongside the compiled server). Starting from /app causes
+# `medusa start` with DISABLE_ADMIN=false to look for .medusa/admin/index.html
+# which doesn't exist — the built admin is at .medusa/server/public/admin/.
+# Run from the correct cwd; resolve the medusa CLI via the parent
+# /app/node_modules so we don't need a second install inside .medusa/server.
+cd /app/.medusa/server
+exec node /app/node_modules/.bin/medusa start

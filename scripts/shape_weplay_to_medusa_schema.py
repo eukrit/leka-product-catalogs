@@ -119,10 +119,28 @@ def build_attachment_index(db: firestore.Client) -> dict[str, list[dict]]:
 
 
 def shape_product(p: dict, doc_id: str, attachment_index: dict[str, list[dict]]) -> tuple[dict, bool]:
-    """Return (merge_payload, has_images)."""
+    """Return (merge_payload, has_images).
+
+    SAFETY (added 2026-05-13 after a re-run clobbered EN names + thumb images):
+      - `name` only set when not already present (preserves later EN
+        scraper writes). Source-of-truth precedence:
+          existing `name` > `product_name` > sku > handle.
+      - `images` only set when this run actually finds matches AND the
+        doc has no existing `images[]`. Otherwise we skip the field
+        entirely so merge=True doesn't replace.
+      - `status` only flipped to "active" — never demoted to
+        "draft_no_images" by this script. The image-ingest + EN-scrape
+        pipelines own status transitions for products that have
+        non-URL-encoded image sources.
+
+    This script is now SAFE to re-run on a populated catalog. Originally
+    it was the bootstrap pass; it should not regress data set by the
+    later, richer pipelines.
+    """
     sku = (p.get("sku") or "").strip()
     handle = doc_id.lower().replace(".", "-").replace("_", "-")
-    name = (p.get("product_name") or "").strip() or sku or handle
+    existing_name = (p.get("name") or "").strip()
+    fallback_name = (p.get("product_name") or "").strip() or sku or handle
 
     images: list[dict] = []
     if sku:
@@ -132,15 +150,30 @@ def shape_product(p: dict, doc_id: str, attachment_index: dict[str, list[dict]])
             for att in attachment_index.get(token, []):
                 images.append({"url": att["url"], "sha": att["sha"]})
 
-    has_images = bool(images)
-    payload = {
+    has_attachment_match = bool(images)
+    existing_images = list(p.get("images") or [])
+
+    payload: dict = {
         "handle": handle,
-        "name": name,
         "item_code": sku or None,
-        "status": "active" if has_images else "draft_no_images",
-        "images": images,
     }
-    return payload, has_images
+    # Only set name when the doc doesn't have one yet
+    if not existing_name:
+        payload["name"] = fallback_name
+    # Only attach images when this run found matches AND doc has none yet
+    if has_attachment_match and not existing_images:
+        payload["images"] = images
+        payload["status"] = "active"
+    elif has_attachment_match and existing_images:
+        # Doc already has images from another source; don't overwrite.
+        # Just ensure status is "active" if we have images.
+        if p.get("status") != "active":
+            payload["status"] = "active"
+    elif not existing_images and not p.get("status"):
+        # Brand-new doc with no images and no status — start as draft.
+        payload["status"] = "draft_no_images"
+
+    return payload, has_attachment_match or bool(existing_images)
 
 
 def main() -> int:

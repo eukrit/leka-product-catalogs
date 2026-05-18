@@ -1,0 +1,20 @@
+{
+  "timestamp": "2026-05-16T14-27-13Z",
+  "dry_run": false,
+  "sales_channel_id": "sc_01KNQAA448RY0YPR51FNPM2TVA",
+  "tokens": {
+    "primary_color": "#B5BC00",
+    "secondary_color": "#2D5346",
+    "accent_color": "#0073AA",
+    "text_color": "#313131",
+    "background_color": "#E6E6E6",
+    "surface_color": "#EEEEEE",
+    "neutral_color": "#DDDDDD",
+    "primary_logo_url": "https://catalogs.leka.studio/api/i/rampline/design-system/logos/6a629fbe2bb09eb916035d97943d712e00b7387713f63dcc8e8ec56a17b46e8b.svg",
+    "fonts": [],
+    "source": "vendors/rampline/brand_ci/latest",
+    "extracted_at": "2026-05-16T06:12:08.175332+00:00",
+    "synced_at": "2026-05-16T14:27:11.814606+00:00"
+  },
+  "previous_brand_ci": null
+}

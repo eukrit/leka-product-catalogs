@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing Config Editor · Leka</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple: #8003FF; --navy: #182557; --cream: #FFF9E6;
+    --magenta: #970260; --amber: #FFA900; --red-orange: #E54822;
+    --green: #1F8A4D;
+    --white: #FFFFFF; --bg: #F5F3EF;
+    --navy-08: rgba(24, 37, 87, 0.08);
+    --navy-40: rgba(24, 37, 87, 0.40);
+    --navy-60: rgba(24, 37, 87, 0.60);
+    --radius-sm: 8px; --radius-md: 16px; --radius-full: 9999px;
+    --shadow: 0 2px 8px rgba(24, 37, 87, 0.08);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Manrope', sans-serif; background: var(--bg); color: var(--navy); min-height: 100vh; }
+  header {
+    background: var(--navy); padding: 20px 32px;
+    display: flex; align-items: center; gap: 16px;
+    position: sticky; top: 0; z-index: 10; flex-wrap: wrap;
+  }
+  .accent { width: 6px; height: 40px; background: var(--purple); border-radius: 4px; }
+  .h-title { color: var(--cream); font-size: 22px; font-weight: 800; letter-spacing: -0.3px; }
+  .h-subtitle { color: var(--cream); opacity: 0.6; font-size: 13px; }
+
+  .fx-strip {
+    margin-left: auto; display: flex; gap: 8px; align-items: center;
+    color: var(--cream); font-size: 12px;
+  }
+  .fx-chip {
+    background: rgba(255, 255, 255, 0.08); padding: 6px 12px;
+    border-radius: var(--radius-full); font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+  .fx-chip strong { font-weight: 800; color: var(--white); }
+  .fx-meta { opacity: 0.5; font-size: 11px; }
+
+  .audit {
+    color: var(--cream); font-size: 12px; opacity: 0.8;
+    text-align: right; padding-left: 12px;
+    border-left: 1px solid rgba(255,255,255,0.15);
+  }
+  .audit strong { display: block; opacity: 1; font-size: 13px; font-weight: 700; }
+
+  main { max-width: 1280px; margin: 32px auto; padding: 0 32px; display: grid; gap: 20px; }
+
+  .card { background: var(--white); border-radius: var(--radius-md); box-shadow: var(--shadow); padding: 24px; }
+  .card h2 {
+    font-size: 13px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1px; color: var(--navy-60); margin-bottom: 6px;
+  }
+  .card .desc { color: var(--navy-60); font-size: 13px; margin-bottom: 18px; }
+  .card h3 { font-size: 15px; font-weight: 700; color: var(--navy); margin: 0; }
+
+  .grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .field { display: flex; flex-direction: column; gap: 4px; }
+  .field label { font-size: 12px; font-weight: 600; color: var(--navy-60); }
+  .field-row { display: flex; align-items: stretch; }
+  .field-row input.pct {
+    border-top-right-radius: 0; border-bottom-right-radius: 0; border-right: 0;
+    width: 100%;
+  }
+  .field-row .unit {
+    display: flex; align-items: center; padding: 0 12px;
+    background: var(--cream); border: 1px solid var(--navy-08);
+    border-top-right-radius: var(--radius-sm); border-bottom-right-radius: var(--radius-sm);
+    font-size: 13px; font-weight: 700; color: var(--navy-60);
+  }
+  .field input {
+    font-family: inherit; font-size: 15px; font-weight: 600; color: var(--navy);
+    padding: 10px 12px; border: 1px solid var(--navy-08);
+    border-radius: var(--radius-sm); background: var(--white);
+    width: 100%;
+  }
+  .field input:focus { outline: 2px solid var(--purple); border-color: transparent; }
+  .field input[type="url"] { font-size: 13px; font-weight: 500; }
+  .field .hint { font-size: 11px; color: var(--navy-40); }
+
+  .checkbox-row {
+    display: flex; align-items: center; gap: 10px; padding: 10px 12px;
+    border: 1px solid var(--navy-08); border-radius: var(--radius-sm);
+    background: var(--cream);
+  }
+  .checkbox-row input[type="checkbox"] { width: 18px; height: 18px; }
+  .checkbox-row label { font-size: 13px; font-weight: 600; color: var(--navy); }
+
+  .brand-block { padding: 16px; border: 1px solid var(--navy-08); border-radius: var(--radius-sm); margin-bottom: 12px; }
+  .brand-block h3 {
+    font-size: 14px; font-weight: 700; margin-bottom: 12px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .brand-pill {
+    display: inline-block; padding: 4px 10px; border-radius: var(--radius-full);
+    font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .brand-pill.vinci    { background: var(--purple);     color: var(--white); }
+  .brand-pill.berliner { background: var(--navy);       color: var(--cream); }
+  .brand-pill.rampline { background: var(--amber);      color: var(--navy); }
+  .brand-pill.wisdom   { background: var(--red-orange); color: var(--white); }
+  .brand-pill.designpark { background: var(--magenta);  color: var(--white); }
+
+  .source-link {
+    display: inline-block; margin-top: 8px; padding: 6px 12px;
+    background: var(--cream); border: 1px solid var(--navy-08);
+    border-radius: var(--radius-sm); font-size: 12px; font-weight: 600;
+    color: var(--navy); text-decoration: none;
+  }
+  .source-link:hover { background: #F8F2D8; }
+  .source-link.broken { background: #FFE9E2; color: var(--red-orange); border-color: rgba(229,72,34,0.25); }
+
+  table.tiers { width: 100%; border-collapse: collapse; margin-top: 8px; }
+  table.tiers th, table.tiers td {
+    text-align: left; padding: 8px 6px;
+    border-bottom: 1px solid var(--navy-08); font-size: 13px;
+  }
+  table.tiers th { font-weight: 700; color: var(--navy-60); font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+  table.tiers input {
+    font-family: inherit; font-size: 14px; font-weight: 600; color: var(--navy);
+    padding: 6px 8px; border: 1px solid var(--navy-08);
+    border-radius: var(--radius-sm); background: var(--white); width: 100%;
+  }
+  table.tiers .infinity { color: var(--navy-40); font-style: italic; font-size: 12px; }
+
+  /* Cascade examples table */
+  table.cascade {
+    width: 100%; border-collapse: collapse; margin-top: 8px;
+    font-size: 12px; font-variant-numeric: tabular-nums;
+  }
+  table.cascade th, table.cascade td {
+    text-align: right; padding: 7px 6px;
+    border-bottom: 1px solid var(--navy-08);
+    white-space: nowrap;
+  }
+  table.cascade th:first-child, table.cascade td:first-child,
+  table.cascade th:nth-child(2), table.cascade td:nth-child(2) {
+    text-align: left; white-space: normal;
+  }
+  table.cascade th {
+    font-weight: 700; color: var(--navy-60);
+    font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px;
+    background: #FAF8F3; position: sticky; top: 0;
+  }
+  table.cascade tr:hover td { background: #FBFAF7; }
+  table.cascade td.tier { font-weight: 700; color: var(--purple); white-space: nowrap; }
+  table.cascade td.sku { font-family: ui-monospace, "SF Mono", Consolas, monospace; font-size: 11px; }
+  table.cascade td.retail-th { color: var(--green); font-weight: 800; }
+  table.cascade td.retail-sg { color: var(--magenta); font-weight: 700; }
+  table.cascade .clamp-floored { color: var(--amber); }
+  table.cascade .clamp-capped  { color: var(--red-orange); }
+
+  .formula-card {
+    margin-top: 16px; padding: 14px; background: #FAF8F3;
+    border-radius: var(--radius-sm); font-size: 12px; line-height: 1.7;
+    color: var(--navy-60);
+  }
+  .formula-card code {
+    background: var(--white); padding: 2px 6px; border-radius: 4px;
+    font-family: ui-monospace, Consolas, monospace; font-size: 11px;
+    color: var(--navy);
+  }
+  .formula-card b { color: var(--navy); font-weight: 700; }
+
+  .actions { display: flex; gap: 12px; align-items: center; margin-top: 8px; flex-wrap: wrap; }
+  .btn {
+    padding: 12px 22px; font-family: inherit; font-size: 14px; font-weight: 700;
+    border-radius: var(--radius-sm); cursor: pointer; border: 0;
+  }
+  .btn.primary { background: var(--purple); color: var(--white); }
+  .btn.primary:hover { background: #6B02D6; }
+  .btn.secondary {
+    background: var(--cream); color: var(--navy);
+    border: 1px solid var(--navy-08);
+  }
+  .btn.secondary:hover { background: #F8F2D8; }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .status {
+    flex: 1; min-width: 200px;
+    padding: 10px 14px; border-radius: var(--radius-sm);
+    font-size: 13px; font-weight: 600;
+  }
+  .status.ok    { background: rgba(31, 138, 77, 0.10); color: var(--green); }
+  .status.err   { background: rgba(229, 72, 34, 0.10); color: var(--red-orange); }
+  .status.info  { background: var(--cream); color: var(--navy-60); }
+
+  .raw { margin-top: 16px; font-size: 11px; color: var(--navy-40); }
+  .raw pre {
+    background: #FAF8F3; padding: 12px; border-radius: var(--radius-sm);
+    overflow: auto; font-size: 11px; max-height: 240px;
+  }
+
+  footer {
+    max-width: 1280px; margin: 24px auto 40px; padding: 0 32px;
+    color: var(--navy-40); font-size: 12px;
+  }
+  footer a { color: var(--navy-60); }
+</style>
+</head>
+<body>
+<header>
+  <div class="accent"></div>
+  <div>
+    <div class="h-title">Pricing Config Editor</div>
+    <div class="h-subtitle">Live source of truth · landed cost + retail + TH/SG destination pricing</div>
+  </div>
+  <div class="fx-strip" id="fx-strip">
+    <span class="fx-meta">FX loading…</span>
+  </div>
+  <div class="audit" id="audit">
+    <strong id="audit-by">…</strong>
+    <span id="audit-at">loading</span>
+  </div>
+</header>
+
+<main>
+  <section class="card">
+    <h2>Global rates</h2>
+    <p class="desc">Apply to every brand unless overridden. Edit as <strong>percentages</strong> — e.g. type <code>7</code>, not <code>0.07</code>.</p>
+    <div class="grid" id="global-grid"></div>
+    <div id="sg-flag" style="margin-top: 14px;"></div>
+  </section>
+
+  <section class="card">
+    <h2>Brand overrides</h2>
+    <p class="desc">Brand-specific values shadow the globals. Gross margin is per-brand by design. Source-pricelist URLs/paths are for human reference (open in your file manager / Drive).</p>
+    <div id="brands"></div>
+  </section>
+
+  <section class="card">
+    <h2>Logistics tiers</h2>
+    <p class="desc">FOB-band floor/cap on logistics percentage of FOB-in-THB. Empty <code>FOB EUR max</code> = catch-all (no upper bound). Tiers are evaluated in order; first match wins.</p>
+    <table class="tiers">
+      <thead>
+        <tr><th>FOB EUR max</th><th>Min %</th><th>Max %</th></tr>
+      </thead>
+      <tbody id="tiers-body"></tbody>
+    </table>
+  </section>
+
+  <section class="card">
+    <h2>Cost cascade — live examples</h2>
+    <p class="desc">
+      One product per <em>logistics tier</em> per brand. Pulled from
+      <code>vendors/&lt;brand&gt;/products</code> in Firestore and
+      recomputed with the <strong>current</strong> config — so changes you save above
+      reflect here on next refresh. <strong>Retail TH</strong> includes the 7% customer
+      VAT (on top of the import VAT already inside landed cost). <strong>Retail SG</strong>
+      converts retail-pre-tax to SGD; 9% GST is applied only when Nubo is
+      flagged as GST-registered.
+    </p>
+    <div id="examples"></div>
+    <div class="formula-card">
+      <b>Formula:</b><br>
+      <code>landed_thb = (FOB × EUR/THB × unmatched_landed_uplift) + (CIF × duty_rate) + ((CIF + duty) × thai_vat_rate)</code><br>
+      <code>retail_pre_tax_thb = landed_thb ÷ (1 − gross_margin)</code><br>
+      <code>retail_th_thb (VAT-incl) = retail_pre_tax_thb × (1 + th_customer_vat_rate)</code><br>
+      <code>retail_sg_thb = retail_pre_tax_thb × (1 + sg_customer_gst_rate if Nubo GST-registered else 1)</code><br>
+      <code>retail_sg_sgd = retail_sg_thb ÷ (THB/SGD)</code><br>
+      <em>Wisdom (China-origin) skips the EU-logistics uplift &amp; tier clamp; uses the import_duty_rate brand override.</em>
+    </div>
+  </section>
+
+  <div class="actions">
+    <button class="btn primary" id="save-btn" disabled>Save changes</button>
+    <button class="btn secondary" id="reload-btn">Reload from Firestore</button>
+    <button class="btn secondary" id="refresh-ctx-btn">Refresh FX + examples</button>
+    <div class="status info" id="status">Loading…</div>
+  </div>
+
+  <details class="raw">
+    <summary>Raw config JSON (debug)</summary>
+    <pre id="raw"></pre>
+  </details>
+</main>
+
+<footer>
+  <a href="../">← Hub</a> &nbsp;·&nbsp;
+  Config edits are live the moment you save. Catalog import scripts read the
+  same Firestore doc on next run; the Medusa retail price doesn't shift until
+  you re-run <code>&lt;brand&gt;/import_pricelist.py</code> and the Medusa sync.
+</footer>
+
+<script>
+// API base is derived from the current page URL so the form works
+// whether served via the access gateway
+// (https://gateway.goco.bz/leka-product-catalogs/forms/pricing-config →
+// /leka-product-catalogs/api/pricing-config) or directly from local Flask
+// (http://localhost:8080/forms/pricing-config → /api/pricing-config).
+const API_BASE  = location.pathname.replace(/\/forms\/[^/]+$/, "/api");
+const API_URL   = API_BASE + "/pricing-config";
+const CTX_URL   = API_BASE + "/pricing-context";
+
+// Field metadata. is_pct=true means stored as decimal (0.07) but UI shows 7.
+const GLOBAL_FIELDS = [
+  ["thai_vat_rate",            "Thai import VAT",          "Applied on (CIF + duty) during import. e.g. 7", true],
+  ["duty_rate_non_china",      "Duty rate (non-China)",    "EU/Norway/Korea origins. e.g. 10", true],
+  ["duty_rate_china",          "Duty rate (China)",        "ASEAN-China FTA. e.g. 0", true],
+  ["unmatched_landed_uplift",  "Unmatched landed uplift",  "Flat multiplier when no CBM. e.g. 1.35 = +35%", false],
+  ["default_packing_factor",   "Default packing factor",   "L*W*H * factor. e.g. 0.15", false],
+  ["th_customer_vat_rate",     "TH customer VAT",          "Added on TOP of retail base for TH sales. e.g. 7", true],
+  ["sg_customer_gst_rate",     "SG customer GST",          "Added when SG-Nubo is GST-registered. e.g. 9", true],
+];
+
+const BRANDS = ["vinci", "berliner", "rampline", "wisdom"];
+const BRAND_FIELDS = {
+  vinci:    [["gross_margin", "Gross margin", true]],
+  berliner: [["gross_margin", "Gross margin", true], ["exw_discount", "EXW discount (off list)", true]],
+  rampline: [["gross_margin", "Gross margin", true]],
+  wisdom:   [["gross_margin", "Gross margin", true], ["import_duty_rate", "Import duty rate", true], ["default_usd_thb", "Default USD/THB", false]],
+};
+
+let original = null;
+let context  = null;
+
+// ---------- helpers ----------
+
+function el(tag, attrs = {}, ...children) {
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs || {})) {
+    if (k === "class") e.className = v;
+    else if (k === "html") e.innerHTML = v;
+    else if (k === "on" && typeof v === "object") {
+      for (const [ev, fn] of Object.entries(v)) e.addEventListener(ev, fn);
+    } else e.setAttribute(k, v);
+  }
+  for (const c of children) {
+    if (c === null || c === undefined) continue;
+    e.append(typeof c === "string" ? document.createTextNode(c) : c);
+  }
+  return e;
+}
+
+function fmt(v) {
+  if (v === null || v === undefined || v === "") return "";
+  return String(v);
+}
+
+// Decimal -> integer-ish percent string (0.07 -> "7", 0.355 -> "35.5")
+function dec2pct(v) {
+  if (v === null || v === undefined || v === "") return "";
+  const x = Number(v) * 100;
+  return String(Math.round(x * 100) / 100);
+}
+
+// Percent string -> decimal (parseFloat then /100)
+function pct2dec(s) {
+  if (s === "" || s === null || s === undefined) return null;
+  const n = parseFloat(s);
+  if (Number.isNaN(n)) return null;
+  return n / 100;
+}
+
+function fmtThb(n) {
+  if (n === null || n === undefined || Number.isNaN(n)) return "—";
+  return "฿" + Math.round(n).toLocaleString("en-US");
+}
+function fmtCcy(n, ccy, digits = 0) {
+  if (n === null || n === undefined || Number.isNaN(n)) return "—";
+  const f = digits === 0 ? Math.round(n) : Number(n.toFixed(digits));
+  return ccy + " " + f.toLocaleString("en-US", {minimumFractionDigits: digits, maximumFractionDigits: digits});
+}
+function fmtPct(dec) {
+  if (dec === null || dec === undefined || Number.isNaN(dec)) return "—";
+  return (Number(dec) * 100).toFixed(1).replace(/\.0$/, "") + "%";
+}
+
+function setStatus(msg, kind = "info") {
+  const s = document.getElementById("status");
+  s.className = "status " + kind;
+  s.textContent = msg;
+}
+
+// ---------- renderers ----------
+
+function renderFx(fx) {
+  const strip = document.getElementById("fx-strip");
+  strip.innerHTML = "";
+  if (!fx) {
+    strip.append(el("span", {class: "fx-meta"}, "FX unavailable"));
+    return;
+  }
+  for (const ccy of ["USD", "EUR", "SGD"]) {
+    if (fx[ccy] === undefined) continue;
+    const chip = el("span", {class: "fx-chip"},
+      ccy + " ",
+      el("strong", {}, "฿" + Number(fx[ccy]).toFixed(2)),
+    );
+    strip.append(chip);
+  }
+  strip.append(el("span", {class: "fx-meta"},
+    `· ${fx._source || "?"} · ${Math.round((fx._age_seconds || 0) / 60)}m ago`));
+}
+
+function renderConfig(doc) {
+  // Audit
+  document.getElementById("audit-by").textContent = doc.updated_by || "—";
+  document.getElementById("audit-at").textContent = doc.updated_at
+    ? "Last edited " + new Date(doc.updated_at).toLocaleString()
+    : "Never edited";
+
+  // Global
+  const g = document.getElementById("global-grid");
+  g.innerHTML = "";
+  const gv = doc.global || {};
+  for (const [key, label, hint, isPct] of GLOBAL_FIELDS) {
+    const inputAttrs = {
+      id: "g_" + key, type: "number",
+      step: isPct ? "0.1" : "0.001",
+      value: isPct ? dec2pct(gv[key]) : fmt(gv[key]),
+      "data-scope": "global", "data-key": key,
+      "data-pct": isPct ? "1" : "0",
+    };
+    const input = el("input", isPct ? {...inputAttrs, class: "pct"} : inputAttrs);
+    const inputNode = isPct
+      ? el("div", {class: "field-row"}, input, el("span", {class: "unit"}, "%"))
+      : input;
+    g.append(el("div", {class: "field"},
+      el("label", {for: "g_" + key}, label),
+      inputNode,
+      el("span", {class: "hint"}, hint),
+    ));
+  }
+
+  // SG flag (boolean)
+  const sgWrap = document.getElementById("sg-flag");
+  sgWrap.innerHTML = "";
+  const flagOn = !!gv["sg_nubo_gst_registered"];
+  const cbId = "g_sg_nubo_gst_registered";
+  sgWrap.append(el("div", {class: "checkbox-row"},
+    el("input", {
+      type: "checkbox", id: cbId,
+      "data-scope": "global", "data-key": "sg_nubo_gst_registered",
+      "data-bool": "1",
+      ...(flagOn ? {checked: ""} : {}),
+    }),
+    el("label", {for: cbId},
+      "Nubo SG is GST-registered (apply 9% GST on SG-destination retail). ",
+      "Leave unchecked until Nubo registration is confirmed."),
+  ));
+
+  // Brands
+  const b = document.getElementById("brands");
+  b.innerHTML = "";
+  const bd = doc.brands || {};
+  for (const brand of BRANDS) {
+    const bv = bd[brand] || {};
+    const block = el("div", {class: "brand-block"});
+    block.append(el("h3", {},
+      el("span", {class: "brand-pill " + brand}, brand)));
+    // numeric fields
+    const grid = el("div", {class: "grid"});
+    for (const [key, label, isPct] of BRAND_FIELDS[brand]) {
+      const inputAttrs = {
+        id: brand + "_" + key, type: "number",
+        step: isPct ? "0.1" : "0.001",
+        value: isPct ? dec2pct(bv[key]) : fmt(bv[key]),
+        "data-scope": "brand", "data-brand": brand, "data-key": key,
+        "data-pct": isPct ? "1" : "0",
+      };
+      const input = el("input", isPct ? {...inputAttrs, class: "pct"} : inputAttrs);
+      const inputNode = isPct
+        ? el("div", {class: "field-row"}, input, el("span", {class: "unit"}, "%"))
+        : input;
+      grid.append(el("div", {class: "field"},
+        el("label", {for: brand + "_" + key}, label),
+        inputNode,
+      ));
+    }
+    block.append(grid);
+    // source pricelist (string fields, full width)
+    const srcUrl = bv["source_pricelist_url"] || "";
+    const srcLabel = bv["source_pricelist_label"] || "";
+    const srcRow = el("div", {class: "grid", style: "margin-top: 12px;"},
+      el("div", {class: "field"},
+        el("label", {for: brand + "_src_url"}, "Source pricelist (URL or file path)"),
+        el("input", {
+          id: brand + "_src_url", type: "url",
+          value: srcUrl,
+          "data-scope": "brand", "data-brand": brand,
+          "data-key": "source_pricelist_url",
+        }),
+      ),
+      el("div", {class: "field"},
+        el("label", {for: brand + "_src_label"}, "Source label (display)"),
+        el("input", {
+          id: brand + "_src_label", type: "text",
+          value: srcLabel,
+          "data-scope": "brand", "data-brand": brand,
+          "data-key": "source_pricelist_label",
+        }),
+      ),
+    );
+    block.append(srcRow);
+    if (srcUrl) {
+      const linkBlock = el("div", {});
+      const a = el("a", {
+        class: "source-link",
+        href: srcUrl,
+        target: "_blank", rel: "noopener noreferrer",
+      }, "↗ " + (srcLabel || srcUrl));
+      // Local Windows path — browser can't open file:// from https
+      if (/^[A-Z]:\\/i.test(srcUrl) || srcUrl.startsWith("\\\\")) {
+        a.className = "source-link broken";
+        a.removeAttribute("href");
+        a.title = "Local file path — copy into File Explorer";
+      }
+      linkBlock.append(a);
+      block.append(linkBlock);
+    }
+    b.append(block);
+  }
+
+  // Tiers
+  const tb = document.getElementById("tiers-body");
+  tb.innerHTML = "";
+  const tiers = doc.logistics_tiers || [];
+  tiers.forEach((t, i) => {
+    const isInf = t.fob_eur_max === null || t.fob_eur_max === undefined;
+    tb.append(el("tr", {"data-tier-index": i},
+      el("td", {},
+        el("input", {
+          type: "number", step: "1", placeholder: "(no max)",
+          value: isInf ? "" : fmt(t.fob_eur_max),
+          "data-scope": "tier", "data-key": "fob_eur_max",
+        }),
+      ),
+      el("td", {},
+        el("input", {type: "number", step: "0.01", value: fmt(t.min_pct),
+          "data-scope": "tier", "data-key": "min_pct"}),
+      ),
+      el("td", {},
+        el("input", {type: "number", step: "0.01", value: fmt(t.max_pct),
+          "data-scope": "tier", "data-key": "max_pct"}),
+      ),
+    ));
+  });
+
+  // Raw
+  document.getElementById("raw").textContent = JSON.stringify(doc, null, 2);
+
+  // Wire change tracking
+  document.querySelectorAll("input").forEach(inp => {
+    inp.addEventListener("input", () => {
+      document.getElementById("save-btn").disabled = false;
+      setStatus("Unsaved changes — examples below stop reflecting until you save + refresh.", "info");
+    });
+    inp.addEventListener("change", () => {
+      document.getElementById("save-btn").disabled = false;
+    });
+  });
+  document.getElementById("save-btn").disabled = true;
+}
+
+function renderExamples(ctx) {
+  const wrap = document.getElementById("examples");
+  wrap.innerHTML = "";
+  if (!ctx || !ctx.brands) {
+    wrap.append(el("p", {class: "desc"}, "No examples available."));
+    return;
+  }
+  for (const brand of BRANDS) {
+    const block = el("div", {class: "brand-block"});
+    block.append(el("h3", {},
+      el("span", {class: "brand-pill " + brand}, brand),
+      " · cost cascade · 1 sample per tier",
+    ));
+    const data = ctx.brands[brand];
+    if (!data || (Array.isArray(data) && data.length === 0)) {
+      block.append(el("p", {class: "desc", style: "margin-top: 8px;"},
+        "No priced products found in Firestore for this brand."));
+      wrap.append(block);
+      continue;
+    }
+    if (!Array.isArray(data) && data.error) {
+      block.append(el("p", {class: "desc", style: "margin-top: 8px; color: var(--red-orange);"},
+        "Error: " + data.error));
+      wrap.append(block);
+      continue;
+    }
+    const table = el("table", {class: "cascade"});
+    const head = el("thead", {}, el("tr", {},
+      el("th", {}, "Tier"),
+      el("th", {}, "SKU"),
+      el("th", {}, "Source FOB"),
+      el("th", {}, "→ THB FOB"),
+      el("th", {}, "+ Logistics"),
+      el("th", {}, "+ Duty"),
+      el("th", {}, "+ Import VAT"),
+      el("th", {}, "Landed"),
+      el("th", {}, "÷ (1−GM)"),
+      el("th", {}, "Retail TH (VAT-incl)"),
+      el("th", {}, "Retail SG"),
+    ));
+    table.append(head);
+    const tbody = el("tbody", {});
+    for (const ex of data) {
+      const c = ex.cascade;
+      tbody.append(el("tr", {},
+        el("td", {class: "tier"}, ex.tier_label),
+        el("td", {class: "sku", title: ex.name},
+          ex.sku.length > 22 ? ex.sku.slice(0, 22) + "…" : ex.sku),
+        el("td", {},
+          fmtCcy(ex.source_fob_native, ex.source_native_ccy, ex.source_native_ccy === "NOK" ? 0 : 0)),
+        el("td", {}, fmtThb(c.fob_thb)),
+        el("td", {class: "clamp-" + (c.logistics_clamp || "none"),
+                  title: c.logistics_clamp || "no clamp"},
+          fmtThb(c.cif_thb - c.fob_thb)),
+        el("td", {}, fmtThb(c.duty_thb)),
+        el("td", {}, fmtThb(c.thai_import_vat_thb)),
+        el("td", {}, fmtThb(c.landed_thb)),
+        el("td", {title: "Gross margin " + fmtPct(c.gross_margin)},
+          fmtThb(c.retail_pre_tax_thb)),
+        el("td", {class: "retail-th",
+                  title: "Includes " + fmtPct(c.th_customer_vat_rate) + " TH customer VAT · "
+                       + fmtCcy(c.th_retail_usd, "USD") + " / "
+                       + fmtCcy(c.th_retail_eur, "EUR")},
+          fmtThb(c.th_retail_thb)),
+        el("td", {class: "retail-sg",
+                  title: (c.sg_nubo_gst_registered ? "+ " + fmtPct(c.sg_customer_gst_rate) + " GST"
+                                                    : "No GST (Nubo not yet registered)")
+                       + " · " + fmtThb(c.sg_retail_thb)},
+          fmtCcy(c.sg_retail_sgd, "SGD")),
+      ));
+    }
+    table.append(tbody);
+    block.append(table);
+    wrap.append(block);
+  }
+}
+
+// ---------- collect / persist ----------
+
+function collect() {
+  const doc = { global: {}, brands: {}, logistics_tiers: [] };
+  document.querySelectorAll('input[data-scope="global"]').forEach(inp => {
+    const key = inp.dataset.key;
+    if (inp.dataset.bool === "1") {
+      doc.global[key] = !!inp.checked;
+    } else if (inp.value !== "") {
+      doc.global[key] = inp.dataset.pct === "1" ? pct2dec(inp.value) : parseFloat(inp.value);
+    }
+  });
+  for (const brand of BRANDS) {
+    doc.brands[brand] = {};
+    document.querySelectorAll(`input[data-scope="brand"][data-brand="${brand}"]`).forEach(inp => {
+      const key = inp.dataset.key;
+      if (inp.value === "") return;
+      if (inp.type === "url" || inp.type === "text") {
+        doc.brands[brand][key] = inp.value;
+      } else {
+        doc.brands[brand][key] = inp.dataset.pct === "1" ? pct2dec(inp.value) : parseFloat(inp.value);
+      }
+    });
+  }
+  document.querySelectorAll("tr[data-tier-index]").forEach(row => {
+    const tier = {};
+    row.querySelectorAll('input[data-scope="tier"]').forEach(inp => {
+      const k = inp.dataset.key;
+      if (k === "fob_eur_max") {
+        tier[k] = inp.value === "" ? null : parseFloat(inp.value);
+      } else {
+        tier[k] = parseFloat(inp.value);
+      }
+    });
+    doc.logistics_tiers.push(tier);
+  });
+  return doc;
+}
+
+async function load() {
+  setStatus("Loading config…", "info");
+  try {
+    const r = await fetch(API_URL);
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    original = await r.json();
+    renderConfig(original);
+    setStatus("Loaded · fetching FX + examples…", "ok");
+    await loadContext();
+    setStatus("Ready.", "ok");
+  } catch (e) {
+    setStatus("Load failed: " + e.message, "err");
+  }
+}
+
+async function loadContext() {
+  try {
+    const r = await fetch(CTX_URL);
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    context = await r.json();
+    renderFx(context.fx);
+    renderExamples(context);
+  } catch (e) {
+    setStatus("Context load failed: " + e.message, "err");
+    renderFx(null);
+  }
+}
+
+async function save() {
+  setStatus("Saving…", "info");
+  document.getElementById("save-btn").disabled = true;
+  try {
+    const payload = collect();
+    const r = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    const body = await r.json();
+    if (!r.ok) throw new Error(body.error || ("HTTP " + r.status));
+    original = body;
+    renderConfig(original);
+    setStatus("Saved · refreshing examples…", "ok");
+    await loadContext();
+    setStatus("Saved · catalog imports will see this on next run.", "ok");
+  } catch (e) {
+    setStatus("Save failed: " + e.message, "err");
+    document.getElementById("save-btn").disabled = false;
+  }
+}
+
+document.getElementById("save-btn").addEventListener("click", save);
+document.getElementById("reload-btn").addEventListener("click", load);
+document.getElementById("refresh-ctx-btn").addEventListener("click", async () => {
+  setStatus("Refreshing FX + examples…", "info");
+  await loadContext();
+  setStatus("Refreshed.", "ok");
+});
+load();
+</script>
+</body>
+</html>

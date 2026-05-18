@@ -11,6 +11,10 @@
         "url": "https://catalogs.leka.studio"
       }
     ],
+    "classification_hints": {
+      "docs/forms/epdm-pricer.html": "forms",
+      "docs/forms/pricing-config.html": "forms"
+    },
     "section_order": [
       "essentials",
       "dashboards",

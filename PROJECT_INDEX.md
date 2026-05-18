@@ -47,10 +47,29 @@ _Last updated: 2026-04-22_
 | [peak-user-token] | `PEAK_USER_TOKEN` | Peak API auth |
 
 ## Databases & Data Stores
-- **Firestore** (database `[name]`): collections — `[col1]`, `[col2]`
-- **Google Sheets:** `[name]` — [URL] ([what it stores])
-- **BigQuery:** `[dataset.table]` — [purpose]
-- **Postgres / other:** [...]
+- **Firestore** (database `leka-product-catalogs`, native mode, `asia-southeast1`):
+  - Per-brand product collections: `products_wisdom`, `products_vinci`, `products_vortex`, `products_4soft`
+  - Per-brand category lookup: `product_categories_{brand}`
+  - **Shared (brand-null) categories** (since v2.17.0): `product_categories` — docs `epdm`, `infill`
+  - **Shared product collections** (since v2.17.0): `products_epdm` (53), `products_infill` (5) — sourced from the EPDM 2024 Pricelist sheet, queryable by `cfh_m` for fall-height lookup.
+  - `leka_vendor_quotations`
+- **Google Sheets:** `EPDM 2024` (id `1wXGZoseE4PWEiY14BmtrYaHkkCJJEPyLQnUte7qUGrg`) — source of truth for pricelist; re-sync with `scripts/sync_epdm_pricelist.py`.
+- **GCS bucket:** `ai-agents-go-documents` (product images, public read, uniform bucket-level access)
+
+## CFH Lookup (for other projects)
+Other projects (steel-fabrication, leka-projects, sales-orders, quotation tooling) can pick the cheapest EPDM that meets a required playground fall height by querying Firestore directly:
+```python
+from google.cloud import firestore
+db = firestore.Client(project="ai-agents-go", database="leka-product-catalogs")
+docs = (db.collection("products_epdm")
+          .where("cfh_m", ">=", required_cfh_m)
+          .where("status", "==", "active")
+          .order_by("cfh_m")
+          .order_by("pricing.quote_thb_per_sqm")
+          .limit(1)
+          .stream())
+```
+Fields available: `cfh_m` (m), `thickness_mm`, `sbr_mm`, `system`, `pricing.quote_thb_per_sqm` (THB/sqm), `pricing.landed_thb_per_sqm`, `description`, `item_code`. Composite indexes are deployed for `(status, cfh_m, pricing.quote_thb_per_sqm)` and `(system, cfh_m, thickness_mm)`.
 
 ## Scheduled / Cron / Cloud Scheduler
 | Name | Schedule | Target | Code path |

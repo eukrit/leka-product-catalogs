@@ -1,0 +1,10 @@
+{
+  "machine": "NCORE100",
+  "branch": "fix/db-migrate-pipeline",
+  "sha": "e53cf1d",
+  "ahead": 0,
+  "behind": 0,
+  "dirty_files": 71,
+  "sop_version": "2026.05.18-rev6",
+  "session_start": "2026-05-18T13:08:00Z"
+}

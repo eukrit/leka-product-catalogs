@@ -1,0 +1,318 @@
+{
+  "timestamp": "2026-05-16T14-41-19Z",
+  "dry_run": true,
+  "totals": {
+    "ENRICH_SPECS": 28
+  },
+  "actions_count": 28,
+  "skipped_count": 0,
+  "errors": [],
+  "skipped": [],
+  "actions": [
+    {
+      "op": "ENRICH_SPECS",
+      "handle": "rampline-rampball",
+      "product_id": "prod_01KNQ3PW9PMY591KPNQXDQ3738",
+      "crawl_sku": "rampball-street-standard-eng",
+      "diff_keys": [
+        "crawl_notes"
+      ]
+    },
+    {
+      "op": "ENRICH_SPECS",
+      "handle": "rampline-floating-bench",
+      "product_id": "prod_01KNQ3PYBRMC0ET0BRFTRCZS82",
+      "crawl_sku": "23488",
+      "diff_keys": [
+        "installed_dimensions",
+        "certifications",
+        "downloads_json",
+        "downloads_count",
+        "crawl_notes"
+      ]
+    },
+    {
+      "op": "ENRICH_SPECS",
+      "handle": "rampline-take-5",
+      "product_id": "prod_01KNQ3Q1AXR41GNYBKKXHQG3DK",
+      "crawl_sku": "25795",
+      "diff_keys": [
+        "installed_dimensions",
+        "downloads_json",
+        "downloads_count"
+      ]
+    },
+    {
+      "op": "ENRICH_SPECS",
+      "handle": "rampline-monkey-business",
+      "product_id": "prod_01KNQ3Q2N1MDM04CGMBKW2QMYD",
+      "crawl_sku": "24419",
+      "diff_keys": [
+        "installed_dimensions",
+        "downloads_json",
+        "downloads_count",
+        "crawl_notes"
+      ]
+    },
+    {
+      "op": "ENRICH_SPECS",
+      "handle": "rampline-junior-power-ii",
+      "product_id": "prod_01KNQ3Q3GTMGFNGC5DJDXZHV3G",
+      "crawl_sku": "junior-power-ii-grass-or-loose-fills",
+      "diff_keys": [
+        "installed_dimensions",
+        "certifications",
+        "downloads_json",
+        "downloads_count"
+      ]
+    },
+    {
+      "op": "ENRICH_SPECS",
+      "handle": "rampline-junior-power",
+      "product_id": "prod_01KNQ3Q3TQ5MWQYTXR0KZ87W4G",
+      "crawl_sku": "24455",
+      "diff_keys": [
+        "installed_dimensions",
+        "certifications",
+        "downloads_json",
+        "downloads_count",
+        "crawl_notes"
+      ]
+    },
+    {
+      "op": "ENRICH_SPECS",
+      "handle": "rampline-jane-jump",
+      "product_id": "prod_01KNQ3Q43MAVKZBW4CHNEVJ752",
+      "crawl_sku": "jane-jump-for-grass-or-loose-fills",
+      "diff_keys": [
+        "installed_dimensions",
+        "downloads_json",
+        "downloads_count"
+      ]
+    },
+    {
+      "op": "ENRICH_SPECS",
+      "handle": "rampline-hunting-high-and-low",
+      "product_id": "prod_01KNQ3Q4CR772KXTRM90W6W05H",
+      "crawl_sku": "24473",
+      "diff_keys": [
+        "installed_dimensions",
+        "downloads_json",
+        "downloads_count",
+        "crawl_notes"
+      ]
+    },
+    {
+      "op": "ENRICH_SPECS",
+      "handle": "rampline-fearless",
+      "product_id": "prod_01KNQ3Q4P0M2GMX702R4NFH653",
+      "crawl_sku": "fearless-artificial-grass",
+      "diff_keys": [
+        "installed_dimensions",
+        "downloads_json",
+        "downloads_count",
+        "crawl_notes"
+      ]
+    },
+    {
+      "op": "ENRICH_SPECS",
+      "handle": "rampline-fast-and-curious",
+      "product_id": "prod_01KNQ3Q4YXWB6MJ97CBHVXWT3Z",
+      "crawl_sku": "24500",
+      "diff_keys": [
+        "installed_dimensions",
+        "downloads_json",
+        "downloads_count",
+        "crawl_notes"
+      ]
+    },
+    {
+      "op": "ENRICH_SPECS",
+      "handle": "rampline-crouching-tiger",
+      "product_id": "prod_01KNQ3Q5JDPYAN021MQRWYK3RC",
+      "crawl_sku": "crouching-tiger-wet-pour-or-shockdeck",
+      "diff_keys": [
+        "installed_dimensions",
+        "downloads_json",
+        "downloads_count",
+        "crawl_notes"
+      ]
+    },
+    {
+      "op": "ENRICH_SPECS",
+      "handle": "rampline-cliffhanger",
+      "product_id": "prod_01KNQ3Q5VECVNKD1ECW13MZQNX",
+      "crawl_sku": "24522-24527",
+      "diff_keys": [
+        "installed_dimensions",
+        "certifications",
+        "downloads_json",
+        "downloads_count",
+        "crawl_notes"
+      ]
+    },
+    {
+      "op": "ENRICH_SPECS",
+      "handle": "rampline-classic-jump",
+      "product_id": "prod_01KNQ3Q64WYH74RJZDYCXP62EN",
+      "crawl_sku": "24536",
+      "diff_keys": [
+        "installed_dimensions",
+        "downloads_json",
+        "downloads_count",
+        "crawl_notes"
+      ]
+    },
+    {
+      "op": "ENRICH_SPECS",
+      "handle": "rampline-skill",
+      "product_id": "prod_01KNQ3Q71RDGMYQS3QBHFX8EW1",
+      "crawl_sku": "26199",
+      "diff_keys": [
+        "certifications",
+        "crawl_notes"
+      ]
+    },
+    {
+      "op": "ENRICH_SPECS",
+      "handle": "rampline-trip",
+      "product_id": "prod_01KNQ3Q7AN15JD9A2VXXYFJ69T",
+      "crawl_sku": "trip-for-shockdeck",
+      "diff_keys": [
+        "installed_dimensions",
+        "installed_area_raw",
+        "crawl_notes"
+      ]
+    },
+    {
+      "op": "ENRICH_SPECS",
+      "handle": "rampline-rock",
+      "product_id": "prod_01KNQ3Q7KKAWAE7540X87GADKT",
+      "crawl_sku": "rock-artificial-grass",
+      "diff_keys": [
+        "crawl_notes"
+      ]
+    },
+    {
+      "op": "ENRICH_SPECS",
+      "handle": "rampline-twist",
+      "product_id": "prod_01KNQ3Q7X8Q1HR6HJ52HMGMVTE",
+      "crawl_sku": "26353",
+      "diff_keys": [
+        "installed_dimensions",
+        "installed_area_raw",
+        "crawl_notes"
+      ]
+    },
+    {
+      "op": "ENRICH_SPECS",
+      "handle": "rampline-impact",
+      "product_id": "prod_01KNQ3Q8654QHQCPGJ1JBTZN1N",
+      "crawl_sku": "impact-for-wet-pour-or-artificial-grass",
+      "diff_keys": [
+        "crawl_notes"
+      ]
+    },
+    {
+      "op": "ENRICH_SPECS",
+      "handle": "rampline-bounce",
+      "product_id": "prod_01KNQ3Q8T1G0DCX9P83Q2M8Q6D",
+      "crawl_sku": "bounce-for-shockdeck",
+      "diff_keys": [
+        "crawl_notes"
+      ]
+    },
+    {
+      "op": "ENRICH_SPECS",
+      "handle": "rampline-power",
+      "product_id": "prod_01KNQ3Q93PZD7Z78HBJ2BAX3SD",
+      "crawl_sku": "power-for-artificial-grass",
+      "diff_keys": [
+        "crawl_notes"
+      ]
+    },
+    {
+      "op": "ENRICH_SPECS",
+      "handle": "rampline-agile",
+      "product_id": "prod_01KNQ3Q9C8Z1MPZWAYQKDJHF8N",
+      "crawl_sku": "agile-artificial-grass",
+      "diff_keys": [
+        "crawl_notes"
+      ]
+    },
+    {
+      "op": "ENRICH_SPECS",
+      "handle": "rampline-flight",
+      "product_id": "prod_01KNQ3Q9NCN8MARBJN6Q9FZ36R",
+      "crawl_sku": "flight-shockdeck",
+      "diff_keys": [
+        "crawl_notes"
+      ]
+    },
+    {
+      "op": "ENRICH_SPECS",
+      "handle": "rampline-dynamic",
+      "product_id": "prod_01KNQ3QA6Z3ACP40TQADEAGXMG",
+      "crawl_sku": "dynamic-grass-or-loose-fills",
+      "diff_keys": [
+        "installed_dimensions",
+        "installed_area_raw",
+        "crawl_notes"
+      ]
+    },
+    {
+      "op": "ENRICH_SPECS",
+      "handle": "rampline-juice",
+      "product_id": "prod_01KNQ3QAGERHBFK2Z02NXZNSFE",
+      "crawl_sku": "juice-wet-pour-or-artificial-grass",
+      "diff_keys": [
+        "certifications",
+        "crawl_notes"
+      ]
+    },
+    {
+      "op": "ENRICH_SPECS",
+      "handle": "rampline-ability",
+      "product_id": "prod_01KNQ3QAT5TT157NFRDKEHGMJM",
+      "crawl_sku": "36477",
+      "diff_keys": [
+        "installed_dimensions",
+        "crawl_notes"
+      ]
+    },
+    {
+      "op": "ENRICH_SPECS",
+      "handle": "rampline-grip",
+      "product_id": "prod_01KNQ3QB4ZWCXACZXWP154MF6N",
+      "crawl_sku": "26471",
+      "diff_keys": [
+        "installed_dimensions",
+        "installed_area_raw",
+        "crawl_notes"
+      ]
+    },
+    {
+      "op": "ENRICH_SPECS",
+      "handle": "rampline-speed",
+      "product_id": "prod_01KNQ3QBEMQ8B2F64HC8BD56ZW",
+      "crawl_sku": "26518",
+      "diff_keys": [
+        "installed_dimensions",
+        "installed_area_raw",
+        "crawl_notes"
+      ]
+    },
+    {
+      "op": "ENRICH_SPECS",
+      "handle": "rampline-shockdeck",
+      "product_id": "prod_01KNQ3QD2GBH3E6ZKMBNBYHHJR",
+      "crawl_sku": "shock-absorber",
+      "diff_keys": [
+        "certifications",
+        "downloads_json",
+        "downloads_count",
+        "crawl_notes"
+      ]
+    }
+  ]
+}

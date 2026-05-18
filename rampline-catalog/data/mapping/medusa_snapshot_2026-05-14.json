@@ -1,0 +1,4535 @@
+[
+  {
+    "id": "prod_01KNQ3PW9PMY591KPNQXDQ3738",
+    "title": "Rampball",
+    "handle": "rampline-rampball",
+    "status": "published",
+    "description": "The unpredictable tilting and rotating behavior of the Rampball challenges the user’s balance skills and triggers creative movement. Rampball® balance balls are suitable for playing, exploration and balance training.\n\nThe Rampball® has an extra strong spring system that makes it tilt to the sides. The 50R/70R-models are also equipped with a ball bearing that allows them to rotate around vertical axis.\n\nTilting balance ballDiameter 35 cmHeight 36 cmWeight 27 kgTilts 5 cm in all directionsFall height 36\n\nTilting balance ballDiameter 50 cmHeight 51 cmWeight 66 kgTilts 10 cm in all directionsFall height 51\n\nTilting and rotating balance ballDiameter 50 cmHeight 51 cmWeight 75 kgTilts 10 cm in all directionsFall height 51\n\nTilting and rotating balance ballDiameter 70 cmHeight 70 cmWeight 201 kgTilts 15 cm in all directionsFall height 70\n\nArtificial grass/wet pour ground covers (rubber/cork etc.)\n\nGrass/loose-fill covers (wood chips, sand etc.)",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [
+        {
+          "type": "datasheet",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampball/rampball-product-sheet",
+          "filename": "rampball-product-sheet",
+          "original_url": "https://rampline.com/rampball-product-sheet"
+        },
+        {
+          "type": "manual",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampball/rampball-oam",
+          "filename": "rampball-oam",
+          "original_url": "https://rampline.com/rampball-oam"
+        },
+        {
+          "type": "manual",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampball/rampball-mount-sd",
+          "filename": "rampball-mount-sd",
+          "original_url": "https://rampline.com/rampball-mount-sd"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampball/1V3KQ6j_uvGBuYBQlJDRv8l-h6h-dF7hn",
+          "filename": "rampball-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1V3KQ6j_uvGBuYBQlJDRv8l-h6h-dF7hn?usp=share_link"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampball/1-WU5JOCBO_Fi2OUVNFlbbey_BESiadGH",
+          "filename": "rampball-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1-WU5JOCBO_Fi2OUVNFlbbey_BESiadGH?usp=share_link"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampball/1RjjINAYlW5r_Ct0Az82PurjpaL8SxSFx",
+          "filename": "rampball-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1RjjINAYlW5r_Ct0Az82PurjpaL8SxSFx?usp=share_link"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampball/12dG9HI2dBYzNynEb2YpD_1Z8BnTSnNd1",
+          "filename": "rampball-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/12dG9HI2dBYzNynEb2YpD_1Z8BnTSnNd1?usp=share_link"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampball/1YCkfmWYDOlwS6SnUX3XEcyvA-b-dql6o",
+          "filename": "rampball-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1YCkfmWYDOlwS6SnUX3XEcyvA-b-dql6o?usp=share_link"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampball/1u7FqxRW33aCLmmOchttHuxdUHPJp8Q7P",
+          "filename": "rampball-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1u7FqxRW33aCLmmOchttHuxdUHPJp8Q7P?usp=share_link"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampball/18NCzuZuhbkL1Ol8iceEtF-R9vPJCMOZp",
+          "filename": "rampball-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/18NCzuZuhbkL1Ol8iceEtF-R9vPJCMOZp?usp=sharing"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampball/18nEdG3T4p7Z8lkCCisaRqYG0xTASABrq",
+          "filename": "rampball-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/18nEdG3T4p7Z8lkCCisaRqYG0xTASABrq?usp=sharing"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampball/18W9NVbGnw93vtquh3ToVmkSzjhRrQQO5",
+          "filename": "rampball-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/18W9NVbGnw93vtquh3ToVmkSzjhRrQQO5?usp=sharing"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampball/18PB89OCaRMhVT8fZateSX3jW1SYT8_57",
+          "filename": "rampball-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/18PB89OCaRMhVT8fZateSX3jW1SYT8_57?usp=sharing"
+        }
+      ],
+      "height_cm": 0,
+      "materials": [
+        "powder coated steel",
+        "EPDM rubber",
+        "natural rubber",
+        "recycled rubber"
+      ],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "6654",
+      "vendor_url": "https://rampline.com/en/product/rampball/",
+      "vendor_data": {
+        "Certified according to EN 1176-1": "2017 (playground equipment) and EN 16630 (outdoor fitness equipment)",
+        "Several Rampballs can be placed in a group (ref EN 1176-1": "2017 / 3.20)",
+        "The safety area can overlap with other equipment (ref EN 1176-1": "2017 / 4.2.8.2.5)",
+        "The required extent of the safety area around the equipment is 150 cm (ref EN 1176-1": "2017 / 4.2.8.2.5)"
+      },
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [
+        "EN 1176",
+        "EN 16630"
+      ],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": [
+        "Grass",
+        "Wet pour or ShockDeck™"
+      ]
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3PWAWKW3HKE011HRH787F",
+        "sku": "6654",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": [
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Rampball_50_3D-scaled.jpg"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/safety-tuv-150x150.png"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/rampball-stopt-26.gif"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/rampball-gress-26.gif"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/rampball-sd-26.gif"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Gul-RAL-1002.png"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Sitrongul-RAL-1012-1.png"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_beige_1015-200x200-1.png"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_orange_2008-200x200-1.png"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Red-RAL-3016.png"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/kugle_bright-red_3017-just.png"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_rosa_4003-200x200-1.png"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_lilla_4005-200x200-1.png"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_mrkbla_5010-200x200-1.png"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Lys-BlU-RAL-5012.png"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_bla_5015-200x200-1.png"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Turkis-RAL-5018-1.png"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_grnn_6005-200x200-1.png"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_grnn_6017-200x200-1.png"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Pale-Green-RAL-6021.png"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_mrkgra_7011-200x200-1.png"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/mellomgra-RAL-7037.png"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_gra_7038-200x200-1.png"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Brunbeige-RAL-8024.png"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_brun_8025-200x200-1.png"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/kugel_mulch_gr-beige-rb.png"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/kugel_mulch_br-beige-rb.png"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/classicjump-motorikkpark-1450x830-1.jpg"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/allin-motorikkpark-1450x830-1.jpg"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/dontstep-motorikkpark-1450x830-1.jpg"
+      }
+    ]
+  },
+  {
+    "id": "prod_01KNQ3PWK71087H7XPX54DJ2VJ",
+    "title": "Rampit",
+    "handle": "rampline-rampit",
+    "status": "published",
+    "description": "The Rampit ™ activity rack can be used in a myriad of ways to trigger children’s desire for varied physical movements. Rampit™ is excellent for fitness purposes and allows for uses that put all the stabilising muscles to work.\n\nRampit™ is a high quality activity rack with a smooth surface and with dimensions adapted to provide good grip for children’s hands. Rampit™ is excellent for developing classic gymnastic skills as well as for creative movement. It can also be used for fitness activities for children, youth and adults.\n\nRampit™ 85\nMounted height on wet pour ground covers or artificial grass: 85 cm\nNot suitable for loose fills.\nWidth: 100 cm\nStandard colour: RAL 6011 Reseda green\n\nRampit™ 120\nHeight:\n– on wet pour ground covers or artificial grass: 120 cm\n– on grass/ loose fills: 95 cm\nWidth: 100 cm\nDepth: 95 cm\nWeight: 36 kg\nStandard colour: RAL 6011 Reseda green\n\nRampit™ 150\nHeight:\n– on wet pour ground covers or artificial grass: 150 cm\n– on loose fills: 126 cm\nWidth: 100 cm\nDepth: 95 cm\nWeight: 40 kg\nStandard colour: RAL 9001 Creme\n\nArtificial grass or wet pour ground covers (rubber or cork)\n\nLoose fill ground covers (wood chips, sand etc.)\n\nThe links will open Google Drive folders where you can choose to download the desired product variant.– Technical files include safety areas– 3D DWG also includes foundations below ground level– BIM files additionally include relevant information and links to downloadable documentsIf you are missing anything, please contact us at contact@rampline.no",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [
+        {
+          "type": "datasheet",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampit/rampit-product-sheet",
+          "filename": "rampit-product-sheet",
+          "original_url": "https://rampline.com/rampit-product-sheet"
+        },
+        {
+          "type": "manual",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampit/rampit-oam",
+          "filename": "rampit-oam",
+          "original_url": "https://rampline.com/rampit-oam"
+        },
+        {
+          "type": "manual",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampit/rampit-mount-en",
+          "filename": "rampit-mount-en",
+          "original_url": "https://rampline.com/rampit-mount-en"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampit/1W234N3Kh1DrmRmaDRQZxojiPJG-rm59y",
+          "filename": "rampit-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1W234N3Kh1DrmRmaDRQZxojiPJG-rm59y?usp=share_link"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampit/1piiab9xGH4D91L-LuIH8V-8pbPpDVoD7",
+          "filename": "rampit-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1piiab9xGH4D91L-LuIH8V-8pbPpDVoD7?usp=share_link"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampit/1ilX1JuYGJOAXdeDInw5KtRLSI8HT9wy5",
+          "filename": "rampit-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1ilX1JuYGJOAXdeDInw5KtRLSI8HT9wy5?usp=share_link"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampit/1M6eo9AYEtUVpAE1sXls0tlhTwD-H3OG1",
+          "filename": "rampit-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1M6eo9AYEtUVpAE1sXls0tlhTwD-H3OG1?usp=sharinghttps://drive.google.com/drive/folders/1M6eo9AYEtUVpAE1sXls0tlhTwD-H3OG1?usp=sharing"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampit/1MGjJ8F_TmWFjuGrMP8CgcYxxk-eWjiKf",
+          "filename": "rampit-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1MGjJ8F_TmWFjuGrMP8CgcYxxk-eWjiKf?usp=sharing"
+        }
+      ],
+      "height_cm": 0,
+      "materials": [
+        "powder coated steel",
+        "EPDM rubber"
+      ],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "7097",
+      "vendor_url": "https://rampline.com/en/product/rampit/",
+      "vendor_data": {
+        "Rampit™ 85": "Wet pour ground covers (cork, rubber), artificial grass.",
+        "Standard colours": "RAL 6011 Reseda green or RAL 9001 Creme",
+        "Rampit™ 120 and 150": "Wet pour ground covers (cork, rubber), artificial grass, loose fill ground covers (sand or wood chips etc. – grass is not recommended).",
+        "Rampit 85, on wet pour ground covers, artificial grass": "85 cm",
+        "Rampit 120, on wet pour ground covers, artificial grass": "120 cm",
+        "Rampit 150, on wet pour ground covers, artificial grass": "150 cm",
+        "Rampit 120, on loose fill ground covers (sand or wood chips etc.)": "95 cm",
+        "Rampit 150, on loose fill ground covers (sand or wood chips etc.)": "125 cm",
+        "The required extent of the safety area around the equipment is 150 cm (ref EN 1176-1": "2017 / 4.2.8.2.5).",
+        "The safety area may overlap with the safety area of other equipment (ref NS EN 1176-1": "2017 / 4.2.8.2.5)"
+      },
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [
+        "EN 1176",
+        "EN 16630",
+        "TUV"
+      ],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": [
+        "Wet pour, artificial grass or ShockDeck™"
+      ]
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3PWMA8Z5XWBRHX3SVAVNW",
+        "sku": "7097",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": [
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampit/Rampit_120_3D_3-scaled.jpg"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampit/safety-tuv-150x150.png"
+      }
+    ]
+  },
+  {
+    "id": "prod_01KNQ3PWVYRPJSVT7YGTXFXF4T",
+    "title": "Rampit TWIN",
+    "handle": "rampline-rampit-swing",
+    "status": "published",
+    "description": "The double horizontal bar (pull-up bar/gimbarr) belongs in all schooyards. It improves agility and requires the use of a multitude of the body’s muscles and make children return to the classroom with flushed cheeks after breaks.\n\nRampit Twin™ is a hight quality bar with rounded ends and a powder-coated finish. A wide range of exercises and activities is possible, like climbing, somersaults, pull-ups, gymnastics and swinging. The dimensions are adapted for children and youths.\n\nMounted height: 200 cm\nWidth: 210 cm\nWeight: 55 kg\n(200 cm is used on wet pour ground covers or artificial grass only)\n\nMounted height\n– on wet pour ground covers or artificial grass: 220 cm\n– on loose fill ground covers: 200 cm\nWidth: 210 cm\nWeight: 60 kg\n\nArtificial grass or wet pour rubber\n\nLoose-fill covers (Rampit Swing 220 only)\n\n(The illustration below shows the measures for Rampit Twin 200).\n\nThe links will open Google Drive folders where you can choose to download the desired product variant.– Technical files include safety areas– 3D DWG also includes foundations below ground level– BIM files additionally include relevant information and links to downloadable documentsDo you miss anything? Please contact us at contact@rampline.no",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [
+        {
+          "type": "datasheet",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampit-swing/twin-product-sheet",
+          "filename": "twin-product-sheet",
+          "original_url": "https://rampline.com/twin-product-sheet"
+        },
+        {
+          "type": "manual",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampit-swing/rampit-oam",
+          "filename": "rampit-oam",
+          "original_url": "https://rampline.com/rampit-oam"
+        },
+        {
+          "type": "manual",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampit-swing/twin-mount-en",
+          "filename": "twin-mount-en",
+          "original_url": "https://rampline.com/twin-mount-en"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampit-swing/1aP0syIqYnuhM4he96nEbcwN7vuiG74yv",
+          "filename": "rampit-swing-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1aP0syIqYnuhM4he96nEbcwN7vuiG74yv?usp=share_link"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampit-swing/1NNSHZ94iJ9reFvVHumz8iKsSHfP10drR",
+          "filename": "rampit-swing-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1NNSHZ94iJ9reFvVHumz8iKsSHfP10drR?usp=share_link"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampit-swing/1_JD3ND9t3qM5NeuKwL2TziEkrtPNQHH5",
+          "filename": "rampit-swing-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1_JD3ND9t3qM5NeuKwL2TziEkrtPNQHH5?usp=share_link"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampit-swing/1JgJcDqIT8fl5jmrsKhgpQiMf-urDq2zU",
+          "filename": "rampit-swing-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1JgJcDqIT8fl5jmrsKhgpQiMf-urDq2zU?usp=sharing"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampit-swing/1Jglk-kQYuYE0_RH8Rw39iM2f-OBKUEtk",
+          "filename": "rampit-swing-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1Jglk-kQYuYE0_RH8Rw39iM2f-OBKUEtk?usp=sharing"
+        }
+      ],
+      "height_cm": 0,
+      "materials": [
+        "powder coated steel",
+        "EPDM rubber"
+      ],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "7074",
+      "vendor_url": "https://rampline.com/en/product/rampit-swing/",
+      "vendor_data": {
+        "Rampit Twin 200": "Wet pour rubber/cork or artificial grass.",
+        "Rampit Twin 220": "Wet pour rubber/cork or artificial grass as well as on loose-fill ground covers like sand or wood chips.",
+        "Rampit Twin 200, on wet pour rubber/cork or artificial grass": "200 cm",
+        "Rampit Twin 220, on wet pour rubber/cork or artificial grass": "220 cm",
+        "The safety area may overlap with other equipment (ref EN 1176-1": "2017 / 4.2.8.2.5)",
+        "Rampit Twin 220, on loose-fill ground covers like sand or wood chips": "200 cm"
+      },
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [
+        "EN 1176",
+        "EN 16630",
+        "TUV"
+      ],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": [
+        "Wet pour, artificial grass or ShockDeck™"
+      ]
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3PWWYYMV9WR765N731VPF",
+        "sku": "7074",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": [
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampit-swing/RampitSwing_200_3D_3-scaled.jpg"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampit-swing/safety-tuv-150x150.png"
+      }
+    ]
+  },
+  {
+    "id": "prod_01KNQ3PX4H6YFY0B7MZ46TWZJ2",
+    "title": "Playground Loop",
+    "handle": "rampline-trampoline-loop-en",
+    "status": "published",
+    "description": "The in-ground trampoline has a strong appeal. It adds weightlessness and pace to the play, and when you put multiple trampolines in a series or combine them with other equipment, they are even more captivating.\n\nPlayground Loop™ from Eurotramp belongs to the most robust trampolines on the market, luckily, considering how users like to jump non-stop. The 1-metre diameter model has excellent bounce, and is hand-picked by Rampline to work optimally with our motor skill park concept. Our in-house developed PlayPro™ trampoline rim provides a neat and durable transition to the ground cover, which is otherwise particularly susceptible to wear around the edge.\n\nRubberized vandal-proof webbing.\nDiameter (jump area): 98 cm\nSteel frame: 150x150x30 cm\nWeight: 160 kg\n\nWet pour ground covers (rubber, cork)\n\nGrass (in combination with wet pour ground cover)\n\nLoose fills (in combination with wet pour ground cover)\n\nCertified by TÜV according to Playground equipment EN 1176-1:2017\n\nThe illustration shows a cross-section of a mounted trampoline.",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [
+        {
+          "type": "datasheet",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-trampoline-loop-en/loop-product-sheet",
+          "filename": "loop-product-sheet",
+          "original_url": "https://rampline.com/loop-product-sheet"
+        },
+        {
+          "type": "manual",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-trampoline-loop-en/loop-oam",
+          "filename": "loop-oam",
+          "original_url": "https://rampline.com/loop-oam"
+        },
+        {
+          "type": "manual",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-trampoline-loop-en/playpro-oam",
+          "filename": "playpro-oam",
+          "original_url": "https://rampline.com/playpro-oam"
+        },
+        {
+          "type": "manual",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-trampoline-loop-en/loop-mount-en",
+          "filename": "loop-mount-en",
+          "original_url": "https://rampline.com/loop-mount-en"
+        },
+        {
+          "type": "manual",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-trampoline-loop-en/playpro-mount-en",
+          "filename": "playpro-mount-en",
+          "original_url": "https://rampline.com/playpro-mount-en"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-trampoline-loop-en/13T6k9DMdOeaTLaCUT9p4Zh9h5_2vfqZe",
+          "filename": "trampoline-loop-en-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/13T6k9DMdOeaTLaCUT9p4Zh9h5_2vfqZe?usp=share_link"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-trampoline-loop-en/1lnF-c_F-Lo2flSewxtq5Z2YXF_ZWlXy_",
+          "filename": "trampoline-loop-en-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1lnF-c_F-Lo2flSewxtq5Z2YXF_ZWlXy_?usp=share_link"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-trampoline-loop-en/1PgWDrGQBLkn8nZLKOH51397FcOOQRQ1U",
+          "filename": "trampoline-loop-en-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1PgWDrGQBLkn8nZLKOH51397FcOOQRQ1U?usp=sharing"
+        }
+      ],
+      "height_cm": 0,
+      "materials": [
+        "EPDM rubber",
+        "natural rubber"
+      ],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "7582",
+      "vendor_url": "https://rampline.com/en/product/trampoline-loop-en/",
+      "vendor_data": {
+        "The device can share safety area with other equipment according to EN 1176-1": "2017 / 4.2.8.2.5.",
+        "The recommended extent of the safety area is 200 cm from the jump area, with a shock absorbing grund cover within 150 cm. (EN 1176-1": "2017 / 4.2.8.2.5)."
+      },
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [
+        "EN 1176",
+        "TUV"
+      ],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": []
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3PX5PKQS2Z9XFD903TH53",
+        "sku": "7582",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": [
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-trampoline-loop-en/kvalitets-trampoliner-lekeplasser-balanseparker-loop1-scaled.jpg"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-trampoline-loop-en/safety-tuv-150x150.png"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-trampoline-loop-en/trampoline-closeup-jacc8atten2b.jpg"
+      }
+    ]
+  },
+  {
+    "id": "prod_01KNQ3PXDX28415XPZAQ5FFH6S",
+    "title": "Jumpstone",
+    "handle": "rampline-jumpstone-en",
+    "status": "published",
+    "description": "The spring attached Jumpstone™ gives a delightful response to the user. When jumping from pad to pad it triggers an exciting and creative play that challenges speed and balance. The modest height makes it safe, even for young children, to make huge leaps and run at high speed.\n\nJumpstone™ natural rubber jump pads with a rough surface. The Jumpstone is popular for a wide age range.\n\nJumpstone™ 27\nDiameter: 27 cm\nHeight: 18 cm\nWeight: 8 kg\n\nJumpstone™ 50\nDiameter: 50 cm\nHeight: 18 cm\nWeight: 20 kg\n\nArtificial grass/wet pour covers (cork or rubber)\n\nGrass/loose-fill ground covers (wood chips, sand, etc.)\n\nSuggested distances between Jumpstones (center to center)\n\nThe links will open Google Drive folders where you can choose to download the desired product variant.",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [
+        {
+          "type": "datasheet",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-jumpstone-en/jumpstone-product-sheet",
+          "filename": "jumpstone-product-sheet",
+          "original_url": "https://rampline.com/jumpstone-product-sheet"
+        },
+        {
+          "type": "manual",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-jumpstone-en/jumpstone-oam",
+          "filename": "jumpstone-oam",
+          "original_url": "https://rampline.com/jumpstone-oam"
+        },
+        {
+          "type": "manual",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-jumpstone-en/jumpstone-mount-sd",
+          "filename": "jumpstone-mount-sd",
+          "original_url": "https://rampline.com/jumpstone-mount-sd"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-jumpstone-en/1kWowNbHsPVCfM67nHb0wyu-n8coJC3xf",
+          "filename": "jumpstone-en-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1kWowNbHsPVCfM67nHb0wyu-n8coJC3xf?usp=share_link"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-jumpstone-en/1aXIqVWxW7AuuBJOU_yUxboQLd_2RSIuo",
+          "filename": "jumpstone-en-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1aXIqVWxW7AuuBJOU_yUxboQLd_2RSIuo?usp=share_link"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-jumpstone-en/1PGwIJHFSXFTJawlizhOjqaXFRsjKGRR5",
+          "filename": "jumpstone-en-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1PGwIJHFSXFTJawlizhOjqaXFRsjKGRR5?usp=share_link"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-jumpstone-en/1xaTg3t332oo3IJNaSogPNxIYdgNbVhbO",
+          "filename": "jumpstone-en-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1xaTg3t332oo3IJNaSogPNxIYdgNbVhbO?usp=share_link"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-jumpstone-en/1cCcAKZlLx2u86_6DnzJnh206PQDTPHy_",
+          "filename": "jumpstone-en-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1cCcAKZlLx2u86_6DnzJnh206PQDTPHy_?usp=share_link"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-jumpstone-en/1MlUuqFm03i7IOsX1s3s7W8qq9yRYJrAp",
+          "filename": "jumpstone-en-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1MlUuqFm03i7IOsX1s3s7W8qq9yRYJrAp?usp=share_link"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-jumpstone-en/1EcqbX8kww_O7H4uR8Fv0Hlc75GlP0h3o",
+          "filename": "jumpstone-en-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1EcqbX8kww_O7H4uR8Fv0Hlc75GlP0h3o?usp=sharing"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-jumpstone-en/1EklN8yd92jq1z2o7vXk_zf4U4Dipja8F",
+          "filename": "jumpstone-en-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1EklN8yd92jq1z2o7vXk_zf4U4Dipja8F?usp=sharing"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-jumpstone-en/1EgZnQe06TR_hH8LtjAyf0sZzUl_3Crch",
+          "filename": "jumpstone-en-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1EgZnQe06TR_hH8LtjAyf0sZzUl_3Crch?usp=sharing"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-jumpstone-en/1Eg0a7qWCLd8OFTK_0MXB93v0dd1m5sPP",
+          "filename": "jumpstone-en-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1Eg0a7qWCLd8OFTK_0MXB93v0dd1m5sPP?usp=sharing"
+        }
+      ],
+      "height_cm": 0,
+      "materials": [
+        "powder coated steel",
+        "EPDM rubber",
+        "natural rubber"
+      ],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "6719",
+      "vendor_url": "https://rampline.com/en/product/jumpstone-en/",
+      "vendor_data": {
+        "Preschools": "from 70 cm to 100 cm.",
+        "Schools, high schools, parks and public areas": "from 90 cm to 170 cm.",
+        "The safety area can overlap with other equipment (ref EN 1176-1": "2017 / 4.2.8.2.5)",
+        "The required extent of the safety area around the equipment is 150 cm (ref EN 1176-1": "2017 / 4.2.8.2.5)",
+        "Several Jumpstone™ can be installed in close proximity to each other in trails, obstacle courses or clusters (ref EN 1176-1": "2017 / 3.20)"
+      },
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [
+        "EN 1176",
+        "EN 16630",
+        "TUV"
+      ],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": [
+        "Grass",
+        "Wet pour or ShockDeck™"
+      ]
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3PXF47AZV4RQF9V6YNSZW",
+        "sku": "6719",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": [
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-jumpstone-en/produktopplisting-jumpstone.png"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-jumpstone-en/safety-tuv-150x150.png"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-jumpstone-en/js-suldal-hoppestein-balanselek-lekeplass.jpg"
+      }
+    ]
+  },
+  {
+    "id": "prod_01KNQ3PXPN3EKZBWZTHSBCSYGC",
+    "title": "BalanceBuddy",
+    "handle": "rampline-balancebuddy-en",
+    "status": "published",
+    "description": "BalanceBuddy™ is a refined version of the well-known balance beam. It stands out with a shock absorbing rubber padding which makes it safe even for the youngest children to challenge themselves a little extra.\n\nBalanceBuddy™ tempts users of all age groups to balance, run and jump. The balance beam is made of stainless steel padded with a layer of shock absorbing natural rubber with a non-slip texture.\n\nBalanceBuddy™ 216 Horizontal\nWidth: 10 cm\nMounted height: 32 cm\nLength: 216 cm\nWeight: 31 kg\n\nBalanceBuddy™ 216 Inclined\nWidth: 10 cm\nMounted height: 18-32 cm\nLength: 216 cm\nWeight: 27 kg\n\nBalanceBuddy™ 316 Horizontal\nWidth: 10 cm\nMounted height: 32 cm\nLength: 316 cm\nWeight: 43 kg\n\nBalanceBuddy™ 316 Inclined\nWidth: 10 cm\nMounted height: 18-32 cm\nLength: 316 cm\nWeight: 40 kg\n\nArtificial grass/wet pour covers (straight and slanted versions)\n\nGrass/loose-fill covers (straight versions only)",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [
+        {
+          "type": "datasheet",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-balancebuddy-en/balancebuddy-product-sheet",
+          "filename": "balancebuddy-product-sheet",
+          "original_url": "https://rampline.com/balancebuddy-product-sheet"
+        },
+        {
+          "type": "manual",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-balancebuddy-en/balancebuddy-oam",
+          "filename": "balancebuddy-oam",
+          "original_url": "https://rampline.com/balancebuddy-oam"
+        },
+        {
+          "type": "manual",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-balancebuddy-en/balancebuddy-mount-en",
+          "filename": "balancebuddy-mount-en",
+          "original_url": "https://rampline.com/balancebuddy-mount-en"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-balancebuddy-en/1rS_Z6kXi-6ehfx5C8GC0YCpk9ytq6uDM",
+          "filename": "balancebuddy-en-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1rS_Z6kXi-6ehfx5C8GC0YCpk9ytq6uDM?usp=share_link"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-balancebuddy-en/1F3_EORn8sqsHxHvRLvqdyuHqxICscv4v",
+          "filename": "balancebuddy-en-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1F3_EORn8sqsHxHvRLvqdyuHqxICscv4v?usp=share_link"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-balancebuddy-en/11zhxBjLPUjqtMsIFjotFYlnro8DG9q_6",
+          "filename": "balancebuddy-en-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/11zhxBjLPUjqtMsIFjotFYlnro8DG9q_6?usp=share_link"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-balancebuddy-en/1Hq9Ueyt_jyIG1xhmyaxAIh9HtD5vRRAG",
+          "filename": "balancebuddy-en-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1Hq9Ueyt_jyIG1xhmyaxAIh9HtD5vRRAG?usp=sharing"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-balancebuddy-en/1Hx2308-rbcznh6OBggP7rHB3Cqy5lWvM",
+          "filename": "balancebuddy-en-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1Hx2308-rbcznh6OBggP7rHB3Cqy5lWvM?usp=sharing"
+        }
+      ],
+      "height_cm": 0,
+      "materials": [
+        "stainless steel",
+        "powder coated steel",
+        "EPDM rubber",
+        "natural rubber"
+      ],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "6732",
+      "vendor_url": "https://rampline.com/en/product/balancebuddy-en/",
+      "vendor_data": {
+        "BalanceBuddy™ Inclined versions": "Wet poured ground covers, artificial grass.",
+        "BalanceBuddy™ Straight versions": "Wet pour ground covers, artificial grass, grass, sand, wood chips.",
+        "Multiple units can be placed in a group (ref EN 1176-1": "2017 / 3.20) in e.g obstacle courses.",
+        "The safety area can overlap with the safety area of other equipment (ref EN 1176-1": "2017 / 4.2.8.2.5)",
+        "The required extent of the safety area around the equipment is 150 cm (ref EN 1176-1": "2017 / 4.2.8.2.5)."
+      },
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [
+        "EN 1176",
+        "EN 16630",
+        "TUV"
+      ],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": [
+        "Grass or loose fills",
+        "Wet pour, artificial grass or ShockDeck™"
+      ]
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3PXQPF8H1VRPZHGQ85KRC",
+        "sku": "6732",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": [
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-balancebuddy-en/balancebuddy-7.jpg"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-balancebuddy-en/safety-tuv-150x150.png"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-balancebuddy-en/hop-balanselek-balansebom-kreativ-lekeplass-skolega%CC%8Ard-scaled.jpg"
+      }
+    ]
+  },
+  {
+    "id": "prod_01KNQ3PY0DJKE37NSSN1D8SDP2",
+    "title": "Rampit Storm",
+    "handle": "rampline-rampit-storm-en",
+    "status": "published",
+    "description": "The Rampit Storm™ climbing pole triggers our instinctive urge to get to the top. Climbing the Rampit Storm™ requires a little technique, courage and strength,  but it is something that everyone can master with a little training.\n\nRampit Storm™ is an excellent device for play, competition and climbing exercises and suitable for children and youth from school age. Rampit Storm™ is safe to use, and challenges all users to reach the top and hit the bell.\n\nDiameter: 10,3 cm\nHeight:\n– mounted on wet pour ground covers: 400 cm\n– mounted on loose fill ground covers: 373 cm\nweight: 50 kg\n\nWet pour ground cover (rubber, cork)\n\nLoose-fill ground covers (wood chips, sand etc.)\n\nThe links will open Google Drive folders where you can choose to download the desired product variant.– Technical files include safety areas– 3D DWG also includes foundations below ground level– BIM files additionally include relevant information and links to downloadable documentsIf you are missing anything, please contact us at contact@rampline.no\n\nRampit Storm™ provides training for coordination skills and cardiovascular fitness.\n\nMuscle groups: Arm, back, abdominal and leg muscles",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [
+        {
+          "type": "datasheet",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampit-storm-en/storm-product-sheet",
+          "filename": "storm-product-sheet",
+          "original_url": "https://rampline.com/storm-product-sheet"
+        },
+        {
+          "type": "manual",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampit-storm-en/storm-oam",
+          "filename": "storm-oam",
+          "original_url": "https://rampline.com/storm-oam"
+        },
+        {
+          "type": "manual",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampit-storm-en/storm-mount-en",
+          "filename": "storm-mount-en",
+          "original_url": "https://rampline.com/storm-mount-en"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampit-storm-en/13z4NCdDOoxJi0Qv8xPsK0N7jaRwY5w9I",
+          "filename": "rampit-storm-en-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/13z4NCdDOoxJi0Qv8xPsK0N7jaRwY5w9I?usp=share_link"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampit-storm-en/16z6WY4WZrzQ0nLDkcgpjrvGjruJkbm0f",
+          "filename": "rampit-storm-en-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/16z6WY4WZrzQ0nLDkcgpjrvGjruJkbm0f?usp=share_link"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampit-storm-en/1j4hEC0XpCUx5BipvHVDDdUcah1KvplKY",
+          "filename": "rampit-storm-en-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1j4hEC0XpCUx5BipvHVDDdUcah1KvplKY?usp=share_link"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampit-storm-en/1LFPTy716FR8s00dytQyyZyQQchJwXU85",
+          "filename": "rampit-storm-en-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1LFPTy716FR8s00dytQyyZyQQchJwXU85?usp=sharing"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampit-storm-en/1LH22QO9FuJQY3Qhcz_UQLNGJeYSmiGqB",
+          "filename": "rampit-storm-en-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1LH22QO9FuJQY3Qhcz_UQLNGJeYSmiGqB?usp=sharing"
+        }
+      ],
+      "height_cm": 0,
+      "materials": [
+        "stainless steel",
+        "powder coated steel",
+        "EPDM rubber",
+        "natural rubber"
+      ],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "7508",
+      "vendor_url": "https://rampline.com/en/product/rampit-storm-en/",
+      "vendor_data": {
+        "The required extent of the safety area around the equipment is 200 cm (ref EN 1176-1": "2017 / 4.2.8.2.5)."
+      },
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [
+        "EN 1176",
+        "EN 16630",
+        "TUV"
+      ],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": []
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3PY1H575EYV2Z98JZ7CRW",
+        "sku": "7508",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": [
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampit-storm-en/produktopplisting-storm.png"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampit-storm-en/safety-tuv-150x150.png"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampit-storm-en/jente_aktivitet_klatre_klatrepale.jpg"
+      }
+    ]
+  },
+  {
+    "id": "prod_01KNQ3PYBRMC0ET0BRFTRCZS82",
+    "title": "Floating Bench",
+    "handle": "rampline-floating-bench",
+    "status": "published",
+    "description": "Floating Bench ™ is not like any other playground equipment. It is a levitating experience for the one who runs along the soft, swirling tracks. It challenges balance and coordination with its bows, turns, waves and straight lines. The visually compelling Floating Bench ™ transforms the landscape and makes an impression on both adults and children.\n\nA DIFFERENT KIND OF GATHERING PLACE\n\nFloating Bench ™ is an individually adapted bench that floats and rolls through the landscape, inspiring the user to creative physical movements. It is also an excellent place for groups of people to gather and socialise. The track is suspended with steel legs in different angles which makes it stylish and robust.\n\nWidth: 33 cm\nHeight: Max. 100 cm\n\nThe stated price includes mounting. In addition comes freight, technical drawings for site adaptation as well as ground-level concrete foundation. We are more than happy to provide a cost estimate on Floating Bench ™ for your project. Please contact us.\n\nFloating Bench ™ can be delivered with optional integrated lighting. With dimmable LED light the bench become well visible and visually intriguing day and night, as the lighting emphasizes the levitating characteristics of the bench.\n\nThe LED strip spreads the light 180 degrees and is a robust system designed for outdoor use in public environments. The system consists of a continuous LED strip and is dimmable and flexible.\n\nArtificial grass or wet pour ground covers (rubber, cork)",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [
+        {
+          "type": "datasheet",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-floating-bench/floatingbench-product-sheet",
+          "filename": "floatingbench-product-sheet",
+          "original_url": "https://rampline.com/floatingbench-product-sheet"
+        },
+        {
+          "type": "manual",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-floating-bench/floatingbench-oam",
+          "filename": "floatingbench-oam",
+          "original_url": "https://rampline.com/floatingbench-oam"
+        },
+        {
+          "type": "manual",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-floating-bench/floatingbench-mount-en",
+          "filename": "floatingbench-mount-en",
+          "original_url": "https://rampline.com/floatingbench-mount-en"
+        }
+      ],
+      "height_cm": 0,
+      "materials": [
+        "stainless steel",
+        "EPDM rubber",
+        "natural rubber"
+      ],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "8036",
+      "vendor_url": "https://rampline.com/en/product/floating-bench/",
+      "vendor_data": {
+        "The safety area can overlap with other equipment according to EN 1176-1": "2017 / 4.2.8.5.3",
+        "The product is certified by TÜV according to Playground equipment EN 1176-1": "2017",
+        "The required extent of the safety area around the equipment is 150 cm (ref EN 1176-1": "2017 / 4.2.8.2.5)."
+      },
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [
+        "EN 1176",
+        "TUV"
+      ],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": []
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3PYCSMS8QZAP16HJGTB3K",
+        "sku": "8036",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": [
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-floating-bench/floatingbench_meny.jpg"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-floating-bench/safety-tuv-150x150.png"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-floating-bench/floating-bench-stopt.gif"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-floating-bench/floating-bench-gress.gif"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-floating-bench/floatingbench-sd.gif"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-floating-bench/algard_benk_rampline_2-scaled.jpg"
+      }
+    ]
+  },
+  {
+    "id": "prod_01KNQ3PYP224DRZPM2Y893RDTC",
+    "title": "Rampline slackline",
+    "handle": "rampline-rampline-slackline",
+    "status": "published",
+    "description": "Nothing improves your balance skills like slacklining. It’s the ultimate exercise and gives a great sense of mastery the more you try. The slackline is a device that gets everyone from the youngest to the toughest to keep challenge themselves for hours.\n\nThe secret that makes people love slacklining is the dynamic webbing. It’s important not to confuse the slackline with static balance lines made of rope, chains or wires, which do not provide the same challenge and experience for the user.\n\nInstalled height: 45 cmLength: 530 cmSlackline length: 410 cmFall height: 100 cm\n\nSimplified drawing showing the required area for a Rampline® slackline.\n\nDoubleTrouble can be set up in several ways. With two parallel lines installed as a group/cluster, as shown in the drawing above, it offers opportunities for more and new tricks and elements to master – such as jumping from one line to the other.\n\nSetups with multiple slack lines can be created in many ways. Shown here is TripleSlackFun, where the slacklines are arranged in a triangular formation with a Rampball70R placed in the center.\n\nSpare parts for Rampline® Slackline can be found here.\n\nGrass/loose-fill ground covers (wood chips, sand etc.)",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [
+        {
+          "type": "datasheet",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampline-slackline/slackline-product-sheet",
+          "filename": "slackline-product-sheet",
+          "original_url": "https://rampline.com/slackline-product-sheet"
+        },
+        {
+          "type": "manual",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampline-slackline/slackline-oam",
+          "filename": "slackline-oam",
+          "original_url": "https://rampline.com/slackline-oam"
+        },
+        {
+          "type": "manual",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampline-slackline/slackline-mount-sd-en",
+          "filename": "slackline-mount-sd-en",
+          "original_url": "https://rampline.com/slackline-mount-sd-en"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampline-slackline/1KtaxMTXHXJ4XjN_cNwTwoaZB0adbYoty",
+          "filename": "rampline-slackline-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1KtaxMTXHXJ4XjN_cNwTwoaZB0adbYoty?usp=share_link"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampline-slackline/1TiFHdiGQ35PyHopOPQ3Yp-D-ZVhhMheq",
+          "filename": "rampline-slackline-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1TiFHdiGQ35PyHopOPQ3Yp-D-ZVhhMheq?usp=share_link"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampline-slackline/1Xs6jSAE4jPm-kAVsTRtJOqvlBoAhrFh8",
+          "filename": "rampline-slackline-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1Xs6jSAE4jPm-kAVsTRtJOqvlBoAhrFh8?usp=share_link"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampline-slackline/1EcSQuqIb33jrqMFYtOKMttTc-bItLTLq",
+          "filename": "rampline-slackline-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1EcSQuqIb33jrqMFYtOKMttTc-bItLTLq?usp=share_link"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampline-slackline/17buKYhayUhsCfNJ5BIaRl1zp_EbMPxVq",
+          "filename": "rampline-slackline-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/17buKYhayUhsCfNJ5BIaRl1zp_EbMPxVq?usp=share_link"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampline-slackline/1a4SYkzgN2GCW6mV6FlJh6DmLsVeLMxEg",
+          "filename": "rampline-slackline-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1a4SYkzgN2GCW6mV6FlJh6DmLsVeLMxEg?usp=share_link"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampline-slackline/1xoEdFX6wk63gNLB0zStMFJ7moPva21t8",
+          "filename": "rampline-slackline-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1xoEdFX6wk63gNLB0zStMFJ7moPva21t8?usp=share_link"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampline-slackline/1DphzUi4u4Ce1miBZzH_r83G7RlFsO12E",
+          "filename": "rampline-slackline-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1DphzUi4u4Ce1miBZzH_r83G7RlFsO12E?usp=sharing"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampline-slackline/1DsNWiHgAqJ871ymiJwGJRmvxCTPUYatR",
+          "filename": "rampline-slackline-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1DsNWiHgAqJ871ymiJwGJRmvxCTPUYatR?usp=sharing"
+        }
+      ],
+      "height_cm": 0,
+      "materials": [
+        "powder coated steel",
+        "EPDM rubber",
+        "natural rubber"
+      ],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "24083",
+      "vendor_url": "https://rampline.com/en/product/rampline-slackline/",
+      "vendor_data": {
+        "The safety area can overlap with other equipment (ref EN 1176-1": "2017 / 4.2.8.2.5)",
+        "The required extent of the safety area around the equipment is 150 cm (ref EN 1176-1": "2017 / 4.2.8.2.5).",
+        "Multiple Rampline® slackline stands can be placed as a group in accordance with EN 1176-1": "2017 / 3.20. Required minimum distance between the lines is 150 cm.",
+        "The vandal-resistant, dynamic SlackShield™ slackline is manufactured from high-strength nylon with an integrated steel wire core. The upper surface is coated with UV-resistant rubber. Width": "40 mm."
+      },
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [
+        "EN 1176",
+        "EN 16630",
+        "TUV"
+      ],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": [
+        "Grass",
+        "ShockDeck™",
+        "Wet pour or artificial grass"
+      ]
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3PYQ89RF8MSE9ADA1VFXC",
+        "sku": "24083",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": [
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampline-slackline/RamplineSlackline_Variant_Sand-scaled.jpg"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampline-slackline/safety-tuv-150x150.png"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampline-slackline/slakkline-single-area-01-26.png"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampline-slackline/slakkline-double-area-01-26.png"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampline-slackline/slakkline-triple-area-08-01-26.png"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampline-slackline/slackline-gress.gif"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampline-slackline/slckline-gress.gif"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampline-slackline/slackline-sd.gif"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampline-slackline/slackline-plan.gif"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampline-slackline/bounche-motorikkpark-1450x830-1.jpg"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampline-slackline/allin-motorikkpark-1450x830-1.jpg"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampline-slackline/PulseZone_01_0013-e1686733717742.png"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampline-slackline/Rampline-miljovennlig-fallunderlag-treningspark.jpg"
+      }
+    ]
+  },
+  {
+    "id": "prod_01KNQ3PZ1VEKPD1WTK83PHRG2D",
+    "title": "Rampit Hopper",
+    "handle": "rampline-rampit-hopper",
+    "status": "published",
+    "description": "An arrangement of activity bars and turning pads. The device increases your heart rate and challenges mobility, agility, and coordination. It works for both exercise and physical play, or why not have a casual competition with a friend – or with yourself?\n\nThe Rampit Hopper™ features 5 bars made of powder-coated steel, with a comfortable and easy-to-grip surface that invites intense activity. Standing at a height of 90 cm, it tempts you to move both over and under the bars. The inclined turning pads are covered with durable natural rubber and withstand powerful thrusts.\n\nMounted height: 90 cm\nWidth: 120 cm\n\nArtificial grass or wet pour ground covers (rubber or cork)\n\nLoose fill ground covers (wood chips, sand etc.)\n\nThe links will open Google Drive folders where you can choose to download the desired product variant.– Technical files include safety areas– 3D DWG also includes foundations below ground level– BIM files additionally include relevant information and links to downloadable documentsIf you are missing anything, please contact us at contact@rampline.no\n\nHopper™ offers training for mobility, gross motor skills as well as cardiac fitness.\n\nMuscle groups:Legs, arms and core muscles",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [
+        {
+          "type": "datasheet",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampit-hopper/hopper-product-sheet",
+          "filename": "hopper-product-sheet",
+          "original_url": "https://rampline.com/hopper-product-sheet"
+        },
+        {
+          "type": "manual",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampit-hopper/rampit-oam",
+          "filename": "rampit-oam",
+          "original_url": "https://rampline.com/rampit-oam"
+        },
+        {
+          "type": "manual",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampit-hopper/hopper-mount-en",
+          "filename": "hopper-mount-en",
+          "original_url": "https://rampline.com/hopper-mount-en"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampit-hopper/1oDwnY9GnSRvvfcTQXgXBTEZkZS1iGxul",
+          "filename": "rampit-hopper-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1oDwnY9GnSRvvfcTQXgXBTEZkZS1iGxul?usp=sharing"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampit-hopper/12pzdx2C_oeihfoVCW5USBzJAXLPUprdi",
+          "filename": "rampit-hopper-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/12pzdx2C_oeihfoVCW5USBzJAXLPUprdi?usp=sharing"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampit-hopper/12p9MhkVYUIxsFENDAJWC9zDmmWHfeM1T",
+          "filename": "rampit-hopper-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/12p9MhkVYUIxsFENDAJWC9zDmmWHfeM1T?usp=sharing"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampit-hopper/1RXAks5FdMQ1jGEk80buDeTzTCReGnwl-",
+          "filename": "rampit-hopper-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1RXAks5FdMQ1jGEk80buDeTzTCReGnwl-?usp=sharing"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampit-hopper/1RcAicJbRFc0yIHbJATESSaB9l9ASwQnu",
+          "filename": "rampit-hopper-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1RcAicJbRFc0yIHbJATESSaB9l9ASwQnu?usp=sharing"
+        }
+      ],
+      "height_cm": 0,
+      "materials": [
+        "powder coated steel",
+        "EPDM rubber",
+        "natural rubber"
+      ],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "32238",
+      "vendor_url": "https://rampline.com/en/product/rampit-hopper/",
+      "vendor_data": {
+        "Certified by TÜV according to": "– Playground equipment EN 1176-1:2017– Permanently installed outdoor fitness equipment EN 16630",
+        "The required extent of the safety area around the equipment is 150 cm (ref EN 1176-1": "2017 / 4.2.8.2.5).",
+        "The safety area may overlap with the safety area of other equipment (ref NS EN 1176-1": "2017 / 4.2.8.2.5)"
+      },
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [
+        "EN 1176",
+        "EN 16630",
+        "TUV"
+      ],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": [
+        "Grass or loose fills",
+        "Wet pour, artificial grass or ShockDeck™"
+      ]
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3PZ2YRZRM86G2HHA2W3RV",
+        "sku": "32238",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": [
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampit-hopper/RampitHopper_Row-e1688729222219.jpg"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampit-hopper/safety-tuv-150x150.png"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampit-hopper/hopper-stopt.gif"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampit-hopper/hopper-losmasser.gif"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampit-hopper/hopper-sd.gif"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampit-hopper/Hopper_Trening-scaled.jpg"
+      }
+    ]
+  },
+  {
+    "id": "prod_01KNQ3PZC8GHBPZPHSM7A97VJZ",
+    "title": "Balancebuddy Wave",
+    "handle": "rampline-balancebuddy-wave",
+    "status": "published",
+    "description": "Balancebuddy Wave™ is a slightly zig-zag shaped balance beam that invites to physical play and movement. It has a low height and shock absorbing balance surface that make it safe and fun to challenge your balance.\n\nBalancebuddy Wave™ is made of hot dip galvanized and powder coated steel. The balance surface is 10 cm wide and covered with a shock absorbing rubber that is kind to bare feet and hands. Balancebuddy Wave™ stimulates balance play and hight intensity activity for all ages.\n\nArtificial grass/wet pour covers (rubber/cork)\n\nGrass/loose-fill covers (wood chips, sand etc)\n\nThe links will open Google Drive folders where you can choose to download the desired product variant.– Technical files include safety areas– 3D DWG also includes foundations below ground level– BIM files additionally include relevant information and links to downloadable documentsIf you are missing anything, please contact us at contact@rampline.no\n\nThe Balancebuddy Wave™ provides training for coordination and balance.\n\nExercise examples:– Balancing back and forth.  – Increased difficulty: Walking with closed eyes.(> 1 minute)",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 10,
+      "downloads": [
+        {
+          "type": "datasheet",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-balancebuddy-wave/balancebuddy-wave-product-sheet",
+          "filename": "balancebuddy-wave-product-sheet",
+          "original_url": "https://rampline.com/balancebuddy-wave-product-sheet"
+        },
+        {
+          "type": "manual",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-balancebuddy-wave/balancebuddy-wave-oam",
+          "filename": "balancebuddy-wave-oam",
+          "original_url": "https://rampline.com/balancebuddy-wave-oam"
+        },
+        {
+          "type": "manual",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-balancebuddy-wave/balancebuddy-wave-mount-en",
+          "filename": "balancebuddy-wave-mount-en",
+          "original_url": "https://rampline.com/balancebuddy-wave-mount-en"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-balancebuddy-wave/1ioHSHrVCm_MLT3jdNWvxZehSVSrZhD-g",
+          "filename": "balancebuddy-wave-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1ioHSHrVCm_MLT3jdNWvxZehSVSrZhD-g?usp=share_link"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-balancebuddy-wave/1P5RyTm-8E9ZHSC8533ULSQYH_9PNIn7X",
+          "filename": "balancebuddy-wave-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1P5RyTm-8E9ZHSC8533ULSQYH_9PNIn7X?usp=share_link"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-balancebuddy-wave/1E6-mxOK6EHsw46l6ICeJBd9Mu1TZBSgJ",
+          "filename": "balancebuddy-wave-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1E6-mxOK6EHsw46l6ICeJBd9Mu1TZBSgJ?usp=share_link"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-balancebuddy-wave/1H6NMF05Zgxa62vi5yrWTsS45mjZtBk7m",
+          "filename": "balancebuddy-wave-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1H6NMF05Zgxa62vi5yrWTsS45mjZtBk7m?usp=sharing"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-balancebuddy-wave/1H6zG6snkUanfY7ahBKkV3Jw3GZrXhAfR",
+          "filename": "balancebuddy-wave-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1H6zG6snkUanfY7ahBKkV3Jw3GZrXhAfR?usp=sharing"
+        }
+      ],
+      "height_cm": 0,
+      "materials": [
+        "powder coated steel",
+        "EPDM rubber",
+        "natural rubber"
+      ],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "20707",
+      "vendor_url": "https://rampline.com/en/product/balancebuddy-wave/",
+      "vendor_data": {
+        "Width": "10 cm",
+        "Length": "316 cm",
+        "Multiple units can be placed in a group (ref EN 1176-1": "2017 / 3.20) in e.g obstacle courses.",
+        "The safety area can overlap with the safety area of other equipment (ref EN 1176-1": "2017 / 4.2.8.2.5)",
+        "The required extent of the safety area around the equipment is 150 cm (ref EN 1176-1": "2017 / 4.2.8.2.5)."
+      },
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [
+        "EN 1176",
+        "EN 16630",
+        "TUV"
+      ],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": [
+        "Grass or loose fills",
+        "Wet pour, artificial grass or ShockDeck™"
+      ]
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3PZD86S7BCNBRZRBAN6PY",
+        "sku": "20707",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": [
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-balancebuddy-wave/BalanceBuddyW_3D_4-scaled.jpg"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-balancebuddy-wave/safety-tuv-150x150.png"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-balancebuddy-wave/wave-montasje2.jpg"
+      }
+    ]
+  },
+  {
+    "id": "prod_01KNQ3PZNVCTERYNETK0X5KK4H",
+    "title": "Fungi",
+    "handle": "rampline-fungi-eng",
+    "status": "published",
+    "description": "Keep your balance, find your own way to climb or just sit down with friends. With its organic shape, Fungi is a friendly element that sparks fun creative play in the playground. It’s as good for climbing, jumping and running, depending on age and skill level.\n\nFungi™ is a mushroom-shaped element for creative play. Fungi™ works well for small children that will climb the pads, but also for older children that will balance, jump and run. The pads are coated with thick natural rubber and are held up by strong steel pipes.\n\nFungi3Height: 73 cmWidth: 77 cmDepth: 74 cmWeight: 18 kg (for wet pour ground covers/artificial grass)  /  21 kg (for grass/loose fills) Fall height: 74 cm\n\nFor loose-fill surfacing Fungi3 is only available in low version.Contact us for more information.\n\nFungi5 Height: 93 cmWidth: 83 cmDepth: 90 cmWeight: 33 kg (for wet pour ground covers/artificial grass) / 38 kg (for grass/loose fills)Fall height: 74 cm\n\nWet pour ground covers (rubber, cork etc.)\n\nGrass/loose-fill ground covers (wood chips, sand etc.)\n\nDrawing for Fungi™ arranged in clusters:",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [
+        {
+          "type": "datasheet",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-fungi-eng/fungi-product-sheet",
+          "filename": "fungi-product-sheet",
+          "original_url": "https://rampline.com/fungi-product-sheet"
+        },
+        {
+          "type": "manual",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-fungi-eng/fungi-oam",
+          "filename": "fungi-oam",
+          "original_url": "https://rampline.com/fungi-oam"
+        },
+        {
+          "type": "manual",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-fungi-eng/fungi-mount-en",
+          "filename": "fungi-mount-en",
+          "original_url": "https://rampline.com/fungi-mount-en"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-fungi-eng/1FJJHgYZ_zm9oymzBR9Uyea3UBD1GtCJP",
+          "filename": "fungi-eng-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1FJJHgYZ_zm9oymzBR9Uyea3UBD1GtCJP?usp=share_link"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-fungi-eng/1tS8S-MRbdRkLshDnK5VypZc3uSp4s4we",
+          "filename": "fungi-eng-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1tS8S-MRbdRkLshDnK5VypZc3uSp4s4we?usp=share_link"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-fungi-eng/1aNu5G6GGETRFUlGb849DhD0AvhRnTGut",
+          "filename": "fungi-eng-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1aNu5G6GGETRFUlGb849DhD0AvhRnTGut?usp=share_link"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-fungi-eng/14EwPrx91YW_PPhrTuA5p3QbaRRhzj_L1",
+          "filename": "fungi-eng-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/14EwPrx91YW_PPhrTuA5p3QbaRRhzj_L1?usp=sharing"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-fungi-eng/14M7Zl4eGxGpLiU4zYtHbWVyFgZgjyggT",
+          "filename": "fungi-eng-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/14M7Zl4eGxGpLiU4zYtHbWVyFgZgjyggT?usp=sharing"
+        }
+      ],
+      "height_cm": 0,
+      "materials": [
+        "stainless steel",
+        "powder coated steel",
+        "EPDM rubber",
+        "natural rubber"
+      ],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "23806",
+      "vendor_url": "https://rampline.com/en/product/fungi-eng/",
+      "vendor_data": {
+        "Fungi 3": "Wet pour ground covers (rubber, cork etc.), artificial grass or ShockDeck™",
+        "Fungi 5": "Wet pour ground covers (rubber, cork etc.), artificial grass, grass/loose-fill ground covers (wood chips, sand etc.) or ShockDeck™",
+        "Approx. installation time": "30 minutes (1 person)",
+        "Required concrete foundation thickness": "15 cm",
+        "The product Fungi is sertified in accordance with NS-EN 1176-1": "2017 (playground equipment) and NS-EN 16630 (permanently installed outdoor fitness equipment)",
+        "Fungi 3, ShockDeck™, wet pour ground covers, artificial grass": "73 cm",
+        "Zones may overlap with those of other equipment (ref NS EN 1176-1": "2017 / 4.2.8.2.5)",
+        "Fungi 5, ShockDeck™, wet pour ground covers, artificial grass, grass or loose fill ground covers": "93 cm"
+      },
+      "installation": {
+        "time": "30 minutes (1 person)",
+        "persons": 1,
+        "foundation": "15 cm"
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [
+        "EN 1176",
+        "EN 16630"
+      ],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": [
+        "Grass or loose fills",
+        "Wet pour, artificial grass or ShockDeck™"
+      ]
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3PZQ5TJ42BVHCPKHRT3PG",
+        "sku": "23806",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": [
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-fungi-eng/Fungi_5_3D__3-scaled.jpg"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-fungi-eng/safety-tuv-150x150.png"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-fungi-eng/rampline-fungi5-area.png"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-fungi-eng/rampline-fungi-forest-area.png"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-fungi-eng/fungi-stopt.gif"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-fungi-eng/fungi-gress.gif"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-fungi-eng/fungi-sd.gif"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-fungi-eng/Fungi_Safety-zone-e1660898178826.png"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-fungi-eng/take-illustrasjon-motorikkpark-1450x830-1-e1767705006752.jpg"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-fungi-eng/fungiforest-illustrasjon-motorikkpark-1450x830-1.jpg"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-fungi-eng/allin-motorikkpark-1450x830-1.jpg"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-fungi-eng/sdis-fungiforest-playground-norway-riskful-play-scaled-e1763994597171.jpg"
+      }
+    ]
+  },
+  {
+    "id": "prod_01KNQ3Q07FQE5F0EDK26ATYX6X",
+    "title": "Don’T STEP INTO THE WATER",
+    "handle": "rampline-dont-step-into-the-water",
+    "status": "published",
+    "description": "A group of balance balls arranged so that they function both for fast-paced activity and as a social seating group. Here, users of all ages will find challenges with climbing, running, hopping, and balancing on tilting and rotating Rampballs. Running from ball to ball without touching the ground requires full effort and high focus, and it is exciting to master.\n\nMonteringstid\n(monteringstid er antatt tid for entreprenører og inkluderer ikke støping av fundamenter)\n\nNedlastinger\n(3D dwg er for montering i helstøpt dekke)",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [
+        {
+          "type": "dwg_2d",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-dont-step-into-the-water/16LVRFZ9NBjy0qe_O0iIZ4E1qOGWMIxPt",
+          "filename": "dont-step-into-the-water-dwg_2d.zip",
+          "original_url": "https://drive.google.com/drive/folders/16LVRFZ9NBjy0qe_O0iIZ4E1qOGWMIxPt?usp=share_link"
+        },
+        {
+          "type": "dwg_2d",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-dont-step-into-the-water/18V6ggiZfh8zT9DTgERMH4hPw7IOTdtqg",
+          "filename": "dont-step-into-the-water-dwg_2d.zip",
+          "original_url": "https://drive.google.com/drive/folders/18V6ggiZfh8zT9DTgERMH4hPw7IOTdtqg?usp=share_link"
+        }
+      ],
+      "height_cm": 0,
+      "materials": [],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "24308",
+      "vendor_url": "https://rampline.com/en/product/dont-step-into-the-water/",
+      "vendor_data": {},
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": [
+        "Grass or loose fills",
+        "Wet pour or ShockDeck™"
+      ]
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3Q08EHKCMYN19GJX29DZB",
+        "sku": "24308",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": []
+  },
+  {
+    "id": "prod_01KNQ3Q0HS0SM4JKRTJ57VKP32",
+    "title": "TRIPLE SLACK FUN",
+    "handle": "rampline-triple-slack-fun",
+    "status": "published",
+    "description": "Triple Slack Fun is a park that accommodates multiple users to have fun balancing at the same time, with good opportunities for advanced balance training as well. With three slacklines placed in a triangle, the user is challenged to complete as many slackline trips in a row as possible.\n\nWith some practice, kids and teenagers will also be able to jump from one of the lines to the Rampball placed in the middle. Triple Slack Fun is also well suited for use in physical education classes.\n\nArea\nApprox. 9.2 x 8.5 m / 55.6 m2\n\nEquipment\n3 x Rampline® slackline\n1 x Rampball® 50",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [
+        {
+          "type": "dwg_2d",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-triple-slack-fun/1Xs6jSAE4jPm-kAVsTRtJOqvlBoAhrFh8",
+          "filename": "triple-slack-fun-dwg_2d.zip",
+          "original_url": "https://drive.google.com/drive/folders/1Xs6jSAE4jPm-kAVsTRtJOqvlBoAhrFh8?usp=share_link"
+        },
+        {
+          "type": "dwg_2d",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-triple-slack-fun/1xoEdFX6wk63gNLB0zStMFJ7moPva21t8",
+          "filename": "triple-slack-fun-dwg_2d.zip",
+          "original_url": "https://drive.google.com/drive/folders/1xoEdFX6wk63gNLB0zStMFJ7moPva21t8?usp=share_link"
+        }
+      ],
+      "height_cm": 0,
+      "materials": [],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "24316",
+      "vendor_url": "https://rampline.com/en/product/triple-slack-fun/",
+      "vendor_data": {},
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": [
+        "Grass or loose fills",
+        "Wet pour",
+        "ShockDeck™"
+      ]
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3Q0JW38JP58ZWQ4T68ZXZ",
+        "sku": "24316",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": [
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-triple-slack-fun/TripleSlack_01_0001-e1684931320662.jpg"
+      }
+    ]
+  },
+  {
+    "id": "prod_01KNQ3Q0W4M5BR27MG9XDWS0KF",
+    "title": "THE FLOOR IS LAVA",
+    "handle": "rampline-the-floor-is-lava",
+    "status": "published",
+    "description": "Provides countless opportunities to move around in different ways. Depending on skill level, you will challenge yourself to increasingly longer jumps, more demanding balance challenges or increased pace. A popular set-up that provides excitement and lots of play, in a course of jump pads, slacklines, balance bars and balance balls.\n\nMounting time\nCasting of foundations not included",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [
+        {
+          "type": "dwg_2d",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-the-floor-is-lava/1gWWXNELIp2sFhXkWE5hgiTTK76DMnaQj",
+          "filename": "the-floor-is-lava-dwg_2d.zip",
+          "original_url": "https://drive.google.com/drive/folders/1gWWXNELIp2sFhXkWE5hgiTTK76DMnaQj?usp=share_link"
+        },
+        {
+          "type": "dwg_2d",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-the-floor-is-lava/1o9X1QwUmGdZT80Ol2eovsOQA9cpUxPuS",
+          "filename": "the-floor-is-lava-dwg_2d.zip",
+          "original_url": "https://drive.google.com/drive/folders/1o9X1QwUmGdZT80Ol2eovsOQA9cpUxPuS?usp=share_link"
+        }
+      ],
+      "height_cm": 0,
+      "materials": [],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "24320",
+      "vendor_url": "https://rampline.com/en/product/the-floor-is-lava/",
+      "vendor_data": {},
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": [
+        "Grass or loose fills",
+        "Wet pour",
+        "ShockDeck™"
+      ]
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3Q0X4P6V0STGEZPMRNM7Q",
+        "sku": "24320",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": []
+  },
+  {
+    "id": "prod_01KNQ3Q1AXR41GNYBKKXHQG3DK",
+    "title": "TAKE 5",
+    "handle": "rampline-take-5",
+    "status": "published",
+    "description": "Take 5 facilitates fast-paced play as well as a breather. Fungi climbing mushrooms are irresistible climbing elements for the smallest children, but also inviting and good to sit on. Rampball and Jumpstone are combined with a slackline, which provides the opportunity for intensive balance training, with many exciting challenges to master.",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [
+        {
+          "type": "dwg_2d",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-take-5/1H7Es0UNj0R2IxiiMVwKadIukiH6B8CQ6",
+          "filename": "take-5-dwg_2d.zip",
+          "original_url": "https://drive.google.com/drive/folders/1H7Es0UNj0R2IxiiMVwKadIukiH6B8CQ6?usp=share_link"
+        },
+        {
+          "type": "dwg_2d",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-take-5/1VdWnv6grtk4HBLE7TuQkavYJ6ldQAIXE",
+          "filename": "take-5-dwg_2d.zip",
+          "original_url": "https://drive.google.com/drive/folders/1VdWnv6grtk4HBLE7TuQkavYJ6ldQAIXE?usp=share_link"
+        }
+      ],
+      "height_cm": 0,
+      "materials": [],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "24339",
+      "vendor_url": "https://rampline.com/en/product/take-5/",
+      "vendor_data": {},
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": [
+        "Grass or loose fills",
+        "Wet pour",
+        "ShockDeck™"
+      ]
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3Q1BYFKSP34B18F21SRHB",
+        "sku": "24339",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": []
+  },
+  {
+    "id": "prod_01KNQ3Q1PYKXNZA7PGM9VVKMKR",
+    "title": "PULSE ZONE",
+    "handle": "rampline-pulse-zone",
+    "status": "published",
+    "description": "An arena for intense balance play, with plenty of exciting exercises to master. Here, play can start with simple and safe activity, which in any case provides high stimulation of balance and motor skills. As the skills develop, the pace can be increased. With high pace and full concentration, you get yourself a really good and playful training session.",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [
+        {
+          "type": "dwg_2d",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-pulse-zone/1w_CE_eNmmgNUUsy5GfCB1By86MVETx0N",
+          "filename": "pulse-zone-dwg_2d.zip",
+          "original_url": "https://drive.google.com/drive/folders/1w_CE_eNmmgNUUsy5GfCB1By86MVETx0N?usp=share_link"
+        },
+        {
+          "type": "dwg_2d",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-pulse-zone/1WCq-rG6k8MXHHdgeFl9L5sbm-N03AHJK",
+          "filename": "pulse-zone-dwg_2d.zip",
+          "original_url": "https://drive.google.com/drive/folders/1WCq-rG6k8MXHHdgeFl9L5sbm-N03AHJK?usp=share_link"
+        }
+      ],
+      "height_cm": 0,
+      "materials": [],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "24377",
+      "vendor_url": "https://rampline.com/en/product/pulse-zone/",
+      "vendor_data": {},
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": [
+        "Grass or loose fills",
+        "Wet pour",
+        "ShockDeck™"
+      ]
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3Q1R086XN501GGC1GEFSN",
+        "sku": "24377",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": []
+  },
+  {
+    "id": "prod_01KNQ3Q20HBZMCNXC6C0BF6F9M",
+    "title": "PLAY TAG",
+    "handle": "rampline-play-tag",
+    "status": "published",
+    "description": "Playing tag is both exciting and challenging in this park. Your concentration is sharpened, your muscles are tense and your legs are in high gear, so that you can make it as far as possible without being caught!\n\nThe Play tag motor skill park is a popular setup that provides endless opportunities for joint play, training and activity, from simple or advanced balance play to activities that challenge speed and endurance.",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [
+        {
+          "type": "dwg_2d",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-play-tag/1gnnpuHX9tCXjyuxdUXvJz0eHUGDjQXJS",
+          "filename": "play-tag-dwg_2d.zip",
+          "original_url": "https://drive.google.com/drive/folders/1gnnpuHX9tCXjyuxdUXvJz0eHUGDjQXJS?usp=share_link"
+        },
+        {
+          "type": "dwg_2d",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-play-tag/1UhsAUzF6chVUWjcXI4fo1kR7fGb-B0Bq",
+          "filename": "play-tag-dwg_2d.zip",
+          "original_url": "https://drive.google.com/drive/folders/1UhsAUzF6chVUWjcXI4fo1kR7fGb-B0Bq?usp=share_link"
+        }
+      ],
+      "height_cm": 0,
+      "materials": [],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "24395",
+      "vendor_url": "https://rampline.com/en/product/play-tag/",
+      "vendor_data": {},
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": [
+        "Grass or loose fills",
+        "Wet pour",
+        "ShockDeck™"
+      ]
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3Q21JMXD0QDARQTVN8B8G",
+        "sku": "24395",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": []
+  },
+  {
+    "id": "prod_01KNQ3Q2BG3AANSC8F1WBB7730",
+    "title": "NEVER STOP PLAYING",
+    "handle": "rampline-never-stop-playing",
+    "status": "published",
+    "description": "A motor skill park with activities high and low, with countless possibilities. Room for lots of people who can play and exercise at the same time. Exciting challenges and possibilities to do tricks, for example by jumping between the slacklines, or from the trampolines to the balance balls. The toughest can challenge themselves to do all the devices in sequence, which will require a bit of training to master.\n\nMounting time\nExcl. casting of foundations",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [
+        {
+          "type": "dwg_2d",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-never-stop-playing/1Cl-NdvB33cSQeq_jmlHpBqQ3EdS1e_GG",
+          "filename": "never-stop-playing-dwg_2d.zip",
+          "original_url": "https://drive.google.com/drive/folders/1Cl-NdvB33cSQeq_jmlHpBqQ3EdS1e_GG?usp=share_link"
+        },
+        {
+          "type": "dwg_2d",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-never-stop-playing/1SuDv9VdJc-9UX955ejssXbaiy4F4sk_E",
+          "filename": "never-stop-playing-dwg_2d.zip",
+          "original_url": "https://drive.google.com/drive/folders/1SuDv9VdJc-9UX955ejssXbaiy4F4sk_E?usp=share_link"
+        }
+      ],
+      "height_cm": 0,
+      "materials": [],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "24404",
+      "vendor_url": "https://rampline.com/en/product/never-stop-playing/",
+      "vendor_data": {},
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": [
+        "Grass or loose fills",
+        "Wet pour",
+        "ShockDeck™"
+      ]
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3Q2CGBNN7SR9E2EM9A93Z",
+        "sku": "24404",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": []
+  },
+  {
+    "id": "prod_01KNQ3Q2N1MDM04CGMBKW2QMYD",
+    "title": "MONKEY BUSINESS",
+    "handle": "rampline-monkey-business",
+    "status": "published",
+    "description": "In this park have we assembled a range of training and gymnastics racks. The Rampit™ series meets children’s need for variation and challenges in physical play. There are countless ways to use the equipment, providing great variety in movements and putting every muscle to work.",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [
+        {
+          "type": "dwg_2d",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-monkey-business/1KXuXcOTicAX08aD4zO0dxSSrirOy606-",
+          "filename": "monkey-business-dwg_2d.zip",
+          "original_url": "https://drive.google.com/drive/folders/1KXuXcOTicAX08aD4zO0dxSSrirOy606-?usp=share_link"
+        },
+        {
+          "type": "dwg_2d",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-monkey-business/1dav58FoM20eEkh3v6JbONCiKFBDcezul",
+          "filename": "monkey-business-dwg_2d.zip",
+          "original_url": "https://drive.google.com/drive/folders/1dav58FoM20eEkh3v6JbONCiKFBDcezul?usp=share_link"
+        }
+      ],
+      "height_cm": 0,
+      "materials": [],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "24414",
+      "vendor_url": "https://rampline.com/en/product/monkey-business/",
+      "vendor_data": {},
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": [
+        "Grass or loose fills",
+        "Wet pour, artificial grass or ShockDeck™"
+      ]
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3Q2P424B917SK35X4XHXP",
+        "sku": "24414",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": []
+  },
+  {
+    "id": "prod_01KNQ3Q2YFDAP3PG22VKM99G4P",
+    "title": "MARATHON PLAY",
+    "handle": "rampline-marathon-play",
+    "status": "published",
+    "description": "A dream of an activity area for young and old, where a Floating Bench connects the entire area. Here you can challenge speed, balance and endurance. Lots of opportunities for jumping, balancing, running, exciting tricks and combinations.\n\nFrom balance play at a low level, more advanced balance training on a slackline or on rocking and rotating balls, to jumping between trampolines and other equipment. There is also a climbing pole that challenges strength and technique.",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [
+        {
+          "type": "dwg_2d",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-marathon-play/1cPLNO2IObPs8RMlFH2cqpnMvxEXeqJAE",
+          "filename": "marathon-play-dwg_2d.zip",
+          "original_url": "https://drive.google.com/drive/folders/1cPLNO2IObPs8RMlFH2cqpnMvxEXeqJAE?usp=share_link"
+        },
+        {
+          "type": "dwg_2d",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-marathon-play/1cXAkH-jf4Az3Sum7HZBHEvp45cy-IeLl",
+          "filename": "marathon-play-dwg_2d.zip",
+          "original_url": "https://drive.google.com/drive/folders/1cXAkH-jf4Az3Sum7HZBHEvp45cy-IeLl?usp=share_link"
+        }
+      ],
+      "height_cm": 0,
+      "materials": [],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "24423",
+      "vendor_url": "https://rampline.com/en/product/marathon-play/",
+      "vendor_data": {},
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": [
+        "Grass or loose fills",
+        "Wet pour",
+        "ShockDeck™"
+      ]
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3Q2ZK9QQTMJYJ9JM4RVW8",
+        "sku": "24423",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": []
+  },
+  {
+    "id": "prod_01KNQ3Q37RWH4RFHFVSTFTD9YE",
+    "title": "KANGAROO",
+    "handle": "rampline-kangaroo",
+    "status": "published",
+    "description": "Kangaroo is an exciting landscape for action, tricks and agile movements. The trampolines provide physical play focused on agility, and the slackline requires concentration and practice. Here you can level up to jumps between trampolines and slacklines, depending on your skill level.\n\nMounting time\nExcl. casting of foundations",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [
+        {
+          "type": "dwg_2d",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-kangaroo/13aNnvsJHRQ3-VU6zye4mgFVL5G1dqgbf",
+          "filename": "kangaroo-dwg_2d.zip",
+          "original_url": "https://drive.google.com/drive/folders/13aNnvsJHRQ3-VU6zye4mgFVL5G1dqgbf?usp=share_link"
+        },
+        {
+          "type": "dwg_2d",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-kangaroo/1xJgjrCq2I1R99F7gRci1Qi73Yac30ehh",
+          "filename": "kangaroo-dwg_2d.zip",
+          "original_url": "https://drive.google.com/drive/folders/1xJgjrCq2I1R99F7gRci1Qi73Yac30ehh?usp=share_link"
+        }
+      ],
+      "height_cm": 0,
+      "materials": [],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "24432",
+      "vendor_url": "https://rampline.com/en/product/kangaroo/",
+      "vendor_data": {},
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": [
+        "Grass or loose fills",
+        "ShockDeck™",
+        "Wet pour or artificial grass"
+      ]
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3Q38SDHCDXV1GM0SARBA3",
+        "sku": "24432",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": []
+  },
+  {
+    "id": "prod_01KNQ3Q3GTMGFNGC5DJDXZHV3G",
+    "title": "JUNIOR POWER II",
+    "handle": "rampline-junior-power-ii",
+    "status": "published",
+    "description": "Junior Power II is suitable for a wide age range, starting from preschool age (approx. 2 years) and up. All the equipment has a low height and the distances between devices take into account small legs. The Rampit stands with 85 and 120 cm heights provide very good stimulation for gross motor skills and facilitates varied climbing and tumbling play from an early age.\n\nMounting time\nExcl. casting of foundations",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [
+        {
+          "type": "dwg_2d",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-junior-power-ii/1Y9Hv0ep13DbP3_sCLnVMDENVDM9Lo1-1",
+          "filename": "junior-power-ii-dwg_2d.zip",
+          "original_url": "https://drive.google.com/drive/folders/1Y9Hv0ep13DbP3_sCLnVMDENVDM9Lo1-1?usp=share_link"
+        },
+        {
+          "type": "dwg_2d",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-junior-power-ii/1L4IO_nVx1d_8ryeOPMZLHD3UAEI0t3r2",
+          "filename": "junior-power-ii-dwg_2d.zip",
+          "original_url": "https://drive.google.com/drive/folders/1L4IO_nVx1d_8ryeOPMZLHD3UAEI0t3r2?usp=share_link"
+        }
+      ],
+      "height_cm": 0,
+      "materials": [],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "24441",
+      "vendor_url": "https://rampline.com/en/product/junior-power-ii/",
+      "vendor_data": {},
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": [
+        "Grass or loose fills",
+        "Wet pour or ShockDeck™"
+      ]
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3Q3HYMGTAEZSMH9Q8RZ8Y",
+        "sku": "24441",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": []
+  },
+  {
+    "id": "prod_01KNQ3Q3TQ5MWQYTXR0KZ87W4G",
+    "title": "JUNIOR POWER",
+    "handle": "rampline-junior-power",
+    "status": "published",
+    "description": "A motor skills park adapted for preschool age. The course gives young children the opportunity to play with high stimulation of balance and training of gross motor skills.\n\nRunning across the balance beam, across the “stones” and eventually, after some training, jumping onto the balance balls without touching the ground is an exciting play that provides a good sense of accomplishment. The balance balls, which rock and rotate, also serve as good climbing devices for the youngest users. A motor skills park that is also well suited for the development of skills for children with reduced function level.\n\nMounting time\nExcl. casting of foundations",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [
+        {
+          "type": "dwg_2d",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-junior-power/1mPtDskjhYGMX89ju-YEuJVUuGJI1ZuGc",
+          "filename": "junior-power-dwg_2d.zip",
+          "original_url": "https://drive.google.com/drive/folders/1mPtDskjhYGMX89ju-YEuJVUuGJI1ZuGc?usp=share_link"
+        },
+        {
+          "type": "dwg_2d",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-junior-power/1bO_iKti_qUNzBuek7De0QmiYV2uucpgD",
+          "filename": "junior-power-dwg_2d.zip",
+          "original_url": "https://drive.google.com/drive/folders/1bO_iKti_qUNzBuek7De0QmiYV2uucpgD?usp=share_link"
+        }
+      ],
+      "height_cm": 0,
+      "materials": [],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "24450",
+      "vendor_url": "https://rampline.com/en/product/junior-power/",
+      "vendor_data": {},
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": [
+        "Grass or loose fills",
+        "Wet pour or ShockDeck™"
+      ]
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3Q3VQ4R93XXY11SVY82Y8",
+        "sku": "24450",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": []
+  },
+  {
+    "id": "prod_01KNQ3Q43MAVKZBW4CHNEVJ752",
+    "title": "JANE JUMP",
+    "handle": "rampline-jane-jump",
+    "status": "published",
+    "description": "A motor skills park where it’s possible to attempt the classic Rampline tricks; running across the rocking and rotating balance balls without touching the ground, jumping from the slackline to the trampoline, jumping from the trampoline to the balance ball. But before you get that far, there are many easier options to play your way to an increasingly better balance.\n\nMounting time\nExcl. casting of foundations",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [
+        {
+          "type": "dwg_2d",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-jane-jump/1Hq9taS1l9xPiGbvWjDxWI3OJJ5YjKo6S",
+          "filename": "jane-jump-dwg_2d.zip",
+          "original_url": "https://drive.google.com/drive/folders/1Hq9taS1l9xPiGbvWjDxWI3OJJ5YjKo6S?usp=share_link"
+        },
+        {
+          "type": "dwg_2d",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-jane-jump/1m-2Dh4d1GpXEj7ZLaJ08xdiJ-ljtBWCq",
+          "filename": "jane-jump-dwg_2d.zip",
+          "original_url": "https://drive.google.com/drive/folders/1m-2Dh4d1GpXEj7ZLaJ08xdiJ-ljtBWCq?usp=share_link"
+        }
+      ],
+      "height_cm": 0,
+      "materials": [],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "24459",
+      "vendor_url": "https://rampline.com/en/product/jane-jump/",
+      "vendor_data": {},
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": [
+        "Grass or loose fills",
+        "Wet pour",
+        "ShockDeck™"
+      ]
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3Q44N83X4BYEDBTPB943F",
+        "sku": "24459",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": []
+  },
+  {
+    "id": "prod_01KNQ3Q4CR772KXTRM90W6W05H",
+    "title": "HUNTING HIGH and LOW",
+    "handle": "rampline-hunting-high-and-low",
+    "status": "published",
+    "description": "This motor skills park offers a variety of activities that stimulate everything from balance, agility and flexibility to endurance and strength. It works at different levels, with  pleasant balance play at low height and more challenging activities for the more advanced.",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [
+        {
+          "type": "dwg_2d",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-hunting-high-and-low/1PaeScALQrKUbRm2vI3KDFm8ZK-aXJd4-",
+          "filename": "hunting-high-and-low-dwg_2d.zip",
+          "original_url": "https://drive.google.com/drive/folders/1PaeScALQrKUbRm2vI3KDFm8ZK-aXJd4-?usp=share_link"
+        },
+        {
+          "type": "dwg_2d",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-hunting-high-and-low/1EhMzjpYNlaTyzK72goBN2fA2nnUhfuF9",
+          "filename": "hunting-high-and-low-dwg_2d.zip",
+          "original_url": "https://drive.google.com/drive/folders/1EhMzjpYNlaTyzK72goBN2fA2nnUhfuF9?usp=share_link"
+        }
+      ],
+      "height_cm": 0,
+      "materials": [],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "24468",
+      "vendor_url": "https://rampline.com/en/product/hunting-high-and-low/",
+      "vendor_data": {},
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": [
+        "Grass or loose fills",
+        "Wet pour",
+        "ShockDeck™"
+      ]
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3Q4DS0MX3XW824HB88M4J",
+        "sku": "24468",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": []
+  },
+  {
+    "id": "prod_01KNQ3Q4P0M2GMX702R4NFH653",
+    "title": "FEARLESS",
+    "handle": "rampline-fearless",
+    "status": "published",
+    "description": "A motor skills park that primarily challenges balance, speed, and movement. Here, you can use your creativity to find your own, fun challenges to master. You start by mastering one device at a time and gradually expand as your skills increase. There is plenty of room for many to be active at the same time.",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [
+        {
+          "type": "dwg_2d",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-fearless/16GVZokANrimhgP9mtmSQFkVBGkser9zJ",
+          "filename": "fearless-dwg_2d.zip",
+          "original_url": "https://drive.google.com/drive/folders/16GVZokANrimhgP9mtmSQFkVBGkser9zJ?usp=share_link"
+        },
+        {
+          "type": "dwg_2d",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-fearless/1SqyQ2puOydQNITC6In07tSnDK-7J-JEI",
+          "filename": "fearless-dwg_2d.zip",
+          "original_url": "https://drive.google.com/drive/folders/1SqyQ2puOydQNITC6In07tSnDK-7J-JEI?usp=share_link"
+        }
+      ],
+      "height_cm": 0,
+      "materials": [],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "24486",
+      "vendor_url": "https://rampline.com/en/product/fearless/",
+      "vendor_data": {},
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": [
+        "Grass or loose fills",
+        "Wet pour",
+        "ShockDeck™"
+      ]
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3Q4Q3ARJ1CM0VETEA79RJ",
+        "sku": "24486",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": []
+  },
+  {
+    "id": "prod_01KNQ3Q4YXWB6MJ97CBHVXWT3Z",
+    "title": "FAST and CURIOUS",
+    "handle": "rampline-fast-and-curious",
+    "status": "published",
+    "description": "This arrangement has all the qualities of the motor skill park concept. Here, there are ample opportunities for the user to use their own creativity in play, thereby stimulating and developing their movement skills.",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [
+        {
+          "type": "dwg_2d",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-fast-and-curious/1D_VGoD2enatJ8oSBWAHxMpEm1SsVHzrv",
+          "filename": "fast-and-curious-dwg_2d.zip",
+          "original_url": "https://drive.google.com/drive/folders/1D_VGoD2enatJ8oSBWAHxMpEm1SsVHzrv?usp=share_link"
+        },
+        {
+          "type": "dwg_2d",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-fast-and-curious/1BDmI1V0tMlADlW3M_4zI6YDCK35gzgMY",
+          "filename": "fast-and-curious-dwg_2d.zip",
+          "original_url": "https://drive.google.com/drive/folders/1BDmI1V0tMlADlW3M_4zI6YDCK35gzgMY?usp=share_link"
+        }
+      ],
+      "height_cm": 0,
+      "materials": [],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "24495",
+      "vendor_url": "https://rampline.com/en/product/fast-and-curious/",
+      "vendor_data": {},
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": [
+        "Grass or loose fills",
+        "Wet pour",
+        "ShockDeck™"
+      ]
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3Q4ZW078SXQ307522D5MG",
+        "sku": "24495",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": []
+  },
+  {
+    "id": "prod_01KNQ3Q58098ZYQXR2YK3YZJVQ",
+    "title": "DEFYING GRAVITY",
+    "handle": "rampline-defying-gravity",
+    "status": "published",
+    "description": "Being able to stay off the ground while balancing between the tilting and rotating balance balls requires training and tenacity. The slackline offers even greater challenges for those who want to master it fully. The more advanced can also try to jump between the trampoline, slackline, and balance balls. The multi-activity rack and pull-up bar complete the park, with opportunities for very varied physical play and training.",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [
+        {
+          "type": "dwg_2d",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-defying-gravity/1gk3xZOwovXEt9Pi-pW35J-mphdzwsw9s",
+          "filename": "defying-gravity-dwg_2d.zip",
+          "original_url": "https://drive.google.com/drive/folders/1gk3xZOwovXEt9Pi-pW35J-mphdzwsw9s?usp=share_link"
+        },
+        {
+          "type": "dwg_2d",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-defying-gravity/1Gyjug_m3M_sbTUMGHYSUkGie5tY2jos4",
+          "filename": "defying-gravity-dwg_2d.zip",
+          "original_url": "https://drive.google.com/drive/folders/1Gyjug_m3M_sbTUMGHYSUkGie5tY2jos4?usp=share_link"
+        }
+      ],
+      "height_cm": 0,
+      "materials": [],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "24504",
+      "vendor_url": "https://rampline.com/en/product/defying-gravity/",
+      "vendor_data": {},
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": [
+        "Grass or loose fills",
+        "Wet pour",
+        "ShockDeck™"
+      ]
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3Q58ZZSBWEKWBPSE0JTM2",
+        "sku": "24504",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": []
+  },
+  {
+    "id": "prod_01KNQ3Q5JDPYAN021MQRWYK3RC",
+    "title": "CROUCHING TIGER",
+    "handle": "rampline-crouching-tiger",
+    "status": "published",
+    "description": "Suitable for a long and narrow area. The Crouching Tiger works as a delightful obstacle course, where you can occasionally jump and run at high speed, with the balance balls as challenges that require more concentration and training to fully master.",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [
+        {
+          "type": "dwg_2d",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-crouching-tiger/1t-QU18P17NMufc_GMv-K1Lf5R-191t5r",
+          "filename": "crouching-tiger-dwg_2d.zip",
+          "original_url": "https://drive.google.com/drive/folders/1t-QU18P17NMufc_GMv-K1Lf5R-191t5r?usp=share_link"
+        },
+        {
+          "type": "dwg_2d",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-crouching-tiger/1J41zq3ePat3CFoGYd8Vn7CVR3zLidjXa",
+          "filename": "crouching-tiger-dwg_2d.zip",
+          "original_url": "https://drive.google.com/drive/folders/1J41zq3ePat3CFoGYd8Vn7CVR3zLidjXa?usp=share_link"
+        }
+      ],
+      "height_cm": 0,
+      "materials": [],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "24513",
+      "vendor_url": "https://rampline.com/en/product/crouching-tiger/",
+      "vendor_data": {},
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": [
+        "Grass or loose fills",
+        "Wet pour or ShockDeck™"
+      ]
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3Q5KBK1DSB1EKSYY4CBNH",
+        "sku": "24513",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": []
+  },
+  {
+    "id": "prod_01KNQ3Q5VECVNKD1ECW13MZQNX",
+    "title": "CLIFFHANGER",
+    "handle": "rampline-cliffhanger",
+    "status": "published",
+    "description": "The Cliffhanger is designed to trigger varied play high and low, where you use your creativity to find your own challenges and movement patterns on and between the devices. The park is full of opportunities to play your way to good balance and stronger arms and legs.",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [
+        {
+          "type": "dwg_2d",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-cliffhanger/1_Qjb5SPt3vNrbSlapp8zno2J_IFUmKeA",
+          "filename": "cliffhanger-dwg_2d.zip",
+          "original_url": "https://drive.google.com/drive/folders/1_Qjb5SPt3vNrbSlapp8zno2J_IFUmKeA?usp=share_link"
+        },
+        {
+          "type": "dwg_2d",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-cliffhanger/1-wJwjEemoSbAhs4DRzYMDzHjprlqiyuA",
+          "filename": "cliffhanger-dwg_2d.zip",
+          "original_url": "https://drive.google.com/drive/folders/1-wJwjEemoSbAhs4DRzYMDzHjprlqiyuA?usp=share_link"
+        }
+      ],
+      "height_cm": 0,
+      "materials": [],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "24522",
+      "vendor_url": "https://rampline.com/en/product/cliffhanger/",
+      "vendor_data": {},
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": [
+        "Grass or loose fills",
+        "Wet pour",
+        "ShockDeck™"
+      ]
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3Q5WJF4PKY8Q8DJ9THHYJ",
+        "sku": "24522",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": []
+  },
+  {
+    "id": "prod_01KNQ3Q64WYH74RJZDYCXP62EN",
+    "title": "CLASSIC JUMP",
+    "handle": "rampline-classic-jump",
+    "status": "published",
+    "description": "Combining a balance beam and tilting and rotating balance balls provides very good stimulation of balance, motor skills, and strength. But most importantly, it is a good starting point for learning the classic Rampline trick; first, balance on the slackline, then jump to the next line, and then jump to a balance ball. It’s not easy, but practice makes perfect!\n\nMounting time\nExcl. casting of foundations",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [
+        {
+          "type": "dwg_2d",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-classic-jump/1wlTcPY5sng2PsPJvuDNpKE4jbp51Atu7",
+          "filename": "classic-jump-dwg_2d.zip",
+          "original_url": "https://drive.google.com/drive/folders/1wlTcPY5sng2PsPJvuDNpKE4jbp51Atu7?usp=share_link"
+        },
+        {
+          "type": "dwg_2d",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-classic-jump/1oAhd83on76deHqyTGc1nHghhthGuZy-E",
+          "filename": "classic-jump-dwg_2d.zip",
+          "original_url": "https://drive.google.com/drive/folders/1oAhd83on76deHqyTGc1nHghhthGuZy-E?usp=share_link"
+        }
+      ],
+      "height_cm": 0,
+      "materials": [],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "24531",
+      "vendor_url": "https://rampline.com/en/product/classic-jump/",
+      "vendor_data": {},
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": [
+        "Grass or loose fills",
+        "Wet pour",
+        "ShockDeck™"
+      ]
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3Q65ZFCEXZ2JA2R5BDVCB",
+        "sku": "24531",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": []
+  },
+  {
+    "id": "prod_01KNQ3Q6EA9VCKZNJ7Y6RMP6ZC",
+    "title": "ALL IN",
+    "handle": "rampline-all-in",
+    "status": "published",
+    "description": "One of Rampline’s most complete motor skill parks, stimulating the user’s ingenuity. Everyone will find their own movement patterns, providing both challenge and a sense of accomplishment. Many different course options and activities both high and low for balance, strength, agility, and flexibility.\n\nMounting time\nExcl. casting of foundations",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [
+        {
+          "type": "dwg_2d",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-all-in/1Db7W13R719VcUvaPISn3yVar9nmQgCI-",
+          "filename": "all-in-dwg_2d.zip",
+          "original_url": "https://drive.google.com/drive/folders/1Db7W13R719VcUvaPISn3yVar9nmQgCI-?usp=share_link"
+        },
+        {
+          "type": "dwg_2d",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-all-in/1KcaQcnglsxLFrpwfeXBIDm88fCwWv8BI",
+          "filename": "all-in-dwg_2d.zip",
+          "original_url": "https://drive.google.com/drive/folders/1KcaQcnglsxLFrpwfeXBIDm88fCwWv8BI?usp=share_link"
+        }
+      ],
+      "height_cm": 0,
+      "materials": [],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "24540",
+      "vendor_url": "https://rampline.com/en/product/all-in/",
+      "vendor_data": {},
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": [
+        "Grass or loose fills",
+        "Wet pour",
+        "ShockDeck™"
+      ]
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3Q6FF70VVDG75AGK55H9X",
+        "sku": "24540",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": []
+  },
+  {
+    "id": "prod_01KNQ3Q6RD32BDZY331E776W9Q",
+    "title": "Rampbow",
+    "handle": "rampline-rampbow",
+    "status": "published",
+    "description": "To truly master the Rampbow™, the user must combine balance and agility, strength and speed. This is a safe but challenging piece of equipment, which also looks nice and inviting in the activity area.\n\nThe long slanted arch challenges users at all levels to climbing and jumping movements as well as creative balancing activities. The height of 106 cm makes the Rampbow both exciting and challenging.\n\nLength: 532 cm\nHeight: 106 cm (Placed on grass the maximum allowed height is 100 cm. This is obtained by heighten the ground level slightly under the center of the arch.)\nWeight:\n– Rampbow for wet pour ground covers or artificial grass\n– Rampbow for grass or loose fill ground covers\n\nArtificial grass or wet pour ground covers (rubber/cork etc.)\n\n*When placed on grass the maximum allowed height is 100 cm. This is obtained by heighten the ground level slightly under the center of the arch.\n\nThe links will open Google Drive folders where you can choose to download the desired product variant.– Technical files include safety areas– 3D DWG also includes foundations below ground level– BIM files additionally include relevant information and links to downloadable documentsIf you are missing anything, please contact us at contact@rampline.no\n\nRampbow™ provides training for coordination and balance skills.\n\nMuscle groups: Thigh, leg and core muscles",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [
+        {
+          "type": "datasheet",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampbow/rampbow-product-sheet",
+          "filename": "rampbow-product-sheet",
+          "original_url": "https://rampline.com/rampbow-product-sheet"
+        },
+        {
+          "type": "manual",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampbow/rampit-oam",
+          "filename": "rampit-oam",
+          "original_url": "https://rampline.com/rampit-oam"
+        },
+        {
+          "type": "manual",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampbow/rampbow-mount-en",
+          "filename": "rampbow-mount-en",
+          "original_url": "https://rampline.com/rampbow-mount-en"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampbow/1jVwa-UCdw4bEQL5t5AfIcTBDYwsrZ8ga",
+          "filename": "rampbow-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1jVwa-UCdw4bEQL5t5AfIcTBDYwsrZ8ga?usp=share_link"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampbow/1V3NbjBs5r6j-jrD9JuKANXORKWM6m3LZ",
+          "filename": "rampbow-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1V3NbjBs5r6j-jrD9JuKANXORKWM6m3LZ?usp=share_link"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampbow/1qxNrjB3wpGsTzRAOSI5I2ktka35dK7Em",
+          "filename": "rampbow-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1qxNrjB3wpGsTzRAOSI5I2ktka35dK7Em?usp=share_link"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampbow/1QHBRmggREbPbwrSCLHKErgCXYpMipkAT",
+          "filename": "rampbow-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1QHBRmggREbPbwrSCLHKErgCXYpMipkAT?usp=sharing"
+        },
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-rampbow/1QK9ki4f8w_9StFmjbbyYKXYXAdYyNJPl",
+          "filename": "rampbow-other.zip",
+          "original_url": "https://drive.google.com/drive/folders/1QK9ki4f8w_9StFmjbbyYKXYXAdYyNJPl?usp=sharing"
+        }
+      ],
+      "height_cm": 0,
+      "materials": [
+        "stainless steel",
+        "powder coated steel",
+        "EPDM rubber"
+      ],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "25475",
+      "vendor_url": "https://rampline.com/en/product/rampbow/",
+      "vendor_data": {
+        "The safety area can overlap with other equipment (ref EN 1176-1": "2017 / 4.2.8.2.5)",
+        "The required extent of the safety area around the equipment is 150 cm (ref EN 1176-1": "2017 / 4.2.8.2.5)"
+      },
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [
+        "EN 1176",
+        "EN 16630",
+        "TUV"
+      ],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": [
+        "Grass or loose fills",
+        "Wet pour, artificial grass or ShockDeck™"
+      ]
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3Q6SJC0K2NRPH1GX5KP13",
+        "sku": "25475",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": [
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampbow/rampbow-prod.jpg"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampbow/safety-tuv-150x150.png"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rampbow/RampbowTrondheim_Justert0911-scaled.jpeg"
+      }
+    ]
+  },
+  {
+    "id": "prod_01KNQ3Q71RDGMYQS3QBHFX8EW1",
+    "title": "SKILL",
+    "handle": "rampline-skill",
+    "status": "published",
+    "description": "A small, concentrated activity area that triggers fun balance play at a low and comfortable height.\n\nEquipment:\n3 x Jumpstone 27\n2 x Jumpstone 50\n1 x Balancebuddy 216",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [],
+      "height_cm": 0,
+      "materials": [],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "26192",
+      "vendor_url": "https://rampline.com/en/product/skill/",
+      "vendor_data": {},
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": [
+        "Grass or loose fills",
+        "Wet pour or ShockDeck™"
+      ]
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3Q72P4ENR5SCR8BYMWMK4",
+        "sku": "26192",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": [
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-skill/TripleSlack_01_0001-e1684931320662.jpg"
+      }
+    ]
+  },
+  {
+    "id": "prod_01KNQ3Q7AN15JD9A2VXXYFJ69T",
+    "title": "TRIP",
+    "handle": "rampline-trip",
+    "status": "published",
+    "description": "A pleasant and varied small obstacle course with a wide range of challenges that both trigger speed play and high stimulation of balance and gross motor skills.\n\nEquipment\n1 x Rampline® Slackline\n1 x Jumpstone™ 27\n2 x Jumpstone™ 50\n1 x Balancbuddy Wave™\n1 x Rampball™ 50",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [],
+      "height_cm": 0,
+      "materials": [],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "26330",
+      "vendor_url": "https://rampline.com/en/product/trip/",
+      "vendor_data": {},
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": [
+        "Grass or loose fills",
+        "Wet pour",
+        "ShockDeck™"
+      ]
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3Q7BMP0K6FKKAVZPWFFRB",
+        "sku": "26330",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": [
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-trip/TripleSlack_01_0001-e1684931320662.jpg"
+      }
+    ]
+  },
+  {
+    "id": "prod_01KNQ3Q7KKAWAE7540X87GADKT",
+    "title": "ROCK",
+    "handle": "rampline-rock",
+    "status": "published",
+    "description": "A playspot with a climbing mushrom and three Rampballs in different sizes. The combination offers very good stimulation for balance and motor skills, and is suitable for a wide age range. Small children will often climb the mushroom and balance on the balls lying on their stomachs, while older users will have plenty of challenges mastering how to move between the devices.\n\nEquipment\n1 x Rampball 50\n2 x Rampball 70R\n1 x Fungi 5",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [],
+      "height_cm": 0,
+      "materials": [],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "26339",
+      "vendor_url": "https://rampline.com/en/product/rock/",
+      "vendor_data": {},
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": [
+        "Grass or loose fills",
+        "Wet pour or ShockDeck™"
+      ]
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3Q7MN0WKMG1G08FE09WMN",
+        "sku": "26339",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": [
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-rock/TripleSlack_01_0001-e1684931320662.jpg"
+      }
+    ]
+  },
+  {
+    "id": "prod_01KNQ3Q7X8Q1HR6HJ52HMGMVTE",
+    "title": "TWIST",
+    "handle": "rampline-twist",
+    "status": "published",
+    "description": "A playspot with three Rampballs in different sizes. The combination offers very good stimulation for balance and motor skills, and is suitable for a wide age range. Small children will often balance on the balls lying on their stomachs, while older users will have plenty of challenges mastering how to move between the devices.\n\nEquipment\n1 x Rampball 35\n1 x Rampball 50\n1 x Rampball 70R",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [],
+      "height_cm": 0,
+      "materials": [],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "26351",
+      "vendor_url": "https://rampline.com/en/product/twist/",
+      "vendor_data": {},
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": [
+        "Grass or loose fills",
+        "Wet pour or ShockDeck™"
+      ]
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3Q7Y736C1XMTE6G9HX3B1",
+        "sku": "26351",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": [
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-twist/TripleSlack_01_0001-e1684931320662.jpg"
+      }
+    ]
+  },
+  {
+    "id": "prod_01KNQ3Q8654QHQCPGJ1JBTZN1N",
+    "title": "IMPACT",
+    "handle": "rampline-impact",
+    "status": "published",
+    "description": "The combination of slackline and trampoline creates activity that stimulates motor skills, balance, and especially agility. Younger children will use the trampoline and slackline separately, while older children and adolescents can try to jump from the dynamic slackline to the trampoline and vice versa.\n\nEquipment\n1 x Rampline® Slackline\n1 x Kids Tramp Playground Loop™",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [],
+      "height_cm": 0,
+      "materials": [],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "26360",
+      "vendor_url": "https://rampline.com/en/product/impact/",
+      "vendor_data": {},
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": [
+        "Grass or loose fills",
+        "ShockDeck™",
+        "Wet pour or artificial grass"
+      ]
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3Q877F24X37GY9ERYE90K",
+        "sku": "26360",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": [
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-impact/TripleSlack_01_0001-e1684931320662.jpg"
+      }
+    ]
+  },
+  {
+    "id": "prod_01KNQ3Q8T1G0DCX9P83Q2M8Q6D",
+    "title": "BOUNCE",
+    "handle": "rampline-bounce",
+    "status": "published",
+    "description": "The combination of slackline, trampoline and Rampball creates activity that stimulates motor skills, balance, and especially agility. Younger children will use the trampoline, slackline, and balance ball separately, while older children and adolescents can try to jump from the dynamic line to the trampoline or Rampball and vice versa, where the different challenges require different skills from the user.\n\nEquipment\n1 x Playground Loop\n1 x Rampline® Slackline\n1 x Rampball 70R",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [],
+      "height_cm": 0,
+      "materials": [],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "26371",
+      "vendor_url": "https://rampline.com/en/product/bounce/",
+      "vendor_data": {},
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": [
+        "Grass or loose fills",
+        "Wet pour",
+        "ShockDeck™"
+      ]
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3Q8V8XXR9Z5XG16AS4FNG",
+        "sku": "26371",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": [
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-bounce/TripleSlack_01_0001-e1684931320662.jpg"
+      }
+    ]
+  },
+  {
+    "id": "prod_01KNQ3Q93PZD7Z78HBJ2BAX3SD",
+    "title": "POWER",
+    "handle": "rampline-power",
+    "status": "published",
+    "description": "Two multi-activity racks and one Rampball provide the opportunity for a wide range of activities that stimulate balance, gross motor skills and muscle strength.\n\nEquipment\n1 x Rampit™ 85\n1 x Rampit™ 120\n1 x Rampball 70R",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [],
+      "height_cm": 0,
+      "materials": [],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "26383",
+      "vendor_url": "https://rampline.com/en/product/power/",
+      "vendor_data": {},
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": [
+        "Grass or loose fills",
+        "Wet pour or ShockDeck™"
+      ]
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3Q94SPF90R1F1WBREYFAN",
+        "sku": "26383",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": [
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-power/TripleSlack_01_0001-e1684931320662.jpg"
+      }
+    ]
+  },
+  {
+    "id": "prod_01KNQ3Q9C8Z1MPZWAYQKDJHF8N",
+    "title": "AGILE",
+    "handle": "rampline-agile",
+    "status": "published",
+    "description": "With two Rampballs and one Fungi 5, you can challenge balance at different levels and also jump and trick between the three devices.\n\nEquipment\n1 x Fungi™ 5\n1 x Rampball 50\n1 x Rampball 70R",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [],
+      "height_cm": 0,
+      "materials": [],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "26392",
+      "vendor_url": "https://rampline.com/en/product/agile/",
+      "vendor_data": {},
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": [
+        "Grass or loose fills",
+        "Wet pour or ShockDeck™"
+      ]
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3Q9D9RS45RVV95BT6B5BE",
+        "sku": "26392",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": [
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-agile/TripleSlack_01_0001-e1684931320662.jpg"
+      }
+    ]
+  },
+  {
+    "id": "prod_01KNQ3Q9NCN8MARBJN6Q9FZ36R",
+    "title": "FLIGHT",
+    "handle": "rampline-flight",
+    "status": "published",
+    "description": "A balance beam, balance ball, and  trampoline combination provide varied activity in a small area. Suitable for a wide age range.\n\nEquipment\n1 x Fungi™ 3\n1 x Rampball 50R\n1 x Playground Loop™",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [],
+      "height_cm": 0,
+      "materials": [],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "26397",
+      "vendor_url": "https://rampline.com/en/product/flight/",
+      "vendor_data": {},
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": [
+        "Grass or loose fills",
+        "Wet pour",
+        "ShockDeck™"
+      ]
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3Q9PD10JJ2G28C9ZWX32F",
+        "sku": "26397",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": [
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-flight/TripleSlack_01_0001-e1684931320662.jpg"
+      }
+    ]
+  },
+  {
+    "id": "prod_01KNQ3Q9YC5N439CAZPY2PWZNJ",
+    "title": "GO",
+    "handle": "rampline-go",
+    "status": "published",
+    "description": "A single, rocking and rotating balance ball provides plenty of challenges for most people, regardless of skill level or age.",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [],
+      "height_cm": 0,
+      "materials": [],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "26406",
+      "vendor_url": "https://rampline.com/en/product/go/",
+      "vendor_data": {},
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": [
+        "Grass or loose fills",
+        "Wet pour or ShockDeck™"
+      ]
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3Q9ZD448NK1ZBRQGN41KB",
+        "sku": "26406",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": [
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-go/TripleSlack_01_0001-e1684931320662.jpg"
+      }
+    ]
+  },
+  {
+    "id": "prod_01KNQ3QA6Z3ACP40TQADEAGXMG",
+    "title": "DYNAMIC",
+    "handle": "rampline-dynamic",
+    "status": "published",
+    "description": "Slackline and balance mushroom make for a fun combination, offering play and challenge for all ages. A young child will love climbing and balancing on the mushroom, and a teenager or adult will test their skills on the slackline. The bravest will even jump between the two devices.\n\nEquipment\n1 x Rampline® Slackline\n1 x Fungi™ 5",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [],
+      "height_cm": 0,
+      "materials": [],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "26417",
+      "vendor_url": "https://rampline.com/en/product/dynamic/",
+      "vendor_data": {},
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": [
+        "Grass or loose fills",
+        "ShockDeck™",
+        "Wet pour or artificial grass"
+      ]
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3QA83H3W683JHND1J43PC",
+        "sku": "26417",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": [
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-dynamic/TripleSlack_01_0001-e1684931320662.jpg"
+      }
+    ]
+  },
+  {
+    "id": "prod_01KNQ3QAGERHBFK2Z02NXZNSFE",
+    "title": "JUICE",
+    "handle": "rampline-juice",
+    "status": "published",
+    "description": "With a slackline and a horisontal bar rack, this is a compact playspot that offers both strength and balance training and physical play in a simple but effective way.\n\nEquipment\n1 x Rampline® Slackline\n1 x Rampit Swing™",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [],
+      "height_cm": 0,
+      "materials": [],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "26447",
+      "vendor_url": "https://rampline.com/en/product/juice/",
+      "vendor_data": {},
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": [
+        "Grass or loose fills",
+        "ShockDeck™",
+        "Wet pour or artificial grass"
+      ]
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3QAHK1HEV4M6622RKX9DM",
+        "sku": "26447",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": [
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-juice/TripleSlack_01_0001-e1684931320662.jpg"
+      }
+    ]
+  },
+  {
+    "id": "prod_01KNQ3QAT5TT157NFRDKEHGMJM",
+    "title": "ABILITY",
+    "handle": "rampline-ability",
+    "status": "published",
+    "description": "A fun playspot with two balance mushroom that trigger motor play and get the body moving for most people. The very young will climb or crawl on the balance pads, while those with more developed motor skills and balance will find their own challenges by freely jumping between the pads.\n\nEquipment\n1 x Fungi 5\n1 x Fungi 3",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [],
+      "height_cm": 0,
+      "materials": [],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "26459",
+      "vendor_url": "https://rampline.com/en/product/ability/",
+      "vendor_data": {},
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": [
+        "Grass or loose fills",
+        "Wet pour, artificial grass or ShockDeck™",
+        "ShockDeck™"
+      ]
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3QAV8AHGJMSXRE7NQWM8W",
+        "sku": "26459",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": [
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-ability/TripleSlack_01_0001-e1684931320662.jpg"
+      }
+    ]
+  },
+  {
+    "id": "prod_01KNQ3QB4ZWCXACZXWP154MF6N",
+    "title": "GRIP",
+    "handle": "rampline-grip",
+    "status": "published",
+    "description": "A playspot for varied physical play and training, offering both body weight training as well as opportunities for creative movements.\n\nEquipment\n1 x Rampit™ 85\n1 x Rampit Swing™",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [],
+      "height_cm": 0,
+      "materials": [],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "26468",
+      "vendor_url": "https://rampline.com/en/product/grip/",
+      "vendor_data": {},
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": [
+        "Grass or loose fills",
+        "Wet pour, artificial grass or ShockDeck™"
+      ]
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3QB61H29PYX72E4KW5P4E",
+        "sku": "26468",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": [
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-grip/TripleSlack_01_0001-e1684931320662.jpg"
+      }
+    ]
+  },
+  {
+    "id": "prod_01KNQ3QBEMQ8B2F64HC8BD56ZW",
+    "title": "SPEED",
+    "handle": "rampline-speed",
+    "status": "published",
+    "description": "A small, concentrated play area that triggers balance play at a low and comfortable height.\n\nEquipment\n3 x Jumpstone™ 27\n3 x Jumpstone™ 50\n2 x Balancebuddy™ 216",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [],
+      "height_cm": 0,
+      "materials": [],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "26476",
+      "vendor_url": "https://rampline.com/en/product/speed/",
+      "vendor_data": {},
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": [
+        "Grass or loose fills",
+        "Wet pour or ShockDeck™"
+      ]
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3QBFX0T3Z2BVJQDTZ1AQ7",
+        "sku": "26476",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": [
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-speed/TripleSlack_01_0001-e1684931320662.jpg"
+      }
+    ]
+  },
+  {
+    "id": "prod_01KNQ3QBRC24H8WPRX4G80YMZG",
+    "title": "FLEX FOREST",
+    "handle": "rampline-flex-forest",
+    "status": "published",
+    "description": "An arena for intense balance play, with plenty of exciting movement sequences and exercises to master. Here, play can start with simple, safe, and careful activity, which nonetheless provides high stimulation of balance and motor skills. As skills develop, the pace can be increased. With high pace and full concentration, you get a really good and fun workout.",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [
+        {
+          "type": "dwg_2d",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-flex-forest/1g2WX2LZn9h_tXwnTDlX-Vd0rMKPYMj0T",
+          "filename": "flex-forest-dwg_2d.zip",
+          "original_url": "https://drive.google.com/drive/folders/1g2WX2LZn9h_tXwnTDlX-Vd0rMKPYMj0T?usp=share_link"
+        },
+        {
+          "type": "dwg_2d",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-flex-forest/1BLsOvXEgXka8R1l1dqvxrr88MU1p-fCH",
+          "filename": "flex-forest-dwg_2d.zip",
+          "original_url": "https://drive.google.com/drive/folders/1BLsOvXEgXka8R1l1dqvxrr88MU1p-fCH?usp=share_link"
+        }
+      ],
+      "height_cm": 0,
+      "materials": [],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "28152",
+      "vendor_url": "https://rampline.com/en/product/flex-forest/",
+      "vendor_data": {},
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": [
+        "Grass or loose fills",
+        "Wet pour",
+        "ShockDeck™"
+      ]
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3QBSKM4E1DXBC4XK7AC8Y",
+        "sku": "28152",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": []
+  },
+  {
+    "id": "prod_01KNQ3QC2Y0YNWNM0Y185YVSH3",
+    "title": "DOUBLE TROUBLE",
+    "handle": "rampline-double-trouble",
+    "status": "published",
+    "description": "Two parallel slacklines offer possibilities for performing tricks and jumping between the lines. Several individuals can participate simultaneously, allowing for competitions to determine who falls off first or crosses the fastest. Additionally, two people can engage in synchronized trick practice.\n\nEquipment\n2 x Rampline® Slackline",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [
+        {
+          "type": "dwg_2d",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-double-trouble/1TiFHdiGQ35PyHopOPQ3Yp-D-ZVhhMheq",
+          "filename": "double-trouble-dwg_2d.zip",
+          "original_url": "https://drive.google.com/drive/folders/1TiFHdiGQ35PyHopOPQ3Yp-D-ZVhhMheq?usp=share_link"
+        },
+        {
+          "type": "dwg_2d",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-double-trouble/1a4SYkzgN2GCW6mV6FlJh6DmLsVeLMxEg",
+          "filename": "double-trouble-dwg_2d.zip",
+          "original_url": "https://drive.google.com/drive/folders/1a4SYkzgN2GCW6mV6FlJh6DmLsVeLMxEg?usp=share_link"
+        }
+      ],
+      "height_cm": 0,
+      "materials": [],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "28670",
+      "vendor_url": "https://rampline.com/en/product/double-trouble/",
+      "vendor_data": {},
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": [
+        "Grass or loose fills",
+        "ShockDeck™",
+        "Wet pour or artificial grass"
+      ]
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3QC46344TF6P89X919P4K",
+        "sku": "28670",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": [
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-double-trouble/TripleSlack_01_0001-e1684931320662.jpg"
+      }
+    ]
+  },
+  {
+    "id": "prod_01KNQ3QCE449NP777M050JJKNC",
+    "title": "Spare parts Rampline",
+    "handle": "rampline-spare-parts-for-slackline",
+    "status": "published",
+    "description": "We supply all necessary parts for the Rampline® slackline system. Please contact us at kontakt@rampline.no if you have any questions or need parts other than those listed in the menu below.\n\nOn this page you can also download installation instructions for the different lines (PDF). For all spare parts, installation instructions are included.\n\nThis is the standard line supplied with the Rampline slackline system (from 2026).\n\nSlackShield™ is made of nylon and features a UV-resistant rubber coating on the top side. It is robust and durable, providing a comfortable and consistent slacklining experience.Requires very little maintenance and re-tensioning. Typical service life is approx. 3–5 years.Width: 40 mmColour: Sand and black\n\nSlackShield™ with integrated wire rope is the most robust line option for the Rampline slackline system. It is made of nylon with a UV-resistant rubber coating on the top side. In addition, it is vandal-resistant due to the wire rope sewn into the line. This is the most durable line variant and provides a good user experience, although it is slightly stiffer because of the wire rope.\n\nRequires very little maintenance and re-tensioning. Typical service life is approx. 3–5 years.We recommend SlackShield™ with wire rope for locations exposed to vandalism.\n\nWidth: 40 mmColour: Sand, black and light grey\n\nThe polyester line is a more cost-effective option. It is PVC-coated and is the most dynamic line type, offering the ultimate slackline experience. Typical service life is approx. 2–3 years. The line should be re-tensioned regularly in areas with intensive use.Width: 35 mmColour: Lime green",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [
+        {
+          "type": "other",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-spare-parts-for-slackline/view",
+          "filename": "spare-parts-for-slackline-other.zip",
+          "original_url": "https://drive.google.com/file/d/1L1uCCaBFwI3pSgWPMWyPBFVW5N4fBMX4/view?usp=sharing"
+        }
+      ],
+      "height_cm": 0,
+      "materials": [
+        "EPDM rubber"
+      ],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "28696",
+      "vendor_url": "https://rampline.com/en/product/spare-parts-for-slackline/",
+      "vendor_data": {},
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": []
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3QCFF85Z6XZWRQSYC99W7",
+        "sku": "28696",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": [
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-spare-parts-for-slackline/RamplineSlackline_Produktbilde-scaled.jpg"
+      }
+    ]
+  },
+  {
+    "id": "prod_01KNQ3QCQPQDM5TXDJYDYTBB0V",
+    "title": "spare parts KIDS TRAMP TRAMPOLINES",
+    "handle": "rampline-spare-parts-kids-tramp-playground-loop",
+    "status": "published",
+    "description": "We supply all necessary parts for the robust Eurotramp trampolines. Experience shows that this is a popular piece of equipment, used intensively by children and young people across all age groups. With frequent and regular use, normal wear should be expected, and maintenance requirements may increase.\n\nPlease contact us at kontakt@rampline.no if you have any questions or need parts other than those listed in the menu below.\n\nInstallation instructions are included with all spare parts.\n\nSpare parts for Kids Tramp trampolines.Please choose a part below.",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [],
+      "height_cm": 0,
+      "materials": [],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "28705",
+      "vendor_url": "https://rampline.com/en/product/spare-parts-kids-tramp-playground-loop/",
+      "vendor_data": {},
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": []
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B",
+        "name": "Playground Equipment"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3QCRVDT285CEA1NYVWMKR",
+        "sku": "28705",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": [
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-spare-parts-kids-tramp-playground-loop/PlayProSquare_Mounted_Rampline-plain-scaled.png"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-spare-parts-kids-tramp-playground-loop/trampoline-loop-liten-playpro-kvalitetstrampoline.jpg"
+      }
+    ]
+  },
+  {
+    "id": "prod_01KNQ3QD2GBH3E6ZKMBNBYHHJR",
+    "title": "ShockDeck",
+    "handle": "rampline-shockdeck",
+    "status": "published",
+    "description": "ShockDeck™ is a system for building an impact-absorbing ground cover using wooden decking. The solution is perfect for universally designed playgrounds and activity areas, and does not result in microplastic emissions. The ground cover is certified for fall heights up to 180 cm.\n\nShockDeck™ provides effective shock absorption for safe play on standard terrace boards. It replaces fall protection such as poured rubber or artificial grass and is suitable as a surface for all types of activity and play equipment.\n\nOnly specific types of pine decking boards (see table below) may be used to build ShockDeck™. These are available in several variants and supplied by multiple manufacturers.\n\nFor battens, pressure (Cu) treated pine 28×45 mm is always used. Along fixed edges, 28×45 mm battens are also used.\n\nPlease note that the European standard for battens differs from the Norwegian standard. The ShockDeck™ system is designed to be compatible with both the Norwegian standard (30×48 mm) and the European standard (28×45 mm).\n\nApproved Decking Board Types for ShockDeck™\n\nThe materials used are approved for outdoor use and comply with applicable requirements for health, environment and safety.\n\nThe materials used in building ShockDeck™ have been carefully selected with regard to durability, function and environmental impact. The solution can be built using various types of standard decking boards, such as pressure-treated (Cu-treated) pine, thermo-pine or Royal-treated pine.",
+    "metadata": {
+      "is_park": false,
+      "depth_cm": 0,
+      "width_cm": 0,
+      "downloads": [
+        {
+          "type": "manual",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-shockdeck/shockdeck-mount-en",
+          "filename": "shockdeck-mount-en",
+          "original_url": "https://rampline.com/shockdeck-mount-en"
+        },
+        {
+          "type": "datasheet",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-shockdeck/shockdeck-product-sheet",
+          "filename": "shockdeck-product-sheet",
+          "original_url": "https://rampline.com/shockdeck-product-sheet"
+        },
+        {
+          "type": "manual",
+          "gcs_url": "https://storage.googleapis.com/ai-agents-go-documents/product-images/rampline/rampline-shockdeck/shockdeck-oam",
+          "filename": "shockdeck-oam",
+          "original_url": "https://rampline.com/shockdeck-oam"
+        }
+      ],
+      "height_cm": 0,
+      "materials": [
+        "EPDM rubber"
+      ],
+      "weight_kg": 0,
+      "brand_name": "Rampline",
+      "brand_slug": "rampline",
+      "vendor_sku": "36172",
+      "vendor_url": "https://rampline.com/en/product/shockdeck/",
+      "vendor_data": {
+        "Fall height up to 180 cm (EN 1177": "2018)."
+      },
+      "installation": {
+        "time": "",
+        "persons": 0,
+        "foundation": ""
+      },
+      "brand_country": "Norway",
+      "product_group": "Shop",
+      "certifications": [
+        "EN 1176",
+        "EN 1177"
+      ],
+      "fall_height_cm": 0,
+      "safety_zone_cm": 0,
+      "ground_cover_options": []
+    },
+    "categories": [
+      {
+        "id": "pcat_01KNQ3PW63KCGZAVEDQ657DX20",
+        "name": "Safety Surfaces"
+      }
+    ],
+    "variants": [
+      {
+        "id": "variant_01KNQ3QD3YJEXHVBTQ19BH3TD1",
+        "sku": "36172",
+        "title": "Default",
+        "options": [
+          {
+            "value": "Default"
+          }
+        ]
+      }
+    ],
+    "images": [
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-shockdeck/ShockDeck-new.jpg"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-shockdeck/safety-tuv-150x150.png"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-shockdeck/ShockDeck-Ill2-ENG.jpg"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-shockdeck/cu-impregnert-eksempel-trampoline.jpg"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-shockdeck/talgo-duo-mork-med-riller.jpg"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-shockdeck/concice-talgo-eksempel-trampoline.jpg"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-shockdeck/termofuru-svanemerket-eksempel.jpg"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-shockdeck/barfot-alvdal-skurlag-fjellgra.jpg"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-shockdeck/ill-shockdeck-oppbygging-scaled.gif"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-shockdeck/shockdeck-kubbestein.gif"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-shockdeck/stalkant.gif"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-shockdeck/kant-av-tre.jpg"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-shockdeck/shockdeck-snitt04.jpg"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-shockdeck/steinar-wikholm-odda-barneskole-ref.png"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-shockdeck/john-martin-grov-utemiljo-as.png"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-shockdeck/hein-tangen-referanse-vea.png"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-shockdeck/lukasz-trase.png"
+      },
+      {
+        "url": "https://catalogs.leka.studio/api/i/rampline/rampline-shockdeck/uu-fallunderlag-shockdeck-red-2.jpg"
+      }
+    ]
+  }
+]

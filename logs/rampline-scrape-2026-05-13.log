@@ -1,0 +1,237 @@
+=== RAMPLINE SCRAPER ===
+
+Step 1: Discovering product URLs...
+  GET https://rampline.com/en/product-sitemap.xml
+  GET https://rampline.com/product-sitemap.xml
+  GET https://rampline.com/en/product-sitemap2.xml
+  Total unique product URLs: 54
+Found 54 product URLs
+
+Step 2: Scraping product details...
+
+[1/54] https://rampline.com/en/product/rampball/
+  GET https://rampline.com/en/product/rampball/
+  OK: Rampball (SKU: 6654)
+
+[2/54] https://rampline.com/en/product/rampit/
+  GET https://rampline.com/en/product/rampit/
+  OK: Rampit (SKU: 7097)
+
+[3/54] https://rampline.com/en/product/rampit-swing/
+  GET https://rampline.com/en/product/rampit-swing/
+  OK: Rampit TWIN (SKU: 7074)
+
+[4/54] https://rampline.com/en/product/trampoline-loop-en/
+  GET https://rampline.com/en/product/trampoline-loop-en/
+  OK: Playground Loop (SKU: 7582)
+
+[5/54] https://rampline.com/en/product/jumpstone-en/
+  GET https://rampline.com/en/product/jumpstone-en/
+  OK: Jumpstone (SKU: 6719)
+
+[6/54] https://rampline.com/en/product/balancebuddy-en/
+  GET https://rampline.com/en/product/balancebuddy-en/
+  OK: BalanceBuddy (SKU: 6732)
+
+[7/54] https://rampline.com/en/product/rampit-storm-en/
+  GET https://rampline.com/en/product/rampit-storm-en/
+  OK: Rampit Storm (SKU: 7508)
+
+[8/54] https://rampline.com/en/product/floating-bench/
+  GET https://rampline.com/en/product/floating-bench/
+  OK: Floating Bench (SKU: 8036)
+
+[9/54] https://rampline.com/en/product/rampline-slackline/
+  GET https://rampline.com/en/product/rampline-slackline/
+  OK: Rampline slackline (SKU: 24083)
+
+[10/54] https://rampline.com/en/product/rampit-hopper/
+  GET https://rampline.com/en/product/rampit-hopper/
+  OK: Rampit Hopper (SKU: 32238)
+
+[11/54] https://rampline.com/en/product/balancebuddy-wave/
+  GET https://rampline.com/en/product/balancebuddy-wave/
+  OK: Balancebuddy Wave (SKU: 20707)
+
+[12/54] https://rampline.com/en/product/fungi-eng/
+  GET https://rampline.com/en/product/fungi-eng/
+  OK: Fungi (SKU: 23806)
+
+[13/54] https://rampline.com/en/product/dont-step-into-the-water/
+  GET https://rampline.com/en/product/dont-step-into-the-water/
+  OK: Don’T STEP INTO THE WATER (SKU: 24308)
+
+[14/54] https://rampline.com/en/product/triple-slack-fun/
+  GET https://rampline.com/en/product/triple-slack-fun/
+  OK: TRIPLE SLACK FUN (SKU: 24316)
+
+[15/54] https://rampline.com/en/product/the-floor-is-lava/
+  GET https://rampline.com/en/product/the-floor-is-lava/
+  OK: THE FLOOR IS LAVA (SKU: 24320)
+
+[16/54] https://rampline.com/en/product/take-5/
+  GET https://rampline.com/en/product/take-5/
+  OK: TAKE 5 (SKU: 24339)
+
+[17/54] https://rampline.com/en/product/pulse-zone/
+  GET https://rampline.com/en/product/pulse-zone/
+  OK: PULSE ZONE (SKU: 24377)
+
+[18/54] https://rampline.com/en/product/play-tag/
+  GET https://rampline.com/en/product/play-tag/
+  OK: PLAY TAG (SKU: 24395)
+
+[19/54] https://rampline.com/en/product/never-stop-playing/
+  GET https://rampline.com/en/product/never-stop-playing/
+  OK: NEVER STOP PLAYING (SKU: 24404)
+
+[20/54] https://rampline.com/en/product/monkey-business/
+  GET https://rampline.com/en/product/monkey-business/
+  OK: MONKEY BUSINESS (SKU: 24414)
+
+[21/54] https://rampline.com/en/product/marathon-play/
+  GET https://rampline.com/en/product/marathon-play/
+  OK: MARATHON PLAY (SKU: 24423)
+
+[22/54] https://rampline.com/en/product/kangaroo/
+  GET https://rampline.com/en/product/kangaroo/
+  OK: KANGAROO (SKU: 24432)
+
+[23/54] https://rampline.com/en/product/junior-power-ii/
+  GET https://rampline.com/en/product/junior-power-ii/
+  OK: JUNIOR POWER II (SKU: 24441)
+
+[24/54] https://rampline.com/en/product/junior-power/
+  GET https://rampline.com/en/product/junior-power/
+  OK: JUNIOR POWER (SKU: 24450)
+
+[25/54] https://rampline.com/en/product/jane-jump/
+  GET https://rampline.com/en/product/jane-jump/
+  OK: JANE JUMP (SKU: 24459)
+
+[26/54] https://rampline.com/en/product/hunting-high-and-low/
+  GET https://rampline.com/en/product/hunting-high-and-low/
+  OK: HUNTING HIGH and LOW (SKU: 24468)
+
+[27/54] https://rampline.com/en/product/fearless/
+  GET https://rampline.com/en/product/fearless/
+  OK: FEARLESS (SKU: 24486)
+
+[28/54] https://rampline.com/en/product/fast-and-curious/
+  GET https://rampline.com/en/product/fast-and-curious/
+  OK: FAST and CURIOUS (SKU: 24495)
+
+[29/54] https://rampline.com/en/product/defying-gravity/
+  GET https://rampline.com/en/product/defying-gravity/
+  OK: DEFYING GRAVITY (SKU: 24504)
+
+[30/54] https://rampline.com/en/product/crouching-tiger/
+  GET https://rampline.com/en/product/crouching-tiger/
+  OK: CROUCHING TIGER (SKU: 24513)
+
+[31/54] https://rampline.com/en/product/cliffhanger/
+  GET https://rampline.com/en/product/cliffhanger/
+  OK: CLIFFHANGER (SKU: 24522)
+
+[32/54] https://rampline.com/en/product/classic-jump/
+  GET https://rampline.com/en/product/classic-jump/
+  OK: CLASSIC JUMP (SKU: 24531)
+
+[33/54] https://rampline.com/en/product/all-in/
+  GET https://rampline.com/en/product/all-in/
+  OK: ALL IN (SKU: 24540)
+
+[34/54] https://rampline.com/en/product/rampbow/
+  GET https://rampline.com/en/product/rampbow/
+  OK: Rampbow (SKU: 25475)
+
+[35/54] https://rampline.com/en/product/skill/
+  GET https://rampline.com/en/product/skill/
+  OK: SKILL (SKU: 26192)
+
+[36/54] https://rampline.com/en/product/trip/
+  GET https://rampline.com/en/product/trip/
+  OK: TRIP (SKU: 26330)
+
+[37/54] https://rampline.com/en/product/rock/
+  GET https://rampline.com/en/product/rock/
+  OK: ROCK (SKU: 26339)
+
+[38/54] https://rampline.com/en/product/twist/
+  GET https://rampline.com/en/product/twist/
+  OK: TWIST (SKU: 26351)
+
+[39/54] https://rampline.com/en/product/impact/
+  GET https://rampline.com/en/product/impact/
+  OK: IMPACT (SKU: 26360)
+
+[40/54] https://rampline.com/en/product/bounce/
+  GET https://rampline.com/en/product/bounce/
+  OK: BOUNCE (SKU: 26371)
+
+[41/54] https://rampline.com/en/product/power/
+  GET https://rampline.com/en/product/power/
+  OK: POWER (SKU: 26383)
+
+[42/54] https://rampline.com/en/product/agile/
+  GET https://rampline.com/en/product/agile/
+  OK: AGILE (SKU: 26392)
+
+[43/54] https://rampline.com/en/product/flight/
+  GET https://rampline.com/en/product/flight/
+  OK: FLIGHT (SKU: 26397)
+
+[44/54] https://rampline.com/en/product/go/
+  GET https://rampline.com/en/product/go/
+  OK: GO (SKU: 26406)
+
+[45/54] https://rampline.com/en/product/dynamic/
+  GET https://rampline.com/en/product/dynamic/
+  OK: DYNAMIC (SKU: 26417)
+
+[46/54] https://rampline.com/en/product/juice/
+  GET https://rampline.com/en/product/juice/
+  OK: JUICE (SKU: 26447)
+
+[47/54] https://rampline.com/en/product/ability/
+  GET https://rampline.com/en/product/ability/
+  OK: ABILITY (SKU: 26459)
+
+[48/54] https://rampline.com/en/product/grip/
+  GET https://rampline.com/en/product/grip/
+  OK: GRIP (SKU: 26468)
+
+[49/54] https://rampline.com/en/product/speed/
+  GET https://rampline.com/en/product/speed/
+  OK: SPEED (SKU: 26476)
+
+[50/54] https://rampline.com/en/product/flex-forest/
+  GET https://rampline.com/en/product/flex-forest/
+  OK: FLEX FOREST (SKU: 28152)
+
+[51/54] https://rampline.com/en/product/double-trouble/
+  GET https://rampline.com/en/product/double-trouble/
+  OK: DOUBLE TROUBLE (SKU: 28670)
+
+[52/54] https://rampline.com/en/product/spare-parts-for-slackline/
+  GET https://rampline.com/en/product/spare-parts-for-slackline/
+  OK: Spare parts Rampline (SKU: 28696)
+
+[53/54] https://rampline.com/en/product/spare-parts-kids-tramp-playground-loop/
+  GET https://rampline.com/en/product/spare-parts-kids-tramp-playground-loop/
+  OK: spare parts KIDS TRAMP TRAMPOLINES (SKU: 28705)
+
+[54/54] https://rampline.com/en/product/shockdeck/
+  GET https://rampline.com/en/product/shockdeck/
+  OK: ShockDeck (SKU: 36172)
+
+Step 3: Downloading assets...
+
+=== SCRAPING COMPLETE ===
+Products scraped: 54
+  Equipment: 54
+  Motor Skills Parks: 0
+Errors: 0
+Images downloaded: 72
+Documents downloaded: 42
+Output: C:\Users\eukri\OneDrive\Documents\Claude Code\leka-product-catalogs\data\scraped\rampline/products.json

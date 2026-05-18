@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rampline pricelist — landed cost + retail · v2.19.0</title>
+<style>
+  :root {
+    --purple: #8003FF; --navy: #182557; --cream: #FFF9E6;
+    --magenta: #970260; --amber: #FFA900; --red: #E54822;
+    --shadow: 0 2px 8px rgba(24,37,87,.08);
+  }
+  * { box-sizing: border-box; }
+  body { font-family: Manrope, -apple-system, system-ui, sans-serif;
+         background: var(--cream); color: var(--navy); margin: 0;
+         padding: 32px 24px; line-height: 1.55; }
+  .wrap { max-width: 960px; margin: 0 auto; }
+  h1 { font-size: 28px; font-weight: 800; color: var(--purple); margin: 0 0 4px; }
+  h2 { font-size: 18px; font-weight: 700; margin: 32px 0 12px; color: var(--navy); }
+  h3 { font-size: 14px; font-weight: 700; margin: 20px 0 6px; color: var(--magenta); text-transform: uppercase; letter-spacing: .04em; }
+  .sub { color: var(--navy); opacity: .7; margin: 0 0 24px; font-size: 14px; }
+  .card { background: #fff; border-radius: 16px; padding: 20px 24px;
+          box-shadow: var(--shadow); margin: 16px 0; }
+  .pill { display: inline-block; background: var(--purple); color: #fff;
+          padding: 4px 12px; border-radius: 9999px; font-size: 12px;
+          font-weight: 600; margin-right: 8px; }
+  .pill.amber { background: var(--amber); color: var(--navy); }
+  .pill.red { background: var(--red); }
+  table { width: 100%; border-collapse: collapse; margin: 8px 0; font-size: 13px; }
+  th, td { padding: 8px 10px; text-align: left; border-bottom: 1px solid #eee; }
+  th { background: var(--cream); color: var(--navy); font-weight: 700; }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  code { background: #f4f0e0; padding: 2px 6px; border-radius: 4px;
+         font-family: SFMono-Regular, Consolas, monospace; font-size: 12.5px; }
+  a { color: var(--purple); }
+  ul { margin: 8px 0; padding-left: 22px; }
+  li { margin: 4px 0; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+          gap: 12px; margin: 12px 0; }
+  .stat { background: #fff; border-radius: 8px; padding: 14px 16px;
+          box-shadow: var(--shadow); }
+  .stat .v { font-size: 22px; font-weight: 800; color: var(--purple); }
+  .stat .l { font-size: 12px; color: var(--navy); opacity: .7;
+             text-transform: uppercase; letter-spacing: .04em; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>Rampline pricelist — landed cost + retail</h1>
+<p class="sub">v2.19.0 · 2026-05-13 · feat/rampline-pricelist · 127 SKUs, NOK → EUR → THB landed → retail (40% GM)</p>
+
+<div class="grid">
+  <div class="stat"><div class="v">127</div><div class="l">SKUs priced</div></div>
+  <div class="stat"><div class="v">13</div><div class="l">Product families</div></div>
+  <div class="stat"><div class="v">40%</div><div class="l">Gross margin</div></div>
+  <div class="stat"><div class="v">0.09277</div><div class="l">NOK→EUR (live)</div></div>
+</div>
+
+<div class="card">
+<h3>Pipeline</h3>
+<ol>
+  <li>Read <code>Pricelist 2025.xlsx</code> from Drive (file id <code>1AbjgiZdjB2VTHKiJw0paVQQsjAWlvroC</code>). Parse section-headed sheet — each family carries a wholesale discount.</li>
+  <li>Use the <strong>Net price 2025</strong> column as EXW (NOK).</li>
+  <li>Convert NOK → EUR via <a href="https://open.er-api.com">open.er-api.com</a> (ECB-backed, no key). Fallback chain: frankfurter.app → 0.087 hardcoded.</li>
+  <li>Feed EUR FOB + family + (no per-SKU CBM) into <code>shared/landed_pricing.py</code>: shipping-automation <code>estimate_landed_cost</code> on the Europe → Laem Chabang LCL route, Baltic-rate calibrated.</li>
+  <li>Tiered logistics clamp (80 / 60 / 45 / 35 % floor by FOB band).</li>
+  <li>Retail THB = landed / (1 − 0.40); USD &amp; EUR derived at live FX.</li>
+  <li>Write to Firestore <code>vendors/rampline/pricelists/2026-05-13</code> — one audit doc, <code>variants</code> map keyed by sanitized article code.</li>
+</ol>
+</div>
+
+<h2>Spot-check (across price bands)</h2>
+<div class="card">
+<table>
+<thead><tr>
+  <th>SKU</th><th>Family</th><th class="num">NOK net</th><th class="num">EUR FOB</th>
+  <th class="num">Landed THB</th><th class="num">Retail THB</th><th class="num">USD</th><th>Clamp</th>
+</tr></thead>
+<tbody>
+<tr><td>SD 02</td><td>SHOCKDECK</td><td class="num">73</td><td class="num">6</td><td class="num">442</td><td class="num">737</td><td class="num">$22</td><td>floored</td></tr>
+<tr><td>RB35</td><td>Tilting balls</td><td class="num">13,910</td><td class="num">1,290</td><td class="num">80,083</td><td class="num">133,471</td><td class="num">$4,039</td><td>floored</td></tr>
+<tr><td>JS5 LF</td><td>Natural rubber</td><td class="num">43,922</td><td class="num">4,074</td><td class="num">229,178</td><td class="num">381,963</td><td class="num">$11,558</td><td>floored</td></tr>
+<tr><td>BP 15 LF</td><td>SHOCKDECK</td><td class="num">1,199,380</td><td class="num">111,259</td><td class="num">5,826,041</td><td class="num">9,710,068</td><td class="num">$293,820</td><td>—</td></tr>
+</tbody>
+</table>
+<p class="sub">94 / 127 SKUs hit the floor clamp (small parts dominated by fixed shipping costs — expected). 33 / 127 within band. 0 capped. Realized GM uniformly 40 %.</p>
+</div>
+
+<h2>Architecture impact</h2>
+<div class="card">
+<p>Lifted Vinci's inline formula into <code>shared/landed_pricing.py</code>: <code>PricedRow</code>, <code>LOGISTICS_TIERS</code>, <code>GROSS_MARGIN</code>, <code>parse_dim</code>, <code>fuzzy_lookup</code>, <code>compute_cbm</code>, <code>calibrate_baltic_rate</code>, <code>price_row</code>. Cross-machine <code>shipping-automation</code> resolution via <code>Path.home()</code> (previously hardcoded to NCORE100's user dir).</p>
+<p><code>vinci-catalog/import_pricelist.py</code>: 427 → 219 lines. Zero behaviour change.</p>
+<p><code>rampline-catalog/import_pricelist.py</code> (NEW): same pipeline, plus NOK conversion + Firestore audit-doc writer (REST API; doesn't require ADC).</p>
+</div>
+
+<h2><span class="pill amber">Deferred</span> Medusa variant push</h2>
+<div class="card">
+<p>Rampline's 54 Medusa products each carry a single <em>Default</em> variant keyed on the WooCommerce numeric ID (e.g. <code>26371</code>). The pricelist's 127 article codes (<code>RB35</code>, <code>BP 34 LF</code>, …) are variant-level SKUs that <strong>don't yet exist in Medusa</strong>. Creating per-article variants is a separate migration; three families (SHOCKDECK, climbing pole, balance arch) appear to have no matching Medusa product either.</p>
+<p>For now we audit landed + retail in Firestore only. The CSV at <code>rampline-catalog/data/pricelist_2026-05-13_landed.csv</code> is the source of truth for any downstream pricing decision.</p>
+</div>
+
+<h2>Open follow-ups</h2>
+<div class="card">
+<ul>
+  <li>Decide whether to create 127 per-article Medusa variants across the 13 families. Needs a family-name → Medusa-product map. New Medusa products needed for SHOCKDECK / climbing pole / balance arch.</li>
+  <li>Source per-SKU dimensions (CBM). Rampline tech-sheet PDFs are scraped but not parsed; rampline.com's public sitemap only exposes 2 family-level products with zero dims.</li>
+  <li>Re-run when a 2026 pricelist becomes available (current source is the 2025 sheet, modified 2025-03-14).</li>
+</ul>
+</div>
+
+</div>
+</body>
+</html>

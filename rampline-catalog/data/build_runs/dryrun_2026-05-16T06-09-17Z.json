@@ -1,0 +1,591 @@
+{
+  "timestamp": "2026-05-16T06-09-17Z",
+  "dry_run": true,
+  "limit_family": "rampball",
+  "totals": {
+    "CREATE_PRODUCT": 4
+  },
+  "errors": [],
+  "actions": [
+    {
+      "op": "CREATE_PRODUCT",
+      "handle": "rampline-rampball-35",
+      "title": "Rampball 35",
+      "parent_handle": "rampline-rampball",
+      "parent_id": "prod_01KNQ3PW9PMY591KPNQXDQ3738",
+      "parent_status": "published",
+      "parent_description": "The unpredictable tilting and rotating behavior of the Rampball challenges the user\u2019s balance skills and triggers creative movement. Rampball\u00ae balance balls are suitable for playing, exploration and balance training.\n\nThe Rampball\u00ae has an extra strong spring system that makes it tilt to the sides. The 50R/70R-models are also equipped with a ball bearing that allows them to rotate around vertical axis.\n\nTilting balance ballDiameter 35 cmHeight 36 cmWeight 27 kgTilts 5 cm in all directionsFall height 36\n\nTilting balance ballDiameter 50 cmHeight 51 cmWeight 66 kgTilts 10 cm in all directionsFall height 51\n\nTilting and rotating balance ballDiameter 50 cmHeight 51 cmWeight 75 kgTilts 10 cm in all directionsFall height 51\n\nTilting and rotating balance ballDiameter 70 cmHeight 70 cmWeight 201 kgTilts 15 cm in all directionsFall height 70\n\nArtificial grass/wet pour ground covers\u00a0(rubber/cork etc.)\n\nGrass/loose-fill covers\u00a0(wood chips, sand etc.)",
+      "parent_thumbnail": "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Rampball_50_3D-scaled.jpg",
+      "parent_images": [
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Rampball_50_3D-scaled.jpg",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/safety-tuv-150x150.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/rampball-stopt-26.gif",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/rampball-gress-26.gif",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/rampball-sd-26.gif",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Gul-RAL-1002.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Sitrongul-RAL-1012-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_beige_1015-200x200-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_orange_2008-200x200-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Red-RAL-3016.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/kugle_bright-red_3017-just.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_rosa_4003-200x200-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_lilla_4005-200x200-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_mrkbla_5010-200x200-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Lys-BlU-RAL-5012.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_bla_5015-200x200-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Turkis-RAL-5018-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_grnn_6005-200x200-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_grnn_6017-200x200-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Pale-Green-RAL-6021.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_mrkgra_7011-200x200-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/mellomgra-RAL-7037.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_gra_7038-200x200-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Brunbeige-RAL-8024.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_brun_8025-200x200-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/kugel_mulch_gr-beige-rb.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/kugel_mulch_br-beige-rb.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/classicjump-motorikkpark-1450x830-1.jpg",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/allin-motorikkpark-1450x830-1.jpg",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/dontstep-motorikkpark-1450x830-1.jpg"
+      ],
+      "parent_category_ids": [
+        "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B"
+      ],
+      "options": [
+        {
+          "title": "Surface",
+          "values": [
+            "Artificial grass",
+            "Grass",
+            "Loose fills",
+            "Wet pour"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "sku": "RB35",
+          "title": "Wet pour",
+          "option_values": [
+            [
+              "Surface",
+              "Wet pour"
+            ]
+          ],
+          "metadata": {
+            "article_code": "RB35",
+            "family": "Tilting and rotating balance balls",
+            "family_discount": 0.3,
+            "net_nok": 13909.7,
+            "recommended_nok": 19871.0,
+            "description": "Rampball\u00ae 35 for wet pour surfaces | \u00f8 35 cm, tilting.",
+            "pricelist_date": "2026-05-13",
+            "source": "rampline-pricelist-2025"
+          }
+        },
+        {
+          "sku": "RB35 AG",
+          "title": "Artificial grass",
+          "option_values": [
+            [
+              "Surface",
+              "Artificial grass"
+            ]
+          ],
+          "metadata": {
+            "article_code": "RB35 AG",
+            "family": "Tilting and rotating balance balls",
+            "family_discount": 0.3,
+            "net_nok": 14738.5,
+            "recommended_nok": 21055.0,
+            "description": "Rampball\u00ae 35 for artificial grass | \u00f8 35 cm, tilting. incl. PETG mounting ring.",
+            "pricelist_date": "2026-05-13",
+            "source": "rampline-pricelist-2025"
+          }
+        },
+        {
+          "sku": "RB35 G",
+          "title": "Grass",
+          "option_values": [
+            [
+              "Surface",
+              "Grass"
+            ]
+          ],
+          "metadata": {
+            "article_code": "RB35 G",
+            "family": "Tilting and rotating balance balls",
+            "family_discount": 0.3,
+            "net_nok": 16144.1,
+            "recommended_nok": 23063.0,
+            "description": "Rampball\u00ae 35 for grass | \u00f8 35 cm, tilting. incl mounting bracket for 21,5 cm depth.",
+            "pricelist_date": "2026-05-13",
+            "source": "rampline-pricelist-2025"
+          }
+        },
+        {
+          "sku": "RB35 LF",
+          "title": "Loose fills",
+          "option_values": [
+            [
+              "Surface",
+              "Loose fills"
+            ]
+          ],
+          "metadata": {
+            "article_code": "RB35 LF",
+            "family": "Tilting and rotating balance balls",
+            "family_discount": 0.3,
+            "net_nok": 16144.1,
+            "recommended_nok": 23063.0,
+            "description": "Rampball\u00ae 35 for loose fills | \u00f8 35 cm, tilting. incl mounting bracket for 30 cm depth.",
+            "pricelist_date": "2026-05-13",
+            "source": "rampline-pricelist-2025"
+          }
+        }
+      ],
+      "family": "Tilting and rotating balance balls",
+      "article_codes": [
+        "RB35",
+        "RB35 AG",
+        "RB35 G",
+        "RB35 LF"
+      ]
+    },
+    {
+      "op": "CREATE_PRODUCT",
+      "handle": "rampline-rampball-50",
+      "title": "Rampball 50",
+      "parent_handle": "rampline-rampball",
+      "parent_id": "prod_01KNQ3PW9PMY591KPNQXDQ3738",
+      "parent_status": "published",
+      "parent_description": "The unpredictable tilting and rotating behavior of the Rampball challenges the user\u2019s balance skills and triggers creative movement. Rampball\u00ae balance balls are suitable for playing, exploration and balance training.\n\nThe Rampball\u00ae has an extra strong spring system that makes it tilt to the sides. The 50R/70R-models are also equipped with a ball bearing that allows them to rotate around vertical axis.\n\nTilting balance ballDiameter 35 cmHeight 36 cmWeight 27 kgTilts 5 cm in all directionsFall height 36\n\nTilting balance ballDiameter 50 cmHeight 51 cmWeight 66 kgTilts 10 cm in all directionsFall height 51\n\nTilting and rotating balance ballDiameter 50 cmHeight 51 cmWeight 75 kgTilts 10 cm in all directionsFall height 51\n\nTilting and rotating balance ballDiameter 70 cmHeight 70 cmWeight 201 kgTilts 15 cm in all directionsFall height 70\n\nArtificial grass/wet pour ground covers\u00a0(rubber/cork etc.)\n\nGrass/loose-fill covers\u00a0(wood chips, sand etc.)",
+      "parent_thumbnail": "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Rampball_50_3D-scaled.jpg",
+      "parent_images": [
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Rampball_50_3D-scaled.jpg",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/safety-tuv-150x150.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/rampball-stopt-26.gif",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/rampball-gress-26.gif",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/rampball-sd-26.gif",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Gul-RAL-1002.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Sitrongul-RAL-1012-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_beige_1015-200x200-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_orange_2008-200x200-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Red-RAL-3016.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/kugle_bright-red_3017-just.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_rosa_4003-200x200-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_lilla_4005-200x200-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_mrkbla_5010-200x200-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Lys-BlU-RAL-5012.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_bla_5015-200x200-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Turkis-RAL-5018-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_grnn_6005-200x200-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_grnn_6017-200x200-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Pale-Green-RAL-6021.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_mrkgra_7011-200x200-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/mellomgra-RAL-7037.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_gra_7038-200x200-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Brunbeige-RAL-8024.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_brun_8025-200x200-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/kugel_mulch_gr-beige-rb.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/kugel_mulch_br-beige-rb.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/classicjump-motorikkpark-1450x830-1.jpg",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/allin-motorikkpark-1450x830-1.jpg",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/dontstep-motorikkpark-1450x830-1.jpg"
+      ],
+      "parent_category_ids": [
+        "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B"
+      ],
+      "options": [
+        {
+          "title": "Surface",
+          "values": [
+            "Artificial grass",
+            "Grass",
+            "Loose fills",
+            "Wet pour"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "sku": "RB50",
+          "title": "Wet pour",
+          "option_values": [
+            [
+              "Surface",
+              "Wet pour"
+            ]
+          ],
+          "metadata": {
+            "article_code": "RB50",
+            "family": "Tilting and rotating balance balls",
+            "family_discount": 0.3,
+            "net_nok": 18275.6,
+            "recommended_nok": 26108.0,
+            "description": "Rampball\u00ae 50 for wet pour surfaces | \u00f8 50 cm, tilting.",
+            "pricelist_date": "2026-05-13",
+            "source": "rampline-pricelist-2025"
+          }
+        },
+        {
+          "sku": "RB50 AG",
+          "title": "Artificial grass",
+          "option_values": [
+            [
+              "Surface",
+              "Artificial grass"
+            ]
+          ],
+          "metadata": {
+            "article_code": "RB50 AG",
+            "family": "Tilting and rotating balance balls",
+            "family_discount": 0.3,
+            "net_nok": 19104.4,
+            "recommended_nok": 27292.0,
+            "description": "Rampball\u00ae 50 for artificial grass | \u00f8 50 cm, tilting. incl. PETG mounting ring.",
+            "pricelist_date": "2026-05-13",
+            "source": "rampline-pricelist-2025"
+          }
+        },
+        {
+          "sku": "RB50 G",
+          "title": "Grass",
+          "option_values": [
+            [
+              "Surface",
+              "Grass"
+            ]
+          ],
+          "metadata": {
+            "article_code": "RB50 G",
+            "family": "Tilting and rotating balance balls",
+            "family_discount": 0.3,
+            "net_nok": 20510.0,
+            "recommended_nok": 29300.0,
+            "description": "Rampball\u00ae 50 for grass | \u00f8 50 cm, tilting. incl mounting bracket for 21,5 cm depth.",
+            "pricelist_date": "2026-05-13",
+            "source": "rampline-pricelist-2025"
+          }
+        },
+        {
+          "sku": "RB50 LF",
+          "title": "Loose fills",
+          "option_values": [
+            [
+              "Surface",
+              "Loose fills"
+            ]
+          ],
+          "metadata": {
+            "article_code": "RB50 LF",
+            "family": "Tilting and rotating balance balls",
+            "family_discount": 0.3,
+            "net_nok": 20510.0,
+            "recommended_nok": 29300.0,
+            "description": "Rampball\u00ae 50 for loose fills | \u00f8 50 cm, tilting. incl mounting bracket for 30 cm depth.",
+            "pricelist_date": "2026-05-13",
+            "source": "rampline-pricelist-2025"
+          }
+        }
+      ],
+      "family": "Tilting and rotating balance balls",
+      "article_codes": [
+        "RB50",
+        "RB50 AG",
+        "RB50 G",
+        "RB50 LF"
+      ]
+    },
+    {
+      "op": "CREATE_PRODUCT",
+      "handle": "rampline-rampball-50r",
+      "title": "Rampball 50R",
+      "parent_handle": "rampline-rampball",
+      "parent_id": "prod_01KNQ3PW9PMY591KPNQXDQ3738",
+      "parent_status": "published",
+      "parent_description": "The unpredictable tilting and rotating behavior of the Rampball challenges the user\u2019s balance skills and triggers creative movement. Rampball\u00ae balance balls are suitable for playing, exploration and balance training.\n\nThe Rampball\u00ae has an extra strong spring system that makes it tilt to the sides. The 50R/70R-models are also equipped with a ball bearing that allows them to rotate around vertical axis.\n\nTilting balance ballDiameter 35 cmHeight 36 cmWeight 27 kgTilts 5 cm in all directionsFall height 36\n\nTilting balance ballDiameter 50 cmHeight 51 cmWeight 66 kgTilts 10 cm in all directionsFall height 51\n\nTilting and rotating balance ballDiameter 50 cmHeight 51 cmWeight 75 kgTilts 10 cm in all directionsFall height 51\n\nTilting and rotating balance ballDiameter 70 cmHeight 70 cmWeight 201 kgTilts 15 cm in all directionsFall height 70\n\nArtificial grass/wet pour ground covers\u00a0(rubber/cork etc.)\n\nGrass/loose-fill covers\u00a0(wood chips, sand etc.)",
+      "parent_thumbnail": "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Rampball_50_3D-scaled.jpg",
+      "parent_images": [
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Rampball_50_3D-scaled.jpg",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/safety-tuv-150x150.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/rampball-stopt-26.gif",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/rampball-gress-26.gif",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/rampball-sd-26.gif",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Gul-RAL-1002.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Sitrongul-RAL-1012-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_beige_1015-200x200-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_orange_2008-200x200-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Red-RAL-3016.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/kugle_bright-red_3017-just.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_rosa_4003-200x200-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_lilla_4005-200x200-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_mrkbla_5010-200x200-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Lys-BlU-RAL-5012.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_bla_5015-200x200-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Turkis-RAL-5018-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_grnn_6005-200x200-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_grnn_6017-200x200-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Pale-Green-RAL-6021.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_mrkgra_7011-200x200-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/mellomgra-RAL-7037.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_gra_7038-200x200-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Brunbeige-RAL-8024.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_brun_8025-200x200-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/kugel_mulch_gr-beige-rb.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/kugel_mulch_br-beige-rb.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/classicjump-motorikkpark-1450x830-1.jpg",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/allin-motorikkpark-1450x830-1.jpg",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/dontstep-motorikkpark-1450x830-1.jpg"
+      ],
+      "parent_category_ids": [
+        "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B"
+      ],
+      "options": [
+        {
+          "title": "Surface",
+          "values": [
+            "Artificial grass",
+            "Grass",
+            "Loose fills",
+            "Wet pour"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "sku": "RB50R",
+          "title": "Wet pour",
+          "option_values": [
+            [
+              "Surface",
+              "Wet pour"
+            ]
+          ],
+          "metadata": {
+            "article_code": "RB50R",
+            "family": "Tilting and rotating balance balls",
+            "family_discount": 0.3,
+            "net_nok": 22642.2,
+            "recommended_nok": 32346.0,
+            "description": "Rampball\u00ae 50R for wet pour surfaces | \u00f8 50 cm, tilting and rotating.",
+            "pricelist_date": "2026-05-13",
+            "source": "rampline-pricelist-2025"
+          }
+        },
+        {
+          "sku": "RB50R AG",
+          "title": "Artificial grass",
+          "option_values": [
+            [
+              "Surface",
+              "Artificial grass"
+            ]
+          ],
+          "metadata": {
+            "article_code": "RB50R AG",
+            "family": "Tilting and rotating balance balls",
+            "family_discount": 0.3,
+            "net_nok": 23471.0,
+            "recommended_nok": 33530.0,
+            "description": "Rampball\u00ae 50R for artificial grass | \u00f8 50 cm, tilting and rotating. incl. PETG mounting ring.",
+            "pricelist_date": "2026-05-13",
+            "source": "rampline-pricelist-2025"
+          }
+        },
+        {
+          "sku": "RB50R G",
+          "title": "Grass",
+          "option_values": [
+            [
+              "Surface",
+              "Grass"
+            ]
+          ],
+          "metadata": {
+            "article_code": "RB50R G",
+            "family": "Tilting and rotating balance balls",
+            "family_discount": 0.3,
+            "net_nok": 24876.6,
+            "recommended_nok": 35538.0,
+            "description": "Rampball\u00ae 50R for grass | \u00f8 50 cm, tilting and rotating. incl mounting bracket for 21,5 cm depth.",
+            "pricelist_date": "2026-05-13",
+            "source": "rampline-pricelist-2025"
+          }
+        },
+        {
+          "sku": "RB50R LF",
+          "title": "Loose fills",
+          "option_values": [
+            [
+              "Surface",
+              "Loose fills"
+            ]
+          ],
+          "metadata": {
+            "article_code": "RB50R LF",
+            "family": "Tilting and rotating balance balls",
+            "family_discount": 0.3,
+            "net_nok": 24876.6,
+            "recommended_nok": 35538.0,
+            "description": "Rampball\u00ae 50R for loose fills | \u00f8 50 cm, tilting and rotating. incl mounting bracket for 30 cm depth.",
+            "pricelist_date": "2026-05-13",
+            "source": "rampline-pricelist-2025"
+          }
+        }
+      ],
+      "family": "Tilting and rotating balance balls",
+      "article_codes": [
+        "RB50R",
+        "RB50R AG",
+        "RB50R G",
+        "RB50R LF"
+      ]
+    },
+    {
+      "op": "CREATE_PRODUCT",
+      "handle": "rampline-rampball-70r",
+      "title": "Rampball 70R",
+      "parent_handle": "rampline-rampball",
+      "parent_id": "prod_01KNQ3PW9PMY591KPNQXDQ3738",
+      "parent_status": "published",
+      "parent_description": "The unpredictable tilting and rotating behavior of the Rampball challenges the user\u2019s balance skills and triggers creative movement. Rampball\u00ae balance balls are suitable for playing, exploration and balance training.\n\nThe Rampball\u00ae has an extra strong spring system that makes it tilt to the sides. The 50R/70R-models are also equipped with a ball bearing that allows them to rotate around vertical axis.\n\nTilting balance ballDiameter 35 cmHeight 36 cmWeight 27 kgTilts 5 cm in all directionsFall height 36\n\nTilting balance ballDiameter 50 cmHeight 51 cmWeight 66 kgTilts 10 cm in all directionsFall height 51\n\nTilting and rotating balance ballDiameter 50 cmHeight 51 cmWeight 75 kgTilts 10 cm in all directionsFall height 51\n\nTilting and rotating balance ballDiameter 70 cmHeight 70 cmWeight 201 kgTilts 15 cm in all directionsFall height 70\n\nArtificial grass/wet pour ground covers\u00a0(rubber/cork etc.)\n\nGrass/loose-fill covers\u00a0(wood chips, sand etc.)",
+      "parent_thumbnail": "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Rampball_50_3D-scaled.jpg",
+      "parent_images": [
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Rampball_50_3D-scaled.jpg",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/safety-tuv-150x150.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/rampball-stopt-26.gif",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/rampball-gress-26.gif",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/rampball-sd-26.gif",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Gul-RAL-1002.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Sitrongul-RAL-1012-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_beige_1015-200x200-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_orange_2008-200x200-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Red-RAL-3016.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/kugle_bright-red_3017-just.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_rosa_4003-200x200-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_lilla_4005-200x200-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_mrkbla_5010-200x200-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Lys-BlU-RAL-5012.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_bla_5015-200x200-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Turkis-RAL-5018-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_grnn_6005-200x200-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_grnn_6017-200x200-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Pale-Green-RAL-6021.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_mrkgra_7011-200x200-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/mellomgra-RAL-7037.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_gra_7038-200x200-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Brunbeige-RAL-8024.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/Kugel_brun_8025-200x200-1.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/kugel_mulch_gr-beige-rb.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/kugel_mulch_br-beige-rb.png",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/classicjump-motorikkpark-1450x830-1.jpg",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/allin-motorikkpark-1450x830-1.jpg",
+        "https://catalogs.leka.studio/api/i/rampline/rampline-rampball/dontstep-motorikkpark-1450x830-1.jpg"
+      ],
+      "parent_category_ids": [
+        "pcat_01KNQ3PW44X2NS3P2VC06K0Z9B"
+      ],
+      "options": [
+        {
+          "title": "Surface",
+          "values": [
+            "Artificial grass",
+            "Grass",
+            "Loose fills",
+            "Wet pour"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "sku": "RB70R",
+          "title": "Wet pour",
+          "option_values": [
+            [
+              "Surface",
+              "Wet pour"
+            ]
+          ],
+          "metadata": {
+            "article_code": "RB70R",
+            "family": "Tilting and rotating balance balls",
+            "family_discount": 0.3,
+            "net_nok": 31686.2,
+            "recommended_nok": 45266.0,
+            "description": "Rampball\u00ae 70R for wet pour surfaces | \u00f8 70 cm, tilting and rotating.",
+            "pricelist_date": "2026-05-13",
+            "source": "rampline-pricelist-2025"
+          }
+        },
+        {
+          "sku": "RB70R AG",
+          "title": "Artificial grass",
+          "option_values": [
+            [
+              "Surface",
+              "Artificial grass"
+            ]
+          ],
+          "metadata": {
+            "article_code": "RB70R AG",
+            "family": "Tilting and rotating balance balls",
+            "family_discount": 0.3,
+            "net_nok": 32636.8,
+            "recommended_nok": 46624.0,
+            "description": "Rampball\u00ae 70R for artificial grass | \u00f8 70 cm, tilting and rotating. incl. PETG mounting ring.",
+            "pricelist_date": "2026-05-13",
+            "source": "rampline-pricelist-2025"
+          }
+        },
+        {
+          "sku": "RB70R G",
+          "title": "Grass",
+          "option_values": [
+            [
+              "Surface",
+              "Grass"
+            ]
+          ],
+          "metadata": {
+            "article_code": "RB70R G",
+            "family": "Tilting and rotating balance balls",
+            "family_discount": 0.3,
+            "net_nok": 33920.6,
+            "recommended_nok": 48458.0,
+            "description": "Rampball\u00ae 70R for grass | \u00f8 70 cm, tilting and rotating. incl mounting bracket for 21,5 cm depth.",
+            "pricelist_date": "2026-05-13",
+            "source": "rampline-pricelist-2025"
+          }
+        },
+        {
+          "sku": "RB70R LF",
+          "title": "Loose fills",
+          "option_values": [
+            [
+              "Surface",
+              "Loose fills"
+            ]
+          ],
+          "metadata": {
+            "article_code": "RB70R LF",
+            "family": "Tilting and rotating balance balls",
+            "family_discount": 0.3,
+            "net_nok": 33920.6,
+            "recommended_nok": 48458.0,
+            "description": "Rampball\u00ae 70R for loose fills | \u00f8 70 cm, tilting and rotating. incl mounting bracket for 30 cm depth.",
+            "pricelist_date": "2026-05-13",
+            "source": "rampline-pricelist-2025"
+          }
+        }
+      ],
+      "family": "Tilting and rotating balance balls",
+      "article_codes": [
+        "RB70R",
+        "RB70R AG",
+        "RB70R G",
+        "RB70R LF"
+      ]
+    }
+  ]
+}

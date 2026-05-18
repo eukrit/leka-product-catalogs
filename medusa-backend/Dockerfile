@@ -14,6 +14,13 @@ COPY . .
 ENV NODE_ENV=development
 ENV DATABASE_URL=postgres://placeholder:placeholder@localhost:5432/placeholder
 ENV REDIS_URL=redis://localhost:6379
+
+# Bake the production backend URL into the admin UI bundle at build time.
+# Without this, the admin bundle hard-codes localhost:9000 and the served
+# admin can't talk back to the API. Default keeps local dev working.
+ARG MEDUSA_BACKEND_URL=http://localhost:9000
+ENV MEDUSA_BACKEND_URL=$MEDUSA_BACKEND_URL
+
 RUN npm run build
 
 # Compile medusa-config.ts to JS so runtime doesn't need ts-node

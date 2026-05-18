@@ -3,10 +3,8 @@ __pycache__/
 .git/
 .gitignore
 *.md
-docs/
 firestore/
 scripts/
-shared/
 wisdom-catalog/
 vinci-catalog/scrape_catalog.py
 vinci-catalog/import_to_firestore.py
@@ -17,3 +15,14 @@ vinci-catalog/web-app/.dockerignore
 .scrape_checkpoint.json
 *.env
 credentials/
+
+# Need shared/ + docs/forms/ in the image so the Flask service can serve
+# the pricing-config editor (src/main.py imports shared.pricing_config and
+# the route /forms/pricing-config sends docs/forms/pricing-config.html).
+# Other docs/ subfolders aren't needed at runtime.
+docs/architecture.html
+docs/build-summary.html
+docs/hub.html
+docs/BuildPlans/
+docs/reports/
+docs/summaries/

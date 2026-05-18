@@ -1,0 +1,48 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    id: pull
+    args: ['pull', 'asia-southeast1-docker.pkg.dev/ai-agents-go/leka-product-catalogs/medusa-backend:01addb0']
+  - name: 'gcr.io/cloud-builders/docker'
+    id: run-and-capture
+    entrypoint: bash
+    args:
+      - '-c'
+      - |
+        set +e
+        timeout 90 docker run --rm \
+          -e NODE_ENV=production \
+          -e DISABLE_ADMIN=false \
+          -e PORT=9000 \
+          -e MEDUSA_BACKEND_URL=https://leka-medusa-backend-538978391890.asia-southeast1.run.app \
+          -e MEDUSA_ADMIN_EMAIL=admin@leka.studio \
+          -e DATABASE_URL="$$DATABASE_URL" \
+          -e REDIS_URL="$$REDIS_URL" \
+          -e COOKIE_SECRET="$$COOKIE_SECRET" \
+          -e JWT_SECRET="$$JWT_SECRET" \
+          -e MEDUSA_ADMIN_PASSWORD="$$MEDUSA_ADMIN_PASSWORD" \
+          -e STORE_CORS=https://catalogs.leka.studio \
+          -e ADMIN_CORS=https://leka-medusa-backend-538978391890.asia-southeast1.run.app \
+          -e AUTH_CORS=https://leka-medusa-backend-538978391890.asia-southeast1.run.app \
+          --entrypoint /bin/sh \
+          asia-southeast1-docker.pkg.dev/ai-agents-go/leka-product-catalogs/medusa-backend:01addb0 \
+          -c 'cd /app/.medusa/server && echo "=== server cwd contents ===" && ls -la 2>&1 | head -30 && echo "=== files ===" && find . -maxdepth 2 -name "*.json" -o -name "*.js" 2>&1 | head -20 && echo "=== try medusa start from .medusa/server ===" && DISABLE_ADMIN=false node /app/node_modules/.bin/medusa start 2>&1 & sleep 35 && echo "=== window closed ==="' || true
+        echo "[cloudbuild] capture window done"
+    secretEnv: ['DATABASE_URL','REDIS_URL','COOKIE_SECRET','JWT_SECRET','MEDUSA_ADMIN_PASSWORD']
+
+availableSecrets:
+  secretManager:
+    - versionName: projects/$PROJECT_ID/secrets/medusa-database-url/versions/latest
+      env: 'DATABASE_URL'
+    - versionName: projects/$PROJECT_ID/secrets/medusa-redis-url/versions/latest
+      env: 'REDIS_URL'
+    - versionName: projects/$PROJECT_ID/secrets/medusa-cookie-secret/versions/latest
+      env: 'COOKIE_SECRET'
+    - versionName: projects/$PROJECT_ID/secrets/medusa-jwt-secret/versions/latest
+      env: 'JWT_SECRET'
+    - versionName: projects/$PROJECT_ID/secrets/medusa-admin-password/versions/latest
+      env: 'MEDUSA_ADMIN_PASSWORD'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+timeout: 600s

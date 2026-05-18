@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Weplay Catalog Review</title>
+<style>
+:root {
+  --purple: #8003FF;
+  --navy: #182557;
+  --cream: #FFF9E6;
+  --red: #C7161E;
+  --bg: #f5f5f7;
+}
+* { box-sizing: border-box; }
+body { font-family: -apple-system, "Segoe UI", Roboto, sans-serif; margin: 0; padding: 24px; background: var(--bg); color: #1a1a1f; }
+h1 { font-size: 24px; margin: 0 0 8px; color: var(--navy); }
+.subtitle { color: #666; margin-bottom: 24px; font-size: 14px; }
+.tabs { display: flex; gap: 8px; margin: 24px 0 16px; border-bottom: 2px solid #e0e0e0; }
+.tab { padding: 10px 18px; cursor: pointer; font-weight: 600; color: #666; border-bottom: 2px solid transparent; margin-bottom: -2px; }
+.tab.active { color: var(--purple); border-bottom-color: var(--purple); }
+.search { margin: 16px 0; }
+.search input { padding: 8px 12px; width: 320px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; }
+.section { display: none; }
+.section.active { display: block; }
+
+/* AI-inferred cards */
+.cat-group { margin: 24px 0 12px; }
+.cat-header { font-size: 14px; font-weight: 700; text-transform: uppercase; color: var(--purple); margin: 16px 0 8px; letter-spacing: 0.5px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+.card { background: white; border-radius: 12px; padding: 16px; box-shadow: 0 2px 8px rgba(24,37,87,0.06); border-left: 4px solid #ddd; }
+.card.ai-inferred { border-left-color: var(--purple); }
+.card.variant-group { border-left-color: var(--red); }
+.sku { font-family: monospace; font-size: 11px; color: #888; }
+.name { font-size: 16px; font-weight: 600; margin: 4px 0; }
+.desc { font-size: 13px; color: #444; line-height: 1.5; }
+.meta { margin-top: 8px; font-size: 11px; color: #888; }
+.notes { margin-top: 8px; font-size: 12px; color: #666; font-style: italic; padding: 6px 10px; background: #fafafa; border-radius: 6px; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 600; text-transform: uppercase; }
+.badge-cat { background: #f0e8ff; color: var(--purple); }
+.badge-status { background: #fff0e8; color: var(--red); }
+.badge-active { background: #e8f5e9; color: #2e7d32; }
+
+/* Variant groups */
+.variant-group-card { background: white; border-radius: 12px; padding: 18px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(24,37,87,0.06); border-left: 4px solid var(--red); }
+.variant-group-header { font-size: 17px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+.variant-group-meta { font-size: 12px; color: #888; margin-bottom: 12px; }
+.variant-list { display: flex; flex-direction: column; gap: 8px; }
+.variant-row { display: grid; grid-template-columns: 120px 1fr 1fr 80px; gap: 12px; padding: 8px 10px; background: #fafafa; border-radius: 6px; font-size: 13px; }
+.variant-row.canonical { background: #fff8e1; border-left: 3px solid var(--purple); }
+.variant-row .doc { font-family: monospace; font-size: 11px; }
+.variant-row .nm { font-weight: 500; }
+.variant-row .img { text-align: center; font-size: 11px; }
+
+.summary-bar { background: white; padding: 16px; border-radius: 10px; margin-bottom: 16px; display: flex; gap: 24px; flex-wrap: wrap; }
+.summary-item { display: flex; flex-direction: column; }
+.summary-num { font-size: 28px; font-weight: 700; color: var(--purple); line-height: 1; }
+.summary-label { font-size: 12px; color: #666; margin-top: 4px; }
+</style>
+</head>
+<body>
+<h1>Weplay Catalog Review</h1>
+<div class="subtitle">Generated 2026-05-17 16:21 — review aid for AI-inferred drafts (103) and multi-doc SKU groups</div>
+
+<div class="summary-bar">
+  <div class="summary-item"><div class="summary-num">103</div><div class="summary-label">AI-inferred drafts</div></div>
+  <div class="summary-item"><div class="summary-num">9</div><div class="summary-label">multi-doc SKU tokens</div></div>
+  <div class="summary-item"><div class="summary-num">22</div><div class="summary-label">docs in variant groups</div></div>
+  <div class="summary-item"><div class="summary-num">162</div><div class="summary-label">total active products</div></div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="show('ai')">AI-Inferred Drafts (103)</div>
+  <div class="tab" onclick="show('var')">Variant Groups (9)</div>
+</div>
+
+<div class="search"><input type="text" id="search" placeholder="Search by SKU or name..." oninput="filter()"></div>
+
+<div id="section-ai" class="section active">
+<div class="cat-header">balance (46)</div>
+<div class="grid">
+
+<div class="card ai-inferred">
+  <div class="sku">AT0002 <span style="color:#bbb"> · </span> at0002</div>
+  <div class="name">Tactile Path - Nature</div>
+  <div class="desc">A set of nature-inspired stepping stones designed to improve balance, coordination, and the sense of touch. The pads feature various textures (spiky, wavy, rippled) and shapes, allowing for the creation of different pathways for walking and sensory exploration. The product is suitable for a wide range of ages, from young children to seniors.</div>
+  <div class="meta"><span class="badge badge-cat">balance</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Image features an intergenerational scene with a child and a senior, demonstrating broad appeal. The &#x27;2 Sets&#x27; text in the corner indicates the image displays a total of 16 pieces, as one set contains 8.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC0015 <span style="color:#bbb"> · </span> kc0015</div>
+  <div class="name">Log &amp; Roll</div>
+  <div class="desc">A modular balance set designed to look like logs and stumps, allowing for various path configurations. The textured log surfaces provide tactile stimulation while children practice balance, coordination, and motor planning. The set includes 4 Logs and 6 Stumps.</div>
+  <div class="meta"><span class="badge badge-cat">balance</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product identified as Weplay Log &amp; Roll (KC0015) based on visual appearance. Specifications such as SKU, dimensions, weight, and materials are based on public data for this product, as they are not present in the image. Dimensions provided are for a single Log component.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC0018 <span style="color:#bbb"> · </span> kc0018</div>
+  <div class="name">Step &#x27;n&#x27; Stones</div>
+  <div class="desc">A set of stepping stones designed to improve balance and coordination in children. The tactile surfaces, featuring dots and lines, provide sensory stimulation to the feet and can be arranged in various paths for challenging activities.</div>
+  <div class="meta"><span class="badge badge-cat">balance</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product is typically sold as a set of 6 stones. Dimensions are for a single stone. Weight is for the entire set. Image shows a partial set.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC0019 <span style="color:#bbb"> · </span> kc0019</div>
+  <div class="name">Wavy Tactile Path</div>
+  <div class="desc">A set of colorful, wavy path segments with various tactile patterns on the surface. These pieces can be interlocked to create straight or curved paths, designed to enhance children&#x27;s dynamic balance, coordination, and sensory integration.</div>
+  <div class="meta"><span class="badge badge-cat">balance</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product identified as the curved, elongated pieces in the image. Set includes both straight and curved pieces. The dimensions provided are for the curved piece. These are shown being used with Weplay Tactile Discs (KM0008).</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC0021 <span style="color:#bbb"> · </span> kc0021</div>
+  <div class="name">Tactile Board</div>
+  <div class="desc">A set of 8 tactile boards designed to improve balance and provide sensory stimulation. The set includes two different shapes and textures: 4 circular green boards with a bumpy surface and 4 oval blue boards with a striped surface. Children can arrange them to create various walking paths.</div>
+  <div class="meta"><span class="badge badge-cat">balance</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product is a set of 8 pieces. Dimensions provided are for the largest component (blue oval board). The green circular board is Ø 27.2 x 4.8 cm. Weight is for the complete set.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC0022 <span style="color:#bbb"> · </span> kc0022</div>
+  <div class="name">Tactile Stepping Stone</div>
+  <div class="desc">A set of colorful stepping stones designed to improve balance and coordination in children. The stones feature various textured surfaces for tactile sensory input and come in different heights to provide progressive challenges.</div>
+  <div class="meta"><span class="badge badge-cat">balance</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 The product is a set of tactile stones, with SKU KC0022 referring to the 8-piece set. The image displays 5 stones from the set, with two stacked together, possibly representing a smaller configuration or for photographic styling. Specifications are for the full 8-piece set.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC0027 <span style="color:#bbb"> · </span> kc0027</div>
+  <div class="name">Adventure Path</div>
+  <div class="desc">The Weplay Adventure Path is a versatile and modular balance beam system designed for children. It consists of piers, paths, and toppers that can be arranged in numerous configurations to challenge and improve balance, coordination, and motor planning skills. The wavy design of the paths and the tactile surfaces provide additional sensory stimulation during play.</div>
+  <div class="meta"><span class="badge badge-cat">balance</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product depicted is a complete set containing 6 Piers (bases), 6 Paths (beams), and 6 Toppers. The Piers are stackable to adjust height and difficulty.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC0030 <span style="color:#bbb"> · </span> kc0030</div>
+  <div class="name">Whale Balance Board</div>
+  <div class="desc">A whale-shaped rocker designed to help children develop balance, coordination, and vestibular sense. The curved, bumpy base provides a fun challenge, while the textured top surface offers tactile stimulation and grip.</div>
+  <div class="meta"><span class="badge badge-cat">balance</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product identified visually as the Weplay Whale Balance Board. Specifications are based on publicly available product data for this model (KC0030), as they are not present in the image itself.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC0031 <span style="color:#bbb"> · </span> kc0031</div>
+  <div class="name">Rainbow River Stones</div>
+  <div class="desc">A set of 6 stackable stepping stones in two sizes and multiple colors. The tops feature tactile patterns to enhance sensory perception, while the anti-slip bases ensure stability, helping children develop balance and confidence.</div>
+  <div class="meta"><span class="badge badge-cat">balance</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product identified as Weplay Rainbow River Stones. The image shows two stones from the 6-piece set, one small and one large. Specifications are for the complete set.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC0031-B <span style="color:#bbb"> · </span> kc0031_b</div>
+  <div class="name">Wavy Tactile Path</div>
+  <div class="desc">A crocodile-shaped balance board with a wavy, tactile surface designed to improve balance, coordination, and sensory perception in children. The curved underside provides a challenging wobble for developing motor skills. Suitable for individual play.</div>
+  <div class="meta"><span class="badge badge-cat">balance</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product is also known as the &#x27;Balance Crocodile&#x27;. Base SKU is KC0031; suffix is assumed for color variant. Data sourced from general product information for Weplay KC0031.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC0031-S <span style="color:#bbb"> · </span> kc0031_s</div>
+  <div class="name">Wavy Tactile Path</div>
+  <div class="desc">A crocodile-shaped balance board with a wavy, tactile surface designed to improve balance, coordination, and sensory perception in children. The curved underside provides a challenging wobble for developing motor skills. Suitable for individual play.</div>
+  <div class="meta"><span class="badge badge-cat">balance</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product is also known as the &#x27;Balance Crocodile&#x27;. Color is also described as sand or stone. Base SKU is KC0031; suffix is assumed for color variant. Data sourced from general product information for Weplay KC0031.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC0032 <span style="color:#bbb"> · </span> kc0032</div>
+  <div class="name">Wavy Tactile Path</div>
+  <div class="desc">The Wavy Tactile Path is a nature-themed balance set featuring a wavy leaf board and turtle shell stepping stones. It allows children to create various routes, enhancing motor skills, balance coordination, and sensory perception through the tactile surfaces. The set includes Wavy Boards (49x43.5x9.7 cm), Square Turtle Shells (32.5x27.5x8.2 cm), and Round Turtle Shells (Ø27x8.2 cm).</div>
+  <div class="meta"><span class="badge badge-cat">balance</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 The image displays the three types of components in the Wavy Tactile Path set: the Wavy Board, the Square Turtle Shell, and the Round Turtle Shell. A full set typically contains multiple pieces (e.g., 4 Wavy Boards, 2 square shells, 2 round shells).</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC0036 <span style="color:#bbb"> · </span> kc0036</div>
+  <div class="name">Honey Hills</div>
+  <div class="desc">A set of hexagonal stepping stones inspired by honeycomb structures. They can be arranged to create paths of varying heights and challenges, promoting balance, coordination, and motor planning. The set includes pieces of three different heights which can be stacked for storage.</div>
+  <div class="meta"><span class="badge badge-cat">balance</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product is visible in the foreground. Set consists of 6 hexagonal pieces in 3 different sizes/heights. The pieces are stackable. Some pieces in the image are shown as open containers which can hold items, and some have textured lids.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC0037 <span style="color:#bbb"> · </span> kc0037</div>
+  <div class="name">Wavy Tactile Path</div>
+  <div class="desc">A modular balance beam set consisting of 8 interlocking pieces that can be arranged into straight or curved paths. The textured surfaces provide tactile stimulation to the feet, helping to improve balance, coordination, and sensory integration for users of various ages.</div>
+  <div class="meta"><span class="badge badge-cat">balance</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product specifications are based on external data for the identified product, as none are present in the image. The product consists of 8 pieces (4 straight, 4 curved). The image depicts use by adults, suggesting applications in physical therapy and senior care in addition to children&#x27;s play.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC0038 <span style="color:#bbb"> · </span> kc0038</div>
+  <div class="name">Wavy Tactile Path</div>
+  <div class="desc">The Weplay Wavy Tactile Path is a set of interlocking wavy sections that can be arranged to create walking paths. The textured surfaces provide tactile stimulation to the feet, helping to improve children&#x27;s balance, coordination, and motor planning skills. The modular design allows for creating straight or serpentine paths.</div>
+  <div class="meta"><span class="badge badge-cat">balance</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 The standard product consists of a set of 8 pieces. The image shows the pieces connected in a serpentine path with two children walking on it.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC0039 <span style="color:#bbb"> · </span> kc0039</div>
+  <div class="name">Weplay Honey Hills</div>
+  <div class="desc">The Weplay Honey Hills set combines tactile paths and hexagonal hills, inspired by honeycombs, to create various walking routes. This modular system helps children improve motor planning, balance, and coordination. The tactile surfaces provide sensory stimulation to their feet.</div>
+  <div class="meta"><span class="badge badge-cat">balance</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 The image displays a configuration of 4 hills and 3 paths. The full commercial set (KC0039) typically includes 6 hills and 6 paths.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC0040 <span style="color:#bbb"> · </span> kc0040</div>
+  <div class="name">Multi-function Balance Blocks</div>
+  <div class="desc">A versatile set of blocks including &#x27;Crawlers&#x27; and &#x27;Paths&#x27; that can be used alone or with other Weplay components like Honey Hills to create diverse obstacle courses. They are designed to improve balance, physical coordination, and motor planning.</div>
+  <div class="meta"><span class="badge badge-cat">balance</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 The image shows the beige &#x27;Crawler&#x27; and &#x27;Path&#x27; components from this set integrated into a larger structure with the Weplay Honey Hills (KC0046) set.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC0043 <span style="color:#bbb"> · </span> kc0043</div>
+  <div class="name">Weplay Connect-A-Path</div>
+  <div class="desc">A versatile, modular balance beam system designed to improve motor skills and balance in children. The set includes bases, straight and wavy paths, and tactile maze boards that can be arranged in numerous configurations. The tactile surfaces provide sensory stimulation during play.</div>
+  <div class="meta"><span class="badge badge-cat">balance</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 This product is a large modular set that includes the other components visible in the image, such as the Honey Hills and Maze Balance Boards. The image shows one possible configuration.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC0046 <span style="color:#bbb"> · </span> kc0046</div>
+  <div class="name">Honey Hills</div>
+  <div class="desc">A set of 6 beehive-inspired stepping stones in 3 different sizes and slopes. The textured surface provides tactile input and helps prevent slipping, while the varying heights challenge children&#x27;s balance, coordination, and motor planning skills. The pieces can be stacked for easy storage.</div>
+  <div class="meta"><span class="badge badge-cat">balance</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product identified as Weplay Honey Hills based on visual characteristics. Specifications are for the complete set of 6, although only 5 are fully visible in the image. Dimensions for length/width/height are for the largest piece in the set.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC0049 <span style="color:#bbb"> · </span> kc0049</div>
+  <div class="name">Honey Hills</div>
+  <div class="desc">A set of stepping stones designed for children to practice balance and coordination. The tactile textured surfaces are inspired by beehives and provide sensory stimulation while preventing slips. The pieces can be arranged in straight or curved paths to create diverse challenges.</div>
+  <div class="meta"><span class="badge badge-cat">balance</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 The product is typically sold as a set of 6 pieces (3 yellow, 3 green). The image shows 8 pieces, indicating that multiple sets can be combined.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC1001-050R <span style="color:#bbb"> · </span> kc1001_050r</div>
+  <div class="name">Hopping Ball</div>
+  <div class="desc">An inflatable hopper ball with two integrated handles for bouncing. This toy helps children develop balance, coordination, and leg strength while playing.</div>
+  <div class="meta"><span class="badge badge-cat">balance</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 The SKU is inferred based on the visible diameter (ø 50 cm) and Weplay&#x27;s standard product codes for this item. The exact SKU text on the product is not fully legible.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC1002 <span style="color:#bbb"> · </span> kc1002</div>
+  <div class="name">Tactile Path - Camino de Santiago</div>
+  <div class="desc">A set of six scallop-shaped stepping stones in three different sizes and colors, inspired by the Camino de Santiago trail. The tactile surfaces and varying heights challenge children&#x27;s balance, coordination, and motor planning skills. The shells are stackable for easy storage.</div>
+  <div class="meta"><span class="badge badge-cat">balance</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product is a set of 6 stepping shells in 3 sizes and 3 colors (2 of each). The image displays one of each size to represent the full set. The scallop shell design is a symbol of the Camino de Santiago pilgrimage route. Also known as Weplay Tactile Scallop.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC1002-B <span style="color:#bbb"> · </span> kc1002_b</div>
+  <div class="name">Rocking Bowl</div>
+  <div class="desc">A large, sturdy plastic bowl that allows children to rock, spin, and balance. It helps to develop vestibular sense and coordination skills. The spacious design provides a comfortable and secure space for play.</div>
+  <div class="meta"><span class="badge badge-cat">balance</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product identified as the Weplay Rocking Bowl. SKU is an assumption based on common product codes, with &#x27;-B&#x27; for the blue color shown. Specifications are based on publicly available data for this product as none are present in the image.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC2101-B <span style="color:#bbb"> · </span> kc2101_b</div>
+  <div class="name">Balance Board (Disc)</div>
+  <div class="desc">A durable plastic disc with a curved base designed to help children develop their sense of balance and coordination. The top surface is ribbed to provide tactile stimulation and prevent slipping. It can be used for rocking, rotating, and balancing exercises.</div>
+  <div class="meta"><span class="badge badge-cat">balance</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 The product is the blue disc shown on the floor. SKU KC2101-B refers to the blue version, but the product is also available in other colors under different suffixes (e.g., -R for Red, -Y for Yellow). The child and other background elements are for demonstration purposes only.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC2201-4 <span style="color:#bbb"> · </span> kc2201_4</div>
+  <div class="name">Weplay Team Walker (4-User Set)</div>
+  <div class="desc">A cooperative walking toy designed for four children to use simultaneously. It promotes teamwork, coordination, and balance as children learn to move in unison on modular footboards. The walkers come with adjustable ropes for children to hold on to for stability.</div>
+  <div class="meta"><span class="badge badge-cat">balance</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 The product depicted is a 4-user configuration. This is typically formed by connecting two 2-user sets (Weplay Team Walker, SKU KC2201).</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC3101 <span style="color:#bbb"> · </span> kc3101</div>
+  <div class="name">Log Activities</div>
+  <div class="desc">A modular balance beam set designed to look like logs, helping children develop balance, coordination, and motor skills. The logs feature tactile patterns and can be arranged in straight or curving paths, encouraging imaginative play and physical development.</div>
+  <div class="meta"><span class="badge badge-cat">balance</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product identified as Weplay Log Activities (KC3101) through visual analysis. Specifications are based on publicly available data for this model as they are not present in the image itself. Dimensions provided for the main log component.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC3301 <span style="color:#bbb"> · </span> kc3301</div>
+  <div class="name">Stepping Ring</div>
+  <div class="desc">The Stepping Ring set encourages children to develop balance, coordination, and motor planning skills. The set includes colorful rings and tactile footprint inserts that can be arranged into various pathways. Children can enjoy stepping, walking, or hopping from one to another, enhancing their physical activity.</div>
+  <div class="meta"><span class="badge badge-cat">balance</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 The set includes 4 large rings, 4 small rings, and 8 tactile footprint inserts (4 pairs). Also known as Weplay Tactile Circle. Recommended age is 3 years and up.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KM0004 <span style="color:#bbb"> · </span> km0004</div>
+  <div class="name">Forest Party</div>
+  <div class="desc">A modular play set designed to improve motor skills, balance, and coordination in young children. The set is themed around a forest and includes a log tunnel and caterpillar-like wavy paths that can be connected in various configurations. The textured surfaces also provide tactile sensory input.</div>
+  <div class="meta"><span class="badge badge-cat">balance</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product identified as Weplay Forest Party (KM0004) by visual comparison. The image shows the Log and Caterpillar components of the set. Other components of the full retail set, such as &#x27;Stumps&#x27;, may not be visible in this specific image. Specifications are based on publicly available data for this p</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KM0009 <span style="color:#bbb"> · </span> km0009</div>
+  <div class="name">Trangle</div>
+  <div class="desc">The Trangle is a multi-functional toy that can be used for sitting and spinning, designed to enhance children&#x27;s motor skills and balance coordination. The sturdy handles provide support for one or two children, encouraging cooperative fun and vestibular development.</div>
+  <div class="meta"><span class="badge badge-cat">balance</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Suitable for one or two children. Recommended age: 3 years and up. Maximum load: 60 kg.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KM0011 <span style="color:#bbb"> · </span> km0011</div>
+  <div class="name">Tactile Path</div>
+  <div class="desc">A modular balance beam set designed to improve balance, coordination, and tactile sensory integration. The set includes straight path segments with different textures and colors, along with connectors to build various walking paths. The anti-slip surfaces provide safety and sensory stimulation for children.</div>
+  <div class="meta"><span class="badge badge-cat">balance</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 The image displays various configurations of the modular Tactile Path system. Specifications and weight are based on a standard retail set (KM0011), which typically includes 8 straight paths, 4 curved paths, and 4 connectors, although the image only shows straight paths and connectors.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KM0012 <span style="color:#bbb"> · </span> km0012</div>
+  <div class="name">Explore the Senses</div>
+  <div class="desc">A comprehensive motor skills development set that combines multiple Weplay products, including the Forest Party, Bridge, and Wavy Tactile Path. It enables the creation of diverse and challenging balance courses. The various components with different textures and shapes are designed to enhance sensory integration, coordination, and balance.</div>
+  <div class="meta"><span class="badge badge-cat">balance</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 This product is a large combination set (KM0012) comprised of multiple individual Weplay products (e.g., KC0001 Forest Party, KC0003 Bridge, KC0009 Wavy Tactile Path). The image shows one possible configuration of the components.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KM0015 <span style="color:#bbb"> · </span> km0015</div>
+  <div class="name">Rocking Volcano / Fuji</div>
+  <div class="desc">A volcano-shaped rocker designed to help children develop balance and coordination. Children can sit, stand, or lie on their stomach to rock, providing vestibular stimulation and enhancing motor skills. The concave top can also be used as a comfortable seat.</div>
+  <div class="meta"><span class="badge badge-cat">balance</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product specifications like dimensions, weight, materials, and SKU were identified by searching for the product shown in the image (&#x27;Weplay Fuji Rocker&#x27; or &#x27;Rocking Volcano&#x27;).</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KM0018 <span style="color:#bbb"> · </span> km0018</div>
+  <div class="name">The Great Adventure</div>
+  <div class="desc">A large, modular balance path designed to enhance children&#x27;s motor skills, balance, and coordination. The set includes a variety of high and low paths with textured surfaces, which can be arranged in numerous creative configurations. The versatile design allows for building fun and challenging obstacle courses.</div>
+  <div class="meta"><span class="badge badge-cat">balance</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 The product is sold as a single large set. The image shows a configuration created by combining two sets, as indicated by the &#x27;2 sets&#x27; text overlay.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KM0020 <span style="color:#bbb"> · </span> km0020</div>
+  <div class="name">Cat Loaf</div>
+  <div class="desc">The Weplay Cat Loaf is a stretching and balance board designed in a cute cat-loaf shape to encourage children to develop proper posture and core strength. Its base can be used on two sides for different levels of stretching intensity, and the textured surface provides sensory stimulation. This tool promotes active play while improving physical coordination and balance.</div>
+  <div class="meta"><span class="badge badge-cat">balance</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product specifications were sourced from external Weplay product listings as they were not present in the image.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KM0028 <span style="color:#bbb"> · </span> km0028</div>
+  <div class="name">Weplay Volcano</div>
+  <div class="desc">The Weplay Volcano is a multi-functional stool that enhances motor skills and balance. Its stable, non-slip design is suitable for sitting, while it can also be inverted or arranged in series to create dynamic balance paths. The volcano shape inspires creative play and physical activity.</div>
+  <div class="meta"><span class="badge badge-cat">balance</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product identified as Weplay Volcano (KM0028) via image search. Specifications are based on data from official and distributor websites.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KM3101 <span style="color:#bbb"> · </span> km3101</div>
+  <div class="name">Balance Disc</div>
+  <div class="desc">An inflatable disc used for developing balance, coordination, and core strength. It can be used for both standing and sitting exercises, and its textured surface provides sensory input and enhances grip.</div>
+  <div class="meta"><span class="badge badge-cat">balance</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product identified as the Weplay Balance Disc based on visual appearance. SKU and specifications are based on standard data for this product, as they are not present in the image itself. Color is based on what is visible in the image.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KP1201 <span style="color:#bbb"> · </span> kp1201</div>
+  <div class="name">Balance Caterpillar</div>
+  <div class="desc">A set of interlocking, wavy balance beams designed to resemble a caterpillar. Children can walk along the path to improve balance, coordination, and motor planning skills. The modular pieces can be arranged in various straight or winding configurations for versatile play.</div>
+  <div class="meta"><span class="badge badge-cat">balance</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product identified as Weplay Balance Caterpillar based on visual appearance. Specifications sourced externally. Set consists of 8 pieces (4 yellow, 4 green). Listed weight is for the complete set.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KP2101 <span style="color:#bbb"> · </span> kp2101</div>
+  <div class="name">Weplay River</div>
+  <div class="desc">The Weplay River is a set of modular balancing path pieces that can be arranged in straight or winding lines. The wavy, textured surface provides tactile stimulation and helps prevent slips, challenging children&#x27;s balance and coordination. The pieces are stackable for easy storage.</div>
+  <div class="meta"><span class="badge badge-cat">balance</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Specifications are for a single piece from the standard 8-piece set. Total set weight is approximate. The image shows this product used in combination with Weplay Islands (KP2101-1).</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KP2101-1 <span style="color:#bbb"> · </span> kp2101_1</div>
+  <div class="name">Weplay Islands</div>
+  <div class="desc">Weplay Islands are sturdy bases that can be used as endpoints, junctions, or stepping stones in an obstacle course. They can be used on their own or combined with other Weplay products like the River or Bridge. The tops can be used as-is or fitted with tactile discs for sensory stimulation.</div>
+  <div class="meta"><span class="badge badge-cat">balance</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product is typically sold as a set of 2, weight is for the set. The image shows this product used in combination with Weplay River (KP2101). The red/yellow toppers are tactile inserts that may be included or sold separately.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KP2104-00 <span style="color:#bbb"> · </span> kp2104_00</div>
+  <div class="name">Caterpillar</div>
+  <div class="desc">The Weplay Caterpillar is a modular balance beam set consisting of logs and branches that can be arranged in various creative paths. The tactile surfaces stimulate children&#x27;s feet, while the wavy and straight components help develop balance, coordination, and motor planning skills. The stackable design allows for easy storage.</div>
+  <div class="meta"><span class="badge badge-cat">balance</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product code also found as KP-2104. Set includes 2 Log pieces and 4 Branch pieces. The product in the image is an assembly of some of these components.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KP2112 <span style="color:#bbb"> · </span> kp2112</div>
+  <div class="name">Wavy Tactile Path</div>
+  <div class="desc">A modular balance beam set featuring a wavy path design to help children improve balance, coordination, and motor skills. The pieces can be connected to create various paths for different levels of challenge. Some surfaces include tactile elements for sensory input.</div>
+  <div class="meta"><span class="badge badge-cat">balance</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 The image shows multiple units of the Wavy Tactile Path connected together. The small colorful pegs on the path may be part of an associated activity set and not included with the base product.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KP3001 <span style="color:#bbb"> · </span> kp3001</div>
+  <div class="name">Forest Party</div>
+  <div class="desc">A modular balance beam set inspired by a forest theme, consisting of log-like beams and rock-like supports. Children can arrange the components into various paths to practice balance, coordination, and motor planning. The textured surfaces of the logs also provide tactile sensory input.</div>
+  <div class="meta"><span class="badge badge-cat">balance</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 The product is a combination of Weplay Log (KP2101) and Weplay Rock (KP2102) components. The image displays a possible configuration of the set. Specifications are based on data for the standard 12-piece set (6 Logs, 6 Rocks).</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KP3013 <span style="color:#bbb"> · </span> kp3013</div>
+  <div class="name">Tactile Cube</div>
+  <div class="desc">A versatile and multi-purpose play set consisting of modular cubes, textured covers, and frames. These components can be arranged to create balance paths and sensory stations, enhancing children&#x27;s motor skills, balance coordination, and tactile perception. The cubes can be used with or without lids and can be filled with various materials for diverse sensory experiences.</div>
+  <div class="meta"><span class="badge badge-cat">balance</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 The set includes 9 cubes, 9 covers, and 18 frames. Contents shown inside the cubes (e.g., balls, sand) are for demonstration purposes and are not included with the product.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KP5006 <span style="color:#bbb"> · </span> kp5006</div>
+  <div class="name">Adventure Path</div>
+  <div class="desc">A versatile and modular balance beam set designed to enhance children&#x27;s balance, coordination, and motor skills. The set includes various interlocking components like logs, wavy paths, straight paths, and stumps, which can be configured in numerous ways for creative play. It is suitable for individual or group activities, encouraging physical development in a fun and engaging manner.</div>
+  <div class="meta"><span class="badge badge-cat">balance</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 The product is shown in an indoor setting with two children demonstrating its use for balancing and crawling.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KS1001 <span style="color:#bbb"> · </span> ks1001</div>
+  <div class="name">Honey Hills</div>
+  <div class="desc">Inspired by honeycombs, the Honey Hills set consists of six stackable hexagonal blocks and three beanbags for creating dynamic pathways. The blocks come in two heights with tactile surfaces to stimulate the feet, enhancing balance, coordination, and sensory perception. The stackable design allows for versatile setups and convenient storage.</div>
+  <div class="meta"><span class="badge badge-cat">balance</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product set includes 6 honeycomb blocks (3 yellow, 3 orange) and 3 tactile beanbags. Maximum user weight: 80 kg.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">WJ0013G <span style="color:#bbb"> · </span> wj0013g</div>
+  <div class="name">Rocking Bowl</div>
+  <div class="desc">This large bowl is great for rocking, spinning, and creative play, helping children to develop balance and coordination. It can also be used as a cozy den for relaxation, providing a secure and comfortable space. The wave-like edge design prevents children&#x27;s fingers from being squashed during play.</div>
+  <div class="meta"><span class="badge badge-cat">balance</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 The image features the green version (WJ0013G) of the Rocking Bowl. A fabric cushion/liner (often sold separately, e.g., as WJ0014) is also shown inside the bowl.</div>
+</div>
+</div>
+<div class="cat-header">ball-play (1)</div>
+<div class="grid">
+
+<div class="card ai-inferred">
+  <div class="sku">KC2302 <span style="color:#bbb"> · </span> kc2302</div>
+  <div class="name">Catch A Ball</div>
+  <div class="desc">A fun game designed to enhance hand-eye coordination and motor skills. The uniquely shaped scoops make it easy to catch the ball. This set includes two scoops and one ball for partner play.</div>
+  <div class="meta"><span class="badge badge-cat">ball-play</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product identified as Weplay Catch A Ball. Specifications are for a single scoop. The retail set typically includes two scoops and one ball.</div>
+</div>
+</div>
+<div class="cat-header">climbing (6)</div>
+<div class="grid">
+
+<div class="card ai-inferred">
+  <div class="sku">KC1101 <span style="color:#bbb"> · </span> kc1101</div>
+  <div class="name">Forest Party</div>
+  <div class="desc">The Weplay Forest Party is a versatile, modular play system designed to resemble a forest log tunnel. The set can be configured in various ways, encouraging children to crawl, climb, and peek through the holes, which promotes gross motor skills and imaginative group play.</div>
+  <div class="meta"><span class="badge badge-cat">climbing</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product is modular and can be assembled into various configurations. The image displays a 4-piece set being used by three children.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KM0003 <span style="color:#bbb"> · </span> km0003</div>
+  <div class="name">Up &amp; Down</div>
+  <div class="desc">A two-piece soft play structure designed for toddlers to practice climbing and balancing. The friendly animal design encourages active play, and the modular pieces can be arranged in different ways for varied challenges and motor skill development.</div>
+  <div class="meta"><span class="badge badge-cat">climbing</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product consists of two separable wedge pieces that form a single climbing structure. Part of the Weplay Forest-themed collection.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KM1102 <span style="color:#bbb"> · </span> km1102</div>
+  <div class="name">Adventure Path</div>
+  <div class="desc">The Adventure Path is a large, 12-piece modular soft play set that allows for a variety of obstacle course configurations. Children can enhance their gross motor skills, balance, and coordination by crawling through the tunnel, climbing over blocks, and walking on ramps. The colorful, multi-shaped foam components encourage creative play and physical development in a safe environment.</div>
+  <div class="meta"><span class="badge badge-cat">climbing</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product consists of a 12-piece modular set including a tunnel, ramps, blocks, and mats, allowing for various configurations. Recommended for ages 2 and up. Suitable for group activities.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KP5320 <span style="color:#bbb"> · </span> kp5320</div>
+  <div class="name">Slope Set</div>
+  <div class="desc">A versatile climbing system for children, consisting of triangular blocks and textured slopes that can be arranged in various configurations. The set is designed to challenge balance and coordination, encouraging creative play and helping to develop motor skills. The image shows two sets combined to create a larger play structure.</div>
+  <div class="meta"><span class="badge badge-cat">climbing</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 The image displays two sets of the product combined. The text &#x27;2組&#x27; in the bottom right corner means &#x27;2 sets&#x27;.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KP6001 <span style="color:#bbb"> · </span> kp6001</div>
+  <div class="name">Fun Train</div>
+  <div class="desc">The Weplay Fun Train is a modular soft play set designed to encourage creative play and motor skill development. It features 11 components including blocks, a cylinder, a ramp, and arches that can be arranged into an obstacle course. The set is ideal for toddlers and young children to practice climbing, crawling, and balancing.</div>
+  <div class="meta"><span class="badge badge-cat">climbing</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product SKU, name, and specifications were identified by searching online for the Weplay product depicted in the image. The set consists of 11 modular pieces. Dimensions are for the assembled set as pictured.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">kc1007 <span style="color:#bbb"> · </span> kc1007</div>
+  <div class="name">Weplay Soft Obstacle Course</div>
+  <div class="desc">A modular soft play set designed for young children to create various obstacle courses. The set includes colorful foam blocks, ramps, and mats to encourage climbing, crawling, and the development of gross motor skills and balance. The pieces can be arranged in multiple configurations for versatile play.</div>
+  <div class="meta"><span class="badge badge-cat">climbing</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 The SKU KC1007 is for the &#x27;Weplay Soft Obstacle Course&#x27; which appears to be the product depicted. Specifications are based on this product&#x27;s typical data, as they are not listed in the image itself. The image shows a possible configuration of the set&#x27;s components.</div>
+</div>
+</div>
+<div class="cat-header">construction (14)</div>
+<div class="grid">
+
+<div class="card ai-inferred">
+  <div class="sku">KB0001 <span style="color:#bbb"> · </span> kb0001</div>
+  <div class="name">Jumbo Blocks</div>
+  <div class="desc">A set of oversized, interlocking building blocks designed for young children. The jumbo size makes them easy for small hands to grasp and build with, encouraging creative construction, spatial awareness, and cooperative play. The blocks come in various bright colors and shapes, including rectangular, square, and curved pieces.</div>
+  <div class="meta"><span class="badge badge-cat">construction</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 The image displays a collection of blocks, likely from a larger set. The specific SKU is inferred from common Weplay product catalogs for these items, as it is not present in the image itself. The product is sold in various set sizes.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KB0008 <span style="color:#bbb"> · </span> kb0008</div>
+  <div class="name">We-Blocks</div>
+  <div class="desc">A construction set featuring soft, durable foam blocks, flexible stick connectors, and lacing strings. Children can build various 2D and 3D structures, enhancing fine motor skills, hand-eye coordination, and creativity. The components are easy for small hands to manipulate.</div>
+  <div class="meta"><span class="badge badge-cat">construction</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product contains 118 pieces: Cubes (60), Sticks (48), Leaves (6), Lacing Strings (4).</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC1002-02M <span style="color:#bbb"> · </span> kc1002_02m</div>
+  <div class="name">Stacking Pegs with Mirror</div>
+  <div class="desc">A creative construction toy where children stack colorful pegs onto pegboards to build various structures. This set includes mirrors to add a fun dimension of reflection and symmetry, enhancing visual perception. It&#x27;s designed to develop fine motor skills, hand-eye coordination, and logical thinking.</div>
+  <div class="meta"><span class="badge badge-cat">construction</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 The image shows a child playing with the Weplay Stacking Pegs. The presence of a mirror indicates it is likely the &#x27;Stacking Pegs with Mirror&#x27; set (KC1002-02M), which is a variant of the base Stacking Pegs set (KC1002).</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC1008 <span style="color:#bbb"> · </span> kc1008</div>
+  <div class="name">Weplay Iceberg</div>
+  <div class="desc">A set of 6 iceberg-shaped blocks for stacking, nesting, and creative play. The different sizes support learning seriation, while the textured snowflake tops offer tactile stimulation. These versatile blocks can also be used in sand or water.</div>
+  <div class="meta"><span class="badge badge-cat">construction</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 The product is a set of 6 pieces.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC2101 <span style="color:#bbb"> · </span> kc2101</div>
+  <div class="name">Weplay Flower Link</div>
+  <div class="desc">A creative construction set featuring colorful, flower-shaped blocks and various connectors that interlock. Children can build a variety of 2D and 3D structures, which helps develop fine motor skills, hand-eye coordination, and spatial reasoning. The image showcases examples of what can be built, including a butterfly, an airplane, a snowflake, and a house.</div>
+  <div class="meta"><span class="badge badge-cat">construction</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 The image shows four different example constructions made from a single product set. The product is the construction set itself, not the individual creations. The SKU and product name were identified through visual matching with Weplay&#x27;s product line.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC2101-2 <span style="color:#bbb"> · </span> kc2101_2</div>
+  <div class="name">Forest Party (2 Sets)</div>
+  <div class="desc">A bundle containing two sets of the Weplay Forest Party, allowing for larger and more complex creations. The 16 bear-shaped pieces and 16 stackable stump pieces enhance fine motor skills, balance, and sensory play. The forest theme inspires imaginative construction.</div>
+  <div class="meta"><span class="badge badge-cat">construction</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 This product is a bundle of two KC2101 sets, containing a total of 16 Bear pieces and 16 Stump pieces. The image explicitly mentions &#x27;2 sets&#x27;.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC2106 <span style="color:#bbb"> · </span> kc2106</div>
+  <div class="name">3D Spatial Fun</div>
+  <div class="desc">A cognitive puzzle game designed to enhance spatial awareness, problem-solving, and logical thinking. Players use the colored blocks to replicate patterns and solve challenges, either in 2D on the base or in 3D. The set includes a grid base and dual-color blocks for structured play and creative building.</div>
+  <div class="meta"><span class="badge badge-cat">construction</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product is also known as 3D Fun Blocks. Although Weplay primarily targets children, the image depicts an older adult using the product, suggesting its application in cognitive therapy or exercises for seniors.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC2106-G <span style="color:#bbb"> · </span> kc2106_g</div>
+  <div class="name">Weplay Cube</div>
+  <div class="desc">A single hollow cube for individual play or to supplement other block sets. Made from durable, non-toxic plastic, it is suitable for stacking, sitting on, or creative construction.</div>
+  <div class="meta"><span class="badge badge-cat">construction</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 This is the small green cube shown separately in the image. The SKU KC2106 is for the cube, with a suffix indicating color (e.g., -G for Green).</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC2301 <span style="color:#bbb"> · </span> kc2301</div>
+  <div class="name">Nuts &amp; Bolts</div>
+  <div class="desc">A construction set designed to enhance fine motor skills, hand-eye coordination, and problem-solving abilities. Children can practice screwing and unscrewing the nuts and bolts, and follow the included pattern cards to match shapes and colors or create their own structures. The set includes a base, various nuts and bolts, and activity cards.</div>
+  <div class="meta"><span class="badge badge-cat">construction</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product identified as &#x27;Weplay Nuts &amp; Bolts&#x27; based on the visual components (translucent colored nuts and bolts, base with posts, and activity cards) which match product catalogs for SKU KC2301. Specifications are sourced from public data for this product.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC3005 <span style="color:#bbb"> · </span> kc3005</div>
+  <div class="name">Maze-n-Trace</div>
+  <div class="desc">A set of modular blocks that can be connected to create intricate mazes. Transparent blocks with enclosed balls allow children to observe cause and effect while developing fine motor skills and spatial reasoning. The tactile surfaces also provide sensory input.</div>
+  <div class="meta"><span class="badge badge-cat">construction</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product identified from image as Weplay Maze-n-Trace. The set consists of 13 pieces. Specifications are based on typical product listings as no official datasheet was provided with the image.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC3202 <span style="color:#bbb"> · </span> kc3202</div>
+  <div class="name">3D Spatial Blocks</div>
+  <div class="desc">A set of interlocking hollow cubes designed to enhance spatial awareness and logical thinking. Players use the blue and yellow blocks to replicate 3D structures from pattern cards. This activity promotes problem-solving skills and hand-eye coordination.</div>
+  <div class="meta"><span class="badge badge-cat">construction</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product identified as Weplay 3D Spatial Blocks (KC3202) through visual matching. Specifications are based on publicly available product data as none are present in the image. The set typically includes 17 blocks (10 blue, 7 yellow) and 30 pattern cards.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC5001 <span style="color:#bbb"> · </span> kc5001</div>
+  <div class="name">Tuan Tuan</div>
+  <div class="desc">A set of geometric blocks, including cubes and triangular prisms, for creating symmetrical patterns and 3D structures. Children can explore spatial relationships and enhance creativity through individual or group play. The patterns on the blocks are in shades of blue, teal, and white.</div>
+  <div class="meta"><span class="badge badge-cat">construction</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product identified as Weplay Tuan Tuan (KC5001) based on visual match with the manufacturer&#x27;s products. Specifications like component dimensions are based on publicly available data for this identified product.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KP2101-2 <span style="color:#bbb"> · </span> kp2101_2</div>
+  <div class="name">Weplay Bricks</div>
+  <div class="desc">Large, lightweight, interlocking plastic bricks used for building life-sized structures. They promote creativity, teamwork, and gross motor skills. In the image, red and blue bricks are used as supports for a balance beam.</div>
+  <div class="meta"><span class="badge badge-cat">construction</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Identified as the large red and blue blocks with holes on the left side of the image, which are supporting a green beam.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KS2003 <span style="color:#bbb"> · </span> ks2003</div>
+  <div class="name">Balancing Elephants</div>
+  <div class="desc">A stacking and balancing game featuring colorful elephant-shaped blocks and wooden sticks. This game is designed to enhance children&#x27;s fine motor skills, hand-eye coordination, and understanding of balance concepts. The different sizes of elephants and sticks allow for a variety of creative structures.</div>
+  <div class="meta"><span class="badge badge-cat">construction</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Recommended for ages 3 years and up. The product is also marketed as &#x27;Balance Elephants&#x27;.</div>
+</div>
+</div>
+<div class="cat-header">motor-skill (21)</div>
+<div class="grid">
+
+<div class="card ai-inferred">
+  <div class="sku">ED0001 <span style="color:#bbb"> · </span> ed0001</div>
+  <div class="name">Edusante Trike</div>
+  <div class="desc">A sturdy and ergonomic tricycle designed for young children to develop balance and coordination. The stable three-wheel design, durable construction, and bright colors make it ideal for active play in early childhood settings. Part of the &#x27;edusante&#x27; line designed by Weplay.</div>
+  <div class="meta"><span class="badge badge-cat">motor-skill</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product identified as the Weplay Edusante Trike based on the &#x27;edusante Designed by Weplay&#x27; logo visible on the front plate. Specifications such as SKU, dimensions, and weight were sourced from public product information for this model as they are not present in the image itself.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC0016 <span style="color:#bbb"> · </span> kc0016</div>
+  <div class="name">Tai Chi Ball</div>
+  <div class="desc">A handheld balance game that challenges users to guide a ball along the track by tilting the disc. This activity is designed to enhance hand-eye coordination, concentration, and dexterity.</div>
+  <div class="meta"><span class="badge badge-cat">motor-skill</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product identified as Weplay Tai Chi Ball (KC0016) based on visual appearance. Specifications are not available in the image.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC1001 <span style="color:#bbb"> · </span> kc1001</div>
+  <div class="name">Rock &#x27;n&#x27; Fish</div>
+  <div class="desc">A fishing game that enhances hand-eye coordination, patience, and concentration. The rocking design of the fish adds an extra challenge, helping to develop wrist control and stability. The game is suitable for individual play or for two players to compete or cooperate.</div>
+  <div class="meta"><span class="badge badge-cat">motor-skill</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 The product is shown in a play scenario with a child and a grandparent, highlighting its suitability for intergenerational play. The set in the image includes two fishing rods and at least five colorful, stylized fish designed to rock on a flat surface, increasing the game&#x27;s difficulty.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC1001-00G <span style="color:#bbb"> · </span> kc1001_00g</div>
+  <div class="name">Rolling 4-Fun</div>
+  <div class="desc">A hand-held dexterity game designed to enhance hand-eye coordination, concentration, and fine motor skills. Players maneuver a ball through the internal circular track by tilting and rotating the device. The transparent design allows users to see the ball&#x27;s movement at all times.</div>
+  <div class="meta"><span class="badge badge-cat">motor-skill</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product name, SKU, dimensions, and weight were identified from public sources based on the product&#x27;s visual appearance, as this data was not available in the image itself. Color is based on the item shown.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC1003 <span style="color:#bbb"> · </span> kc1003</div>
+  <div class="name">Rolling Top</div>
+  <div class="desc">The Weplay Rolling Top is a versatile game set for developing motor skills and breath control. It includes two tracks that can be used for blowing games or cooperative ball rolling, a round tray that creates a circular track, and six balls. The set encourages wrist stability, teamwork, and respiratory training.</div>
+  <div class="meta"><span class="badge badge-cat">motor-skill</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 The image displays two key play configurations of the Rolling Top set: the vertical track used for a blowing game (as played by the boy) and the round tray used as a circular ball track (as used by the girl).</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC1011 <span style="color:#bbb"> · </span> kc1011</div>
+  <div class="name">Fish Maze</div>
+  <div class="desc">A handheld, fish-shaped maze game where the user tilts the toy to guide a small ball through a spiral labyrinth. This activity helps develop fine motor skills, patience, and hand-eye coordination.</div>
+  <div class="meta"><span class="badge badge-cat">motor-skill</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 SKU KC1011 and &#x27;Made in Taiwan&#x27; are embossed on the tail of the product.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC1201-04 <span style="color:#bbb"> · </span> kc1201_04</div>
+  <div class="name">Bean Bags</div>
+  <div class="desc">A set of four colorful, easy-to-grip beanbags designed for developing hand-eye coordination and gross motor skills through throwing, catching, and balancing games. Their soft texture and vibrant colors also make them suitable for sensory activities and color recognition. The set includes one bag of each color: green, red, blue, and yellow.</div>
+  <div class="meta"><span class="badge badge-cat">motor-skill</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product is a set of four beanbags. The specified weight is for the entire set (0.12 kg per bag).</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC2006 <span style="color:#bbb"> · </span> kc2006</div>
+  <div class="name">Bean Pods</div>
+  <div class="desc">A set of bean pods and colorful beans designed to enhance fine motor skills and hand-eye coordination. Children can open the pods to place or remove the beans, promoting finger dexterity. The set can also be used for games involving color recognition and counting.</div>
+  <div class="meta"><span class="badge badge-cat">motor-skill</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product identified as Weplay Bean Pods (KC2006) based on visual appearance. The set typically includes 3 pairs of pods and 6 beans. Recommended age is 2 years and up. The image shows cooperative play.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC2102 <span style="color:#bbb"> · </span> kc2102</div>
+  <div class="name">Route Game</div>
+  <div class="desc">The Route Game consists of 25 interlocking foam puzzle pieces. The high-contrast blue route on the yellow puzzle provides visual stimulation. Children can create different routes, enhancing their creative thinking and planning skills.</div>
+  <div class="meta"><span class="badge badge-cat">motor-skill</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 The product is a set of 25 pieces. The image shows a sample arrangement using 7 of the pieces.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC2204 <span style="color:#bbb"> · </span> kc2204</div>
+  <div class="name">Balance Tree</div>
+  <div class="desc">The Weplay Balance Tree is a cooperative game that enhances fine motor skills, hand-eye coordination, and concentration. Players take turns balancing colorful bean bags on the tree&#x27;s branches, learning about cause and effect as they work to keep the tree stable. The set is designed for individual or group play.</div>
+  <div class="meta"><span class="badge badge-cat">motor-skill</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product identified as Weplay Balance Tree (KC2204) through visual analysis. The image shows the tree structure, rings, and pieces used for the balancing game.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC3010 <span style="color:#bbb"> · </span> kc3010</div>
+  <div class="name">Handheld Rolling Path</div>
+  <div class="desc">A handheld balance board designed to improve hand-eye coordination, concentration, and wrist dexterity. Users guide the ball along the path by tilting the board. Suitable for individual use in therapy, rehabilitation, or for developing fine motor skills.</div>
+  <div class="meta"><span class="badge badge-cat">motor-skill</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product identified through reverse image search as Weplay Handheld Rolling Path, KC3010. While Weplay&#x27;s primary market is early childhood, the image shows an elderly user, indicating the product is also marketed for senior therapy and rehabilitation.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KF0021 <span style="color:#bbb"> · </span> kf0021</div>
+  <div class="name">Emotion Wreath</div>
+  <div class="desc">A large stacking toy designed to look like a cactus. The set includes a base, a central post, and six large rings (wreaths), each featuring a unique facial expression. This toy helps children develop fine motor skills, balance, and emotional recognition.</div>
+  <div class="meta"><span class="badge badge-cat">motor-skill</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Recommended age: 2 years and up. Set includes 1 base, 1 post, and 6 wreaths with different emotional expressions.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KM1201 <span style="color:#bbb"> · </span> km1201</div>
+  <div class="name">Pedal Walker - Tandem</div>
+  <div class="desc">A tandem pedal walker with a unique rocking motion designed to promote cooperative play. As children pedal, they develop leg muscle strength, balance, and coordination.</div>
+  <div class="meta"><span class="badge badge-cat">motor-skill</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product identified as &#x27;Weplay Pedal Walker - Tandem (KM1201)&#x27; based on visual analysis. Specifications such as SKU, dimensions, and weight are based on publicly available data for this product and are not present in the source image itself.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KM1301 <span style="color:#bbb"> · </span> km1301</div>
+  <div class="name">Small Tricycle</div>
+  <div class="desc">A durable and sturdy tricycle designed for young children. Its classic design helps toddlers develop motor skills, coordination, and strength through play. Ideal for use in schools and daycare centers.</div>
+  <div class="meta"><span class="badge badge-cat">motor-skill</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product identified as &#x27;Weplay Small Tricycle&#x27; via reverse image search. Specifications were sourced from retailer websites and Weplay product catalogs. Recommended age is 2+ years.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KM2301 <span style="color:#bbb"> · </span> km2301</div>
+  <div class="name">Taxi Trike</div>
+  <div class="desc">This sturdy tandem tricycle allows two children to play together, promoting cooperation and developing motor skills. The front child pedals while the passenger rides on the rear platform. Its durable construction makes it ideal for schools and playgroups.</div>
+  <div class="meta"><span class="badge badge-cat">motor-skill</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product identified as Weplay Taxi Trike (KM2301) via visual matching. Specifications such as dimensions, weight, and certifications were obtained from public product data sheets to supplement the information available in the source image.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KM2401 <span style="color:#bbb"> · </span> km2401</div>
+  <div class="name">Tricycle - Large</div>
+  <div class="desc">A durable tricycle for children ages 4 and up, designed to help a single rider develop gross motor skills, coordination, and balance. Its sturdy frame and solid, one-piece wheels provide stability and support for early riders up to 40 kg. The design promotes confidence and physical development through active play.</div>
+  <div class="meta"><span class="badge badge-cat">motor-skill</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 This product appears to be the Large model (KM2401). Other available sizes from Weplay include Small (KM2400) for ages 2+ and Medium (KM2400-1) for ages 3+.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KM2602 <span style="color:#bbb"> · </span> km2602</div>
+  <div class="name">Taxi Trike</div>
+  <div class="desc">A durable tandem tricycle designed for two children to play together, promoting cooperative play and physical development. The front child pedals and steers while the rear child stands on the platform and holds the grab rail.</div>
+  <div class="meta"><span class="badge badge-cat">motor-skill</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product identified as Weplay Taxi Trike (KM2602) from the provided image. Specifications such as SKU, dimensions, and weight were sourced from publicly available product information as they were not present in the source image itself.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KM3002 <span style="color:#bbb"> · </span> km3002</div>
+  <div class="name">Scooter</div>
+  <div class="desc">A durable three-wheeled scooter designed for young children to develop motor skills, coordination and balance. The stable chariot-style design allows children to propel themselves by pushing off the ground, enhancing leg strength and coordination. Its sturdy steel frame and wide base provide a safe and fun riding experience.</div>
+  <div class="meta"><span class="badge badge-cat">motor-skill</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product specifications were cross-referenced with retailer data for SKU KM3002, which matches the product in the image.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KM3201 <span style="color:#bbb"> · </span> km3201</div>
+  <div class="name">Story Puzzle - The Little Mouse</div>
+  <div class="desc">A set of six simple, two-piece puzzles that tell a story about a little mouse. The puzzles are designed for young children to develop logical thinking, color matching and fine motor skills.</div>
+  <div class="meta"><span class="badge badge-cat">motor-skill</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 A single green puzzle piece from this set, shaped like a leaf with a mouse-head-shaped hole, is visible on the table in front of the boy.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KS1002 <span style="color:#bbb"> · </span> ks1002</div>
+  <div class="name">Universal Set</div>
+  <div class="desc">A comprehensive set for creating dynamic obstacle courses to develop motor skills, balance, and coordination. The set includes a versatile collection of Weplay&#x27;s most popular items, such as bricks, hoops, beams, and markers. The components can be configured in numerous ways for activities like crawling, walking, and jumping.</div>
+  <div class="meta"><span class="badge badge-cat">motor-skill</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 This is a comprehensive set containing multiple components: 6 Bricks, 2 Half Bricks, 4 Hoops (2x 60cm, 2x 70cm), 4 Posts (100cm), 8 Clips, 10 Beanbags, 4 Balance Beams, 6 pairs of Hand &amp; Foot Marks, and a carrying bag. The image shows a possible configuration of the set.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KT2101-03 <span style="color:#bbb"> · </span> kt2101_03</div>
+  <div class="name">Fun Cycle - Small</div>
+  <div class="desc">The Weplay Fun Cycle is a durable tricycle designed for young children to develop motor skills and balance. It features a solid one-piece steel frame for stability and safety. The simple, classic design makes it ideal for use in preschools, daycares, or at home.</div>
+  <div class="meta"><span class="badge badge-cat">motor-skill</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product identified as a Weplay Fun Cycle based on the distinctive red looped frame behind the seat. The specific model chosen is the &#x27;Small&#x27; version (KT2101-03) as it appears to fit the child in the image, although it could also be the medium version.</div>
+</div>
+</div>
+<div class="cat-header">sand-water (2)</div>
+<div class="grid">
+
+<div class="card ai-inferred">
+  <div class="sku">KC3003 <span style="color:#bbb"> · </span> kc3003</div>
+  <div class="name">Bath Fun</div>
+  <div class="desc">A set of 6 creative bath toys designed for water play. The set includes a pouring shell, a floating star, and suction-cup starfish and waves that can stick to bath walls to create waterfall effects.</div>
+  <div class="meta"><span class="badge badge-cat">sand-water</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product is a set of 6 bath toys: 1 pouring shell, 2 suction-cup starfish, 2 suction-cup waves, and 1 floating star. The product is also referred to as &#x27;Sea Fun&#x27; in some regions.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">W-KY3001 <span style="color:#bbb"> · </span> w_ky3001</div>
+  <div class="name">Waterfall</div>
+  <div class="desc">A multi-level transparent water table that allows children to observe water flowing like a waterfall. The water flow can be controlled with plugs, and the set includes casters for mobility and balls for play. It encourages sensory exploration and cooperative play.</div>
+  <div class="meta"><span class="badge badge-cat">sand-water</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 The product is identified as the Weplay Waterfall based on visual characteristics. Specifications are from public data for this model as they are not present in the image itself. The red and yellow balls shown are typically included with the set.</div>
+</div>
+</div>
+<div class="cat-header">sensory (13)</div>
+<div class="grid">
+
+<div class="card ai-inferred">
+  <div class="sku">KB0007 <span style="color:#bbb"> · </span> kb0007</div>
+  <div class="name">Translucent Honeycomb</div>
+  <div class="desc">Weplay Translucent Honeycombs are a set of colorful, six-sided blocks perfect for stacking, sorting, and pattern making. Their transparent quality makes them ideal for use on a light table to explore color mixing and light. The open center design allows for creative construction and exploration.</div>
+  <div class="meta"><span class="badge badge-cat">sensory</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 These are the loose, translucent hexagonal pieces seen on the table. The image shows the orange and yellow variants.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KB0020 <span style="color:#bbb"> · </span> kb0020</div>
+  <div class="name">Tactile Path</div>
+  <div class="desc">Inspired by nature, this set of textured stepping pads is designed to stimulate the sense of touch on the feet and hands. The pieces can be arranged in various configurations to challenge and improve motor skills, balance, and coordination.</div>
+  <div class="meta"><span class="badge badge-cat">sensory</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product is a set of 6 pieces, consisting of 2 of each design: Arch, Hill, and Flower. The image shows a child walking along a path constructed from these pieces.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC0041 <span style="color:#bbb"> · </span> kc0041</div>
+  <div class="name">Tactile Path</div>
+  <div class="desc">A set of sensory stepping stones designed to stimulate tactile perception and improve motor skills. The path consists of 8 non-slip pieces with different textures resembling seashells and starfish, encouraging exploration with feet and hands.</div>
+  <div class="meta"><span class="badge badge-cat">sensory</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product identified as Weplay Tactile Path (KC0041). The set contains 8 pieces (4 designs, 2 of each). The image displays at least 3 of the 4 designs. Specifications are based on publicly available data for this product.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC2201 <span style="color:#bbb"> · </span> kc2201</div>
+  <div class="name">Pattern Cube</div>
+  <div class="desc">The Pattern Cube is a logic game designed to enhance visual perception, logical thinking, and problem-solving skills. Players replicate patterns from the guide book by combining the blocks in various ways. The set is suitable for individual cognitive training or group activities for a wide range of ages.</div>
+  <div class="meta"><span class="badge badge-cat">sensory</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 The image depicts the product being used by elderly individuals, highlighting its suitability for cognitive stimulation and therapy in adults, in addition to its primary target for children.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC2303 <span style="color:#bbb"> · </span> kc2303</div>
+  <div class="name">Sound Puzzle-Farm Animals</div>
+  <div class="desc">A wooden puzzle featuring farm animal illustrations. Placing a piece into its correct spot can trigger the corresponding animal sound, helping to develop auditory discrimination, matching skills, and fine motor control.</div>
+  <div class="meta"><span class="badge badge-cat">sensory</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product identity is inferred based on the farm animal theme and puzzle style, which strongly match Weplay&#x27;s catalog for this model.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC2501 <span style="color:#bbb"> · </span> kc2501</div>
+  <div class="name">Treasure Box</div>
+  <div class="desc">The Weplay Treasure Box is an educational sorting set featuring a 16-compartment tray filled with a variety of small objects. This kit is designed to help children develop skills in classification, sorting, counting, and pattern recognition through hands-on play. The diverse textures, colors, and shapes of the included dice, beads, sequins, and blocks also provide a rich sensory experience.</div>
+  <div class="meta"><span class="badge badge-cat">sensory</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product consists of a 16-compartment tray with a transparent lid and a variety of small manipulatives for sorting and counting activities.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KC3302 <span style="color:#bbb"> · </span> kc3302</div>
+  <div class="name">Large Mirror Blocks</div>
+  <div class="desc">A set of five large, interlocking blocks designed for sensory exploration and creative construction. The blocks feature safe acrylic mirrors with flat, convex, and concave surfaces to provide interesting visual effects. Ideal for toddlers, these blocks encourage self-discovery, observation, and building skills.</div>
+  <div class="meta"><span class="badge badge-cat">sensory</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product is a 5-piece set consisting of: Square (Flat Mirror) x 1, Square (Convex Mirror) x 1, Rectangle (4 Concave Mirrors) x 1, Rectangle (Open Frame with Flat Mirror) x 1, Rectangle (Open Frame) x 1.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KM0008 <span style="color:#bbb"> · </span> km0008</div>
+  <div class="name">Tactile Discs</div>
+  <div class="desc">A set of large, textured circular discs made from soft, pliable plastic. Used for sensory games and balance activities, they stimulate the sense of touch through both hands and feet and can be arranged into a stepping stone path.</div>
+  <div class="meta"><span class="badge badge-cat">sensory</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product identified as the round, textured discs in the image. These are the large discs from the full set which also includes smaller, hand-held discs. Shown being used with Weplay Wavy Tactile Path (KC0019).</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KM2101 <span style="color:#bbb"> · </span> km2101</div>
+  <div class="name">Massage Ball</div>
+  <div class="desc">The Weplay Massage Ball is a spiky, one-piece ball designed for sensory stimulation, massage, and relaxation. Its soft, pliable spikes provide tactile input, making it an ideal tool for stimulating muscle tissues and sensory awareness. It is safe and suitable for users of all ages, including young children.</div>
+  <div class="meta"><span class="badge badge-cat">sensory</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 This product line is available in various sizes (from 6 cm to 10 cm diameter) and colors. The SKU KM2101 represents the general product line. The item pictured is a small, green variant, likely the 7cm diameter version.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KP1012-00 <span style="color:#bbb"> · </span> kp1012_00</div>
+  <div class="name">Tactile Discs</div>
+  <div class="desc">A set of textured discs designed to enhance sensory perception and balance. Users step on the various tactile surfaces to stimulate the soles of their feet, which can improve motor skills, coordination, and tactile awareness. The image shows the large discs from the set being used by a child and an adult.</div>
+  <div class="meta"><span class="badge badge-cat">sensory</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product identified as Weplay Tactile Discs (KP1012-00) based on the visible textures and shapes. The image primarily shows the large discs from the set. The set typically also includes smaller hand-held discs.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KP2301 <span style="color:#bbb"> · </span> kp2301</div>
+  <div class="name">Sensory Mat</div>
+  <div class="desc">The Weplay Sensory Mat provides various tactile inputs to help children develop their tactile senses. These mats can be used on the floor for crawling or walking, or on a tabletop for hand exploration. The interlocking design allows for creative and flexible pathway construction.</div>
+  <div class="meta"><span class="badge badge-cat">sensory</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product SKU and specifications identified via reverse image search and visual matching with Weplay&#x27;s product line. Weight is for a full set of 6 pieces.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KS1005 <span style="color:#bbb"> · </span> ks1005</div>
+  <div class="name">Bug-Viewer</div>
+  <div class="desc">A 2-way bug viewer designed for children to observe insects or small objects from both the top and bottom perspectives. Its transparent container features breathing holes and a measurement grid, fostering scientific exploration and observation skills.</div>
+  <div class="meta"><span class="badge badge-cat">sensory</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 This product is being held by the child in the image. It is a separate product from the Honey Hills set also pictured.</div>
+</div>
+
+<div class="card ai-inferred">
+  <div class="sku">KT0007 <span style="color:#bbb"> · </span> kt0007</div>
+  <div class="name">Sand &amp; Water Topper</div>
+  <div class="desc">A versatile topper that can be filled with sand or water for sensory play or to add weight and stability to constructions. It is designed to fit on Weplay construction blocks and paths to add texture and challenge.</div>
+  <div class="meta"><span class="badge badge-cat">sensory</span> <span class="badge badge-status">DRAFT</span></div>
+  <div class="notes">📝 Product is shown used in conjunction with the Weplay Tactile Path (KC0040). SKU and name identified by visual recognition.</div>
+</div>
+</div>
+</div>
+
+<div id="section-var" class="section">
+
+<div class="variant-group-card">
+  <div class="variant-group-header">KC1001 — Rock &#x27;n&#x27; Fish</div>
+  <div class="variant-group-meta">3 docs · MIXED names — likely AI mis-inference</div>
+  <div class="variant-list">
+
+    <div class="variant-row">
+      <div class="doc">kc1001</div>
+      <div class="nm">Rock &#x27;n&#x27; Fish<br><span class="sku">KC1001</span></div>
+      <div><span class="badge badge-status">DRAFT</span></div>
+      <div class="img">—</div>
+    </div>
+
+    <div class="variant-row">
+      <div class="doc">kc1001_00g</div>
+      <div class="nm">Rolling 4-Fun<br><span class="sku">KC1001-00G</span></div>
+      <div><span class="badge badge-status">DRAFT</span></div>
+      <div class="img">—</div>
+    </div>
+
+    <div class="variant-row">
+      <div class="doc">kc1001_050r</div>
+      <div class="nm">Hopping Ball<br><span class="sku">KC1001-050R</span></div>
+      <div><span class="badge badge-status">DRAFT</span></div>
+      <div class="img">—</div>
+    </div>
+  </div>
+</div>
+
+<div class="variant-group-card">
+  <div class="variant-group-header">KC1002 — Tactile Path - Camino de Santiago</div>
+  <div class="variant-group-meta">3 docs · MIXED names — likely AI mis-inference</div>
+  <div class="variant-list">
+
+    <div class="variant-row">
+      <div class="doc">kc1002</div>
+      <div class="nm">Tactile Path - Camino de Santiago<br><span class="sku">KC1002</span></div>
+      <div><span class="badge badge-status">DRAFT</span></div>
+      <div class="img">—</div>
+    </div>
+
+    <div class="variant-row">
+      <div class="doc">kc1002_02m</div>
+      <div class="nm">Stacking Pegs with Mirror<br><span class="sku">KC1002-02M</span></div>
+      <div><span class="badge badge-status">DRAFT</span></div>
+      <div class="img">—</div>
+    </div>
+
+    <div class="variant-row">
+      <div class="doc">kc1002_b</div>
+      <div class="nm">Rocking Bowl<br><span class="sku">KC1002-B</span></div>
+      <div><span class="badge badge-status">DRAFT</span></div>
+      <div class="img">—</div>
+    </div>
+  </div>
+</div>
+
+<div class="variant-group-card">
+  <div class="variant-group-header">KC2101 — Forest Party (2 Sets)</div>
+  <div class="variant-group-meta">3 docs · MIXED names — likely AI mis-inference</div>
+  <div class="variant-list">
+
+    <div class="variant-row">
+      <div class="doc">kc2101</div>
+      <div class="nm">Weplay Flower Link<br><span class="sku">KC2101</span></div>
+      <div><span class="badge badge-status">DRAFT</span></div>
+      <div class="img">—</div>
+    </div>
+
+    <div class="variant-row">
+      <div class="doc">kc2101_2</div>
+      <div class="nm">Forest Party (2 Sets)<br><span class="sku">KC2101-2</span></div>
+      <div><span class="badge badge-status">DRAFT</span></div>
+      <div class="img">—</div>
+    </div>
+
+    <div class="variant-row">
+      <div class="doc">kc2101_b</div>
+      <div class="nm">Balance Board (Disc)<br><span class="sku">KC2101-B</span></div>
+      <div><span class="badge badge-status">DRAFT</span></div>
+      <div class="img">—</div>
+    </div>
+  </div>
+</div>
+
+<div class="variant-group-card">
+  <div class="variant-group-header">KP2101 — Weplay Islands</div>
+  <div class="variant-group-meta">3 docs · MIXED names — likely AI mis-inference</div>
+  <div class="variant-list">
+
+    <div class="variant-row">
+      <div class="doc">kp2101</div>
+      <div class="nm">Weplay River<br><span class="sku">KP2101</span></div>
+      <div><span class="badge badge-status">DRAFT</span></div>
+      <div class="img">—</div>
+    </div>
+
+    <div class="variant-row">
+      <div class="doc">kp2101_1</div>
+      <div class="nm">Weplay Islands<br><span class="sku">KP2101-1</span></div>
+      <div><span class="badge badge-status">DRAFT</span></div>
+      <div class="img">—</div>
+    </div>
+
+    <div class="variant-row">
+      <div class="doc">kp2101_2</div>
+      <div class="nm">Weplay Bricks<br><span class="sku">KP2101-2</span></div>
+      <div><span class="badge badge-status">DRAFT</span></div>
+      <div class="img">—</div>
+    </div>
+  </div>
+</div>
+
+<div class="variant-group-card">
+  <div class="variant-group-header">KC0007 — Sand and Water Table - Clear</div>
+  <div class="variant-group-meta">2 docs · MIXED names — likely AI mis-inference</div>
+  <div class="variant-list">
+
+    <div class="variant-row">
+      <div class="doc">kc0007</div>
+      <div class="nm">Honeycomb<br><span class="sku">KC0007</span></div>
+      <div><span class="badge badge-status">DRAFT</span></div>
+      <div class="img">—</div>
+    </div>
+
+    <div class="variant-row">
+      <div class="doc">we_kc0007</div>
+      <div class="nm">Sand and Water Table - Clear<br><span class="sku">WE-KC0007</span></div>
+      <div><span class="badge badge-status">DRAFT</span></div>
+      <div class="img">—</div>
+    </div>
+  </div>
+</div>
+
+<div class="variant-group-card">
+  <div class="variant-group-header">KC0009 — BUBBLE Breath &amp; Balance</div>
+  <div class="variant-group-meta">2 docs · MIXED names — likely AI mis-inference</div>
+  <div class="variant-list">
+
+    <div class="variant-row">
+      <div class="doc">kc0009</div>
+      <div class="nm">Tactile Path<br><span class="sku">KC0009</span></div>
+      <div><span class="badge badge-status">DRAFT</span></div>
+      <div class="img">—</div>
+    </div>
+
+    <div class="variant-row">
+      <div class="doc">wpl_kc0009</div>
+      <div class="nm">BUBBLE Breath &amp; Balance<br><span class="sku">WPL-KC0009</span></div>
+      <div><span class="badge badge-status">DRAFT</span></div>
+      <div class="img">—</div>
+    </div>
+  </div>
+</div>
+
+<div class="variant-group-card">
+  <div class="variant-group-header">KC0031 — Rainbow River Stones</div>
+  <div class="variant-group-meta">2 docs · MIXED names — likely AI mis-inference</div>
+  <div class="variant-list">
+
+    <div class="variant-row">
+      <div class="doc">kc0031</div>
+      <div class="nm">Rainbow River Stones<br><span class="sku">KC0031</span></div>
+      <div><span class="badge badge-status">DRAFT</span></div>
+      <div class="img">—</div>
+    </div>
+
+    <div class="variant-row">
+      <div class="doc">kc0031_b</div>
+      <div class="nm">Wavy Tactile Path<br><span class="sku">KC0031-B</span></div>
+      <div><span class="badge badge-status">DRAFT</span></div>
+      <div class="img">—</div>
+    </div>
+  </div>
+</div>
+
+<div class="variant-group-card">
+  <div class="variant-group-header">KC2106 — 3D Spatial Fun</div>
+  <div class="variant-group-meta">2 docs · MIXED names — likely AI mis-inference</div>
+  <div class="variant-list">
+
+    <div class="variant-row">
+      <div class="doc">kc2106</div>
+      <div class="nm">3D Spatial Fun<br><span class="sku">KC2106</span></div>
+      <div><span class="badge badge-status">DRAFT</span></div>
+      <div class="img">—</div>
+    </div>
+
+    <div class="variant-row">
+      <div class="doc">kc2106_g</div>
+      <div class="nm">Weplay Cube<br><span class="sku">KC2106-G</span></div>
+      <div><span class="badge badge-status">DRAFT</span></div>
+      <div class="img">—</div>
+    </div>
+  </div>
+</div>
+
+<div class="variant-group-card">
+  <div class="variant-group-header">KC2201 — Weplay Team Walker (4-User Set)</div>
+  <div class="variant-group-meta">2 docs · MIXED names — likely AI mis-inference</div>
+  <div class="variant-list">
+
+    <div class="variant-row">
+      <div class="doc">kc2201</div>
+      <div class="nm">Pattern Cube<br><span class="sku">KC2201</span></div>
+      <div><span class="badge badge-status">DRAFT</span></div>
+      <div class="img">—</div>
+    </div>
+
+    <div class="variant-row">
+      <div class="doc">kc2201_4</div>
+      <div class="nm">Weplay Team Walker (4-User Set)<br><span class="sku">KC2201-4</span></div>
+      <div><span class="badge badge-status">DRAFT</span></div>
+      <div class="img">—</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+function show(which) {
+  document.querySelectorAll('.tab').forEach((t, i) => t.classList.toggle('active', (i===0 && which==='ai') || (i===1 && which==='var')));
+  document.getElementById('section-ai').classList.toggle('active', which==='ai');
+  document.getElementById('section-var').classList.toggle('active', which==='var');
+}
+function filter() {
+  const q = document.getElementById('search').value.toLowerCase();
+  document.querySelectorAll('.card, .variant-group-card').forEach(el => {
+    el.style.display = el.textContent.toLowerCase().includes(q) ? '' : 'none';
+  });
+}
+</script>
+</body>
+</html>

@@ -57,6 +57,7 @@ BRAND_SALES_CHANNELS: dict[str, str] = {
     "rampline":  "sc_01KNQAA448RY0YPR51FNPM2TVA",
     "4soft":     "sc_01KNQAA4A8SF4ZT9S8N0AHGY3Y",
     "weplay":    "sc_01KR6Z0VBSXWYZDVGF30EAP0EQ",
+    "designpark": "sc_01KRRK0N4ET8QZHX6QB3KZ84YD",
 }
 
 
@@ -99,7 +100,12 @@ def _headers(token: str) -> dict:
 def _find_product_by_handle(token: str, handle: str) -> dict | None:
     r = requests.get(
         f"{BACKEND}/admin/products",
-        params={"handle": handle, "limit": 1, "fields": "id,handle,variants.id,variants.prices.id,variants.prices.currency_code"},
+        params={"handle": handle, "limit": 1,
+                "fields": "id,handle,thumbnail,images.url,"
+                          "options.id,options.title,options.values.value,"
+                          "variants.id,variants.title,variants.sku,"
+                          "variants.options.value,variants.options.option_id,"
+                          "variants.prices.id,variants.prices.currency_code,variants.prices.amount"},
         headers=_headers(token),
         timeout=TIMEOUT,
     )
@@ -108,27 +114,79 @@ def _find_product_by_handle(token: str, handle: str) -> dict | None:
     return products[0] if products else None
 
 
+# Pricing keys on `pricing.*` → Medusa currency code.
+_RETAIL_KEYS: tuple[tuple[str, str], ...] = (
+    ("retail_usd", "usd"),
+    ("retail_thb", "thb"),
+    ("retail_eur", "eur"),
+    ("retail_sgd", "sgd"),
+)
+
+
+def _build_prices(pricing: dict) -> list[dict]:
+    """Build a Medusa `prices` array from a `pricing.*` map.
+
+    Preference order: retail_<ccy> (multi-currency, post-landed-calc pricing)
+    → fob_usd (legacy USD-only).
+    Amounts are minor units (cents/satang).
+    """
+    if not pricing:
+        return []
+    out: list[dict] = []
+    for key, ccy in _RETAIL_KEYS:
+        val = pricing.get(key)
+        if val:
+            out.append({"amount": int(round(val * 100)), "currency_code": ccy})
+    if not out:
+        fob = pricing.get("fob_usd")
+        if fob:
+            out.append({"amount": int(round(fob * 100)), "currency_code": "usd"})
+    return out
+
+
 def _build_create_payload(slug: str, sc_id: str, p: dict) -> dict:
-    """Map a vendors product doc → Medusa create-product payload."""
+    """Map a vendors product doc → Medusa create-product payload.
+
+    If the doc carries a `variants[]` array (e.g. coating Standard / Additional
+    on Eurotramp Kids Tramp), emit one Medusa option + one variant per entry.
+    Otherwise emit a single Default variant.
+    """
     handle = p["handle"]
     images = [img["url"] for img in (p.get("images") or []) if img.get("url")]
-    fob = (p.get("pricing") or {}).get("fob_usd")
+    pricing = p.get("pricing") or {}
     metadata = {
         "brand_slug": slug,
         "item_code": p.get("item_code"),
+        "gtin": p.get("gtin"),
         "category": p.get("category"),
         "subcategory": p.get("subcategory"),
         "source_url": p.get("source_url"),
     }
     metadata = {k: v for k, v in metadata.items() if v is not None}
 
-    variant = {
-        "title": p.get("name") or handle,
-        "sku": p.get("item_code") or handle,
-        "manage_inventory": False,
-        # Medusa v2 requires `prices` to be present even when empty.
-        "prices": [{"amount": int(round(fob * 100)), "currency_code": "usd"}] if fob else [],
-    }
+    variants_array = p.get("variants") or []
+    if variants_array:
+        option_title = p.get("variant_option") or "Variant"
+        option_values = [v["title"] for v in variants_array]
+        med_variants = []
+        for v in variants_array:
+            med_variants.append({
+                "title": v["title"],
+                "sku": v.get("sku") or f"{p.get('item_code', handle)}-{v['title'][:10]}",
+                "manage_inventory": False,
+                "prices": _build_prices(v.get("pricing") or pricing),
+                "options": {option_title: v["title"]},
+            })
+        options = [{"title": option_title, "values": option_values}]
+    else:
+        med_variants = [{
+            "title": p.get("name") or handle,
+            "sku": p.get("item_code") or handle,
+            "manage_inventory": False,
+            "prices": _build_prices(pricing),
+            "options": {"Default": "Default"},
+        }]
+        options = [{"title": "Default", "values": ["Default"]}]
 
     payload = {
         "title": p.get("name") or handle,
@@ -137,8 +195,8 @@ def _build_create_payload(slug: str, sc_id: str, p: dict) -> dict:
         "status": "published" if (p.get("status") or "active") == "active" else "draft",
         "sales_channels": [{"id": sc_id}],
         "metadata": metadata,
-        "options": [{"title": "Default", "values": ["Default"]}],
-        "variants": [variant | {"options": {"Default": "Default"}}],
+        "options": options,
+        "variants": med_variants,
     }
     if images:
         payload["images"] = [{"url": u} for u in images]
@@ -146,36 +204,123 @@ def _build_create_payload(slug: str, sc_id: str, p: dict) -> dict:
     return payload
 
 
-def _build_update_payload(p: dict) -> dict:
-    """Update payload — fields safe to refresh on every sync."""
+def _build_update_payload(p: dict, *, existing_image_urls: set[str] | None = None) -> dict:
+    """Update payload — fields safe to refresh on every sync.
+
+    Includes `images` and `thumbnail` when the Firestore doc carries images
+    the Medusa product doesn't already have. We don't replace images blindly
+    because Medusa preserves image ids; instead, we APPEND any new URLs by
+    submitting the full union (Medusa de-dupes by URL on its end). When
+    `existing_image_urls` is None we skip the image patch (caller didn't
+    want to touch images).
+
+    Includes `dimensions` and `source_url` in `metadata` so the storefront
+    can render spec tables + outbound mfr links without re-querying Firestore.
+    """
     metadata = {
         "brand_slug": p.get("slug"),
         "item_code": p.get("item_code"),
+        "gtin": p.get("gtin"),
         "category": p.get("category"),
         "source_url": p.get("source_url"),
+        "dimensions": p.get("dimensions"),
     }
     metadata = {k: v for k, v in metadata.items() if v is not None}
-    return {
+
+    out: dict = {
         "title": p.get("name") or p["handle"],
         "description": p.get("description") or "",
         "metadata": metadata,
     }
 
+    # Image sync — only if caller passed the existing-URL set (i.e. we
+    # fetched it from Medusa) so we can compute the union without overwriting.
+    if existing_image_urls is not None:
+        fs_urls = [img["url"] for img in (p.get("images") or []) if img.get("url")]
+        new_urls = [u for u in fs_urls if u not in existing_image_urls]
+        if new_urls:
+            union = list(existing_image_urls) + new_urls
+            out["images"] = [{"url": u} for u in union]
+            # First image becomes thumbnail when there isn't one yet
+            if fs_urls:
+                out["thumbnail"] = fs_urls[0]
+    return out
 
-def _update_variant_price(token: str, variant_id: str, fob_usd: float, existing_price_id: str | None) -> None:
-    """Upsert USD price on a variant. Medusa stores amount in minor units."""
-    amount = int(round(fob_usd * 100))
-    body = {"prices": [{"amount": amount, "currency_code": "usd"}]}
-    if existing_price_id:
-        body["prices"][0]["id"] = existing_price_id
+
+def _update_variant_prices(token: str, product_id: str, variant_id: str,
+                            pricing: dict, existing_prices: list[dict] | None) -> None:
+    """Upsert all currency prices on a variant.
+
+    `pricing` is the `pricing.*` map from the Firestore product / variant doc.
+    Existing price rows are matched by `currency_code` so we PATCH the same row
+    rather than orphaning the previous one.
+    """
+    new_prices = _build_prices(pricing)
+    if not new_prices:
+        return
+    existing_by_ccy = {(pr.get("currency_code") or "").lower(): pr.get("id")
+                      for pr in (existing_prices or [])}
+    for entry in new_prices:
+        eid = existing_by_ccy.get(entry["currency_code"])
+        if eid:
+            entry["id"] = eid
+    body = {"prices": new_prices}
     r = requests.post(
-        f"{BACKEND}/admin/products/variants/{variant_id}",
+        f"{BACKEND}/admin/products/{product_id}/variants/{variant_id}",
         json=body,
         headers=_headers(token),
         timeout=TIMEOUT,
     )
     if r.status_code >= 400:
         log.warning("price update failed for variant %s: %s %s", variant_id, r.status_code, r.text[:200])
+
+
+def _ensure_variants(token: str, product_id: str, p: dict,
+                     existing_variants: list[dict]) -> list[dict]:
+    """If the Firestore doc has multi-variant data and Medusa only has the
+    default variant, create the additional variants. Returns the updated
+    variants list (refetched lightly).
+    """
+    fs_variants = p.get("variants") or []
+    if not fs_variants:
+        return existing_variants
+    option_title = p.get("variant_option") or "Variant"
+    have_titles = {(v.get("title") or "").lower() for v in existing_variants}
+    # Need at least one variant per FS entry; skip if all titles already present.
+    missing = [v for v in fs_variants if (v["title"]).lower() not in have_titles]
+    if not missing:
+        return existing_variants
+    # Medusa v2: cannot append a new option to an existing product via the
+    # variants endpoint alone — the product needs the option defined. If the
+    # product was created without it (legacy default-option), we skip variant
+    # creation and log so the user knows.
+    has_option = False
+    for v in existing_variants:
+        if option_title in (v.get("options") or {}):
+            has_option = True
+            break
+    if not has_option:
+        log.info("[variants] %s lacks option '%s' — skipping variant fold "
+                 "(needs product re-create or admin migration)", p["handle"], option_title)
+        return existing_variants
+    for v in missing:
+        body = {
+            "title": v["title"],
+            "sku": v.get("sku"),
+            "manage_inventory": False,
+            "prices": _build_prices(v.get("pricing") or {}),
+            "options": {option_title: v["title"]},
+        }
+        r = requests.post(
+            f"{BACKEND}/admin/products/{product_id}/variants",
+            json=body,
+            headers=_headers(token),
+            timeout=TIMEOUT,
+        )
+        if r.status_code >= 400:
+            log.warning("variant create failed for %s/%s: %s %s",
+                        p["handle"], v["title"], r.status_code, r.text[:200])
+    return existing_variants  # caller will refetch on next pass
 
 
 def sync_brand(slug: str, dry_run: bool, limit: int | None, skip_no_images: bool = False) -> dict:
@@ -228,9 +373,16 @@ def sync_brand(slug: str, dry_run: bool, limit: int | None, skip_no_images: bool
             if dry_run:
                 log.info("[%s] UPDATE %s (dry)", slug, handle)
             else:
+                # Pass existing image URLs so the update payload can compute
+                # the union and append-only new images (preserves Medusa's
+                # image ids; avoids dropping reverse-imported ones).
+                existing_img_urls = {
+                    im.get("url") for im in (existing.get("images") or [])
+                    if im.get("url")
+                }
                 r = requests.post(
                     f"{BACKEND}/admin/products/{existing['id']}",
-                    json=_build_update_payload(p),
+                    json=_build_update_payload(p, existing_image_urls=existing_img_urls),
                     headers=_headers(token),
                     timeout=TIMEOUT,
                 )
@@ -238,17 +390,23 @@ def sync_brand(slug: str, dry_run: bool, limit: int | None, skip_no_images: bool
                     log.warning("[%s] UPDATE %s failed: %s %s", slug, handle, r.status_code, r.text[:200])
                     errors += 1
                     continue
-                fob = (p.get("pricing") or {}).get("fob_usd")
-                if fob:
+                pricing = p.get("pricing") or {}
+                if _build_prices(pricing):
                     variants = existing.get("variants") or []
+                    # Try to create any missing Firestore-declared variants first
+                    variants = _ensure_variants(token, existing["id"], p, variants)
+                    fs_variants_by_title = {
+                        (v.get("title") or "").lower(): v.get("pricing") or pricing
+                        for v in (p.get("variants") or [])
+                    }
                     if variants:
-                        primary = variants[0]
-                        existing_price_id = None
-                        for pr in primary.get("prices") or []:
-                            if (pr.get("currency_code") or "").lower() == "usd":
-                                existing_price_id = pr.get("id")
-                                break
-                        _update_variant_price(token, primary["id"], fob, existing_price_id)
+                        for med_v in variants:
+                            t = (med_v.get("title") or "").lower()
+                            v_pricing = fs_variants_by_title.get(t, pricing)
+                            _update_variant_prices(
+                                token, existing["id"], med_v["id"], v_pricing,
+                                med_v.get("prices"),
+                            )
                         priced += 1
             updated += 1
 

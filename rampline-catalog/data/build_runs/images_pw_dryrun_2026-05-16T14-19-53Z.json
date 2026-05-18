@@ -1,0 +1,36 @@
+{
+  "timestamp": "2026-05-16T14-19-53Z",
+  "dry_run": true,
+  "max_images": 8,
+  "limit": 3,
+  "totals": {
+    "ADD_IMAGES": 3
+  },
+  "actions_count": 3,
+  "skipped_count": 0,
+  "skipped": [],
+  "errors": [],
+  "actions": [
+    {
+      "op": "ADD_IMAGES",
+      "handle": "rampline-take-5",
+      "product_id": "prod_01KNQ3Q1AXR41GNYBKKXHQG3DK",
+      "new_count": 1,
+      "thumbnail_set": true
+    },
+    {
+      "op": "ADD_IMAGES",
+      "handle": "rampline-monkey-business",
+      "product_id": "prod_01KNQ3Q2N1MDM04CGMBKW2QMYD",
+      "new_count": 1,
+      "thumbnail_set": true
+    },
+    {
+      "op": "ADD_IMAGES",
+      "handle": "rampline-junior-power-ii",
+      "product_id": "prod_01KNQ3Q3GTMGFNGC5DJDXZHV3G",
+      "new_count": 1,
+      "thumbnail_set": true
+    }
+  ]
+}

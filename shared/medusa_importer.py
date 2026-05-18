@@ -205,6 +205,13 @@ class MedusaImporter:
             {"categories": [{"id": cid} for cid in category_ids]},
         )
 
+    def set_product_collection(self, product_id: str, collection_id: Optional[str]) -> dict:
+        """Set (or clear) the collection link on an existing product."""
+        return self._patch(
+            f"/admin/products/{product_id}",
+            {"collection_id": collection_id},
+        )
+
     def list_products_by_category(self, category_id: str, limit: int = 200) -> list:
         """Return all products linked to a category id (paginated)."""
         out = []
@@ -242,6 +249,107 @@ class MedusaImporter:
 
         result = self._post("/admin/product-tags", {"value": value})
         return result["product_tag"]["id"]
+
+    def get_product_with_variants(self, handle: str) -> dict | None:
+        """Return the full product dict (including variants) for a given handle, or None."""
+        try:
+            resp = self._get(
+                "/admin/products",
+                {"handle": handle, "limit": 1, "fields": "id,handle,variants"},
+            )
+            products = resp.get("products", [])
+            return products[0] if products else None
+        except Exception:
+            return None
+
+    def get_variant_by_sku(self, sku: str) -> tuple[str | None, str | None]:
+        """Return (product_id, variant_id) for a given current SKU, or (None, None).
+
+        Note: For Wisdom/Leka Project products post-rebrand, the SKU on the
+        variant is the new `LP-XXXXXXXX` nanoid form. To look up by the
+        original Wisdom item_code, use `build_legacy_sku_index()` instead.
+        """
+        try:
+            resp = self._get(
+                "/admin/products",
+                {"sku": sku, "limit": 1, "fields": "id,variants.id,variants.sku"},
+            )
+            products = resp.get("products", [])
+            if not products:
+                # Fallback: legacy direct-handle lookup (pre-rebrand products).
+                handle = f"wisdom-{sku.lower().replace(' ', '-')}"
+                product = self.get_product_with_variants(handle)
+                if not product:
+                    return None, None
+                variants = product.get("variants", [])
+                return (product["id"], variants[0]["id"]) if variants else (None, None)
+            p = products[0]
+            variants = p.get("variants", [])
+            match = next((v for v in variants if v.get("sku") == sku), variants[0] if variants else None)
+            return (p["id"], match["id"]) if match else (None, None)
+        except Exception:
+            return None, None
+
+    def build_legacy_sku_index(self, sales_channel_id: str) -> dict[str, tuple[str, str]]:
+        """Page through a sales channel and index variants by `metadata.legacy_sku`.
+
+        Used post-rebrand: Wisdom item codes survive in
+        `variants[].metadata.legacy_sku` even though the current SKU is now
+        `LP-XXXXXXXX`. Returns `{legacy_sku: (product_id, variant_id)}`.
+        """
+        index: dict[str, tuple[str, str]] = {}
+        offset = 0
+        limit = 100
+        while True:
+            try:
+                resp = self._get("/admin/products", {
+                    "sales_channel_id[]": sales_channel_id,
+                    "limit": limit,
+                    "offset": offset,
+                    "fields": "id,variants.id,variants.sku,variants.metadata",
+                })
+            except Exception:
+                break
+            batch = resp.get("products", [])
+            if not batch:
+                break
+            for p in batch:
+                pid = p["id"]
+                for v in p.get("variants", []) or []:
+                    vid = v["id"]
+                    md = v.get("metadata") or {}
+                    legacy = md.get("legacy_sku")
+                    if legacy:
+                        index[str(legacy).strip()] = (pid, vid)
+                    cur = v.get("sku")
+                    if cur and cur not in index:
+                        index[cur] = (pid, vid)
+            if len(batch) < limit:
+                break
+            offset += limit
+        return index
+
+    def update_variant_prices(
+        self,
+        product_id: str,
+        variant_id: str,
+        prices: list[dict],
+    ) -> dict:
+        """Replace the price list on a variant.
+
+        Args:
+            product_id:  Medusa product ID.
+            variant_id:  Medusa variant ID.
+            prices:      List of {amount: int (in smallest unit), currency_code: str}.
+
+        Returns the updated variant dict.
+        """
+        resp = self.session.post(
+            f"{self.base_url}/admin/products/{product_id}/variants/{variant_id}",
+            json={"prices": prices},
+        )
+        resp.raise_for_status()
+        return resp.json()
 
     def batch_import(
         self,
