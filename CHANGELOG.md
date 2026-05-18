@@ -4,6 +4,47 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.26.0] - 2026-05-18
+
+### Added — Weplay quotation AQ1251030077 USD pricing sync
+
+Ingested the 2025-11-05 Weplay quotation (`AQ1251030077`, dated
+Oct. 30, 2025, FOB Taiwan, USD) into `vendors/weplay/products/*`.
+
+#### `scripts/ingest_weplay_quotation_aq1251030077.py` (new)
+Parses the 7-page text-layer PDF with `pdfplumber`, line regex on
+`SKU DESCRIPTION PRICE / UNIT PACK CBM GW`. Uses the same
+`SKU_TOKEN_RE = ([A-Z]{2}[0-9]{4,})` (no word boundaries) as
+`scripts/ingest_weplay_local_catalogs.py` so it matches tokens inside
+larger item codes (e.g. `KM1003` inside `6800KM1003`).
+
+Source-priority gating preserved: name/description only written when
+the target doc has zero provenance (`source_url_en/cached/flipbook/
+pdf_ocr/local`) AND is in a draft state. Otherwise the write is
+audit-only — never clobbers richer sources.
+
+Always-written fields (merge=True):
+  - `pricing.quote_2025_usd`              — FOB Taiwan price
+  - `pricing.quote_aq1251030077_at`       — `"2025-10-30"`
+  - `pricing.quote_aq1251030077_unit`     — `PC | SET | PAC | DZN`
+  - `quotation_refs`                      — `ArrayUnion(["AQ1251030077"])`
+
+#### Run results
+  - 167 quotation rows parsed
+  - 151 unique SKU tokens
+  - 189 Firestore docs matched (some tokens have variant docs)
+  - 0 no-doc-match
+  - 189 audit-only writes (all matched docs already had names from
+    richer scrape sources — `name`/`description`/`source_url_local`
+    correctly skipped per the priority gate)
+
+#### Audit-only by design
+USD `quote_*` fields are kept separate from any landed-cost or retail
+`retail_*` keys consumed by `sync_vendors_to_medusa.py`, so no Medusa
+re-sync is required from this commit.
+
+---
+
 ## [2.25.0] - 2026-05-17
 
 ### Removed — 38 duplicate Weplay products (Medusa 200 → 162)
