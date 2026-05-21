@@ -91,6 +91,12 @@ export default async function orderPlacedHandler({
   const addr = order.shipping_address || {}
   const customerName = [addr.first_name, addr.last_name].filter(Boolean).join(" ").trim()
   const company = addr.company ? ` (${addr.company})` : ""
+  // B2B project context — set on the cart metadata at checkout and copied onto
+  // the order at completion (see leka-website catalogs checkout page).
+  const meta: any = order.metadata || {}
+  const projectName = (meta.project_name ?? "").toString().trim()
+  const projectDetails = (meta.project_details ?? "").toString().trim()
+  const siteLocation = (meta.site_location ?? "").toString().trim()
   // retrieveOrder does not compute order.total — fall back to summing line
   // items (+ shipping) so the alert/email never show a misleading 0.00.
   const itemsSum = items.reduce(
@@ -116,6 +122,22 @@ export default async function orderPlacedHandler({
     const shipTo = [addr.address_1, addr.city, addr.province, addr.postal_code, addr.country_code?.toUpperCase()]
       .filter(Boolean)
       .join(", ")
+    const projectBlocks: any[] = []
+    if (projectName || siteLocation) {
+      projectBlocks.push({
+        type: "section",
+        fields: [
+          { type: "mrkdwn", text: `*Project:*\n${projectName || "—"}` },
+          { type: "mrkdwn", text: `*Site location:*\n${siteLocation || "—"}` },
+        ],
+      })
+    }
+    if (projectDetails) {
+      projectBlocks.push({
+        type: "section",
+        text: { type: "mrkdwn", text: `*Project details:*\n${projectDetails}` },
+      })
+    }
     await postToRouter(slackUrl, {
       channel,
       text: `:shopping_trolley: New order #${displayId} — ${totalStr}`,
@@ -130,6 +152,7 @@ export default async function orderPlacedHandler({
             { type: "mrkdwn", text: `*Ship to:*\n${shipTo || "—"}` },
           ],
         },
+        ...projectBlocks,
         { type: "section", text: { type: "mrkdwn", text: `*Items:*\n${itemLines || "—"}` } },
         { type: "context", elements: [{ type: "mrkdwn", text: `Order ID \`${order.id}\` · payment: manual (invoice follows)` }] },
       ],
@@ -153,11 +176,20 @@ export default async function orderPlacedHandler({
           `<td style="padding:8px 0;border-bottom:1px solid #eee;text-align:right">${money(i.unit_price * i.quantity, order.currency_code)}</td></tr>`
       )
       .join("")
+    const projectHtml =
+      projectName || siteLocation || projectDetails
+        ? `<div style="background:#FFF9E6;border-radius:12px;padding:12px 16px;margin:0 0 16px;font-size:14px">` +
+          (projectName ? `<p style="margin:0 0 4px"><strong>Project:</strong> ${escapeHtml(projectName)}</p>` : "") +
+          (siteLocation ? `<p style="margin:0 0 4px"><strong>Site location:</strong> ${escapeHtml(siteLocation)}</p>` : "") +
+          (projectDetails ? `<p style="margin:0;white-space:pre-wrap"><strong>Details:</strong> ${escapeHtml(projectDetails)}</p>` : "") +
+          `</div>`
+        : ""
     const bodyHtml =
       `<div style="font-family:Manrope,Arial,sans-serif;max-width:560px;margin:0 auto;color:#182557">` +
       `<h1 style="color:#8003FF;font-size:22px;margin:0 0 4px">Order confirmed</h1>` +
       `<p style="margin:0 0 16px;color:#555">Thank you${customerName ? `, ${escapeHtml(customerName)}` : ""}! ` +
       `We've received your order <strong>#${displayId}</strong> and our team will be in touch with delivery details and an invoice.</p>` +
+      projectHtml +
       `<table style="width:100%;border-collapse:collapse;font-size:14px">${rowsHtml}` +
       `<tr><td style="padding:12px 0;font-weight:700">Total</td>` +
       `<td style="padding:12px 0;text-align:right;font-weight:700;color:#8003FF">${totalStr}</td></tr></table>` +

@@ -4,6 +4,24 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.27.0] - 2026-05-21
+
+### Added — B2B project context in order-placed notifications
+
+The `order.placed` subscriber (`medusa-backend/src/subscribers/order-placed.ts`)
+now reads the B2B project fields the storefront sets on the cart/order metadata
+(`project_name`, `project_details`, `site_location`) and surfaces them in both
+the Slack alert (#leka-medusa-order) and the confirmation email:
+
+- **Slack:** adds a Project / Site-location fields block and a Project-details
+  section when present (rendered between the customer block and the items list).
+- **Email:** adds a cream-highlighted project block above the line-item table.
+
+Both are conditional — orders without project metadata are unchanged. Pairs with
+leka-website catalogs v0.17.0 (Submit Order flow).
+
+---
+
 ## [2.26.0] - 2026-05-18
 
 ### Added — Weplay quotation AQ1251030077 USD pricing sync
