@@ -80,7 +80,7 @@ export default async function orderPlacedHandler({
   try {
     const orderService = container.resolve(Modules.ORDER)
     order = await (orderService as any).retrieveOrder(orderId, {
-      relations: ["items", "shipping_address"],
+      relations: ["items", "shipping_address", "shipping_methods"],
     })
   } catch (err: any) {
     console.log(`[notify] could not load order ${orderId}: ${err.message}`)
@@ -91,7 +91,19 @@ export default async function orderPlacedHandler({
   const addr = order.shipping_address || {}
   const customerName = [addr.first_name, addr.last_name].filter(Boolean).join(" ").trim()
   const company = addr.company ? ` (${addr.company})` : ""
-  const totalStr = money(order.total, order.currency_code)
+  // retrieveOrder does not compute order.total — fall back to summing line
+  // items (+ shipping) so the alert/email never show a misleading 0.00.
+  const itemsSum = items.reduce(
+    (s, i) => s + (Number(i.unit_price) || 0) * (Number(i.quantity) || 0),
+    0
+  )
+  const shippingSum = (order.shipping_methods || []).reduce(
+    (s: number, m: any) => s + (Number(m.amount) || 0),
+    0
+  )
+  const orderTotal =
+    Number(order.total) > 0 ? Number(order.total) : itemsSum + shippingSum
+  const totalStr = money(orderTotal, order.currency_code)
   const displayId = order.display_id ?? order.id
 
   // ---- 1. Slack team alert -> #leka-medusa-order ----
