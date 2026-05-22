@@ -73,9 +73,12 @@ from shared.landed_pricing import (  # noqa: E402
     THAI_VAT_RATE,
     UNMATCHED_LANDED_UPLIFT,
     DUTY_RATE_NON_CHINA,
+    SG_CUSTOMER_GST_RATE,
+    SG_NUBO_GST_REGISTERED,
     calibrate_baltic_rate,
     get_fx_rates,
 )
+from shared.pricing_config import get_pricing_config  # noqa: E402
 import cost_engine  # noqa: E402 — resolved via shared.landed_pricing's sys.path nudge
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s: %(message)s")
@@ -278,6 +281,7 @@ def price_designpark_row(fob_usd: float, fx: dict) -> dict:
     """
     usd_thb = fx.get("USD", 35.0)
     eur_thb = fx.get("EUR", 38.0)
+    sgd_thb = fx.get("SGD", 25.0)
     fob_thb = fob_usd * usd_thb
     # Korea LCL flat-uplift floor — Japan/Korea LCL is cheaper than Europe.
     # Mirror UNMATCHED_LANDED_UPLIFT (35%) for parity with Vinci/Rampline at v1;
@@ -290,6 +294,11 @@ def price_designpark_row(fob_usd: float, fx: dict) -> dict:
     retail_thb = round(landed_thb / (1 - GROSS_MARGIN), 2)
     retail_usd = round(retail_thb / usd_thb, 2)
     retail_eur = round(retail_thb / eur_thb, 2)
+    _g = get_pricing_config() or {}
+    sg_gst = float(_g.get("sg_customer_gst_rate", SG_CUSTOMER_GST_RATE))
+    sg_reg = bool(_g.get("sg_nubo_gst_registered", SG_NUBO_GST_REGISTERED))
+    sg_gst_mult = (1 + sg_gst) if sg_reg else 1.0
+    retail_sgd = round(retail_thb * sg_gst_mult / sgd_thb, 2)
     return {
         "fob_usd": round(fob_usd, 2),
         "fob_thb": round(fob_thb, 2),
@@ -300,6 +309,7 @@ def price_designpark_row(fob_usd: float, fx: dict) -> dict:
         "retail_thb": retail_thb,
         "retail_usd": retail_usd,
         "retail_eur": retail_eur,
+        "retail_sgd": retail_sgd,
         "gross_margin": GROSS_MARGIN,
         "logistics_uplift": UNMATCHED_LANDED_UPLIFT - 1,
         "method": "flat_uplift_korea_lcl",

@@ -76,6 +76,10 @@ GROSS_MARGIN = 0.35                    # Vinci default; brands override
 DUTY_RATE_NON_CHINA = 0.10             # Thai import duty for non-China origins
 DUTY_RATE_CHINA = 0.0                  # ASEAN-China FTA Form E
 THAI_VAT_RATE = 0.07                   # Thai VAT applied on (CIF + duty)
+# Destination customer-tax fallbacks (Firestore global keys are authoritative).
+# Nubo is not yet GST-registered in Singapore → SG retail ships GST-free.
+SG_CUSTOMER_GST_RATE = 0.09            # applied to SG retail only when Nubo registered
+SG_NUBO_GST_REGISTERED = False
 DEFAULT_PRODUCT_CATEGORY = "playground_equipment"
 ORIGIN_ROUTE = "europe"
 METHOD = "lcl"
@@ -123,6 +127,11 @@ def _resolve_params(brand: str) -> dict:
         "thai_vat_rate": float(cfg.get("thai_vat_rate", THAI_VAT_RATE)),
         "unmatched_landed_uplift": float(cfg.get("unmatched_landed_uplift", UNMATCHED_LANDED_UPLIFT)),
         "logistics_tiers": tiers,
+        # Destination customer taxes (v2.21.0 schema). SG GST only applies when
+        # Nubo is GST-registered; otherwise the SG sale is a zero-rated export
+        # and retail_sgd is the pre-tax base converted at live FX.
+        "sg_customer_gst_rate": float(cfg.get("sg_customer_gst_rate", SG_CUSTOMER_GST_RATE)),
+        "sg_nubo_gst_registered": bool(cfg.get("sg_nubo_gst_registered", SG_NUBO_GST_REGISTERED)),
     }
 
 
@@ -149,6 +158,7 @@ class PricedRow:
     retail_thb: float
     retail_usd: float
     retail_eur: float
+    retail_sgd: float
     freight_thb: float
     duty_thb: float
     vat_thb: float
@@ -305,6 +315,10 @@ def price_row(
     retail_thb = round(landed_thb / (1 - p["gross_margin"]), 2)
     retail_usd = round(retail_thb / fx.get("USD", 35.0), 2)
     retail_eur = round(retail_thb / fx.get("EUR", 38.0), 2)
+    # SG retail: GST stacks only when Nubo is GST-registered; otherwise the
+    # SG sale is a zero-rated export and SGD is just the pre-tax base at live FX.
+    sg_gst_mult = (1 + p["sg_customer_gst_rate"]) if p["sg_nubo_gst_registered"] else 1.0
+    retail_sgd = round(retail_thb * sg_gst_mult / fx.get("SGD", 25.0), 2)
 
     return PricedRow(
         item_code=code,
@@ -320,6 +334,7 @@ def price_row(
         retail_thb=retail_thb,
         retail_usd=retail_usd,
         retail_eur=retail_eur,
+        retail_sgd=retail_sgd,
         freight_thb=freight_thb,
         duty_thb=duty_thb,
         vat_thb=vat_thb,

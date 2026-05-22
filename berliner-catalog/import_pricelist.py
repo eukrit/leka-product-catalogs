@@ -72,6 +72,8 @@ def _berliner_params() -> dict:
         "duty_rate_non_china": float(cfg.get("duty_rate_non_china", DUTY_RATE_NON_CHINA)),
         "thai_vat_rate": float(cfg.get("thai_vat_rate", THAI_VAT_RATE)),
         "unmatched_landed_uplift": float(cfg.get("unmatched_landed_uplift", UNMATCHED_LANDED_UPLIFT)),
+        "sg_customer_gst_rate": float(cfg.get("sg_customer_gst_rate", 0.09)),
+        "sg_nubo_gst_registered": bool(cfg.get("sg_nubo_gst_registered", False)),
     }
 
 # Tiered logistics-cost band (% of FOB-in-THB). Identical to Vinci.
@@ -108,6 +110,7 @@ class PricedRow:
     retail_thb: float | None
     retail_usd: float | None
     retail_eur: float | None
+    retail_sgd: float | None
     freight_thb: float | None
     duty_thb: float | None
     vat_thb: float | None
@@ -209,7 +212,7 @@ def price_row(
             cbm=0.0, cbm_method="n/a",
             landed_thb=None, landed_thb_raw=None,
             logistics_pct=None, logistics_clamp="",
-            retail_thb=None, retail_usd=None, retail_eur=None,
+            retail_thb=None, retail_usd=None, retail_eur=None, retail_sgd=None,
             freight_thb=None, duty_thb=None, vat_thb=None,
             remarks=remarks,
         )
@@ -271,6 +274,8 @@ def price_row(
     retail_thb = round(landed_thb / (1 - p["gross_margin"]), 2)
     retail_usd = round(retail_thb / fx.get("USD", 35.0), 2)
     retail_eur = round(retail_thb / fx.get("EUR", 38.0), 2)
+    sg_gst_mult = (1 + p["sg_customer_gst_rate"]) if p["sg_nubo_gst_registered"] else 1.0
+    retail_sgd = round(retail_thb * sg_gst_mult / fx.get("SGD", 25.0), 2)
 
     return PricedRow(
         handle=handle, item_code=item_code, name=name, page=page, status=status,
@@ -279,6 +284,7 @@ def price_row(
         landed_thb=landed_thb, landed_thb_raw=round(landed_thb_raw, 2),
         logistics_pct=logistics_pct, logistics_clamp=logistics_clamp,
         retail_thb=retail_thb, retail_usd=retail_usd, retail_eur=retail_eur,
+        retail_sgd=retail_sgd,
         freight_thb=freight_thb, duty_thb=duty_thb, vat_thb=vat_thb,
         remarks=remarks,
     )
@@ -342,6 +348,7 @@ def write_firestore(rows: list[PricedRow], fx: dict, baltic: dict) -> None:
                 "retail_thb": r.retail_thb,
                 "retail_usd": r.retail_usd,
                 "retail_eur": r.retail_eur,
+                "retail_sgd": r.retail_sgd,
                 "cbm_used": r.cbm,
                 "cbm_method": r.cbm_method,
                 "freight_thb": r.freight_thb,

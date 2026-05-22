@@ -139,6 +139,7 @@ def write_firestore(rows: list[PricedRow], fx: dict, baltic: dict):
             "pricing.retail_thb": r.retail_thb,
             "pricing.retail_usd": r.retail_usd,
             "pricing.retail_eur": r.retail_eur,
+            "pricing.retail_sgd": r.retail_sgd,
             "pricing.cbm_used": r.cbm,
             "pricing.cbm_method": r.cbm_method,
             "pricing.freight_thb": r.freight_thb,

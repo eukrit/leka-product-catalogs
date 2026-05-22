@@ -84,3 +84,6 @@ Thumbs.db
 
 # Next.js TS incremental build cache
 *.tsbuildinfo
+
+# Pricing backfill safety backups (local audit)
+scripts/backfill_backups/
