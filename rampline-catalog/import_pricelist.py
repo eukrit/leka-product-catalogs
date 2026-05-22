@@ -82,6 +82,8 @@ def _rampline_params() -> dict:
         "gross_margin": float(cfg.get("gross_margin", GROSS_MARGIN)),
         "duty_rate_non_china": float(cfg.get("duty_rate_non_china", DUTY_RATE_NON_CHINA)),
         "thai_vat_rate": float(cfg.get("thai_vat_rate", THAI_VAT_RATE)),
+        "sg_customer_gst_rate": float(cfg.get("sg_customer_gst_rate", 0.09)),
+        "sg_nubo_gst_registered": bool(cfg.get("sg_nubo_gst_registered", False)),
     }
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s: %(message)s")
@@ -319,6 +321,7 @@ def write_firestore(
             "retail_thb": r.retail_thb,
             "retail_usd": r.retail_usd,
             "retail_eur": r.retail_eur,
+            "retail_sgd": r.retail_sgd,
             "cbm_used": r.cbm,
             "cbm_method": r.cbm_method,
             "freight_thb": r.freight_thb,
@@ -431,6 +434,8 @@ def main():
         pr.retail_thb = round(pr.landed_thb / (1 - p["gross_margin"]), 2)
         pr.retail_usd = round(pr.retail_thb / fx.get("USD", 35.0), 2)
         pr.retail_eur = round(pr.retail_thb / fx.get("EUR", 38.0), 2)
+        sg_gst_mult = (1 + p["sg_customer_gst_rate"]) if p["sg_nubo_gst_registered"] else 1.0
+        pr.retail_sgd = round(pr.retail_thb * sg_gst_mult / fx.get("SGD", 25.0), 2)
         priced.append(pr)
 
     by_strategy: dict[str, int] = {}

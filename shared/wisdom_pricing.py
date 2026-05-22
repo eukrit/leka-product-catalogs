@@ -36,6 +36,10 @@ IMPORT_DUTY_RATE: float = 0.07
 THAI_VAT_RATE: float = 0.07
 GROSS_MARGIN: float = 0.50
 DEFAULT_USD_THB: float = 35.0
+DEFAULT_SGD_THB: float = 25.0
+# SG GST stacks on SG retail only when Nubo is GST-registered (currently off).
+SG_CUSTOMER_GST_RATE: float = 0.09
+SG_NUBO_GST_REGISTERED: bool = False
 
 
 def _params() -> dict:
@@ -45,6 +49,8 @@ def _params() -> dict:
         "thai_vat_rate": float(cfg.get("thai_vat_rate", THAI_VAT_RATE)),
         "gross_margin": float(cfg.get("gross_margin", GROSS_MARGIN)),
         "default_usd_thb": float(cfg.get("default_usd_thb", DEFAULT_USD_THB)),
+        "sg_customer_gst_rate": float(cfg.get("sg_customer_gst_rate", SG_CUSTOMER_GST_RATE)),
+        "sg_nubo_gst_registered": bool(cfg.get("sg_nubo_gst_registered", SG_NUBO_GST_REGISTERED)),
     }
 
 
@@ -84,6 +90,38 @@ def get_usd_thb() -> float:
     return _params()["default_usd_thb"]
 
 
+def get_sgd_thb() -> float:
+    """Return SGD→THB rate: env override → shipping-automation live → default."""
+    env = os.environ.get("SGD_THB_RATE")
+    if env:
+        try:
+            return float(env)
+        except ValueError:
+            pass
+    try:
+        import sys
+        from pathlib import Path
+
+        candidates = [
+            Path.home() / "OneDrive" / "Documents" / "Claude Code"
+            / "shipping-automation" / "mcp-server",
+            Path(r"C:\Users\Eukrit\OneDrive\Documents\Claude Code"
+                 r"\shipping-automation\mcp-server"),
+            Path(r"C:\Users\eukri\OneDrive\Documents\Claude Code"
+                 r"\shipping-automation\mcp-server"),
+        ]
+        mcp = next((c for c in candidates if c.exists()), None)
+        if mcp and str(mcp) not in sys.path:
+            sys.path.insert(0, str(mcp))
+        from fx_rates import get_fx_rates
+        sgd = get_fx_rates().get("SGD")
+        if sgd and sgd > 0:
+            return float(sgd)
+    except Exception as e:
+        log.warning("SGD FX lookup failed (non-fatal): %s — using %.2f", e, DEFAULT_SGD_THB)
+    return DEFAULT_SGD_THB
+
+
 @dataclass
 class WisdomPricedRow:
     item_code: str
@@ -95,14 +133,18 @@ class WisdomPricedRow:
     landed_thb: float = 0.0
     retail_thb: float = 0.0
     retail_usd: float = 0.0
+    retail_sgd: float = 0.0
+    sgd_thb: float = 0.0
 
 
-def compute_wisdom_retail(fob_usd: float, usd_thb: float | None = None) -> WisdomPricedRow | None:
+def compute_wisdom_retail(fob_usd: float, usd_thb: float | None = None,
+                          sgd_thb: float | None = None) -> WisdomPricedRow | None:
     """Compute landed cost and retail price for a single Wisdom SKU.
 
     Args:
         fob_usd:  FOB Shanghai price in USD (from catalog).
-        usd_thb:  Exchange rate to use; fetched live if None.
+        usd_thb:  USD→THB rate to use; fetched live if None.
+        sgd_thb:  SGD→THB rate to use; fetched live if None.
 
     Returns:
         WisdomPricedRow, or None if fob_usd is falsy.
@@ -112,12 +154,15 @@ def compute_wisdom_retail(fob_usd: float, usd_thb: float | None = None) -> Wisdo
 
     p = _params()
     rate = usd_thb if usd_thb and usd_thb > 0 else get_usd_thb()
+    sgd_rate = sgd_thb if sgd_thb and sgd_thb > 0 else get_sgd_thb()
     fob_thb = fob_usd * rate
     duty_thb = round(fob_thb * p["import_duty_rate"], 2)
     vat_thb = round((fob_thb + duty_thb) * p["thai_vat_rate"], 2)
     landed_thb = round(fob_thb + duty_thb + vat_thb, 2)
     retail_thb = round(landed_thb / (1 - p["gross_margin"]), 2)
     retail_usd = round(retail_thb / rate, 2)
+    sg_gst_mult = (1 + p["sg_customer_gst_rate"]) if p["sg_nubo_gst_registered"] else 1.0
+    retail_sgd = round(retail_thb * sg_gst_mult / sgd_rate, 2)
 
     return WisdomPricedRow(
         item_code="",          # caller fills this in
@@ -129,6 +174,8 @@ def compute_wisdom_retail(fob_usd: float, usd_thb: float | None = None) -> Wisdo
         landed_thb=landed_thb,
         retail_thb=retail_thb,
         retail_usd=retail_usd,
+        retail_sgd=retail_sgd,
+        sgd_thb=sgd_rate,
     )
 
 
@@ -146,11 +193,12 @@ def compute_wisdom_retail_batch(
         List of WisdomPricedRow for every product that has a valid fob_usd.
     """
     rate = usd_thb if usd_thb and usd_thb > 0 else get_usd_thb()
+    sgd_rate = get_sgd_thb()
     results = []
     for p in products:
         fob = p.get("fob_usd") or (p.get("pricing") or {}).get("fob_usd")
         code = p.get("item_code", "")
-        row = compute_wisdom_retail(fob, rate)
+        row = compute_wisdom_retail(fob, rate, sgd_rate)
         if row:
             row.item_code = code
             results.append(row)
@@ -163,14 +211,17 @@ def pricing_metadata(row: WisdomPricedRow, price_date: str) -> dict:
     return {
         "fob_usd": row.fob_usd,
         "usd_thb": row.usd_thb,
+        "sgd_thb": row.sgd_thb,
         "duty_thb": row.duty_thb,
         "vat_thb": row.vat_thb,
         "landed_thb": row.landed_thb,
         "retail_thb": row.retail_thb,
         "retail_usd": row.retail_usd,
+        "retail_sgd": row.retail_sgd,
         "import_duty_rate": p["import_duty_rate"],
         "thai_vat_rate": p["thai_vat_rate"],
         "gross_margin": p["gross_margin"],
+        "sg_nubo_gst_registered": p["sg_nubo_gst_registered"],
         "price_date": price_date,
         "currency": "USD",
     }

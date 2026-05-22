@@ -4,6 +4,80 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.28.0] - 2026-05-22
+
+### Added — SGD retail across 5 brands + recompute onto current config
+
+Implements "local currency per country": Thailand checks out in THB,
+Singapore in SGD, everywhere else USD. SGD retail prices were missing on
+every brand except Eurotramp; this pass computes them for Wisdom, Vinci,
+Berliner, DesignPark, and Rampline straight from each brand's original
+pricelist FOB through the canonical landed-cost pipeline (user direction
+2026-05-22: "always refer to original pricelist and use pricing calculation
+to THB/SGD/USD as target").
+
+#### Tax treatment (already in `pricing_config/canonical`, confirmed)
+- **TH** — `th_customer_vat_rate = 0`: retail is VAT-inclusive; the 7% import
+  VAT is already inside `landed_thb`. No extra customer-VAT line.
+- **SG** — `sg_nubo_gst_registered = false`: SG sale is treated as a
+  zero-rated export, so **no GST is added** at catalog price. The formula
+  `retail_sgd = retail_pre_tax_thb / (THB/SGD)` flips to add 9% automatically
+  once Nubo registers and the flag is set true.
+
+#### Pipeline changes (SGD added to the formula)
+- `shared/landed_pricing.py` — `PricedRow.retail_sgd`; `price_row()` computes
+  it with the Nubo GST gate. New `SG_CUSTOMER_GST_RATE` / `SG_NUBO_GST_REGISTERED`
+  fallbacks; `_resolve_params()` reads the SG keys from Firestore config.
+- `shared/wisdom_pricing.py` — `retail_sgd` + `sgd_thb` on `WisdomPricedRow`;
+  `get_sgd_thb()` live-FX helper; `pricing_metadata()` emits SGD.
+- `scripts/ingest_designpark_pricelist.py` — `price_designpark_row()` emits
+  `retail_sgd`.
+- `vinci/berliner/rampline import_pricelist.py` — persist `retail_sgd`; Berliner
+  derives the EXW cost basis from `list_eur × (1 - exw_discount)` (config-driven).
+
+#### Recompute = adds SGD AND corrects stale config drift
+Recomputing from FOB at the current config also fixed prices that predated
+config changes and were never backfilled:
+- **Vinci -7.8%** — stored prices used 40% GM; config moved to 35% on 2026-05-14.
+- **Berliner +0.4%→+17.3%** — stored prices predated the 2026-05-14 7% Thai
+  VAT layer (small items floored either way; large items show the added VAT).
+- DesignPark/Rampline ~0% drift; Wisdom had no retail at all (FOB-only).
+
+Trade terms re-verified against the `vendors` DB before writing: Berliner
+`eur_fob` = `list_eur × 0.85` (EXW -15%, no double discount); Vinci/DesignPark/
+Wisdom are discount-free FOB; Vinci `eur_fob_2026` == `eur_fob`; Wisdom
+`fob_usd` covers all priceable docs.
+
+#### `scripts/backfill_sgd_pricing.py` (new)
+Recomputes the landed→retail cascade per brand from the original-pricelist FOB
+captured on each Firestore doc and writes `pricing.retail_{thb,usd,eur,sgd}`
+back to `vendors/{slug}/products` (Rampline → its `pricelists/<date>` audit
+doc). Dry-run by default; dumps a pre-write backup CSV per brand
+(`scripts/backfill_backups/`, gitignored) and stamps `fx_snapshot`,
+`fx_source`, `retail_basis`, `calculated_at` for audit. **Written:** Vinci
+1,234 · Berliner 728 · DesignPark 178 · Wisdom 4,809 · Rampline 127 (audit).
+
+#### `scripts/sync_brand_prices_to_medusa.py` (new)
+Update-only multi-currency price push. Indexes ALL Medusa products by variant
+sku / `metadata.legacy_sku` / handle and matches vendor docs by
+item_code → handle → doc-id, so it **never creates products** — avoiding the
+duplicate hazard of the handle-based `sync_vendors_to_medusa.py` (Berliner uses
+descriptive handles with item-code SKUs; Wisdom is rebranded "Leka Project"
+with `LP-` SKUs + `legacy_sku`). Match rates: Vinci 1,234/1,234, Berliner
+728/728, DesignPark 178/178, Wisdom 4,800/4,809 (9 `CQ14-QL-*(n)` sub-variants
+absent in Medusa).
+
+#### Deferred (not in this pass)
+- **SGD region NOT created** — per user, hold the `sg` region switch until the
+  whole ~9k catalog has SGD; SG keeps checking out in USD until then. No
+  storefront change needed (checkout currency follows `cart.region`).
+- **Rampline → Medusa** stays deferred (per-variant migration not done); SGD is
+  in the audit doc only.
+- **4soft / Weplay / Vortex** have no usable FOB/retail source in the vendors DB
+  and were out of scope.
+
+---
+
 ## [2.27.0] - 2026-05-21
 
 ### Added — B2B project context in order-placed notifications
