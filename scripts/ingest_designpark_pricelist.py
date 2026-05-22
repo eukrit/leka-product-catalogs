@@ -71,6 +71,7 @@ from shared.landed_pricing import (  # noqa: E402
     DEFAULT_PACKING_FACTOR,
     GROSS_MARGIN,
     THAI_VAT_RATE,
+    TH_CUSTOMER_VAT_RATE,
     UNMATCHED_LANDED_UPLIFT,
     DUTY_RATE_NON_CHINA,
     SG_CUSTOMER_GST_RATE,
@@ -270,49 +271,118 @@ def parse_theme_manifest() -> list[dict]:
 
 
 # --- Pricing ---------------------------------------------------------------
-def price_designpark_row(fob_usd: float, fx: dict) -> dict:
-    """USD FOB Busan → landed THB → retail (THB/USD/EUR).
+def price_designpark_row(fob_usd: float, fx: dict, cbm: float = 0.0,
+                         kg: float = 0.0) -> dict:
+    """USD FOB Busan → landed THB → retail (THB/USD/EUR/SGD).
 
-    DesignPark has no dimension data in the pricelist, so every SKU goes
-    through the cost_engine origin=japan_korea LCL path with cbm=0 (which
-    triggers the flat-uplift fallback inside the engine for goods-value-only
-    estimates). We replicate the landed_pricing.py "no dims" branch in-line
-    so the formula stays explicit and auditable per row.
+    When cbm > 0: routes through shipping-automation cost_engine
+    origin=japan_korea, method=lcl for a CBM-based Korea LCL estimate.
+    When cbm == 0 (no dimension data): falls back to the flat 35% uplift.
+    In both cases the Vinci tier-clamp (floor/cap by FOB band) is applied.
+
+    Korea LCL rate: 3,500 THB/CBM (cost_engine japan_korea.lcl).
+    Duty: 10% non-China (Korea not covered by ASEAN-China FTA).
     """
     usd_thb = fx.get("USD", 35.0)
     eur_thb = fx.get("EUR", 38.0)
     sgd_thb = fx.get("SGD", 25.0)
     fob_thb = fob_usd * usd_thb
-    # Korea LCL flat-uplift floor — Japan/Korea LCL is cheaper than Europe.
-    # Mirror UNMATCHED_LANDED_UPLIFT (35%) for parity with Vinci/Rampline at v1;
-    # refine to a Korea-specific tier once we have CBM data from B2 (DWG bbox).
-    cif_thb = fob_thb * UNMATCHED_LANDED_UPLIFT
-    freight_thb = cif_thb - fob_thb
-    duty_thb = round(cif_thb * DUTY_RATE_NON_CHINA, 2)
-    vat_thb = round((cif_thb + duty_thb) * THAI_VAT_RATE, 2)
-    landed_thb = round(cif_thb + duty_thb + vat_thb, 2)
-    retail_thb = round(landed_thb / (1 - GROSS_MARGIN), 2)
-    retail_usd = round(retail_thb / usd_thb, 2)
-    retail_eur = round(retail_thb / eur_thb, 2)
     _g = get_pricing_config() or {}
-    sg_gst = float(_g.get("sg_customer_gst_rate", SG_CUSTOMER_GST_RATE))
-    sg_reg = bool(_g.get("sg_nubo_gst_registered", SG_NUBO_GST_REGISTERED))
+    th_cust_vat = float(_g.get("th_customer_vat_rate", TH_CUSTOMER_VAT_RATE))
+    cfg_gm = float(_g.get("brands", {}).get("designpark", {}).get("gross_margin", GROSS_MARGIN)) \
+        if isinstance(_g.get("brands"), dict) else GROSS_MARGIN
+    # Pull from flat merged config (get_pricing_config("designpark") merges brand + global)
+    from shared.pricing_config import get_pricing_config as _gpc
+    dp_cfg = _gpc("designpark") or {}
+    gm = float(dp_cfg.get("gross_margin", GROSS_MARGIN))
+    duty_rate = float(dp_cfg.get("duty_rate_non_china", DUTY_RATE_NON_CHINA))
+    vat_rate = float(dp_cfg.get("thai_vat_rate", THAI_VAT_RATE))
+
+    method_used = "flat_uplift_korea_lcl"
+    if cbm and cbm > 0:
+        # CBM-based: use shipping-automation cost_engine for Korea LCL
+        try:
+            est = cost_engine.estimate_landed_cost(
+                origin="japan_korea",
+                method="lcl",
+                goods_value=fob_usd,
+                goods_currency="USD",
+                cbm=cbm,
+                kg=kg,
+                duty_rate=duty_rate,
+                fx_rates=fx,
+            )
+            landed_thb_raw = est["total_landed_thb"]
+            freight_thb = est["freight"]["thb"]
+            duty_thb = est["customs"]["duty_thb"]
+            vat_thb = est["customs"]["vat_thb"]
+            cif_thb = est["customs"]["cif_thb"]
+            method_used = "korea_lcl_cbm"
+        except Exception as e:
+            log.warning("Korea LCL CBM estimate failed for fob_usd=%.2f cbm=%.3f: %s — "
+                        "falling back to flat uplift", fob_usd, cbm, e)
+            cbm = 0.0  # fall through to flat path below
+
+    if not (cbm and cbm > 0):
+        # Flat-uplift fallback (no CBM data or CBM estimate failed)
+        cif_thb = fob_thb * UNMATCHED_LANDED_UPLIFT
+        freight_thb = cif_thb - fob_thb
+        duty_thb = round(cif_thb * duty_rate, 2)
+        vat_thb = round((cif_thb + duty_thb) * vat_rate, 2)
+        landed_thb_raw = round(cif_thb + duty_thb + vat_thb, 2)
+
+    # Tier clamp (same floor/cap system as Vinci/Berliner, applied in EUR-band space)
+    # DesignPark FOB is in USD — convert to EUR for tier lookup
+    eur_fob_equiv = fob_usd * usd_thb / eur_thb  # approx EUR to determine tier
+    from shared.landed_pricing import logistics_band, LOGISTICS_TIERS
+    tiers_raw = dp_cfg.get("logistics_tiers")
+    if tiers_raw:
+        tiers = [
+            (float("inf") if t.get("fob_eur_max") in (None, "inf") else float(t["fob_eur_max"]),
+             float(t["min_pct"]), float(t["max_pct"]))
+            for t in tiers_raw
+        ]
+    else:
+        tiers = LOGISTICS_TIERS
+    lo_pct, hi_pct = logistics_band(eur_fob_equiv, tiers)
+    floor_landed = fob_thb * (1 + lo_pct)
+    cap_landed = fob_thb * (1 + hi_pct)
+    logistics_clamp = ""
+    landed_thb = landed_thb_raw
+    if landed_thb < floor_landed:
+        landed_thb = floor_landed
+        logistics_clamp = "floored"
+    elif landed_thb > cap_landed:
+        landed_thb = cap_landed
+        logistics_clamp = "capped"
+    landed_thb = round(landed_thb, 2)
+
+    # Retail: independent per-currency (Task 10). TH customer VAT only on THB.
+    retail_thb = round((landed_thb / (1 - gm)) * (1 + th_cust_vat), 2)
+    retail_usd = round((landed_thb / usd_thb) / (1 - gm), 2)   # no TH customer VAT
+    retail_eur = round((landed_thb / eur_thb) / (1 - gm), 2)
+    sg_gst = float(dp_cfg.get("sg_customer_gst_rate", SG_CUSTOMER_GST_RATE))
+    sg_reg = bool(dp_cfg.get("sg_nubo_gst_registered", SG_NUBO_GST_REGISTERED))
     sg_gst_mult = (1 + sg_gst) if sg_reg else 1.0
-    retail_sgd = round(retail_thb * sg_gst_mult / sgd_thb, 2)
+    retail_sgd = round(((landed_thb / sgd_thb) / (1 - gm)) * sg_gst_mult, 2)
     return {
         "fob_usd": round(fob_usd, 2),
         "fob_thb": round(fob_thb, 2),
         "freight_thb": round(freight_thb, 2),
-        "duty_thb": duty_thb,
-        "vat_thb": vat_thb,
+        "duty_thb": round(duty_thb, 2),
+        "vat_thb": round(vat_thb, 2),
         "landed_thb": landed_thb,
+        "landed_thb_raw": round(landed_thb_raw, 2),
+        "logistics_clamp": logistics_clamp,
         "retail_thb": retail_thb,
         "retail_usd": retail_usd,
         "retail_eur": retail_eur,
         "retail_sgd": retail_sgd,
-        "gross_margin": GROSS_MARGIN,
+        "gross_margin": gm,
+        "th_customer_vat_rate": th_cust_vat,
         "logistics_uplift": UNMATCHED_LANDED_UPLIFT - 1,
-        "method": "flat_uplift_korea_lcl",
+        "cbm_used": cbm or 0.0,
+        "method": method_used,
         "formula_version": FORMULA_VERSION,
     }
 

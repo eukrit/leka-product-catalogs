@@ -4,6 +4,108 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.31.0] - 2026-05-24
+
+### Changed — Pricing formula overhaul: duty fix, TH VAT, independent currencies, CBM routing
+
+#### Task 1 — Pricing config master doc
+- Added `docs/summaries/pricing-config-master.md`: complete authoritative reference
+  for all FX sources, brand params, tax rules, per-brand formulas, Vinci tier
+  floor/cap system with worked examples, shipping-automation integration details,
+  and script reference.
+
+#### Task 2 — Fix Wisdom import duty (0%, not 7%)
+- `shared/wisdom_pricing.py`: `IMPORT_DUTY_RATE` corrected 0.07 → 0.00. China-origin
+  goods qualify under ASEAN-China FTA (Form E); 7% was incorrect.
+- `shared/pricing_config.py` schema doc updated: `brands.wisdom.import_duty_rate = 0.0`.
+- After this fix, Wisdom retail prices decrease by ~7% (the erroneous duty is removed).
+  Re-run `scripts/backfill_sgd_pricing.py --brand wisdom --write` to apply.
+
+#### Task 3 — TH customer VAT: embed 7% into all retail prices
+- `shared/landed_pricing.py`: added `TH_CUSTOMER_VAT_RATE = 0.07`. `_resolve_params()`
+  now reads `th_customer_vat_rate` from Firestore. `price_row()` applies
+  `retail_thb = (landed_thb / (1-gm)) × 1.07`. This is the TH domestic customer VAT
+  (distinct from the 7% import VAT already in `landed_thb`).
+- `shared/wisdom_pricing.py`: same `TH_CUSTOMER_VAT_RATE` constant and application in
+  `compute_wisdom_retail()`.
+- `scripts/ingest_designpark_pricelist.py`: applies `th_customer_vat_rate` from config.
+- `berliner-catalog/import_pricelist.py`: applies `th_customer_vat_rate`.
+- `rampline-catalog/import_pricelist.py`: applies `th_customer_vat_rate`.
+- Net effect: all THB retail prices increase by 7% vs pre-VAT. USD and SGD prices are
+  unaffected (TH customer VAT is a Thai domestic tax; international prices pre-VAT).
+
+#### Task 4 — Vinci tier floor/cap documented (code unchanged)
+- Vinci already routes through `shared.price_row()` → `cost_engine` when CBM available.
+- Full tier table and worked examples now documented in pricing-config-master.md.
+
+#### Task 5 — Berliner: CBM routing via shipping-automation
+- Berliner already uses `cost_engine` via its own `price_row()` implementation when
+  Firestore docs carry dimension data (from prior website scrape). No code change needed.
+- `_berliner_params()` now includes `th_customer_vat_rate`.
+
+#### Task 6 — DesignPark: Korea LCL CBM routing
+- `scripts/ingest_designpark_pricelist.py`: `price_designpark_row()` now accepts `cbm`
+  and `kg` params. When CBM > 0, routes through `cost_engine origin=japan_korea,
+  method=lcl` (3,500 THB/CBM). Applies Vinci-style tier clamp. Falls back to
+  flat 35% uplift when no CBM data (current pricelist has no dimensions).
+
+#### Task 7 — Wisdom: China LCL CBM routing + tier clamp
+- `shared/wisdom_pricing.py`: `compute_wisdom_retail()` now accepts `cbm`, `kg`, `fx`
+  params. New `_wisdom_lcl_estimate()` helper calls `cost_engine origin=china,
+  method=lcl` (2,800 THB/CBM). When CBM estimate succeeds, applies Vinci-style tier
+  clamp. Falls back to flat China CIF ≈ FOB path (duty=0%) when no CBM.
+- `compute_wisdom_retail_batch()` now auto-computes CBM from `dimensions` dict if
+  present on product docs (packing_factor 0.15).
+
+#### Task 8 — Rampline: airfreight routing when weight available
+- `rampline-catalog/import_pricelist.py`: load_dim_index() now also reads `weight_kg`
+  from scraped products. Main pricing loop: when weight_kg > 0, calls `cost_engine
+  origin=europe, method=air` (120 THB/kg, Profreight Italy→BKK rate, Norway comparable).
+  Applies tier clamp. Falls back to LCL tier system when no weight data (current scrape
+  has no weight; air routing activates after re-scrape).
+- Added `RAMPLINE_SHIPPING_METHOD = "air"` constant and airfreight rate logging.
+
+#### Task 9 — PLP currency selector (THB / USD / SGD)
+- `leka-website/catalogs/src/lib/currency.ts` (new): `SupportedCurrency` type,
+  `SUPPORTED_CURRENCIES`, `getStoredCurrency()` / `storeCurrency()` (localStorage),
+  `pickPrice()` (currency-aware Medusa variant price picker), `formatPrice()`.
+- `leka-website/catalogs/src/components/currency-selector.tsx` (new): pill-shaped
+  THB/USD/SGD selector matching Leka DS (Manrope, #8003FF, 9999px pill radius, 8px
+  button radius, `0px 2px 8px rgba(24,37,87,0.08)` shadow).
+- `leka-website/catalogs/src/components/product-card.tsx`: accepts `currency` prop;
+  uses `pickPrice()` + `formatPrice()` for currency-aware price display.
+- `leka-website/catalogs/src/app/[brand]/catalog-content.tsx`: adds `currency` state
+  (hydrated from localStorage after mount to avoid SSR mismatch); shows
+  `CurrencySelector` in header when `brand.hasPricing`; passes `currency` to
+  every `ProductCard`.
+
+#### Task 10 — Independent retail calculations per currency
+- `shared/landed_pricing.py` `price_row()`: `retail_usd` and `retail_sgd` now derived
+  from `landed_thb / FX` (not from `retail_thb / FX`) — independent from the TH
+  customer VAT applied to `retail_thb`. International prices are pre-TH-VAT.
+- `shared/wisdom_pricing.py`: same independent derivation.
+- `scripts/ingest_designpark_pricelist.py`: same independent derivation.
+- `berliner-catalog/import_pricelist.py`: same independent derivation.
+- `rampline-catalog/import_pricelist.py`: same independent derivation.
+
+**Files changed:**
+- `shared/landed_pricing.py`
+- `shared/wisdom_pricing.py`
+- `shared/pricing_config.py` (schema comment update)
+- `scripts/ingest_designpark_pricelist.py`
+- `berliner-catalog/import_pricelist.py`
+- `rampline-catalog/import_pricelist.py`
+- `docs/summaries/pricing-config-master.md` (new)
+- `leka-website/catalogs/src/lib/currency.ts` (new)
+- `leka-website/catalogs/src/components/currency-selector.tsx` (new)
+- `leka-website/catalogs/src/components/product-card.tsx`
+- `leka-website/catalogs/src/app/[brand]/catalog-content.tsx`
+
+---
+
+
+---
+
 ## [2.30.0] - 2026-05-23
 
 ### Changed — Playground Mound Modeler extracted to dedicated repo
