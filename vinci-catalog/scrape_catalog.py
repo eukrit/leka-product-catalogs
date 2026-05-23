@@ -176,14 +176,32 @@ def scrape_product(url, series_slug, series_name):
     h1 = soup.find("h1")
     if h1:
         product["name"] = h1.get_text(strip=True)
-    # Extract item code from URL: /en/offer/series/series-CODE -> CODE
-    url_match = re.search(r"/offer/[^/]+/[^/]+-(.+)$", url.rstrip("/"))
-    if url_match:
-        raw_code = url_match.group(1).upper()
-        product["item_code"] = raw_code
+    # Extract item code. Priority order (bug fixed 2026-05-16; the old code
+    # used a greedy `[^/]+-(.+)` that collapsed 75 distinct products to
+    # codes "1" / "2" / "001"):
+    #
+    #   1. Product name — `"ROBINIA RB0521-1"` → `"RB0521-1"`. This is the
+    #      most reliable signal because Vinci's H1 always shows
+    #      "<SERIES_NAME> <CODE>" and we already extracted the name.
+    #   2. URL with backreference — `/offer/<series>/<series>-<CODE>`
+    #      (works for canonical slugs where the series repeats).
+    #   3. URL with loose pattern (legacy fallback for non-canonical slugs
+    #      e.g. STEEL+ uses `steelplus/steel-XXXX`).
+    #   4. Name-as-slug (last resort).
+    name_str = product.get("name", "")
+    name_match = re.match(r"^[A-Z+]+\s+(.+)$", name_str)
+    if name_match:
+        product["item_code"] = name_match.group(1).upper()
     else:
-        # Fallback: use product name
-        product["item_code"] = product.get("name", "").replace(" ", "-").upper()
+        url_match = re.search(r"/offer/([^/]+)/\1-(.+)$", url.rstrip("/"))
+        if url_match:
+            product["item_code"] = url_match.group(2).upper()
+        else:
+            loose = re.search(r"/offer/[^/]+/[^/]+-(.+)$", url.rstrip("/"))
+            if loose:
+                product["item_code"] = loose.group(1).upper()
+            else:
+                product["item_code"] = name_str.replace(" ", "-").upper()
 
     # --- Description ---
     # Look for description paragraphs near the product
