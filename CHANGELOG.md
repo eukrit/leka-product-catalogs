@@ -4,6 +4,54 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.29.0] - 2026-05-22
+
+### Added — Proposal Builder backend endpoints (sibling to leka-projects #29)
+
+Two new HTTP routes + one subscriber so the `catalogs.leka.studio` storefront's "Send to Proposal" button (sibling PR in `eukrit/leka-website`) can convert a customer cart into a Medusa Draft Order, and so the Python `proposal_engine` adapter in `eukrit/leka-projects` (v1.48.0) can fetch that draft order pre-joined with every expansion it needs.
+
+Plan: `~/.claude/plans/based-on-the-latest-tingly-coral.md` §D.
+
+**New routes:**
+
+- `POST /store/proposal-builder/convert-cart`
+  - **Auth:** store-side (publishable API key + optional customer session).
+  - **Body:** `{ cart_id, project_id?, project_name?, site_location?, project_details?, metadata? }`.
+  - **Flow:** retrieves the cart, runs `createOrderWorkflow` from `@medusajs/medusa/core-flows` with `status: "draft"`, stamps `metadata.proposal_builder: true` on the order + every line item plus the project context. Copies cart shipping/billing address through. Returns `{ draft_order_id, display_id, status, message }`.
+  - **What happens to the cart:** left intact on the server (storefront clears its localStorage cart-id on success).
+  - **File:** `medusa-backend/src/api/store/proposal-builder/convert-cart/route.ts`.
+
+- `GET /admin/draft-orders/:id/proposal-export`
+  - **Auth:** admin (JWT or admin API key from Medusa admin UI). The proposal engine sends `x-medusa-access-token: <key>`; key lives in GCP Secret Manager as `medusa-admin-api-key-proposal-engine`.
+  - **Returns:** the draft order with every expansion the Python adapter needs (items → variant → product → images, region, addresses) in a single HTTP call, wrapped in a legacy-`cart`-shaped envelope so the adapter doesn't have to dual-handle v1/v2 order shapes.
+  - **Why custom:** the BoQ adapter contract is stable in `proposal_engine` (plan §C3); pinning the wire shape here means future BoQ schema changes don't require redeploying Cloud Run.
+  - **File:** `medusa-backend/src/api/admin/draft-orders/[id]/proposal-export/route.ts`.
+
+**New subscriber:**
+
+- `src/subscribers/proposal-created.ts` — listens on `order.placed`, filters `metadata.proposal_builder === true`, posts a Slack alert to `#leka-medusa-proposal` via the data-comms Slack Router (Rule 16) with the `draft_order_id`, total, project_id/name/site, and a one-liner instruction to paste the ID into `projects/<id>/config.yaml` and run `python -m proposal_engine render ...`. Best-effort (no-throws) so the cart conversion never fails on notification glitches.
+
+**Verification:**
+
+- `npm run build` → green (backend compiled in 19.85s, admin frontend in 59.31s; no TypeScript errors).
+- Manual smoke (post-deploy):
+  ```
+  curl -X POST https://catalogs.leka.studio/api/store/proposal-builder/convert-cart \
+    -H "Content-Type: application/json" \
+    -H "x-publishable-api-key: $LEKA_PUBLISHABLE_KEY" \
+    -d '{"cart_id":"cart_xxx","project_id":"dulwich-singapore","project_name":"Test"}'
+  ```
+  Expect `201` with `draft_order_id`.
+
+**Not in this PR (sibling work):**
+
+- `eukrit/leka-projects` v1.48.0 — the Python adapter that consumes `/admin/draft-orders/:id/proposal-export` (PR #29, merged).
+- `eukrit/leka-website` — the storefront "Send to Proposal" button that POSTs to `/store/proposal-builder/convert-cart`.
+- One-shot: `gcloud secrets create medusa-admin-api-key-proposal-engine --replication-policy=automatic` + paste the admin key issued in Medusa admin UI.
+- Variant metadata backfill (`supplier`, `supplier_url`, `dimensions`, `age_range`, `diecut_white_gcs`) on Wisdom / Vinci Play / Weplay products so the proposal engine cards have full data — separate follow-up; until then bare products render with default zone/category + sales retags in admin.
+
+---
+
 ## [2.28.0] - 2026-05-22
 
 ### Added — SGD retail across 5 brands + recompute onto current config
