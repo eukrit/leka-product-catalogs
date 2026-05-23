@@ -4,6 +4,50 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.30.0] - 2026-05-23
+
+### Changed — Playground Mound Modeler extracted to dedicated repo
+
+The `mound-modeler/` module (developed in a worktree off this repo from
+2026-04 to 2026-05-17) has been extracted to its own repo and Cloud Run
+service:
+
+- **Repo:** [eukrit/leka-mound](https://github.com/eukrit/leka-mound) (private, branch `main`)
+- **Cloud Run service:** `leka-mound` (asia-southeast1, replaces the `/mound/` blueprint mount on `leka-product-catalogs` Cloud Run)
+- **Gateway slug:** `leka-mound` (kind=cloud_run, visibility=admin)
+- **Legacy slug:** `leka-mound-modeler` deprecated 2026-05-23; still points at the existing `leka-product-catalogs` Cloud Run revision (which carries the historical /mound/ blueprint). Scheduled for removal on 2026-06-23.
+
+### Vinci catalog dependency
+
+The new `leka-mound` service fetches Vinci product data at runtime from
+`https://leka-product-catalogs-538978391890.asia-southeast1.run.app/vinciplay/data/products_all.json`.
+Bundled snapshot in `leka-mound/data/vinci_products.bundled.json` is the
+offline fallback. Refresh cadence: 1h in-memory cache. `/health` surfaces
+the current source as `remote` / `bundled` / `remote_stale`.
+
+### Firestore designs
+
+`mound_designs` collection stays in this project's Firestore database
+(`leka-product-catalogs`). The new service uses a cross-database client
+so existing saved-design URLs (`?id=m-XXXX`) still resolve.
+
+### Note on the running Cloud Run revision
+
+`leka-product-catalogs` Cloud Run revision `00014-mw2` was built from the
+worktree (not from main) and includes the mound blueprint at `/mound/`.
+A redeploy from `main` would drop the blueprint and break the legacy
+`leka-mound-modeler` gateway slug. Plan: redeploy from main only AFTER
+2026-06-23 when the legacy slug is removed.
+
+### Pre-history
+
+All mound-modeler development before extraction is preserved in this
+repo's git history under the worktree branch
+`claude/determined-yalow-d2e28e`. See `eukrit/leka-mound/BUILD_LOG.md`
+for v0.2.0 (the extraction).
+
+---
+
 ## [2.29.0] - 2026-05-22
 
 ### Added — Proposal Builder backend endpoints (sibling to leka-projects #29)
