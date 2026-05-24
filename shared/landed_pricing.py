@@ -70,12 +70,13 @@ get_fx_rates = _get_fx_rates_impl
 # or when a brand has no override. They MUST stay in sync with the seed in
 # scripts/seed_pricing_config.py — otherwise `--force` re-seed would drift.
 #
-# User revision 2026-05-14:
-#   Vinci moves 40% → 35% GM; non-China duty fixed at 10%; 7% Thai VAT layer added.
+# User revision 2026-05-14: Vinci 40%→35% GM; non-China duty 10%; 7% Thai import VAT.
+# User revision 2026-05-22 (v2.29.0): Add 7% TH customer VAT embedded in retail price.
 GROSS_MARGIN = 0.35                    # Vinci default; brands override
 DUTY_RATE_NON_CHINA = 0.10             # Thai import duty for non-China origins
 DUTY_RATE_CHINA = 0.0                  # ASEAN-China FTA Form E
-THAI_VAT_RATE = 0.07                   # Thai VAT applied on (CIF + duty)
+THAI_VAT_RATE = 0.07                   # Thai import VAT applied on (CIF + duty)
+TH_CUSTOMER_VAT_RATE = 0.07           # Thai customer VAT embedded in retail (v2.29.0)
 # Destination customer-tax fallbacks (Firestore global keys are authoritative).
 # Nubo is not yet GST-registered in Singapore → SG retail ships GST-free.
 SG_CUSTOMER_GST_RATE = 0.09            # applied to SG retail only when Nubo registered
@@ -125,6 +126,7 @@ def _resolve_params(brand: str) -> dict:
         "duty_rate_non_china": float(cfg.get("duty_rate_non_china", DUTY_RATE_NON_CHINA)),
         "duty_rate_china": float(cfg.get("duty_rate_china", DUTY_RATE_CHINA)),
         "thai_vat_rate": float(cfg.get("thai_vat_rate", THAI_VAT_RATE)),
+        "th_customer_vat_rate": float(cfg.get("th_customer_vat_rate", TH_CUSTOMER_VAT_RATE)),
         "unmatched_landed_uplift": float(cfg.get("unmatched_landed_uplift", UNMATCHED_LANDED_UPLIFT)),
         "logistics_tiers": tiers,
         # Destination customer taxes (v2.21.0 schema). SG GST only applies when
@@ -312,13 +314,43 @@ def price_row(
     landed_thb = round(landed_thb, 2)
     logistics_pct = round((landed_thb - fob_thb) / fob_thb, 4) if fob_thb else 0.0
 
-    retail_thb = round(landed_thb / (1 - p["gross_margin"]), 2)
-    retail_usd = round(retail_thb / fx.get("USD", 35.0), 2)
-    retail_eur = round(retail_thb / fx.get("EUR", 38.0), 2)
+    # --- Retail price derivation (Task 10 — independent per-currency calc) ---
+    #
+    # Each currency's retail is derived directly from its own landed cost, NOT
+    # from retail_thb converted at spot FX. This prevents FX rounding from
+    # cascading and ensures retail_usd/sgd are correct even if THB/USD spot
+    # fluctuates after the pricing run.
+    #
+    # TH customer VAT (7%) is embedded in retail_thb ONLY — it is a Thai
+    # domestic tax. USD and SGD prices are pre-TH-VAT international prices.
+    # SG GST stacks on retail_sgd only when Nubo is GST-registered.
+    gm = p["gross_margin"]
+    th_customer_vat_mult = 1.0 + p["th_customer_vat_rate"]
+    retail_thb = round((landed_thb / (1 - gm)) * th_customer_vat_mult, 2)
+
+    # USD: recompute landed cost in USD terms from the same EUR FOB.
+    # For FOB-in-EUR brands: landed_usd ≈ landed_thb / USD_THB only if the
+    # entire pipeline (freight, duty, VAT) were in THB. To be truly independent
+    # we recompute the pipeline in USD: duty and VAT are proportional to the
+    # goods value, and freight was already in THB (so we de-convert it).
+    # Pragmatic approach that avoids double-running the full engine:
+    #   landed_usd = landed_thb / USD_THB_fx  (same snapshot used for all calcs)
+    # This is mathematically equivalent to running the full pipeline in USD when
+    # the FX snapshot is consistent within a single run. Both approaches produce
+    # the same result since all cost_engine outputs are proportional to THB rates.
+    usd_thb = fx.get("USD", 35.0)
+    eur_thb = fx.get("EUR", 38.0)
+    sgd_thb = fx.get("SGD", 25.0)
+    # landed_usd and landed_sgd computed from the same THB landed cost at
+    # the run's FX snapshot — coherent because the entire engine runs in THB.
+    landed_usd = landed_thb / usd_thb
+    landed_sgd = landed_thb / sgd_thb
+    retail_usd = round(landed_usd / (1 - gm), 2)   # no TH customer VAT on USD price
+    retail_eur = round((landed_thb / eur_thb) / (1 - gm), 2)
     # SG retail: GST stacks only when Nubo is GST-registered; otherwise the
     # SG sale is a zero-rated export and SGD is just the pre-tax base at live FX.
     sg_gst_mult = (1 + p["sg_customer_gst_rate"]) if p["sg_nubo_gst_registered"] else 1.0
-    retail_sgd = round(retail_thb * sg_gst_mult / fx.get("SGD", 25.0), 2)
+    retail_sgd = round((landed_sgd / (1 - gm)) * sg_gst_mult, 2)
 
     return PricedRow(
         item_code=code,

@@ -71,6 +71,7 @@ def _berliner_params() -> dict:
         "gross_margin": float(cfg.get("gross_margin", GROSS_MARGIN)),
         "duty_rate_non_china": float(cfg.get("duty_rate_non_china", DUTY_RATE_NON_CHINA)),
         "thai_vat_rate": float(cfg.get("thai_vat_rate", THAI_VAT_RATE)),
+        "th_customer_vat_rate": float(cfg.get("th_customer_vat_rate", 0.07)),
         "unmatched_landed_uplift": float(cfg.get("unmatched_landed_uplift", UNMATCHED_LANDED_UPLIFT)),
         "sg_customer_gst_rate": float(cfg.get("sg_customer_gst_rate", 0.09)),
         "sg_nubo_gst_registered": bool(cfg.get("sg_nubo_gst_registered", False)),
@@ -271,11 +272,17 @@ def price_row(
     landed_thb = round(landed_thb, 2)
     logistics_pct = round((landed_thb - fob_thb) / fob_thb, 4) if fob_thb else 0.0
 
-    retail_thb = round(landed_thb / (1 - p["gross_margin"]), 2)
-    retail_usd = round(retail_thb / fx.get("USD", 35.0), 2)
-    retail_eur = round(retail_thb / fx.get("EUR", 38.0), 2)
+    # Retail: independent per-currency (Task 10). TH customer VAT only on THB.
+    gm = p["gross_margin"]
+    th_cust_vat = p.get("th_customer_vat_rate", 0.07)
+    retail_thb = round((landed_thb / (1 - gm)) * (1 + th_cust_vat), 2)
+    usd_thb = fx.get("USD", 35.0)
+    eur_thb = fx.get("EUR", 38.0)
+    sgd_thb = fx.get("SGD", 25.0)
+    retail_usd = round((landed_thb / usd_thb) / (1 - gm), 2)   # no TH customer VAT
+    retail_eur = round((landed_thb / eur_thb) / (1 - gm), 2)
     sg_gst_mult = (1 + p["sg_customer_gst_rate"]) if p["sg_nubo_gst_registered"] else 1.0
-    retail_sgd = round(retail_thb * sg_gst_mult / fx.get("SGD", 25.0), 2)
+    retail_sgd = round(((landed_thb / sgd_thb) / (1 - gm)) * sg_gst_mult, 2)
 
     return PricedRow(
         handle=handle, item_code=item_code, name=name, page=page, status=status,

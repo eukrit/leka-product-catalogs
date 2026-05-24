@@ -49,6 +49,11 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 RAMPLINE_DIR = REPO_ROOT / "rampline-catalog"
 OUTPUT_DIR = RAMPLINE_DIR / "data"
 DIM_SOURCE = REPO_ROOT / "data" / "scraped" / "rampline" / "products.json"
+# Rampline ships by airfreight from Norway. When weight data is available in
+# the scraped products, use cost_engine origin=europe, method=air (120 THB/kg,
+# Profreight PRO 2604059 Italy→BKK rate; Norway is similar). When no weight/CBM
+# data, fall back to the Vinci LCL tier system (price_row brand=rampline).
+RAMPLINE_SHIPPING_METHOD = "air"   # "air" | "lcl" — override per product when mixed
 DEFAULT_PRICELIST = (
     RAMPLINE_DIR / "data" / "source" / "rampline_pricelist_2025_fetched-2026-05-13.xlsx"
 )
@@ -82,6 +87,7 @@ def _rampline_params() -> dict:
         "gross_margin": float(cfg.get("gross_margin", GROSS_MARGIN)),
         "duty_rate_non_china": float(cfg.get("duty_rate_non_china", DUTY_RATE_NON_CHINA)),
         "thai_vat_rate": float(cfg.get("thai_vat_rate", THAI_VAT_RATE)),
+        "th_customer_vat_rate": float(cfg.get("th_customer_vat_rate", 0.07)),
         "sg_customer_gst_rate": float(cfg.get("sg_customer_gst_rate", 0.09)),
         "sg_nubo_gst_registered": bool(cfg.get("sg_nubo_gst_registered", False)),
     }
@@ -195,8 +201,14 @@ def load_dim_index() -> dict[str, dict]:
         depth = parse_dim(dims.get("depth_cm"))
         width = parse_dim(dims.get("width_cm"))
         height = parse_dim(dims.get("height_cm"))
+        weight_kg = p.get("weight_kg")  # used for airfreight (europe/air) routing
+        try:
+            weight_kg = float(weight_kg) if weight_kg else None
+        except (TypeError, ValueError):
+            weight_kg = None
         # Key by both raw and normalized form so fuzzy_lookup can hit either.
-        entry = {"length_cm": depth, "width_cm": width, "height_cm": height}
+        entry = {"length_cm": depth, "width_cm": width, "height_cm": height,
+                 "weight_kg": weight_kg}
         index[sku] = entry
         norm = normalize_sku(sku)
         if norm != sku:
@@ -416,6 +428,21 @@ def main():
              baltic["per_cbm_thb"], len(baltic["sources"]))
 
     p = _rampline_params()
+    th_cust_vat_mult = 1.0 + p.get("th_customer_vat_rate", 0.07)
+    sg_gst_mult = (1 + p["sg_customer_gst_rate"]) if p["sg_nubo_gst_registered"] else 1.0
+
+    # Import cost_engine for direct airfreight estimates when weight data available.
+    # Rampline ships airfreight from Norway; cost_engine europe/air = 120 THB/kg
+    # (Profreight PRO 2604059 Italy→BKK EUR 3.20/kg, Norway comparable).
+    try:
+        import cost_engine as _ce_rampline
+        _air_profile = _ce_rampline.ROUTE_PROFILES["europe"]["methods"]["air"]
+        log.info("Airfreight rate: %.0f THB/kg (min charge %.0f THB)",
+                 _air_profile["rates"]["per_kg"], _air_profile["rates"]["min_charge"])
+    except Exception as _e:
+        _ce_rampline = None
+        log.warning("cost_engine not available for airfreight estimates: %s", _e)
+
     priced: list[PricedRow] = []
     for row in parsed:
         sku = row["sku"]
@@ -425,17 +452,73 @@ def main():
         norm = normalize_sku(sku)
         if norm in dim_index_for_call and sku not in dim_index_for_call:
             dim_index_for_call[sku] = dim_index_for_call[norm]
-        # Pass brand="rampline" so price_row pulls Rampline's GM (30%)
-        # from Firestore directly. The retail re-derivation below stays
-        # as a defensive belt-and-suspenders for the Firestore-unreachable
-        # path where shared falls back to its 0.35 default.
-        pr = price_row(sku, eur, dim_index_for_call, fx, baltic,
-                       args.packing_factor, brand="rampline")
-        pr.retail_thb = round(pr.landed_thb / (1 - p["gross_margin"]), 2)
-        pr.retail_usd = round(pr.retail_thb / fx.get("USD", 35.0), 2)
-        pr.retail_eur = round(pr.retail_thb / fx.get("EUR", 38.0), 2)
-        sg_gst_mult = (1 + p["sg_customer_gst_rate"]) if p["sg_nubo_gst_registered"] else 1.0
-        pr.retail_sgd = round(pr.retail_thb * sg_gst_mult / fx.get("SGD", 25.0), 2)
+
+        # Check if we have weight data for this SKU (enables airfreight routing)
+        scraped = dim_index_for_call.get(sku) or dim_index_for_call.get(norm)
+        weight_kg = float(scraped.get("weight_kg") or 0) if scraped else 0.0
+        use_airfreight = weight_kg > 0 and _ce_rampline is not None
+
+        if use_airfreight:
+            # Direct airfreight estimate: europe/air, 120 THB/kg
+            try:
+                fob_thb = eur * fx.get("EUR", 38.0)
+                est = _ce_rampline.estimate_landed_cost(
+                    origin="europe", method="air",
+                    goods_value=eur, goods_currency="EUR",
+                    cbm=0, kg=weight_kg,
+                    duty_rate=p["duty_rate_non_china"],
+                    fx_rates=fx,
+                )
+                landed_thb_raw = est["total_landed_thb"]
+                # Apply Vinci-style tier clamp
+                from shared.landed_pricing import logistics_band, LOGISTICS_TIERS
+                lo_pct, hi_pct = logistics_band(eur, LOGISTICS_TIERS)
+                floor_landed = fob_thb * (1 + lo_pct)
+                cap_landed = fob_thb * (1 + hi_pct)
+                logistics_clamp = ""
+                if landed_thb_raw < floor_landed:
+                    landed_thb = floor_landed
+                    logistics_clamp = "floored"
+                elif landed_thb_raw > cap_landed:
+                    landed_thb = cap_landed
+                    logistics_clamp = "capped"
+                else:
+                    landed_thb = landed_thb_raw
+                landed_thb = round(landed_thb, 2)
+                # Build a PricedRow-like struct for uniform downstream handling
+                from shared.landed_pricing import PricedRow as _PR
+                pr = _PR(
+                    item_code=sku, eur_fob=eur,
+                    matched=True, match_strategy="airfreight_weight",
+                    cbm=0.0, cbm_method="airfreight_weight",
+                    landed_thb=landed_thb, landed_thb_raw=round(landed_thb_raw, 2),
+                    logistics_pct=round((landed_thb - fob_thb) / fob_thb, 4) if fob_thb else 0.0,
+                    logistics_clamp=logistics_clamp,
+                    retail_thb=0, retail_usd=0, retail_eur=0, retail_sgd=0,
+                    freight_thb=est["freight"]["thb"],
+                    duty_thb=est["customs"]["duty_thb"],
+                    vat_thb=est["customs"]["vat_thb"],
+                    note=f"air {weight_kg:.1f}kg",
+                )
+            except Exception as _air_err:
+                log.warning("[rampline/%s] airfreight estimate failed: %s — LCL fallback", sku, _air_err)
+                use_airfreight = False
+
+        if not use_airfreight:
+            # LCL tier system (default / fallback)
+            pr = price_row(sku, eur, dim_index_for_call, fx, baltic,
+                           args.packing_factor, brand="rampline")
+
+        # Retail: independent per-currency (Task 10). TH customer VAT only on THB.
+        gm = p["gross_margin"]
+        usd_thb_r = fx.get("USD", 35.0)
+        eur_thb_r = fx.get("EUR", 38.0)
+        sgd_thb_r = fx.get("SGD", 25.0)
+        lt = pr.landed_thb
+        pr.retail_thb = round((lt / (1 - gm)) * th_cust_vat_mult, 2)
+        pr.retail_usd = round((lt / usd_thb_r) / (1 - gm), 2)   # no TH customer VAT
+        pr.retail_eur = round((lt / eur_thb_r) / (1 - gm), 2)
+        pr.retail_sgd = round(((lt / sgd_thb_r) / (1 - gm)) * sg_gst_mult, 2)
         priced.append(pr)
 
     by_strategy: dict[str, int] = {}
