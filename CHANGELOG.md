@@ -4,6 +4,25 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.32.0] - 2026-05-24
+
+### Fixed — Rampline weight scraper + airfreight routing for 32/127 SKUs
+
+- `scripts/scrape-rampline.ts`: fixed weight extraction — Rampline publishes specs
+  in `<p><br>` blocks, not `<ul><li>`. Now parses both; takes max weight across all
+  variant lines per page (conservative airfreight estimate).
+  Products with weight data: Rampit 40kg, Rampit TWIN 60kg, Jumpstone 20kg,
+  Rampit Storm 50kg, BalanceBuddy 43kg, Fungi 33kg, Playground Loop 160kg.
+- `rampline-catalog/import_pricelist.py`: added `FAMILY_DESC_TO_SLUG` table (pricelist
+  uses long descriptive family names, not marketing names); `load_dim_index()` now
+  keys by handle slug + title slug in addition to WooCommerce SKU; main loop tries
+  family-desc lookup when article-SKU lookup misses.
+  Result: **32/127 SKUs now use `airfreight_weight` strategy** (was 0), 95 remain on
+  `flat_uplift` (Rampball — no published weight, ShockDeck, motor-skill parks).
+  Scraped data: `data/scraped/rampline/products.json` (54 products from sitemap).
+
+---
+
 ## [2.31.0] - 2026-05-24
 
 ### Changed — Pricing formula overhaul: duty fix, TH VAT, independent currencies, CBM routing

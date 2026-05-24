@@ -32,10 +32,10 @@
   <div class="latest-card">
     <h2 style="margin-top:0;border:0">Latest build</h2>
     <p>
-      Version <strong>2.31.0</strong> &middot; 2026-05-24 &middot;
+      Version <strong>2.32.0</strong> &middot; 2026-05-24 &middot;
       <span class="badge badge-success">success</span>
     </p>
-    <p>Pricing formula overhaul: fix Wisdom duty 7%&rarr;0% (ASEAN-China FTA), embed 7% TH customer VAT into all retail prices, add Korea/China/airfreight CBM routing via shipping-automation, independent per-currency retail calculations, PLP currency selector (THB/USD/SGD with localStorage persistence), and authoritative pricing-config-master.md reference doc.</p>
+    <p>Rampline weight scraper fix: parse &lt;p&gt;&lt;br&gt; spec blocks for weight_kg (was always 0). Family-descriptor dim lookup bridges pricelist descriptive family names to scraped product slugs. Result: 32/127 Rampline SKUs now use airfreight_weight routing (vs 0 before).</p>
     <p>
       <a href="CHANGELOG.md">Full build log</a> &middot;
       <a href="PROJECT_INDEX.md">Project index</a> &middot;
@@ -47,6 +47,7 @@
   <table>
     <thead><tr><th>Version</th><th>Date</th><th>Summary</th><th>Status</th></tr></thead>
     <tbody>
+      <tr><td><code>2.32.0</code></td><td>2026-05-24</td><td>Rampline weight scraper fix: &lt;p&gt;&lt;br&gt; spec parsing, family-desc dim lookup — 32/127 SKUs airfreight_weight (was 0)</td><td><span class="badge badge-success">success</span></td></tr>
       <tr><td><code>2.31.0</code></td><td>2026-05-24</td><td>Pricing formula overhaul: Wisdom duty 0%, TH customer VAT, CBM routing, independent currencies, PLP currency selector</td><td><span class="badge badge-success">success</span></td></tr>
       <tr><td><code>2.30.0</code></td><td>2026-05-23</td><td>Playground Mound Modeler extracted to eukrit/leka-mound</td><td><span class="badge badge-success">success</span></td></tr>
       <tr><td><code>2.29.0</code></td><td>2026-05-22</td><td>Proposal Builder backend endpoints (convert-cart + proposal-export)</td><td><span class="badge badge-success">success</span></td></tr>
