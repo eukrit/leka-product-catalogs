@@ -54,6 +54,33 @@ DIM_SOURCE = REPO_ROOT / "data" / "scraped" / "rampline" / "products.json"
 # Profreight PRO 2604059 Italy→BKK rate; Norway is similar). When no weight/CBM
 # data, fall back to the Vinci LCL tier system (price_row brand=rampline).
 RAMPLINE_SHIPPING_METHOD = "air"   # "air" | "lcl" — override per product when mixed
+
+# Explicit mapping: pricelist family description (normalized) → product slug key.
+# Bridges the gap between the pricelist's long descriptive family names and the
+# short marketing slugs used as keys in load_dim_index().
+# Source: rampline.com/en/product-sitemap.xml + visual inspection of pricelist.
+FAMILY_DESC_TO_SLUG: dict[str, str] = {
+    # Family description fragment (lowercase, no special chars) → slug (uppercase, no sep)
+    "tiltingandrotatingbalanceballs":                         "RAMPBALL",
+    "slacklinerackwithpaddedramps":                           "RAMPLINESLACKLINE",
+    "naturalrubberjumppads":                                  "JUMPSTONEEN",
+    "balancebeamwithshockabsorbingnaturalrubberpadding":      "BALANCEBUDDYEN",
+    "zigzagbalancebeam":                                      "BALANCEBUDDYWAVE",
+    "climbingmushrooms":                                      "FUNGIENG",
+    "fullyweldedandpowdercoatedgimbarr":                      "RAMPITSWING",   # Rampit TWIN
+    "fullyweldedandpowdercoatedactivityrack":                 "RAMPIT",        # Rampit single
+    "fullyweldedandpowdercoatedactivitybars":                 "RAMPITHOPPER",  # Rampit Hopper
+    "powdercoatedclimbingpole":                               "RAMITSTORMEN",  # Rampit Storm
+    "powdercoatedbalancearch":                                "RAMPBOW",
+    "individuallyadaptedbench":                               "FLOATINGBENCH",
+    "shockdeck":                                              "SHOCKDECK",
+}
+
+
+def _normalize_family_desc(s: str) -> str:
+    """Strip noise chars from a pricelist family description for lookup."""
+    return re.sub(r"[^a-z0-9]", "", s.lower())
+
 DEFAULT_PRICELIST = (
     RAMPLINE_DIR / "data" / "source" / "rampline_pricelist_2025_fetched-2026-05-13.xlsx"
 )
@@ -183,6 +210,12 @@ def read_pricelist(path: Path) -> list[dict]:
 # --- Dimension index --------------------------------------------------------
 # Scraped output: dimensions.{height_cm, width_cm, depth_cm}. The shared
 # formula expects {length_cm, width_cm, height_cm} — map depth_cm → length_cm.
+#
+# Key strategy: pricelist article codes (RB35, BP 34 LF) do NOT match the
+# WooCommerce numeric SKUs in the scraped JSON. To bridge the gap we ALSO key
+# by the product handle slug (minus "rampline-" prefix) and by a normalized
+# title. The main loop then tries a family-name lookup as a secondary key when
+# the article-code lookup fails.
 def load_dim_index() -> dict[str, dict]:
     if not DIM_SOURCE.exists():
         log.warning(
@@ -195,8 +228,6 @@ def load_dim_index() -> dict[str, dict]:
     index: dict[str, dict] = {}
     for p in products:
         sku = str(p.get("sku") or "").strip()
-        if not sku:
-            continue
         dims = p.get("dimensions") or {}
         depth = parse_dim(dims.get("depth_cm"))
         width = parse_dim(dims.get("width_cm"))
@@ -206,13 +237,31 @@ def load_dim_index() -> dict[str, dict]:
             weight_kg = float(weight_kg) if weight_kg else None
         except (TypeError, ValueError):
             weight_kg = None
-        # Key by both raw and normalized form so fuzzy_lookup can hit either.
         entry = {"length_cm": depth, "width_cm": width, "height_cm": height,
                  "weight_kg": weight_kg}
-        index[sku] = entry
-        norm = normalize_sku(sku)
-        if norm != sku:
-            index[norm] = entry
+
+        # 1. WooCommerce numeric SKU (primary, works for exact WC lookups)
+        if sku:
+            index[sku] = entry
+            norm = normalize_sku(sku)
+            if norm != sku:
+                index[norm] = entry
+
+        # 2. Handle-based key (slug without "rampline-" prefix, e.g. "rampball")
+        #    Normalized uppercase: "RAMPBALL". Used by family-name lookup below.
+        handle = str(p.get("handle") or "").strip()
+        slug = handle.removeprefix("rampline-") if handle else ""
+        if slug:
+            slug_key = normalize_sku(slug)  # e.g. "RAMPBALL"
+            index[slug_key] = entry
+
+        # 3. Product title normalized (e.g. "Rampball®" → "RAMPBALL")
+        title = str(p.get("title") or "").strip()
+        if title:
+            title_key = normalize_sku(re.sub(r"[™®]", "", title).strip())
+            if title_key and title_key not in index:
+                index[title_key] = entry
+
     return index
 
 
@@ -453,8 +502,26 @@ def main():
         if norm in dim_index_for_call and sku not in dim_index_for_call:
             dim_index_for_call[sku] = dim_index_for_call[norm]
 
-        # Check if we have weight data for this SKU (enables airfreight routing)
+        # Check if we have weight data for this SKU (enables airfreight routing).
+        # Try: exact SKU → normalized SKU → family-desc mapping → handle slug key.
         scraped = dim_index_for_call.get(sku) or dim_index_for_call.get(norm)
+        if not scraped and row.get("family"):
+            # Strategy 1: explicit family-description table (FAMILY_DESC_TO_SLUG)
+            desc_key = _normalize_family_desc(row["family"])
+            slug_key = None
+            for frag, target in FAMILY_DESC_TO_SLUG.items():
+                if frag in desc_key:
+                    slug_key = target
+                    break
+            if slug_key:
+                scraped = dim_index_for_call.get(slug_key)
+                if scraped:
+                    log.debug("[rampline/%s] family-desc match via '%s'→'%s'",
+                              sku, row["family"][:40], slug_key)
+            # Strategy 2: fallback – simple normalized family title lookup
+            if not scraped:
+                fallback_key = normalize_sku(re.sub(r"[™®,.]", "", row["family"]).strip())[:20]
+                scraped = dim_index_for_call.get(fallback_key)
         weight_kg = float(scraped.get("weight_kg") or 0) if scraped else 0.0
         use_airfreight = weight_kg > 0 and _ce_rampline is not None
 

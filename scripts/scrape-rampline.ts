@@ -237,13 +237,46 @@ async function scrapeProduct(url: string): Promise<ScrapedProduct> {
   }
 
   // ── Specifications ──
-  // Rampline uses ul/li lists rather than tables for specs
+  // Rampline specs appear in TWO places:
+  //   1. <ul><li>Key: Value</li></ul>  (some pages)
+  //   2. <p>Key: Value<br/>Key: Value</p>  (most product spec blocks)
+  // We parse both so weight_kg and dims are reliably extracted.
   const rawSpecs: Record<string, string> = {}
+
+  // Source 1: ul/li items (legacy / some accessory pages)
   $("ul li, .wp-block-list li").each((_, el) => {
     const text = $(el).text().trim()
     const match = text.match(/^(.+?):\s*(.+)$/)
     if (match) rawSpecs[match[1].trim()] = match[2].trim()
   })
+
+  // Source 2: <p> elements with <br> separators (main Rampline spec block format).
+  // Example HTML:
+  //   <p><strong>Rampit™ 120</strong><br/>Height: 120 cm<br/>Width: 100 cm<br/>
+  //      Depth: 95 cm<br/>Weight: 36 kg<br/>...</p>
+  // Strategy: parse all lines, collect ALL values per key (multiple variants),
+  // then keep the LAST value found — Rampline lists sizes smallest→largest, so
+  // the last entry is the heaviest/largest variant (conservative airfreight cost).
+  const specMulti: Record<string, string[]> = {}
+  $("p, .wp-block-paragraph").each((_, el) => {
+    const inner = $(el).html() || ""
+    const lines = inner.split(/<br\s*\/?>/gi)
+    for (const line of lines) {
+      // Strip HTML tags to get plain text
+      const text = line.replace(/<[^>]+>/g, " ").replace(/&[a-z]+;/g, " ").replace(/\s+/g, " ").trim()
+      const match = text.match(/^([A-Za-zÆØÅæøåÉé][^:]{0,40}):\s*(.+)$/)
+      if (match && match[1].length < 40 && !match[1].includes("\n")) {
+        const k = match[1].trim()
+        const v = match[2].trim()
+        if (!specMulti[k]) specMulti[k] = []
+        specMulti[k].push(v)
+      }
+    }
+  })
+  // Merge multi-value specs into rawSpecs (last value = largest variant)
+  for (const [k, vals] of Object.entries(specMulti)) {
+    if (!(k in rawSpecs)) rawSpecs[k] = vals[vals.length - 1]
+  }
 
   const findSpec = (...keys: string[]): string => {
     for (const k of keys) {
@@ -254,21 +287,33 @@ async function scrapeProduct(url: string): Promise<ScrapedProduct> {
     return ""
   }
 
-  const heightText = findSpec("Height", "Høyde")
-  const heightMatch = heightText.match(/([\d.]+)\s*cm/)
-  const widthText = findSpec("Width", "Bredde")
-  const widthMatch = widthText.match(/([\d.]+)\s*cm/)
-  const depthText = findSpec("Depth", "Dybde")
-  const depthMatch = depthText.match(/([\d.]+)\s*cm/)
-  const dimensions = {
-    height_cm: heightMatch ? parseFloat(heightMatch[1]) : 0,
-    width_cm: widthMatch ? parseFloat(widthMatch[1]) : 0,
-    depth_cm: depthMatch ? parseFloat(depthMatch[1]) : 0,
+  // For dims and weight, take the MAX value across all spec lines for the key
+  // (largest variant = most conservative airfreight / CBM estimate).
+  const parseMaxFromMulti = (keys: string[], unit: string): number => {
+    const regex = new RegExp(`([\\d.]+)\\s*${unit}`)
+    let maxVal = 0
+    for (const k of keys) {
+      const vals = specMulti[k] || Object.entries(specMulti).filter(([sk]) =>
+        sk.toLowerCase().includes(k.toLowerCase())
+      ).flatMap(([, v]) => v)
+      for (const v of vals) {
+        const m = v.match(regex)
+        if (m) maxVal = Math.max(maxVal, parseFloat(m[1]))
+      }
+    }
+    return maxVal
   }
 
-  const weightText = findSpec("Weight", "Vekt")
-  const weightMatch = weightText.match(/([\d.]+)\s*kg/)
-  const weight_kg = weightMatch ? parseFloat(weightMatch[1]) : 0
+  const height_cm_val = parseMaxFromMulti(["Height", "Høyde"], "cm")
+  const width_cm_val = parseMaxFromMulti(["Width", "Bredde"], "cm")
+  const depth_cm_val = parseMaxFromMulti(["Depth", "Dybde"], "cm")
+  const dimensions = {
+    height_cm: height_cm_val,
+    width_cm: width_cm_val,
+    depth_cm: depth_cm_val,
+  }
+
+  const weight_kg = parseMaxFromMulti(["Weight", "Vekt"], "kg")
 
   const fallText = findSpec("Fall height", "Fallhøyde")
   const fallMatch = fallText.match(/([\d.]+)\s*cm/)
