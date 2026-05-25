@@ -4,6 +4,26 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.33.0] - 2026-05-25
+
+### Added — Singapore SGD Medusa region + pricing summary HTML
+
+- **Medusa Singapore SGD region** (`reg_01KSEBH1EAK9RWAYEW87QY8NWS`) created via
+  admin API. `sg` (Singapore) removed from Asia-Pacific USD region
+  (`reg_01KNKVD0TNN5G0HG3CSTF7JGWN`) and re-assigned to new Singapore region.
+  All brands' `retail_sgd` prices (already in Firestore from v2.31.0 backfill)
+  synced to Medusa via `sync_brand_prices_to_medusa.py --brand all --write`.
+- **`docs/summaries/pricing-config-master.md`** updated to v2.33.0: corrected all
+  v2.29.0 → v2.31.0 references, added Rampline airfreight fix details (v2.32.0,
+  `FAMILY_DESC_TO_SLUG`, 32/127 SKUs), added Medusa regions section with all 4
+  region IDs including new Singapore SGD, updated version history.
+- **`docs/summaries/pricing-config-master.html`** (NEW): full visual HTML reference
+  of the pricing structure using Leka Design System (Manrope font, navy/purple
+  palette). Includes brand cards, pipeline diagram, formula blocks, tier table,
+  region cards, and version history table. Served via gateway.
+
+---
+
 ## [2.32.0] - 2026-05-24
 
 ### Fixed — Rampline weight scraper + airfreight routing for 32/127 SKUs
