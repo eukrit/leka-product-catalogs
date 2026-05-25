@@ -4,6 +4,100 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.34.0] - 2026-05-25
+
+### Fixed — Zero blank product cards on `catalogs.leka.studio/leka-project`
+
+The "Leka Project" storefront (Medusa SC `sc_01KNKTHC0B7KFEDSZ3NNM49JQW`,
+formerly Wisdom) was rendering blank cards for **2,226 of 5,062 products
+(44%)**. Diagnosis: those products had `images: []` and `null` thumbnail in
+Medusa because the original Wisdom import deliberately left them blank — every
+one mapped to a `products_wisdom` Firestore doc that also had empty `images[]`
+and `image_verified: False` / `None`. The v2.17.0 image proxy + URL rewrite are
+correct; only 1 product had a true 404 URL.
+
+Empirically established (and now permanently checkpointed in Firestore
+`image_backfill_verify/`):
+
+- **539** imageless products had a hosted candidate image in
+  `gs://ai-agents-go-vendors/leka-project/<code>_*` but all were flagged
+  `image_verified: False`. Visual spot-checks confirmed real mismatches
+  (e.g. item "Car Wash Splash Center" whose hosted image is actually a felt-
+  faces toy).
+- **1,687** had no hosted candidate at all.
+- Slack `#vendor-wisdom-playground` (`C090A90K2N6`) is a project/quotation
+  channel — not an item-code-keyed image library. No automated bulk source.
+
+#### `scripts/backfill_leka_project_images.py` (new)
+
+Four-phase, idempotent, resumable. Mirrors the auth + checkpoint conventions
+of `scripts/strip_wisdom_logos.py` and the Medusa-write pattern of
+`scripts/rewrite_wisdom_image_urls.py`.
+
+- `--verify`: for each of the 539 candidates, downloads the representative
+  image (`catalog/<code>_img0` preferred, else lexicographically first), calls
+  `gemini-2.5-flash` at Vertex `location=global` with `{title, image}` and a
+  structured JSON schema `{matches: bool, confidence: number, depicted: str}`.
+  Accepts only when `matches == True and confidence >= 0.70`. Checkpoints each
+  decision in Firestore `image_backfill_verify/{sha1(code)}`. Concurrency 4 to
+  respect the global-location quota documented in v2.17.0.
+- `--make-placeholder`: renders a 1024×1024 Leka Design System PNG with Pillow
+  (cream `#FFF9E6` background, navy `#182557` "Leka Project" wordmark, purple
+  `#8003FF` "Image coming soon" subtitle, amber underline accent, navy rounded
+  card stroke). Uploads to
+  `gs://ai-agents-go-vendors/leka-project/_placeholder/leka-coming-soon.png`
+  and keeps a provenance copy at `docs/assets/leka-coming-soon.png`. Proxy URL:
+  `https://catalogs.leka.studio/api/i/leka-project/_placeholder/leka-coming-soon.png`.
+- `--attach [--dry-run]`: admin auth via Secret Manager `medusa-admin-email` /
+  `medusa-admin-password`, then `POST /admin/products/{id}` with the resolved
+  `images[]` + `thumbnail`. Verified codes get all bucket objects with that
+  leading token attached (catalog/ first, then verified/ + spatial_v2/) and
+  `metadata.image_status = "backfilled"`. Everything else gets the placeholder
+  URL and `metadata.image_status = "placeholder"`.
+- `--audit`: re-walks the Store API for the SC and asserts zero products
+  remain with empty images + null thumbnail.
+
+#### Run results (2026-05-25)
+
+- Verify: 539/539 done in ~9 min, **67 accept / 472 reject**. The strict
+  reject behavior is intentional — every reject sampled was a genuine
+  mismatch (e.g. "Viking Toys Tractor" image showing water-play towers).
+- Placeholder: 25,427-byte PNG uploaded; proxy returns `200 image/png`.
+- Attach: 2,226/2,226 in 25.8 min (~1.4/s sequential admin POSTs), **67
+  backfilled with verified real photos + 2,159 placeholder, 0 errors**. The
+  stray `test-swing` test product (1 product whose existing URL was the
+  one true 404) also re-pointed to the placeholder.
+- Audit: **0 blanks** across all 5,062 products in the SC.
+
+#### Reversibility
+
+`metadata.image_status` flags every touched product (`backfilled` or
+`placeholder`), so a future real-image pass can target placeholders without
+re-touching backfills. Original Wisdom blobs remain untouched at
+`gs://ai-agents-go-vendors/wisdom/`. Firestore `image_backfill_verify/`
+preserves every per-code decision (matches, confidence, depicted phrase) for
+audit and re-runs.
+
+### Cost
+
+≈ $5 Vertex AI (gemini-2.5-flash, 539 vision calls @ ~$0.01 each). No
+incremental Cloud Run / Cloud SQL / GCS storage cost worth measuring (one
+25 KB PNG, 0 net new image blobs).
+
+### Files changed
+
+- `scripts/backfill_leka_project_images.py` (new — phases A–D)
+- `docs/assets/leka-coming-soon.png` (new — provenance copy)
+- `requirements.txt` — pinned `google-genai` (was imported by
+  `strip_wisdom_logos.py` but unpinned)
+- New GCS object: `gs://ai-agents-go-vendors/leka-project/_placeholder/leka-coming-soon.png`
+- New Firestore collection: `image_backfill_verify/` (539 docs)
+- `CHANGELOG.md`, `VERSION` → 2.34.0
+- `docs/build-summary.html`, `docs/hub.html` regenerated
+- `.claude/PROGRESS.md` updated
+
+---
+
 ## [2.33.0] - 2026-05-25
 
 ### Added — Singapore SGD Medusa region + pricing summary HTML
