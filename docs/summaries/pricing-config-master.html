@@ -1,0 +1,788 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Leka Pricing Configuration Master Reference</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Leka Design Tokens ─── */
+    :root {
+      --purple:   #8003FF;
+      --navy:     #182557;
+      --cream:    #FFF9E6;
+      --magenta:  #970260;
+      --amber:    #FFA900;
+      --red-orange: #E54822;
+      --card-r:   16px;
+      --btn-r:    8px;
+      --badge-r:  9999px;
+      --shadow:   0px 2px 8px rgba(24,37,87,0.08);
+    }
+
+    /* ─── Reset & Base ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Manrope', -apple-system, sans-serif;
+      background: #f5f4f0;
+      color: var(--navy);
+      line-height: 1.6;
+      font-size: 15px;
+    }
+    a { color: var(--purple); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ─── Header ─── */
+    .site-header {
+      background: var(--navy);
+      color: #fff;
+      padding: 1.25rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .site-header .brand { font-size: 1.1rem; font-weight: 800; letter-spacing: -0.02em; }
+    .site-header .subtitle { font-size: 0.85rem; opacity: 0.65; }
+    .header-badge {
+      margin-left: auto;
+      background: var(--purple);
+      color: #fff;
+      border-radius: var(--badge-r);
+      padding: 3px 12px;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    /* ─── Layout ─── */
+    .page { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+    /* ─── Breadcrumb / Meta ─── */
+    .meta {
+      font-size: 0.82rem;
+      color: #888;
+      margin-bottom: 1.5rem;
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .meta span { display: flex; align-items: center; gap: 4px; }
+
+    /* ─── TOC ─── */
+    .toc-card {
+      background: #fff;
+      border: 1px solid #e8e4f0;
+      border-radius: var(--card-r);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2.5rem;
+      box-shadow: var(--shadow);
+    }
+    .toc-card h2 { font-size: 0.85rem; font-weight: 700; color: var(--purple); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; }
+    .toc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.4rem 1.5rem; }
+    .toc-grid a {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--navy);
+      padding: 2px 0;
+      border-bottom: 1px dashed transparent;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .toc-grid a:hover { color: var(--purple); border-color: var(--purple); text-decoration: none; }
+
+    /* ─── Section Headers ─── */
+    .section { margin-bottom: 3rem; }
+    .section-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--purple);
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+    }
+    .section-title .num {
+      font-size: 0.8rem;
+      font-weight: 700;
+      background: var(--purple);
+      color: #fff;
+      border-radius: var(--badge-r);
+      padding: 2px 8px;
+      min-width: 28px;
+      text-align: center;
+    }
+    .subsection-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin: 1.5rem 0 0.6rem;
+    }
+
+    /* ─── Cards ─── */
+    .card {
+      background: #fff;
+      border-radius: var(--card-r);
+      padding: 1.25rem 1.5rem;
+      box-shadow: var(--shadow);
+      margin-bottom: 1rem;
+    }
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1rem; }
+
+    /* ─── Brand Cards ─── */
+    .brand-card {
+      background: #fff;
+      border-radius: var(--card-r);
+      padding: 1.25rem 1.5rem;
+      box-shadow: var(--shadow);
+      border-top: 4px solid var(--purple);
+      margin-bottom: 1rem;
+    }
+    .brand-card.vinci   { border-color: #8003FF; }
+    .brand-card.berliner{ border-color: #970260; }
+    .brand-card.designpark{ border-color: #E54822; }
+    .brand-card.wisdom  { border-color: #FFA900; }
+    .brand-card.rampline{ border-color: #182557; }
+
+    .brand-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; }
+    .brand-icon {
+      width: 36px; height: 36px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; font-weight: 800; color: #fff;
+      flex-shrink: 0;
+    }
+    .brand-icon.vinci    { background: #8003FF; }
+    .brand-icon.berliner { background: #970260; }
+    .brand-icon.designpark{ background: #E54822; }
+    .brand-icon.wisdom   { background: #FFA900; }
+    .brand-icon.rampline { background: #182557; }
+
+    .brand-name { font-size: 1rem; font-weight: 800; }
+    .brand-origin { font-size: 0.78rem; color: #888; }
+
+    /* ─── KV Rows ─── */
+    .kv-row { display: flex; gap: 1rem; padding: 0.35rem 0; border-bottom: 1px solid #f0eef8; font-size: 0.88rem; }
+    .kv-row:last-child { border-bottom: none; }
+    .kv-key { color: #777; min-width: 120px; flex-shrink: 0; }
+    .kv-val { font-weight: 600; }
+    .pill {
+      display: inline-block;
+      background: #f0ebff;
+      color: var(--purple);
+      border-radius: var(--badge-r);
+      padding: 1px 8px;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+    .pill.green { background: #d1fae5; color: #065f46; }
+    .pill.amber { background: #fef3c7; color: #92400e; }
+    .pill.red   { background: #fee2e2; color: #991b1b; }
+    .pill.navy  { background: #e0e7ff; color: #182557; }
+
+    /* ─── Tables ─── */
+    .table-wrap { overflow-x: auto; border-radius: var(--card-r); box-shadow: var(--shadow); margin-bottom: 1rem; }
+    table { width: 100%; border-collapse: collapse; background: #fff; font-size: 0.88rem; }
+    th { background: #f7f5ff; color: var(--navy); font-weight: 700; padding: 10px 14px; text-align: left; border-bottom: 2px solid #e8e4f0; white-space: nowrap; }
+    td { padding: 9px 14px; border-bottom: 1px solid #f0eef8; vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #faf9ff; }
+    code { background: #f4f2ff; padding: 1px 6px; border-radius: 4px; font-size: 0.85em; font-family: 'Courier New', monospace; color: var(--purple); }
+
+    /* ─── Formula Blocks ─── */
+    .formula-block {
+      background: #1a1a2e;
+      color: #e2e8f0;
+      border-radius: var(--card-r);
+      padding: 1rem 1.25rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.83rem;
+      line-height: 1.7;
+      overflow-x: auto;
+      margin: 0.75rem 0;
+    }
+    .formula-block .comment { color: #6b7280; }
+    .formula-block .key { color: #a78bfa; }
+    .formula-block .val { color: #34d399; }
+    .formula-block .op  { color: #f87171; }
+
+    /* ─── Pipeline Diagram ─── */
+    .pipeline {
+      background: #fff;
+      border-radius: var(--card-r);
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      margin-bottom: 1rem;
+    }
+    .pipeline-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+      font-size: 0.9rem;
+    }
+    .pipeline-label {
+      background: var(--purple);
+      color: #fff;
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-weight: 700;
+      font-size: 0.8rem;
+      min-width: 110px;
+      text-align: center;
+    }
+    .pipeline-label.green { background: #059669; }
+    .pipeline-label.amber { background: #d97706; }
+    .pipeline-label.navy  { background: var(--navy); }
+    .pipeline-arrow { color: var(--purple); font-size: 1.2rem; }
+    .pipeline-desc { color: #555; font-size: 0.85rem; }
+
+    /* ─── Tier table highlight ─── */
+    .tier-0 td:first-child { border-left: 3px solid #8003FF; }
+    .tier-1 td:first-child { border-left: 3px solid #970260; }
+    .tier-2 td:first-child { border-left: 3px solid #E54822; }
+    .tier-3 td:first-child { border-left: 3px solid #FFA900; }
+
+    /* ─── Region Cards ─── */
+    .region-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 1rem; }
+    .region-card {
+      background: #fff;
+      border-radius: var(--card-r);
+      padding: 1.1rem;
+      box-shadow: var(--shadow);
+      border-top: 4px solid #ddd;
+    }
+    .region-card.active { border-color: var(--purple); }
+    .region-card.new    { border-color: #059669; background: #f0fdf4; }
+    .region-currency { font-size: 1.5rem; font-weight: 800; color: var(--purple); }
+    .region-name { font-size: 0.95rem; font-weight: 700; margin: 2px 0; }
+    .region-countries { font-size: 0.78rem; color: #888; margin-top: 4px; }
+    .region-id { font-size: 0.72rem; color: #bbb; margin-top: 6px; font-family: monospace; word-break: break-all; }
+    .new-badge { font-size: 0.72rem; font-weight: 700; color: #059669; background: #d1fae5; border-radius: var(--badge-r); padding: 1px 7px; display: inline-block; margin-bottom: 4px; }
+
+    /* ─── Version History ─── */
+    .version-row td:first-child { font-weight: 700; font-family: monospace; }
+    .v-new td:first-child { color: #059669; }
+    .v-major td:first-child { color: var(--purple); }
+
+    /* ─── Alert box ─── */
+    .alert {
+      border-radius: var(--card-r);
+      padding: 0.85rem 1.1rem;
+      margin: 0.75rem 0;
+      font-size: 0.88rem;
+    }
+    .alert-info  { background: #eff6ff; border: 1px solid #bfdbfe; color: #1e40af; }
+    .alert-green { background: #f0fdf4; border: 1px solid #bbf7d0; color: #065f46; }
+    .alert-amber { background: #fffbeb; border: 1px solid #fde68a; color: #92400e; }
+
+    /* ─── Print ─── */
+    @media print {
+      .site-header { background: #000; }
+      body { font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header class="site-header">
+  <div>
+    <div class="brand">Leka Product Catalogs</div>
+    <div class="subtitle">Pricing Configuration Master Reference</div>
+  </div>
+  <div class="header-badge">v2.33.0 · 2026-05-25</div>
+</header>
+
+<div class="page">
+
+  <!-- Meta -->
+  <div class="meta">
+    <span>📄 Source: <code>Firestore / pricing_config/canonical</code></span>
+    <span>🛠 Editor: <a href="../forms/pricing-config.html">pricing-config.html</a></span>
+    <span>📝 Markdown: <a href="pricing-config-master.md">pricing-config-master.md</a></span>
+    <span>📅 Updated: 2026-05-25</span>
+  </div>
+
+  <!-- TOC -->
+  <div class="toc-card">
+    <h2>Contents</h2>
+    <div class="toc-grid">
+      <a href="#arch">1. Architecture Overview</a>
+      <a href="#fx">2. FX Sources &amp; Fallbacks</a>
+      <a href="#global">3. Global Config Params</a>
+      <a href="#brands">4. Brand Config Params</a>
+      <a href="#tax">5. Tax Rules</a>
+      <a href="#formulas">6. Per-Brand Formulas</a>
+      <a href="#tier">7. Tier Floor/Cap System</a>
+      <a href="#shipping">8. Shipping Integration</a>
+      <a href="#regions">9. Medusa Regions</a>
+      <a href="#storage">10. Where Values Live</a>
+      <a href="#scripts">11. Scripts Reference</a>
+      <a href="#history">12. Version History</a>
+    </div>
+  </div>
+
+  <!-- ═══ 1. ARCHITECTURE ═══ -->
+  <section class="section" id="arch">
+    <h2 class="section-title"><span class="num">1</span> Architecture Overview</h2>
+    <div class="alert alert-info">
+      Prices in all three currencies (THB · USD · SGD) are calculated <strong>independently</strong> from the source-currency FOB cost.
+      <code>retail_usd ≠ retail_thb / FX_USD_THB</code> — each currency is derived from the original cost so rounding errors don't cascade (added v2.31.0).
+    </div>
+    <div class="pipeline card">
+      <div class="pipeline-row">
+        <div class="pipeline-label navy">FOB Cost</div>
+        <div class="pipeline-arrow">→</div>
+        <div class="pipeline-desc">Source currency: EUR (EU brands) or USD (DesignPark, Wisdom)</div>
+      </div>
+      <div class="pipeline-row" style="padding-left:2rem">
+        <div class="pipeline-label">Freight THB</div>
+        <div class="pipeline-arrow">+</div>
+        <div class="pipeline-desc"><code>cost_engine</code> LCL/air estimate, or flat 35% uplift if no CBM/weight</div>
+      </div>
+      <div class="pipeline-row" style="padding-left:2rem">
+        <div class="pipeline-label">Insurance</div>
+        <div class="pipeline-arrow">+</div>
+        <div class="pipeline-desc">fob_thb × 1%</div>
+      </div>
+      <div class="pipeline-row" style="padding-left:2rem">
+        <div class="pipeline-label amber">Import Duty</div>
+        <div class="pipeline-arrow">+</div>
+        <div class="pipeline-desc">CIF-value × import_duty_rate (0% China, 10% others)</div>
+      </div>
+      <div class="pipeline-row" style="padding-left:2rem">
+        <div class="pipeline-label amber">Thai VAT 7%</div>
+        <div class="pipeline-arrow">+</div>
+        <div class="pipeline-desc">(CIF + duty) × 0.07 — import-stage VAT</div>
+      </div>
+      <div class="pipeline-row">
+        <div class="pipeline-label green">Landed THB</div>
+        <div class="pipeline-arrow">→</div>
+        <div class="pipeline-desc">Tier clamp applied (EU brands). Then split to three independent retail paths:</div>
+      </div>
+      <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:0.75rem; margin-top:0.5rem; padding-left:2rem">
+        <div class="card" style="border-top:3px solid var(--purple)">
+          <div style="font-weight:700; color:var(--purple)">retail_thb</div>
+          <div style="font-size:0.82rem;color:#666;margin-top:4px">landed_thb / (1−GM) × 1.07<br>(TH customer VAT)</div>
+        </div>
+        <div class="card" style="border-top:3px solid #059669">
+          <div style="font-weight:700; color:#059669">retail_usd</div>
+          <div style="font-size:0.82rem;color:#666;margin-top:4px">landed_usd / (1−GM)<br>(independent from THB)</div>
+        </div>
+        <div class="card" style="border-top:3px solid #E54822">
+          <div style="font-weight:700; color:#E54822">retail_sgd</div>
+          <div style="font-size:0.82rem;color:#666;margin-top:4px">landed_sgd / (1−GM)<br>(SG region, v2.31.0)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 2. FX ═══ -->
+  <section class="section" id="fx">
+    <h2 class="section-title"><span class="num">2</span> FX Sources &amp; Fallbacks</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Source</th><th>Priority</th><th>Module</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td><code>fx_rates.get_fx_rates(buffer_pct=2)</code></td><td><span class="pill green">1 Primary</span></td><td><code>shipping-automation/mcp-server/fx_rates.py</code></td><td>Live ECB/open.er-api +2% buffer</td></tr>
+          <tr><td>FBX Global index</td><td><span class="pill navy">2 Calibration</span></td><td><code>rate_feeds.py</code></td><td>Calibrates LCL per-CBM Baltic rate</td></tr>
+          <tr><td><code>open.er-api.com</code> (NOK→EUR)</td><td><span class="pill green">1 for NOK</span></td><td><code>rampline/import_pricelist.py</code></td><td>ECB daily, no key</td></tr>
+          <tr><td><code>frankfurter.app</code> (NOK→EUR)</td><td><span class="pill amber">2 for NOK</span></td><td><code>rampline/import_pricelist.py</code></td><td>Fallback when above fails</td></tr>
+          <tr><td>Module constants</td><td><span class="pill red">Last resort</span></td><td>each brand's pricelist.py</td><td>Only when Firestore + live FX both fail</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <div style="font-size:0.82rem;font-weight:700;color:#888;margin-bottom:0.5rem">FALLBACK CONSTANTS (offline only)</div>
+      <div class="formula-block">USD_THB = <span class="val">35.0</span>   <span class="comment"># shared/wisdom_pricing.py DEFAULT_USD_THB</span>
+SGD_THB = <span class="val">25.0</span>   <span class="comment"># shared/wisdom_pricing.py DEFAULT_SGD_THB</span>
+EUR_THB = <span class="val">38.0</span>   <span class="comment"># shared/landed_pricing.py FALLBACK_FX</span>
+NOK_EUR = <span class="val">0.087</span>  <span class="comment"># rampline-catalog/import_pricelist.py</span></div>
+    </div>
+  </section>
+
+  <!-- ═══ 3. GLOBAL CONFIG ═══ -->
+  <section class="section" id="global">
+    <h2 class="section-title"><span class="num">3</span> Global Config Params</h2>
+    <p style="font-size:0.85rem;color:#888;margin-bottom:0.75rem">Firestore: <code>leka-product-catalogs / pricing_config / canonical.global</code></p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Key</th><th>Value</th><th>Description</th><th>Code</th></tr></thead>
+        <tbody>
+          <tr><td><code>thai_vat_rate</code></td><td><span class="pill">0.07</span></td><td>Import-stage VAT on (CIF + duty)</td><td><code>landed_pricing.py:78</code></td></tr>
+          <tr><td><code>th_customer_vat_rate</code></td><td><span class="pill">0.07</span></td><td>7% VAT embedded in retail price (VAT-inclusive display). Added v2.31.0.</td><td><code>landed_pricing.py</code></td></tr>
+          <tr><td><code>duty_rate_non_china</code></td><td><span class="pill amber">0.10</span></td><td>Thai import duty — EU, Korea, Norway origins</td><td><code>landed_pricing.py:77</code></td></tr>
+          <tr><td><code>duty_rate_china</code></td><td><span class="pill green">0.00</span></td><td>China origin — ASEAN-China FTA Form E</td><td><code>landed_pricing.py:78</code></td></tr>
+          <tr><td><code>unmatched_landed_uplift</code></td><td><span class="pill">1.35</span></td><td>Flat 35% FOB→CIF uplift when no CBM data</td><td><code>landed_pricing.py:86</code></td></tr>
+          <tr><td><code>default_packing_factor</code></td><td><span class="pill">0.15</span></td><td>CBM = L×W×H × 0.15 (15% for installed-dim air gaps)</td><td><code>landed_pricing.py:87</code></td></tr>
+          <tr><td><code>sg_customer_gst_rate</code></td><td><span class="pill amber">0.09</span></td><td>SG GST 9% — applied only when <code>sg_nubo_gst_registered=true</code></td><td><code>landed_pricing.py:133</code></td></tr>
+          <tr><td><code>sg_nubo_gst_registered</code></td><td><span class="pill red">false</span></td><td>SG sale is zero-rated export. No GST until Nubo registers.</td><td><code>landed_pricing.py:134</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ═══ 4. BRANDS ═══ -->
+  <section class="section" id="brands">
+    <h2 class="section-title"><span class="num">4</span> Brand Config Params</h2>
+    <div class="card-grid">
+
+      <!-- Vinci -->
+      <div class="brand-card vinci">
+        <div class="brand-header">
+          <div class="brand-icon vinci">V</div>
+          <div>
+            <div class="brand-name">Vinci Play</div>
+            <div class="brand-origin">FOB Poland · EUR</div>
+          </div>
+        </div>
+        <div class="kv-row"><span class="kv-key">Gross Margin</span><span class="kv-val"><span class="pill">35%</span></span></div>
+        <div class="kv-row"><span class="kv-key">Trade Terms</span><span class="kv-val">FOB Poland/EU</span></div>
+        <div class="kv-row"><span class="kv-key">Discount</span><span class="kv-val">None — list price as-is</span></div>
+        <div class="kv-row"><span class="kv-key">Shipping</span><span class="kv-val">LCL Gdynia → Laem Chabang</span></div>
+        <div class="kv-row"><span class="kv-key">Import Duty</span><span class="kv-val"><span class="pill amber">10%</span></span></div>
+      </div>
+
+      <!-- Berliner -->
+      <div class="brand-card berliner">
+        <div class="brand-header">
+          <div class="brand-icon berliner">B</div>
+          <div>
+            <div class="brand-name">Berliner Seilfabrik</div>
+            <div class="brand-origin">EXW Germany · EUR</div>
+          </div>
+        </div>
+        <div class="kv-row"><span class="kv-key">Gross Margin</span><span class="kv-val"><span class="pill">25%</span></span></div>
+        <div class="kv-row"><span class="kv-key">Trade Terms</span><span class="kv-val">EXW Germany</span></div>
+        <div class="kv-row"><span class="kv-key">EXW Discount</span><span class="kv-val">15% off list (<code>eur_fob = list × 0.85</code>)</span></div>
+        <div class="kv-row"><span class="kv-key">Shipping</span><span class="kv-val">LCL Hamburg → Laem Chabang</span></div>
+        <div class="kv-row"><span class="kv-key">Import Duty</span><span class="kv-val"><span class="pill amber">10%</span></span></div>
+      </div>
+
+      <!-- DesignPark -->
+      <div class="brand-card designpark">
+        <div class="brand-header">
+          <div class="brand-icon designpark">D</div>
+          <div>
+            <div class="brand-name">DesignPark</div>
+            <div class="brand-origin">FOB Busan · USD</div>
+          </div>
+        </div>
+        <div class="kv-row"><span class="kv-key">Gross Margin</span><span class="kv-val"><span class="pill">35%</span></span></div>
+        <div class="kv-row"><span class="kv-key">Trade Terms</span><span class="kv-val">FOB Busan, Korea</span></div>
+        <div class="kv-row"><span class="kv-key">Discount</span><span class="kv-val">None — pricelist USD as-is</span></div>
+        <div class="kv-row"><span class="kv-key">Shipping</span><span class="kv-val">Korea LCL → Bangkok (CBM or flat)</span></div>
+        <div class="kv-row"><span class="kv-key">Import Duty</span><span class="kv-val"><span class="pill amber">10%</span></span></div>
+      </div>
+
+      <!-- Wisdom -->
+      <div class="brand-card wisdom">
+        <div class="brand-header">
+          <div class="brand-icon wisdom">W</div>
+          <div>
+            <div class="brand-name">Wisdom / Leka Project</div>
+            <div class="brand-origin">FOB China · USD</div>
+          </div>
+        </div>
+        <div class="kv-row"><span class="kv-key">Gross Margin</span><span class="kv-val"><span class="pill">50%</span></span></div>
+        <div class="kv-row"><span class="kv-key">Trade Terms</span><span class="kv-val">FOB China</span></div>
+        <div class="kv-row"><span class="kv-key">Discount</span><span class="kv-val">None — catalog USD as-is</span></div>
+        <div class="kv-row"><span class="kv-key">Shipping</span><span class="kv-val">China consolidated sea → Bangkok</span></div>
+        <div class="kv-row"><span class="kv-key">Import Duty</span><span class="kv-val"><span class="pill green">0% (ASEAN-China FTA)</span></span></div>
+      </div>
+
+      <!-- Rampline -->
+      <div class="brand-card rampline">
+        <div class="brand-header">
+          <div class="brand-icon rampline">R</div>
+          <div>
+            <div class="brand-name">Rampline</div>
+            <div class="brand-origin">EXW Norway · NOK → EUR</div>
+          </div>
+        </div>
+        <div class="kv-row"><span class="kv-key">Gross Margin</span><span class="kv-val"><span class="pill">30%</span></span></div>
+        <div class="kv-row"><span class="kv-key">Trade Terms</span><span class="kv-val">EXW Norway (net NOK price)</span></div>
+        <div class="kv-row"><span class="kv-key">FX</span><span class="kv-val">Live NOK→EUR (ECB / frankfurter fallback)</span></div>
+        <div class="kv-row"><span class="kv-key">Shipping</span><span class="kv-val">Airfreight @ 120 THB/kg (32/127 SKUs) or flat 35% uplift (95/127 SKUs)</span></div>
+        <div class="kv-row"><span class="kv-key">Weight source</span><span class="kv-val">rampline.com scrape → <code>FAMILY_DESC_TO_SLUG</code> map</span></div>
+        <div class="kv-row"><span class="kv-key">Import Duty</span><span class="kv-val"><span class="pill amber">10%</span></span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ 5. TAX RULES ═══ -->
+  <section class="section" id="tax">
+    <h2 class="section-title"><span class="num">5</span> Tax Rules</h2>
+
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem; flex-wrap:wrap">
+
+      <div class="card">
+        <div class="subsection-title">5a. Thai Import Duty</div>
+        <div class="formula-block">CIF = fob_thb + freight_thb + insurance_thb
+duty_thb = CIF × import_duty_rate
+
+<span class="comment"># By origin:</span>
+China  → <span class="val">0.00</span>  <span class="comment"># ASEAN-China FTA (Form E)</span>
+EU     → <span class="val">0.10</span>  <span class="comment"># Vinci, Berliner, Rampline</span>
+Korea  → <span class="val">0.10</span>  <span class="comment"># DesignPark</span>
+Norway → <span class="val">0.10</span>  <span class="comment"># Rampline</span></div>
+      </div>
+
+      <div class="card">
+        <div class="subsection-title">5b. Thai Import VAT (7%)</div>
+        <div class="formula-block">vat_thb = (cif_thb + duty_thb) × <span class="val">0.07</span>
+<span class="comment"># Paid at customs clearance on CIF+duty value</span></div>
+        <div class="subsection-title" style="margin-top:1rem">5c. TH Customer VAT (7%, v2.31.0)</div>
+        <div class="formula-block">retail_thb = retail_thb_pre_vat × <span class="val">1.07</span>
+<span class="comment"># VAT-inclusive retail (TH practice)</span>
+<span class="comment"># Distinct from import VAT above</span></div>
+      </div>
+
+      <div class="card" style="grid-column: 1 / -1">
+        <div class="subsection-title">5d. Singapore GST (9%, deferred)</div>
+        <div class="formula-block">sg_gst_mult = <span class="val">1.09</span> <span class="op">if</span> sg_nubo_gst_registered <span class="op">else</span> <span class="val">1.0</span>
+retail_sgd  = retail_pre_tax_thb × sg_gst_mult / (THB/SGD FX)
+
+<span class="comment"># Currently: sg_nubo_gst_registered = false → zero-rated export, no GST</span></div>
+        <div class="alert alert-amber" style="margin-top:0.5rem">
+          When Nubo registers for SG GST: set <code>sg_nubo_gst_registered=true</code> in pricing-config, re-run backfill_sgd_pricing.py + sync to Medusa.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ 6. FORMULAS ═══ -->
+  <section class="section" id="formulas">
+    <h2 class="section-title"><span class="num">6</span> Per-Brand Formulas</h2>
+
+    <div class="subsection-title">6a. Vinci Play (EU FOB, EUR)</div>
+    <div class="formula-block">fob_thb    = eur_fob × EUR_THB
+cif_thb    = fob_thb + freight_thb + insurance_thb  <span class="comment"># CBM-based LCL</span>
+             <span class="comment"># OR: fob_thb × 1.35  (flat-uplift, no CBM)</span>
+duty_thb   = cif_thb × <span class="val">0.10</span>
+vat_thb    = (cif_thb + duty_thb) × <span class="val">0.07</span>
+landed_thb = cif_thb + duty_thb + vat_thb  → <span class="op">TIER CLAMP</span>
+retail_thb = (landed_thb / <span class="val">0.65</span>) × <span class="val">1.07</span>   <span class="comment"># 35% GM + TH VAT</span>
+retail_usd = landed_usd / <span class="val">0.65</span>              <span class="comment"># independent calculation</span>
+retail_sgd = landed_sgd / <span class="val">0.65</span>              <span class="comment"># independent calculation</span></div>
+
+    <div class="subsection-title">6b. Berliner (EU EXW, EUR)</div>
+    <div class="formula-block">eur_fob    = list_eur × <span class="val">0.85</span>  <span class="comment"># 15% EXW discount</span>
+<span class="comment"># ... same pipeline as Vinci, with GM = 0.25 (÷ 0.75)</span>
+retail_thb = (landed_thb / <span class="val">0.75</span>) × <span class="val">1.07</span></div>
+
+    <div class="subsection-title">6c. DesignPark (Korea FOB, USD)</div>
+    <div class="formula-block">fob_thb    = fob_usd × USD_THB
+cif_thb    = fob_thb × <span class="val">1.35</span>  <span class="comment"># flat-uplift (or CBM when available)</span>
+duty_thb   = cif_thb × <span class="val">0.10</span>
+retail_thb = ((cif_thb + duty + vat) / <span class="val">0.65</span>) × <span class="val">1.07</span></div>
+
+    <div class="subsection-title">6d. Wisdom / Leka Project (China FOB, USD)</div>
+    <div class="formula-block">fob_thb    = fob_usd × USD_THB
+cif_thb    = fob_thb  <span class="comment"># China sea: CIF ≈ FOB (or CBM-based)</span>
+duty_thb   = cif_thb × <span class="val">0.00</span>  <span class="comment"># ASEAN-China FTA — 0% (FIXED v2.31.0)</span>
+vat_thb    = cif_thb × <span class="val">0.07</span>
+retail_thb = ((cif_thb + vat) / <span class="val">0.50</span>) × <span class="val">1.07</span>  <span class="comment"># 50% GM</span>
+retail_usd = landed_usd / <span class="val">0.50</span>
+retail_sgd = landed_sgd / <span class="val">0.50</span></div>
+
+    <div class="subsection-title">6e. Rampline (Norway EXW, NOK→EUR)</div>
+    <div class="formula-block">nok_eur    = live FX (open.er-api.com / frankfurter.app fallback)
+eur_fob    = net_nok × nok_eur
+fob_thb    = eur_fob × EUR_THB
+
+<span class="comment"># Path A — airfreight (weight_kg known, 32/127 SKUs as of v2.32.0):</span>
+freight    = weight_kg × <span class="val">120</span> THB/kg  → cif_thb = fob + freight + insurance
+
+<span class="comment"># Path B — flat uplift (no weight, 95/127 SKUs):</span>
+cif_thb    = fob_thb × <span class="val">1.35</span>
+
+duty_thb   = cif_thb × <span class="val">0.10</span>
+retail_thb = ((cif_thb + duty + vat) / <span class="val">0.70</span>) × <span class="val">1.07</span>  <span class="comment"># 30% GM</span></div>
+  </section>
+
+  <!-- ═══ 7. TIER SYSTEM ═══ -->
+  <section class="section" id="tier">
+    <h2 class="section-title"><span class="num">7</span> Vinci Tier Floor/Cap System</h2>
+    <p style="font-size:0.88rem;color:#555;margin-bottom:0.75rem">
+      All EU-origin brands (Vinci, Berliner, Rampline) share this table. It prevents absurdly low landed costs
+      on tiny items (floor) and prevents freight dominating on enormous pieces (cap).
+    </p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>EUR FOB Band</th><th>Floor (lo_pct)</th><th>Cap (hi_pct)</th><th>Floor formula</th><th>Cap formula</th></tr></thead>
+        <tbody>
+          <tr class="tier-0"><td>≤ 500 EUR</td><td>0.80</td><td>2.50</td><td><code>fob_thb × 1.80</code></td><td><code>fob_thb × 3.50</code></td></tr>
+          <tr class="tier-1"><td>≤ 2,000 EUR</td><td>0.60</td><td>1.80</td><td><code>fob_thb × 1.60</code></td><td><code>fob_thb × 2.80</code></td></tr>
+          <tr class="tier-2"><td>≤ 10,000 EUR</td><td>0.45</td><td>1.20</td><td><code>fob_thb × 1.45</code></td><td><code>fob_thb × 2.20</code></td></tr>
+          <tr class="tier-3"><td>> 10,000 EUR</td><td>0.35</td><td>0.80</td><td><code>fob_thb × 1.35</code></td><td><code>fob_thb × 1.80</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card" style="margin-top:0.75rem">
+      <div style="font-size:0.82rem;font-weight:700;color:#888;margin-bottom:0.5rem">WORKED EXAMPLE — Small item (EUR 150 FOB, Tier 0, Vinci 35% GM)</div>
+      <div class="formula-block">fob_thb    = 150 × 38 = <span class="val">5,700</span> THB
+flat_cif   = 5,700 × 1.35 = <span class="val">7,695</span> THB
+duty       = 7,695 × 0.10 = <span class="val">769.5</span> THB
+vat        = (7,695 + 769.5) × 0.07 = <span class="val">522.5</span> THB
+landed_raw = 7,695 + 769.5 + 522.5 = <span class="val">8,987</span> THB
+
+Tier 0 floor = 5,700 × 1.80 = <span class="val">10,260</span> THB  <span class="op">← raw 8,987 &lt; floor → FLOORED</span>
+landed_thb   = <span class="val">10,260</span> THB
+retail_thb   = (10,260 / 0.65) × 1.07 = <span class="val">16,889</span> THB  ✓</div>
+    </div>
+  </section>
+
+  <!-- ═══ 8. SHIPPING ═══ -->
+  <section class="section" id="shipping">
+    <h2 class="section-title"><span class="num">8</span> Shipping-Automation Integration</h2>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Brand</th><th>origin key</th><th>method</th><th>Rate</th><th>Fallback</th></tr></thead>
+        <tbody>
+          <tr><td>Vinci, Berliner</td><td><code>europe</code></td><td><code>lcl</code></td><td>5,500 THB/CBM</td><td>35% flat uplift</td></tr>
+          <tr><td>Rampline</td><td><code>europe</code></td><td><code>air</code></td><td>120 THB/kg</td><td>35% flat uplift (when no weight)</td></tr>
+          <tr><td>DesignPark</td><td><code>japan_korea</code></td><td><code>lcl</code></td><td>3,500 THB/CBM</td><td>35% flat uplift</td></tr>
+          <tr><td>Wisdom</td><td><code>china</code></td><td><code>china_thai_sea</code></td><td>4,600 THB/CBM</td><td>FOB ≈ CIF (sea, no uplift)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="subsection-title" style="margin-top:0">How it's called</div>
+      <div class="formula-block">est = estimate_landed_cost(
+    origin=<span class="val">"europe"</span>,
+    method=<span class="val">"lcl"</span>,          <span class="comment"># or "air" for Rampline</span>
+    goods_value=eur_fob,
+    goods_currency=<span class="val">"EUR"</span>,
+    cbm=cbm,               <span class="comment"># from parsed dims × packing_factor 0.15</span>
+    kg=weight_kg,          <span class="comment"># for airfreight</span>
+    duty_rate=<span class="val">0.10</span>,
+    fx_rates=fx,
+)
+landed_thb  = est[<span class="val">"total_landed_thb"</span>]</div>
+    </div>
+  </section>
+
+  <!-- ═══ 9. MEDUSA REGIONS ═══ -->
+  <section class="section" id="regions">
+    <h2 class="section-title"><span class="num">9</span> Medusa Regions &amp; Currency Routing</h2>
+    <div class="alert alert-green" style="margin-bottom:1rem">
+      ✅ Singapore SGD region created 2026-05-25. <code>sg</code> moved from Asia-Pacific USD to Singapore SGD.
+    </div>
+
+    <div class="region-grid">
+      <div class="region-card active">
+        <div class="region-currency">THB</div>
+        <div class="region-name">Thailand</div>
+        <div class="region-countries">🇹🇭 TH</div>
+        <div class="region-id">reg_01KRD770VERSJ1CY1TPVJQ6DY9</div>
+      </div>
+      <div class="region-card new">
+        <div class="new-badge">✨ NEW 2026-05-25</div>
+        <div class="region-currency" style="color:#059669">SGD</div>
+        <div class="region-name">Singapore</div>
+        <div class="region-countries">🇸🇬 SG</div>
+        <div class="region-id">reg_01KSEBH1EAK9RWAYEW87QY8NWS</div>
+      </div>
+      <div class="region-card active">
+        <div class="region-currency" style="color:#059669">USD</div>
+        <div class="region-name">Asia-Pacific</div>
+        <div class="region-countries">🇰🇭 KH · 🇮🇩 ID · 🇲🇾 MY · 🇻🇳 VN · 🇵🇭 PH · 🇨🇳 CN · 🇺🇸 US</div>
+        <div class="region-id">reg_01KNKVD0TNN5G0HG3CSTF7JGWN</div>
+      </div>
+      <div class="region-card active">
+        <div class="region-currency" style="color:#E54822">EUR</div>
+        <div class="region-name">Europe</div>
+        <div class="region-countries">🇮🇪 IE · 🇦🇹 AT · 🇧🇪 BE · 🇫🇮 FI · 🇫🇷 FR · 🇩🇪 DE · 🇬🇷 GR · 🇮🇹 IT · 🇳🇱 NL · 🇵🇹 PT · 🇪🇸 ES · 🇸🇪 SE · 🇵🇱 PL</div>
+        <div class="region-id">reg_01KRD7714NWS07RGH38F2TM178</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="subsection-title" style="margin-top:0">How SGD prices reach Medusa</div>
+      <p style="font-size:0.88rem;color:#555">
+        All 5 brands have <code>retail_sgd</code> in Firestore (backfilled 2026-05-24, v2.31.0).
+        <code>sync_brand_prices_to_medusa.py</code> pushes <code>{"amount": ..., "currency_code": "sgd"}</code>
+        as currency-level price set entries. Medusa matches these to any cart in the Singapore SGD region.
+        No <code>region_id</code> override needed — currency match is sufficient.
+      </p>
+    </div>
+
+    <div class="alert alert-amber">
+      <strong>Future:</strong> When Nubo registers for SG GST → set <code>sg_nubo_gst_registered=true</code> in Firestore →
+      re-run <code>backfill_sgd_pricing.py --brand all --write</code> → re-run <code>sync_brand_prices_to_medusa.py --brand all --write</code>.
+    </div>
+  </section>
+
+  <!-- ═══ 10. STORAGE ═══ -->
+  <section class="section" id="storage">
+    <h2 class="section-title"><span class="num">10</span> Where Values Live</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Parameter</th><th>Storage</th><th>How to edit</th></tr></thead>
+        <tbody>
+          <tr><td><code>gross_margin</code> per brand</td><td>Firestore <code>pricing_config/canonical.brands.&lt;slug&gt;.gross_margin</code></td><td>pricing-config.html form</td></tr>
+          <tr><td><code>import_duty_rate</code> (Wisdom)</td><td>Firestore <code>pricing_config/canonical.brands.wisdom.import_duty_rate</code></td><td>pricing-config.html form</td></tr>
+          <tr><td><code>exw_discount</code> (Berliner)</td><td>Firestore <code>pricing_config/canonical.brands.berliner.exw_discount</code></td><td>pricing-config.html form</td></tr>
+          <tr><td><code>thai_vat_rate</code></td><td>Firestore <code>pricing_config/canonical.global.thai_vat_rate</code></td><td>pricing-config.html form</td></tr>
+          <tr><td><code>th_customer_vat_rate</code></td><td>Firestore <code>pricing_config/canonical.global.th_customer_vat_rate</code></td><td>pricing-config.html form</td></tr>
+          <tr><td><code>logistics_tiers</code></td><td>Firestore <code>pricing_config/canonical.logistics_tiers</code></td><td>pricing-config.html form</td></tr>
+          <tr><td>LCL per-CBM rates</td><td><code>shipping-automation/mcp-server/cost_engine.py</code> ROUTE_PROFILES</td><td>Edit cost_engine.py directly</td></tr>
+          <tr><td>Air per-kg rates</td><td><code>shipping-automation/mcp-server/cost_engine.py</code> ROUTE_PROFILES</td><td>Edit cost_engine.py directly</td></tr>
+          <tr><td><code>sg_nubo_gst_registered</code></td><td>Firestore <code>pricing_config/canonical.global.sg_nubo_gst_registered</code></td><td>pricing-config.html form</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ═══ 11. SCRIPTS ═══ -->
+  <section class="section" id="scripts">
+    <h2 class="section-title"><span class="num">11</span> Scripts Reference</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Script</th><th>Purpose</th><th>Run after</th></tr></thead>
+        <tbody>
+          <tr><td><code>scripts/backfill_sgd_pricing.py --brand all --write</code></td><td>Recompute all brand prices from source FOB; write to Firestore <code>vendors/{slug}/products</code></td><td>Any config/formula change</td></tr>
+          <tr><td><code>scripts/sync_brand_prices_to_medusa.py --brand all --write</code></td><td>Push computed prices to Medusa variants by SKU/handle match</td><td>After backfill or Medusa region change</td></tr>
+          <tr><td><code>scripts/seed_pricing_config.py</code></td><td>Seed/reset Firestore <code>pricing_config/canonical</code></td><td>Initial setup or --force reset</td></tr>
+          <tr><td><code>rampline-catalog/import_pricelist.py</code></td><td>Parse Rampline NOK pricelist → Firestore pricelists + vendor products</td><td>Source pricelist updated</td></tr>
+          <tr><td><code>scripts/ingest_designpark_pricelist.py --apply</code></td><td>Parse DesignPark xlsx → Firestore</td><td>Source pricelist updated</td></tr>
+          <tr><td><code>vinci-catalog/import_pricelist.py</code></td><td>Parse Vinci EUR pricelist → Firestore</td><td>Source pricelist updated</td></tr>
+          <tr><td><code>berliner-catalog/import_pricelist.py</code></td><td>Parse Berliner EUR CSV → Firestore</td><td>Source pricelist updated</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ═══ 12. VERSION HISTORY ═══ -->
+  <section class="section" id="history">
+    <h2 class="section-title"><span class="num">12</span> Version History</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Version</th><th>Date</th><th>Change</th></tr></thead>
+        <tbody>
+          <tr class="v-new version-row"><td>v2.33.0</td><td>2026-05-25</td><td>Create Medusa Singapore SGD region (<code>reg_01KSEBH1EAK9RWAYEW87QY8NWS</code>); move <code>sg</code> out of Asia-Pacific USD; re-sync all brand prices. This doc created as HTML.</td></tr>
+          <tr class="v-major version-row"><td>v2.32.0</td><td>2026-05-24</td><td>Rampline weight scraper fix: <code>&lt;p&gt;&lt;br&gt;</code> spec parsing + <code>FAMILY_DESC_TO_SLUG</code> map. 32/127 Rampline SKUs now use <code>airfreight_weight</code> routing (was 0 before). Scraper run: 54 products from rampline.com.</td></tr>
+          <tr class="v-major version-row"><td>v2.31.0</td><td>2026-05-24</td><td>Pricing formula overhaul: Wisdom duty 7%→0% (ASEAN-China FTA); 7% TH customer VAT added to all retail prices; Korea/China/Norway CBM routes via shipping-automation; currency-independent retail calculations (THB/USD/SGD each from source FOB).</td></tr>
+          <tr class="version-row"><td>v2.28.0</td><td>2026-05-22</td><td>Add <code>retail_sgd</code> across all 5 brands; <code>backfill_sgd_pricing.py</code>; <code>sync_brand_prices_to_medusa.py</code>.</td></tr>
+          <tr class="version-row"><td>v2.21.1</td><td>2026-05-14</td><td>TH retail VAT-inclusive config fix; Vinci GM 40%→35%; non-China duty 10%.</td></tr>
+          <tr class="version-row"><td>v2.21.0</td><td>2026-05-14</td><td>Add 7% import VAT layer; SG GST gate (<code>sg_nubo_gst_registered</code>).</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <p style="font-size:0.78rem;color:#bbb;margin-top:2rem;text-align:center">
+    Generated 2026-05-25 · leka-product-catalogs v2.33.0 ·
+    <a href="pricing-config-master.md">Markdown source</a> ·
+    <a href="../../CHANGELOG.md">CHANGELOG</a>
+  </p>
+
+</div><!-- /.page -->
+</body>
+</html>

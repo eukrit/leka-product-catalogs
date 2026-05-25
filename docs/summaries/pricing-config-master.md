@@ -1,6 +1,6 @@
 # Leka Product Catalogs — Pricing Configuration Master Reference
 
-> **Last updated:** 2026-05-22 (v2.29.0)
+> **Last updated:** 2026-05-25 (v2.33.0 — SGD region created)
 > **Source of truth:** Firestore `leka-product-catalogs/pricing_config/canonical`
 > **Editor UI:** `docs/forms/pricing-config.html` (served at `gateway.goco.bz/leka-product-catalogs/forms/pricing-config.html`)
 > **Code files:** `shared/pricing_config.py`, `shared/landed_pricing.py`, `shared/wisdom_pricing.py`
@@ -24,9 +24,9 @@ FOB (EUR or USD)
           │
           └─→ landed_thb  (+ tier clamp)
                 │
-                ├─→ retail_thb = landed_thb / (1 - gm)
-                ├─→ retail_usd = landed_usd / (1 - gm)  [Task 10: independent calc]
-                └─→ retail_sgd = landed_sgd / (1 - gm)  [Task 10: independent calc]
+                ├─→ retail_thb = landed_thb / (1 - gm)   × 1.07 (TH customer VAT)
+                ├─→ retail_usd = landed_usd / (1 - gm)   [independent calc, v2.31.0]
+                └─→ retail_sgd = landed_sgd / (1 - gm)   [independent calc, v2.31.0]
 ```
 
 ---
@@ -56,7 +56,7 @@ NOK_EUR  = 0.087  # rampline-catalog/import_pricelist.py
 | Key | Value | Description | Code reference |
 |-----|-------|-------------|----------------|
 | `thai_vat_rate` | **0.07** | Thai VAT on (CIF + duty). Applied **after** import duty, before retail mark-up. | `shared/landed_pricing.py` line 78; `shared/wisdom_pricing.py` line 36 |
-| `th_customer_vat_rate` | **0.07** | 7% VAT embedded in retail price (retail is VAT-inclusive). Applied as `retail_thb_final = retail_thb_pre_vat × 1.07`. As of v2.29.0. | `shared/landed_pricing.py`; `shared/wisdom_pricing.py` |
+| `th_customer_vat_rate` | **0.07** | 7% VAT embedded in retail price (retail is VAT-inclusive). Applied as `retail_thb_final = retail_thb_pre_vat × 1.07`. Added v2.31.0. | `shared/landed_pricing.py`; `shared/wisdom_pricing.py` |
 | `duty_rate_non_china` | **0.10** | Thai import duty for non-China origins (EU, Korea, Norway). | `shared/landed_pricing.py` line 77 |
 | `duty_rate_china` | **0.00** | Thai import duty for China-origin under ASEAN-China FTA (Form E). | `shared/landed_pricing.py` line 78; `shared/wisdom_pricing.py` |
 | `unmatched_landed_uplift` | **1.35** | Flat FOB→CIF multiplier (35% uplift) when no CBM dimension data. | `shared/landed_pricing.py` line 86 |
@@ -93,7 +93,7 @@ NOK_EUR  = 0.087  # rampline-catalog/import_pricelist.py
 |-----|-------|-------------|
 | `gross_margin` | **0.35** | 35% GM (same as Vinci). |
 | Trade terms | FOB Busan, Korea | `fob_usd` = pricelist USD as-is. |
-| Shipping | Korea LCL flat-uplift → Bangkok | `cost_engine` `origin=japan_korea, method=lcl` (or flat 35%). As of v2.29.0, uses shipping-automation CBM where available; tier fallback otherwise. |
+| Shipping | Korea LCL flat-uplift → Bangkok | `cost_engine` `origin=japan_korea, method=lcl` (or flat 35%). As of v2.31.0, uses shipping-automation CBM where available; tier fallback otherwise. |
 | Duty | 10% | `duty_rate_non_china` global (Korea is not China FTA) |
 
 ### 4d. Wisdom / Leka Project (`brands.wisdom`)
@@ -101,10 +101,10 @@ NOK_EUR  = 0.087  # rampline-catalog/import_pricelist.py
 | Key | Value | Description |
 |-----|-------|-------------|
 | `gross_margin` | **0.50** | 50% GM. |
-| `import_duty_rate` | **0.00** | Fixed to 0% in v2.29.0 (ASEAN-China FTA Form E). Previously 0.07 — that was incorrect. |
+| `import_duty_rate` | **0.00** | Fixed to 0% in v2.31.0 (ASEAN-China FTA Form E). Previously 0.07 — that was incorrect. |
 | `default_usd_thb` | 35.0 | Offline FX fallback only. |
 | Trade terms | FOB China | `fob_usd` = catalog USD. |
-| Shipping | China flat (CIF ≈ FOB) → Bangkok | As of v2.29.0, uses shipping-automation China LCL where CBM available; tier fallback otherwise. |
+| Shipping | China consolidated sea → Bangkok | As of v2.31.0, uses shipping-automation China LCL where CBM available; tier fallback otherwise. |
 | Duty | **0%** | China-origin under ASEAN-China FTA Form E. |
 
 ### 4e. Rampline (`brands.rampline`)
@@ -113,7 +113,10 @@ NOK_EUR  = 0.087  # rampline-catalog/import_pricelist.py
 |-----|-------|-------------|
 | `gross_margin` | **0.30** | 30% GM. |
 | Trade terms | EXW Norway (net NOK) | `eur_fob = net_nok × NOK_EUR`. Already-discounted wholesale net price. |
-| Shipping | Airfreight Norway → Bangkok | `cost_engine` `origin=europe, method=air` where weight/CBM available; tier fallback otherwise. As of v2.29.0. |
+| Shipping — with weight | Airfreight Norway → Bangkok | `cost_engine` `origin=europe, method=air` @ 120 THB/kg. Used when `weight_kg > 0`. **32/127 SKUs** use this path (v2.32.0). |
+| Shipping — no weight | Flat 35% uplift + tier clamp | Fallback for products without published weight specs (Rampball, motor skills parks). **95/127 SKUs**. |
+| Weight source | `data/scraped/rampline/products.json` | Scraped from rampline.com spec blocks (`<p><br>` format). Max across product variants (conservative). |
+| Family-desc lookup | `FAMILY_DESC_TO_SLUG` map | Bridges pricelist descriptive family names to scraped product slugs. In `rampline-catalog/import_pricelist.py`. Fixed v2.32.0. |
 | Duty | 10% | `duty_rate_non_china` global |
 
 ---
@@ -146,7 +149,7 @@ retail_thb_final = retail_thb_pre_vat × 1.07
 ```
 Retail prices displayed in Thailand are VAT-inclusive (TH practice). This
 customer VAT is distinct from the import VAT — it is the 7% VAT that Leka
-adds when selling to TH customers. As of v2.29.0, `th_customer_vat_rate = 0.07`.
+adds when selling to TH customers. Added in v2.31.0, `th_customer_vat_rate = 0.07`.
 
 Code: `shared/landed_pricing.py` (`price_row`); `shared/wisdom_pricing.py` (`compute_wisdom_retail`)
 
@@ -174,7 +177,7 @@ vat_thb    = (cif_thb + duty_thb) × 0.07
 landed_thb = cif_thb + duty_thb + vat_thb
              → TIER CLAMP applied (see §7)
 retail_thb_pre_vat = landed_thb / (1 - 0.35)
-retail_thb = retail_thb_pre_vat × 1.07   # TH customer VAT (v2.29.0)
+retail_thb = retail_thb_pre_vat × 1.07   # TH customer VAT (v2.31.0)
 retail_usd = landed_usd / (1 - 0.35)     # landed_usd calculated independently
 retail_sgd = landed_sgd / (1 - 0.35)     # landed_sgd calculated independently
 ```
@@ -208,8 +211,8 @@ Code: `scripts/ingest_designpark_pricelist.py` `price_designpark_row()`
 ```python
 fob_thb    = fob_usd × USD_THB
 cif_thb    = fob_thb                     # China consolidated sea: CIF ≈ FOB
-             # OR: cif_thb via cost_engine origin=china when CBM available (v2.29.0)
-duty_thb   = cif_thb × 0.00             # ASEAN-China FTA (0% — FIXED v2.29.0)
+             # OR: cif_thb via cost_engine origin=china when CBM available (v2.31.0)
+duty_thb   = cif_thb × 0.00             # ASEAN-China FTA (0% — FIXED v2.31.0)
 vat_thb    = (cif_thb + duty_thb) × 0.07
 landed_thb = cif_thb + duty_thb + vat_thb
 retail_thb = (landed_thb / (1 - 0.50)) × 1.07
@@ -220,11 +223,17 @@ Code: `shared/wisdom_pricing.py` `compute_wisdom_retail()`
 
 ### 6e. Rampline (Norway EXW net, NOK→EUR)
 ```python
-nok_eur    = live FX (frankfurter.app / open.er-api.com)
+nok_eur    = live FX (open.er-api.com / frankfurter.app fallback)
 eur_fob    = net_nok × nok_eur
 fob_thb    = eur_fob × EUR_THB
-# Rampline ships airfreight; cost_engine origin=europe, method=air where weight available
-# OR: flat 35% uplift + tier clamp (v2.28.0); airfreight integration in v2.29.0
+
+# Path A — airfreight (weight_kg available, 32/127 SKUs as of v2.32.0):
+freight_thb = weight_kg × 120 THB/kg   # cost_engine origin=europe, method=air
+cif_thb     = fob_thb + freight_thb + insurance_thb
+
+# Path B — flat uplift (no weight, 95/127 SKUs):
+cif_thb     = fob_thb × 1.35
+
 duty_thb   = cif_thb × 0.10
 vat_thb    = (cif_thb + duty_thb) × 0.07
 landed_thb = cif_thb + duty_thb + vat_thb
@@ -318,7 +327,7 @@ est = estimate_landed_cost(
     goods_value=eur_fob,
     goods_currency="EUR",
     cbm=cbm,                  # from parsed dimensions × packing_factor
-    kg=0,
+    kg=weight_kg,             # for Rampline airfreight path
     duty_rate=0.10,           # explicit override bypasses route defaults
     fx_rates=fx,              # live FX snapshot (same for all SKUs in a run)
 )
@@ -339,16 +348,16 @@ baltic = calibrate_baltic_rate(fx)   # in shared/landed_pricing.py
 
 ### 8c. Routes Available
 
-| Brand | origin key | method key | Per-CBM rate (static) |
-|-------|-----------|-----------|----------------------|
+| Brand | origin key | method key | Per-CBM / Per-kg rate (static) |
+|-------|-----------|-----------|-------------------------------|
 | Vinci, Berliner | `europe` | `lcl` | 5,500 THB/CBM |
 | Rampline | `europe` | `air` | 120 THB/kg |
 | DesignPark | `japan_korea` | `lcl` | 3,500 THB/CBM |
 | Wisdom | `china` | `china_thai_sea` or `lcl` | 4,600 THB/CBM (consolidated) |
 
-### 8d. Flat-Uplift Fallback (No CBM Data)
+### 8d. Flat-Uplift Fallback (No CBM/Weight Data)
 
-When no dimensions are available (scrape failed, item has no published dims):
+When no dimensions or weight are available (scrape failed, item has no published specs):
 ```python
 cif_thb   = fob_thb × UNMATCHED_LANDED_UPLIFT   # 1.35 = 35% flat uplift
 freight_thb = cif_thb - fob_thb
@@ -357,7 +366,35 @@ The tier clamp still applies after this, so very cheap items are floored.
 
 ---
 
-## 9. Which Values Live Where
+## 9. Medusa Regions and Currency Routing
+
+Medusa serves prices to storefront customers by matching the cart region to the
+variant's price set. Each region has a single currency. SGD region was activated
+2026-05-25.
+
+| Region ID | Name | Currency | Countries | Notes |
+|-----------|------|----------|-----------|-------|
+| `reg_01KNKVD0TNN5G0HG3CSTF7JGWN` | Asia-Pacific | USD | KH, ID, MY, VN, PH, CN, US | `sg` removed 2026-05-25 |
+| `reg_01KRD770VERSJ1CY1TPVJQ6DY9` | Thailand | THB | TH | |
+| `reg_01KRD7714NWS07RGH38F2TM178` | Europe | EUR | IE, AT, BE, FI, FR, DE, GR, IT, NL, PT, ES, SE, PL | |
+| `reg_01KSEBH1EAK9RWAYEW87QY8NWS` | **Singapore** | **SGD** | **SG** | Created 2026-05-25 |
+
+### How SGD prices reach Medusa
+All 5 brands have `retail_sgd` in Firestore (backfilled 2026-05-24, v2.31.0).
+`scripts/sync_brand_prices_to_medusa.py` pushes `{"amount": ..., "currency_code": "sgd"}`
+as currency-level price set entries. Medusa serves these to any cart in the
+Singapore region. No `region_id` override needed — currency match is sufficient.
+
+### SGD Region: Future Steps
+- **When Nubo registers for SG GST**: set `sg_nubo_gst_registered=true` in
+  `pricing_config/canonical.global`, re-run `backfill_sgd_pricing.py --brand all --write`,
+  then re-run `sync_brand_prices_to_medusa.py --brand all --write`.
+- **When 4soft/Weplay/Vortex have pricelists** (~9k coverage): create a full SGD
+  pricing pass for those brands, then these brands can also sell into SG region.
+
+---
+
+## 10. Which Values Live Where
 
 | Parameter | Storage | How to edit |
 |-----------|---------|-------------|
@@ -383,7 +420,7 @@ These **must stay in sync** with `scripts/seed_pricing_config.py`:
 | `shared/landed_pricing.py` | `DUTY_RATE_NON_CHINA` | 0.10 |
 | `shared/landed_pricing.py` | `DUTY_RATE_CHINA` | 0.0 |
 | `shared/landed_pricing.py` | `THAI_VAT_RATE` | 0.07 |
-| `shared/wisdom_pricing.py` | `IMPORT_DUTY_RATE` | **0.00** (fixed v2.29.0) |
+| `shared/wisdom_pricing.py` | `IMPORT_DUTY_RATE` | **0.00** (fixed v2.31.0) |
 | `shared/wisdom_pricing.py` | `GROSS_MARGIN` | 0.50 |
 | `berliner-catalog/import_pricelist.py` | `EXW_DISCOUNT` | 0.15 |
 | `berliner-catalog/import_pricelist.py` | `GROSS_MARGIN` | 0.25 |
@@ -391,7 +428,7 @@ These **must stay in sync** with `scripts/seed_pricing_config.py`:
 
 ---
 
-## 10. Scripts Reference
+## 11. Scripts Reference
 
 | Script | Purpose | Run after |
 |--------|---------|-----------|
@@ -405,11 +442,13 @@ These **must stay in sync** with `scripts/seed_pricing_config.py`:
 
 ---
 
-## 11. Version History for Pricing Changes
+## 12. Version History for Pricing Changes
 
 | Version | Date | Change |
 |---------|------|--------|
-| v2.29.0 | 2026-05-22 | Fix Wisdom duty 7%→0%; add 7% TH customer VAT to all retail prices; add Korea/China/Norway shipping-automation CBM routes; currency-independent retail calculations (Task 10) |
+| v2.33.0 | 2026-05-25 | Create Medusa Singapore SGD region (`reg_01KSEBH1EAK9RWAYEW87QY8NWS`); move `sg` out of Asia-Pacific USD; re-sync all brand prices |
+| v2.32.0 | 2026-05-24 | Rampline weight scraper fix: `<p><br>` spec parsing + `FAMILY_DESC_TO_SLUG` map. 32/127 Rampline SKUs now use `airfreight_weight` routing (was 0 before) |
+| v2.31.0 | 2026-05-24 | Fix Wisdom duty 7%→0% (ASEAN-China FTA); add 7% TH customer VAT to all retail prices; Korea/China/Norway shipping-automation CBM routes; currency-independent retail calculations (THB/USD/SGD each from source FOB) |
 | v2.28.0 | 2026-05-22 | Add `retail_sgd` across all 5 brands; backfill script; Medusa sync script |
 | v2.21.1 | 2026-05-14 | TH retail VAT-inclusive config fix; Vinci GM 40%→35%; non-China duty 10% |
 | v2.21.0 | 2026-05-14 | Add 7% import VAT layer; SG GST gate (`sg_nubo_gst_registered`) |
