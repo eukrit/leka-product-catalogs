@@ -4,6 +4,66 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.42.0] - 2026-05-29
+
+### Added — 4soft 3D play elements created in Medusa + dims-based pricing
+
+Follow-up to the 4soft pricelist ingest (**v2.40.0**, PR #63). That release
+priced all 2,410 pricelist SKUs in `vendors/4soft/products` but only **377**
+existed as Medusa products — the other 2,033 were pricelist-only. This release
+creates the **3D scope** in Medusa and upgrades pricing for the SKUs with real
+dimensions.
+
+#### 2026 pricing re-verification (user decision 2026-05-29)
+
+Checked `eukrit@goco.bz` (SA domain-wide delegation, ~201 emails from 4soft.cz):
+- The *"Our Pricing for 2026"* newsletter (graphics@4soft.cz, 2026-04-01) is an
+  **image-only marketing blast — no pricelist attachment, no price/discount
+  figures.** No 2026 `.xls` exists in the inbox; the latest actual pricelist is
+  still `4soft_EPDM_graphics-price_list_2025.xls` (2025-06-25).
+- No document supersedes the **15% basic EXW** discount (2020 Price Conditions
+  PDF). The 2025 pricelist email confirms a reseller % applies on list prices.
+  → **EXW 15% / GM 40% retained.** 2026 pricelist is an open follow-up.
+
+#### Website reality
+
+4soft.cz publishes only **400 products** (256 2D / 90 3D / 54 other), not the
+~2,033 assumed. 377 match the pricelist 1:1 (EN site names == pricelist EN
+names — cross-checked); 2,033 pricelist codes (mostly colour/UV/size variants of
+2D ground markings) have **no individual web page**. User decision: create the
+**3D scope only** (the hero physical play elements) and defer the flat 2D
+markings.
+
+#### Scope created (dimension == "3D" = 592 SKUs)
+
+3D animals/nature/shapes/sport, **tunnels+slides (41)**, **water fountains
+(29)**, EPDM houses (5), furniture (112). Created as **draft** for review before
+publish.
+
+- `foursoft-catalog/backfill_scraped_details.py` (new) — wrote **260
+  dimensions** + **163 borrowed base-design images** (a colour variant inherits
+  its base design's photo, flagged `representative=true`) into
+  `vendors/4soft/products`.
+- Re-ran `foursoft-catalog/import_pricelist.py` → **251 SKUs now use
+  `dims_scaled` CBM** landed cost (was 0; rest flat-uplift). FX this run:
+  USD 33.25, EUR 38.71, SGD 26.04.
+- `foursoft-catalog/create_medusa_products.py` (new) — handle-based create
+  reusing `scripts/sync_vendors_to_medusa.py` helpers, scope-filtered, draft
+  status, EN pricelist titles, base-image attach. **Created 462** new 3D
+  products (163 with images), **renamed 130** existing Czech titles → EN,
+  0 errors. Medusa 4soft channel: 391 → **853 products**.
+- `scripts/sync_brand_prices_to_medusa.py --brand 4soft --write` — multi-currency
+  THB/USD/EUR/SGD prices pushed; match rose **377 → 839** (the 1,571 unmatched
+  are the deferred 2D/accessory/packaging pricelist-only SKUs).
+
+#### Deferred follow-ups
+
+- ~1,800 flat **2D ground markings** (hopscotch, numbers/letters, footprints) —
+  not created this pass (image-less, lower catalog value).
+- Confirm the **2026 pricelist** (request the `.xls` from 4soft) and re-verify
+  the 15% basic EXW before a full re-sync.
+- Review the 462 draft 3D products and **publish** when approved.
+
 ## [2.41.0] - 2026-05-29
 
 ### Added — Archimedes Water Play landed pricing (the deferred PR #59 work)
