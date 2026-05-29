@@ -1,5 +1,61 @@
 # Deployment Log — Wisdom Product Catalog
 
+## v1.5.0 — 2026-05-30 (Outdoor-Play Collection — Medusa Link + Gemini Image Verify)
+
+### Summary
+Tagged the 272-SKU **Wisdom Outdoor Classroom — Outdoor Play** subset into a new Medusa collection `wisdom-outdoor-play` on `leka-medusa-backend`. Recognised mid-flight that 255 of the 272 SKUs already live in Medusa under the rebranded **Leka Project** sales channel (their original Wisdom item codes are preserved in `variants[].metadata.legacy_sku`), so the importer was redesigned as a hybrid: **link** the existing 255, **create** the 17 truly absent. Every candidate image was filtered through URL rewrite → HTTP HEAD → Gemini 2.5 Flash verify before being written.
+
+### Pipeline
+- **Source work-list:** `vendors` repo `wisdom-catalog/parsed/wisdom-outdoor-play-merged.json` (272 rows, top-level array). 17 rows have `firestore: null` (the unmatched ones); 255 have at least the `description` / `description_cn` enrichment.
+- **Script:** `wisdom-catalog/import_outdoor_play_to_medusa.py` (new) — eight stages, idempotent, dry-runnable.
+- **Shared helper added:** `update_product_images(product_id, thumbnail, gallery)` and `update_product_metadata(product_id, metadata)` in `shared/medusa_importer.py`.
+- **Match strategy:** `build_legacy_sku_index(SC=sc_01KNKTHC0B7KFEDSZ3NNM49JQW)` indexes 10,123 Wisdom variant-SKU↔product-id pairs. For each outdoor-play SKU, the importer probes by (a) exact `sku`, (b) `firestore.matched_id`. No match → create with handle `wisdom-<code.lower()>`.
+- **Image URL rewrite:** Firestore `images[].url` points at the **private** `gs://ai-agents-go-documents/product-images/wisdom/...` bucket (403 anonymously). A `rewrite_image_url()` helper flips every URL to the live storefront-proxy form `https://catalogs.leka.studio/api/i/leka-project/<path>` (backed by `gs://ai-agents-go-vendors/leka-project/`). Confirmed via memory `image-proxy-bucket.md` + curl spot-check.
+- **HEAD pre-filter:** ThreadPoolExecutor(16) HEAD-checks all 300 unique URLs in ~0.5s. 255 return 200; 45 return non-2xx (object not present in `leka-project/` bucket).
+- **Gemini verify:** For each HEAD-OK URL × product title pair (264 jobs), `gemini-2.5-flash` returns `{matches, confidence, depicted}`. Threshold `confidence >= 0.70`. Decisions cached in Firestore `wisdom_outdoor_play_verify/{sha1(url|title)}` for free reruns. Reused the `image_backfill_verify` prompt + schema established in v2.34.0.
+
+### Outcome
+| Bucket | Count |
+|---|---:|
+| SKUs in source merged JSON | 272 |
+| Linked to existing Leka-Project product (via `legacy_sku` / `matched_id`) | 255 |
+| Created fresh as `wisdom-<code>` | 17 |
+| Skipped due to error | 0 |
+| **Unique products now in `wisdom-outdoor-play` collection** | **227** |
+| SKUs that ended with a verified thumbnail | 140 |
+| SKUs that ended on the Leka "Image coming soon" placeholder | 132 |
+| Broken image URLs (HEAD non-2xx) dropped | 45 |
+| Gemini verdicts: accept / reject / error / cached | 168 / 96 / 0 / 4 |
+| New images written to existing products | 0 (existing products already had non-placeholder images from v2.34.0; `--force-image-refresh` was not requested) |
+
+The **227 vs 272 gap** is expected and reconciled in the report: many merged-JSON SKUs share a single `firestore.matched_id` (e.g. both `CSS-BZ` and `CSS-BZ-V02` map to `leka-project-qv8v9i2v`). Every source SKU is accounted for — none silently dropped.
+
+### Collection on Medusa
+- **Title:** `Wisdom Outdoor Classroom — Outdoor Play`
+- **Handle:** `wisdom-outdoor-play`
+- **ID:** `pcol_01KSTM5ZC4H197S057QC2TNATR`
+- **Live URL (admin):** https://leka-medusa-backend-rg5gmtwrfa-as.a.run.app/admin/collections/pcol_01KSTM5ZC4H197S057QC2TNATR
+- **Sub-areas covered (from `metadata.outdoor_play.sub_area` / `metadata.sub_area`):** `planting_breeding`, `sand_water`, `music`, `outdoor_planting`, `outdoor_classroom_misc`, `vision_weather`.
+
+### Cost / wall-time
+- Gemini: 260 verifications × ~$0.0015 ≈ **~$0.40** Vertex spend.
+- Wall-time end-to-end: **~2 min** (Gemini fan-out at concurrency 4 dominates; Medusa upsert at ~5/s).
+- Idempotent rerun (everything cached): expected <30s — second pass is essentially `HEAD` re-check + index rebuild + 272 read-modify-write PATCH/POSTs against an already-final state.
+
+### New files
+| File | Purpose |
+|------|---------|
+| `wisdom-catalog/import_outdoor_play_to_medusa.py` | Hybrid link/create orchestrator (this build). |
+| `wisdom-catalog/IMPORT_OUTDOOR_PLAY_REPORT.md` | Auto-written report — re-emitted on every run. |
+| `shared/medusa_importer.py` (extended) | `update_product_images`, `update_product_metadata`. |
+
+### Notes for future runs
+1. If we want to overwrite the v2.34.0-era thumbnails with the Gemini-verified outdoor-play images, rerun with `--force-image-refresh` — the Firestore Gemini cache makes this almost free.
+2. The 132 SKUs that ended on a placeholder are a mix of (a) the 17 firestore-null rows, (b) 82 rows whose `firestore.images[]` is empty in the source JSON, and (c) ~33 rows where every candidate image was either bucket-missing (HEAD 4xx) or Gemini-rejected. The 96 Gemini-rejected URLs are likely "page collage" PDF extractions where multiple products appear in one frame — fixable by upstream PDF re-extraction, out of scope here.
+3. CLAUDE.md's "Image Pipeline" note (upload to `gs://ai-agents-go-documents/product-images/<brand>/catalog/`) remains stale — the live serving bucket is `gs://ai-agents-go-vendors/<vendor>/`. The memory note `image-proxy-bucket.md` documents this; a follow-up should fix CLAUDE.md.
+
+---
+
 ## v1.0.0 — 2026-03-22 (Initial Release)
 
 ### Summary

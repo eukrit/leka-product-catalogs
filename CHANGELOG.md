@@ -4,6 +4,55 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.40.0] - 2026-05-30
+
+### Added — Wisdom outdoor-play collection in Medusa (link existing 255 + create 17)
+
+Tagged the 272-SKU **Wisdom Outdoor Classroom — Outdoor Play** subset into a
+new Medusa collection `wisdom-outdoor-play` on `leka-medusa-backend`. Hybrid
+strategy after discovering that 255 of the 272 SKUs already exist in Medusa
+under the rebranded `Leka Project` sales channel — original Wisdom item codes
+live in `variants[].metadata.legacy_sku`.
+
+#### `wisdom-catalog/import_outdoor_play_to_medusa.py` (new)
+Orchestrator: load merged JSON → Firestore enrichment → URL rewrite → HEAD
+filter → Gemini 2.5 Flash verify (cached in Firestore
+`wisdom_outdoor_play_verify`) → idempotent link or create. Stages each gated
+by a flag (`--dry-run`, `--skip-gemini`, `--skip-head-check`, `--no-firestore`,
+`--force-image-refresh`, `--limit N`). Source list pulled from sibling
+`vendors` repo (`wisdom-catalog/parsed/wisdom-outdoor-play-merged.json`).
+
+#### Image URL rewrite — proxy form
+Firestore `images[].url` points at the private
+`gs://ai-agents-go-documents/...` bucket (403 anonymously). The importer flips
+every URL to the live storefront-proxy form
+`https://catalogs.leka.studio/api/i/leka-project/<path>` (backed by
+`gs://ai-agents-go-vendors/leka-project/`). Of 300 unique URLs: 255 HEAD-OK,
+45 broken. Of HEAD-OK URLs: Gemini accepted 168, rejected 96.
+
+#### `shared/medusa_importer.py` — `update_product_images`, `update_product_metadata`
+Added two thin helpers. The four-helper list in the task brief was mostly
+fulfilled by pre-existing methods (`find_product_by_handle`,
+`get_or_create_collection`, `set_product_collection`); only image PATCH was
+missing.
+
+#### Outcome
+- Collection `wisdom-outdoor-play` (`pcol_01KSTM5ZC4H197S057QC2TNATR`) created.
+- **227 unique products** now linked to the collection (272 SKUs collapse via
+  shared `firestore.matched_id`; e.g. `CSS-BZ` and `CSS-BZ-V02` both map to
+  `leka-project-qv8v9i2v`).
+- 255 existing products got collection link + `metadata.outdoor_play` merge
+  (no image overwrite — v2.34.0 thumbnails preserved).
+- 17 new `wisdom-<code>` products created for the firestore-null SKUs; they
+  carry the Leka "Image coming soon" placeholder where no Gemini-verified
+  image was available.
+- Wall-time ~2 min; Vertex spend ~$0.40.
+
+Full report: `wisdom-catalog/IMPORT_OUTDOOR_PLAY_REPORT.md`. Brand log:
+`wisdom-catalog/DEPLOYMENT_LOG.md` (v1.5.0).
+
+---
+
 ## [2.39.0] - 2026-05-29
 
 ### Added — WePlay landed-cost retail pricing (THB/USD/SGD) + Medusa sync
