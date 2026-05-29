@@ -1,0 +1,10 @@
+{
+  "machine": "NCORE100",
+  "branch": "claude/frosty-sinoussi-947eae",
+  "sha": "f5021fa",
+  "ahead": 0,
+  "behind": 0,
+  "dirty_files": 0,
+  "sop_version": "2026.05.18-rev6",
+  "session_start": "2026-05-29T10:13:01Z"
+}
