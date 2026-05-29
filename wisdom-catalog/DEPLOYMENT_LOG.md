@@ -1,5 +1,44 @@
 # Deployment Log — Wisdom Product Catalog
 
+## v2.45.0 — 2026-05-30 (Furniture Catalog image backfill)
+
+### Summary
+Extracted and attached real product imagery from the brand-new `2025-08-11
+Wisdom International Furniture Catalog.pdf` (355 pages, never previously
+ingested) to Leka Project placeholder products on Medusa.
+
+### Pipeline
+1. `wisdom-catalog/extract_furniture_pdf_images.py --extract` — spatial PDF
+   attribution (PyMuPDF span-bbox + image-rect nearest-neighbor, MAX_IMAGES=2,
+   MAX_DISTANCE=600 px). Output: 1,538 JPEGs to local cache + mapping JSON.
+2. `wisdom-catalog/enrich_furniture_pdf_images.py --upload` — 1,222 new
+   objects in `gs://ai-agents-go-vendors/wisdom/furniture_2025/`.
+3. `wisdom-catalog/enrich_furniture_pdf_images.py --write-firestore` — 93
+   `vendors/wisdom/products` docs gained furniture image entries.
+4. `wisdom-catalog/enrich_furniture_pdf_images.py --verify` — Gemini 2.5
+   Flash @ 0.70, 93 calls / $0.86 spent / 39 accept / 47 reject / 0 error.
+5. `wisdom-catalog/enrich_furniture_pdf_images.py --sync-medusa` — 33
+   placeholder products flipped to `backfilled_furniture` on Medusa.
+
+### Outcome
+- Live placeholders: 2,138 → 2,105 (delta −33).
+- Backfilled with real imagery: 67 → 100 (delta +33).
+- 93 vendor docs populated for future Medusa onboarding (some not yet on
+  Medusa).
+
+### Quality / spend
+- 96.5 % of spatial attributions had centroid distance < 200 px.
+- Verify accept rate 42 % — Gemini correctly rejected multi-product-page
+  mis-attributions; accepts cluster on KB / GP / HW / MGF prefixes.
+- $0.86 Vertex spend, $19.14 under ceiling.
+
+### Sibling worktree
+`claude/great-hopper-c0fd71` is independently re-extracting the 2025-06-13
+USA + International catalogues for the QSWP / SR / BS outdoor-play
+prefixes. No file or write-key overlap with this branch's furniture wave.
+
+---
+
 ## v1.0.0 — 2026-03-22 (Initial Release)
 
 ### Summary
