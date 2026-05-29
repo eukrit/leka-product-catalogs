@@ -7,6 +7,69 @@ Products: `vendors/4soft/products` (db `vendors`)
 
 ---
 
+## 2026-05-30 — v2.45.0-dryrun — Air-freight pricing pivot (dry-run, NOT deployed)
+
+- **Scope:** switch the pricing engine from sea-LCL to air freight (4soft ships
+  Czech Republic → Thailand by air, not by sea). Dry-run only — Firestore and
+  Medusa untouched. Awaiting user sign-off before promoting.
+- **Cross-repo changes:**
+  - `shipping-automation/mcp-server/cost_engine.py` — added chargeable-weight
+    (volumetric kg = cbm × 167) to the `air` branch of `calc_freight`; added
+    `volumetric_divisor_kg_per_m3` to the EU air method; fixed stale
+    `VENDOR_COUNTRY_MAP["4soft"]` from `china` → `europe`.
+  - `foursoft-catalog/import_pricelist.py` — `METHOD="lcl"` → `"air"`; new
+    CLI flags `--air-rate`, `--landed-csv`, `--load-dims`; per-SKU override
+    pattern (overrides air `per_kg` and zeroes `min_charge` for the call
+    window, since 5 000 THB shipment minimum doesn't apply per-SKU).
+- **Rate research:** [air-freight-rates-2026-05-30.md](./data/air-freight-rates-2026-05-30.md).
+  No public PRG→BKK spot rate available; used 6 backhaul-relevant data points
+  (Xeneta Europe-origin avg, WorldACD week-18 + April global yields, FreightAmigo
+  FRA→HKG, TH→EU reverse proxy, Suaid EU→USA). Low **90 / median 105 / high
+  135 THB/kg chargeable**, all-in (FSC + SSC + war-risk included). Volumetric
+  divisor 167 kg/m³ (IATA general cargo).
+- **Dry-runs:** 3 runs at 90 / 105 / 135 THB/kg. FX this run: USD 33.25,
+  EUR 38.71, SGD 26.04 (exchangerate-api.com + 2% buffer). dim_index from
+  Firestore: **520 docs indexed** (was 338 in previous runs).
+- **Diff doc:** [air-freight-dryrun-diff-2026-05-30.md](./data/air-freight-dryrun-diff-2026-05-30.md)
+  with 10 representative SKUs + summary stats.
+- **Headline counts under MID (105 THB/kg):**
+  - `dims_scaled` 251, `flat_uplift` 2 159 (unchanged from OLD — 0 byte-diffs)
+  - clamp `none` 198 → 207 (+9), `floored` 2 045 → 2 069 (+24), `capped` 167 → 134 (–33)
+  - p90 landed THB: 75 680 → 63 575 (–16%) — heavy tail lighter under air
+    because the 18 000 THB LCL clearance fee drops to 3 800 THB for air
+- **Tests:** new `TestAirFreightChargeable` (7 cases) in
+  `shipping-automation/tests/test_pricing_engine.py`. 26/26 pass.
+- **`LOGISTICS_TIERS` untouched** — still sea-tuned. Retune is a follow-up PR
+  after the user reviews the dry-run diff (per plan §4).
+- **Decisions deferred to the user:**
+  1. Pick a baseline rate (LO 90 / **MID 105 recommended** / HI 135 THB/kg).
+  2. Decide whether to retune `LOGISTICS_TIERS` now or in a follow-up PR.
+  3. Investigate the suspiciously small CBM on A6-01A-00 (0.0002 m³ for a
+     40 cm hexagon mat — probably a missing-thickness default).
+
+### Run commands
+```bash
+# Engine unit tests
+cd C:/Users/Eukrit/OneDrive/Documents/Claude Code/shipping-automation
+python -m pytest tests/test_pricing_engine.py -v
+
+# Dry-runs (worktree: inspiring-chandrasekhar-c387ff)
+cd C:/Users/Eukrit/OneDrive/Documents/Claude Code/leka-product-catalogs/.claude/worktrees/inspiring-chandrasekhar-c387ff
+python foursoft-catalog/import_pricelist.py --dry-run --load-dims --air-rate 90  --landed-csv foursoft-catalog/data/pricelist_2025-03-01_landed_AIR-DRYRUN-lo.csv
+python foursoft-catalog/import_pricelist.py --dry-run --load-dims --air-rate 105 --landed-csv foursoft-catalog/data/pricelist_2025-03-01_landed_AIR-DRYRUN-mid.csv
+python foursoft-catalog/import_pricelist.py --dry-run --load-dims --air-rate 135 --landed-csv foursoft-catalog/data/pricelist_2025-03-01_landed_AIR-DRYRUN-hi.csv
+```
+
+### Follow-ups
+- Retune `LOGISTICS_TIERS` for air freight (separate PR — needs the dry-run
+  evidence to bound the floor/cap by tier).
+- Get a real Czech→BKK air-freight RFQ from Profreight / DHL Global Forwarding
+  to replace the synthesized 105 THB/kg.
+- Fix the A6-01A-00 style tiny-CBM bug in Firestore dim records (likely
+  missing-thickness default in the dim-backfill pipeline).
+
+---
+
 ## 2026-05-30 — v2.44.0 — 2D ground markings created in Medusa (catalog completion)
 
 - **Scope:** deferred **2D** SKUs (hopscotch, numbers/letters, footprints, flat
