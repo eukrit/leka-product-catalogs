@@ -4,6 +4,49 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.43.0] - 2026-05-29
+
+### Added — 4soft product images from the picture-pricelist PDF
+
+Follow-up to v2.42.0 (4soft 3D create). The 3D drafts mostly fell back to
+borrowed base-design web images (only 130 web bases existed). The official
+**picture-pricelist PDF** (`4soft_EPDM_graphics_-_picture_-_price_list_2025_optimized.pdf`,
+89 pages, the picture variant of the v2.40.0 `.xls`) carries a 100x100 image per
+product design — the only image source for the ~2,000 colour/UV/size variants
+4soft.cz does not publish on the web.
+
+- `foursoft-catalog/extract_pdf_images.py` (new) — PyMuPDF grid extractor:
+  matches each left-column image to its code by y-row, validates against the
+  pricelist, prefers the DeviceRGB jpeg (renders the cell for jpx-only).
+  Extracted **989 images** (964 native jpeg / 25 rendered), verified by eye
+  (crocodile, Rubik's cube, sea star). Mapping → `data/pdf_images_map.json`.
+- `foursoft-catalog/enrich_pdf_images.py` (new) — uploads the 989 images to
+  `gs://ai-agents-go-vendors/4soft/pdf/<handle>.jpg` (the bucket the storefront
+  image proxy reads — see leka-website `api/i/[...path]`), then writes
+  `vendors/4soft/products[].images` via the proxy URL
+  `https://catalogs.leka.studio/api/i/4soft/pdf/<handle>.jpg`. UV-class-matched
+  base-design borrowing lifts coverage to **1,635 / 2,410 = 67.8%**.
+- **Precedence:** keep the 372 higher-res web images as primary (no downgrade);
+  REPLACE the 162 v2.41.0/v2.42.0 borrowed-web base-design images with the real
+  PDF image; ADD a PDF image to 1,101 previously image-less products.
+- **Medusa:** 419 in-channel products updated with the PDF image (thumbnail +
+  images), 0 errors. 844 PDF-imaged codes are the deferred 2D SKUs (not yet in
+  Medusa) — images held in Firestore for when they are created.
+
+The 989 extracted JPGs are reproducible (`extract_pdf_images.py`) and live in
+GCS, so they are gitignored; the mapping JSON is committed as provenance.
+
+#### Note on automation
+The picture-pricelist note in CLAUDE.md's "Image Pipeline" (upload to
+`ai-agents-go-documents/product-images/`) is **stale** — the live storefront
+proxy reads `gs://ai-agents-go-vendors/<vendor>/<path>`.
+
+#### Deferred follow-ups
+- 775 codes (mostly flat 2D markings) have no image in the PDF — still
+  image-less.
+- Higher-resolution images would need a different source (PDF embeds are 100px).
+
+
 ## [2.42.0] - 2026-05-29
 
 ### Added — 4soft 3D play elements created in Medusa + dims-based pricing
