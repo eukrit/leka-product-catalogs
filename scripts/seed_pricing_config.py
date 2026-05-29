@@ -119,6 +119,18 @@ def build_seed_doc() -> dict:
             },
             # Vortex Aquatics — Canada EXW USD, per-product-line reseller discounts.
             "vortex": _vortex.brand_config(),
+            # WePlay (Kiddie's Paradise Inc., Taiwan) — FOB Taiwan, net USD.
+            # Taiwan is non-FTA for Thailand → 10% import duty + 7% import VAT.
+            # Freight is CBM-driven (carton CBM / pack qty) at sea_lcl_per_cbm_thb;
+            # see weplay-catalog/import_pricelist.py. GM 0.50 confirmed 2026-05-29.
+            "weplay": {
+                "gross_margin": 0.50,
+                "import_duty_rate": 0.10,
+                "sea_lcl_per_cbm_thb": 5500.0,
+                "default_usd_thb": 33.0,
+                "source_pricelist_url": "weplay-catalog/import_pricelist.py (AQ1251030077)",
+                "source_pricelist_label": "WePlay quotation AQ1251030077 (FOB Taiwan, USD)",
+            },
         },
         "logistics_tiers": tiers,
         "updated_at": datetime.now(timezone.utc).isoformat(),

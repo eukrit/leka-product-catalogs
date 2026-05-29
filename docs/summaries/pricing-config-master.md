@@ -1,9 +1,9 @@
 # Leka Product Catalogs — Pricing Configuration Master Reference
 
-> **Last updated:** 2026-05-29 (v2.38.0 — Vortex Aquatics added: per-product-line reseller discounts, Canada EXW USD)
+> **Last updated:** 2026-05-29 (v2.39.0 — WePlay brand added: Taiwan FOB net USD, CBM-driven sea LCL)
 > **Source of truth:** Firestore `leka-product-catalogs/pricing_config/canonical`
 > **Editor UI:** `docs/forms/pricing-config.html` (served at `gateway.goco.bz/leka-product-catalogs/forms/pricing-config.html`)
-> **Code files:** `shared/pricing_config.py`, `shared/landed_pricing.py`, `shared/wisdom_pricing.py`
+> **Code files:** `shared/pricing_config.py`, `shared/landed_pricing.py`, `shared/wisdom_pricing.py`, `weplay-catalog/import_pricelist.py`
 
 ---
 
@@ -157,6 +157,19 @@ exist in the discount map but match 0 SKUs in the 2026 R2 pricelist.
 
 Code: `vortex-catalog/import_pricelist.py` `price_vortex_row()`
 
+### 4g. WePlay / Kiddie's Paradise (`brands.weplay`)
+
+| Key | Value | Description |
+|-----|-------|-------------|
+| `gross_margin` | **0.50** | 50% GM (confirmed 2026-05-29). |
+| `import_duty_rate` | **0.10** | Taiwan is **non-FTA** for Thailand → 10% import duty. |
+| `sea_lcl_per_cbm_thb` | **5500** | Ocean LCL Kaohsiung → Laem Chabang, THB per CBM (conservative static; refine when a real rate is available). |
+| `default_usd_thb` | 33.0 | Offline FX fallback only. |
+| Trade terms | **FOB Taiwan, net USD** | Quotation `AQ1251030077` (2025-10-30, valid 2026). No list/discount split — these are GO Corp's negotiated reseller prices. Payment T/T in advance; MOQ = full master carton; MOV USD 10,000/shipment. |
+| Shipping | **CBM-driven** sea LCL → Bangkok | Unlike DesignPark/Vortex (flat-uplift), WePlay's quotation gives per-carton CBM. `per_unit_cbm = carton_cbm / pack_qty` × `sea_lcl_per_cbm_thb`; flat 1.35× fallback for any row missing CBM. |
+| Duty | **10%** | Taiwan-origin, non-FTA. |
+| Code | `weplay-catalog/import_pricelist.py` | Parses the PDF, writes `pricing.retail_thb/usd/sgd` to `vendors/weplay/products` by SKU-token match; synced to Medusa SC `sc_01KR6Z0VBSXWYZDVGF30EAP0EQ`. **189 SKUs.** |
+
 ---
 
 ## 5. Tax Rules
@@ -171,6 +184,8 @@ import_duty_rate (by origin):
   EU       → 0.10  (non-FTA: Vinci, Berliner, Rampline)
   Korea    → 0.10  (non-FTA: DesignPark)
   Norway   → 0.10  (non-FTA: Rampline)
+  Canada   → 0.10  (non-FTA: Vortex)
+  Taiwan   → 0.10  (non-FTA: WePlay)
 ```
 Code: `shared/landed_pricing.py` `duty_rate_non_china=0.10`, `duty_rate_china=0.0`
 
@@ -505,6 +520,7 @@ These **must stay in sync** with `scripts/seed_pricing_config.py`:
 
 | Version | Date | Change |
 |---------|------|--------|
+| v2.39.0 | 2026-05-29 | Add **WePlay** brand (Taiwan/USD, GM 0.50, duty 0.10, sea LCL 5500 THB/CBM). `weplay-catalog/import_pricelist.py` computes landed THB/USD/SGD retail for 189 SKUs from quotation AQ1251030077 (CBM-driven freight `per_unit_cbm = carton_cbm/pack`); synced to Medusa |
 | v2.38.0 | 2026-05-29 | Add **Vortex Aquatics** (`brands.vortex`): per-product-LINE reseller discounts (Splashpad 25% / Poolplay 15% / Spraypoint 25% / Elevations 15% / WQMS 15% / Water Journey 20% / Water Slides 15% / CoolHub 0%), Canada EXW USD, 311 SKUs ingested, 295 synced to Medusa. Maps in `vortex-catalog/vortex_config.py`. |
 | v2.33.0 | 2026-05-25 | Create Medusa Singapore SGD region (`reg_01KSEBH1EAK9RWAYEW87QY8NWS`); move `sg` out of Asia-Pacific USD; re-sync all brand prices |
 | v2.32.0 | 2026-05-24 | Rampline weight scraper fix: `<p><br>` spec parsing + `FAMILY_DESC_TO_SLUG` map. 32/127 Rampline SKUs now use `airfreight_weight` routing (was 0 before) |

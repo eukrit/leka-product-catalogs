@@ -4,6 +4,61 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.39.0] - 2026-05-29
+
+### Added — WePlay landed-cost retail pricing (THB/USD/SGD) + Medusa sync
+
+Turned the raw WePlay quotation prices (`AQ1251030077`, ingested audit-only in
+v2.26.0) into full landed-cost retail across all three currencies, added the
+brand to the pricing engine, and pushed prices to Medusa.
+
+**Trade terms verified** off the quotation header (authoritative source):
+FOB Taiwan, **net USD** unit prices (no list/discount split — these are GO
+Corp's negotiated reseller prices), country of origin Taiwan, T/T in advance,
+30–45 day lead time, MOQ = full master carton, MOV USD 10,000/shipment.
+_(Gmail confirmation of terms was not available in this session — the printed
+quotation terms were used directly.)_
+
+#### `weplay-catalog/import_pricelist.py` (new)
+Parses the 7-page text-layer PDF (`pdfplumber`), capturing SKU, description,
+USD net price, unit, master-carton **PACK qty**, **carton CBM**, and G.W.
+Taiwan/USD cost cascade (route-correct sibling of the `shared/landed_pricing`
+EU path and the `shared/wisdom_pricing` China path), following the canonical
+v2.31.0 independent-currency convention:
+
+```
+per_unit_cbm = carton_cbm / pack_qty
+fob_thb      = fob_usd · USD_THB
+freight_thb  = per_unit_cbm · sea_lcl_per_cbm_thb (5500)   # CBM path; flat 1.35x fallback
+insurance    = fob_thb · 1%
+cif_thb      = fob_thb + freight_thb + insurance
+duty_thb     = cif_thb · 0.10            # Taiwan non-FTA import duty
+import_vat   = (cif_thb + duty_thb) · 0.07
+landed_thb   = cif_thb + duty_thb + import_vat
+retail_thb   = (landed_thb / (1 - 0.50)) · 1.07     # +TH customer VAT (THB only)
+retail_usd   = (landed_thb / USD_THB) / (1 - 0.50)  # independent, no TH VAT
+retail_sgd   = (landed_thb / SGD_THB) / (1 - 0.50) · sg_gst_mult
+```
+
+Writes `pricing.retail_thb/usd/sgd` + full audit map to matching
+`vendors/weplay/products` docs (boundary-less `[A-Z]{2}[0-9]{4,}` SKU-token
+match). Idempotent, merge-only. **Gross margin 0.50** (user-confirmed 2026-05-29).
+
+#### Pricing config
+- `pricing_config/canonical` → added `brands.weplay`
+  `{gross_margin: 0.50, import_duty_rate: 0.10, sea_lcl_per_cbm_thb: 5500, default_usd_thb: 33.0}`
+  (targeted merge — existing brands preserved).
+- `scripts/seed_pricing_config.py` → added the matching `weplay` seed block.
+- `docs/summaries/pricing-config-master.md` → new §4f WePlay brand section + version-history row.
+
+#### Run results
+- 167 quotation rows → 151 unique SKU tokens → **189** Firestore docs priced (0 misses).
+- Medusa sync (`scripts/sync_vendors_to_medusa.py --brand=weplay --skip-no-images`):
+  200 image-having products → 162 updated, 38 created, **151 priced**, 0 errors.
+  Pushed to existing WePlay sales channel `sc_01KR6Z0VBSXWYZDVGF30EAP0EQ`.
+
+---
+
 ## [2.38.0] - 2026-05-29
 
 ### Added — Vortex Aquatics 2026 USD pricelist ingestion + per-product-line reseller discounts
@@ -69,8 +124,6 @@ carries no dimensions) — same as DesignPark / WePlay.
   Medusa under that form (price-only-in-Firestore until reconciled). All four
   currencies (THB/USD/EUR/SGD) verified on synced variants — USD region
   (Asia-Pacific) serves Vortex correctly.
-
----
 
 ## [2.37.0] - 2026-05-29
 
