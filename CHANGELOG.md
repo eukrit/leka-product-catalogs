@@ -4,6 +4,91 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.41.0] - 2026-05-29
+
+### Added — Archimedes Water Play landed pricing (the deferred PR #59 work)
+
+Continues the `archimedes-water-play` brand (Wenzhou Daosen 温州道森游乐戏水,
+34 children's water-play SKUs, slugs AWP001–AWP034) merged in PR #59 (v2.36.0),
+which parsed the CNY pricelist but **deferred** landed pricing
+(`landed_pricing_status: "deferred — CNY→USD + dim normalization required"`).
+
+This release runs the parser against live Firestore and completes the landed
+CNY→THB/USD/SGD pricing pass, mirroring the Wisdom (China FOB) pipeline.
+
+#### Task 1 — audit doc populated
+- Ran `archimedes-water-play-catalog/import_pricelist.py` (this machine has gcloud
+  ADC; the authoring machine did not). Wrote the audit doc with all 34 variants to
+  Firestore `vendors/archimedes-water-play/pricelists/2026-05-29` (database `vendors`).
+
+#### Task 2 — landed pricing
+- **`archimedes-water-play-catalog/price_archimedes.py`** (NEW) — faithful mirror of
+  `shared/wisdom_pricing.compute_wisdom_retail`, but in CNY:
+  - Origin China → **0% import duty** (ASEAN-China FTA Form E), **+7% Thai import VAT**
+    on (CIF+duty), **+7% TH customer VAT** embedded in `retail_thb` only.
+  - **Independent** THB/USD/SGD retail — each derived from `landed_thb` (USD/SGD via
+    `landed_thb / FX`, no TH customer VAT), never `retail_thb / FX`.
+  - **Gross margin 0.50** — China-origin default, same as Wisdom. Adjustable via the
+    pricing-config form (`brands.archimedes-water-play.gross_margin`).
+  - **FX:** live THB-per-unit rates from shipping-automation `fx_rates.get_fx_rates`
+    (+2% buffer). Snapshot used: CNY=4.8903, USD=33.2529, SGD=26.0437 THB/unit
+    (⇒ CNY→USD 0.1471, CNY→SGD 0.1878). Fallback constants CNY 4.80 / USD 35 / SGD 25.
+  - **Dimension → CBM (documented, conservative):** only `kind == "lwh"` rows get a CBM.
+    Unit per row: explicit "cm" marker → cm; else any axis > 1000 → mm (e.g. `2000*1100*1250`);
+    else cm (e.g. `95×45×95`). `CBM = L·W·H (m³) × 0.15` packing factor. `lwh` rows route
+    through the China-LCL `cost_engine` + Vinci tier clamp (floor/cap by FOB band, which
+    bounds any cm/mm mis-guess — and most small items hit the LCL `min_charge`, so the CBM
+    value barely moves the result). `custom` / `diameter` / `two-dim` / `length` / `unknown`
+    rows fall back to the flat China **CIF ≈ FOB** path (no freight uplift), exactly like Wisdom.
+  - Result: **34 SKUs priced** (28 via China-LCL CBM, 6 via flat CIF≈FOB). Audit CSV at
+    `archimedes-water-play-catalog/data/pricelist_2026-05-29_priced.csv`.
+  - **Known caveat:** lwh (CBM) SKUs carry the per-shipment fixed clearance/last-mile of the
+    China-LCL route, so an `lwh` item can price ~2× an equivalently-priced flat (`custom`/
+    `diameter`) item. This is the standard Wisdom-pipeline behaviour; the tier clamp bounds it.
+    Adjust GM or method via the pricing-config form + re-run if a flatter curve is preferred.
+  - Writes priced product docs to `vendors/archimedes-water-play/products/<sku>` (vendors DB),
+    matching the rampline/designpark per-product shape; updates the audit doc
+    `landed_pricing_status → "completed (v2.38.0)"` with the FX snapshot.
+- **`scripts/add_archimedes_pricing_config.py`** (NEW) — merge-only writer that adds
+  `brands.archimedes-water-play` (GM 0.50, `import_duty_rate` 0.00, `currency` CNY,
+  `origin` china, `default_cny_thb` 4.80, source pricelist pointer) to
+  `pricing_config/canonical` (database `leka-product-catalogs`) **without disturbing** the
+  other brands added by later PRs (vortex/4soft/weplay). Idempotent (`--force` to overwrite).
+- **`scripts/seed_pricing_config.py`** — `build_seed_doc()` now includes the
+  `archimedes-water-play` block so a future `--force` reseed stays consistent.
+
+#### Task 3 — Medusa
+- Created/confirmed the **"Archimedes Water Play"** Medusa sales channel
+  (`sc_01KSSP39K5DVH9TT2TMXCREHFV`) and added it to the `SC` map in
+  `scripts/sync_brand_prices_to_medusa.py`. **Product creation is a follow-up** — there are
+  no AWP### products in Medusa yet, so the price sync is a documented no-op (0/34 matched)
+  until the 34 products are created. Once created (SKU = AWP###), the existing sync will
+  push THB/USD/SGD prices by SKU match.
+
+#### Docs
+- `docs/summaries/pricing-config-master.md` — added §4f (brand config), §6f (formula),
+  scripts-reference rows, and a v2.38.0 version-history row.
+- `archimedes-water-play-catalog/DEPLOYMENT_LOG.md` (NEW) — dated brand deploy log.
+
+### Files
+- NEW `archimedes-water-play-catalog/price_archimedes.py`
+- NEW `archimedes-water-play-catalog/data/pricelist_2026-05-29_priced.csv`
+- NEW `archimedes-water-play-catalog/DEPLOYMENT_LOG.md`
+- NEW `scripts/add_archimedes_pricing_config.py`
+- EDIT `scripts/seed_pricing_config.py` (+ archimedes seed block)
+- EDIT `scripts/sync_brand_prices_to_medusa.py` (+ SC map entry)
+- EDIT `docs/summaries/pricing-config-master.md`, `docs/build-summary.html`, `VERSION`,
+  `.claude/PROGRESS.md`
+
+### Outcome
+- Success. 34 SKUs priced + written to `vendors/archimedes-water-play/products`; audit doc
+  status → completed; brand config + sales channel landed. `verify.sh` 0 FAIL.
+- **Version note:** rebased onto `origin/main` (2.40.0 after WePlay #61, Vortex #62, 4soft #63);
+  renumbered to **2.41.0** (next free minor). The Firestore audit doc
+  `landed_pricing_status` still reads "completed (v2.38.0)" — the version at write time.
+
+---
+
 ## [2.40.0] - 2026-05-29
 
 ### Added — 4soft EPDM-graphics 2025 pricelist ingested (2,410 EUR SKUs)
@@ -94,7 +179,6 @@ SGD 26.04 (exchangerate-api.com live, +2% buffer).
 
 Spot-check: `4soft-a1-01a-00` ("Circle 18 cm", list €20) → retail ฿2,112.30 /
 $59.37 / €51.00 / S$75.80 (live in Medusa).
-
 ---
 
 ## [2.39.0] - 2026-05-29
@@ -217,7 +301,6 @@ carries no dimensions) — same as DesignPark / WePlay.
   Medusa under that form (price-only-in-Firestore until reconciled). All four
   currencies (THB/USD/EUR/SGD) verified on synced variants — USD region
   (Asia-Pacific) serves Vortex correctly.
-
 ## [2.37.0] - 2026-05-29
 
 ### Added — AI enrichment of Wisdom / Leka Project specs + Toys category

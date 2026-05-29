@@ -1,6 +1,6 @@
 # Leka Product Catalogs — Pricing Configuration Master Reference
 
-> **Last updated:** 2026-05-29 (v2.40.0 — 4soft EPDM-graphics brand added; v2.39.0 — WePlay)
+> **Last updated:** 2026-05-29 (v2.41.0 — Archimedes Water Play brand added; 4soft #63 + WePlay #61 + Vortex #62 also landed)
 > **Source of truth:** Firestore `leka-product-catalogs/pricing_config/canonical`
 > **Editor UI:** `docs/forms/pricing-config.html` (served at `gateway.goco.bz/leka-product-catalogs/forms/pricing-config.html`)
 > **Code files:** `shared/pricing_config.py`, `shared/landed_pricing.py`, `shared/wisdom_pricing.py`, `weplay-catalog/import_pricelist.py`
@@ -169,6 +169,23 @@ Code: `vortex-catalog/import_pricelist.py` `price_vortex_row()`
 | Shipping | **CBM-driven** sea LCL → Bangkok | Unlike DesignPark/Vortex (flat-uplift), WePlay's quotation gives per-carton CBM. `per_unit_cbm = carton_cbm / pack_qty` × `sea_lcl_per_cbm_thb`; flat 1.35× fallback for any row missing CBM. |
 | Duty | **10%** | Taiwan-origin, non-FTA. |
 | Code | `weplay-catalog/import_pricelist.py` | Parses the PDF, writes `pricing.retail_thb/usd/sgd` to `vendors/weplay/products` by SKU-token match; synced to Medusa SC `sc_01KR6Z0VBSXWYZDVGF30EAP0EQ`. **189 SKUs.** |
+### 4i. Archimedes Water Play (`brands.archimedes-water-play`)
+
+China-origin children's water-play products (Wenzhou Daosen 温州道森游乐戏水),
+priced in **CNY**. Reuses the Wisdom China-FOB pattern. Added v2.38.0.
+
+| Key | Value | Description |
+|-----|-------|-------------|
+| `gross_margin` | **0.50** | 50% GM — China-origin default (same as Wisdom). |
+| `import_duty_rate` | **0.00** | ASEAN-China FTA Form E (0% duty). |
+| `currency` | **CNY** | Source pricelist currency (RMB). |
+| `origin` | **china** | China consolidated sea. |
+| `default_cny_thb` | **4.80** | Offline FX fallback (THB per CNY). |
+| Trade terms | FOB China (CNY) | `fob_thb = price_cny × cny_thb`. |
+| Shipping | China consolidated sea → Bangkok | `kind=lwh` SKUs use China-LCL `cost_engine` CBM + tier clamp; all other dim kinds use flat CIF ≈ FOB. |
+| Duty | **0%** | China-origin under ASEAN-China FTA Form E. |
+| CBM rule | cm unless mm | `lwh` only; explicit "cm" marker → cm; else axis > 1000 → mm; else cm. `CBM = L·W·H(m³) × 0.15`. |
+| Caveat | lwh ≈ 2× flat | `lwh` (CBM) SKUs carry per-shipment China-LCL clearance/last-mile, pricing ~2× an equally-priced flat item; the tier clamp bounds it. |
 
 ### 4h. 4soft (`brands.4soft`) — added v2.40.0
 
@@ -334,6 +351,30 @@ retail_sgd = (landed_thb / SGD_THB) / (1 − 0.35)     # × SG GST mult when reg
 ```
 Code: `vortex-catalog/import_pricelist.py` `price_vortex_row()`;
 maps in `vortex-catalog/vortex_config.py`
+### 6h. Archimedes Water Play (China FOB, CNY)
+```python
+cny_thb    = live FX (shipping-automation fx_rates, THB per CNY; fallback 4.80)
+fob_thb    = price_cny × cny_thb
+
+# Path A — kind == "lwh" (CBM via China-LCL cost_engine + tier clamp):
+cbm        = L_m × W_m × H_m × 0.15      # unit: explicit cm → cm; axis>1000 → mm; else cm
+est        = cost_engine.estimate_landed_cost(origin="china", method="lcl",
+                 goods_value=price_cny, goods_currency="CNY", cbm=cbm, duty_rate=0.0, fx_rates=fx)
+landed_thb = est.total_landed_thb        → Vinci tier clamp (floor/cap on EUR-equiv FOB band)
+
+# Path B — all other dim kinds (custom / diameter / two-dim / length / unknown):
+cif_thb    = fob_thb                     # China consolidated sea: CIF ≈ FOB (no uplift)
+duty_thb   = cif_thb × 0.00             # ASEAN-China FTA Form E
+vat_thb    = (cif_thb + duty_thb) × 0.07
+landed_thb = cif_thb + duty_thb + vat_thb
+
+retail_thb = (landed_thb / (1 - 0.50)) × 1.07   # TH customer VAT embedded
+retail_usd = (landed_thb / usd_thb) / (1 - 0.50)   # independent, no TH customer VAT
+retail_sgd = (landed_thb / sgd_thb) / (1 - 0.50) × sg_gst_mult
+```
+Code: `archimedes-water-play-catalog/price_archimedes.py` `compute_pricing()`
+Pricelist: `archimedes-water-play-catalog/import_pricelist.py` (parse) +
+`price_archimedes.py` (price). 34 SKUs: 28 CBM / 6 flat (v2.40.0).
 
 ### 6g. 4soft (EU EXW, EUR) — added v2.40.0
 ```python
@@ -549,6 +590,9 @@ These **must stay in sync** with `scripts/seed_pricing_config.py`:
 | `berliner-catalog/import_pricelist.py` | Parse Berliner EUR CSV → Firestore `vendors/berliner/products` | When source pricelist updated |
 | `vortex-catalog/import_pricelist.py --apply` | Parse Vortex 2026 USD PDF → Firestore `vendors/vortex/products` + merge `brands.vortex` config | When source pricelist updated |
 | `foursoft-catalog/import_pricelist.py` | Parse 4soft EUR `.xls` (EXW 15%) → Firestore `vendors/4soft/products` + seed `brands.4soft` | When source pricelist updated |
+| `archimedes-water-play-catalog/import_pricelist.py` | Parse Wenzhou Daosen CNY pricelist → CSV + Firestore `vendors/archimedes-water-play/pricelists/<date>` audit doc | When source pricelist updated |
+| `archimedes-water-play-catalog/price_archimedes.py --apply` | Price 34 AWP### SKUs (CNY→landed→THB/USD/SGD) → Firestore `vendors/archimedes-water-play/products` | After parse, or any config/FX change |
+| `scripts/add_archimedes_pricing_config.py` | Merge `brands.archimedes-water-play` into `pricing_config/canonical` (does not touch other brands) | Initial brand setup |
 
 ---
 
@@ -556,6 +600,7 @@ These **must stay in sync** with `scripts/seed_pricing_config.py`:
 
 | Version | Date | Change |
 |---------|------|--------|
+| v2.41.0 | 2026-05-29 | Add `brands.archimedes-water-play` (China FOB, CNY, GM 0.50, 0% duty); landed pricing pass for 34 AWP### SKUs (`price_archimedes.py`, mirrors Wisdom); Archimedes Water Play Medusa sales channel (`sc_01KSSP39K5DVH9TT2TMXCREHFV`). Rebased onto 4soft 2.40.0 + WePlay 2.39.0 + Vortex 2.38.0. |
 | v2.40.0 | 2026-05-29 | Add **`brands.4soft`** (EU EXW, EUR; GM 40%, EXW discount 15%). Ingest 2025 EPDM-graphics `.xls` → 2,410 priced SKUs in `vendors/4soft`; 377 existing Medusa variants priced. Reconciled as a NEW brand (no overlap with the separate wet-pour EPDM/Infill CFH pricer) |
 | v2.39.0 | 2026-05-29 | Add **WePlay** brand (Taiwan/USD, GM 0.50, duty 0.10, sea LCL 5500 THB/CBM). `weplay-catalog/import_pricelist.py` computes landed THB/USD/SGD retail for 189 SKUs from quotation AQ1251030077 (CBM-driven freight `per_unit_cbm = carton_cbm/pack`); synced to Medusa |
 | v2.38.0 | 2026-05-29 | Add **Vortex Aquatics** (`brands.vortex`): per-product-LINE reseller discounts (Splashpad 25% / Poolplay 15% / Spraypoint 25% / Elevations 15% / WQMS 15% / Water Journey 20% / Water Slides 15% / CoolHub 0%), Canada EXW USD, 311 SKUs ingested, 295 synced to Medusa. Maps in `vortex-catalog/vortex_config.py`. |

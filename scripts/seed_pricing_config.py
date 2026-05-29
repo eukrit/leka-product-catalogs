@@ -140,6 +140,17 @@ def build_seed_doc() -> dict:
                 "source_pricelist_url": "foursoft-catalog/data/pricelist_2025-03-01.csv",
                 "source_pricelist_label": "4soft 2025 EPDM-graphics pricelist (.xls, valid 2025-03-01)",
             },
+            # China-origin (Wenzhou Daosen), priced in CNY. Mirrors Wisdom:
+            # 0% duty (ASEAN-China FTA Form E), 7% import VAT, 50% GM.
+            "archimedes-water-play": {
+                "gross_margin": 0.50,
+                "import_duty_rate": 0.00,
+                "currency": "CNY",
+                "origin": "china",
+                "default_cny_thb": 4.80,
+                "source_pricelist_url": "archimedes-water-play-catalog/data/source/daosen_pricelist_2026-05-29.xls",
+                "source_pricelist_label": "Wenzhou Daosen 温州道森游乐戏水 pricelist 2026-05-29 (in-repo XLS)",
+            },
         },
         "logistics_tiers": tiers,
         "updated_at": datetime.now(timezone.utc).isoformat(),
