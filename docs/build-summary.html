@@ -32,10 +32,10 @@
   <div class="latest-card">
     <h2 style="margin-top:0;border:0">Latest build</h2>
     <p>
-      Version <strong>2.41.0</strong> &middot; 2026-05-29 &middot;
+      Version <strong>2.42.0</strong> &middot; 2026-05-29 &middot;
       <span class="badge badge-success">success</span>
     </p>
-    <p>Archimedes Water Play landed pricing — 34 AWP### SKUs priced (CNY→THB/USD/SGD, China 0% duty, GM 0.50), brand config + Medusa sales channel.</p>
+    <p>4soft 3D play elements created in Medusa (462 drafts + 130 renamed; 853 total) with dims-based CBM pricing on 251 SKUs; EXW 15% / GM 40% retained after 2026 re-verification.</p>
     <p>
       <a href="CHANGELOG.md">Full build log</a> &middot;
       <a href="PROJECT_INDEX.md">Project index</a>
@@ -46,6 +46,7 @@
   <table>
     <thead><tr><th>Version</th><th>Date</th><th>Summary</th><th>Status</th></tr></thead>
     <tbody>
+      <tr><td><code>2.42.0</code></td><td>2026-05-29</td><td>4soft 3D play elements created in Medusa (462 drafts + 130 renamed; 853 total) + dims-based CBM pricing on 251 SKUs.</td><td><span class="badge badge-success">success</span></td></tr>
       <tr><td><code>2.41.0</code></td><td>2026-05-29</td><td>Archimedes Water Play landed pricing (34 SKUs, CNY, China 0% duty, GM 0.50) + brand config + Medusa sales channel</td><td><span class="badge badge-success">success</span></td></tr>
       <tr><td><code>2.40.0</code></td><td>2026-05-29</td><td>Parsed and priced the **4soft 2025 EPDM-graphics pricelist** (`.xls`,</td><td><span class="badge badge-success">success</span></td></tr>
       <tr><td><code>2.39.0</code></td><td>2026-05-29</td><td>Turned the raw WePlay quotation prices (`AQ1251030077`, ingested audit-only in</td><td><span class="badge badge-success">success</span></td></tr>
@@ -103,7 +104,7 @@
       <tr><td><code>2.8.5</code></td><td>2026-05-10</td><td>v2.8.3 changed step 3 from `npx medusa db:migrate` to `npm run db:migrate` but didn't account for entrypoint-override behavior: when Cloud Build runs a step with a custom `entrypoint`, the container C</td><td><span class="badge badge-success">success</span></td></tr>
       <tr><td><code>2.8.4</code></td><td>2026-05-10</td><td>Created Medusa Sales Channel **Weplay** (`sc_01KR6Z0VBSXWYZDVGF30EAP0EQ`) + publishable key `pk_2b18dd5670830702993445fe43f4269a406baab0b20f85cad15d43b9b9a9efbb`. Linked the key to the SC.</td><td><span class="badge badge-success">success</span></td></tr>
       <tr><td><code>2.8.3</code></td><td>2026-05-09</td><td>`cloudbuild.yaml` Step 3: `entrypoint: npx; args: [medusa, db:migrate]` → `entrypoint: npm; args: [run, db:migrate]`. After [2.8.2] unblocked the worker, the next pipeline run got further: build/pus</td><td><span class="badge badge-failed">failed</span></td></tr>
-      <tr><td><code>2.8.2</code></td><td>2026-05-09</td><td>`cloudbuild.yaml`: bumped `options.machineType` from `E2_MEDIUM` (1 vCPU / 4 GB) to `E2_HIGHCPU_8` (8 vCPU / 8 GB). Every push from 2026-05-05 onward was timing out at Step #0 `build-medusa-backend` �</td><td><span class="badge badge-success">success</span></td></tr>
+      <tr><td><code>2.8.2</code></td><td>2026-05-09</td><td>`cloudbuild.yaml`: bumped `options.machineType` from `E2_MEDIUM` (1 vCPU / 4 GB) to `E2_HIGHCPU_8` (8 vCPU / 8 GB). Every push from 2026-05-05 onward was timing out at Step #0 `build-medusa-backend` �</td><td><span class="badge badge-success">success</span></td></tr>
       <tr><td><code>2.8.1</code></td><td>2026-05-09</td><td>Verified Weplay palette in Chrome at weplay.com.tw on 2026-05-09 via computed-style histogram across 3,000 elements: `#C7161E` red (126 hits, dominant), `#F0831E` orange (34), `#FED52B` yellow (5). Up</td><td><span class="badge badge-success">success</span></td></tr>
       <tr><td><code>2.8.0</code></td><td>2026-05-08</td><td>Commit `70f0dcd` ("vendor-specific design systems for 6 brands") removed `brand-ci.ts` and replaced it with a parallel `vendor-themes.ts` system carrying fabricated palettes (Berliner navy+orange, Eur</td><td><span class="badge badge-failed">failed</span></td></tr>
       <tr><td><code>2.7.0</code></td><td>2026-05-07</td><td>Storefront FilterBar** ([medusa-storefront/src/components/filter-bar.tsx](medusa-storefront/src/components/filter-bar.tsx)): top-level `<select>` now drives a dependent Sub-category `<select>`, popula</td><td><span class="badge badge-success">success</span></td></tr>

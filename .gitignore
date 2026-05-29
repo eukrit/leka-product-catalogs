@@ -81,9 +81,16 @@ Thumbs.db
 .claude/telemetry/
 .claude/worktrees/
 .claude/active-machine.*
+.claude/session-state.*
 
 # Next.js TS incremental build cache
 *.tsbuildinfo
 
 # Pricing backfill safety backups (local audit)
 scripts/backfill_backups/
+
+# Scraped catalog output (reproducible via scrape scripts; products.json is large) — not committed
+data/scraped/
+# Transient run logs (reproducible)
+*_run.log
+data-scrape-*.log
