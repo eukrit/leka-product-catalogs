@@ -97,6 +97,18 @@ export default async function orderPlacedHandler({
   const projectName = (meta.project_name ?? "").toString().trim()
   const projectDetails = (meta.project_details ?? "").toString().trim()
   const siteLocation = (meta.site_location ?? "").toString().trim()
+  // Multi-brand "bag" correlation — set by the storefront in
+  // leka-website/catalogs/src/app/checkout/page.tsx so the team can see which
+  // orders belong together. Only meaningful when bag_total_brands > 1.
+  // TODO (deferred): a true single-Slack-post-per-bag aggregation would
+  // require buffering in Firestore keyed by bag_id with a count-or-timeout
+  // gate. Out of scope here — for v1 each order still posts its own message,
+  // just with the bag label inline.
+  const bagId = (meta.bag_id ?? "").toString().trim()
+  const bagBrandIndex = Number(meta.bag_brand_index) || 0
+  const bagTotalBrands = Number(meta.bag_total_brands) || 0
+  const isMultiBrandBag = !!bagId && bagTotalBrands > 1
+  const bagLabel = isMultiBrandBag ? ` (${bagBrandIndex} of ${bagTotalBrands} in bag)` : ""
   // retrieveOrder does not compute order.total — fall back to summing line
   // items (+ shipping) so the alert/email never show a misleading 0.00.
   const itemsSum = items.reduce(
@@ -140,9 +152,9 @@ export default async function orderPlacedHandler({
     }
     await postToRouter(slackUrl, {
       channel,
-      text: `:shopping_trolley: New order #${displayId} — ${totalStr}`,
+      text: `:shopping_trolley: New order #${displayId}${bagLabel} — ${totalStr}`,
       blocks: [
-        { type: "section", text: { type: "mrkdwn", text: `:shopping_trolley: *New order #${displayId}* — *${totalStr}*` } },
+        { type: "section", text: { type: "mrkdwn", text: `:shopping_trolley: *New order #${displayId}*${bagLabel} — *${totalStr}*` } },
         {
           type: "section",
           fields: [
@@ -154,6 +166,15 @@ export default async function orderPlacedHandler({
         },
         ...projectBlocks,
         { type: "section", text: { type: "mrkdwn", text: `*Items:*\n${itemLines || "—"}` } },
+        ...(isMultiBrandBag
+          ? [{
+              type: "context",
+              elements: [{
+                type: "mrkdwn",
+                text: `Bag \`${bagId}\` · ${bagBrandIndex}/${bagTotalBrands} brands · expect ${bagTotalBrands} alerts total`,
+              }],
+            }]
+          : []),
         { type: "context", elements: [{ type: "mrkdwn", text: `Order ID \`${order.id}\` · payment: manual (invoice follows)` }] },
       ],
       caller: "leka-product-catalogs/order-placed",
@@ -198,7 +219,7 @@ export default async function orderPlacedHandler({
     await postToRouter(emailUrl, {
       to,
       bcc,
-      subject: `Leka Studio — Order #${displayId} confirmed`,
+      subject: `Leka Studio — Order #${displayId} confirmed${bagLabel}`,
       bodyHtml,
       senderDisplay: "Leka Studio",
       caller: "leka-product-catalogs/order-placed",
