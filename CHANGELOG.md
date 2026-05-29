@@ -76,9 +76,9 @@ carries no dimensions) — same as DesignPark / WePlay.
 
 ### Added — AI enrichment of Wisdom / Leka Project specs + Toys category
 
-> **Status: scripts shipped; apply + category-link gated on user review of the
-> category distribution before running against live Medusa.** Renumbered to 2.37.0
-> at rebase (2.35.0 = checkout fix PR #58; 2.36.0 = archimedes-water-play PR #59).
+> **Status: ✅ LIVE on Medusa.** Full enrichment + apply + category-link pass
+> shipped 2026-05-29. Renumbered to 2.37.0 at rebase (2.35.0 = checkout fix PR #58;
+> 2.36.0 = archimedes-water-play PR #59).
 
 Live audit found the PDP at `leka-website/catalogs/src/app/[brand]/[handle]/product-detail.tsx`
 reads `metadata.materials[]`, `metadata.specifications.{age_group,num_users,indoor_outdoor,...}`
@@ -130,6 +130,72 @@ on Medusa (`category_ids=[]`), so admin and PDP breadcrumbs are bare.
 | K4-20420 | Flower Matching Game | educational_manipulatives |
 
 Average confidence on smoke set: 0.89.
+
+#### Full-run results
+
+| Stage | Outcome | Duration |
+|---|---|---|
+| Enrich (Gemini 2.5 Flash) | 5,061 ok, 0 errors | 3.1 h |
+| Apply to Medusa | 4,571 applied + 490 skipped (idempotent re-run), 0 errors | 56 min |
+| Category create | 16 top-level categories ensured | 1 min |
+| Category link | 5,055 linked + 6 already, 0 errors | 31 min |
+
+#### Confidence distribution (full pass)
+
+- ≥ 0.85: **4,145** (81.9%)
+- 0.70 – 0.85: 828 (16.4%)
+- 0.50 – 0.70: 88 (1.7%)
+- < 0.50: 0
+
+#### Final per-category counts (live Medusa, Leka Project SC)
+
+| Category | Count | Category | Count |
+|---|---|---|---|
+| Playground Equipment | 1,523 | Music Instruments | 70 |
+| Kids Furniture | 977 | Sand Play | 70 |
+| Educational Manipulatives | 845 | Water Play | 44 |
+| Arts & Crafts | 495 | Safety & Accessories | 43 |
+| Role Play | 472 | Sports & Outdoor | 41 |
+| **Toys** | **300** | Ride-Ons | 25 |
+| Infant & Toddler | 121 | Other | 15 |
+| | | Climbing | 10 |
+| | | Books & Media | 4 |
+
+#### Two PDP query bugs found + fixed during verification (leka-website)
+
+1. **Medusa v2 `+categories` shorthand returns `[]`** on the Store API — nested
+   paths must be explicit. PDP query updated to
+   `+categories.id,+categories.name,+categories.handle` (plus `+collection.id,
+   +collection.title,+tags.id,+tags.value`). The `categories: Array<...>` type
+   gained a `handle` field.
+2. **Breadcrumb prefers Medusa category over legacy `series_name`** — Dino Rocker
+   now shows `Leka Project / Toys / SKU` with the Toys node linking to
+   `/leka-project?category=toys`.
+
+#### Verified on `leka-project-qruge2f7` (Dino Rocker™)
+
+```
+title:        Dino Rocker™
+description:  A vibrant red plastic push-car designed for toddlers, featuring
+              a functional steering wheel and a convenient parent push handle ...
+dims:         L57 × W33 × H69 cm
+materials:    [plastic]
+specs:        {age_group: "1-3 yrs", num_users: "1",
+               indoor_outdoor: "both", subcategory: "push-car"}
+category_inferred: toys
+admin categories:  Other, Toys           (confidence 0.90)
+```
+
+#### Apply-pipeline fixes shipped during the run
+
+- `scripts/apply_wisdom_enrichment.py` — added `PYTHONUNBUFFERED=1` to the run
+  invocation (Python full-buffers stdout when piped through `grep`, so progress
+  logs were invisible until process exit on the first kill-shot bg).
+- `scripts/medusa_create_toys_category.py` — `ensure_category` now matches by
+  handle ONLY (matching by name was picking up legacy `leka-project-outdoor-*`
+  subcategories named "Climbing"/"Sand Play"/"Water Play"/"Other" and blocking
+  creation of the clean top-level handle). Link payload now uses Medusa v2's
+  `categories: [{id}]` shape, not the rejected `category_ids: [...]`.
 
 ---
 

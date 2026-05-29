@@ -147,10 +147,13 @@ def list_categories(tok: str) -> list[dict]:
 
 
 def ensure_category(tok: str, name: str, handle: str) -> str:
-    """Find or create a top-level product category. Returns its id."""
+    """Find or create a top-level product category. Match on EXACT handle only —
+    matching by name picks up legacy subcategories (e.g. `leka-project-outdoor-climbing`
+    named 'Climbing') and blocks creation of the clean top-level handle.
+    Returns its id."""
     cats = list_categories(tok)
     for c in cats:
-        if c.get("handle") == handle or c.get("name") == name:
+        if c.get("handle") == handle:
             log.info("  exists: %s (%s)", name, c["id"])
             return c["id"]
     r = _retry("POST", f"{MEDUSA_BACKEND}/admin/product-categories", tok, json_body={
@@ -256,8 +259,9 @@ def cmd_link(args) -> None:
                 log.info("  [dry] %s -> +%s", p.get("handle"), vocab)
             continue
         try:
+            # Medusa v2 admin: pass `categories: [{id}]`, NOT `category_ids`.
             r = _retry("POST", f"{MEDUSA_BACKEND}/admin/products/{p['id']}", tok,
-                       json_body={"category_ids": new_ids})
+                       json_body={"categories": [{"id": x} for x in new_ids]})
             r.raise_for_status()
             counts["linked"] += 1
         except Exception as e:
