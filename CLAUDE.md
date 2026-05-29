@@ -168,9 +168,10 @@ All `firestore.Client()` calls must include `database="leka-product-catalogs"`.
 1. Download catalog PDFs from source (Slack/email/Drive)
 2. Extract images with PyMuPDF (`extract_images.py`)
 3. Convert non-browser formats (`.jpx` → `.jpeg`) with Pillow
-4. Upload to GCS: `gs://ai-agents-go-documents/product-images/<brand>/catalog/`
-5. Map to Firestore product `images[]` array
-6. GCS bucket uses **uniform bucket-level access** — do NOT call `blob.make_public()`
+4. Upload to GCS: **`gs://ai-agents-go-vendors/<vendor>/<sub>/...`** (e.g. `gs://ai-agents-go-vendors/leka-project/catalog/<code>_imgN.jpeg`). This bucket is the source of truth for the live storefront proxy at `https://catalogs.leka.studio/api/i/<vendor>/<path>`. The proxy streams private GCS objects with the Cloud Run runtime SA token; direct `storage.googleapis.com` URLs return 403.
+5. Map to Firestore product `images[]` array using the **proxy URL**, not a direct GCS URL — e.g. `https://catalogs.leka.studio/api/i/leka-project/catalog/<code>_img0.jpeg`. Medusa product `thumbnail` / `images[].url` also use the proxy form.
+6. Both buckets use **uniform bucket-level access** — do NOT call `blob.make_public()`.
+7. **Legacy note:** older docs and Firestore entries reference `gs://ai-agents-go-documents/product-images/<brand>/catalog/` — that path is now stale and unreadable anonymously. New code must use the `ai-agents-go-vendors` bucket + proxy form. See `scripts/rewrite_wisdom_image_urls.py` for the migration helper.
 
 ## Safety Rules
 - NEVER commit credentials, API keys, or tokens
