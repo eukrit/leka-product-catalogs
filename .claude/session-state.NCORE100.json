@@ -1,10 +1,10 @@
 {
   "machine": "NCORE100",
   "branch": "feat/bag-id-slack-grouping",
-  "sha": "9b9b632",
+  "sha": "73c4fec",
   "ahead": 0,
   "behind": 0,
-  "dirty_files": 0,
+  "dirty_files": 1,
   "sop_version": "2026.05.18-rev6",
-  "session_start": "2026-05-29T14:58:40Z"
+  "session_start": "2026-05-29T16:28:33Z"
 }
