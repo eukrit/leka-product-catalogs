@@ -4,6 +4,44 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.36.0] - 2026-05-29
+
+### Added — `archimedes-water-play` brand: Wenzhou Daosen pricelist parsed
+
+New brand folder `archimedes-water-play-catalog/` for the Wenzhou Daosen
+(温州道森游乐戏水) factory pricelist — 34 children's water-play SKUs (Chinese
+names + raw dimensions + CNY prices). Vendor contact 桂书龙 (13676763303),
+Yongjia/Wenzhou. Brand name comes from SKU AWP033 阿基米德取水器
+("Archimedes water collector"), the signature item in the catalog.
+
+- Parser: `archimedes-water-play-catalog/import_pricelist.py` reads the
+  single sheet `儿童戏水`, slugs SKUs as `AWP001`..`AWP034`, parses each
+  dimension cell into structured fields (length/width/height + kind:
+  `lwh`/`two-dim`/`diameter`/`length`/`custom`) while preserving the raw
+  string. **Mixed units in source (cm vs. mm) — no CBM normalization
+  attempted; landed-pricing pass deferred.**
+- CSV: `archimedes-water-play-catalog/data/pricelist_2026-05-29_parsed.csv`
+  (34 rows, UTF-8 BOM for Excel-friendly Chinese).
+- Firestore target: `vendors/archimedes-water-play/pricelists/2026-05-29`
+  in the `vendors` database (same shape as `vendors/rampline/pricelists/...`).
+  Run `python archimedes-water-play-catalog/import_pricelist.py` once
+  `LEKA_FIRESTORE_ACCESS_TOKEN` or ADC is configured.
+- Source XLS archived at
+  `archimedes-water-play-catalog/data/source/daosen_pricelist_2026-05-29.xls`.
+
+Price range: ¥560 (手摇取水) → ¥16,700 (月亮自行车, 直径200×70×225).
+
+> Renumbered from 2.35.0 at merge: 2.35.0 was already taken by the checkout fix
+> (below). Audit/parse-only — landed pricing + Medusa sync are a follow-up pass.
+
+### Files changed
+- `archimedes-water-play-catalog/import_pricelist.py` (new)
+- `archimedes-water-play-catalog/data/pricelist_2026-05-29_parsed.csv` (new)
+- `archimedes-water-play-catalog/data/source/daosen_pricelist_2026-05-29.xls` (new)
+- `CHANGELOG.md`, `VERSION` → 2.36.0
+
+---
+
 ## [2.35.0] - 2026-05-29
 
 ### Fixed — "We couldn't submit your order" on `catalogs.leka.studio/checkout`
