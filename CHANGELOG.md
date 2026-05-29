@@ -4,6 +4,99 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.40.0] - 2026-05-29
+
+### Added — 4soft EPDM-graphics 2025 pricelist ingested (2,410 EUR SKUs)
+
+Parsed and priced the **4soft 2025 EPDM-graphics pricelist** (`.xls`,
+`2025-06-25 4soft_EPDM_graphics-price_list_2025.xls`, valid 2025-03-01) and
+ingested it as a first-class EUR-FOB brand following the **Berliner EXW
+pattern**.
+
+#### Reconciliation decision (Step 4) — new brand, NOT the EPDM/Infill pricer
+
+The task flagged the existing **EPDM/Infill CFH pricer** (v2.10.0 —
+`products_epdm`/`products_infill`, area-priced THB/m², CFH lookup contract,
+`scripts/sync_epdm_pricelist.py`) as a possible overlap. **There is no
+overlap:**
+
+- The EPDM/Infill pricer is **generic wet-pour surfacing** (SBR granule,
+  Sand/Rubber infill, Miroad, Eurosia Non-UV/UV, TPV) sourced from the
+  "EPDM 2024 / Pricelist" Google Sheet — priced **per m² of installed area**
+  at a thickness, with a `cfh_m` field for the storefront CFH pricer. It is
+  **not** 4soft-branded.
+- The 4soft `.xls` is **2,410 discrete, per-item EUR SKUs** — moulded-EPDM
+  3D play elements (animals, shapes, tunnels, furniture, fountains) and 2D
+  markings (hopscotch, numbers/letters, footprints). Single "POHODA" sheet
+  (Czech accounting export); columns code / name / `Target SALE price EUR`.
+  **No per-m² surfacing section, no CFH.**
+
+The 4soft `.xls` is the **authoritative pricelist for the existing 4soft
+Medusa brand** (sales channel `sc_01KNQAA4A8SF4ZT9S8N0AHGY3Y`; 391 SKUs
+scraped from 4soft.cz in earlier work, previously **unpriced**). Decision:
+add a **`brands.4soft`** config (NOT extend the EPDM pricer), price all 2,410
+SKUs through the shared landed pipeline, and leave the wet-pour pricer
+untouched. The CFH/per-m² contract is fully preserved.
+
+#### Trade terms (Step 3) — EXW, EUR, EU/Czech origin
+
+- 4soft, s.r.o. is **Czech** (Tanvald, CZ — EU origin, VAT CZ28703324), prices
+  in **EUR**, terms **EXW** (`2019-11-26 Price conditions 2020` PDF). Basic
+  **reseller discount 15%** off list (+5% for orders >€2,500, +2.5% prepay,
+  min €5k/yr turnover — order-specific, not baked into catalog cost).
+- Gmail (eukrit@goco.bz) confirms 4soft is an active vendor (roger@4soft.cz,
+  graphics@4soft.cz); recent quotes seen EXW and project-CFR Bangkok. No email
+  superseding the 15% basic EXW discount surfaced. A *"Our Pricing for 2026"*
+  newsletter exists (2026-04-01) — **follow-up: confirm 2026 discount/pricelist.**
+- **User decisions (2026-05-29):** gross margin **40%**; bake **15% basic EXW**
+  discount only (`eur_fob = list × 0.85`); price the 391 existing Medusa
+  variants now + spawn a follow-up to scrape the ~2,020 missing SKUs.
+
+#### Cost structure (same shared pipeline as Vinci/Berliner/Rampline)
+
+`eur_fob = list_eur × 0.85` → EUR→THB FX → landed THB via shipping-automation
+`cost_engine` (LCL EU, Baltic-rate calibration) → **10% Thai duty**, **7%
+import VAT** on (CIF+duty), tiered logistics floor/cap → retail. Independent
+THB/USD/EUR/SGD; **7% TH customer VAT embedded in `retail_thb` only**; SG GST
+gated on `sg_nubo_gst_registered` (off). No published dims yet → all rows use
+the flat-35%-uplift path; the tier-0 floor (×1.80) re-bounds the many cheap 2D
+items (**2,265 / 2,410 floored**). FX snapshot this run: USD 33.25, EUR 38.71,
+SGD 26.04 (exchangerate-api.com live, +2% buffer).
+
+#### Files & outcomes
+
+- **`foursoft-catalog/import_pricelist.py`** (new) — parses the `.xls`
+  (`xlrd`), applies EXW 15%, computes landed/retail via the shared pipeline
+  with `brand="4soft"`, writes `vendors/4soft/products`, and self-seeds
+  `brands.4soft` into `pricing_config/canonical` via a safe read-modify-write
+  merge (never a full `--force` reseed). Emits a committed parsed CSV +
+  landed CSV.
+- **`foursoft-catalog/data/pricelist_2025-03-01.csv`** (new) — in-repo parsed
+  source of truth (2,410 rows: code, name, list_eur, section, dimension,
+  product_group, unit).
+- **`foursoft-catalog/data/pricelist_2025-03-01_landed.csv`** (new) — full
+  landed-cost / retail audit trail.
+- **`scripts/sync_brand_prices_to_medusa.py`** — added `4soft` →
+  `sc_01KNQAA4A8SF4ZT9S8N0AHGY3Y` to the SC map.
+- **`scripts/seed_pricing_config.py`** — added the `brands.4soft` block
+  (gm 0.40, exw 0.15) so a future `--force` reseed includes it.
+- **`docs/summaries/pricing-config-master.md`** — new §4f (4soft brand),
+  §6f formula, §11 script row, §12 version-history row.
+- **Firestore `vendors/4soft/products`:** wrote **2,410** docs (**2,033 new**,
+  377 updated existing). Vendor root `product_count = 2410`.
+- **Firestore `pricing_config/canonical.brands.4soft`:** seeded (gm 0.40,
+  exw 0.15, EXW, EU/Czech).
+- **Medusa:** matched **377 / 2,410** vendor docs to existing 4soft variants
+  by SKU (= item_code); **updated 377 variants, 0 errors** (THB/USD/EUR/SGD).
+  The **2,033 unmatched** are pricelist-only — not yet Medusa products
+  (`sync_brand_prices_to_medusa.py` is update-only by design). **Follow-up:
+  scrape the ~2,020 missing SKUs from 4soft.cz, then create + price them.**
+
+Spot-check: `4soft-a1-01a-00` ("Circle 18 cm", list €20) → retail ฿2,112.30 /
+$59.37 / €51.00 / S$75.80 (live in Medusa).
+
+---
+
 ## [2.39.0] - 2026-05-29
 
 ### Added — WePlay landed-cost retail pricing (THB/USD/SGD) + Medusa sync
