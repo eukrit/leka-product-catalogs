@@ -24,8 +24,12 @@ from datetime import date
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 from shared.wisdom_pricing import (
     compute_wisdom_retail,
+    compute_wisdom_retail_sg,
     pricing_metadata,
+    pricing_metadata_sg,
     get_usd_thb,
+    get_sgd_thb,
+    get_usd_sgd,
     IMPORT_DUTY_RATE,
     THAI_VAT_RATE,
     GROSS_MARGIN,
@@ -60,19 +64,25 @@ def _firestore_client() -> firestore.Client:
 
 
 def update_firestore(db, rows: list[dict], price_date: str, dry_run: bool) -> int:
-    """Batch-update pricing sub-fields on Wisdom Firestore documents."""
+    """Batch-update pricing sub-fields on Wisdom Firestore documents.
+
+    When a row carries a "sg_update" key (populated by --sg-channel), its
+    pricing.sg.* sub-map is merged into the same batch update so TH + SG
+    fields land in a single Firestore write per SKU.
+    """
     batch = db.batch()
     count = 0
     for item in rows:
         doc_ref = db.collection(COLLECTION).document(item["item_code"])
         pricing = item["pricing_update"]
+        sg_update = item.get("sg_update") or {}
         if dry_run:
             print(f"  [dry] {item['item_code']:12s}  "
                   f"FOB ${item['fob_usd']:>7.2f}  "
                   f"landed ฿{pricing['landed_thb']:>9,.0f}  "
                   f"retail ฿{pricing['retail_thb']:>9,.0f}")
             continue
-        batch.update(doc_ref, {
+        update_doc = {
             "pricing.landed_thb":       pricing["landed_thb"],
             "pricing.retail_thb":       pricing["retail_thb"],
             "pricing.retail_usd":       pricing["retail_usd"],
@@ -83,7 +93,9 @@ def update_firestore(db, rows: list[dict], price_date: str, dry_run: bool) -> in
             "pricing.thai_vat_rate":    pricing["thai_vat_rate"],
             "pricing.gross_margin":     pricing["gross_margin"],
             "pricing.price_date":       price_date,
-        })
+        }
+        update_doc.update(sg_update)
+        batch.update(doc_ref, update_doc)
         count += 1
         if count % BATCH_SIZE == 0:
             batch.commit()
@@ -165,6 +177,12 @@ def main():
                         default=os.environ.get("MEDUSA_BACKEND_URL", "http://localhost:9000"))
     parser.add_argument("--api-key",
                         default=os.environ.get("MEDUSA_ADMIN_API_KEY", ""))
+    parser.add_argument("--sg-channel", action="store_true",
+                        help="Also compute Singapore-channel landed cost "
+                             "(china_to_singapore route, 9%% SG GST, 0%% duty) "
+                             "and write pricing.sg.* fields. Prints an "
+                             "[sg-compare] line per SKU showing old vs new "
+                             "retail_sgd. No Medusa SG push this round.")
     args = parser.parse_args()
 
     usd_thb = args.usd_thb or get_usd_thb()
@@ -178,6 +196,12 @@ def main():
     print(f"  Formula:      cif = FOB × {usd_thb:.2f};  "
           f"landed = cif × {(1 + IMPORT_DUTY_RATE) * (1 + THAI_VAT_RATE):.4f};  "
           f"retail = landed × {1 / (1 - GROSS_MARGIN):.2f}")
+    sgd_thb = usd_sgd = None
+    if args.sg_channel:
+        sgd_thb = get_sgd_thb()
+        usd_sgd = get_usd_sgd()
+        print(f"  SG channel:   ON — china_to_singapore route, 9% GST, "
+              f"USD/SGD {usd_sgd:.4f}  SGD/THB {sgd_thb:.4f}")
     print()
 
     # --- Load Wisdom products from Firestore ---
@@ -189,6 +213,7 @@ def main():
     # --- Compute pricing ---
     rows = []
     no_fob = 0
+    sg_compare_lines: list[str] = []
     for doc in docs:
         d = doc.to_dict() or {}
         item_code = d.get("item_code") or doc.id
@@ -202,13 +227,51 @@ def main():
             no_fob += 1
             continue
         result.item_code = item_code
-        rows.append({
+        row = {
             "item_code": item_code,
             "fob_usd": fob,
             "pricing_update": pricing_metadata(result, price_date),
-        })
+        }
+        if args.sg_channel:
+            # Reuse CBM extraction the TH path already computes implicitly
+            # via dimensions on the doc.
+            cbm = 0.0
+            kg = float(d.get("weight_kg") or 0.0)
+            dims = d.get("dimensions") or {}
+            try:
+                l_cm = float(dims.get("length_cm") or 0)
+                w_cm = float(dims.get("width_cm") or 0)
+                h_cm = float(dims.get("height_cm") or 0)
+                if l_cm > 0 and w_cm > 0 and h_cm > 0:
+                    cbm = round(l_cm * w_cm * h_cm / 1_000_000.0 * 0.15, 4)
+            except (TypeError, ValueError):
+                pass
+            sg_row = compute_wisdom_retail_sg(
+                fob, cbm=cbm, kg=kg,
+                usd_sgd=usd_sgd, sgd_thb=sgd_thb,
+            )
+            if sg_row:
+                sg_row.item_code = item_code
+                row["sg_update"] = pricing_metadata_sg(sg_row, price_date)
+                old_sgd = result.retail_sgd
+                new_sgd = sg_row.retail_sgd
+                delta = (new_sgd - old_sgd) / old_sgd * 100 if old_sgd else 0.0
+                sg_compare_lines.append(
+                    f"[sg-compare] {item_code:14s}  "
+                    f"old_sgd ${old_sgd:>8.2f}  "
+                    f"new_sgd ${new_sgd:>8.2f}  "
+                    f"Δ {delta:+6.1f}%  "
+                    f"({sg_row.cbm_method})"
+                )
+        rows.append(row)
 
     print(f"  Priced: {len(rows)}  |  No FOB: {no_fob}\n")
+
+    if args.sg_channel and sg_compare_lines:
+        print(f"--- SG channel comparison (first 20 of {len(sg_compare_lines)}) ---")
+        for line in sg_compare_lines[:20]:
+            print(f"  {line}")
+        print()
 
     if not rows:
         print("Nothing to update.")

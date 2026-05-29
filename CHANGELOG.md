@@ -4,6 +4,113 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.49.0] - 2026-05-30
+
+### Added — Wisdom Singapore-channel landed cost (Nubo SG)
+
+Until today every Wisdom SKU's SGD price was back-derived from its
+**Thai** landed cost (`landed_thb / sgd_thb / 0.50` in
+`shared/wisdom_pricing.py:267-269`). That landed-THB number bakes in
+Xiamen→Laem Chabang LCL freight, Thai customs clearance, and Thai 7%
+import VAT — none of which apply to a SKU that actually ships China →
+Singapore for Nubo SG. The "SGD price" was therefore anchored in
+Thailand-shaped costs and converted by spot FX.
+
+This release adds a parallel landed-cost path for Singapore. The TH path
+is untouched. First round is Firestore-only with a dry-run comparison
+report — no Medusa SG sales-channel push until deltas are reviewed.
+
+**Singapore import rules** (cited at the function docstring):
+- **Duty**: 0% on HS 9503 (educational toys) / HS 9506 (playground
+  equipment). Singapore is a near-free port; only liquor, tobacco, motor
+  vehicles, and petroleum/biodiesel are dutiable. Form E unnecessary.
+  Source: Singapore Customs.
+- **GST**: 9% since 2024-01-01 (was 8% in 2023), applied at customs on
+  CIF + duty — identical mechanics to Thai import VAT. Source: IRAS.
+
+#### `shipping-automation/mcp-server/cost_engine.py` (sibling repo)
+- New `ROUTE_PROFILES["china_to_singapore"]` with `lcl`, `fcl_20`,
+  `fcl_40` methods. Rate card mirrors the FLY/RGL Xiamen rate shape;
+  values are industry benchmarks (LCL THB 4,200/CBM all-in ≈ USD 130
+  × 32.5 THB/USD) pending a forwarder-quote refresh during Nubo SG
+  onboarding. `typical_duty_rates.default = 0.0`,
+  `typical_vat_rate = 0.09`.
+- `estimate_landed_cost(...)` gains a `vat_rate=None` kwarg; when set
+  it overrides the route's `typical_vat_rate` (default falls back to
+  Thailand 7% for legacy callers).
+- `VENDOR_COUNTRY_MAP` gains `"nubo": "china_to_singapore"`.
+
+#### `shared/wisdom_pricing.py`
+- New module constants: `SG_IMPORT_DUTY_RATE = 0.00`,
+  `SG_GST_RATE = 0.09`, `SG_GROSS_MARGIN = 0.50`,
+  `SG_FREIGHT_METHOD = "lcl"`, `DEFAULT_USD_SGD = 1.33`.
+- New helpers: `_sg_params()`, `get_usd_sgd()` (derived from the same FX
+  source as USD/THB and SGD/THB so all three stay on a consistent snap).
+- New `WisdomSgPricedRow` dataclass and `compute_wisdom_retail_sg(...)`:
+  - Flat path (no CBM): `fob_sgd = fob_usd × usd_sgd`,
+    `gst_sgd = (fob_sgd + duty_sgd) × sg_gst_rate`,
+    `retail_sgd = landed_sgd / 0.50`.
+  - CBM path: routes through `cost_engine.estimate_landed_cost(origin="china_to_singapore", duty_rate=0, vat_rate=0.09, ...)`, converts THB breakdown back to SGD at `sgd_thb`.
+  - Vinci-style logistics tier clamp applied for symmetry with the TH path.
+  - Customer-side SG GST stack stays off until `sg_nubo_gst_registered=True` (existing toggle).
+- `compute_wisdom_retail_sg_batch(...)` mirrors the TH batch wrapper.
+- `pricing_metadata_sg(...)` returns a `pricing.sg.*` dotted-key sub-map
+  ready to merge into a Firestore `.update()` (no overlap with the
+  flat `pricing.*` keys the TH path writes).
+
+#### `shared/pricing_config.py` + `scripts/seed_pricing_config.py`
+- `pricing_config/canonical.brands.wisdom` schema gains
+  `sg_import_duty_rate`, `sg_gst_rate`, `sg_gross_margin`,
+  `sg_freight_method`, `default_usd_sgd`. Module fallbacks defined in
+  `wisdom_pricing.py` so Firestore-unreachable runs degrade cleanly.
+  `sg_customer_gst_rate` (0.09) and `sg_nubo_gst_registered` (False)
+  in `global` were already present and are reused for the retail-side
+  GST stack.
+
+#### `wisdom-catalog/update_pricing.py`
+- New `--sg-channel` flag (default OFF). When set: computes SG pricing
+  alongside TH, merges the `pricing.sg.*` sub-map into the same per-SKU
+  batch Firestore update, and prints `[sg-compare] {code} old_sgd $X
+  new_sgd $Y Δ ±Z%` for the first 20 SKUs. **No Medusa SG push** —
+  deferred until the comparison report is reviewed.
+- TH-channel behavior is unchanged when the flag is omitted.
+
+#### `scripts/compare_sg_pricing.py` (new)
+- Standalone dry-run report. Loads N representative SKUs from
+  `products_wisdom` (`--strategy=spread|by-category|head`), computes
+  both old (TH-derived) and new (SG-landed) retail_sgd, emits a markdown
+  table + aggregate stats + sanity-check flags (`|Δ| > 25%`) to
+  `scripts/reports/sg_pricing_compare_<DATE>.md`. No writes.
+
+#### First-run comparison (10 SKUs, spread strategy)
+- FX snapshot: USD/THB 33.25, SGD/THB 26.04, USD/SGD 1.28.
+- Mean Δ% = -4.96%, median +0.19%, range [-37.66%, +1.87%].
+- Flat-path SKUs: +1.9% (SG GST 9% vs TH VAT 7% — expected).
+- Free-running large CBM (e.g. `HW1-S1A711` FOB 3,913 / 9.69 CBM): +0.4% — engines agree when no clamp is active.
+- Capped/floored SKUs: −20% to −38% — different logistics-tier clamps fire in TH vs SG (one outlier flagged: `HW1-S367-V01`, SG-floored). Documents the clamp-driven divergence, not a bug.
+- Full report: [`scripts/reports/sg_pricing_compare_2026-05-30.md`](scripts/reports/sg_pricing_compare_2026-05-30.md).
+
+### Out of scope (deferred follow-ups)
+- Medusa SG sales-channel push (SG SC ID not yet identified).
+- Replacing benchmark freight rates with real forwarder quotes for Xiamen → Singapore (LCL + FCL).
+- Migrating existing readers to a `pricing.th.*` namespace.
+- Storefront wiring that consumes `pricing.sg.retail_sgd`.
+
+### Files changed
+- `shared/wisdom_pricing.py` (+SG path, ~240 lines)
+- `shared/pricing_config.py` (docstring schema)
+- `scripts/seed_pricing_config.py` (`brands.wisdom` keys)
+- `scripts/compare_sg_pricing.py` (new)
+- `wisdom-catalog/update_pricing.py` (`--sg-channel` flag, batch merge)
+- `wisdom-catalog/DEPLOYMENT_LOG.md`
+- `../shipping-automation/mcp-server/cost_engine.py` (+china_to_singapore route, vat_rate kwarg)
+
+### Outcome
+Function + comparison report shipped; default behavior unchanged. Ready
+to review deltas before any Firestore write or Medusa SG push.
+
+---
+
 ## [2.48.0] - 2026-05-30
 
 ### Added — Wisdom outdoor-play collection in Medusa (link existing 255 + create 17)
