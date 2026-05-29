@@ -7,6 +7,25 @@ Products: `vendors/4soft/products` (db `vendors`)
 
 ---
 
+## 2026-05-30 — v2.44.0 — 2D ground markings created in Medusa (catalog completion)
+
+- **Scope:** deferred **2D** SKUs (hopscotch, numbers/letters, footprints, flat
+  shapes). Pure extraction from `vendors/4soft/products` — `create_medusa_products.py
+  --scope 2D --status draft`. No AI.
+- **Create:** **1,553 new** (843 with a PDF image, ~712 image-less), **247**
+  existing updated (Czech → EN title + metadata), **2** benign "handle already
+  exists" skips. All new = **draft**.
+- **Price sync** (`sync_brand_prices_to_medusa.py --brand 4soft --write`): match
+  **2,394 / 2,410 (99.3%)**, THB/USD/EUR/SGD.
+- **Excluded (16):** packaging (10) + accessory (6) — codes like `BOX-typ2`,
+  `BOXOSB-A`; look like packaging surcharges / fixed-fee items, not sellable
+  products. Left out pending a decision.
+- **Follow-ups:** review + publish the 1,553 2D drafts (~712 image-less →
+  optionally AI-generate placeholders); decide on the 16 packaging/accessory;
+  2026 pricelist + discount structure requested by email 2026-05-29.
+
+---
+
 ## 2026-05-29 — v2.43.0 — Product images from the picture-pricelist PDF
 
 - **Source:** `2025-06-25 4soft_EPDM_graphics_-_picture_-_price_list_2025_optimized.pdf`

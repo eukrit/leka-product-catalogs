@@ -4,6 +4,39 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.44.0] - 2026-05-30
+
+### Added — 4soft 2D ground markings created in Medusa (catalog completion)
+
+Follow-up to v2.42.0 (3D) / v2.43.0 (PDF images). Materializes the deferred
+**2D scope** — the flat ground markings (hopscotch, numbers/letters, footprints,
+shapes) — into Medusa from the existing pricelist records. Pure extraction (no
+AI): `create_medusa_products.py --scope 2D --status draft` pushes the
+`vendors/4soft/products` docs (code / EN name / EUR-derived prices / dims /
+category) as handle-based products, attaching the picture-pricelist PDF images
+already written to Firestore in v2.43.0.
+
+- **Create:** **1,553 new** 2D products (843 with a PDF image, ~712 image-less),
+  **247 existing** updated (Czech → EN title + metadata), **2** benign
+  "handle already exists" skips (present but not SC-indexed). Created as
+  **draft** for review before publish.
+- **Price sync** (`sync_brand_prices_to_medusa.py --brand 4soft --write`):
+  match rose to **2,394 / 2,410 (99.3%)** — THB/USD/EUR/SGD.
+- **Remaining 16** = the **packaging (10) + accessory (6)** SKUs (codes like
+  `BOX-typ2`, `BOXOSB-A`) — deliberately NOT created; they look like packaging
+  surcharges / fixed-fee line items rather than sellable catalog products.
+
+The 4soft brand is now effectively complete in Medusa: **~3,960 products**
+(2,408 of the 2,410 priced pricelist SKUs present + earlier web-only extras).
+3D published (v2.42.0 follow-up); 2D created as drafts pending review.
+
+#### Deferred follow-ups
+- Review + publish the 1,553 2D drafts; ~712 are image-less (no image in the PDF
+  or on 4soft.cz) — optionally AI-generate placeholders later.
+- Decide whether the 16 packaging/accessory SKUs belong in the catalog.
+- 2026 pricelist + discount structure requested from 4soft (email sent 2026-05-29).
+
+
 ## [2.43.0] - 2026-05-29
 
 ### Added — 4soft product images from the picture-pricelist PDF
