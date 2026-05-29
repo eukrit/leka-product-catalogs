@@ -15,6 +15,7 @@ import argparse
 import datetime
 import json
 import os
+import re
 import sys
 import time
 from pathlib import Path
@@ -47,6 +48,37 @@ def latest_diff_json() -> Path:
 
 def filename_from_url(url: str) -> str:
     return url.rsplit("/", 1)[-1].split("?")[0]
+
+
+# Eurotramp serves multiple sizes per photo with a `_WIDTHxHEIGHT.jpg`
+# suffix. The scraper only captures whichever variant the page rendered
+# (usually the 200x112 gallery thumb). For OG cards we want a larger one.
+# Try these in order, fall back to the original URL on miss.
+SIZE_LADDER = ["_1920x1080.jpg", "_920x512.jpg", "_680x378.jpg", "_200x112.jpg"]
+
+
+def upgrade_url_to_largest(url: str, session: requests.Session) -> str:
+    """Probe larger size variants and return the URL that resolves, else
+    return the original."""
+    m = re.search(r"_(\d+)x(\d+)\.jpg$", url)
+    if not m:
+        return url
+    current_suffix = m.group(0)
+    if current_suffix == SIZE_LADDER[0]:
+        return url  # already largest
+    for suffix in SIZE_LADDER:
+        if suffix == current_suffix:
+            # We've reached the original — fall back below
+            break
+        candidate = url[: -len(current_suffix)] + suffix
+        try:
+            time.sleep(0.15)
+            head = session.head(candidate, timeout=15, allow_redirects=True)
+            if head.status_code == 200:
+                return candidate
+        except Exception:
+            continue
+    return url
 
 
 def upload_via_sdk(client, bucket_name: str, local_path: Path, gcs_path: str, dry_run: bool) -> bool:
@@ -142,7 +174,11 @@ def main() -> None:
         print(f"\n[{i}/{len(targets)}] {handle}  ({len(new_urls)} photos)")
         uploads_per_handle[handle] = []
 
-        for url in new_urls:
+        for original_url in new_urls:
+            # Upgrade to the largest available size variant
+            url = upgrade_url_to_largest(original_url, session) if not args.dry_run else original_url
+            if url != original_url:
+                print(f"  upgraded {filename_from_url(original_url)} -> {filename_from_url(url)}")
             fn = filename_from_url(url)
             gcs_path = f"{GCS_PREFIX}/{handle}/{fn}"
             local_path = tmp_dir / fn

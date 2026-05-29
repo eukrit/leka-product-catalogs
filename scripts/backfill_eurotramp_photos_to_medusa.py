@@ -221,7 +221,33 @@ def main() -> None:
                 deduped_urls.append(u)
 
         # Pick new thumbnail. Candidates: any photo in final_image_urls.
-        # Rank by photo_rank() and pick the best.
+        # Prefer photos whose filename overlaps the product handle (so a
+        # `kids-tramp-kindergarten` product doesn't grab an unrelated
+        # `impactprotectionsystem` accessory photo).
+        handle_tokens = {
+            t for t in re.split(r"[-_]+", handle.lower())
+            if t and t not in {"eurotramp", "the", "and", "for"}
+        }
+
+        def fn_tokens(fn: str) -> set[str]:
+            # productdetails-wehrfritzfunroundplayground_<hash>_<size>.jpg
+            #   → ['productdetails','wehrfritzfunroundplayground','hash','size','jpg']
+            parts = re.split(r"[-_.]+", fn.lower())
+            return {p for p in parts if p}
+
+        def handle_overlap(fn: str) -> int:
+            toks = fn_tokens(fn)
+            # Substring match too (joined-word filenames)
+            score = sum(1 for t in handle_tokens if t in toks)
+            if score == 0:
+                # joined-word handling: e.g. handle token "kindergarten" inside
+                # filename word "97509-sport-thiemeadventure-trampkindergarten…"
+                for word in toks:
+                    for ht in handle_tokens:
+                        if ht in word and len(ht) >= 4:
+                            score += 1
+            return score
+
         photo_candidates = []
         for u in deduped_urls:
             fn = filename_from_url(u).lower()
@@ -230,8 +256,14 @@ def main() -> None:
 
         new_thumb = product.get("thumbnail")
         if photo_candidates:
-            best = max(photo_candidates, key=photo_rank)
-            # Re-point thumbnail if current is non-photo (cert/badge/etc.)
+            # Rank: handle-overlap first, then photo_rank().
+            def rank_key(u: str) -> tuple:
+                fn = filename_from_url(u).lower()
+                return (handle_overlap(fn), *photo_rank(u))
+
+            best = max(photo_candidates, key=rank_key)
+            best_overlap = handle_overlap(filename_from_url(best).lower())
+
             current = product.get("thumbnail") or ""
             current_fn = filename_from_url(current).lower()
             is_current_photo = bool(
@@ -239,8 +271,13 @@ def main() -> None:
                 or "productdetails-" in current_fn
                 or "productdetail-" in current_fn
             )
-            if not is_current_photo:
+            # Re-point only if (a) current thumb isn't already a photo AND
+            # (b) the best candidate has at least one handle-token overlap
+            # (avoids swapping in a wrong-product photo).
+            if not is_current_photo and best_overlap > 0:
                 new_thumb = best
+            elif not is_current_photo and best_overlap == 0:
+                print(f"  ! best candidate {filename_from_url(best)} has no handle-token overlap — leaving thumbnail unchanged")
 
         # Compute the changes
         thumb_changed = new_thumb != product.get("thumbnail")

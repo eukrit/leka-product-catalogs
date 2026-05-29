@@ -22,13 +22,13 @@ This audit classifies each Medusa image as one of:
 ## Summary
 
 - Total Eurotramp products: **187**
-- **Backfill targets (zero real photos in Medusa)**: **33**
-  - of which have *only* certs/badges/symbols/etc.: 33
+- **Backfill targets (zero real photos in Medusa)**: **27**
+  - of which have *only* certs/badges/symbols/etc.: 27
   - of which have **no images at all**: 2
-  - of which have at least one cert image: 8
-- Products whose `thumbnail` is **not** a real photo: **88**
-  - of which thumbnail is a cert image: **23**
-- Products that already have ≥1 real photo: **154**
+  - of which have at least one cert image: 5
+- Products whose `thumbnail` is **not** a real photo: **72**
+  - of which thumbnail is a cert image: **10**
+- Products that already have ≥1 real photo: **160**
 
 ## Backfill targets — products with zero real product photos
 
@@ -42,7 +42,6 @@ These products need real photographs added. Most have only feature badges + the 
 | `eurotramp-customized-fabrications` | Customized Fabrications | 1 | 0 | 0 | 1 | 0 | 0 | feature-badge | [link](https://www.eurotramp.com/en/products/customized-fabrications/) |
 | `eurotramp-eurotramp-play` | Eurotramp PLAY! | 31 | 0 | 0 | 1 | 0 | 8 | feature-badge | [link](https://www.eurotramp.com/en/products/eurotramp-play/) |
 | `eurotramp-eurotramp-play-light-epl0001` | Eurotramp PLAY! Light | 3 | 0 | 0 | 0 | 0 | 0 | unknown | — |
-| `eurotramp-impact-protection-system` | Impact protection system EPDM | 26 | 0 | 0 | 3 | 0 | 0 | feature-badge | [link](https://www.eurotramp.com/en/products/impact-protection-system/) |
 | `eurotramp-impactprotection-system-kids-tramp-e97044` | impactprotection system Kids Tramp | 0 | 0 | 0 | 0 | 0 | 0 | none | — |
 | `eurotramp-jumping-bed-kids-tramp-kindergarten-e21897` | Jumping bed Kids Tramp Kindergarten | 6 | 0 | 0 | 0 | 0 | 4 | vector | — |
 | `eurotramp-jumping-bed-kids-tramp-kindergarten-xl-e21879` | Jumping bed Kids Tramp "Kindergarten" XL | 4 | 0 | 0 | 0 | 0 | 4 | vector | — |
@@ -50,8 +49,6 @@ These products need real photographs added. Most have only feature badges + the 
 | `eurotramp-kids-tramp-kindergarten-loop-xl` | Kids Tramp "Kindergarten Loop XL" | 35 | 0 | 1 | 7 | 0 | 1 | cert | [link](https://www.eurotramp.com/en/products/kids-tramp-kindergarten-loop-xl/) |
 | `eurotramp-kids-tramp-playground-loop` | Kids Tramp "Playground Loop" | 36 | 0 | 1 | 9 | 0 | 0 | cert | [link](https://www.eurotramp.com/en/products/kids-tramp-playground-loop/) |
 | `eurotramp-kids-tramp-playground-loop-xl` | Kids Tramp "Playground Loop XL" | 36 | 0 | 1 | 9 | 0 | 0 | cert | [link](https://www.eurotramp.com/en/products/kids-tramp-playground-loop-xl/) |
-| `eurotramp-kids-tramp-track-playground` | Kids Tramp Track "Playground" | 36 | 0 | 1 | 9 | 24 | 1 | cert | [link](https://www.eurotramp.com/en/products/kids-tramp-track-playground/) |
-| `eurotramp-mats-tramp` | Mats Trampoline | 8 | 0 | 0 | 1 | 0 | 1 | feature-badge | [link](https://www.eurotramp.com/en/products/mats-tramp/) |
 | `eurotramp-safety-platforms-universal-freestyle` | Safety platforms "Competition Universal" | 1 | 0 | 0 | 0 | 0 | 0 | unknown | [link](https://www.eurotramp.com/en/products/safety-platforms-universal-freestyle/) |
 | `eurotramp-set-of-landing-mats-dmt` | Set of landing mats | 3 | 0 | 0 | 0 | 0 | 0 | unknown | [link](https://www.eurotramp.com/en/products/set-of-landing-mats-dmt/) |
 | `eurotramp-single-tile-impact-protection-kids-tramp-track-centrepiece-e97006` | single tile impact protection Kids Tramp Track centrepiece | 2 | 0 | 0 | 0 | 0 | 0 | unknown | — |
@@ -64,11 +61,8 @@ These products need real photographs added. Most have only feature badges + the 
 | `eurotramp-trampoline-set-one-field` | Trampoline Set "Stationary" - one jump area | 10 | 0 | 0 | 2 | 0 | 0 | feature-badge | [link](https://www.eurotramp.com/en/products/trampoline-set-one-field/) |
 | `eurotramp-trampoline-set-stationary` | Trampoline Set "Stationary" | 13 | 0 | 0 | 5 | 0 | 0 | feature-badge | [link](https://www.eurotramp.com/en/products/trampoline-set-stationary/) |
 | `eurotramp-transport-case-hdts` | HDTS transport case | 1 | 0 | 0 | 0 | 0 | 0 | unknown | [link](https://www.eurotramp.com/en/products/transport-case-hdts/) |
-| `eurotramp-underwater-trampoline` | Underwater Trampoline | 9 | 0 | 0 | 2 | 0 | 0 | feature-badge | [link](https://www.eurotramp.com/en/products/underwater-trampoline/) |
-| `eurotramp-wehrfritz-fun-round` | Wehrfritz FUN round | 19 | 0 | 1 | 5 | 11 | 1 | cert | [link](https://www.eurotramp.com/en/products/wehrfritz-fun-round/) |
 | `eurotramp-wehrfritz-fun-round-kindergarten-94750` | Wehrfritz Fun round "Kindergarten" | 3 | 0 | 0 | 0 | 0 | 3 | vector | — |
 | `eurotramp-wehrfritz-fun-xl-kindergarten` | Wehrfritz FUN XL "Kindergarten" | 18 | 0 | 1 | 5 | 11 | 1 | cert | [link](https://www.eurotramp.com/en/products/wehrfritz-fun-xl--kindergarten/) |
-| `eurotramp-wehrfritz-fun-xl-playground` | Wehrfritz FUN XL "Playground" | 20 | 0 | 1 | 7 | 11 | 1 | cert | [link](https://www.eurotramp.com/en/products/wehrfritz-fun-xl-playground/) |
 
 ## Full audit (all Eurotramp products)
 
@@ -118,16 +112,16 @@ These products need real photographs added. Most have only feature badges + the 
 | `eurotramp-fivesquare` | 11 | 2 | 0 | 1 | 0 | 0 | 0 | 1 | ❌ feature-badge |
 | `eurotramp-frame-bouncecloud-e41093` | 6 | 5 | 0 | 0 | 0 | 0 | 0 | 1 | ❌ unknown |
 | `eurotramp-frame-pads-set-80mm-safety-plus` | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ✅ photo |
-| `eurotramp-grand-master` | 36 | 14 | 1 | 1 | 0 | 1 | 0 | 19 | ❌ cert |
+| `eurotramp-grand-master` | 38 | 16 | 1 | 1 | 0 | 1 | 0 | 19 | ✅ photo |
 | `eurotramp-grand-master-exclusiv` | 38 | 17 | 0 | 0 | 0 | 1 | 0 | 20 | ✅ photo |
 | `eurotramp-grand-master-exclusiv-open-end` | 21 | 2 | 0 | 0 | 0 | 0 | 0 | 19 | ✅ photo |
 | `eurotramp-ground-trampoline-freestyle` | 24 | 9 | 0 | 1 | 0 | 0 | 0 | 14 | ❌ feature-badge |
-| `eurotramp-ground-trampoline-indoor` | 14 | 5 | 1 | 1 | 0 | 1 | 0 | 6 | ❌ cert |
-| `eurotramp-ground-trampoline-outdoor` | 50 | 33 | 1 | 5 | 0 | 0 | 0 | 11 | ❌ cert |
+| `eurotramp-ground-trampoline-indoor` | 13 | 6 | 1 | 1 | 0 | 1 | 0 | 4 | ✅ photo |
+| `eurotramp-ground-trampoline-outdoor` | 22 | 11 | 1 | 5 | 0 | 0 | 0 | 5 | ✅ photo |
 | `eurotramp-hdts` | 14 | 1 | 0 | 1 | 0 | 0 | 0 | 12 | ❌ feature-badge |
 | `eurotramp-hobbytramp` | 9 | 2 | 0 | 0 | 0 | 0 | 1 | 6 | ✅ photo |
 | `eurotramp-icepad` | 10 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | ✅ photo |
-| `eurotramp-impact-protection-system` | 26 | 0 | 0 | 3 | 0 | 0 | 0 | 0 | ❌ feature-badge |
+| `eurotramp-impact-protection-system` | 30 | 4 | 0 | 3 | 0 | 0 | 0 | 0 | ✅ photo |
 | `eurotramp-impactprotection-system-kids-tramp-e97044` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ — |
 | `eurotramp-jumping-bed-kids-tramp-kindergarten-e21897` | 6 | 0 | 0 | 0 | 0 | 4 | 0 | 2 | ❌ vector |
 | `eurotramp-jumping-bed-kids-tramp-kindergarten-xl-e21879` | 4 | 0 | 0 | 0 | 0 | 4 | 0 | 0 | ❌ vector |
@@ -153,7 +147,7 @@ These products need real photographs added. Most have only feature badges + the 
 | `eurotramp-kids-tramp-playground-loop` | 36 | 0 | 1 | 9 | 0 | 0 | 0 | 2 | ❌ cert |
 | `eurotramp-kids-tramp-playground-loop-xl` | 36 | 0 | 1 | 9 | 0 | 0 | 0 | 2 | ❌ cert |
 | `eurotramp-kids-tramp-playground-xl` | 37 | 1 | 1 | 9 | 0 | 0 | 0 | 2 | ❌ cert |
-| `eurotramp-kids-tramp-track-playground` | 36 | 0 | 1 | 9 | 24 | 1 | 0 | 1 | ❌ cert |
+| `eurotramp-kids-tramp-track-playground` | 24 | 5 | 1 | 9 | 7 | 1 | 0 | 1 | ✅ photo |
 | `eurotramp-kids-tramp-track-playground-10m-97049` | 6 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | ✅ photo |
 | `eurotramp-kids-tramp-track-playground-10m-97059` | 3 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | ✅ photo |
 | `eurotramp-kids-tramp-track-playground-4m-97044` | 6 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | ✅ photo |
@@ -167,13 +161,13 @@ These products need real photographs added. Most have only feature badges + the 
 | `eurotramp-lifting-roller-stand` | 16 | 8 | 0 | 1 | 0 | 0 | 0 | 7 | ❌ feature-badge |
 | `eurotramp-lifting-roller-stand-safe-comfort` | 11 | 3 | 0 | 1 | 0 | 0 | 0 | 0 | ❌ feature-badge |
 | `eurotramp-long-leaf-spring-connecting-cable-e33393` | 6 | 5 | 0 | 0 | 0 | 0 | 0 | 1 | ❌ unknown |
-| `eurotramp-master` | 31 | 10 | 1 | 1 | 0 | 1 | 0 | 18 | ❌ cert |
-| `eurotramp-mats-tramp` | 8 | 0 | 0 | 1 | 0 | 1 | 0 | 0 | ❌ feature-badge |
+| `eurotramp-master` | 33 | 12 | 1 | 1 | 0 | 1 | 0 | 18 | ✅ photo |
+| `eurotramp-mats-tramp` | 9 | 1 | 0 | 1 | 0 | 1 | 0 | 0 | ✅ photo |
 | `eurotramp-minitramp-trolley` | 11 | 3 | 0 | 1 | 0 | 0 | 0 | 0 | ❌ feature-badge |
 | `eurotramp-minitrampoline-112-125` | 42 | 12 | 1 | 1 | 0 | 3 | 6 | 19 | ❌ cert |
 | `eurotramp-mounting-tool-kids-tramp-e31100` | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | ✅ photo |
 | `eurotramp-octotramp` | 4 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | ✅ photo |
-| `eurotramp-open-end-minitramp` | 30 | 7 | 1 | 1 | 0 | 2 | 0 | 19 | ❌ cert |
+| `eurotramp-open-end-minitramp` | 33 | 10 | 1 | 1 | 0 | 2 | 0 | 19 | ✅ photo |
 | `eurotramp-playpro-rubber-protection-lip-for-kids-tramp-e97048` | 3 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | ✅ photo |
 | `eurotramp-playpro-rubber-protection-lip-for-kids-tramp-track-10m-e97948` | 3 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | ✅ photo |
 | `eurotramp-playpro-rubber-protection-lip-for-kids-tramp-track-4m-e97448` | 3 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | ✅ photo |
@@ -231,13 +225,13 @@ These products need real photographs added. Most have only feature badges + the 
 | `eurotramp-single-tile-impact-protection-kids-tramp-xl-centrepiece-e97404` | 6 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | ✅ photo |
 | `eurotramp-somersault-belt-twisting-belt` | 8 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | ✅ photo |
 | `eurotramp-spieth-ground-safety-mat` | 3 | 1 | 0 | 0 | 0 | 0 | 1 | 1 | ❌ unknown |
-| `eurotramp-sport-thieme-adventure-tramp` | 21 | 10 | 1 | 7 | 0 | 0 | 0 | 3 | ❌ cert |
+| `eurotramp-sport-thieme-adventure-tramp` | 22 | 11 | 1 | 7 | 0 | 0 | 0 | 3 | ✅ photo |
 | `eurotramp-sport-thieme-adventure-tramp-built-in-frame` | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | ✅ photo |
 | `eurotramp-spotting-mat-freestyle` | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | ❌ unknown |
 | `eurotramp-stability-plate` | 11 | 3 | 0 | 1 | 0 | 0 | 0 | 0 | ❌ feature-badge |
 | `eurotramp-steel-spring-145x20mm-e31120` | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | ✅ photo |
 | `eurotramp-tchoukball` | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | ✅ photo |
-| `eurotramp-teamgym` | 17 | 6 | 1 | 1 | 0 | 1 | 1 | 7 | ❌ cert |
+| `eurotramp-teamgym` | 18 | 7 | 1 | 1 | 0 | 1 | 1 | 7 | ✅ photo |
 | `eurotramp-teamgym-freestyle` | 10 | 2 | 0 | 1 | 0 | 0 | 0 | 0 | ❌ feature-badge |
 | `eurotramp-top-sheet-for-bouncecloud-e21030` | 6 | 5 | 0 | 0 | 0 | 0 | 0 | 1 | ❌ unknown |
 | `eurotramp-top-sheet-for-bouncecloud-e21031` | 6 | 5 | 0 | 0 | 0 | 0 | 0 | 1 | ❌ unknown |
@@ -253,11 +247,11 @@ These products need real photographs added. Most have only feature badges + the 
 | `eurotramp-trampoline-track-vario` | 20 | 9 | 0 | 1 | 0 | 0 | 9 | 1 | ❌ feature-badge |
 | `eurotramp-transport-case-hdts` | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | ❌ unknown |
 | `eurotramp-trimm-tramp` | 9 | 3 | 0 | 0 | 0 | 1 | 0 | 5 | ✅ photo |
-| `eurotramp-ultimate` | 62 | 28 | 1 | 2 | 0 | 1 | 0 | 30 | ❌ cert |
-| `eurotramp-ultimate-dmt-6x6` | 36 | 7 | 1 | 1 | 0 | 1 | 2 | 24 | ❌ cert |
-| `eurotramp-ultimate-freestyle` | 35 | 11 | 1 | 1 | 0 | 0 | 0 | 22 | ❌ cert |
-| `eurotramp-underwater-trampoline` | 9 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | ❌ feature-badge |
-| `eurotramp-wehrfritz-fun-round` | 19 | 0 | 1 | 5 | 11 | 1 | 1 | 0 | ❌ cert |
+| `eurotramp-ultimate` | 62 | 28 | 1 | 2 | 0 | 1 | 0 | 30 | ✅ photo |
+| `eurotramp-ultimate-dmt-6x6` | 36 | 8 | 1 | 1 | 0 | 1 | 1 | 24 | ✅ photo |
+| `eurotramp-ultimate-freestyle` | 35 | 11 | 1 | 1 | 0 | 0 | 0 | 22 | ✅ photo |
+| `eurotramp-underwater-trampoline` | 10 | 1 | 0 | 2 | 0 | 0 | 0 | 0 | ✅ photo |
+| `eurotramp-wehrfritz-fun-round` | 16 | 1 | 1 | 5 | 7 | 1 | 1 | 0 | ✅ photo |
 | `eurotramp-wehrfritz-fun-round-kindergarten-94750` | 3 | 0 | 0 | 0 | 0 | 3 | 0 | 0 | ❌ vector |
 | `eurotramp-wehrfritz-fun-xl-kindergarten` | 18 | 0 | 1 | 5 | 11 | 1 | 0 | 0 | ❌ cert |
-| `eurotramp-wehrfritz-fun-xl-playground` | 20 | 0 | 1 | 7 | 11 | 1 | 0 | 0 | ❌ cert |
+| `eurotramp-wehrfritz-fun-xl-playground` | 16 | 1 | 1 | 7 | 6 | 1 | 0 | 0 | ✅ photo |

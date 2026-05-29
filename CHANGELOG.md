@@ -4,11 +4,35 @@ All notable changes to this project will be documented in this file.
 
 ---
 
-## [2.40.0-plan] — Eurotramp product-photo backfill (proposed, awaiting sign-off)
+## [2.40.0] - 2026-05-30 — Eurotramp product-photo backfill
 
-> **STATUS:** plan only — **no Medusa writes have been made**. Audit + root-cause complete; backfill execution gated on user approval.
+> **STATUS:** SHIPPED. 16 Medusa products updated, 62 photos uploaded to GCS.
 > Audit report: [`docs/reports/eurotramp-image-audit-2026-05-30.md`](docs/reports/eurotramp-image-audit-2026-05-30.md)
 > Sibling-repo context: leka-website storefront v0.19.2 (#87) extended the cert-penalty regex but cannot rescue a product whose only image data IS a cert.
+
+### Result — before / after on live storefront
+
+| Metric | Before | After | Δ |
+|---|---:|---:|---:|
+| Eurotramp products with a non-photo thumbnail | 88 | 72 | −16 |
+| Eurotramp products whose thumbnail is a TÜV/cert image | 23 | 10 | **−13** |
+| Eurotramp products with zero real photos (backfill targets) | 33 | 27 | −6 |
+| Post-backfill `og:image` flipped to a real photo (spot-check, 9/10 handles) | — | 9 ✅ | — |
+
+Post-backfill `og:image` verification (live `curl https://catalogs.leka.studio/eurotramp/<handle>`):
+
+```
+✅ photo  eurotramp-wehrfritz-fun-round         → productdetails-wehrfritzfunroundplayground_1202e5eb57_1920x1080.jpg
+✅ photo  eurotramp-kids-tramp-track-playground → 97054-kidstramptrack4mepdm_83ccaccd40_1920x1080.jpg
+✅ photo  eurotramp-wehrfritz-fun-xl-playground → productdetail-wehrfritzfunxlplayground_672451331b_1920x1080.jpg
+✅ photo  eurotramp-impact-protection-system    → e97541-impactprotectionsystemepdmforkidstrampxlgrey_6f6c5cb7b8_1920x1080.jpg
+✅ photo  eurotramp-grand-master                → productdetails-grandmaster13mm_49d719a380_1920x1080.jpg
+✅ photo  eurotramp-ultimate                    → productdetails-ultimate_1a9386d18e_1920x1080.jpg
+✅ photo  eurotramp-teamgym                     → productdetails-minitrampteamgym_c4e2140598_1920x1080.jpg
+✅ photo  eurotramp-underwater-trampoline       → productdetails-underwatertrampoline_8fb7b817d5_1920x1080.jpg
+✅ photo  eurotramp-mats-tramp                  → 91000-preview-matstrampoline_f249c65994_1920x1080.jpg
+❌ cert   eurotramp-kids-tramp-kindergarten-loop-xl → tuev_1176_2021.jpg  (in upstream-gap list — no photo upstream)
+```
 
 ### Audit summary (live Medusa, 2026-05-30)
 
@@ -110,17 +134,55 @@ The current selector would catch them — so the gap is from a prior ingest pass
 - [`docs/reports/eurotramp-image-audit-2026-05-30.md`](docs/reports/eurotramp-image-audit-2026-05-30.md) — human-readable report.
 - [`docs/reports/eurotramp-image-audit-2026-05-30-classified.json`](docs/reports/eurotramp-image-audit-2026-05-30-classified.json) — machine-readable; consumed by the Phase 1 diff script.
 
-### Sign-off needed before Phase 1
+### Sign-off (received 2026-05-30)
 
-Confirm:
-- [ ] OK to re-scrape `eurotramp.com` (13 categories, ~190 product pages, ~800ms per request → ~3 min walltime; respectful UA).
-- [ ] Target bucket `gs://ai-agents-go-vendors/eurotramp/<handle>/` is correct (per workspace `image-proxy-bucket` memory).
-- [ ] Acceptable for backfill script to append-not-replace `images[]` (keeps badges/certs alongside new photos, lets the storefront scorer sort).
-- [ ] OK to write `metadata.photo_backfilled_at` + `metadata.previous_{thumbnail,images}` for idempotency + rollback.
+All four checkboxes approved; executed in a single chained pass.
 
-### Post-backfill verification
+### What ran
 
-_(to be filled in after Phase 4 runs)_
+1. **Phase 1 — fresh scrape** ([`scripts/scrape-eurotramp.ts`](scripts/scrape-eurotramp.ts)) — 81 product pages crawled, `data/scraped/eurotramp/products.json` repopulated. 0 errors.
+2. **Phase 1 — diff vs Medusa** ([`scripts/diff_eurotramp_scrape_vs_medusa.py`](scripts/diff_eurotramp_scrape_vs_medusa.py)) — wrote [`docs/reports/eurotramp-backfill-diff-2026-05-30.json`](docs/reports/eurotramp-backfill-diff-2026-05-30.json). Found:
+    - 6 backfill targets with new upstream photos (fixable now)
+    - 9 cert-thumb products with new upstream photos (cosmetic re-point + add)
+    - 4 cert-thumb products with only existing Medusa photos (thumb-only re-point)
+    - **13 backfill targets with no upstream photos** (page found, no real-photo URLs)
+    - **15 backfill/cert-thumb products not in scrape at all** (sub-page accessories — not reached by 13-category crawl)
+3. **Phase 2 — GCS rehost** ([`scripts/rehost_missing_eurotramp_photos.py`](scripts/rehost_missing_eurotramp_photos.py)) — downloaded 62 photos, uploaded all to `gs://ai-agents-go-vendors/eurotramp/<handle>/`. Each URL was upgraded from the 200x112 gallery thumb (the only size the scraper captured) to 1920x1080 by HEAD-probing the size ladder `_1920x1080`/`_920x512`/`_680x378`/`_200x112` and using the largest that returned HTTP 200. 0 failures. Manifest: [`docs/reports/eurotramp-rehost-manifest-2026-05-30.json`](docs/reports/eurotramp-rehost-manifest-2026-05-30.json).
+4. **Phase 3 — Medusa backfill** ([`scripts/backfill_eurotramp_photos_to_medusa.py`](scripts/backfill_eurotramp_photos_to_medusa.py)) — **16 products updated, 8 skipped (no change needed), 0 failed**. Each updated product got:
+    - new `images[]` (photos appended; existing badges/certs preserved; dups collapsed)
+    - re-pointed `thumbnail` to the highest-rank `productdetails-*` / `<articleNo>-*` URL, but **only when the candidate filename shares at least one token with the product handle** — this prevented 4 `kids-tramp-kindergarten*` products from getting an unrelated `impactprotectionsystem` accessory photo as their thumbnail.
+    - `metadata.previous_thumbnail` + `metadata.previous_images` (for rollback)
+    - `metadata.photo_backfilled_at` (for idempotency on re-run)
+    Per-product log: [`docs/reports/eurotramp-backfill-log-2026-05-30.json`](docs/reports/eurotramp-backfill-log-2026-05-30.json).
+5. **Phase 4 — verification** — re-curled 10 handles; 9/10 now serve a real product photo as `og:image`. The 1 still-broken one (`kids-tramp-kindergarten-loop-xl`) is in the upstream-gap list — no fix possible without procuring photos manually.
+
+### Remaining work — not fixable from upstream
+
+These 28 products still have non-photo thumbnails after this backfill. They need photos procured manually (vendor PDF, manufacturer brochure, or fresh photoshoot):
+
+- **Upstream gap (13)** — vendor page crawled, no real-photo URLs found: `booster-board-freestyle`, `customized-fabrications`, `eurotramp-play`, `kids-tramp-{kindergarten,playground}-loop[-xl]` (4), `safety-platforms-universal-freestyle`, `set-of-landing-mats-dmt`, `spotting-mat-freestyle`, `trampoline-set-{one-field,stationary}` (2), `transport-case-hdts`.
+- **Not in 13-category scrape (15)** — most are sub-page accessories/spare-parts: 4× `adhesive-cartridge-…`, `bonded-impact-protection-…`, `eurotramp-play-light-…`, `impactprotection-system-…`, 2× `jumping-bed-…`, `minitrampoline-112-125`, 6× `single-tile-impact-protection-…`, 2× `wehrfritz-fun-…-kindergarten…`. Either re-crawl with deeper accessory traversal or procure manually.
+
+Recommended next step: open a follow-up ticket "Eurotramp manual photo procurement" with these 28 handles; close it once images are uploaded to `gs://ai-agents-go-vendors/eurotramp/<handle>/` and the backfill script is re-run with `--force`.
+
+### Storefront sibling-repo follow-up (out of scope here)
+
+The `\btuev\b` regex in [`leka-website/catalogs/src/lib/image-scoring.ts:8`](https://github.com/eukrit/leka-website/blob/main/catalogs/src/lib/image-scoring.ts) fails on `tuev_*.jpg` because JS `\b` treats `_` as a word character (`\btuev\b` ≠ match in `tuev_1176_2021.jpg`). This bug is masked for now: after this backfill the 13 still-cert products have ONLY a cert and the scorer can't choose any better. But it should be fixed in `leka-website` (replace `\b…\b` with `(?<![a-z0-9])…(?![a-z0-9])`) so the scorer correctly penalises `tuev_*` filenames once any real photo exists.
+
+### Rollback path (if needed)
+
+Per-product:
+```bash
+TOKEN=$(curl -s -X POST "$MEDUSA/auth/user/emailpass" -d '{"email":"...","password":"..."}' | jq -r .token)
+curl -s -H "Authorization: Bearer $TOKEN" "$MEDUSA/admin/products?handle=$HANDLE&fields=metadata,id" | jq '.products[0]' > /tmp/p.json
+ID=$(jq -r .id /tmp/p.json)
+THUMB=$(jq -r '.metadata.previous_thumbnail' /tmp/p.json)
+jq -r '.metadata.previous_images' /tmp/p.json > /tmp/imgs.json
+curl -s -X POST -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d "{\"thumbnail\":\"$THUMB\",\"images\":$(jq '[.[] | {url: .}]' /tmp/imgs.json)}" \
+  "$MEDUSA/admin/products/$ID"
+```
+GCS uploads were `--no-clobber` and don't need rollback.
 
 ---
 
