@@ -4,6 +4,56 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.35.0] - 2026-05-29
+
+### Fixed — "We couldn't submit your order" on `catalogs.leka.studio/checkout`
+
+The Submit Order step on every catalog brand returned the generic frontend
+error banner. Root cause: the storefront (eukrit/leka-website/catalogs) calls
+`sdk.store.cart.complete(cartId, ...)` → `POST /store/carts/:id/complete`,
+which on the backend is served by Medusa's stock `completeCartWorkflow`.
+That workflow validates the cart has shipping methods + a payment collection
+with an authorized session. Leka catalogs are a B2B "send to proposal" flow
+with no shipping providers and no payment providers configured — so every
+checkout failed cart validation before any order was created.
+
+A separate custom route, `POST /store/proposal-builder/convert-cart`
+(introduced in v2.29.0), already did the right thing for this flow, but the
+storefront never called it.
+
+#### `medusa-backend/src/api/store/carts/[id]/complete/route.ts` (new)
+
+Overrides Medusa's stock cart-complete route. Pulls the cart, builds a draft
+order via `createOrderWorkflow` with `status: "draft"` and
+`metadata.proposal_builder: true`, then returns the same response shape the
+storefront SDK expects: `{ type: "order", order: { id, display_id, ... } }`.
+No storefront change required.
+
+Defensive bits learned from upstream Medusa source:
+
+- `items[].title` is required by `validateLineItemPricesStep`; we fall back
+  to `product_title` / `variant_sku` / `"Item"` so a cart whose line items
+  carry a null title (rare but possible) still completes.
+- `quantity` and `unit_price` are coerced via `Number()` to guard against
+  BigNumber serialization edge cases.
+- `region_id` and `currency_code` are forwarded as-is; if either is stale
+  (e.g. a cart cached before the SGD region went live in v2.33.0) the
+  workflow's `findOneOrAnyRegionStep` resolves to "any" region rather than
+  throwing.
+- Errors are surfaced as `400` with `{ message, type }` so the storefront's
+  `err.response.data.message` path shows the real reason (e.g. "variant_xxx
+  out of stock") instead of the generic banner.
+
+The existing `proposal-created.ts` subscriber already filters on
+`metadata.proposal_builder === true` to post the new draft to
+`#leka-medusa-proposal`, so the operator handoff is unchanged.
+
+#### Files changed
+- `medusa-backend/src/api/store/carts/[id]/complete/route.ts` (new)
+- `VERSION` → 2.35.0
+
+---
+
 ## [2.34.0] - 2026-05-25
 
 ### Fixed — Zero blank product cards on `catalogs.leka.studio/leka-project`
