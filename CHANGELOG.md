@@ -4,6 +4,67 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.37.0] - 2026-05-29
+
+### Added — AI enrichment of Wisdom / Leka Project specs + Toys category
+
+> **Status: scripts shipped; apply + category-link gated on user review of the
+> category distribution before running against live Medusa.** Renumbered to 2.37.0
+> at rebase (2.35.0 = checkout fix PR #58; 2.36.0 = archimedes-water-play PR #59).
+
+Live audit found the PDP at `leka-website/catalogs/src/app/[brand]/[handle]/product-detail.tsx`
+reads `metadata.materials[]`, `metadata.specifications.{age_group,num_users,indoor_outdoor,...}`
+plus a real product `description`. Wisdom products carry **none** of these — they were
+imported from a China OEM pricelist with only SKU, title (EN+CN), L×W×H, FOB price,
+page number. 100% of 5,061 Wisdom products show only L/W/H/Weight on PDP.
+
+Also: storefront has no top-level "Toys" category. Wisdom products fell into 0 categories
+on Medusa (`category_ids=[]`), so admin and PDP breadcrumbs are bare.
+
+#### Pipeline added
+
+- `scripts/enrich_wisdom_with_ai.py` — Gemini 2.5 Flash vision pass over all 5,061 Wisdom-origin
+  products on live Medusa. Sends `{title, dimensions, thumbnail}` and gets back structured
+  JSON: `{category, subcategory, age_min/max_years, materials[], num_users_min/max,
+  indoor_outdoor, description, confidence}`. Category vocab includes a dedicated **toys**
+  bucket separate from large `playground_equipment`. Idempotent + resumable; checkpoints
+  to Firestore `wisdom_enrichment/{sha1(sku)}`. Concurrency 4. Cost: ~$0.50 for full pass.
+- `scripts/apply_wisdom_enrichment.py` — Push enrichment to Medusa via `/admin/products/{id}`:
+  fills `metadata.materials[]`, `metadata.specifications`, `metadata.category_inferred`,
+  and overwrites `description` only when current desc equals title (preserves manual edits).
+  Records `enrichment_applied_at` for idempotency.
+- `scripts/medusa_create_toys_category.py` — Creates 16 top-level Medusa product categories
+  matching the AI vocab (Toys, Playground Equipment, Kids Furniture, Arts & Crafts,
+  Educational Manipulatives, Music Instruments, Role Play, Sports & Outdoor, Infant & Toddler,
+  Water Play, Sand Play, Climbing, Ride-Ons, Books & Media, Safety & Accessories, Other),
+  then links each Wisdom product to its inferred category.
+
+#### PDP changes (leka-website — separate repo)
+
+- `catalogs/src/app/[brand]/[handle]/product-detail.tsx` — accept both `meta.materials[]` and
+  legacy singular `meta.material`; render new spec rows `Volume`, `Indoor/Outdoor`, `Subcategory`;
+  suppress `EN Standard`, `Fall Height`, `Safety Zone` for OEM brands (`source_brand_internal`
+  in {wisdom, vinci, vortex}) which don't carry EU certifications. Materials displayed
+  title-cased. (Lives in eukrit/leka-website; tracked/committed there separately.)
+
+#### Verification (smoke test, 9 representative SKUs)
+
+| SKU | Title | → Category |
+|---|---|---|
+| A4-497100 | Dino Rocker™ | toys |
+| GP1-12004 | Giraffe Ride-on | toys |
+| G1-SG018 | Smart Car | toys |
+| SR-21004 | Pony Spring Rider | playground_equipment |
+| KB1-0111-V01 | Small Dress Up Trolley | kids_furniture |
+| H3-DMM004 | Tambourine | music_instruments |
+| B2-2006 | Blow Lotto | educational_manipulatives |
+| E10-B04 | Rabbit 45Pcs | educational_manipulatives |
+| K4-20420 | Flower Matching Game | educational_manipulatives |
+
+Average confidence on smoke set: 0.89.
+
+---
+
 ## [2.36.0] - 2026-05-29
 
 ### Added — `archimedes-water-play` brand: Wenzhou Daosen pricelist parsed
