@@ -30,6 +30,11 @@ if str(REPO_ROOT) not in sys.path:
 
 from shared import landed_pricing as _lp  # noqa: E402
 from shared import wisdom_pricing as _wp  # noqa: E402
+
+# Vortex canonical maps live in vortex-catalog/vortex_config.py (pure dicts,
+# no heavy deps) — single source of truth shared with its import_pricelist.py.
+sys.path.insert(0, str(REPO_ROOT / "vortex-catalog"))
+import vortex_config as _vortex  # noqa: E402
 from shared.pricing_config import (  # noqa: E402
     FS_COLLECTION, FS_DATABASE, FS_DOCUMENT, FS_PROJECT,
 )
@@ -112,6 +117,8 @@ def build_seed_doc() -> dict:
                 "source_pricelist_url": "wisdom-catalog/data/",
                 "source_pricelist_label": "Wisdom Excel catalogs (in-repo)",
             },
+            # Vortex Aquatics — Canada EXW USD, per-product-line reseller discounts.
+            "vortex": _vortex.brand_config(),
         },
         "logistics_tiers": tiers,
         "updated_at": datetime.now(timezone.utc).isoformat(),
