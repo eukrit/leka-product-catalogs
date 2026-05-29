@@ -7,6 +7,37 @@ Products: `vendors/4soft/products` (db `vendors`)
 
 ---
 
+## 2026-05-29 — v2.43.0 — Product images from the picture-pricelist PDF
+
+- **Source:** `2025-06-25 4soft_EPDM_graphics_-_picture_-_price_list_2025_optimized.pdf`
+  (89 pages, picture variant of the v2.40.0 `.xls`). Grid layout: 100x100 image
+  per design at x≈44-99, code at x≈135.
+- **Extract** (`extract_pdf_images.py`, PyMuPDF): y-row match image→code,
+  validate vs pricelist, prefer DeviceRGB jpeg. **989 images** (964 native /
+  25 rendered) → `data/pdf_images/` (gitignored) + `data/pdf_images_map.json`.
+- **Host:** uploaded to `gs://ai-agents-go-vendors/4soft/pdf/<handle>.jpg` — the
+  bucket the storefront image proxy reads (leka-website `api/i/[...path]`; the
+  CLAUDE.md `ai-agents-go-documents` note is stale). Proxy URL:
+  `https://catalogs.leka.studio/api/i/4soft/pdf/<handle>.jpg`.
+- **Enrich** (`enrich_pdf_images.py`): UV-class-matched base-design borrowing →
+  **1,635/2,410 (67.8%)** products imaged. Firestore: 1,263 PDF-primary
+  (162 replaced borrowed-web, 1,101 added), 372 kept higher-res web, 775 no
+  image. Medusa: **419** in-channel products updated (thumbnail + images),
+  0 errors; 844 PDF-imaged codes are deferred 2D (Firestore only).
+- **Follow-ups:** 775 codes (mostly flat 2D markings) have no PDF image; PDF
+  embeds are 100px (higher-res would need another source).
+
+### Run commands (v2.43.0)
+```bash
+python foursoft-catalog/extract_pdf_images.py
+python foursoft-catalog/enrich_pdf_images.py --upload --write-firestore
+export LEKA_MEDUSA_ADMIN_EMAIL=$(gcloud secrets versions access latest --secret=medusa-admin-email --project ai-agents-go)
+export LEKA_MEDUSA_ADMIN_PASSWORD=$(gcloud secrets versions access latest --secret=medusa-admin-password --project ai-agents-go)
+python foursoft-catalog/enrich_pdf_images.py --sync-medusa
+```
+
+---
+
 ## 2026-05-29 — v2.42.0 — 3D play elements created in Medusa + dims pricing
 
 > Follow-up to the 2025 pricelist ingest (CHANGELOG **v2.40.0**, PR #63 — this
