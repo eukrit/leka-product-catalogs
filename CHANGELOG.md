@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ---
 
-## [2.40.0] - 2026-05-30 — Eurotramp product-photo backfill
+## [2.45.0] - 2026-05-30 — Eurotramp product-photo backfill
 
 > **STATUS:** SHIPPED. 16 Medusa products updated, 62 photos uploaded to GCS.
 > Audit report: [`docs/reports/eurotramp-image-audit-2026-05-30.md`](docs/reports/eurotramp-image-audit-2026-05-30.md)
@@ -186,6 +186,319 @@ GCS uploads were `--no-clobber` and don't need rollback.
 
 ---
 
+## [2.44.0] - 2026-05-30
+
+### Added — 4soft 2D ground markings created in Medusa (catalog completion)
+
+Follow-up to v2.42.0 (3D) / v2.43.0 (PDF images). Materializes the deferred
+**2D scope** — the flat ground markings (hopscotch, numbers/letters, footprints,
+shapes) — into Medusa from the existing pricelist records. Pure extraction (no
+AI): `create_medusa_products.py --scope 2D --status draft` pushes the
+`vendors/4soft/products` docs (code / EN name / EUR-derived prices / dims /
+category) as handle-based products, attaching the picture-pricelist PDF images
+already written to Firestore in v2.43.0.
+
+- **Create:** **1,553 new** 2D products (843 with a PDF image, ~712 image-less),
+  **247 existing** updated (Czech → EN title + metadata), **2** benign
+  "handle already exists" skips (present but not SC-indexed). Created as
+  **draft** for review before publish.
+- **Price sync** (`sync_brand_prices_to_medusa.py --brand 4soft --write`):
+  match rose to **2,394 / 2,410 (99.3%)** — THB/USD/EUR/SGD.
+- **Remaining 16** = the **packaging (10) + accessory (6)** SKUs (codes like
+  `BOX-typ2`, `BOXOSB-A`) — deliberately NOT created; they look like packaging
+  surcharges / fixed-fee line items rather than sellable catalog products.
+
+The 4soft brand is now effectively complete in Medusa: **~3,960 products**
+(2,408 of the 2,410 priced pricelist SKUs present + earlier web-only extras).
+3D published (v2.42.0 follow-up); 2D created as drafts pending review.
+
+#### Deferred follow-ups
+- Review + publish the 1,553 2D drafts; ~712 are image-less (no image in the PDF
+  or on 4soft.cz) — optionally AI-generate placeholders later.
+- Decide whether the 16 packaging/accessory SKUs belong in the catalog.
+- 2026 pricelist + discount structure requested from 4soft (email sent 2026-05-29).
+
+
+## [2.43.0] - 2026-05-29
+
+### Added — 4soft product images from the picture-pricelist PDF
+
+Follow-up to v2.42.0 (4soft 3D create). The 3D drafts mostly fell back to
+borrowed base-design web images (only 130 web bases existed). The official
+**picture-pricelist PDF** (`4soft_EPDM_graphics_-_picture_-_price_list_2025_optimized.pdf`,
+89 pages, the picture variant of the v2.40.0 `.xls`) carries a 100x100 image per
+product design — the only image source for the ~2,000 colour/UV/size variants
+4soft.cz does not publish on the web.
+
+- `foursoft-catalog/extract_pdf_images.py` (new) — PyMuPDF grid extractor:
+  matches each left-column image to its code by y-row, validates against the
+  pricelist, prefers the DeviceRGB jpeg (renders the cell for jpx-only).
+  Extracted **989 images** (964 native jpeg / 25 rendered), verified by eye
+  (crocodile, Rubik's cube, sea star). Mapping → `data/pdf_images_map.json`.
+- `foursoft-catalog/enrich_pdf_images.py` (new) — uploads the 989 images to
+  `gs://ai-agents-go-vendors/4soft/pdf/<handle>.jpg` (the bucket the storefront
+  image proxy reads — see leka-website `api/i/[...path]`), then writes
+  `vendors/4soft/products[].images` via the proxy URL
+  `https://catalogs.leka.studio/api/i/4soft/pdf/<handle>.jpg`. UV-class-matched
+  base-design borrowing lifts coverage to **1,635 / 2,410 = 67.8%**.
+- **Precedence:** keep the 372 higher-res web images as primary (no downgrade);
+  REPLACE the 162 v2.41.0/v2.42.0 borrowed-web base-design images with the real
+  PDF image; ADD a PDF image to 1,101 previously image-less products.
+- **Medusa:** 419 in-channel products updated with the PDF image (thumbnail +
+  images), 0 errors. 844 PDF-imaged codes are the deferred 2D SKUs (not yet in
+  Medusa) — images held in Firestore for when they are created.
+
+The 989 extracted JPGs are reproducible (`extract_pdf_images.py`) and live in
+GCS, so they are gitignored; the mapping JSON is committed as provenance.
+
+#### Note on automation
+The picture-pricelist note in CLAUDE.md's "Image Pipeline" (upload to
+`ai-agents-go-documents/product-images/`) is **stale** — the live storefront
+proxy reads `gs://ai-agents-go-vendors/<vendor>/<path>`.
+
+#### Deferred follow-ups
+- 775 codes (mostly flat 2D markings) have no image in the PDF — still
+  image-less.
+- Higher-resolution images would need a different source (PDF embeds are 100px).
+
+
+## [2.42.0] - 2026-05-29
+
+### Added — 4soft 3D play elements created in Medusa + dims-based pricing
+
+Follow-up to the 4soft pricelist ingest (**v2.40.0**, PR #63). That release
+priced all 2,410 pricelist SKUs in `vendors/4soft/products` but only **377**
+existed as Medusa products — the other 2,033 were pricelist-only. This release
+creates the **3D scope** in Medusa and upgrades pricing for the SKUs with real
+dimensions.
+
+#### 2026 pricing re-verification (user decision 2026-05-29)
+
+Checked `eukrit@goco.bz` (SA domain-wide delegation, ~201 emails from 4soft.cz):
+- The *"Our Pricing for 2026"* newsletter (graphics@4soft.cz, 2026-04-01) is an
+  **image-only marketing blast — no pricelist attachment, no price/discount
+  figures.** No 2026 `.xls` exists in the inbox; the latest actual pricelist is
+  still `4soft_EPDM_graphics-price_list_2025.xls` (2025-06-25).
+- No document supersedes the **15% basic EXW** discount (2020 Price Conditions
+  PDF). The 2025 pricelist email confirms a reseller % applies on list prices.
+  → **EXW 15% / GM 40% retained.** 2026 pricelist is an open follow-up.
+
+#### Website reality
+
+4soft.cz publishes only **400 products** (256 2D / 90 3D / 54 other), not the
+~2,033 assumed. 377 match the pricelist 1:1 (EN site names == pricelist EN
+names — cross-checked); 2,033 pricelist codes (mostly colour/UV/size variants of
+2D ground markings) have **no individual web page**. User decision: create the
+**3D scope only** (the hero physical play elements) and defer the flat 2D
+markings.
+
+#### Scope created (dimension == "3D" = 592 SKUs)
+
+3D animals/nature/shapes/sport, **tunnels+slides (41)**, **water fountains
+(29)**, EPDM houses (5), furniture (112). Created as **draft** for review before
+publish.
+
+- `foursoft-catalog/backfill_scraped_details.py` (new) — wrote **260
+  dimensions** + **163 borrowed base-design images** (a colour variant inherits
+  its base design's photo, flagged `representative=true`) into
+  `vendors/4soft/products`.
+- Re-ran `foursoft-catalog/import_pricelist.py` → **251 SKUs now use
+  `dims_scaled` CBM** landed cost (was 0; rest flat-uplift). FX this run:
+  USD 33.25, EUR 38.71, SGD 26.04.
+- `foursoft-catalog/create_medusa_products.py` (new) — handle-based create
+  reusing `scripts/sync_vendors_to_medusa.py` helpers, scope-filtered, draft
+  status, EN pricelist titles, base-image attach. **Created 462** new 3D
+  products (163 with images), **renamed 130** existing Czech titles → EN,
+  0 errors. Medusa 4soft channel: 391 → **853 products**.
+- `scripts/sync_brand_prices_to_medusa.py --brand 4soft --write` — multi-currency
+  THB/USD/EUR/SGD prices pushed; match rose **377 → 839** (the 1,571 unmatched
+  are the deferred 2D/accessory/packaging pricelist-only SKUs).
+
+#### Deferred follow-ups
+
+- ~1,800 flat **2D ground markings** (hopscotch, numbers/letters, footprints) —
+  not created this pass (image-less, lower catalog value).
+- Confirm the **2026 pricelist** (request the `.xls` from 4soft) and re-verify
+  the 15% basic EXW before a full re-sync.
+- Review the 462 draft 3D products and **publish** when approved.
+
+## [2.41.0] - 2026-05-29
+
+### Added — Archimedes Water Play landed pricing (the deferred PR #59 work)
+
+Continues the `archimedes-water-play` brand (Wenzhou Daosen 温州道森游乐戏水,
+34 children's water-play SKUs, slugs AWP001–AWP034) merged in PR #59 (v2.36.0),
+which parsed the CNY pricelist but **deferred** landed pricing
+(`landed_pricing_status: "deferred — CNY→USD + dim normalization required"`).
+
+This release runs the parser against live Firestore and completes the landed
+CNY→THB/USD/SGD pricing pass, mirroring the Wisdom (China FOB) pipeline.
+
+#### Task 1 — audit doc populated
+- Ran `archimedes-water-play-catalog/import_pricelist.py` (this machine has gcloud
+  ADC; the authoring machine did not). Wrote the audit doc with all 34 variants to
+  Firestore `vendors/archimedes-water-play/pricelists/2026-05-29` (database `vendors`).
+
+#### Task 2 — landed pricing
+- **`archimedes-water-play-catalog/price_archimedes.py`** (NEW) — faithful mirror of
+  `shared/wisdom_pricing.compute_wisdom_retail`, but in CNY:
+  - Origin China → **0% import duty** (ASEAN-China FTA Form E), **+7% Thai import VAT**
+    on (CIF+duty), **+7% TH customer VAT** embedded in `retail_thb` only.
+  - **Independent** THB/USD/SGD retail — each derived from `landed_thb` (USD/SGD via
+    `landed_thb / FX`, no TH customer VAT), never `retail_thb / FX`.
+  - **Gross margin 0.50** — China-origin default, same as Wisdom. Adjustable via the
+    pricing-config form (`brands.archimedes-water-play.gross_margin`).
+  - **FX:** live THB-per-unit rates from shipping-automation `fx_rates.get_fx_rates`
+    (+2% buffer). Snapshot used: CNY=4.8903, USD=33.2529, SGD=26.0437 THB/unit
+    (⇒ CNY→USD 0.1471, CNY→SGD 0.1878). Fallback constants CNY 4.80 / USD 35 / SGD 25.
+  - **Dimension → CBM (documented, conservative):** only `kind == "lwh"` rows get a CBM.
+    Unit per row: explicit "cm" marker → cm; else any axis > 1000 → mm (e.g. `2000*1100*1250`);
+    else cm (e.g. `95×45×95`). `CBM = L·W·H (m³) × 0.15` packing factor. `lwh` rows route
+    through the China-LCL `cost_engine` + Vinci tier clamp (floor/cap by FOB band, which
+    bounds any cm/mm mis-guess — and most small items hit the LCL `min_charge`, so the CBM
+    value barely moves the result). `custom` / `diameter` / `two-dim` / `length` / `unknown`
+    rows fall back to the flat China **CIF ≈ FOB** path (no freight uplift), exactly like Wisdom.
+  - Result: **34 SKUs priced** (28 via China-LCL CBM, 6 via flat CIF≈FOB). Audit CSV at
+    `archimedes-water-play-catalog/data/pricelist_2026-05-29_priced.csv`.
+  - **Known caveat:** lwh (CBM) SKUs carry the per-shipment fixed clearance/last-mile of the
+    China-LCL route, so an `lwh` item can price ~2× an equivalently-priced flat (`custom`/
+    `diameter`) item. This is the standard Wisdom-pipeline behaviour; the tier clamp bounds it.
+    Adjust GM or method via the pricing-config form + re-run if a flatter curve is preferred.
+  - Writes priced product docs to `vendors/archimedes-water-play/products/<sku>` (vendors DB),
+    matching the rampline/designpark per-product shape; updates the audit doc
+    `landed_pricing_status → "completed (v2.38.0)"` with the FX snapshot.
+- **`scripts/add_archimedes_pricing_config.py`** (NEW) — merge-only writer that adds
+  `brands.archimedes-water-play` (GM 0.50, `import_duty_rate` 0.00, `currency` CNY,
+  `origin` china, `default_cny_thb` 4.80, source pricelist pointer) to
+  `pricing_config/canonical` (database `leka-product-catalogs`) **without disturbing** the
+  other brands added by later PRs (vortex/4soft/weplay). Idempotent (`--force` to overwrite).
+- **`scripts/seed_pricing_config.py`** — `build_seed_doc()` now includes the
+  `archimedes-water-play` block so a future `--force` reseed stays consistent.
+
+#### Task 3 — Medusa
+- Created/confirmed the **"Archimedes Water Play"** Medusa sales channel
+  (`sc_01KSSP39K5DVH9TT2TMXCREHFV`) and added it to the `SC` map in
+  `scripts/sync_brand_prices_to_medusa.py`. **Product creation is a follow-up** — there are
+  no AWP### products in Medusa yet, so the price sync is a documented no-op (0/34 matched)
+  until the 34 products are created. Once created (SKU = AWP###), the existing sync will
+  push THB/USD/SGD prices by SKU match.
+
+#### Docs
+- `docs/summaries/pricing-config-master.md` — added §4f (brand config), §6f (formula),
+  scripts-reference rows, and a v2.38.0 version-history row.
+- `archimedes-water-play-catalog/DEPLOYMENT_LOG.md` (NEW) — dated brand deploy log.
+
+### Files
+- NEW `archimedes-water-play-catalog/price_archimedes.py`
+- NEW `archimedes-water-play-catalog/data/pricelist_2026-05-29_priced.csv`
+- NEW `archimedes-water-play-catalog/DEPLOYMENT_LOG.md`
+- NEW `scripts/add_archimedes_pricing_config.py`
+- EDIT `scripts/seed_pricing_config.py` (+ archimedes seed block)
+- EDIT `scripts/sync_brand_prices_to_medusa.py` (+ SC map entry)
+- EDIT `docs/summaries/pricing-config-master.md`, `docs/build-summary.html`, `VERSION`,
+  `.claude/PROGRESS.md`
+
+### Outcome
+- Success. 34 SKUs priced + written to `vendors/archimedes-water-play/products`; audit doc
+  status → completed; brand config + sales channel landed. `verify.sh` 0 FAIL.
+- **Version note:** rebased onto `origin/main` (2.40.0 after WePlay #61, Vortex #62, 4soft #63);
+  renumbered to **2.41.0** (next free minor). The Firestore audit doc
+  `landed_pricing_status` still reads "completed (v2.38.0)" — the version at write time.
+
+---
+
+## [2.40.0] - 2026-05-29
+
+### Added — 4soft EPDM-graphics 2025 pricelist ingested (2,410 EUR SKUs)
+
+Parsed and priced the **4soft 2025 EPDM-graphics pricelist** (`.xls`,
+`2025-06-25 4soft_EPDM_graphics-price_list_2025.xls`, valid 2025-03-01) and
+ingested it as a first-class EUR-FOB brand following the **Berliner EXW
+pattern**.
+
+#### Reconciliation decision (Step 4) — new brand, NOT the EPDM/Infill pricer
+
+The task flagged the existing **EPDM/Infill CFH pricer** (v2.10.0 —
+`products_epdm`/`products_infill`, area-priced THB/m², CFH lookup contract,
+`scripts/sync_epdm_pricelist.py`) as a possible overlap. **There is no
+overlap:**
+
+- The EPDM/Infill pricer is **generic wet-pour surfacing** (SBR granule,
+  Sand/Rubber infill, Miroad, Eurosia Non-UV/UV, TPV) sourced from the
+  "EPDM 2024 / Pricelist" Google Sheet — priced **per m² of installed area**
+  at a thickness, with a `cfh_m` field for the storefront CFH pricer. It is
+  **not** 4soft-branded.
+- The 4soft `.xls` is **2,410 discrete, per-item EUR SKUs** — moulded-EPDM
+  3D play elements (animals, shapes, tunnels, furniture, fountains) and 2D
+  markings (hopscotch, numbers/letters, footprints). Single "POHODA" sheet
+  (Czech accounting export); columns code / name / `Target SALE price EUR`.
+  **No per-m² surfacing section, no CFH.**
+
+The 4soft `.xls` is the **authoritative pricelist for the existing 4soft
+Medusa brand** (sales channel `sc_01KNQAA4A8SF4ZT9S8N0AHGY3Y`; 391 SKUs
+scraped from 4soft.cz in earlier work, previously **unpriced**). Decision:
+add a **`brands.4soft`** config (NOT extend the EPDM pricer), price all 2,410
+SKUs through the shared landed pipeline, and leave the wet-pour pricer
+untouched. The CFH/per-m² contract is fully preserved.
+
+#### Trade terms (Step 3) — EXW, EUR, EU/Czech origin
+
+- 4soft, s.r.o. is **Czech** (Tanvald, CZ — EU origin, VAT CZ28703324), prices
+  in **EUR**, terms **EXW** (`2019-11-26 Price conditions 2020` PDF). Basic
+  **reseller discount 15%** off list (+5% for orders >€2,500, +2.5% prepay,
+  min €5k/yr turnover — order-specific, not baked into catalog cost).
+- Gmail (eukrit@goco.bz) confirms 4soft is an active vendor (roger@4soft.cz,
+  graphics@4soft.cz); recent quotes seen EXW and project-CFR Bangkok. No email
+  superseding the 15% basic EXW discount surfaced. A *"Our Pricing for 2026"*
+  newsletter exists (2026-04-01) — **follow-up: confirm 2026 discount/pricelist.**
+- **User decisions (2026-05-29):** gross margin **40%**; bake **15% basic EXW**
+  discount only (`eur_fob = list × 0.85`); price the 391 existing Medusa
+  variants now + spawn a follow-up to scrape the ~2,020 missing SKUs.
+
+#### Cost structure (same shared pipeline as Vinci/Berliner/Rampline)
+
+`eur_fob = list_eur × 0.85` → EUR→THB FX → landed THB via shipping-automation
+`cost_engine` (LCL EU, Baltic-rate calibration) → **10% Thai duty**, **7%
+import VAT** on (CIF+duty), tiered logistics floor/cap → retail. Independent
+THB/USD/EUR/SGD; **7% TH customer VAT embedded in `retail_thb` only**; SG GST
+gated on `sg_nubo_gst_registered` (off). No published dims yet → all rows use
+the flat-35%-uplift path; the tier-0 floor (×1.80) re-bounds the many cheap 2D
+items (**2,265 / 2,410 floored**). FX snapshot this run: USD 33.25, EUR 38.71,
+SGD 26.04 (exchangerate-api.com live, +2% buffer).
+
+#### Files & outcomes
+
+- **`foursoft-catalog/import_pricelist.py`** (new) — parses the `.xls`
+  (`xlrd`), applies EXW 15%, computes landed/retail via the shared pipeline
+  with `brand="4soft"`, writes `vendors/4soft/products`, and self-seeds
+  `brands.4soft` into `pricing_config/canonical` via a safe read-modify-write
+  merge (never a full `--force` reseed). Emits a committed parsed CSV +
+  landed CSV.
+- **`foursoft-catalog/data/pricelist_2025-03-01.csv`** (new) — in-repo parsed
+  source of truth (2,410 rows: code, name, list_eur, section, dimension,
+  product_group, unit).
+- **`foursoft-catalog/data/pricelist_2025-03-01_landed.csv`** (new) — full
+  landed-cost / retail audit trail.
+- **`scripts/sync_brand_prices_to_medusa.py`** — added `4soft` →
+  `sc_01KNQAA4A8SF4ZT9S8N0AHGY3Y` to the SC map.
+- **`scripts/seed_pricing_config.py`** — added the `brands.4soft` block
+  (gm 0.40, exw 0.15) so a future `--force` reseed includes it.
+- **`docs/summaries/pricing-config-master.md`** — new §4f (4soft brand),
+  §6f formula, §11 script row, §12 version-history row.
+- **Firestore `vendors/4soft/products`:** wrote **2,410** docs (**2,033 new**,
+  377 updated existing). Vendor root `product_count = 2410`.
+- **Firestore `pricing_config/canonical.brands.4soft`:** seeded (gm 0.40,
+  exw 0.15, EXW, EU/Czech).
+- **Medusa:** matched **377 / 2,410** vendor docs to existing 4soft variants
+  by SKU (= item_code); **updated 377 variants, 0 errors** (THB/USD/EUR/SGD).
+  The **2,033 unmatched** are pricelist-only — not yet Medusa products
+  (`sync_brand_prices_to_medusa.py` is update-only by design). **Follow-up:
+  scrape the ~2,020 missing SKUs from 4soft.cz, then create + price them.**
+
+Spot-check: `4soft-a1-01a-00` ("Circle 18 cm", list €20) → retail ฿2,112.30 /
+$59.37 / €51.00 / S$75.80 (live in Medusa).
+---
+
 ## [2.39.0] - 2026-05-29
 
 ### Added — WePlay landed-cost retail pricing (THB/USD/SGD) + Medusa sync
@@ -306,7 +619,6 @@ carries no dimensions) — same as DesignPark / WePlay.
   Medusa under that form (price-only-in-Firestore until reconciled). All four
   currencies (THB/USD/EUR/SGD) verified on synced variants — USD region
   (Asia-Pacific) serves Vortex correctly.
-
 ## [2.37.0] - 2026-05-29
 
 ### Added — AI enrichment of Wisdom / Leka Project specs + Toys category
