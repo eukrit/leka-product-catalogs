@@ -1,5 +1,52 @@
 # Vortex Aquatics Catalog — Deployment Log
 
+## v0.2.0 — 2026-05-29 (leka-product-catalogs v2.38.0)
+
+### Added — 2026 USD pricelist ingestion + per-product-line reseller discounts
+
+Parsed the **Vortex 2026 USD Price List R2** (`2026-04-22 Vortex 2026_USD_Price
+List_R2 (1).pdf`, released Feb 2026) — **311 SKUs / 22 collections** — into
+`vendors/vortex/products` (vendors DB) with the shared landed-cost pipeline,
+then synced multi-currency retail to Medusa.
+
+**Trade terms (confirmed from `eukrit@goco.bz` Gmail "Pricelist 2026" thread):**
+EXW Pointe-Claire, Quebec, **Canada**, USD. Non-China → 10% Thai import duty.
+
+**Per-product-line reseller discounts (USD):** Splashpad 25% · Poolplay 15% ·
+Spraypoint 25% · Elevations 15% · WQMS 15% · Water Journey 20% · Water Slides
+15%. **CoolHub 0%** (user decision — not in the reseller agreement). SmartPoint
+→ Splashpad 25%; PlayNuk → Elevations 15%. (Discount table cross-checked by OCR
+of the image Vortex shared in-thread — exact match to the confirmed structure.)
+
+**Pricing:** `our_cost_usd = list_usd × (1 − line_discount)` → flat-uplift CIF
+(1.35) + 10% duty + 7% import VAT + Vinci tier clamp → landed THB. Independent
+retail THB/USD/EUR/SGD; `gross_margin = 0.35`. `formula_version = vortex-v1-2026-05-29`.
+
+### Files added / changed
+
+- [vortex-catalog/vortex_config.py](vortex_config.py) (new) — canonical
+  `LINE_DISCOUNTS`, `COLLECTION_TO_LINE` (22 collections), `GROSS_MARGIN`,
+  origin/terms, `brand_config()`. Shared with `scripts/seed_pricing_config.py`.
+- [vortex-catalog/import_pricelist.py](import_pricelist.py) (new) — pdfplumber
+  parser → `price_vortex_row()` → `vendors/vortex/products`; deep-merges
+  `brands.vortex` into `pricing_config/canonical`. `--dry-run`/`--apply`/`--dump-csv`.
+- `scripts/sync_brand_prices_to_medusa.py` — `vortex` → SC `sc_01KPRY1T8HZJ57020JPZVGAKZK`.
+- `scripts/seed_pricing_config.py` — `vortex` brand block (from `vortex_config`).
+- `docs/summaries/pricing-config-master.md` — §4f, §6f, version history.
+
+### Outcome
+
+- Firestore `vendors/vortex/products`: **311** priced docs (splashpad 236,
+  elevations 26, water_journey 25, coolhub 18, poolplay 6).
+- Medusa: **295 / 311** variants updated (94.9% by `VOR-…` SKU; 0 errors). 16
+  unmatched = stainless `VOR-…-304L` SmartPoint SKUs absent from Medusa. All
+  four currencies (THB/USD/EUR/SGD) verified on synced variants.
+
+**Note:** the formal reseller discount structure was requested from Vortex on
+2026-05-29 (out-of-office reply until June 1); the percentages used here are
+the user-confirmed structure (matching the image Eukrit shared in-thread).
+Re-confirm with Vortex's written reply when received.
+
 ## v0.1.0 — 2026-04-21
 
 ### Added — initial brand scaffold

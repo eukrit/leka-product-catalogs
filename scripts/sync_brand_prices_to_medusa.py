@@ -44,6 +44,7 @@ SC: dict[str, str] = {
     "berliner":   "sc_01KNQAA3QDYHP15Y9K4PPRMDF0",
     "designpark": "sc_01KRRK0N4ET8QZHX6QB3KZ84YD",
     "wisdom":     "sc_01KNKTHC0B7KFEDSZ3NNM49JQW",  # rebranded "Leka Project"
+    "vortex":     "sc_01KPRY1T8HZJ57020JPZVGAKZK",  # Vortex Aquatics (VOR-… SKUs)
 }
 _CCY = (("retail_thb", "thb"), ("retail_usd", "usd"),
         ("retail_eur", "eur"), ("retail_sgd", "sgd"))

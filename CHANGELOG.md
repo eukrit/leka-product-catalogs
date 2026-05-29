@@ -4,6 +4,74 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.38.0] - 2026-05-29
+
+### Added — Vortex Aquatics 2026 USD pricelist ingestion + per-product-line reseller discounts
+
+Ingested Vortex's **2026 USD Price List (R2, released Feb 2026)** — 311 SKUs
+across 22 collections — into `vendors/vortex/products` with the shared
+landed-cost pipeline, then synced multi-currency retail to Medusa.
+
+Vortex's reseller discount is **per product LINE**, not a flat brand discount.
+The engine maps each pricelist *Collection* to one of Vortex's top-level
+product lines and applies that line's confirmed USD discount before the
+landed-cost pipeline runs.
+
+#### Reseller terms (cross-checked from the supplier Gmail thread, 2026-05-29)
+
+- **Origin / trade terms:** EXW Pointe-Claire, Quebec, **Canada**, USD
+  (Vortex Aquatic Structures International). Non-China origin → 10% Thai import
+  duty. Confirmed via the ECU Worldwide freight quote ("EXW. Term", shipper
+  VORTEX Pointe-Claire) in `eukrit@goco.bz`'s mailbox.
+- **Per-line reseller discounts (USD)** — confirmed by OCR of the discount
+  table Vortex shared in the "Pricelist 2026" thread, exact match to the
+  user-provided structure:
+  Splashpad 25% · Poolplay 15% · Spraypoint 25% · Elevations 15% · WQMS 15% ·
+  Water Journey 20% · Water Slides 15%.
+- **User mapping decisions (2026-05-29):** CoolHub™ → its own line, **0%**
+  (not covered by the reseller agreement; our cost = full list); SmartPoint /
+  Smartpoint N°4 → classified under **Splashpad 25%**; PlayNuk™ → grouped with
+  **Elevations 15%** (per Vortex's own "Elevations™ & PlayNuk™" taxonomy).
+
+#### Pricing model
+
+`our_cost_usd = list_usd × (1 − line_discount)`, then flat-uplift CIF (1.35) +
+10% non-China duty + 7% import VAT + Vinci tier floor/cap clamp → landed THB.
+Retail derived independently per currency: `retail_thb = (landed/(1−gm))×1.07`
+(TH customer VAT, THB only); `retail_usd/eur/sgd` from the same landed cost.
+`gross_margin = 0.35` (matches the other USD-FOB import brands; editable via
+the pricing-config form). Every SKU uses the flat-uplift path (the pricelist
+carries no dimensions) — same as DesignPark / WePlay.
+
+#### Files
+
+- `vortex-catalog/vortex_config.py` (new) — canonical maps: `GROSS_MARGIN`,
+  `LINE_DISCOUNTS` (7 lines + CoolHub 0%), `COLLECTION_TO_LINE` (22 collections),
+  origin/terms, `brand_config()`. Single source of truth shared with the seeder.
+- `vortex-catalog/import_pricelist.py` (new) — pdfplumber PDF parser →
+  `price_vortex_row()` → `vendors/vortex/products`; deep-merges `brands.vortex`
+  into `pricing_config/canonical` (mirrors WePlay's `brands.weplay seed`).
+  `--dry-run` / `--apply` / `--dump-csv` / `--skip-config`.
+- `scripts/sync_brand_prices_to_medusa.py` — added `vortex` →
+  `sc_01KPRY1T8HZJ57020JPZVGAKZK` (SKUs `VOR-<zero-padded code>`).
+- `scripts/seed_pricing_config.py` — added the `vortex` brand block (imported
+  from `vortex_config`) so a future `--force` re-seed stays complete.
+- `docs/summaries/pricing-config-master.md` — new §4f Vortex brand, §6f
+  formula, version-history row.
+
+#### Outcome
+
+- Firestore: **311** priced docs in `vendors/vortex/products`; line coverage
+  splashpad 236 · elevations 26 · water_journey 25 · coolhub 18 · poolplay 6.
+- Config: `pricing_config/canonical.brands.vortex` merged (other brands intact).
+- Medusa: **295 / 311** variants updated (94.9% match by `VOR-…` SKU; 0 errors).
+  The 16 unmatched are stainless `VOR-…-304L` SmartPoint SKUs absent from
+  Medusa under that form (price-only-in-Firestore until reconciled). All four
+  currencies (THB/USD/EUR/SGD) verified on synced variants — USD region
+  (Asia-Pacific) serves Vortex correctly.
+
+---
+
 ## [2.37.0] - 2026-05-29
 
 ### Added — AI enrichment of Wisdom / Leka Project specs + Toys category
