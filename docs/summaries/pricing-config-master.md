@@ -1,6 +1,6 @@
 # Leka Product Catalogs — Pricing Configuration Master Reference
 
-> **Last updated:** 2026-05-25 (v2.33.0 — SGD region created)
+> **Last updated:** 2026-05-29 (v2.38.0 — Vortex Aquatics added: per-product-line reseller discounts, Canada EXW USD)
 > **Source of truth:** Firestore `leka-product-catalogs/pricing_config/canonical`
 > **Editor UI:** `docs/forms/pricing-config.html` (served at `gateway.goco.bz/leka-product-catalogs/forms/pricing-config.html`)
 > **Code files:** `shared/pricing_config.py`, `shared/landed_pricing.py`, `shared/wisdom_pricing.py`
@@ -118,6 +118,44 @@ NOK_EUR  = 0.087  # rampline-catalog/import_pricelist.py
 | Weight source | `data/scraped/rampline/products.json` | Scraped from rampline.com spec blocks (`<p><br>` format). Max across product variants (conservative). |
 | Family-desc lookup | `FAMILY_DESC_TO_SLUG` map | Bridges pricelist descriptive family names to scraped product slugs. In `rampline-catalog/import_pricelist.py`. Fixed v2.32.0. |
 | Duty | 10% | `duty_rate_non_china` global |
+
+### 4f. Vortex Aquatics (`brands.vortex`)
+
+Vortex's reseller discount is **per product LINE**, not a single brand discount.
+The importer maps each pricelist *Collection* → top-level product line, then
+applies that line's USD discount to the list price to get our EXW cost.
+
+| Key | Value | Description |
+|-----|-------|-------------|
+| `gross_margin` | **0.35** | 35% GM (matches DesignPark / global default). |
+| `origin` | `canada` | EXW Pointe-Claire, Quebec — non-China → 10% duty. |
+| `currency` | `USD` | Pricelist is USD; `our_cost_usd = list_usd × (1 − line_discount)`. |
+| Trade terms | EXW Canada (USD) | Confirmed from supplier Gmail thread + ECU Worldwide freight quote. |
+| Shipping | Flat-uplift (no CBM in pricelist) | `cif = fob × 1.35`; same path as DesignPark/WePlay. |
+| Duty | 10% | `duty_rate_non_china` global (Canada not FTA). |
+
+**Per-line reseller discounts** (`brands.vortex.line_discounts`, all USD):
+
+| Line | Discount | | Line | Discount |
+|------|----------|-|------|----------|
+| `splashpad` | 25% | | `elevations` | 15% |
+| `poolplay` | 15% | | `wqms` | 15% |
+| `spraypoint` | 25% | | `water_journey` | 20% |
+| `water_slides` | 15% | | `coolhub` | **0%** (user decision 2026-05-29) |
+
+**Collection → line map** (`brands.vortex.collection_to_line`, 22 collections):
+Splashpad ← Essentials, Classic, Contemporary, Toons, Vectory, Explora,
+Watergarden, Ground Sprays, Spraylink, Sea Silhouette, Nautical, Fine Mist,
+Playable Fountain, Custom Items, **SmartPoint, Smartpoint N°4** (user 2026-05-29:
+Spraypoint/Smartpoint classified as Splashpad 25%). · Poolplay ← Poolplay. ·
+Elevations ← Elevations, **Playnuk** (Vortex groups "Elevations™ & PlayNuk™"). ·
+Water Journey ← Water Journey, Lazy River. · CoolHub ← CoolHub (0%).
+
+Source of truth for the maps: `vortex-catalog/vortex_config.py` (shared by the
+importer and `seed_pricing_config.py`). Spraypoint / WQMS / Water Slides lines
+exist in the discount map but match 0 SKUs in the 2026 R2 pricelist.
+
+Code: `vortex-catalog/import_pricelist.py` `price_vortex_row()`
 
 ---
 
@@ -243,6 +281,25 @@ retail_usd = landed_usd / (1 - 0.30)
 retail_sgd = landed_sgd / (1 - 0.30)
 ```
 Code: `rampline-catalog/import_pricelist.py`; `shared/landed_pricing.py` `price_row(brand="rampline")`
+
+### 6f. Vortex Aquatics (Canada EXW, USD — per-line reseller discount)
+```python
+line       = collection_to_line(collection)        # 22 collections → 7 lines
+line_disc  = line_discounts[line]                  # e.g. splashpad 0.25, coolhub 0.0
+our_cost_usd = list_usd × (1 − line_disc)          # EXW cost we pay Vortex
+fob_usd    = our_cost_usd
+fob_thb    = fob_usd × USD_THB
+cif_thb    = fob_thb × 1.35                         # flat-uplift (no CBM in pricelist)
+duty_thb   = cif_thb × 0.10                          # non-China (Canada)
+vat_thb    = (cif_thb + duty_thb) × 0.07
+landed_thb = cif_thb + duty_thb + vat_thb
+             → TIER CLAMP applied (USD→EUR-equiv band, §7)
+retail_thb = (landed_thb / (1 − 0.35)) × 1.07        # TH customer VAT
+retail_usd = (landed_thb / USD_THB) / (1 − 0.35)     # independent, no TH VAT
+retail_sgd = (landed_thb / SGD_THB) / (1 − 0.35)     # × SG GST mult when registered
+```
+Code: `vortex-catalog/import_pricelist.py` `price_vortex_row()`;
+maps in `vortex-catalog/vortex_config.py`
 
 ---
 
@@ -389,8 +446,9 @@ Singapore region. No `region_id` override needed — currency match is sufficien
 - **When Nubo registers for SG GST**: set `sg_nubo_gst_registered=true` in
   `pricing_config/canonical.global`, re-run `backfill_sgd_pricing.py --brand all --write`,
   then re-run `sync_brand_prices_to_medusa.py --brand all --write`.
-- **When 4soft/Weplay/Vortex have pricelists** (~9k coverage): create a full SGD
-  pricing pass for those brands, then these brands can also sell into SG region.
+- **Vortex** now has full multi-currency pricing incl. SGD (v2.38.0). **When
+  4soft has a pricelist**: create a full SGD pricing pass for it, then it can
+  also sell into SG region.
 
 ---
 
@@ -439,6 +497,7 @@ These **must stay in sync** with `scripts/seed_pricing_config.py`:
 | `rampline-catalog/import_pricelist.py` | Parse Rampline NOK pricelist → Firestore `vendors/rampline/pricelists/<date>` | When source pricelist updated |
 | `vinci-catalog/import_pricelist.py` | Parse Vinci EUR pricelist → Firestore `vendors/vinci/products` | When source pricelist updated |
 | `berliner-catalog/import_pricelist.py` | Parse Berliner EUR CSV → Firestore `vendors/berliner/products` | When source pricelist updated |
+| `vortex-catalog/import_pricelist.py --apply` | Parse Vortex 2026 USD PDF → Firestore `vendors/vortex/products` + merge `brands.vortex` config | When source pricelist updated |
 
 ---
 
@@ -446,6 +505,7 @@ These **must stay in sync** with `scripts/seed_pricing_config.py`:
 
 | Version | Date | Change |
 |---------|------|--------|
+| v2.38.0 | 2026-05-29 | Add **Vortex Aquatics** (`brands.vortex`): per-product-LINE reseller discounts (Splashpad 25% / Poolplay 15% / Spraypoint 25% / Elevations 15% / WQMS 15% / Water Journey 20% / Water Slides 15% / CoolHub 0%), Canada EXW USD, 311 SKUs ingested, 295 synced to Medusa. Maps in `vortex-catalog/vortex_config.py`. |
 | v2.33.0 | 2026-05-25 | Create Medusa Singapore SGD region (`reg_01KSEBH1EAK9RWAYEW87QY8NWS`); move `sg` out of Asia-Pacific USD; re-sync all brand prices |
 | v2.32.0 | 2026-05-24 | Rampline weight scraper fix: `<p><br>` spec parsing + `FAMILY_DESC_TO_SLUG` map. 32/127 Rampline SKUs now use `airfreight_weight` routing (was 0 before) |
 | v2.31.0 | 2026-05-24 | Fix Wisdom duty 7%→0% (ASEAN-China FTA); add 7% TH customer VAT to all retail prices; Korea/China/Norway shipping-automation CBM routes; currency-independent retail calculations (THB/USD/SGD each from source FOB) |
