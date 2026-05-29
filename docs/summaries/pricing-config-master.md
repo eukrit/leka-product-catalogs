@@ -1,6 +1,6 @@
 # Leka Product Catalogs — Pricing Configuration Master Reference
 
-> **Last updated:** 2026-05-29 (v2.39.0 — WePlay brand added: Taiwan FOB net USD, CBM-driven sea LCL)
+> **Last updated:** 2026-05-29 (v2.40.0 — 4soft EPDM-graphics brand added; v2.39.0 — WePlay)
 > **Source of truth:** Firestore `leka-product-catalogs/pricing_config/canonical`
 > **Editor UI:** `docs/forms/pricing-config.html` (served at `gateway.goco.bz/leka-product-catalogs/forms/pricing-config.html`)
 > **Code files:** `shared/pricing_config.py`, `shared/landed_pricing.py`, `shared/wisdom_pricing.py`, `weplay-catalog/import_pricelist.py`
@@ -170,6 +170,25 @@ Code: `vortex-catalog/import_pricelist.py` `price_vortex_row()`
 | Duty | **10%** | Taiwan-origin, non-FTA. |
 | Code | `weplay-catalog/import_pricelist.py` | Parses the PDF, writes `pricing.retail_thb/usd/sgd` to `vendors/weplay/products` by SKU-token match; synced to Medusa SC `sc_01KR6Z0VBSXWYZDVGF30EAP0EQ`. **189 SKUs.** |
 
+### 4h. 4soft (`brands.4soft`) — added v2.40.0
+
+4soft, s.r.o. (Tanvald, **Czech Republic**, VAT CZ28703324) makes discrete
+moulded-EPDM play elements — 3D animals/shapes/tunnels/furniture/fountains and
+2D markings (hopscotch, numbers/letters, footprints). **Per-item EUR SKUs**,
+NOT the area-priced wet-pour surfacing pricer (`products_epdm`/`products_infill`,
+`scripts/sync_epdm_pricelist.py`, CFH lookup contract — a separate system).
+Same shape as Berliner (EU EXW). Sales channel `sc_01KNQAA4A8SF4ZT9S8N0AHGY3Y`.
+
+| Key | Value | Description |
+|-----|-------|-------------|
+| `gross_margin` | **0.40** | 40% GM. User decision 2026-05-29 (no GM was previously documented). |
+| `exw_discount` | **0.15** | Our cost = `list_eur × (1 - 0.15)`. Basic reseller discount, "Price conditions 2020" PDF. |
+| Trade terms | EXW Czech/EU | `eur_fob = list_eur × 0.85`. (+5% >€2,500, +2.5% prepay are order-specific — NOT in catalog cost.) |
+| Shipping | LCL EU → Laem Chabang | `cost_engine` `origin=europe, method=lcl`. No published dims yet → flat 35% uplift; tier-0 floor (×1.80) re-bounds cheap 2D items (2,265/2,410 floored). |
+| Duty | 10% | `duty_rate_non_china` global |
+| Source | `foursoft-catalog/data/pricelist_2025-03-01.csv` | Parsed from `4soft_EPDM_graphics-price_list_2025.xls` (valid 2025-03-01). 2,410 priced SKUs. |
+| Firestore | `vendors/4soft/products` | All 2,410 priced. Medusa: 377 existing variants priced; ~2,033 pricelist-only pending a 4soft.cz scrape. |
+
 ---
 
 ## 5. Tax Rules
@@ -315,6 +334,22 @@ retail_sgd = (landed_thb / SGD_THB) / (1 − 0.35)     # × SG GST mult when reg
 ```
 Code: `vortex-catalog/import_pricelist.py` `price_vortex_row()`;
 maps in `vortex-catalog/vortex_config.py`
+
+### 6g. 4soft (EU EXW, EUR) — added v2.40.0
+```python
+eur_fob    = list_eur × (1 - 0.15)      # EXW-15% reseller discount
+fob_thb    = eur_fob × EUR_THB
+cif_thb    = fob_thb × 1.35              # flat-uplift (no published dims yet)
+duty_thb   = cif_thb × 0.10
+vat_thb    = (cif_thb + duty_thb) × 0.07
+landed_thb = cif_thb + duty_thb + vat_thb
+             → TIER CLAMP applied (see §7); most cheap 2D items hit the floor
+retail_thb = (landed_thb / (1 - 0.40)) × 1.07   # 40% GM + TH customer VAT
+retail_usd = (landed_thb / USD_THB) / (1 - 0.40)
+retail_eur = (landed_thb / EUR_THB) / (1 - 0.40)
+retail_sgd = (landed_thb / SGD_THB) / (1 - 0.40)   # ×(1+GST) when Nubo registered
+```
+Code: `foursoft-catalog/import_pricelist.py` (self-contained, mirrors Berliner).
 
 ---
 
@@ -513,6 +548,7 @@ These **must stay in sync** with `scripts/seed_pricing_config.py`:
 | `vinci-catalog/import_pricelist.py` | Parse Vinci EUR pricelist → Firestore `vendors/vinci/products` | When source pricelist updated |
 | `berliner-catalog/import_pricelist.py` | Parse Berliner EUR CSV → Firestore `vendors/berliner/products` | When source pricelist updated |
 | `vortex-catalog/import_pricelist.py --apply` | Parse Vortex 2026 USD PDF → Firestore `vendors/vortex/products` + merge `brands.vortex` config | When source pricelist updated |
+| `foursoft-catalog/import_pricelist.py` | Parse 4soft EUR `.xls` (EXW 15%) → Firestore `vendors/4soft/products` + seed `brands.4soft` | When source pricelist updated |
 
 ---
 
@@ -520,6 +556,7 @@ These **must stay in sync** with `scripts/seed_pricing_config.py`:
 
 | Version | Date | Change |
 |---------|------|--------|
+| v2.40.0 | 2026-05-29 | Add **`brands.4soft`** (EU EXW, EUR; GM 40%, EXW discount 15%). Ingest 2025 EPDM-graphics `.xls` → 2,410 priced SKUs in `vendors/4soft`; 377 existing Medusa variants priced. Reconciled as a NEW brand (no overlap with the separate wet-pour EPDM/Infill CFH pricer) |
 | v2.39.0 | 2026-05-29 | Add **WePlay** brand (Taiwan/USD, GM 0.50, duty 0.10, sea LCL 5500 THB/CBM). `weplay-catalog/import_pricelist.py` computes landed THB/USD/SGD retail for 189 SKUs from quotation AQ1251030077 (CBM-driven freight `per_unit_cbm = carton_cbm/pack`); synced to Medusa |
 | v2.38.0 | 2026-05-29 | Add **Vortex Aquatics** (`brands.vortex`): per-product-LINE reseller discounts (Splashpad 25% / Poolplay 15% / Spraypoint 25% / Elevations 15% / WQMS 15% / Water Journey 20% / Water Slides 15% / CoolHub 0%), Canada EXW USD, 311 SKUs ingested, 295 synced to Medusa. Maps in `vortex-catalog/vortex_config.py`. |
 | v2.33.0 | 2026-05-25 | Create Medusa Singapore SGD region (`reg_01KSEBH1EAK9RWAYEW87QY8NWS`); move `sg` out of Asia-Pacific USD; re-sync all brand prices |
