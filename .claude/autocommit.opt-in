@@ -1,0 +1,12 @@
+# Autocommit opt-in marker (Claude Process Standards Rule 5, SOP rev4+).
+#
+# The presence of this file opts leka-product-catalogs INTO the Stop-hook
+# automation in scripts/auto-commit-and-merge.sh: after a turn that edits code
+# and passes verify.sh, Claude auto-commits, pushes, waits on the CI gate
+# (scripts/check-ci-status.sh), and admin-squash-merges feature-branch PRs only
+# when CI is green. Collaborator PRs still require CODEOWNERS review (Rule 11).
+#
+# Opt OUT per-turn by saying "draft only" / "don't push" / "don't commit" /
+# "hold off". Remove this file to opt the whole project back out.
+#
+# Enabled: 2026-05-29 (by user request).
