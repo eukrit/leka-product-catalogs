@@ -1,0 +1,107 @@
+{
+  "generated_at": "2026-05-29T19:50:05.653770Z",
+  "dry_run": false,
+  "totals": {
+    "updated": 16,
+    "skipped": 8,
+    "failed": 0
+  },
+  "log": [
+    {
+      "handle": "eurotramp-grand-master",
+      "status": "updated",
+      "thumb_changed": true,
+      "images_added": 2
+    },
+    {
+      "handle": "eurotramp-ground-trampoline-indoor",
+      "status": "updated",
+      "thumb_changed": true,
+      "images_added": 1
+    },
+    {
+      "handle": "eurotramp-ground-trampoline-outdoor",
+      "status": "updated",
+      "thumb_changed": true,
+      "images_added": 0
+    },
+    {
+      "handle": "eurotramp-impact-protection-system",
+      "status": "updated",
+      "thumb_changed": true,
+      "images_added": 4
+    },
+    {
+      "handle": "eurotramp-kids-tramp-track-playground",
+      "status": "updated",
+      "thumb_changed": true,
+      "images_added": 5
+    },
+    {
+      "handle": "eurotramp-master",
+      "status": "updated",
+      "thumb_changed": true,
+      "images_added": 2
+    },
+    {
+      "handle": "eurotramp-mats-tramp",
+      "status": "updated",
+      "thumb_changed": true,
+      "images_added": 1
+    },
+    {
+      "handle": "eurotramp-open-end-minitramp",
+      "status": "updated",
+      "thumb_changed": true,
+      "images_added": 3
+    },
+    {
+      "handle": "eurotramp-sport-thieme-adventure-tramp",
+      "status": "updated",
+      "thumb_changed": true,
+      "images_added": 1
+    },
+    {
+      "handle": "eurotramp-teamgym",
+      "status": "updated",
+      "thumb_changed": true,
+      "images_added": 1
+    },
+    {
+      "handle": "eurotramp-ultimate",
+      "status": "updated",
+      "thumb_changed": true,
+      "images_added": 2
+    },
+    {
+      "handle": "eurotramp-ultimate-dmt-6x6",
+      "status": "updated",
+      "thumb_changed": true,
+      "images_added": 1
+    },
+    {
+      "handle": "eurotramp-ultimate-freestyle",
+      "status": "updated",
+      "thumb_changed": true,
+      "images_added": 0
+    },
+    {
+      "handle": "eurotramp-underwater-trampoline",
+      "status": "updated",
+      "thumb_changed": true,
+      "images_added": 1
+    },
+    {
+      "handle": "eurotramp-wehrfritz-fun-round",
+      "status": "updated",
+      "thumb_changed": true,
+      "images_added": 1
+    },
+    {
+      "handle": "eurotramp-wehrfritz-fun-xl-playground",
+      "status": "updated",
+      "thumb_changed": true,
+      "images_added": 1
+    }
+  ]
+}

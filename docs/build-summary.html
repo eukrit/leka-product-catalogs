@@ -32,10 +32,10 @@
   <div class="latest-card">
     <h2 style="margin-top:0;border:0">Latest build</h2>
     <p>
-      Version <strong>2.44.0</strong> &middot; 2026-05-30 &middot;
-      <span class="badge badge-success">success</span>
+      Version <strong>2.45.0-dryrun</strong> &middot; 2026-05-30 &middot;
+      <span class="badge badge-pending">dry-run</span>
     </p>
-    <p>4soft 2D ground markings created in Medusa (1,553 new drafts + 247 updated) — catalog now 2,394/2,410 priced (99.3%); 16 packaging/accessory SKUs deliberately excluded.</p>
+    <p>4soft pricing pivot from sea-LCL to <strong>air freight</strong> with chargeable-weight handling (volumetric kg = cbm × 167). Engine + importer changed, 26/26 tests pass, 3 dry-runs at 90 / 105 / 135 THB/kg produced. <strong>Firestore + Medusa untouched</strong> pending user review of the diff doc (<a href="../foursoft-catalog/data/air-freight-dryrun-diff-2026-05-30.md">air-freight-dryrun-diff-2026-05-30.md</a>).</p>
     <p>
       <a href="CHANGELOG.md">Full build log</a> &middot;
       <a href="PROJECT_INDEX.md">Project index</a>
@@ -46,6 +46,7 @@
   <table>
     <thead><tr><th>Version</th><th>Date</th><th>Summary</th><th>Status</th></tr></thead>
     <tbody>
+      <tr><td><code>2.45.0-dryrun</code></td><td>2026-05-30</td><td>4soft pricing pivot sea-LCL → air freight (chargeable-weight). Engine + importer changed; 3 dry-runs at 90/105/135 THB/kg; Firestore untouched pending user review.</td><td><span class="badge badge-pending">dry-run</span></td></tr>
       <tr><td><code>2.44.0</code></td><td>2026-05-30</td><td>4soft 2D ground markings created in Medusa (1,553 new drafts + 247 updated); catalog 2,394/2,410 priced (99.3%).</td><td><span class="badge badge-success">success</span></td></tr>
       <tr><td><code>2.43.0</code></td><td>2026-05-29</td><td>4soft product images from picture-pricelist PDF — 989 extracted → GCS, 1,635/2,410 imaged (67.8%), 419 synced to Medusa.</td><td><span class="badge badge-success">success</span></td></tr>
       <tr><td><code>2.42.0</code></td><td>2026-05-29</td><td>4soft 3D play elements created in Medusa (462 drafts + 130 renamed; 853 total) + dims-based CBM pricing on 251 SKUs.</td><td><span class="badge badge-success">success</span></td></tr>
