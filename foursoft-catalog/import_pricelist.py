@@ -87,8 +87,21 @@ TH_CUSTOMER_VAT_RATE = 0.07   # 7% TH customer VAT embedded in retail_thb
 UNMATCHED_LANDED_UPLIFT = 1.35  # 35% flat uplift on EUR-THB FOB when no CBM
 PRODUCT_CATEGORY = "playground_equipment"
 ORIGIN_ROUTE = "europe"
-METHOD = "lcl"
+METHOD = "air"                  # 2026-05-30 pivot: 4soft is Czech, ships by air (was "lcl")
 
+# Override the cost_engine's per-kg air rate for this run. None → use the engine
+# default (see shipping-automation/mcp-server/cost_engine.py ROUTE_PROFILES.europe.air).
+# Source the value from foursoft-catalog/data/air-freight-rates-2026-05-30.md; rerun
+# with the median, low, and high for sensitivity before promoting to Firestore.
+AIR_RATE_OVERRIDE_THB_PER_KG: float | None = None
+
+# IATA general cargo volumetric divisor (kg/m³). 6000 cm³/kg = 167 kg/m³.
+# Used by cost_engine when kg=0 and cbm>0 (per-SKU pricing).
+VOLUMETRIC_DIVISOR = 167
+
+# Sea-tuned clamps. Knowingly retained under the air pivot — the dry-run diff
+# is supposed to surface where the cap dominates so a follow-up PR can retune
+# with evidence (see ~/.claude/plans/goal-4soft-is-imported-hazy-mochi.md §4).
 LOGISTICS_TIERS: list[tuple[float, float, float]] = [
     (500,          0.80, 2.50),
     (2_000,        0.60, 1.80),
@@ -299,9 +312,19 @@ def price_row(row: RawRow, dim_index: dict, fx: dict, baltic: dict, packing_fact
     cbm = compute_cbm(dims, packing_factor) if dims else None
 
     if cbm and cbm > 0:
-        original = cost_engine.ROUTE_PROFILES["europe"]["methods"]["lcl"]["rates"]["per_cbm"]
+        # Per-SKU air-freight pricing. We override the engine's air method:
+        #   1. per_kg → AIR_RATE_OVERRIDE_THB_PER_KG (when set; else engine default)
+        #   2. min_charge → 0 (the 5000 THB shipment minimum doesn't apply to
+        #      per-SKU economics; it's amortized across the whole shipment)
+        # The engine derives chargeable kg from cbm via volumetric_divisor_kg_per_m3
+        # when kg=0 is passed.
+        air = cost_engine.ROUTE_PROFILES["europe"]["methods"]["air"]
+        original_rate = air["rates"]["per_kg"]
+        original_min = air["rates"].get("min_charge", 0)
         try:
-            cost_engine.ROUTE_PROFILES["europe"]["methods"]["lcl"]["rates"]["per_cbm"] = baltic["per_cbm_thb"]
+            if AIR_RATE_OVERRIDE_THB_PER_KG is not None:
+                air["rates"]["per_kg"] = AIR_RATE_OVERRIDE_THB_PER_KG
+            air["rates"]["min_charge"] = 0
             est = estimate_landed_cost(
                 origin=ORIGIN_ROUTE, method=METHOD,
                 goods_value=eur_fob, goods_currency="EUR",
@@ -309,7 +332,8 @@ def price_row(row: RawRow, dim_index: dict, fx: dict, baltic: dict, packing_fact
                 fx_rates=fx, duty_rate=p["duty_rate_non_china"],
             )
         finally:
-            cost_engine.ROUTE_PROFILES["europe"]["methods"]["lcl"]["rates"]["per_cbm"] = original
+            air["rates"]["per_kg"] = original_rate
+            air["rates"]["min_charge"] = original_min
         landed_thb = est["total_landed_thb"]
         freight_thb = est["freight"]["thb"]
         duty_thb = est["customs"]["duty_thb"]
@@ -472,6 +496,7 @@ def write_firestore(rows: list[PricedRow], fx: dict, baltic: dict) -> None:
 
 
 def main() -> int:
+    global AIR_RATE_OVERRIDE_THB_PER_KG
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--xls", type=Path, default=DEFAULT_XLS,
                     help="Source .xls. Falls back to the committed parsed CSV if absent.")
@@ -481,7 +506,17 @@ def main() -> int:
     ap.add_argument("--packing-factor", type=float, default=0.15)
     ap.add_argument("--no-seed", action="store_true",
                     help="Skip ensuring brands.4soft in pricing_config/canonical.")
+    ap.add_argument("--air-rate", type=float, default=None,
+                    help="Override THB/kg chargeable for the air method (engine default if unset).")
+    ap.add_argument("--landed-csv", type=Path, default=None,
+                    help="Override the output landed CSV path (default: data/pricelist_*_landed.csv).")
+    ap.add_argument("--load-dims", action="store_true",
+                    help="Load dim_index from Firestore even in --dry-run (read-only; needed for air-freight dry-run validation).")
     args = ap.parse_args()
+
+    if args.air_rate is not None:
+        AIR_RATE_OVERRIDE_THB_PER_KG = args.air_rate
+        log.info("Air rate override: %.2f THB/kg chargeable (was engine default)", args.air_rate)
 
     if args.xls.exists():
         log.info("Parsing .xls: %s", args.xls)
@@ -505,7 +540,10 @@ def main() -> int:
     baltic = calibrate_baltic_rate(fx)
     log.info("Baltic LCL rate: %.2f THB/CBM", baltic["per_cbm_thb"])
 
-    dim_index = {} if args.dry_run else load_dim_index()
+    if args.dry_run and not args.load_dims:
+        dim_index = {}
+    else:
+        dim_index = load_dim_index()
     priced = [price_row(r, dim_index, fx, baltic, args.packing_factor) for r in raw]
 
     by_dim: dict[str, int] = {}
@@ -520,12 +558,13 @@ def main() -> int:
     log.info("By logistics clamp: %s", by_clamp)
 
     DATA_DIR.mkdir(parents=True, exist_ok=True)
-    with LANDED_CSV.open("w", newline="", encoding="utf-8") as f:
+    out_csv = args.landed_csv if args.landed_csv else LANDED_CSV
+    with out_csv.open("w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=list(asdict(priced[0]).keys()))
         w.writeheader()
         for r in priced:
             w.writerow(asdict(r))
-    log.info("Wrote landed CSV: %s (%d rows)", LANDED_CSV, len(priced))
+    log.info("Wrote landed CSV: %s (%d rows)", out_csv, len(priced))
 
     for r in priced[:6]:
         log.info("  %s | %-32s | list €%.0f → EXW €%.0f → landed ฿%.0f → retail ฿%.0f / $%.0f / €%.0f",

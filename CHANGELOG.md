@@ -4,6 +4,59 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.45.0-dryrun] - 2026-05-30
+
+### Pivoted — 4soft pricing pipeline from sea-LCL to air-freight (dry-run only, NOT deployed)
+
+4soft is imported by air (Czech Republic → Thailand), but
+`foursoft-catalog/import_pricelist.py` was routing every SKU through the EU
+sea-LCL freight engine with `kg=0`. This release pivots the pipeline to
+air-freight with proper chargeable-weight handling. **Dry-run only — Firestore
+and Medusa untouched, no Cloud Run deploy.** Awaiting user review of the
+validation diff before promoting.
+
+- **Engine (cross-repo, `shipping-automation/mcp-server/cost_engine.py`):**
+  `calc_freight` air branch now derives a chargeable kg from CBM (volumetric =
+  cbm × 167 kg/m³, IATA general cargo) when `kg=0` is passed. Adds
+  `volumetric_divisor_kg_per_m3` knob to the EU air method. Fixes stale
+  `VENDOR_COUNTRY_MAP["4soft"] = "china"` → `"europe"`.
+- **Importer (`foursoft-catalog/import_pricelist.py`):** `METHOD="lcl"` →
+  `"air"`. Adds `--air-rate <THB/kg>`, `--landed-csv <path>`, and `--load-dims`
+  CLI flags so the dry-run can pull dim_index from Firestore (520 docs indexed)
+  and override the rate per run. Overrides cost_engine's air `per_kg` for the
+  call window and zeroes `min_charge` (per-SKU pricing — the 5 000 THB shipment
+  minimum is amortized across the whole shipment, not per item).
+- **Rate research:** new file `foursoft-catalog/data/air-freight-rates-2026-05-30.md`.
+  No public PRG→BKK spot quote; used 6 backhaul-relevant data points (Xeneta
+  Europe-origin avg, WorldACD week-18 and April global yields, FreightAmigo
+  FRA→HKG, TH→EU reverse proxy, Suaid EU→USA). Low **90**, median **105**
+  (recommended), high **135** THB/kg chargeable, all-in.
+- **Dry-runs:** 3 runs at 90 / 105 / 135 THB/kg. Outputs:
+  `foursoft-catalog/data/pricelist_2025-03-01_landed_AIR-DRYRUN-{lo,mid,hi}.csv`.
+  Diff doc: `foursoft-catalog/data/air-freight-dryrun-diff-2026-05-30.md`.
+  - `flat_uplift` rows (2 159 / 2 410) are byte-identical to the current sea
+    landed CSV — 0 diffs. The `else` branch was intentionally untouched.
+  - **92 `dims_scaled` rows** move user-facing prices (most by ±5%; one
+    representative — V1-03B-001 3D Bench PLAY — drops -11.7% because the LCL
+    18 000 THB clearance fee was dominating). High-CBM 3D items shift ±1%.
+  - **134 capped + 2 069 floored** rows are unchanged at the user level — the
+    sea-tuned clamps still bind. Cap count fell 167 → 134 (–20%) because air's
+    3 800 THB clearance is much lower than LCL's 18 000 THB.
+- **`LOGISTICS_TIERS`** intentionally left at the current sea-tuned values
+  (`0.80–2.50` at tier 1, etc.). The dry-run produces the evidence needed for
+  a follow-up PR to retune them with real numbers.
+- **Tests:** new `TestAirFreightChargeable` class with 7 cases in
+  `shipping-automation/tests/test_pricing_engine.py` (volumetric fallback,
+  actual-kg precedence, min_charge floor + zero-override, default divisor 167,
+  regression guards for EU air profile and VENDOR_COUNTRY_MAP). 26/26 passed.
+
+**Plan:** `~/.claude/plans/goal-4soft-is-imported-hazy-mochi.md`.
+**Out of scope:** clamp retune, Firestore writes, dim-data fix for
+A6-01A-00-style tiny-CBM rows, real Czech→BKK forwarder RFQ (defer to
+follow-up PRs).
+
+---
+
 ## [2.44.0] - 2026-05-30
 
 ### Added — 4soft 2D ground markings created in Medusa (catalog completion)
