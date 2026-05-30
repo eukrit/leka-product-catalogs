@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ---
 
-## [2.40.0] - 2026-05-30
+## [2.48.0] - 2026-05-30
 
 ### Added — Wisdom outdoor-play collection in Medusa (link existing 255 + create 17)
 
@@ -13,6 +13,13 @@ new Medusa collection `wisdom-outdoor-play` on `leka-medusa-backend`. Hybrid
 strategy after discovering that 255 of the 272 SKUs already exist in Medusa
 under the rebranded `Leka Project` sales channel — original Wisdom item codes
 live in `variants[].metadata.legacy_sku`.
+
+> **Renumbered from v2.40.0 during merge** — main moved to v2.47.0 (PR #78
+> Furniture Catalog backfill) while this branch was in flight. The two builds
+> are complementary: v2.47.0 swapped 33 placeholders to real furniture imagery
+> on the broader Leka-Project SC; this one tags 227 of those products into the
+> new outdoor-play collection. PR #74's CLAUDE.md fix superseded the matching
+> doc edit on this branch, so that part was dropped in the merge.
 
 #### `wisdom-catalog/import_outdoor_play_to_medusa.py` (new)
 Orchestrator: load merged JSON → Firestore enrichment → URL rewrite → HEAD
@@ -42,15 +49,703 @@ missing.
   shared `firestore.matched_id`; e.g. `CSS-BZ` and `CSS-BZ-V02` both map to
   `leka-project-qv8v9i2v`).
 - 255 existing products got collection link + `metadata.outdoor_play` merge
-  (no image overwrite — v2.34.0 thumbnails preserved).
+  (no image overwrite — v2.34.0 / v2.47.0 thumbnails preserved).
 - 17 new `wisdom-<code>` products created for the firestore-null SKUs; they
   carry the Leka "Image coming soon" placeholder where no Gemini-verified
   image was available.
 - Wall-time ~2 min; Vertex spend ~$0.40.
 
 Full report: `wisdom-catalog/IMPORT_OUTDOOR_PLAY_REPORT.md`. Brand log:
-`wisdom-catalog/DEPLOYMENT_LOG.md` (v1.5.0).
+`wisdom-catalog/DEPLOYMENT_LOG.md` (v2.48.0).
 
+---
+
+## [2.47.0] - 2026-05-30
+
+### Added — Leka Project image backfill from the 2025-08-11 Furniture Catalog
+
+Follow-up to v2.34.0 (placeholder backfill). Of the **2,138 Leka Project
+products** still rendering the cream "Image coming soon" placeholder, **33
+now display real catalog imagery** sourced from the never-previously-ingested
+`2025-08-11 Wisdom International Furniture Catalog.pdf` (355 pages, 1,418
+SKU codes, 5,286 raw embedded images). KB / GP / HW prefix furniture.
+
+Pattern mirrors the v2.43.0 4soft picture-pricelist enrichment (extract →
+upload → vendors-write → Medusa-sync), with a Gemini verify step inserted
+between vendors-write and Medusa-sync because the furniture catalog's
+free-form multi-product pages require spatial-proximity attribution
+(stricter than 4soft's y-row grid layout).
+
+#### Discovery + sizing
+Two source folders were inspected (`docs/wisdom-image-backfill-discovery.md`):
+- `…\WeChat OneDrive\WeChat Wisdom Playground` — 1 custom-order PDF + 1
+  xlsx, no catalog imagery. Skipped.
+- `…\My Drive\Catalogs GO\Wisdom Playground` — 3 catalog PDFs. The
+  2025-06-13 USA + International catalogues are being re-extracted by the
+  sibling worktree `claude/great-hopper-c0fd71` (outdoor-play / QSWP
+  prefixes). This wave handles only the brand-new Furniture catalog.
+
+Empirical bridge sizing (`data/bridge-sizing.json`,
+`data/wisdom-placeholder-summary.json`): **2,137 / 2,138 placeholders already
+have a `vendors/wisdom/products` doc with `images=[]`**. The prior
+v2.34.0 + v2.36-37 extractions left them empty; bridge-from-vendors
+alone yields zero. PDF→image extraction is the only path.
+
+#### `wisdom-catalog/extract_furniture_pdf_images.py` (new)
+
+Spatial PDF→image extractor. Mirrors `wisdom-catalog/map_images_verified.py`'s
+span-bbox-center + image-rect-center euclidean-nearest attribution, plus PR
+#73's DeviceRGB-JPEG preference over JPX and 3× zoom render fallback.
+
+- Reads gap codes once from `vendors/wisdom/products` (empty `images=[]` OR
+  new SKU not yet in vendors).
+- MAX_IMAGES = 2 per code, MAX_DISTANCE = 600 px.
+- Output: `wisdom-catalog/data/pdf_images/*.jpg` (gitignored, reproducible
+  from PDF) and `wisdom-catalog/data/pdf_images_map.json` (committed
+  provenance).
+- Idempotent: page-level checkpoint in Firestore
+  `wisdom_pdf_extract/{pdf_sha16}/pages/{N}`.
+- Flags: `--dry-run` (default), `--extract`, `--pages 1-30`, `--limit-codes N`,
+  `--no-gap-filter`.
+
+**Extraction run (355 pages, full):**
+- 1,631 distinct codes detected in PDF.
+- 858 in the gap (102 in vendors with empty images, 756 new SKUs).
+- 250 pages processed, 1,842 raw attributions, **1,538 unique JPEGs written**.
+- Distance distribution p50=100 px, p80=142 px, p95=181 px, max=361 px;
+  **96.5 % of attributions < 200 px** (tight spatial match).
+- 36 attributions dropped due to decode failure (acceptable noise).
+
+#### `wisdom-catalog/enrich_furniture_pdf_images.py` (new)
+
+Four sub-phases (`--upload`, `--write-firestore`, `--verify`,
+`--sync-medusa`), each idempotent and resumable.
+
+**A. `--upload`** → 1,222 new + 35 existing = 1,257 unique objects in
+`gs://ai-agents-go-vendors/wisdom/furniture_2025/`. Zero errors. Mirrors the
+4soft `<vendor>/<source-tag>/<file>` layout; served via
+`https://catalogs.leka.studio/api/i/wisdom/furniture_2025/<filename>`
+(proxy validated `200 OK image/jpeg`).
+
+**B. `--write-firestore`** → 93 `vendors/wisdom/products` docs updated with
+furniture image entries (`source = catalog_pdf_furniture_2025_spatial_v2`).
+Precedence rule from PR #73: keep real images, replace borrowed/base-design
+entries, ADD where `images=[]`. 742 codes skipped — they're new SKUs without
+a vendor doc (would require Medusa onboarding before backfill applies).
+
+**C. `--verify`** → Gemini 2.5 Flash @ Vertex location `global`, threshold
+0.70, concurrency 4. **93 calls, $0.86 spent** (under the $18 ceiling).
+**39 accepted / 47 rejected / 0 errors** (42 % accept rate). Decisions
+checkpoint in Firestore `image_backfill_verify/{sha1(code)}` (same
+collection as v2.34.0); per-image `image_verified` and `image_match_score`
+also written back to vendor docs.
+
+The reject rate is the spatial extractor's signal: on multi-product pages,
+the nearest-image heuristic can attribute an image whose code is spatially
+close but belongs to a neighbouring product. Gemini correctly catches
+these. The 39 accepts are tightly grouped on KB / GP / HW / MGF prefixes.
+
+**D. `--sync-medusa`** → 33 Medusa placeholder products flipped to
+`metadata.image_status = "backfilled_furniture"` (the other 6 of the 39
+verified codes don't have a matching live placeholder product). Each
+product's `images` + `thumbnail` replace the placeholder atomically.
+
+#### Outcome — `scripts/_audit_placeholders.py`
+
+| Metric | Before | After |
+|---|---:|---:|
+| Total Leka Project products | 5,062 | 5,062 |
+| Showing placeholder | **2,138** | **2,105** |
+| Backfilled (real image) | 67 | **100** |
+| New: vendors/wisdom/products with furniture image entries | — | 93 |
+| New: future-onboarding imagery (vendor doc not yet created) | — | 742 codes |
+
+Spot-checked product **GP1-12036 (Wallboard Handrail-Straight Rod)**:
+storefront thumbnail `200 OK`, `image_status = backfilled_furniture`, 2
+images served from `wisdom/furniture_2025/`. ✅
+
+#### Files
+
+- `wisdom-catalog/extract_furniture_pdf_images.py` (new, ~370 LOC)
+- `wisdom-catalog/enrich_furniture_pdf_images.py` (new, ~450 LOC)
+- `wisdom-catalog/data/pdf_images_map.json` (new, committed provenance)
+- `wisdom-catalog/data/furniture_candidates.csv` (new, committed)
+- `wisdom-catalog/data/pdf_images/` (gitignored)
+- `docs/wisdom-image-backfill-discovery.md` (new)
+- `data/wisdom-placeholder-skus.csv`, `data/wisdom-placeholder-summary.json`,
+  `data/bridge-candidates.csv`, `data/bridge-sizing.json`,
+  `data/vendors-wisdom-snapshot.json` (new audit artifacts)
+- `scripts/_audit_placeholders.py`, `scripts/_peek_pdfs.py`,
+  `scripts/_peek_vendors_wisdom.py`, `scripts/_size_bridge.py`
+  (new audit helpers — names prefixed `_` to mark them internal)
+- `.gitignore` — added `wisdom-catalog/data/pdf_images/`
+- New GCS objects: 1,222 under `gs://ai-agents-go-vendors/wisdom/furniture_2025/`
+- New Firestore docs: `wisdom_pdf_extract/{pdf_sha16}/pages/{0..354}` +
+  93 new entries in `image_backfill_verify/` (source=furniture_2025).
+- `CHANGELOG.md`, `VERSION` → 2.45.0
+- `wisdom-catalog/DEPLOYMENT_LOG.md` → run summary
+- `.claude/PROGRESS.md` → last-touched + recent-sessions
+
+#### Vertex AI spend (this wave)
+
+$0.86 — well under the $20 ceiling. 47 rejected codes can be re-verified
+later if a different image source emerges; their vendor-doc entries remain
+with `image_verified=False`.
+
+#### Sibling-branch coordination
+
+`claude/great-hopper-c0fd71` is independently re-extracting the
+2025-06-13 USA + International catalogues to chase the QSWP / SR / BS
+outdoor-play prefixes. This wave only writes `source` strings containing
+`furniture_2025` and only flips `image_status` to `backfilled_furniture`
+(distinct from `backfilled` v2.34 and from whatever tag the sibling chooses).
+No file-level conflicts expected.
+
+---
+
+## [2.46.0] - 2026-05-30 — Eurotramp product-photo backfill
+
+> **STATUS:** SHIPPED. 16 Medusa products updated, 62 photos uploaded to GCS.
+> Audit report: [`docs/reports/eurotramp-image-audit-2026-05-30.md`](docs/reports/eurotramp-image-audit-2026-05-30.md)
+> Sibling-repo context: leka-website storefront v0.19.2 (#87) extended the cert-penalty regex but cannot rescue a product whose only image data IS a cert.
+
+### Result — before / after on live storefront
+
+| Metric | Before | After | Δ |
+|---|---:|---:|---:|
+| Eurotramp products with a non-photo thumbnail | 88 | 72 | −16 |
+| Eurotramp products whose thumbnail is a TÜV/cert image | 23 | 10 | **−13** |
+| Eurotramp products with zero real photos (backfill targets) | 33 | 27 | −6 |
+| Post-backfill `og:image` flipped to a real photo (spot-check, 9/10 handles) | — | 9 ✅ | — |
+
+Post-backfill `og:image` verification (live `curl https://catalogs.leka.studio/eurotramp/<handle>`):
+
+```
+✅ photo  eurotramp-wehrfritz-fun-round         → productdetails-wehrfritzfunroundplayground_1202e5eb57_1920x1080.jpg
+✅ photo  eurotramp-kids-tramp-track-playground → 97054-kidstramptrack4mepdm_83ccaccd40_1920x1080.jpg
+✅ photo  eurotramp-wehrfritz-fun-xl-playground → productdetail-wehrfritzfunxlplayground_672451331b_1920x1080.jpg
+✅ photo  eurotramp-impact-protection-system    → e97541-impactprotectionsystemepdmforkidstrampxlgrey_6f6c5cb7b8_1920x1080.jpg
+✅ photo  eurotramp-grand-master                → productdetails-grandmaster13mm_49d719a380_1920x1080.jpg
+✅ photo  eurotramp-ultimate                    → productdetails-ultimate_1a9386d18e_1920x1080.jpg
+✅ photo  eurotramp-teamgym                     → productdetails-minitrampteamgym_c4e2140598_1920x1080.jpg
+✅ photo  eurotramp-underwater-trampoline       → productdetails-underwatertrampoline_8fb7b817d5_1920x1080.jpg
+✅ photo  eurotramp-mats-tramp                  → 91000-preview-matstrampoline_f249c65994_1920x1080.jpg
+❌ cert   eurotramp-kids-tramp-kindergarten-loop-xl → tuev_1176_2021.jpg  (in upstream-gap list — no photo upstream)
+```
+
+### Audit summary (live Medusa, 2026-05-30)
+
+| Metric | Count |
+|---|---:|
+| Total Medusa products scanned | 11,064 |
+| Eurotramp products | 187 |
+| **Backfill targets** — zero real product photos in Medusa (neither in `images[]` nor as `thumbnail`) | **33** |
+| └ of which have only `cert` + `feature-badge` + `symbol` + `vector` (no photo, but ≥1 image) | 31 |
+| └ of which have **no images at all** | 2 |
+| Products whose `thumbnail` is not a real photo | 88 |
+| └ of which `thumbnail` is a TÜV/cert image | 23 |
+
+A product image was classified as:
+
+- `photo` — leading article number (`97004-`, `e97941-`), `productdetails-`, or `<articleNo>-preview-`
+- `cert` — `tuev_*`, `tuv_*`, ISO, CE-mark, GS-mark, compliance
+- `feature-badge` — `madeingermany_*`, `uv-lightresistant_*`, `flame-retardant_*`, etc.
+- `symbol` / `vector` / `merchant` / `placeholder` — UI icons, CAD line drawings, distributor logos, literal placeholder
+
+Storefront-visible failure example — `eurotramp-wehrfritz-fun-round`:
+`og:image` today = `…/tuev_1176_2021.jpg` (cert). Medusa has 19 images: 1 cert, 6 feature badges, 11 symbol/mediaType icons, 1 vector drawing, 0 real photos.
+
+### Root cause
+
+**Upstream Eurotramp DOES have real product photos** — confirmed by direct fetch of the vendor product pages:
+
+- `/products/wehrfritz-fun-round/` → `productdetails-wehrfritzfunroundplayground_*.jpg` (multi-size), `94700-wehrfritzfunroundplayground_*.jpg` (multi-size)
+- `/products/kids-tramp-track-playground/` → `97004-kidstramptrackplayground_*.jpg`, `97004-kidstramptrackplaypro_*.jpg`, `97054-/97056-/97058-/97059-kidstramptrack…_*.jpg`
+- `/products/wehrfritz-fun-xl-playground/` → `97610-wehrfritzfunxlplayground_*.jpg` (multi-size), `productdetail-wehrfritzfunxlplayground_*.jpg` (multi-size)
+
+These photos live under the same `/_resources.d/images.d/` path that the current scraper in [`scripts/scrape-eurotramp.ts`](scripts/scrape-eurotramp.ts) (lines 295–310) already targets:
+
+```ts
+$("img").each((_, el) => {
+  const src = $(el).attr("data-src") || $(el).attr("src") || ""
+  if (src && (src.includes("/_resources.d/images.d/") || src.includes("/images.d/")) &&
+      !src.includes("icon") && !src.includes("logo") && !imageUrls.includes(src)) {
+    imageUrls.push(src.startsWith("http") ? src : `${BASE_URL}${src}`)
+  }
+})
+```
+
+The current selector would catch them — so the gap is from a prior ingest pass that pushed an older (narrower) image set. Likely sources:
+1. Initial scrape pre-dated the current `$("img")` selector — an older version filtered to `productFeatureImages.d/` only, capturing badges + cert and missing `images.d/` photos.
+2. The GCS re-host in [`scripts/rehost-images-to-gcs.ts`](scripts/rehost-images-to-gcs.ts) / [`scripts/rewrite_image_urls_to_vendors_bucket.py`](scripts/rewrite_image_urls_to_vendors_bucket.py) may have processed an older `data/scraped/eurotramp/products.json` and the photos never landed in `gs://ai-agents-go-vendors/eurotramp/<handle>/`.
+
+**Either way the fix is the same:** re-scrape Eurotramp with the current scraper, then push the new photos to Medusa for the 33 backfill targets + re-point the 23 cert thumbnails.
+
+### Backfill plan — phased, reversible
+
+#### Phase 1 — Fresh scrape (read-only, no Medusa writes)
+
+1. `npx tsx scripts/scrape-eurotramp.ts` — repopulate `data/scraped/eurotramp/products.json` and `data/scraped/eurotramp/images/`. Already targets all 13 category slugs; no code change needed.
+2. New script `scripts/diff_eurotramp_scrape_vs_medusa.py` — for each handle in the audit's 33 backfill targets, list the scraped image URLs that are NOT in the current Medusa `images[]`. Flag any handle where the fresh scrape still finds 0 real photos (true upstream gap; manual photo procurement required).
+3. Expected output: most 33 targets gain ≥1 fresh `productdetails-…_*.jpg` / `<articleNo>-…_*.jpg` photo URL. Hard cases (e.g. the 2 zero-image accessories and some spare-parts SKUs whose vendor pages are sub-pages without their own gallery) will be listed for manual handling.
+
+#### Phase 2 — Re-host the new photos to GCS (`gs://ai-agents-go-vendors/eurotramp/<handle>/`)
+
+4. Extend `scripts/rehost-images-to-gcs.ts` (or add `scripts/rehost_missing_eurotramp_photos.ts`) to download each new photo URL discovered in Phase 1 and upload to `gs://ai-agents-go-vendors/eurotramp/<handle>/<filename>` with the standard image-proxy headers. (Per the workspace `image-proxy-bucket` memory: catalog images live in `ai-agents-go-vendors`, served via `catalogs.leka.studio/api/i/`.)
+5. Dry-run first (`--dry-run`) and print download/upload counts before writing.
+
+#### Phase 3 — Update Medusa products (the only write step)
+
+6. New script `scripts/backfill_eurotramp_photos_to_medusa.py` (model after [`scripts/apply_wisdom_enrichment.py`](scripts/apply_wisdom_enrichment.py) — Medusa admin auth, idempotency marker in `metadata.photo_backfilled_at`):
+    - For each of the 33 backfill targets: append the new photo URLs to `images[]` (do NOT replace — leave existing badges/certs for now, sorted by storefront scorer) and set `thumbnail` to the highest-resolution `productdetails-…` or `<articleNo>-…` URL.
+    - For each of the 23 cert-thumbnail products that already have real photos in `images[]`: re-point `thumbnail` to the first non-cert non-badge non-symbol non-vector image (a `photo`-class URL).
+    - Use Medusa Admin API `POST /admin/products/:id` with `{thumbnail, images}`. Same pagination + retry-on-429 as the apply script.
+    - Idempotency: write `metadata.photo_backfilled_at = "2026-05-30T…"` per product; skip products with that marker on re-run unless `--force`.
+7. Run order: `--dry-run --limit 5` → spot-check the diff → `--dry-run` full → live run.
+
+#### Phase 4 — Verification
+
+8. Re-curl `https://catalogs.leka.studio/eurotramp/<handle>` for at least these handles:
+    - `eurotramp-wehrfritz-fun-round`
+    - `eurotramp-kids-tramp-track-playground`
+    - `eurotramp-wehrfritz-fun-xl-playground`
+    - `eurotramp-kids-tramp-kindergarten-loop-xl`
+    - one of the zero-image accessories (if a photo was found)
+   Assert that `<meta property="og:image">` no longer matches `/(tuev|tuv)[_-]/i`. Append curl output to this CHANGELOG entry under "Post-backfill verification".
+9. Re-run `scripts/audit_eurotramp_images.ts` + `scripts/reclassify_eurotramp_images.py` and confirm the backfill-target count drops to its irreducible minimum (the products with no upstream photos).
+
+### Rollback path
+
+- All writes are to Medusa product `thumbnail` + `images[]`. The fresh scrape's `data/scraped/eurotramp/products.json` is committed first (Phase 1) — a single git revert restores the pre-backfill state of that file.
+- The backfill script writes `metadata.previous_thumbnail` and `metadata.previous_images` before mutating, so a `scripts/rollback_eurotramp_photo_backfill.py` can restore the original Medusa state product-by-product.
+- GCS uploads (Phase 2) are non-destructive (new object names, no overwrites). Leaving the photos in the bucket after rollback is fine — they're unreferenced storage, not visible to users.
+
+### Out of scope (this entry)
+
+- Other vendors' image quality (Vinci, Berliner, Rampline, etc.) — separate audit, separate ticket.
+- Storefront code changes in `eukrit/leka-website` — the v0.19.2 cert-penalty regex uses `\b…\b` which JS evaluates as `(?<=\w)(?!\w)` / `(?<!\w)(?=\w)`. Because `_` is a word character, `\btuev\b` does NOT match `tuev_1176_2021.jpg`. This is a separate bug in the storefront scorer; fixing it would let `pickPrimaryImage()` reject cert URLs even when they're the thumbnail, masking part of this data problem. Flag-only here; fix in `leka-website` as a follow-up.
+- The 2 zero-image products (`eurotramp-bonded-impact-protection-system-kids-tramp-xl-e97544`, `eurotramp-impactprotection-system-kids-tramp-e97044`) — empty `vendor_url`; if Phase 1's scrape still finds no photos, these need manual procurement.
+
+### Files added (audit only; no behavior change yet)
+
+- [`scripts/audit_eurotramp_images.ts`](scripts/audit_eurotramp_images.ts) — Medusa-side audit; emits `docs/reports/eurotramp-image-audit-<date>.md` + `.json`.
+- [`scripts/reclassify_eurotramp_images.py`](scripts/reclassify_eurotramp_images.py) — applies the `photo`/`cert`/`badge`/`symbol`/`vector` classifier to the raw audit JSON and writes the storyboard report.
+- [`docs/reports/eurotramp-image-audit-2026-05-30.md`](docs/reports/eurotramp-image-audit-2026-05-30.md) — human-readable report.
+- [`docs/reports/eurotramp-image-audit-2026-05-30-classified.json`](docs/reports/eurotramp-image-audit-2026-05-30-classified.json) — machine-readable; consumed by the Phase 1 diff script.
+
+### Sign-off (received 2026-05-30)
+
+All four checkboxes approved; executed in a single chained pass.
+
+### What ran
+
+1. **Phase 1 — fresh scrape** ([`scripts/scrape-eurotramp.ts`](scripts/scrape-eurotramp.ts)) — 81 product pages crawled, `data/scraped/eurotramp/products.json` repopulated. 0 errors.
+2. **Phase 1 — diff vs Medusa** ([`scripts/diff_eurotramp_scrape_vs_medusa.py`](scripts/diff_eurotramp_scrape_vs_medusa.py)) — wrote [`docs/reports/eurotramp-backfill-diff-2026-05-30.json`](docs/reports/eurotramp-backfill-diff-2026-05-30.json). Found:
+    - 6 backfill targets with new upstream photos (fixable now)
+    - 9 cert-thumb products with new upstream photos (cosmetic re-point + add)
+    - 4 cert-thumb products with only existing Medusa photos (thumb-only re-point)
+    - **13 backfill targets with no upstream photos** (page found, no real-photo URLs)
+    - **15 backfill/cert-thumb products not in scrape at all** (sub-page accessories — not reached by 13-category crawl)
+3. **Phase 2 — GCS rehost** ([`scripts/rehost_missing_eurotramp_photos.py`](scripts/rehost_missing_eurotramp_photos.py)) — downloaded 62 photos, uploaded all to `gs://ai-agents-go-vendors/eurotramp/<handle>/`. Each URL was upgraded from the 200x112 gallery thumb (the only size the scraper captured) to 1920x1080 by HEAD-probing the size ladder `_1920x1080`/`_920x512`/`_680x378`/`_200x112` and using the largest that returned HTTP 200. 0 failures. Manifest: [`docs/reports/eurotramp-rehost-manifest-2026-05-30.json`](docs/reports/eurotramp-rehost-manifest-2026-05-30.json).
+4. **Phase 3 — Medusa backfill** ([`scripts/backfill_eurotramp_photos_to_medusa.py`](scripts/backfill_eurotramp_photos_to_medusa.py)) — **16 products updated, 8 skipped (no change needed), 0 failed**. Each updated product got:
+    - new `images[]` (photos appended; existing badges/certs preserved; dups collapsed)
+    - re-pointed `thumbnail` to the highest-rank `productdetails-*` / `<articleNo>-*` URL, but **only when the candidate filename shares at least one token with the product handle** — this prevented 4 `kids-tramp-kindergarten*` products from getting an unrelated `impactprotectionsystem` accessory photo as their thumbnail.
+    - `metadata.previous_thumbnail` + `metadata.previous_images` (for rollback)
+    - `metadata.photo_backfilled_at` (for idempotency on re-run)
+    Per-product log: [`docs/reports/eurotramp-backfill-log-2026-05-30.json`](docs/reports/eurotramp-backfill-log-2026-05-30.json).
+5. **Phase 4 — verification** — re-curled 10 handles; 9/10 now serve a real product photo as `og:image`. The 1 still-broken one (`kids-tramp-kindergarten-loop-xl`) is in the upstream-gap list — no fix possible without procuring photos manually.
+
+### Remaining work — not fixable from upstream
+
+These 28 products still have non-photo thumbnails after this backfill. They need photos procured manually (vendor PDF, manufacturer brochure, or fresh photoshoot):
+
+- **Upstream gap (13)** — vendor page crawled, no real-photo URLs found: `booster-board-freestyle`, `customized-fabrications`, `eurotramp-play`, `kids-tramp-{kindergarten,playground}-loop[-xl]` (4), `safety-platforms-universal-freestyle`, `set-of-landing-mats-dmt`, `spotting-mat-freestyle`, `trampoline-set-{one-field,stationary}` (2), `transport-case-hdts`.
+- **Not in 13-category scrape (15)** — most are sub-page accessories/spare-parts: 4× `adhesive-cartridge-…`, `bonded-impact-protection-…`, `eurotramp-play-light-…`, `impactprotection-system-…`, 2× `jumping-bed-…`, `minitrampoline-112-125`, 6× `single-tile-impact-protection-…`, 2× `wehrfritz-fun-…-kindergarten…`. Either re-crawl with deeper accessory traversal or procure manually.
+
+Recommended next step: open a follow-up ticket "Eurotramp manual photo procurement" with these 28 handles; close it once images are uploaded to `gs://ai-agents-go-vendors/eurotramp/<handle>/` and the backfill script is re-run with `--force`.
+
+### Storefront sibling-repo follow-up (out of scope here)
+
+The `\btuev\b` regex in [`leka-website/catalogs/src/lib/image-scoring.ts:8`](https://github.com/eukrit/leka-website/blob/main/catalogs/src/lib/image-scoring.ts) fails on `tuev_*.jpg` because JS `\b` treats `_` as a word character (`\btuev\b` ≠ match in `tuev_1176_2021.jpg`). This bug is masked for now: after this backfill the 13 still-cert products have ONLY a cert and the scorer can't choose any better. But it should be fixed in `leka-website` (replace `\b…\b` with `(?<![a-z0-9])…(?![a-z0-9])`) so the scorer correctly penalises `tuev_*` filenames once any real photo exists.
+
+### Rollback path (if needed)
+
+Per-product:
+```bash
+TOKEN=$(curl -s -X POST "$MEDUSA/auth/user/emailpass" -d '{"email":"...","password":"..."}' | jq -r .token)
+curl -s -H "Authorization: Bearer $TOKEN" "$MEDUSA/admin/products?handle=$HANDLE&fields=metadata,id" | jq '.products[0]' > /tmp/p.json
+ID=$(jq -r .id /tmp/p.json)
+THUMB=$(jq -r '.metadata.previous_thumbnail' /tmp/p.json)
+jq -r '.metadata.previous_images' /tmp/p.json > /tmp/imgs.json
+curl -s -X POST -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d "{\"thumbnail\":\"$THUMB\",\"images\":$(jq '[.[] | {url: .}]' /tmp/imgs.json)}" \
+  "$MEDUSA/admin/products/$ID"
+```
+GCS uploads were `--no-clobber` and don't need rollback.
+## [2.45.0-dryrun] - 2026-05-30
+
+### Pivoted — 4soft pricing pipeline from sea-LCL to air-freight (dry-run only, NOT deployed)
+
+4soft is imported by air (Czech Republic → Thailand), but
+`foursoft-catalog/import_pricelist.py` was routing every SKU through the EU
+sea-LCL freight engine with `kg=0`. This release pivots the pipeline to
+air-freight with proper chargeable-weight handling. **Dry-run only — Firestore
+and Medusa untouched, no Cloud Run deploy.** Awaiting user review of the
+validation diff before promoting.
+
+- **Engine (cross-repo, `shipping-automation/mcp-server/cost_engine.py`):**
+  `calc_freight` air branch now derives a chargeable kg from CBM (volumetric =
+  cbm × 167 kg/m³, IATA general cargo) when `kg=0` is passed. Adds
+  `volumetric_divisor_kg_per_m3` knob to the EU air method. Fixes stale
+  `VENDOR_COUNTRY_MAP["4soft"] = "china"` → `"europe"`.
+- **Importer (`foursoft-catalog/import_pricelist.py`):** `METHOD="lcl"` →
+  `"air"`. Adds `--air-rate <THB/kg>`, `--landed-csv <path>`, and `--load-dims`
+  CLI flags so the dry-run can pull dim_index from Firestore (520 docs indexed)
+  and override the rate per run. Overrides cost_engine's air `per_kg` for the
+  call window and zeroes `min_charge` (per-SKU pricing — the 5 000 THB shipment
+  minimum is amortized across the whole shipment, not per item).
+- **Rate research:** new file `foursoft-catalog/data/air-freight-rates-2026-05-30.md`.
+  No public PRG→BKK spot quote; used 6 backhaul-relevant data points (Xeneta
+  Europe-origin avg, WorldACD week-18 and April global yields, FreightAmigo
+  FRA→HKG, TH→EU reverse proxy, Suaid EU→USA). Low **90**, median **105**
+  (recommended), high **135** THB/kg chargeable, all-in.
+- **Dry-runs:** 3 runs at 90 / 105 / 135 THB/kg. Outputs:
+  `foursoft-catalog/data/pricelist_2025-03-01_landed_AIR-DRYRUN-{lo,mid,hi}.csv`.
+  Diff doc: `foursoft-catalog/data/air-freight-dryrun-diff-2026-05-30.md`.
+  - `flat_uplift` rows (2 159 / 2 410) are byte-identical to the current sea
+    landed CSV — 0 diffs. The `else` branch was intentionally untouched.
+  - **92 `dims_scaled` rows** move user-facing prices (most by ±5%; one
+    representative — V1-03B-001 3D Bench PLAY — drops -11.7% because the LCL
+    18 000 THB clearance fee was dominating). High-CBM 3D items shift ±1%.
+  - **134 capped + 2 069 floored** rows are unchanged at the user level — the
+    sea-tuned clamps still bind. Cap count fell 167 → 134 (–20%) because air's
+    3 800 THB clearance is much lower than LCL's 18 000 THB.
+- **`LOGISTICS_TIERS`** intentionally left at the current sea-tuned values
+  (`0.80–2.50` at tier 1, etc.). The dry-run produces the evidence needed for
+  a follow-up PR to retune them with real numbers.
+- **Tests:** new `TestAirFreightChargeable` class with 7 cases in
+  `shipping-automation/tests/test_pricing_engine.py` (volumetric fallback,
+  actual-kg precedence, min_charge floor + zero-override, default divisor 167,
+  regression guards for EU air profile and VENDOR_COUNTRY_MAP). 26/26 passed.
+
+**Plan:** `~/.claude/plans/goal-4soft-is-imported-hazy-mochi.md`.
+**Out of scope:** clamp retune, Firestore writes, dim-data fix for
+A6-01A-00-style tiny-CBM rows, real Czech→BKK forwarder RFQ (defer to
+follow-up PRs).
+
+---
+
+## [2.44.0] - 2026-05-30
+
+### Added — 4soft 2D ground markings created in Medusa (catalog completion)
+
+Follow-up to v2.42.0 (3D) / v2.43.0 (PDF images). Materializes the deferred
+**2D scope** — the flat ground markings (hopscotch, numbers/letters, footprints,
+shapes) — into Medusa from the existing pricelist records. Pure extraction (no
+AI): `create_medusa_products.py --scope 2D --status draft` pushes the
+`vendors/4soft/products` docs (code / EN name / EUR-derived prices / dims /
+category) as handle-based products, attaching the picture-pricelist PDF images
+already written to Firestore in v2.43.0.
+
+- **Create:** **1,553 new** 2D products (843 with a PDF image, ~712 image-less),
+  **247 existing** updated (Czech → EN title + metadata), **2** benign
+  "handle already exists" skips (present but not SC-indexed). Created as
+  **draft** for review before publish.
+- **Price sync** (`sync_brand_prices_to_medusa.py --brand 4soft --write`):
+  match rose to **2,394 / 2,410 (99.3%)** — THB/USD/EUR/SGD.
+- **Remaining 16** = the **packaging (10) + accessory (6)** SKUs (codes like
+  `BOX-typ2`, `BOXOSB-A`) — deliberately NOT created; they look like packaging
+  surcharges / fixed-fee line items rather than sellable catalog products.
+
+The 4soft brand is now effectively complete in Medusa: **~3,960 products**
+(2,408 of the 2,410 priced pricelist SKUs present + earlier web-only extras).
+3D published (v2.42.0 follow-up); 2D created as drafts pending review.
+
+#### Deferred follow-ups
+- Review + publish the 1,553 2D drafts; ~712 are image-less (no image in the PDF
+  or on 4soft.cz) — optionally AI-generate placeholders later.
+- Decide whether the 16 packaging/accessory SKUs belong in the catalog.
+- 2026 pricelist + discount structure requested from 4soft (email sent 2026-05-29).
+
+
+## [2.43.0] - 2026-05-29
+
+### Added — 4soft product images from the picture-pricelist PDF
+
+Follow-up to v2.42.0 (4soft 3D create). The 3D drafts mostly fell back to
+borrowed base-design web images (only 130 web bases existed). The official
+**picture-pricelist PDF** (`4soft_EPDM_graphics_-_picture_-_price_list_2025_optimized.pdf`,
+89 pages, the picture variant of the v2.40.0 `.xls`) carries a 100x100 image per
+product design — the only image source for the ~2,000 colour/UV/size variants
+4soft.cz does not publish on the web.
+
+- `foursoft-catalog/extract_pdf_images.py` (new) — PyMuPDF grid extractor:
+  matches each left-column image to its code by y-row, validates against the
+  pricelist, prefers the DeviceRGB jpeg (renders the cell for jpx-only).
+  Extracted **989 images** (964 native jpeg / 25 rendered), verified by eye
+  (crocodile, Rubik's cube, sea star). Mapping → `data/pdf_images_map.json`.
+- `foursoft-catalog/enrich_pdf_images.py` (new) — uploads the 989 images to
+  `gs://ai-agents-go-vendors/4soft/pdf/<handle>.jpg` (the bucket the storefront
+  image proxy reads — see leka-website `api/i/[...path]`), then writes
+  `vendors/4soft/products[].images` via the proxy URL
+  `https://catalogs.leka.studio/api/i/4soft/pdf/<handle>.jpg`. UV-class-matched
+  base-design borrowing lifts coverage to **1,635 / 2,410 = 67.8%**.
+- **Precedence:** keep the 372 higher-res web images as primary (no downgrade);
+  REPLACE the 162 v2.41.0/v2.42.0 borrowed-web base-design images with the real
+  PDF image; ADD a PDF image to 1,101 previously image-less products.
+- **Medusa:** 419 in-channel products updated with the PDF image (thumbnail +
+  images), 0 errors. 844 PDF-imaged codes are the deferred 2D SKUs (not yet in
+  Medusa) — images held in Firestore for when they are created.
+
+The 989 extracted JPGs are reproducible (`extract_pdf_images.py`) and live in
+GCS, so they are gitignored; the mapping JSON is committed as provenance.
+
+#### Note on automation
+The picture-pricelist note in CLAUDE.md's "Image Pipeline" (upload to
+`ai-agents-go-documents/product-images/`) is **stale** — the live storefront
+proxy reads `gs://ai-agents-go-vendors/<vendor>/<path>`.
+
+#### Deferred follow-ups
+- 775 codes (mostly flat 2D markings) have no image in the PDF — still
+  image-less.
+- Higher-resolution images would need a different source (PDF embeds are 100px).
+
+
+## [2.42.0] - 2026-05-29
+
+### Added — 4soft 3D play elements created in Medusa + dims-based pricing
+
+Follow-up to the 4soft pricelist ingest (**v2.40.0**, PR #63). That release
+priced all 2,410 pricelist SKUs in `vendors/4soft/products` but only **377**
+existed as Medusa products — the other 2,033 were pricelist-only. This release
+creates the **3D scope** in Medusa and upgrades pricing for the SKUs with real
+dimensions.
+
+#### 2026 pricing re-verification (user decision 2026-05-29)
+
+Checked `eukrit@goco.bz` (SA domain-wide delegation, ~201 emails from 4soft.cz):
+- The *"Our Pricing for 2026"* newsletter (graphics@4soft.cz, 2026-04-01) is an
+  **image-only marketing blast — no pricelist attachment, no price/discount
+  figures.** No 2026 `.xls` exists in the inbox; the latest actual pricelist is
+  still `4soft_EPDM_graphics-price_list_2025.xls` (2025-06-25).
+- No document supersedes the **15% basic EXW** discount (2020 Price Conditions
+  PDF). The 2025 pricelist email confirms a reseller % applies on list prices.
+  → **EXW 15% / GM 40% retained.** 2026 pricelist is an open follow-up.
+
+#### Website reality
+
+4soft.cz publishes only **400 products** (256 2D / 90 3D / 54 other), not the
+~2,033 assumed. 377 match the pricelist 1:1 (EN site names == pricelist EN
+names — cross-checked); 2,033 pricelist codes (mostly colour/UV/size variants of
+2D ground markings) have **no individual web page**. User decision: create the
+**3D scope only** (the hero physical play elements) and defer the flat 2D
+markings.
+
+#### Scope created (dimension == "3D" = 592 SKUs)
+
+3D animals/nature/shapes/sport, **tunnels+slides (41)**, **water fountains
+(29)**, EPDM houses (5), furniture (112). Created as **draft** for review before
+publish.
+
+- `foursoft-catalog/backfill_scraped_details.py` (new) — wrote **260
+  dimensions** + **163 borrowed base-design images** (a colour variant inherits
+  its base design's photo, flagged `representative=true`) into
+  `vendors/4soft/products`.
+- Re-ran `foursoft-catalog/import_pricelist.py` → **251 SKUs now use
+  `dims_scaled` CBM** landed cost (was 0; rest flat-uplift). FX this run:
+  USD 33.25, EUR 38.71, SGD 26.04.
+- `foursoft-catalog/create_medusa_products.py` (new) — handle-based create
+  reusing `scripts/sync_vendors_to_medusa.py` helpers, scope-filtered, draft
+  status, EN pricelist titles, base-image attach. **Created 462** new 3D
+  products (163 with images), **renamed 130** existing Czech titles → EN,
+  0 errors. Medusa 4soft channel: 391 → **853 products**.
+- `scripts/sync_brand_prices_to_medusa.py --brand 4soft --write` — multi-currency
+  THB/USD/EUR/SGD prices pushed; match rose **377 → 839** (the 1,571 unmatched
+  are the deferred 2D/accessory/packaging pricelist-only SKUs).
+
+#### Deferred follow-ups
+
+- ~1,800 flat **2D ground markings** (hopscotch, numbers/letters, footprints) —
+  not created this pass (image-less, lower catalog value).
+- Confirm the **2026 pricelist** (request the `.xls` from 4soft) and re-verify
+  the 15% basic EXW before a full re-sync.
+- Review the 462 draft 3D products and **publish** when approved.
+
+## [2.41.0] - 2026-05-29
+
+### Added — Archimedes Water Play landed pricing (the deferred PR #59 work)
+
+Continues the `archimedes-water-play` brand (Wenzhou Daosen 温州道森游乐戏水,
+34 children's water-play SKUs, slugs AWP001–AWP034) merged in PR #59 (v2.36.0),
+which parsed the CNY pricelist but **deferred** landed pricing
+(`landed_pricing_status: "deferred — CNY→USD + dim normalization required"`).
+
+This release runs the parser against live Firestore and completes the landed
+CNY→THB/USD/SGD pricing pass, mirroring the Wisdom (China FOB) pipeline.
+
+#### Task 1 — audit doc populated
+- Ran `archimedes-water-play-catalog/import_pricelist.py` (this machine has gcloud
+  ADC; the authoring machine did not). Wrote the audit doc with all 34 variants to
+  Firestore `vendors/archimedes-water-play/pricelists/2026-05-29` (database `vendors`).
+
+#### Task 2 — landed pricing
+- **`archimedes-water-play-catalog/price_archimedes.py`** (NEW) — faithful mirror of
+  `shared/wisdom_pricing.compute_wisdom_retail`, but in CNY:
+  - Origin China → **0% import duty** (ASEAN-China FTA Form E), **+7% Thai import VAT**
+    on (CIF+duty), **+7% TH customer VAT** embedded in `retail_thb` only.
+  - **Independent** THB/USD/SGD retail — each derived from `landed_thb` (USD/SGD via
+    `landed_thb / FX`, no TH customer VAT), never `retail_thb / FX`.
+  - **Gross margin 0.50** — China-origin default, same as Wisdom. Adjustable via the
+    pricing-config form (`brands.archimedes-water-play.gross_margin`).
+  - **FX:** live THB-per-unit rates from shipping-automation `fx_rates.get_fx_rates`
+    (+2% buffer). Snapshot used: CNY=4.8903, USD=33.2529, SGD=26.0437 THB/unit
+    (⇒ CNY→USD 0.1471, CNY→SGD 0.1878). Fallback constants CNY 4.80 / USD 35 / SGD 25.
+  - **Dimension → CBM (documented, conservative):** only `kind == "lwh"` rows get a CBM.
+    Unit per row: explicit "cm" marker → cm; else any axis > 1000 → mm (e.g. `2000*1100*1250`);
+    else cm (e.g. `95×45×95`). `CBM = L·W·H (m³) × 0.15` packing factor. `lwh` rows route
+    through the China-LCL `cost_engine` + Vinci tier clamp (floor/cap by FOB band, which
+    bounds any cm/mm mis-guess — and most small items hit the LCL `min_charge`, so the CBM
+    value barely moves the result). `custom` / `diameter` / `two-dim` / `length` / `unknown`
+    rows fall back to the flat China **CIF ≈ FOB** path (no freight uplift), exactly like Wisdom.
+  - Result: **34 SKUs priced** (28 via China-LCL CBM, 6 via flat CIF≈FOB). Audit CSV at
+    `archimedes-water-play-catalog/data/pricelist_2026-05-29_priced.csv`.
+  - **Known caveat:** lwh (CBM) SKUs carry the per-shipment fixed clearance/last-mile of the
+    China-LCL route, so an `lwh` item can price ~2× an equivalently-priced flat (`custom`/
+    `diameter`) item. This is the standard Wisdom-pipeline behaviour; the tier clamp bounds it.
+    Adjust GM or method via the pricing-config form + re-run if a flatter curve is preferred.
+  - Writes priced product docs to `vendors/archimedes-water-play/products/<sku>` (vendors DB),
+    matching the rampline/designpark per-product shape; updates the audit doc
+    `landed_pricing_status → "completed (v2.38.0)"` with the FX snapshot.
+- **`scripts/add_archimedes_pricing_config.py`** (NEW) — merge-only writer that adds
+  `brands.archimedes-water-play` (GM 0.50, `import_duty_rate` 0.00, `currency` CNY,
+  `origin` china, `default_cny_thb` 4.80, source pricelist pointer) to
+  `pricing_config/canonical` (database `leka-product-catalogs`) **without disturbing** the
+  other brands added by later PRs (vortex/4soft/weplay). Idempotent (`--force` to overwrite).
+- **`scripts/seed_pricing_config.py`** — `build_seed_doc()` now includes the
+  `archimedes-water-play` block so a future `--force` reseed stays consistent.
+
+#### Task 3 — Medusa
+- Created/confirmed the **"Archimedes Water Play"** Medusa sales channel
+  (`sc_01KSSP39K5DVH9TT2TMXCREHFV`) and added it to the `SC` map in
+  `scripts/sync_brand_prices_to_medusa.py`. **Product creation is a follow-up** — there are
+  no AWP### products in Medusa yet, so the price sync is a documented no-op (0/34 matched)
+  until the 34 products are created. Once created (SKU = AWP###), the existing sync will
+  push THB/USD/SGD prices by SKU match.
+
+#### Docs
+- `docs/summaries/pricing-config-master.md` — added §4f (brand config), §6f (formula),
+  scripts-reference rows, and a v2.38.0 version-history row.
+- `archimedes-water-play-catalog/DEPLOYMENT_LOG.md` (NEW) — dated brand deploy log.
+
+### Files
+- NEW `archimedes-water-play-catalog/price_archimedes.py`
+- NEW `archimedes-water-play-catalog/data/pricelist_2026-05-29_priced.csv`
+- NEW `archimedes-water-play-catalog/DEPLOYMENT_LOG.md`
+- NEW `scripts/add_archimedes_pricing_config.py`
+- EDIT `scripts/seed_pricing_config.py` (+ archimedes seed block)
+- EDIT `scripts/sync_brand_prices_to_medusa.py` (+ SC map entry)
+- EDIT `docs/summaries/pricing-config-master.md`, `docs/build-summary.html`, `VERSION`,
+  `.claude/PROGRESS.md`
+
+### Outcome
+- Success. 34 SKUs priced + written to `vendors/archimedes-water-play/products`; audit doc
+  status → completed; brand config + sales channel landed. `verify.sh` 0 FAIL.
+- **Version note:** rebased onto `origin/main` (2.40.0 after WePlay #61, Vortex #62, 4soft #63);
+  renumbered to **2.41.0** (next free minor). The Firestore audit doc
+  `landed_pricing_status` still reads "completed (v2.38.0)" — the version at write time.
+
+---
+
+## [2.40.0] - 2026-05-29
+
+### Added — 4soft EPDM-graphics 2025 pricelist ingested (2,410 EUR SKUs)
+
+Parsed and priced the **4soft 2025 EPDM-graphics pricelist** (`.xls`,
+`2025-06-25 4soft_EPDM_graphics-price_list_2025.xls`, valid 2025-03-01) and
+ingested it as a first-class EUR-FOB brand following the **Berliner EXW
+pattern**.
+
+#### Reconciliation decision (Step 4) — new brand, NOT the EPDM/Infill pricer
+
+The task flagged the existing **EPDM/Infill CFH pricer** (v2.10.0 —
+`products_epdm`/`products_infill`, area-priced THB/m², CFH lookup contract,
+`scripts/sync_epdm_pricelist.py`) as a possible overlap. **There is no
+overlap:**
+
+- The EPDM/Infill pricer is **generic wet-pour surfacing** (SBR granule,
+  Sand/Rubber infill, Miroad, Eurosia Non-UV/UV, TPV) sourced from the
+  "EPDM 2024 / Pricelist" Google Sheet — priced **per m² of installed area**
+  at a thickness, with a `cfh_m` field for the storefront CFH pricer. It is
+  **not** 4soft-branded.
+- The 4soft `.xls` is **2,410 discrete, per-item EUR SKUs** — moulded-EPDM
+  3D play elements (animals, shapes, tunnels, furniture, fountains) and 2D
+  markings (hopscotch, numbers/letters, footprints). Single "POHODA" sheet
+  (Czech accounting export); columns code / name / `Target SALE price EUR`.
+  **No per-m² surfacing section, no CFH.**
+
+The 4soft `.xls` is the **authoritative pricelist for the existing 4soft
+Medusa brand** (sales channel `sc_01KNQAA4A8SF4ZT9S8N0AHGY3Y`; 391 SKUs
+scraped from 4soft.cz in earlier work, previously **unpriced**). Decision:
+add a **`brands.4soft`** config (NOT extend the EPDM pricer), price all 2,410
+SKUs through the shared landed pipeline, and leave the wet-pour pricer
+untouched. The CFH/per-m² contract is fully preserved.
+
+#### Trade terms (Step 3) — EXW, EUR, EU/Czech origin
+
+- 4soft, s.r.o. is **Czech** (Tanvald, CZ — EU origin, VAT CZ28703324), prices
+  in **EUR**, terms **EXW** (`2019-11-26 Price conditions 2020` PDF). Basic
+  **reseller discount 15%** off list (+5% for orders >€2,500, +2.5% prepay,
+  min €5k/yr turnover — order-specific, not baked into catalog cost).
+- Gmail (eukrit@goco.bz) confirms 4soft is an active vendor (roger@4soft.cz,
+  graphics@4soft.cz); recent quotes seen EXW and project-CFR Bangkok. No email
+  superseding the 15% basic EXW discount surfaced. A *"Our Pricing for 2026"*
+  newsletter exists (2026-04-01) — **follow-up: confirm 2026 discount/pricelist.**
+- **User decisions (2026-05-29):** gross margin **40%**; bake **15% basic EXW**
+  discount only (`eur_fob = list × 0.85`); price the 391 existing Medusa
+  variants now + spawn a follow-up to scrape the ~2,020 missing SKUs.
+
+#### Cost structure (same shared pipeline as Vinci/Berliner/Rampline)
+
+`eur_fob = list_eur × 0.85` → EUR→THB FX → landed THB via shipping-automation
+`cost_engine` (LCL EU, Baltic-rate calibration) → **10% Thai duty**, **7%
+import VAT** on (CIF+duty), tiered logistics floor/cap → retail. Independent
+THB/USD/EUR/SGD; **7% TH customer VAT embedded in `retail_thb` only**; SG GST
+gated on `sg_nubo_gst_registered` (off). No published dims yet → all rows use
+the flat-35%-uplift path; the tier-0 floor (×1.80) re-bounds the many cheap 2D
+items (**2,265 / 2,410 floored**). FX snapshot this run: USD 33.25, EUR 38.71,
+SGD 26.04 (exchangerate-api.com live, +2% buffer).
+
+#### Files & outcomes
+
+- **`foursoft-catalog/import_pricelist.py`** (new) — parses the `.xls`
+  (`xlrd`), applies EXW 15%, computes landed/retail via the shared pipeline
+  with `brand="4soft"`, writes `vendors/4soft/products`, and self-seeds
+  `brands.4soft` into `pricing_config/canonical` via a safe read-modify-write
+  merge (never a full `--force` reseed). Emits a committed parsed CSV +
+  landed CSV.
+- **`foursoft-catalog/data/pricelist_2025-03-01.csv`** (new) — in-repo parsed
+  source of truth (2,410 rows: code, name, list_eur, section, dimension,
+  product_group, unit).
+- **`foursoft-catalog/data/pricelist_2025-03-01_landed.csv`** (new) — full
+  landed-cost / retail audit trail.
+- **`scripts/sync_brand_prices_to_medusa.py`** — added `4soft` →
+  `sc_01KNQAA4A8SF4ZT9S8N0AHGY3Y` to the SC map.
+- **`scripts/seed_pricing_config.py`** — added the `brands.4soft` block
+  (gm 0.40, exw 0.15) so a future `--force` reseed includes it.
+- **`docs/summaries/pricing-config-master.md`** — new §4f (4soft brand),
+  §6f formula, §11 script row, §12 version-history row.
+- **Firestore `vendors/4soft/products`:** wrote **2,410** docs (**2,033 new**,
+  377 updated existing). Vendor root `product_count = 2410`.
+- **Firestore `pricing_config/canonical.brands.4soft`:** seeded (gm 0.40,
+  exw 0.15, EXW, EU/Czech).
+- **Medusa:** matched **377 / 2,410** vendor docs to existing 4soft variants
+  by SKU (= item_code); **updated 377 variants, 0 errors** (THB/USD/EUR/SGD).
+  The **2,033 unmatched** are pricelist-only — not yet Medusa products
+  (`sync_brand_prices_to_medusa.py` is update-only by design). **Follow-up:
+  scrape the ~2,020 missing SKUs from 4soft.cz, then create + price them.**
+
+Spot-check: `4soft-a1-01a-00` ("Circle 18 cm", list €20) → retail ฿2,112.30 /
+$59.37 / €51.00 / S$75.80 (live in Medusa).
 ---
 
 ## [2.39.0] - 2026-05-29
@@ -173,7 +868,6 @@ carries no dimensions) — same as DesignPark / WePlay.
   Medusa under that form (price-only-in-Firestore until reconciled). All four
   currencies (THB/USD/EUR/SGD) verified on synced variants — USD region
   (Asia-Pacific) serves Vortex correctly.
-
 ## [2.37.0] - 2026-05-29
 
 ### Added — AI enrichment of Wisdom / Leka Project specs + Toys category

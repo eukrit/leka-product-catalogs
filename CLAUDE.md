@@ -76,7 +76,8 @@ Master instructions: `Credentials Claude Code/Instructions/API Access Master Ins
 | GCP Project | `ai-agents-go` |
 | Service Account | `claude@ai-agents-go.iam.gserviceaccount.com` |
 | Firestore | Native mode, database `leka-product-catalogs` (asia-southeast1) |
-| GCS Bucket | `ai-agents-go-documents` (public read, uniform bucket-level access) |
+| GCS Bucket (catalog images) | `ai-agents-go-vendors` — **private**, UBLA; served via the storefront proxy `catalogs.leka.studio/api/i/<brand>/<path>` |
+| GCS Bucket (documents) | `ai-agents-go-documents` — UBLA (NOT the image-proxy bucket) |
 | Cloud Build | GitHub connection `github-eukrit` (us-central1) |
 | Cloud Run | asia-southeast1 region |
 
@@ -168,10 +169,15 @@ All `firestore.Client()` calls must include `database="leka-product-catalogs"`.
 1. Download catalog PDFs from source (Slack/email/Drive)
 2. Extract images with PyMuPDF (`extract_images.py`)
 3. Convert non-browser formats (`.jpx` → `.jpeg`) with Pillow
-4. Upload to GCS: **`gs://ai-agents-go-vendors/<vendor>/<sub>/...`** (e.g. `gs://ai-agents-go-vendors/leka-project/catalog/<code>_imgN.jpeg`). This bucket is the source of truth for the live storefront proxy at `https://catalogs.leka.studio/api/i/<vendor>/<path>`. The proxy streams private GCS objects with the Cloud Run runtime SA token; direct `storage.googleapis.com` URLs return 403.
-5. Map to Firestore product `images[]` array using the **proxy URL**, not a direct GCS URL — e.g. `https://catalogs.leka.studio/api/i/leka-project/catalog/<code>_img0.jpeg`. Medusa product `thumbnail` / `images[].url` also use the proxy form.
-6. Both buckets use **uniform bucket-level access** — do NOT call `blob.make_public()`.
-7. **Legacy note:** older docs and Firestore entries reference `gs://ai-agents-go-documents/product-images/<brand>/catalog/` — that path is now stale and unreadable anonymously. New code must use the `ai-agents-go-vendors` bucket + proxy form. See `scripts/rewrite_wisdom_image_urls.py` for the migration helper.
+4. Upload to GCS: **`gs://ai-agents-go-vendors/<brand>/<path>`** — this is the
+   bucket the storefront image proxy reads (`leka-website/catalogs/src/app/api/i/[...path]/route.ts`).
+   (The older `gs://ai-agents-go-documents/product-images/...` path is **NOT**
+   served by the live proxy — do not use it for catalog images.)
+5. Reference via the proxy URL, never a raw GCS URL: `https://catalogs.leka.studio/api/i/<brand>/<path>`
+6. Map that proxy URL into the Firestore product `images[]` array + Medusa `thumbnail`/`images`
+7. Both buckets use **uniform bucket-level access** and are **private** (the
+   proxy streams them with the Cloud Run runtime SA) — do NOT call
+   `blob.make_public()`, and direct `storage.googleapis.com` URLs will 403.
 
 ## Safety Rules
 - NEVER commit credentials, API keys, or tokens
@@ -199,7 +205,7 @@ Minimum pass rate: 100% on critical path, 80% overall.
 - Web Framework: Flask (serving static catalog apps)
 - Infrastructure: GCP Cloud Run + Cloud Build
 - Database: Firestore (Native mode)
-- Storage: GCS (`ai-agents-go-documents`)
+- Storage: GCS — catalog images in `ai-agents-go-vendors` (proxy-served), documents in `ai-agents-go-documents`
 - CI/CD: GitHub → GCP Cloud Build trigger
 - Automation: n8n (gocorp.app.n8n.cloud)
 - Docs: Notion

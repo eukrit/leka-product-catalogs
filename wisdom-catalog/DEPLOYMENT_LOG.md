@@ -1,6 +1,10 @@
 # Deployment Log — Wisdom Product Catalog
 
-## v1.5.0 — 2026-05-30 (Outdoor-Play Collection — Medusa Link + Gemini Image Verify)
+## v2.48.0 — 2026-05-30 (Outdoor-Play Collection — Medusa Link + Gemini Image Verify)
+
+> Renumbered from v1.5.0 → v2.48.0 during merge with main: the wisdom brand
+> log was migrated to the project-wide semver scheme (matching the v2.45.0
+> Furniture Catalog entry that landed below). The work itself is unchanged.
 
 ### Summary
 Tagged the 272-SKU **Wisdom Outdoor Classroom — Outdoor Play** subset into a new Medusa collection `wisdom-outdoor-play` on `leka-medusa-backend`. Recognised mid-flight that 255 of the 272 SKUs already live in Medusa under the rebranded **Leka Project** sales channel (their original Wisdom item codes are preserved in `variants[].metadata.legacy_sku`), so the importer was redesigned as a hybrid: **link** the existing 255, **create** the 17 truly absent. Every candidate image was filtered through URL rewrite → HTTP HEAD → Gemini 2.5 Flash verify before being written.
@@ -67,6 +71,46 @@ Re-enumerated the collection live to decide whether `--force-image-refresh` was 
 1. The 96 Gemini-rejected URLs are mostly PDF page-collage extractions (multiple products per frame). Fixable by upstream PDF re-extraction (out of scope here). When that lands, the cached Gemini decisions in `wisdom_outdoor_play_verify` will need invalidation (or run with `--force-gemini`).
 2. `CLAUDE.md` Image Pipeline section updated in this commit to point at `gs://ai-agents-go-vendors/<vendor>/` + the storefront proxy form. Stops future scripts from reproducing the bug we hit during this build.
 3. Storefront cache: the leka-website proxy caches 404s for ~24h. The 17 new placeholder URLs are stable + the placeholder object exists in GCS, so no propagation work needed.
+
+---
+
+## v2.45.0 — 2026-05-30 (Furniture Catalog image backfill)
+
+### Summary
+Extracted and attached real product imagery from the brand-new `2025-08-11
+Wisdom International Furniture Catalog.pdf` (355 pages, never previously
+ingested) to Leka Project placeholder products on Medusa.
+
+### Pipeline
+1. `wisdom-catalog/extract_furniture_pdf_images.py --extract` — spatial PDF
+   attribution (PyMuPDF span-bbox + image-rect nearest-neighbor, MAX_IMAGES=2,
+   MAX_DISTANCE=600 px). Output: 1,538 JPEGs to local cache + mapping JSON.
+2. `wisdom-catalog/enrich_furniture_pdf_images.py --upload` — 1,222 new
+   objects in `gs://ai-agents-go-vendors/wisdom/furniture_2025/`.
+3. `wisdom-catalog/enrich_furniture_pdf_images.py --write-firestore` — 93
+   `vendors/wisdom/products` docs gained furniture image entries.
+4. `wisdom-catalog/enrich_furniture_pdf_images.py --verify` — Gemini 2.5
+   Flash @ 0.70, 93 calls / $0.86 spent / 39 accept / 47 reject / 0 error.
+5. `wisdom-catalog/enrich_furniture_pdf_images.py --sync-medusa` — 33
+   placeholder products flipped to `backfilled_furniture` on Medusa.
+
+### Outcome
+- Live placeholders: 2,138 → 2,105 (delta −33).
+- Backfilled with real imagery: 67 → 100 (delta +33).
+- 93 vendor docs populated for future Medusa onboarding (some not yet on
+  Medusa).
+
+### Quality / spend
+- 96.5 % of spatial attributions had centroid distance < 200 px.
+- Verify accept rate 42 % — Gemini correctly rejected multi-product-page
+  mis-attributions; accepts cluster on KB / GP / HW / MGF prefixes.
+- $0.86 Vertex spend, $19.14 under ceiling.
+
+### Sibling worktree (resolved post-merge)
+`claude/great-hopper-c0fd71` (now v2.48.0 above) did NOT re-extract images
+— it tagged the outdoor-play collection. Image re-extraction was scoped out
+and spawned as a separate task. No file or write-key overlap with this
+branch's furniture wave.
 
 ---
 
