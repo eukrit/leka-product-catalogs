@@ -114,6 +114,15 @@ def build_seed_doc() -> dict:
                 "gross_margin": _wp.GROSS_MARGIN,
                 "import_duty_rate": _wp.IMPORT_DUTY_RATE,
                 "default_usd_thb": _wp.DEFAULT_USD_THB,
+                # SG (Nubo Singapore) channel — parallel landed-cost path.
+                # Driven by compute_wisdom_retail_sg(); routes through
+                # shipping-automation china_to_singapore profile.
+                # SG: 0% duty on HS 9503/9506, 9% GST since 2024-01-01.
+                "sg_import_duty_rate": _wp.SG_IMPORT_DUTY_RATE,
+                "sg_gst_rate":         _wp.SG_GST_RATE,
+                "sg_gross_margin":     _wp.SG_GROSS_MARGIN,
+                "sg_freight_method":   _wp.SG_FREIGHT_METHOD,
+                "default_usd_sgd":     _wp.DEFAULT_USD_SGD,
                 "source_pricelist_url": "wisdom-catalog/data/",
                 "source_pricelist_label": "Wisdom Excel catalogs (in-repo)",
             },

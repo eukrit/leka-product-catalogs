@@ -248,3 +248,32 @@ Extracted images from the **full 529-page** Wisdom catalog PDF (previously only 
 | `web-app/server.py` | Flask static file server |
 | `web-app/Dockerfile` | Cloud Run container |
 | `web-app/firestore.rules` | Firestore security rules |
+
+---
+
+## v2.45.0 — 2026-05-30 (SG-channel landed cost, dry-run)
+
+### Summary
+Parallel Singapore-channel landed-cost path added for Nubo SG. TH path
+unchanged. Firestore-only this round (no Medusa SG push). See
+[`CHANGELOG.md`](../CHANGELOG.md) `[2.45.0]` for full detail and the
+[comparison report](../scripts/reports/sg_pricing_compare_2026-05-30.md).
+
+### Files (this folder)
+- `update_pricing.py` — new `--sg-channel` flag (default OFF). When set,
+  computes SG pricing alongside TH and merges `pricing.sg.*` into the
+  same per-SKU batch update. Prints `[sg-compare]` preview lines.
+
+### Runs to date
+- 2026-05-30: dry-run `python wisdom-catalog/update_pricing.py --dry-run
+  --skip-medusa --sg-channel` against `products_wisdom` (5,071 docs, 4,809
+  with FOB). No writes. Preview shows flat-path SKUs +1.9% (GST premium),
+  CBM SKUs varying ±0–70% driven by genuine freight-rate differences.
+- Comparison report `scripts/compare_sg_pricing.py --limit 10`:
+  median +0.19%, mean −4.96%, one |Δ|>25% outlier
+  (`HW1-S367-V01` SG-floored on logistics-tier clamp).
+
+### Pending before SG goes live
+- Replace benchmark freight constants in `cost_engine.ROUTE_PROFILES["china_to_singapore"]` with a real forwarder quote.
+- Identify Medusa SG sales-channel ID + wire `update_pricing.py` to push retail_sgd there when ready.
+- Decide on a pricing.th.* / pricing.sg.* migration if storefront wants to read both natively.

@@ -22,7 +22,16 @@ Schema (single document):
         "rampline": { "gross_margin": 0.30 },
         "wisdom":   { "gross_margin": 0.50,
                       "import_duty_rate": 0.07,
-                      "default_usd_thb": 35.0 }
+                      "default_usd_thb": 35.0,
+                      # Singapore (Nubo SG) channel — parallel landed-cost
+                      # path used by compute_wisdom_retail_sg(). SG-side
+                      # rules: 0% duty on HS 9503/9506 (toys / playground
+                      # equipment), 9% GST on CIF+duty (since 2024-01-01).
+                      "sg_import_duty_rate": 0.00,
+                      "sg_gst_rate":         0.09,
+                      "sg_gross_margin":     0.50,
+                      "sg_freight_method":   "lcl",
+                      "default_usd_sgd":     1.33 }
       },
       "logistics_tiers": [
         { "fob_eur_max": 500,    "min_pct": 0.80, "max_pct": 2.50 },
