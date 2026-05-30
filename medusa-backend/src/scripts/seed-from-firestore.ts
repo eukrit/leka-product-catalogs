@@ -3,9 +3,25 @@
  *
  * Usage:
  *   1. Run scripts/export_firestore_to_json.py to generate migration/*.json
+ *      (wisdom_products.json, vinci_products.json, optional vortex_products.json)
  *   2. npx medusa exec ./src/scripts/seed-from-firestore.ts
  *
- * Creates: Sales Channels, Categories, Collections, Tags, Products + Variants
+ * Creates:
+ *   - ONE Sales Channel "Leka Catalogs" (shared across brands so the cart
+ *     is no longer brand-scoped — a customer can put Wisdom + Vinci + Vortex
+ *     items in the same cart and send one combined proposal).
+ *   - Three Brand records (Wisdom, Vinci Play, Vortex Aquatics) via the
+ *     custom brand module (src/modules/brand/).
+ *   - Product Categories + Collections + Tags from the Firestore exports.
+ *   - All products published to "Leka Catalogs" AND linked to their Brand
+ *     via the brand-product module link (src/links/brand-product.ts).
+ *   - ONE publishable API key "Leka Catalogs Storefront" used by all
+ *     per-brand landing pages in eukrit/leka-website/catalogs/.
+ *
+ * Idempotency note: this seed creates fresh resources on every run. Re-running
+ * against a non-empty DB will produce duplicate categories/tags. Wipe the DB
+ * (npx medusa db:reset) before re-seeding — the wipe+reseed migration path is
+ * documented in CHANGELOG.md under v2.49.0.
  */
 import * as fs from "fs"
 import * as path from "path"
@@ -14,9 +30,32 @@ import {
   IProductModuleService,
   ISalesChannelModuleService,
 } from "@medusajs/framework/types"
-import { Modules } from "@medusajs/framework/utils"
+import { ContainerRegistrationKeys, Modules } from "@medusajs/framework/utils"
+import { BRAND_MODULE } from "../modules/brand"
 
 const MIGRATION_DIR = path.resolve(__dirname, "../../../migration")
+
+const BRAND_DEFINITIONS: Array<{
+  handle: string
+  name: string
+  description: string
+}> = [
+  {
+    handle: "wisdom",
+    name: "Wisdom",
+    description: "Wisdom Playground Equipment — furniture, playground, outdoor",
+  },
+  {
+    handle: "vinci",
+    name: "Vinci Play",
+    description: "Vinci Play — playground equipment from Poland",
+  },
+  {
+    handle: "vortex",
+    name: "Vortex Aquatics",
+    description: "Vortex Aquatics — splash-pad and water-play features",
+  },
+]
 
 interface FirestoreProduct {
   item_code: string
@@ -79,26 +118,45 @@ export default async function seedFromFirestore({ container }: ExecArgs) {
   const salesChannelService: ISalesChannelModuleService = container.resolve(
     Modules.SALES_CHANNEL
   )
+  const brandService: any = container.resolve(BRAND_MODULE)
+  const link = container.resolve(ContainerRegistrationKeys.LINK)
 
   console.log("=== Leka Product Catalogs — Medusa Seed ===\n")
 
-  // --- Step 1: Sales Channels ---
-  console.log("Step 1: Creating Sales Channels...")
-  const wisdomChannel = await salesChannelService.createSalesChannels({
-    name: "Wisdom",
-    description: "Wisdom Playground Equipment — furniture, playground, outdoor",
+  // --- Step 1: Sales Channel ---
+  // ONE shared sales channel for all brands. Brand is no longer a cart-
+  // scoping construct — it's a product attribute (see Step 1b). This is
+  // what lets a single cart carry products from Wisdom + Vinci + Vortex
+  // at the same time.
+  console.log("Step 1: Creating Sales Channel 'Leka Catalogs'...")
+  const lekaChannel = await salesChannelService.createSalesChannels({
+    name: "Leka Catalogs",
+    description:
+      "Public storefront for all Leka catalog brands (Wisdom, Vinci Play, Vortex). " +
+      "Single SC so the cart can mix products across brands.",
     is_disabled: false,
   })
-  const vinciChannel = await salesChannelService.createSalesChannels({
-    name: "Vinci Play",
-    description: "Vinci Play — playground equipment from Poland",
-    is_disabled: false,
-  })
-  console.log(`  Created: Wisdom (${wisdomChannel.id}), Vinci Play (${vinciChannel.id})`)
+  console.log(`  Created: Leka Catalogs (${lekaChannel.id})`)
 
-  const channelMap: Record<string, string> = {
-    wisdom: wisdomChannel.id,
-    vinci: vinciChannel.id,
+  // --- Step 1b: Brand records ---
+  // Each brand becomes a Brand entity linked to its products via the
+  // brand-product module link. Replaces the previous "one SC per brand"
+  // pattern. Idempotent: if a brand already exists by handle, reuse it
+  // (this lets us re-run the seed without unique-constraint errors).
+  console.log("\nStep 1b: Creating Brand records...")
+  const brandMap: Record<string, string> = {}
+  for (const def of BRAND_DEFINITIONS) {
+    const [existing] = await brandService.listBrands({ handle: def.handle })
+    let brand = existing
+    if (!brand) {
+      brand = await brandService.createBrands({
+        handle: def.handle,
+        name: def.name,
+        description: def.description,
+      })
+    }
+    brandMap[def.handle] = brand.id
+    console.log(`  Brand: ${def.name} (${brand.id}) [handle: ${def.handle}]`)
   }
 
   // --- Step 2: Product Categories ---
@@ -106,8 +164,12 @@ export default async function seedFromFirestore({ container }: ExecArgs) {
   const allCategories = new Set<string>()
   const wisdomProducts = loadJson<FirestoreProduct>("wisdom_products.json")
   const vinciProducts = loadJson<FirestoreProduct>("vinci_products.json")
+  // Vortex is optional — seed still completes if the JSON isn't generated yet
+  // (the Brand record + /vortex landing page will exist regardless so the
+  // storefront can render "Coming soon" without 404ing).
+  const vortexProducts = loadJson<FirestoreProduct>("vortex_products.json")
 
-  for (const p of [...wisdomProducts, ...vinciProducts]) {
+  for (const p of [...wisdomProducts, ...vinciProducts, ...vortexProducts]) {
     if (p.category) allCategories.add(p.category)
   }
 
@@ -149,7 +211,7 @@ export default async function seedFromFirestore({ container }: ExecArgs) {
   // --- Step 4: Product Tags ---
   console.log("\nStep 4: Creating Product Tags...")
   const allTags = new Set<string>()
-  for (const p of [...wisdomProducts, ...vinciProducts]) {
+  for (const p of [...wisdomProducts, ...vinciProducts, ...vortexProducts]) {
     for (const tag of p.tags || []) {
       allTags.add(tag)
     }
@@ -227,6 +289,9 @@ export default async function seedFromFirestore({ container }: ExecArgs) {
       images,
       tags,
       variants: [variant],
+      // Publish to the single shared sales channel so the cart accepts
+      // this product regardless of brand.
+      sales_channels: [{ id: lekaChannel.id }],
     }
 
     // Associate category
@@ -240,7 +305,23 @@ export default async function seedFromFirestore({ container }: ExecArgs) {
     }
 
     const product = await productService.createProducts(productData as any) as any
-    return Array.isArray(product) ? product[0]?.id : product.id
+    const productId = Array.isArray(product) ? product[0]?.id : product.id
+
+    // Link the product to its Brand via the brand-product module link.
+    // This is what powers the storefront brand filter (Medusa query
+    // graph: `GET /store/products?fields=+brand.*&filters[brand][handle]=wisdom`)
+    // and the admin "Brand" column on the Products list.
+    const brandId = brandMap[p.brand]
+    if (productId && brandId) {
+      await link.create({
+        [BRAND_MODULE]: { brand_id: brandId },
+        [Modules.PRODUCT]: { product_id: productId },
+      })
+    } else if (!brandId) {
+      console.warn(`    No brand mapping for "${p.brand}" on ${p.item_code} — skipped brand link`)
+    }
+
+    return productId
   }
 
   // Import Wisdom products
@@ -274,6 +355,26 @@ export default async function seedFromFirestore({ container }: ExecArgs) {
     }
   }
   console.log(`  Done: ${vinciCount} Vinci products imported`)
+
+  // Import Vortex products (optional — skipped if vortex_products.json absent)
+  let vortexCount = 0
+  if (vortexProducts.length > 0) {
+    console.log(`\n  Importing ${vortexProducts.length} Vortex products...`)
+    for (const p of vortexProducts) {
+      try {
+        await importProduct(p)
+        vortexCount++
+        if (vortexCount % 100 === 0) {
+          console.log(`    ${vortexCount} / ${vortexProducts.length}`)
+        }
+      } catch (err: any) {
+        console.error(`    Error importing ${p.item_code}: ${err.message}`)
+      }
+    }
+    console.log(`  Done: ${vortexCount} Vortex products imported`)
+  } else {
+    console.log(`\n  Skipping Vortex (vortex_products.json not found)`)
+  }
 
   // --- Step 6: Region, Fulfillment, Payment ---
   console.log("\nStep 6: Setting up Region, Fulfillment, and Payment...")
@@ -313,21 +414,20 @@ export default async function seedFromFirestore({ container }: ExecArgs) {
     console.log(`  Shipping setup skipped: ${err.message}`)
   }
 
-  // Create Publishable API Keys for each sales channel
+  // Create ONE publishable API key for the shared Leka Catalogs storefront.
+  // Replaces the previous per-brand keys — the storefront now uses a single
+  // key across /wisdom, /vinci, /vortex landing pages so the cart cookie is
+  // shared and items from any brand can sit in the same cart.
   const apiKeyService = container.resolve(Modules.API_KEY)
   try {
-    const wisdomKey = await (apiKeyService as any).createApiKeys({
-      title: "Wisdom Storefront",
+    const storefrontKey = await (apiKeyService as any).createApiKeys({
+      title: "Leka Catalogs Storefront",
       type: "publishable",
     })
-    const vinciKey = await (apiKeyService as any).createApiKeys({
-      title: "Vinci Play Storefront",
-      type: "publishable",
-    })
-    console.log(`  Publishable Keys:`)
-    console.log(`    Wisdom: ${wisdomKey.token}`)
-    console.log(`    Vinci:  ${vinciKey.token}`)
-    console.log(`  >> Copy these keys to medusa-storefront/.env.local`)
+    console.log(`  Publishable Key:`)
+    console.log(`    Leka Catalogs Storefront: ${storefrontKey.token}`)
+    console.log(`  >> Copy this key to eukrit/leka-website/catalogs/.env.local`)
+    console.log(`     as NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY (single key for all brands)`)
   } catch (err: any) {
     console.log(`  API Key setup skipped: ${err.message}`)
   }
@@ -353,12 +453,22 @@ export default async function seedFromFirestore({ container }: ExecArgs) {
   }
 
   // --- Summary ---
+  const totalProducts = wisdomCount + vinciCount + vortexCount
   console.log("\n=== Seed Complete ===")
-  console.log(`  Sales Channels: 2 (Wisdom, Vinci Play)`)
+  console.log(`  Sales Channels: 1 (Leka Catalogs — shared across all brands)`)
+  console.log(`  Brands: ${Object.keys(brandMap).length} (${BRAND_DEFINITIONS.map((b) => b.name).join(", ")})`)
   console.log(`  Categories: ${allCategories.size}`)
   console.log(`  Collections: ${seriesSlugs.size}`)
   console.log(`  Tags: ${allTags.size}`)
-  console.log(`  Products: ${wisdomCount + vinciCount} (Wisdom: ${wisdomCount}, Vinci: ${vinciCount})`)
+  console.log(
+    `  Products: ${totalProducts} ` +
+      `(Wisdom: ${wisdomCount}, Vinci: ${vinciCount}, Vortex: ${vortexCount})`
+  )
   console.log(`  Region: Asia-Pacific (USD, 5 countries)`)
   console.log(`  Customer Groups: 3 (Dealer, Distributor, Retail)`)
+  console.log(
+    `\n  NOTE: cart is now multi-brand by design. The storefront's single ` +
+      `publishable key + shared cart cookie lets customers add Wisdom + Vinci ` +
+      `+ Vortex products to the same cart and send one combined proposal.`
+  )
 }

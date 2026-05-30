@@ -1,0 +1,1731 @@
+{
+  "_meta": {
+    "generated_by": "wisdom-catalog/build_recrop_worklist.py",
+    "medusa_url": "https://leka-medusa-backend-rg5gmtwrfa-as.a.run.app",
+    "verify_collection": "wisdom_outdoor_play_verify",
+    "collection_id": "pcol_01KSTM5ZC4H197S057QC2TNATR",
+    "placeholder_url": "https://catalogs.leka.studio/api/i/leka-project/_placeholder/leka-coming-soon.png"
+  },
+  "summary": {
+    "rejection_records": 96,
+    "skus_with_rejections": 55,
+    "skus_in_outdoor_play": 54,
+    "skus_resolved_to_medusa": 54,
+    "skus_unresolved": 0,
+    "unique_products_with_rejections": 54,
+    "bucket_A_rejected_thumb": 38,
+    "bucket_B_placeholder_with_rejections": 0,
+    "bucket_C_silent_placeholder": 6,
+    "targets": 44,
+    "unique_pages": 20,
+    "skipped_no_page": 0
+  },
+  "targets_by_sku": [
+    {
+      "sku": "CSS-CBZJ-BZ",
+      "product_id": "prod_01KNKW13627C98GJA8G11H421W",
+      "title": "Castle Support Standard Package",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/leka-project/_placeholder/leka-coming-soon.png",
+      "current_image_status": "placeholder",
+      "handle": "leka-project-o6lsl2na",
+      "matched_id": null,
+      "sub_area": "sand_water",
+      "page_assignments": [
+        [
+          "2025 Wisdom catalog.pdf",
+          77
+        ]
+      ],
+      "rejections": [],
+      "bucket": "C_silent_placeholder",
+      "all_candidate_skus": [
+        "CSS-CBZJ-BZ"
+      ]
+    },
+    {
+      "sku": "CSS-JDZJ-BZ",
+      "product_id": "prod_01KNKW14JCJA57V7BQKAEG80NB",
+      "title": "Classical Support Standard Package",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/CSS-JDZJ-BZ_wisdom_2025_p77_8756e070.jpeg",
+      "current_image_status": null,
+      "handle": "leka-project-ufhgoubo",
+      "matched_id": null,
+      "sub_area": "sand_water",
+      "page_assignments": [
+        [
+          "2025 Wisdom catalog.pdf",
+          77
+        ]
+      ],
+      "rejections": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/CSS-JDZJ-BZ_wisdom_2025_p77_8756e070.jpeg",
+          "confidence": 0.9,
+          "depicted": "giant wooden game board",
+          "title_at_verify": "Classical Support Standard Package"
+        }
+      ],
+      "bucket": "A_rejected_thumb"
+    },
+    {
+      "sku": "CSS-JQ-V01",
+      "product_id": "prod_01KNKW15E5NSEKF8VV4VRHJVZ9",
+      "title": "Sand & Water - Jumbo Version",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/CSS-JQ-V01_wisdom_2025_p77_a992c993.jpeg",
+      "current_image_status": null,
+      "handle": "leka-project-mr91g35d",
+      "matched_id": "CSS-JQ-V01",
+      "sub_area": "sand_water",
+      "page_assignments": [
+        [
+          "2025 Wisdom catalog.pdf",
+          77
+        ]
+      ],
+      "rejections": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/CSS-JQ-V01_wisdom_2025_p77_a992c993.jpeg",
+          "confidence": 1.0,
+          "depicted": "pipe fittings",
+          "title_at_verify": "Sand & Water - Jumbo Version"
+        }
+      ],
+      "bucket": "A_rejected_thumb"
+    },
+    {
+      "sku": "CSS-QBWJ-BZ",
+      "product_id": "prod_01KNKW16TS5FCYTGN4VVGR7PPW",
+      "title": "Wallboard Toys Standard Package",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/leka-project/catalog/CSS-QBWJ-BZ_img0.jpeg",
+      "current_image_status": null,
+      "handle": "leka-project-kilz4mff",
+      "matched_id": null,
+      "sub_area": "sand_water",
+      "page_assignments": [
+        [
+          "2025 Wisdom catalog.pdf",
+          77
+        ]
+      ],
+      "rejections": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/catalog/CSS-QBWJ-BZ_img2.jpeg",
+          "confidence": 0.0,
+          "depicted": "",
+          "title_at_verify": "Wallboard Toys Standard Package"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/catalog/CSS-QBWJ-BZ_img1.jpeg",
+          "confidence": 1.0,
+          "depicted": "pipe fittings",
+          "title_at_verify": "Wallboard Toys Standard Package"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/catalog/CSS-QBWJ-BZ_img0.jpeg",
+          "confidence": 1.0,
+          "depicted": "water and sand play stations",
+          "title_at_verify": "Wallboard Toys Standard Package"
+        }
+      ],
+      "bucket": "A_rejected_thumb"
+    },
+    {
+      "sku": "CSS-XPB-PMSG",
+      "product_id": "prod_01KNKW18EBWC29QD1B1CBCDKYX",
+      "title": "Accessory Package-Semicircular Tubes",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/leka-project/catalog/CSS-XPB-PMSG_img0.jpeg",
+      "current_image_status": null,
+      "handle": "leka-project-daikwob5",
+      "matched_id": null,
+      "sub_area": "sand_water",
+      "page_assignments": [
+        [
+          "2025 Wisdom catalog.pdf",
+          77
+        ]
+      ],
+      "rejections": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/catalog/CSS-XPB-PMSG_img1.jpeg",
+          "confidence": 1.0,
+          "depicted": "pipe fittings",
+          "title_at_verify": "Accessory Package-Semicircular Tubes"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/catalog/CSS-XPB-PMSG_img2.jpeg",
+          "confidence": 1.0,
+          "depicted": "wooden game board with circular holes",
+          "title_at_verify": "Accessory Package-Semicircular Tubes"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/catalog/CSS-XPB-PMSG_img0.jpeg",
+          "confidence": 1.0,
+          "depicted": "various water and sand play accessories including troughs, containers, and activity stations",
+          "title_at_verify": "Accessory Package-Semicircular Tubes"
+        }
+      ],
+      "bucket": "A_rejected_thumb"
+    },
+    {
+      "sku": "CSS-XPB-SG",
+      "product_id": "prod_01KNKW18ZR85W1HZ01HMHSXK0T",
+      "title": "Accessory Package-Tubes",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/leka-project/catalog/CSS-XPB-SG_img0.jpeg",
+      "current_image_status": null,
+      "handle": "leka-project-yhwbs7cr",
+      "matched_id": null,
+      "sub_area": "sand_water",
+      "page_assignments": [
+        [
+          "2025 Wisdom catalog.pdf",
+          77
+        ]
+      ],
+      "rejections": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/catalog/CSS-XPB-SG_img0.jpeg",
+          "confidence": 0.9,
+          "depicted": "various water play accessories including troughs, containers, and water wheels",
+          "title_at_verify": "Accessory Package-Tubes"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/catalog/CSS-XPB-SG_img2.jpeg",
+          "confidence": 1.0,
+          "depicted": "wooden play panel with holes",
+          "title_at_verify": "Accessory Package-Tubes"
+        }
+      ],
+      "bucket": "A_rejected_thumb"
+    },
+    {
+      "sku": "FS-WP0005C",
+      "product_id": "prod_01KNKW8T93TW00K59G422VZGPY",
+      "title": "Sensory Station Pair",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/FS-WP0005C_usa_2025_p116_b1369eac.jpeg",
+      "current_image_status": null,
+      "handle": "leka-project-20d6a4ke",
+      "matched_id": "FS-WP0005C",
+      "sub_area": "planting_breeding",
+      "page_assignments": [
+        [
+          "2025 Wisdom catalog.pdf",
+          92
+        ]
+      ],
+      "rejections": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/FS-WP0005C_usa_2025_p116_b1369eac.jpeg",
+          "confidence": 0.8,
+          "depicted": "playground merry-go-round with tricycles",
+          "title_at_verify": "Sensory Station Pair"
+        }
+      ],
+      "bucket": "A_rejected_thumb"
+    },
+    {
+      "sku": "GP2-T040",
+      "product_id": "prod_01KNKWDMC0ZY8EJ4C3W33H0R6P",
+      "title": "Transport Theme Chalkboard",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/GP2-T040_wisdom_2025_p98_e73d0ba5.jpeg",
+      "current_image_status": null,
+      "handle": "leka-project-1z1fremf",
+      "matched_id": "GP2-T040",
+      "sub_area": "planting_breeding",
+      "page_assignments": [
+        [
+          "2025 Wisdom catalog.pdf",
+          98
+        ]
+      ],
+      "rejections": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/GP2-T040_wisdom_2025_p98_e73d0ba5.jpeg",
+          "confidence": 1.0,
+          "depicted": "silhouettes of various transport vehicles",
+          "title_at_verify": "Transport Theme Chalkboard"
+        }
+      ],
+      "bucket": "A_rejected_thumb"
+    },
+    {
+      "sku": "GP2-T042",
+      "product_id": "prod_01KNKWDMTRS40ZXQ7NM17NEXAC",
+      "title": "Emotion Theme Chalkboard",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/GP2-T042_wisdom_2025_p98_edb10502.jpeg",
+      "current_image_status": null,
+      "handle": "leka-project-l45t4kyj",
+      "matched_id": "GP2-T042",
+      "sub_area": "planting_breeding",
+      "page_assignments": [
+        [
+          "2025 Wisdom catalog.pdf",
+          98
+        ]
+      ],
+      "rejections": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/GP2-T042_wisdom_2025_p98_edb10502.jpeg",
+          "confidence": 0.9,
+          "depicted": "emotion faces",
+          "title_at_verify": "Emotion Theme Chalkboard"
+        }
+      ],
+      "bucket": "A_rejected_thumb"
+    },
+    {
+      "sku": "GP2-T043-V02",
+      "product_id": "prod_01KNKWDN8DE0FXGFK6S89WPJ7V",
+      "title": "Dimension：81×118cm",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/GP2-T043-V02_wisdom_2025_p98_e5fc1e59.jpeg",
+      "current_image_status": null,
+      "handle": "leka-project-uh1bqqd6",
+      "matched_id": "GP2-T043-V02",
+      "sub_area": "planting_breeding",
+      "page_assignments": [
+        [
+          "2025 Wisdom catalog.pdf",
+          98
+        ]
+      ],
+      "rejections": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/GP2-T043-V02_wisdom_2025_p98_e5fc1e59.jpeg",
+          "confidence": 0.0,
+          "depicted": "",
+          "title_at_verify": "Dimension：81×118cm"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/GP2-T043-V02_wisdom_2025_p503_6baec52c.jpeg",
+          "confidence": 0.0,
+          "depicted": "",
+          "title_at_verify": "Dimension：81×118cm"
+        }
+      ],
+      "bucket": "A_rejected_thumb"
+    },
+    {
+      "sku": "GP2-T044",
+      "product_id": "prod_01KNKWDNP04TRD7JJ5ZHW33KQV",
+      "title": "Emotion Theme Whiteboard",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/GP2-T044_wisdom_2025_p98_4d007436.jpeg",
+      "current_image_status": null,
+      "handle": "leka-project-556l2gda",
+      "matched_id": "GP2-T044",
+      "sub_area": "planting_breeding",
+      "page_assignments": [
+        [
+          "2025 Wisdom catalog.pdf",
+          98
+        ]
+      ],
+      "rejections": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/GP2-T044_wisdom_2025_p98_4d007436.jpeg",
+          "confidence": 0.9,
+          "depicted": "drawings of faces expressing emotions",
+          "title_at_verify": "Emotion Theme Whiteboard"
+        }
+      ],
+      "bucket": "A_rejected_thumb"
+    },
+    {
+      "sku": "GP2-T057",
+      "product_id": "prod_01KNKWDQDWEDQ3175T3R2X9PAT",
+      "title": "Outdoor Chalkboard 1-100 Number\nSquare - Coloured",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/GP2-T057_wisdom_2025_p98_f5e734b8.jpeg",
+      "current_image_status": null,
+      "handle": "leka-project-7wugil3w",
+      "matched_id": "GP2-T057",
+      "sub_area": "planting_breeding",
+      "page_assignments": [
+        [
+          "2025 Wisdom catalog.pdf",
+          98
+        ]
+      ],
+      "rejections": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/GP2-T057_wisdom_2025_p98_f5e734b8.jpeg",
+          "confidence": 0.9,
+          "depicted": "a colored 1-100 number grid",
+          "title_at_verify": "Outdoor Chalkboard 1-100 Number\nSquare - Coloured"
+        }
+      ],
+      "bucket": "A_rejected_thumb"
+    },
+    {
+      "sku": "GP2-T058",
+      "product_id": "prod_01KNKWDQVV964M39ER7A6R8VCB",
+      "title": "Outdoor Chalkboard 1-20 Number\nSquare-Black & White",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/GP2-T058_wisdom_2025_p98_20a49e03.jpeg",
+      "current_image_status": null,
+      "handle": "leka-project-raapg223",
+      "matched_id": "GP2-T058",
+      "sub_area": "planting_breeding",
+      "page_assignments": [
+        [
+          "2025 Wisdom catalog.pdf",
+          98
+        ]
+      ],
+      "rejections": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/GP2-T058_wisdom_2025_p98_20a49e03.jpeg",
+          "confidence": 0.9,
+          "depicted": "black and white number grid",
+          "title_at_verify": "Outdoor Chalkboard 1-20 Number\nSquare-Black & White"
+        }
+      ],
+      "bucket": "A_rejected_thumb"
+    },
+    {
+      "sku": "GP2-T059",
+      "product_id": "prod_01KNKWDR9GEZFW5YNHR1332ZRS",
+      "title": "Outdoor Chalkboard Alphabet Square -\nBlack & White",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/GP2-T059_wisdom_2025_p98_804db2d1.jpeg",
+      "current_image_status": null,
+      "handle": "leka-project-minsf2c6",
+      "matched_id": "GP2-T059",
+      "sub_area": "planting_breeding",
+      "page_assignments": [
+        [
+          "2025 Wisdom catalog.pdf",
+          98
+        ]
+      ],
+      "rejections": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/GP2-T059_wisdom_2025_p503_ad0ab005.jpeg",
+          "confidence": 0.9,
+          "depicted": "wooden play stand with awning and small chalkboard",
+          "title_at_verify": "Outdoor Chalkboard Alphabet Square -\nBlack & White"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/GP2-T059_wisdom_2025_p98_804db2d1.jpeg",
+          "confidence": 0.9,
+          "depicted": "alphabet display board",
+          "title_at_verify": "Outdoor Chalkboard Alphabet Square -\nBlack & White"
+        }
+      ],
+      "bucket": "A_rejected_thumb"
+    },
+    {
+      "sku": "GP2-TC012",
+      "product_id": "prod_01KNKWE4HG27ME880Y0CBEBT8R",
+      "title": "Power Trolley Wheel-Yellow",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/GP2-TC012_wisdom_2025_p108_ee2181fe.jpeg",
+      "current_image_status": null,
+      "handle": "leka-project-n1qsm20y",
+      "matched_id": null,
+      "sub_area": "outdoor_classroom_misc",
+      "page_assignments": [
+        [
+          "2025 Wisdom catalog.pdf",
+          108
+        ]
+      ],
+      "rejections": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/GP2-TC012_wisdom_2025_p108_ee2181fe.jpeg",
+          "confidence": 1.0,
+          "depicted": "yellow tricycles on a red storage rack",
+          "title_at_verify": "Power Trolley Wheel-Yellow"
+        }
+      ],
+      "bucket": "A_rejected_thumb"
+    },
+    {
+      "sku": "GP3-1312-V02",
+      "product_id": "prod_01KNKWEHEKBR79PQMVSY3N0TS8",
+      "title": "Sand & Water Play Set-Round",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/GP3-1312-V02_wisdom_2025_p78_1f524bac.jpeg",
+      "current_image_status": null,
+      "handle": "leka-project-t3w2ur37",
+      "matched_id": null,
+      "sub_area": "sand_water",
+      "page_assignments": [
+        [
+          "2025 Wisdom catalog.pdf",
+          78
+        ]
+      ],
+      "rejections": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/GP3-1312-V02_wisdom_2025_p78_1f524bac.jpeg",
+          "confidence": 0.9,
+          "depicted": "a multi-compartment sand and water play set with triangular bins",
+          "title_at_verify": "Sand & Water Play Set-Round"
+        }
+      ],
+      "bucket": "A_rejected_thumb"
+    },
+    {
+      "sku": "HW1-S007",
+      "product_id": "prod_01KNKWEZBKFANBNWNDHFMS8TGB",
+      "title": "Nature's Elements Outdoor Insect\n-prevented & Anti-cold Flower Bed\n(Ladybug)",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW1-S007_wisdom_2025_p84_b69c38ea.jpeg",
+      "current_image_status": null,
+      "handle": "leka-project-p4z9m9qd",
+      "matched_id": null,
+      "sub_area": "outdoor_planting",
+      "page_assignments": [
+        [
+          "2025 Wisdom catalog.pdf",
+          84
+        ]
+      ],
+      "rejections": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW1-S007_wisdom_2025_p84_b69c38ea.jpeg",
+          "confidence": 0.9,
+          "depicted": "butterfly-shaped flower bed",
+          "title_at_verify": "Nature's Elements Outdoor Insect\n-prevented & Anti-cold Flower Bed\n(Ladybug)"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW1-S007_wisdom_2025_p84_ef3cf600.jpeg",
+          "confidence": 0.9,
+          "depicted": "plant with a trellis",
+          "title_at_verify": "Nature's Elements Outdoor Insect\n-prevented & Anti-cold Flower Bed\n(Ladybug)"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW1-S007_wisdom_2025_p84_88c2d571.jpeg",
+          "confidence": 0.9,
+          "depicted": "outdoor wooden flower beds with plants",
+          "title_at_verify": "Nature's Elements Outdoor Insect\n-prevented & Anti-cold Flower Bed\n(Ladybug)"
+        }
+      ],
+      "bucket": "A_rejected_thumb"
+    },
+    {
+      "sku": "HW1-S008-V01",
+      "product_id": "prod_01KNKWEZSMW1Y6T6VY1ZQSEV6Q",
+      "title": "Entrance Ramp",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/leka-project/_placeholder/leka-coming-soon.png",
+      "current_image_status": "placeholder",
+      "handle": "leka-project-ovgmlqvi",
+      "matched_id": null,
+      "sub_area": "outdoor_classroom_misc",
+      "page_assignments": [
+        [
+          "2025 Wisdom catalog.pdf",
+          108
+        ]
+      ],
+      "rejections": [],
+      "bucket": "C_silent_placeholder",
+      "all_candidate_skus": [
+        "HW1-S008-V01"
+      ]
+    },
+    {
+      "sku": "HW1-S032-V02",
+      "product_id": "prod_01KNKWF9FNDSVZZGE1SQE9YNNN",
+      "title": "Flowerpot Stand",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW1-S032-V02_wisdom_2025_p97_6855cf69.jpeg",
+      "current_image_status": null,
+      "handle": "leka-project-1luf2x7c",
+      "matched_id": null,
+      "sub_area": "outdoor_classroom_misc",
+      "page_assignments": [
+        [
+          "2025 Wisdom catalog.pdf",
+          97
+        ]
+      ],
+      "rejections": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW1-S032-V02_wisdom_2025_p97_6855cf69.jpeg",
+          "confidence": 1.0,
+          "depicted": "wooden planter",
+          "title_at_verify": "Flowerpot Stand"
+        }
+      ],
+      "bucket": "A_rejected_thumb"
+    },
+    {
+      "sku": "HW1-S033",
+      "product_id": "prod_01KNKWF9X3Q7G5521G8SRFK7MW",
+      "title": "Indoor Garden",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW1-S033_wisdom_2025_p83_6d4e4bc5.jpeg",
+      "current_image_status": null,
+      "handle": "leka-project-iej2w5sl",
+      "matched_id": null,
+      "sub_area": "outdoor_planting",
+      "page_assignments": [
+        [
+          "2025 Wisdom catalog.pdf",
+          83
+        ]
+      ],
+      "rejections": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW1-S033_wisdom_2025_p83_6d4e4bc5.jpeg",
+          "confidence": 0.9,
+          "depicted": "garden sign",
+          "title_at_verify": "Indoor Garden"
+        }
+      ],
+      "bucket": "A_rejected_thumb"
+    },
+    {
+      "sku": "HW1-S060",
+      "product_id": "prod_01KNKWFEG6HHW9094S18A75FPF",
+      "title": "Stand Column Support",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW1-S060_wisdom_2025_p81_973b4ea8.jpeg",
+      "current_image_status": null,
+      "handle": "leka-project-b4ejwklw",
+      "matched_id": null,
+      "sub_area": "sand_water",
+      "page_assignments": [
+        [
+          "2025 Wisdom catalog.pdf",
+          79
+        ],
+        [
+          "2025 Wisdom catalog.pdf",
+          81
+        ]
+      ],
+      "rejections": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW1-S060_wisdom_2025_p79_90a801cf.jpeg",
+          "confidence": 0.9,
+          "depicted": "water play station with multiple activity panels",
+          "title_at_verify": "Stand Column Support"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW1-S060_wisdom_2025_p81_3ebe7b8b.jpeg",
+          "confidence": 1.0,
+          "depicted": "wooden lattice panel",
+          "title_at_verify": "Stand Column Support"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW1-S060_wisdom_2025_p81_973b4ea8.jpeg",
+          "confidence": 1.0,
+          "depicted": "planter box with trellis and climbing roses",
+          "title_at_verify": "Stand Column Support"
+        }
+      ],
+      "bucket": "A_rejected_thumb"
+    },
+    {
+      "sku": "HW1-S082",
+      "product_id": "prod_01KNKWFNR5HTXH7KEQTQRXDBSE",
+      "title": "Fence",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW1-S082_wisdom_2025_p502_86c01957.jpeg",
+      "current_image_status": null,
+      "handle": "leka-project-ekzuthcn",
+      "matched_id": null,
+      "sub_area": "planting_breeding",
+      "page_assignments": [
+        [
+          "2025 Wisdom catalog.pdf",
+          81
+        ]
+      ],
+      "rejections": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW1-S082_wisdom_2025_p502_86c01957.jpeg",
+          "confidence": 0.9,
+          "depicted": "miniature garden decorations",
+          "title_at_verify": "Fence"
+        }
+      ],
+      "bucket": "A_rejected_thumb"
+    },
+    {
+      "sku": "HW1-S089",
+      "product_id": "prod_01KNKWFP5WDBTZN1JE1RBH85R1",
+      "title": "Flowerbed",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW1-S089_wisdom_2025_p81_c8bf5bcd.jpeg",
+      "current_image_status": null,
+      "handle": "leka-project-uxmw3qjb",
+      "matched_id": null,
+      "sub_area": "planting_breeding",
+      "page_assignments": [
+        [
+          "2025 Wisdom catalog.pdf",
+          81
+        ]
+      ],
+      "rejections": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW1-S089_wisdom_2025_p81_c8bf5bcd.jpeg",
+          "confidence": 0.8,
+          "depicted": "wooden planter with birdhouse",
+          "title_at_verify": "Flowerbed"
+        }
+      ],
+      "bucket": "A_rejected_thumb"
+    },
+    {
+      "sku": "HW1-S091",
+      "product_id": "prod_01KNKWFQ17NSMW2Q0T23SRT3H0",
+      "title": "Breeding Box-Ants",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW1-S091_wisdom_2025_p81_e420c09e.jpeg",
+      "current_image_status": null,
+      "handle": "leka-project-am4xlofo",
+      "matched_id": null,
+      "sub_area": "planting_breeding",
+      "page_assignments": [
+        [
+          "2025 Wisdom catalog.pdf",
+          81
+        ],
+        [
+          "2025 Wisdom catalog.pdf",
+          82
+        ]
+      ],
+      "rejections": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW1-S091_wisdom_2025_p81_e420c09e.jpeg",
+          "confidence": 0.9,
+          "depicted": "a multi-functional wooden outdoor play structure with various sections including mesh enclosures, a planter, and a birdhouse",
+          "title_at_verify": "Breeding Box-Ants"
+        }
+      ],
+      "bucket": "A_rejected_thumb"
+    },
+    {
+      "sku": "HW1-S092",
+      "product_id": "prod_01KNKWFQEDKZZA6D9W91E1EBMV",
+      "title": "Breeding Box-Hamster",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW1-S092_wisdom_2025_p82_1b34cef4.jpeg",
+      "current_image_status": null,
+      "handle": "leka-project-m9oag3i0",
+      "matched_id": null,
+      "sub_area": "planting_breeding",
+      "page_assignments": [
+        [
+          "2025 Wisdom catalog.pdf",
+          81
+        ],
+        [
+          "2025 Wisdom catalog.pdf",
+          82
+        ]
+      ],
+      "rejections": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW1-S092_wisdom_2025_p82_1b34cef4.jpeg",
+          "confidence": 0.9,
+          "depicted": "hamster habitat or playhouse",
+          "title_at_verify": "Breeding Box-Hamster"
+        }
+      ],
+      "bucket": "A_rejected_thumb"
+    },
+    {
+      "sku": "HW1-S143",
+      "product_id": "prod_01KNKWFV1PVYN7TBWKJ65SA961",
+      "title": "Triangle Support (Single)",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW1-S143_wisdom_2025_p92_0f3f025c.jpeg",
+      "current_image_status": null,
+      "handle": "leka-project-n483fow6",
+      "matched_id": null,
+      "sub_area": "music",
+      "page_assignments": [
+        [
+          "2025 Wisdom catalog.pdf",
+          92
+        ],
+        [
+          "2025 Wisdom catalog.pdf",
+          97
+        ]
+      ],
+      "rejections": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW1-S143_wisdom_2025_p92_0f3f025c.jpeg",
+          "confidence": 0.9,
+          "depicted": "colorful play panel structure",
+          "title_at_verify": "Triangle Support (Single)"
+        }
+      ],
+      "bucket": "A_rejected_thumb"
+    },
+    {
+      "sku": "HW1-S1A144",
+      "product_id": "prod_01KNKWFXW3B1F1CNGP2ES24J3J",
+      "title": "Nature's Elements\nOutdoor Planter With Root Viewer-Two Doors",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW1-S1A144_wisdom_2025_p85_3dedae5c.jpeg",
+      "current_image_status": null,
+      "handle": "leka-project-usykrawi",
+      "matched_id": null,
+      "sub_area": "outdoor_planting",
+      "page_assignments": [
+        [
+          "2025 Wisdom catalog.pdf",
+          85
+        ]
+      ],
+      "rejections": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW1-S1A144_wisdom_2025_p85_301cd6f0.jpeg",
+          "confidence": 0.0,
+          "depicted": "",
+          "title_at_verify": "Nature's Elements\nOutdoor Planter With Root Viewer-Two Doors"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW1-S1A144_wisdom_2025_p85_3dedae5c.jpeg",
+          "confidence": 0.9,
+          "depicted": "a wooden multi-tiered plant stand with potted plants",
+          "title_at_verify": "Nature's Elements\nOutdoor Planter With Root Viewer-Two Doors"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW1-S1A144_wisdom_2025_p85_e938d56d.jpeg",
+          "confidence": 1.0,
+          "depicted": "wooden shelf unit",
+          "title_at_verify": "Nature's Elements\nOutdoor Planter With Root Viewer-Two Doors"
+        }
+      ],
+      "bucket": "A_rejected_thumb"
+    },
+    {
+      "sku": "HW1-S205",
+      "product_id": "prod_01KNKWG8Y1RF4CK9Y9S87V9R9S",
+      "title": "Nature's Element Outdoor Flowerbed(L)",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW1-S205_wisdom_2025_p502_24fd0f8d.jpeg",
+      "current_image_status": null,
+      "handle": "leka-project-6ctohj8q",
+      "matched_id": null,
+      "sub_area": "outdoor_planting",
+      "page_assignments": [
+        [
+          "2025 Wisdom catalog.pdf",
+          83
+        ]
+      ],
+      "rejections": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW1-S205_wisdom_2025_p502_24fd0f8d.jpeg",
+          "confidence": 1.0,
+          "depicted": "butterfly-shaped box",
+          "title_at_verify": "Nature's Element Outdoor Flowerbed(L)"
+        }
+      ],
+      "bucket": "A_rejected_thumb"
+    },
+    {
+      "sku": "HW1-S247-V01",
+      "product_id": "prod_01KNKWGCRVC4B48SEDH5J6B0NP",
+      "title": "Little Farm-Corner Fence Set",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW1-S247-V01_wisdom_2025_p86_8e8a18ed.jpeg",
+      "current_image_status": null,
+      "handle": "leka-project-9c7xyj0a",
+      "matched_id": "HW1-S247-V01",
+      "sub_area": "outdoor_classroom_misc",
+      "page_assignments": [
+        [
+          "2025 Wisdom catalog.pdf",
+          86
+        ]
+      ],
+      "rejections": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW1-S247-V01_wisdom_2025_p86_8e8a18ed.jpeg",
+          "confidence": 0.0,
+          "depicted": "",
+          "title_at_verify": "Little Farm-Corner Fence Set"
+        }
+      ],
+      "bucket": "A_rejected_thumb"
+    },
+    {
+      "sku": "HW1-S251-V01",
+      "product_id": "prod_01KNKWGEGD9X5TMEQ7E8SRD3YW",
+      "title": "Little Farm-Long Hexagon Planting Set",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW1-S251-V01_wisdom_2025_p87_83340a0a.jpeg",
+      "current_image_status": null,
+      "handle": "leka-project-q1slewg5",
+      "matched_id": "HW1-S251-V01",
+      "sub_area": "outdoor_classroom_misc",
+      "page_assignments": [
+        [
+          "2025 Wisdom catalog.pdf",
+          87
+        ]
+      ],
+      "rejections": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW1-S251-V01_wisdom_2025_p87_83340a0a.jpeg",
+          "confidence": 0.9,
+          "depicted": "children watering plants in rectangular raised garden beds",
+          "title_at_verify": "Little Farm-Long Hexagon Planting Set"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW1-S251-V01_wisdom_2025_p87_c283c4fd.jpeg",
+          "confidence": 0.9,
+          "depicted": "tiered rectangular raised garden bed with trellis",
+          "title_at_verify": "Little Farm-Long Hexagon Planting Set"
+        }
+      ],
+      "bucket": "A_rejected_thumb"
+    },
+    {
+      "sku": "HW1-S263",
+      "product_id": "prod_01KNKWGKJMHY3V6JDPFGAB4GHT",
+      "title": "0",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/leka-project/catalog/HW1-S263_img0.jpeg",
+      "current_image_status": null,
+      "handle": "leka-project-k45lud4u",
+      "matched_id": null,
+      "sub_area": "planting_breeding",
+      "page_assignments": [
+        [
+          "2025 Wisdom catalog.pdf",
+          88
+        ]
+      ],
+      "rejections": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/catalog/HW1-S263_img0.jpeg",
+          "confidence": 0.1,
+          "depicted": "raised garden bed with cold frame",
+          "title_at_verify": "0"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/catalog/HW1-S263_img6.jpeg",
+          "confidence": 1.0,
+          "depicted": "three-tiered wooden planter",
+          "title_at_verify": "0"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/catalog/HW1-S263_img1.jpeg",
+          "confidence": 1.0,
+          "depicted": "raised garden bed with greenhouse",
+          "title_at_verify": "0"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/catalog/HW1-S263_img2.jpeg",
+          "confidence": 0.0,
+          "depicted": "planter with lettuce plants",
+          "title_at_verify": "0"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/catalog/HW1-S263_img4.jpeg",
+          "confidence": 1.0,
+          "depicted": "raised garden bed with trellises",
+          "title_at_verify": "0"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/catalog/HW1-S263_img3.jpeg",
+          "confidence": 0.1,
+          "depicted": "raised garden bed with trellises",
+          "title_at_verify": "0"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/catalog/HW1-S263_img5.jpeg",
+          "confidence": 1.0,
+          "depicted": "children playing in a small garden structure",
+          "title_at_verify": "0"
+        }
+      ],
+      "bucket": "A_rejected_thumb"
+    },
+    {
+      "sku": "HW1-S366",
+      "product_id": "prod_01KNKWHPKJ2G554KACVKP6ZRJ5",
+      "title": "Wallboard Post",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/leka-project/catalog/HW1-S366_img0.jpeg",
+      "current_image_status": null,
+      "handle": "leka-project-nfki612i",
+      "matched_id": null,
+      "sub_area": "music",
+      "page_assignments": [
+        [
+          "2025 Wisdom catalog.pdf",
+          92
+        ]
+      ],
+      "rejections": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/catalog/HW1-S366_img9.jpeg",
+          "confidence": 1.0,
+          "depicted": "marimba",
+          "title_at_verify": "Wallboard Post"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/catalog/HW1-S366_img2.jpeg",
+          "confidence": 1.0,
+          "depicted": "multi-panel outdoor play station",
+          "title_at_verify": "Wallboard Post"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/catalog/HW1-S366_img1.jpeg",
+          "confidence": 0.0,
+          "depicted": "",
+          "title_at_verify": "Wallboard Post"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/catalog/HW1-S366_img3.jpeg",
+          "confidence": 0.9,
+          "depicted": "wooden play structure",
+          "title_at_verify": "Wallboard Post"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/catalog/HW1-S366_img8.jpeg",
+          "confidence": 1.0,
+          "depicted": "xylophone",
+          "title_at_verify": "Wallboard Post"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/catalog/HW1-S366_img4.jpeg",
+          "confidence": 1.0,
+          "depicted": "outdoor chimes",
+          "title_at_verify": "Wallboard Post"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/catalog/HW1-S366_img7.jpeg",
+          "confidence": 1.0,
+          "depicted": "outdoor musical instrument stand",
+          "title_at_verify": "Wallboard Post"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/catalog/HW1-S366_img0.jpeg",
+          "confidence": 1.0,
+          "depicted": "musical play structure",
+          "title_at_verify": "Wallboard Post"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/catalog/HW1-S366_img5.jpeg",
+          "confidence": 0.9,
+          "depicted": "playground activity panel",
+          "title_at_verify": "Wallboard Post"
+        }
+      ],
+      "bucket": "A_rejected_thumb"
+    },
+    {
+      "sku": "HW1-S614",
+      "product_id": "prod_01KNKWHX4RPNG16RGK3A077EEP",
+      "title": "Nature's Elements Outdoor\nChalkboard Table-S",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/leka-project/_placeholder/leka-coming-soon.png",
+      "current_image_status": "placeholder",
+      "handle": "leka-project-4hzikepw",
+      "matched_id": "HW1-S614",
+      "sub_area": "planting_breeding",
+      "page_assignments": [
+        [
+          "2025 Wisdom catalog.pdf",
+          96
+        ]
+      ],
+      "rejections": [],
+      "bucket": "C_silent_placeholder",
+      "all_candidate_skus": [
+        "HW1-S614"
+      ]
+    },
+    {
+      "sku": "HW1-S616",
+      "product_id": "prod_01KNKWHXZKS2M0VAF35GD7GB90",
+      "title": "Light & Shadow House-Red & Green",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW1-S616_wisdom_2025_p95_6d71eb78.jpeg",
+      "current_image_status": null,
+      "handle": "leka-project-bsneu45j",
+      "matched_id": "HW1-S616",
+      "sub_area": "planting_breeding",
+      "page_assignments": [
+        [
+          "2025 Wisdom catalog.pdf",
+          95
+        ]
+      ],
+      "rejections": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW1-S616_wisdom_2025_p95_6e30aa27.jpeg",
+          "confidence": 0.9,
+          "depicted": "wooden play kitchen or storage unit",
+          "title_at_verify": "Light & Shadow House-Red & Green"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW1-S616_wisdom_2025_p95_f19c6da2.jpeg",
+          "confidence": 1.0,
+          "depicted": "wooden outdoor table with a bucket",
+          "title_at_verify": "Light & Shadow House-Red & Green"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW1-S616_wisdom_2025_p95_6d71eb78.jpeg",
+          "confidence": 1.0,
+          "depicted": "wooden table or bench",
+          "title_at_verify": "Light & Shadow House-Red & Green"
+        }
+      ],
+      "bucket": "A_rejected_thumb"
+    },
+    {
+      "sku": "HW1-S621",
+      "product_id": "prod_01KNKWJ09N7RYC7EXX3WE71DZ8",
+      "title": "Hex Tray",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/leka-project/_placeholder/leka-coming-soon.png",
+      "current_image_status": "placeholder",
+      "handle": "leka-project-9jdqhqbc",
+      "matched_id": "HW1-S621",
+      "sub_area": "planting_breeding",
+      "page_assignments": [
+        [
+          "2025 Wisdom catalog.pdf",
+          98
+        ]
+      ],
+      "rejections": [],
+      "bucket": "C_silent_placeholder",
+      "all_candidate_skus": [
+        "HW1-S621"
+      ]
+    },
+    {
+      "sku": "HW1-S626",
+      "product_id": "prod_01KNKWJ26Y92PM9YZDXJBAJ9C4",
+      "title": "Outdoor Mobile Shoes Rack",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW1-S626_wisdom_2025_p111_52454d4b.jpeg",
+      "current_image_status": null,
+      "handle": "leka-project-pypw9asf",
+      "matched_id": "HW1-S626",
+      "sub_area": "outdoor_classroom_misc",
+      "page_assignments": [
+        [
+          "2025 Wisdom catalog.pdf",
+          111
+        ]
+      ],
+      "rejections": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW1-S626_wisdom_2025_p111_52454d4b.jpeg",
+          "confidence": 0.0,
+          "depicted": "",
+          "title_at_verify": "Outdoor Mobile Shoes Rack"
+        }
+      ],
+      "bucket": "A_rejected_thumb"
+    },
+    {
+      "sku": "HW1-S627",
+      "product_id": "prod_01KNKWJ2MPX6H3AX0D465RBT05",
+      "title": "Outdoor Coat & Shoes Cabinet",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW1-S627_wisdom_2025_p111_f258f0b2.jpeg",
+      "current_image_status": null,
+      "handle": "leka-project-d93nrnek",
+      "matched_id": "HW1-S627",
+      "sub_area": "outdoor_classroom_misc",
+      "page_assignments": [
+        [
+          "2025 Wisdom catalog.pdf",
+          111
+        ]
+      ],
+      "rejections": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW1-S627_wisdom_2025_p111_f258f0b2.jpeg",
+          "confidence": 0.9,
+          "depicted": "outdoor shelving unit with awning",
+          "title_at_verify": "Outdoor Coat & Shoes Cabinet"
+        }
+      ],
+      "bucket": "A_rejected_thumb"
+    },
+    {
+      "sku": "HW1-S683",
+      "product_id": "prod_01KNKWJ4ACDR36D0RGSQE3DT6J",
+      "title": "Outdoor Bulletin Board - Roof",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/leka-project/_placeholder/leka-coming-soon.png",
+      "current_image_status": "placeholder",
+      "handle": "leka-project-cmh99q1p",
+      "matched_id": "HW1-S683",
+      "sub_area": "planting_breeding",
+      "page_assignments": [
+        [
+          "2025 Wisdom catalog.pdf",
+          90
+        ]
+      ],
+      "rejections": [],
+      "bucket": "C_silent_placeholder",
+      "all_candidate_skus": [
+        "HW1-S683"
+      ]
+    },
+    {
+      "sku": "HW1-S684",
+      "product_id": "prod_01KNKWJ4RM120G50C53QPK4NWN",
+      "title": "Outdoor Bulletin Board - Pinnacle",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/leka-project/_placeholder/leka-coming-soon.png",
+      "current_image_status": "placeholder",
+      "handle": "leka-project-zbg1p303",
+      "matched_id": "HW1-S684",
+      "sub_area": "planting_breeding",
+      "page_assignments": [
+        [
+          "2025 Wisdom catalog.pdf",
+          90
+        ]
+      ],
+      "rejections": [],
+      "bucket": "C_silent_placeholder",
+      "all_candidate_skus": [
+        "HW1-S684"
+      ]
+    },
+    {
+      "sku": "HW1-S695",
+      "product_id": "prod_01KNKWJ855G8W89N7KQAQ37KAD",
+      "title": "Outdoor Bulletin Board Stand Column",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW1-S695_wisdom_2025_p502_3825fdbe.jpeg",
+      "current_image_status": null,
+      "handle": "leka-project-qony6jqh",
+      "matched_id": "HW1-S695",
+      "sub_area": "planting_breeding",
+      "page_assignments": [
+        [
+          "2025 Wisdom catalog.pdf",
+          90
+        ]
+      ],
+      "rejections": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW1-S695_wisdom_2025_p502_3825fdbe.jpeg",
+          "confidence": 1.0,
+          "depicted": "wooden playhouse or sensory play structure",
+          "title_at_verify": "Outdoor Bulletin Board Stand Column"
+        }
+      ],
+      "bucket": "A_rejected_thumb"
+    },
+    {
+      "sku": "HW1-SP01",
+      "product_id": "prod_01KNKWJYDAZASV8R125H37MFWN",
+      "title": "0",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW1-SP01_wisdom_2025_p88_5e395940.jpeg",
+      "current_image_status": null,
+      "handle": "leka-project-89lsyqs7",
+      "matched_id": "HW1-SP01",
+      "sub_area": "outdoor_classroom_misc",
+      "page_assignments": [
+        [
+          "2025 Wisdom catalog.pdf",
+          88
+        ]
+      ],
+      "rejections": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW1-SP01_wisdom_2025_p86_a6aa2e64.jpeg",
+          "confidence": 1.0,
+          "depicted": "raised garden bed",
+          "title_at_verify": "0"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW1-SP01_wisdom_2025_p88_5e395940.jpeg",
+          "confidence": 0.0,
+          "depicted": "hydroponic planter with lettuce",
+          "title_at_verify": "0"
+        }
+      ],
+      "bucket": "A_rejected_thumb"
+    },
+    {
+      "sku": "HW1-SP02",
+      "product_id": "prod_01KNKWJYTTBS1FQDARBFR88FRW",
+      "title": "0",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW1-SP02_wisdom_2025_p86_ebea0f8d.jpeg",
+      "current_image_status": null,
+      "handle": "leka-project-0ac2jo2l",
+      "matched_id": "HW1-SP02",
+      "sub_area": "outdoor_classroom_misc",
+      "page_assignments": [
+        [
+          "2025 Wisdom catalog.pdf",
+          88
+        ]
+      ],
+      "rejections": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW1-SP02_wisdom_2025_p86_ebea0f8d.jpeg",
+          "confidence": 1.0,
+          "depicted": "raised garden bed",
+          "title_at_verify": "0"
+        }
+      ],
+      "bucket": "A_rejected_thumb"
+    },
+    {
+      "sku": "HW4-SZ001-V02",
+      "product_id": "prod_01KNKWK2V64VNSX8C6R8AVH7D5",
+      "title": "Nature's Elements Outdoor Rectangular Table",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW4-SZ001-V02_wisdom_2025_p503_dae89687.jpeg",
+      "current_image_status": null,
+      "handle": "leka-project-sszmfhzu",
+      "matched_id": null,
+      "sub_area": "outdoor_classroom_misc",
+      "page_assignments": [
+        [
+          "2025 Wisdom catalog.pdf",
+          96
+        ],
+        [
+          "2025 Wisdom catalog.pdf",
+          102
+        ]
+      ],
+      "rejections": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW4-SZ001-V02_wisdom_2025_p503_dae89687.jpeg",
+          "confidence": 1.0,
+          "depicted": "wooden playhouse on wheels",
+          "title_at_verify": "Nature's Elements Outdoor Rectangular Table"
+        }
+      ],
+      "bucket": "A_rejected_thumb"
+    },
+    {
+      "sku": "HW4-SZ010",
+      "product_id": "prod_01KNKWK5426KMKG5R76FPVGM5Y",
+      "title": "Outdoor Classroom - Storage Table",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW4-SZ010_wisdom_2025_p90_04f507f7.jpeg",
+      "current_image_status": null,
+      "handle": "leka-project-8hu45xo5",
+      "matched_id": "HW4-SZ010",
+      "sub_area": "planting_breeding",
+      "page_assignments": [
+        [
+          "2025 Wisdom catalog.pdf",
+          90
+        ]
+      ],
+      "rejections": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW4-SZ010_wisdom_2025_p502_68397c66.jpeg",
+          "confidence": 0.9,
+          "depicted": "wooden table",
+          "title_at_verify": "Outdoor Classroom - Storage Table"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/leka-project/spatial_v2/HW4-SZ010_wisdom_2025_p90_04f507f7.jpeg",
+          "confidence": 0.9,
+          "depicted": "wooden outdoor table",
+          "title_at_verify": "Outdoor Classroom - Storage Table"
+        }
+      ],
+      "bucket": "A_rejected_thumb"
+    }
+  ],
+  "work_units": [
+    {
+      "pdf": "2025 Wisdom catalog.pdf",
+      "page": 77,
+      "candidates": [
+        {
+          "sku": "CSS-CBZJ-BZ",
+          "product_id": "prod_01KNKW13627C98GJA8G11H421W",
+          "title": "Castle Support Standard Package",
+          "bucket": "C_silent_placeholder"
+        },
+        {
+          "sku": "CSS-JDZJ-BZ",
+          "product_id": "prod_01KNKW14JCJA57V7BQKAEG80NB",
+          "title": "Classical Support Standard Package",
+          "bucket": "A_rejected_thumb"
+        },
+        {
+          "sku": "CSS-JQ-V01",
+          "product_id": "prod_01KNKW15E5NSEKF8VV4VRHJVZ9",
+          "title": "Sand & Water - Jumbo Version",
+          "bucket": "A_rejected_thumb"
+        },
+        {
+          "sku": "CSS-QBWJ-BZ",
+          "product_id": "prod_01KNKW16TS5FCYTGN4VVGR7PPW",
+          "title": "Wallboard Toys Standard Package",
+          "bucket": "A_rejected_thumb"
+        },
+        {
+          "sku": "CSS-XPB-PMSG",
+          "product_id": "prod_01KNKW18EBWC29QD1B1CBCDKYX",
+          "title": "Accessory Package-Semicircular Tubes",
+          "bucket": "A_rejected_thumb"
+        },
+        {
+          "sku": "CSS-XPB-SG",
+          "product_id": "prod_01KNKW18ZR85W1HZ01HMHSXK0T",
+          "title": "Accessory Package-Tubes",
+          "bucket": "A_rejected_thumb"
+        }
+      ]
+    },
+    {
+      "pdf": "2025 Wisdom catalog.pdf",
+      "page": 78,
+      "candidates": [
+        {
+          "sku": "GP3-1312-V02",
+          "product_id": "prod_01KNKWEHEKBR79PQMVSY3N0TS8",
+          "title": "Sand & Water Play Set-Round",
+          "bucket": "A_rejected_thumb"
+        }
+      ]
+    },
+    {
+      "pdf": "2025 Wisdom catalog.pdf",
+      "page": 79,
+      "candidates": [
+        {
+          "sku": "HW1-S060",
+          "product_id": "prod_01KNKWFEG6HHW9094S18A75FPF",
+          "title": "Stand Column Support",
+          "bucket": "A_rejected_thumb"
+        }
+      ]
+    },
+    {
+      "pdf": "2025 Wisdom catalog.pdf",
+      "page": 81,
+      "candidates": [
+        {
+          "sku": "HW1-S060",
+          "product_id": "prod_01KNKWFEG6HHW9094S18A75FPF",
+          "title": "Stand Column Support",
+          "bucket": "A_rejected_thumb"
+        },
+        {
+          "sku": "HW1-S082",
+          "product_id": "prod_01KNKWFNR5HTXH7KEQTQRXDBSE",
+          "title": "Fence",
+          "bucket": "A_rejected_thumb"
+        },
+        {
+          "sku": "HW1-S089",
+          "product_id": "prod_01KNKWFP5WDBTZN1JE1RBH85R1",
+          "title": "Flowerbed",
+          "bucket": "A_rejected_thumb"
+        },
+        {
+          "sku": "HW1-S091",
+          "product_id": "prod_01KNKWFQ17NSMW2Q0T23SRT3H0",
+          "title": "Breeding Box-Ants",
+          "bucket": "A_rejected_thumb"
+        },
+        {
+          "sku": "HW1-S092",
+          "product_id": "prod_01KNKWFQEDKZZA6D9W91E1EBMV",
+          "title": "Breeding Box-Hamster",
+          "bucket": "A_rejected_thumb"
+        }
+      ]
+    },
+    {
+      "pdf": "2025 Wisdom catalog.pdf",
+      "page": 82,
+      "candidates": [
+        {
+          "sku": "HW1-S091",
+          "product_id": "prod_01KNKWFQ17NSMW2Q0T23SRT3H0",
+          "title": "Breeding Box-Ants",
+          "bucket": "A_rejected_thumb"
+        },
+        {
+          "sku": "HW1-S092",
+          "product_id": "prod_01KNKWFQEDKZZA6D9W91E1EBMV",
+          "title": "Breeding Box-Hamster",
+          "bucket": "A_rejected_thumb"
+        }
+      ]
+    },
+    {
+      "pdf": "2025 Wisdom catalog.pdf",
+      "page": 83,
+      "candidates": [
+        {
+          "sku": "HW1-S033",
+          "product_id": "prod_01KNKWF9X3Q7G5521G8SRFK7MW",
+          "title": "Indoor Garden",
+          "bucket": "A_rejected_thumb"
+        },
+        {
+          "sku": "HW1-S205",
+          "product_id": "prod_01KNKWG8Y1RF4CK9Y9S87V9R9S",
+          "title": "Nature's Element Outdoor Flowerbed(L)",
+          "bucket": "A_rejected_thumb"
+        }
+      ]
+    },
+    {
+      "pdf": "2025 Wisdom catalog.pdf",
+      "page": 84,
+      "candidates": [
+        {
+          "sku": "HW1-S007",
+          "product_id": "prod_01KNKWEZBKFANBNWNDHFMS8TGB",
+          "title": "Nature's Elements Outdoor Insect\n-prevented & Anti-cold Flower Bed\n(Ladybug)",
+          "bucket": "A_rejected_thumb"
+        }
+      ]
+    },
+    {
+      "pdf": "2025 Wisdom catalog.pdf",
+      "page": 85,
+      "candidates": [
+        {
+          "sku": "HW1-S1A144",
+          "product_id": "prod_01KNKWFXW3B1F1CNGP2ES24J3J",
+          "title": "Nature's Elements\nOutdoor Planter With Root Viewer-Two Doors",
+          "bucket": "A_rejected_thumb"
+        }
+      ]
+    },
+    {
+      "pdf": "2025 Wisdom catalog.pdf",
+      "page": 86,
+      "candidates": [
+        {
+          "sku": "HW1-S247-V01",
+          "product_id": "prod_01KNKWGCRVC4B48SEDH5J6B0NP",
+          "title": "Little Farm-Corner Fence Set",
+          "bucket": "A_rejected_thumb"
+        }
+      ]
+    },
+    {
+      "pdf": "2025 Wisdom catalog.pdf",
+      "page": 87,
+      "candidates": [
+        {
+          "sku": "HW1-S251-V01",
+          "product_id": "prod_01KNKWGEGD9X5TMEQ7E8SRD3YW",
+          "title": "Little Farm-Long Hexagon Planting Set",
+          "bucket": "A_rejected_thumb"
+        }
+      ]
+    },
+    {
+      "pdf": "2025 Wisdom catalog.pdf",
+      "page": 88,
+      "candidates": [
+        {
+          "sku": "HW1-S263",
+          "product_id": "prod_01KNKWGKJMHY3V6JDPFGAB4GHT",
+          "title": "0",
+          "bucket": "A_rejected_thumb"
+        },
+        {
+          "sku": "HW1-SP01",
+          "product_id": "prod_01KNKWJYDAZASV8R125H37MFWN",
+          "title": "0",
+          "bucket": "A_rejected_thumb"
+        },
+        {
+          "sku": "HW1-SP02",
+          "product_id": "prod_01KNKWJYTTBS1FQDARBFR88FRW",
+          "title": "0",
+          "bucket": "A_rejected_thumb"
+        }
+      ]
+    },
+    {
+      "pdf": "2025 Wisdom catalog.pdf",
+      "page": 90,
+      "candidates": [
+        {
+          "sku": "HW1-S683",
+          "product_id": "prod_01KNKWJ4ACDR36D0RGSQE3DT6J",
+          "title": "Outdoor Bulletin Board - Roof",
+          "bucket": "C_silent_placeholder"
+        },
+        {
+          "sku": "HW1-S684",
+          "product_id": "prod_01KNKWJ4RM120G50C53QPK4NWN",
+          "title": "Outdoor Bulletin Board - Pinnacle",
+          "bucket": "C_silent_placeholder"
+        },
+        {
+          "sku": "HW1-S695",
+          "product_id": "prod_01KNKWJ855G8W89N7KQAQ37KAD",
+          "title": "Outdoor Bulletin Board Stand Column",
+          "bucket": "A_rejected_thumb"
+        },
+        {
+          "sku": "HW4-SZ010",
+          "product_id": "prod_01KNKWK5426KMKG5R76FPVGM5Y",
+          "title": "Outdoor Classroom - Storage Table",
+          "bucket": "A_rejected_thumb"
+        }
+      ]
+    },
+    {
+      "pdf": "2025 Wisdom catalog.pdf",
+      "page": 92,
+      "candidates": [
+        {
+          "sku": "FS-WP0005C",
+          "product_id": "prod_01KNKW8T93TW00K59G422VZGPY",
+          "title": "Sensory Station Pair",
+          "bucket": "A_rejected_thumb"
+        },
+        {
+          "sku": "HW1-S143",
+          "product_id": "prod_01KNKWFV1PVYN7TBWKJ65SA961",
+          "title": "Triangle Support (Single)",
+          "bucket": "A_rejected_thumb"
+        },
+        {
+          "sku": "HW1-S366",
+          "product_id": "prod_01KNKWHPKJ2G554KACVKP6ZRJ5",
+          "title": "Wallboard Post",
+          "bucket": "A_rejected_thumb"
+        }
+      ]
+    },
+    {
+      "pdf": "2025 Wisdom catalog.pdf",
+      "page": 95,
+      "candidates": [
+        {
+          "sku": "HW1-S616",
+          "product_id": "prod_01KNKWHXZKS2M0VAF35GD7GB90",
+          "title": "Light & Shadow House-Red & Green",
+          "bucket": "A_rejected_thumb"
+        }
+      ]
+    },
+    {
+      "pdf": "2025 Wisdom catalog.pdf",
+      "page": 96,
+      "candidates": [
+        {
+          "sku": "HW1-S614",
+          "product_id": "prod_01KNKWHX4RPNG16RGK3A077EEP",
+          "title": "Nature's Elements Outdoor\nChalkboard Table-S",
+          "bucket": "C_silent_placeholder"
+        },
+        {
+          "sku": "HW4-SZ001-V02",
+          "product_id": "prod_01KNKWK2V64VNSX8C6R8AVH7D5",
+          "title": "Nature's Elements Outdoor Rectangular Table",
+          "bucket": "A_rejected_thumb"
+        }
+      ]
+    },
+    {
+      "pdf": "2025 Wisdom catalog.pdf",
+      "page": 97,
+      "candidates": [
+        {
+          "sku": "HW1-S032-V02",
+          "product_id": "prod_01KNKWF9FNDSVZZGE1SQE9YNNN",
+          "title": "Flowerpot Stand",
+          "bucket": "A_rejected_thumb"
+        },
+        {
+          "sku": "HW1-S143",
+          "product_id": "prod_01KNKWFV1PVYN7TBWKJ65SA961",
+          "title": "Triangle Support (Single)",
+          "bucket": "A_rejected_thumb"
+        }
+      ]
+    },
+    {
+      "pdf": "2025 Wisdom catalog.pdf",
+      "page": 98,
+      "candidates": [
+        {
+          "sku": "GP2-T040",
+          "product_id": "prod_01KNKWDMC0ZY8EJ4C3W33H0R6P",
+          "title": "Transport Theme Chalkboard",
+          "bucket": "A_rejected_thumb"
+        },
+        {
+          "sku": "GP2-T042",
+          "product_id": "prod_01KNKWDMTRS40ZXQ7NM17NEXAC",
+          "title": "Emotion Theme Chalkboard",
+          "bucket": "A_rejected_thumb"
+        },
+        {
+          "sku": "GP2-T043-V02",
+          "product_id": "prod_01KNKWDN8DE0FXGFK6S89WPJ7V",
+          "title": "Dimension：81×118cm",
+          "bucket": "A_rejected_thumb"
+        },
+        {
+          "sku": "GP2-T044",
+          "product_id": "prod_01KNKWDNP04TRD7JJ5ZHW33KQV",
+          "title": "Emotion Theme Whiteboard",
+          "bucket": "A_rejected_thumb"
+        },
+        {
+          "sku": "GP2-T057",
+          "product_id": "prod_01KNKWDQDWEDQ3175T3R2X9PAT",
+          "title": "Outdoor Chalkboard 1-100 Number\nSquare - Coloured",
+          "bucket": "A_rejected_thumb"
+        },
+        {
+          "sku": "GP2-T058",
+          "product_id": "prod_01KNKWDQVV964M39ER7A6R8VCB",
+          "title": "Outdoor Chalkboard 1-20 Number\nSquare-Black & White",
+          "bucket": "A_rejected_thumb"
+        },
+        {
+          "sku": "GP2-T059",
+          "product_id": "prod_01KNKWDR9GEZFW5YNHR1332ZRS",
+          "title": "Outdoor Chalkboard Alphabet Square -\nBlack & White",
+          "bucket": "A_rejected_thumb"
+        },
+        {
+          "sku": "HW1-S621",
+          "product_id": "prod_01KNKWJ09N7RYC7EXX3WE71DZ8",
+          "title": "Hex Tray",
+          "bucket": "C_silent_placeholder"
+        }
+      ]
+    },
+    {
+      "pdf": "2025 Wisdom catalog.pdf",
+      "page": 102,
+      "candidates": [
+        {
+          "sku": "HW4-SZ001-V02",
+          "product_id": "prod_01KNKWK2V64VNSX8C6R8AVH7D5",
+          "title": "Nature's Elements Outdoor Rectangular Table",
+          "bucket": "A_rejected_thumb"
+        }
+      ]
+    },
+    {
+      "pdf": "2025 Wisdom catalog.pdf",
+      "page": 108,
+      "candidates": [
+        {
+          "sku": "GP2-TC012",
+          "product_id": "prod_01KNKWE4HG27ME880Y0CBEBT8R",
+          "title": "Power Trolley Wheel-Yellow",
+          "bucket": "A_rejected_thumb"
+        },
+        {
+          "sku": "HW1-S008-V01",
+          "product_id": "prod_01KNKWEZSMW1Y6T6VY1ZQSEV6Q",
+          "title": "Entrance Ramp",
+          "bucket": "C_silent_placeholder"
+        }
+      ]
+    },
+    {
+      "pdf": "2025 Wisdom catalog.pdf",
+      "page": 111,
+      "candidates": [
+        {
+          "sku": "HW1-S626",
+          "product_id": "prod_01KNKWJ26Y92PM9YZDXJBAJ9C4",
+          "title": "Outdoor Mobile Shoes Rack",
+          "bucket": "A_rejected_thumb"
+        },
+        {
+          "sku": "HW1-S627",
+          "product_id": "prod_01KNKWJ2MPX6H3AX0D465RBT05",
+          "title": "Outdoor Coat & Shoes Cabinet",
+          "bucket": "A_rejected_thumb"
+        }
+      ]
+    }
+  ],
+  "unresolved_skus": [],
+  "skipped_no_page": []
+}

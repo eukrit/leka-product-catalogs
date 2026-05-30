@@ -1,0 +1,93 @@
+{
+  "total_placeholders": 2138,
+  "buckets": {
+    "no_vendor_doc": 1,
+    "vendor_doc_no_images": 2137
+  },
+  "yield_by_prefix_top20": [],
+  "placeholder_count_by_prefix_top20": [
+    [
+      "QSWP",
+      518
+    ],
+    [
+      "KB",
+      500
+    ],
+    [
+      "GP",
+      80
+    ],
+    [
+      "HW",
+      66
+    ],
+    [
+      "CH",
+      65
+    ],
+    [
+      "BS",
+      58
+    ],
+    [
+      "N",
+      57
+    ],
+    [
+      "AT",
+      51
+    ],
+    [
+      "L",
+      34
+    ],
+    [
+      "CY",
+      33
+    ],
+    [
+      "CX",
+      32
+    ],
+    [
+      "CJ",
+      31
+    ],
+    [
+      "QJB",
+      31
+    ],
+    [
+      "WT",
+      24
+    ],
+    [
+      "CC",
+      23
+    ],
+    [
+      "CM",
+      23
+    ],
+    [
+      "FLCS",
+      23
+    ],
+    [
+      "CB",
+      22
+    ],
+    [
+      "QSFS",
+      22
+    ],
+    [
+      "FLTH",
+      21
+    ]
+  ],
+  "yield_by_source_pdf": [],
+  "vendors_wisdom_total_docs_read": 5071,
+  "vendors_wisdom_indexed_codes": 5071
+}

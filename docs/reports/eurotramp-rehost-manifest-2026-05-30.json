@@ -1,0 +1,444 @@
+{
+  "generated_at": "2026-05-30",
+  "dry_run": false,
+  "diff_source": "eurotramp-backfill-diff-2026-05-30.json",
+  "totals": {
+    "downloaded": 62,
+    "uploaded": 59,
+    "skipped_existing": 3,
+    "failed": 0
+  },
+  "failures": [],
+  "by_handle": {
+    "eurotramp-anti-slip-plate-dmt": [
+      {
+        "filename": "23201-anti-slipplatefordmt_3be2acfea4_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/23201-anti-slipplatefordmt_3be2acfea4_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-anti-slip-plate-dmt/23201-anti-slipplatefordmt_3be2acfea4_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-anti-slip-plate-dmt/23201-anti-slipplatefordmt_3be2acfea4_1920x1080.jpg"
+      }
+    ],
+    "eurotramp-booster-board": [
+      {
+        "filename": "productdetails-boosterboard_624fca473e_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/productdetails-boosterboard_624fca473e_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-booster-board/productdetails-boosterboard_624fca473e_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-booster-board/productdetails-boosterboard_624fca473e_1920x1080.jpg"
+      }
+    ],
+    "eurotramp-bounce-cloud": [
+      {
+        "filename": "93000-rendering-bouncecloudgreen_702fb19adf_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/93000-rendering-bouncecloudgreen_702fb19adf_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-bounce-cloud/93000-rendering-bouncecloudgreen_702fb19adf_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-bounce-cloud/93000-rendering-bouncecloudgreen_702fb19adf_1920x1080.jpg"
+      },
+      {
+        "filename": "93001-rendering-bouncecloudyellow_84b6cbb4b1_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/93001-rendering-bouncecloudyellow_84b6cbb4b1_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-bounce-cloud/93001-rendering-bouncecloudyellow_84b6cbb4b1_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-bounce-cloud/93001-rendering-bouncecloudyellow_84b6cbb4b1_1920x1080.jpg"
+      },
+      {
+        "filename": "93002-rendering-bouncecloudorange_390a3f54a8_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/93002-rendering-bouncecloudorange_390a3f54a8_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-bounce-cloud/93002-rendering-bouncecloudorange_390a3f54a8_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-bounce-cloud/93002-rendering-bouncecloudorange_390a3f54a8_1920x1080.jpg"
+      },
+      {
+        "filename": "93003-rendering-bouncecloudblue_7c331a4552_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/93003-rendering-bouncecloudblue_7c331a4552_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-bounce-cloud/93003-rendering-bouncecloudblue_7c331a4552_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-bounce-cloud/93003-rendering-bouncecloudblue_7c331a4552_1920x1080.jpg"
+      },
+      {
+        "filename": "93004-rendering-bouncecloudpurple_a606518cda_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/93004-rendering-bouncecloudpurple_a606518cda_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-bounce-cloud/93004-rendering-bouncecloudpurple_a606518cda_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-bounce-cloud/93004-rendering-bouncecloudpurple_a606518cda_1920x1080.jpg"
+      },
+      {
+        "filename": "93005-rendering-bouncecloudgrey_a9f5c99758_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/93005-rendering-bouncecloudgrey_a9f5c99758_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-bounce-cloud/93005-rendering-bouncecloudgrey_a9f5c99758_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-bounce-cloud/93005-rendering-bouncecloudgrey_a9f5c99758_1920x1080.jpg"
+      },
+      {
+        "filename": "93006-rendering-bouncecloudred_2aa7519f91_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/93006-rendering-bouncecloudred_2aa7519f91_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-bounce-cloud/93006-rendering-bouncecloudred_2aa7519f91_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-bounce-cloud/93006-rendering-bouncecloudred_2aa7519f91_1920x1080.jpg"
+      },
+      {
+        "filename": "93020-bouncecloudgreen-setof3_0c3a707e5d_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/93020-bouncecloudgreen-setof3_0c3a707e5d_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-bounce-cloud/93020-bouncecloudgreen-setof3_0c3a707e5d_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-bounce-cloud/93020-bouncecloudgreen-setof3_0c3a707e5d_1920x1080.jpg"
+      },
+      {
+        "filename": "93021-bouncecloudyellow-setof3_e86e069229_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/93021-bouncecloudyellow-setof3_e86e069229_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-bounce-cloud/93021-bouncecloudyellow-setof3_e86e069229_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-bounce-cloud/93021-bouncecloudyellow-setof3_e86e069229_1920x1080.jpg"
+      },
+      {
+        "filename": "93022-bouncecloudorange-setof3_5d3458eecf_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/93022-bouncecloudorange-setof3_5d3458eecf_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-bounce-cloud/93022-bouncecloudorange-setof3_5d3458eecf_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-bounce-cloud/93022-bouncecloudorange-setof3_5d3458eecf_1920x1080.jpg"
+      },
+      {
+        "filename": "93030-bouncecloudgreen-setof6_8a9b92e2d0_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/93030-bouncecloudgreen-setof6_8a9b92e2d0_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-bounce-cloud/93030-bouncecloudgreen-setof6_8a9b92e2d0_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-bounce-cloud/93030-bouncecloudgreen-setof6_8a9b92e2d0_1920x1080.jpg"
+      },
+      {
+        "filename": "93031-bouncecloudyellow-setof6_6bf4d62e20_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/93031-bouncecloudyellow-setof6_6bf4d62e20_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-bounce-cloud/93031-bouncecloudyellow-setof6_6bf4d62e20_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-bounce-cloud/93031-bouncecloudyellow-setof6_6bf4d62e20_1920x1080.jpg"
+      },
+      {
+        "filename": "93032-bouncecloudorange-setof6_280d69d25d_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/93032-bouncecloudorange-setof6_280d69d25d_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-bounce-cloud/93032-bouncecloudorange-setof6_280d69d25d_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-bounce-cloud/93032-bouncecloudorange-setof6_280d69d25d_1920x1080.jpg"
+      }
+    ],
+    "eurotramp-fivesquare": [
+      {
+        "filename": "40000-fivesquaregrey_dfada99d79_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/40000-fivesquaregrey_dfada99d79_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-fivesquare/40000-fivesquaregrey_dfada99d79_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-fivesquare/40000-fivesquaregrey_dfada99d79_1920x1080.jpg"
+      },
+      {
+        "filename": "40001-fivesquareblack_a1f403403b_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/40001-fivesquareblack_a1f403403b_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-fivesquare/40001-fivesquareblack_a1f403403b_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-fivesquare/40001-fivesquareblack_a1f403403b_1920x1080.jpg"
+      }
+    ],
+    "eurotramp-grand-master": [
+      {
+        "filename": "productdetails-grandmaster13mm_49d719a380_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/productdetails-grandmaster13mm_49d719a380_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-grand-master/productdetails-grandmaster13mm_49d719a380_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-grand-master/productdetails-grandmaster13mm_49d719a380_1920x1080.jpg"
+      },
+      {
+        "filename": "productdetails-grandmaster45mm_99566bd928_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/productdetails-grandmaster45mm_99566bd928_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-grand-master/productdetails-grandmaster45mm_99566bd928_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-grand-master/productdetails-grandmaster45mm_99566bd928_1920x1080.jpg"
+      }
+    ],
+    "eurotramp-ground-trampoline-indoor": [
+      {
+        "filename": "96013-groundtrampolineindoor13mm_9c8c0635b1_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/96013-groundtrampolineindoor13mm_9c8c0635b1_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-ground-trampoline-indoor/96013-groundtrampolineindoor13mm_9c8c0635b1_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-ground-trampoline-indoor/96013-groundtrampolineindoor13mm_9c8c0635b1_1920x1080.jpg"
+      }
+    ],
+    "eurotramp-impact-protection-system": [
+      {
+        "filename": "e97541-impactprotectionsystemepdmforkidstrampxlgrey_6f6c5cb7b8_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/e97541-impactprotectionsystemepdmforkidstrampxlgrey_6f6c5cb7b8_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-impact-protection-system/e97541-impactprotectionsystemepdmforkidstrampxlgrey_6f6c5cb7b8_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-impact-protection-system/e97541-impactprotectionsystemepdmforkidstrampxlgrey_6f6c5cb7b8_1920x1080.jpg"
+      },
+      {
+        "filename": "e97041-impactprotectionsystemepdmforkidstrampgrey_850b489db6_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/e97041-impactprotectionsystemepdmforkidstrampgrey_850b489db6_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-impact-protection-system/e97041-impactprotectionsystemepdmforkidstrampgrey_850b489db6_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-impact-protection-system/e97041-impactprotectionsystemepdmforkidstrampgrey_850b489db6_1920x1080.jpg"
+      },
+      {
+        "filename": "e97542-impactprotectionsystemepdmforkidstramploopxlgrey_7b8666bdc1_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/e97542-impactprotectionsystemepdmforkidstramploopxlgrey_7b8666bdc1_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-impact-protection-system/e97542-impactprotectionsystemepdmforkidstramploopxlgrey_7b8666bdc1_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-impact-protection-system/e97542-impactprotectionsystemepdmforkidstramploopxlgrey_7b8666bdc1_1920x1080.jpg"
+      },
+      {
+        "filename": "e97051-impactprotectionsystemepdmforkidstramploopgrey_1e012138ee_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/e97051-impactprotectionsystemepdmforkidstramploopgrey_1e012138ee_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-impact-protection-system/e97051-impactprotectionsystemepdmforkidstramploopgrey_1e012138ee_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-impact-protection-system/e97051-impactprotectionsystemepdmforkidstramploopgrey_1e012138ee_1920x1080.jpg"
+      }
+    ],
+    "eurotramp-kids-tramp-track-playground": [
+      {
+        "filename": "97054-kidstramptrack4mepdm_83ccaccd40_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/97054-kidstramptrack4mepdm_83ccaccd40_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-kids-tramp-track-playground/97054-kidstramptrack4mepdm_83ccaccd40_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground/97054-kidstramptrack4mepdm_83ccaccd40_1920x1080.jpg"
+      },
+      {
+        "filename": "97056-kidstramptrack6mepdm_c385cac09c_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/97056-kidstramptrack6mepdm_c385cac09c_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-kids-tramp-track-playground/97056-kidstramptrack6mepdm_c385cac09c_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground/97056-kidstramptrack6mepdm_c385cac09c_1920x1080.jpg"
+      },
+      {
+        "filename": "97058-kidstramptrack8mepdm_de8ede0316_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/97058-kidstramptrack8mepdm_de8ede0316_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-kids-tramp-track-playground/97058-kidstramptrack8mepdm_de8ede0316_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground/97058-kidstramptrack8mepdm_de8ede0316_1920x1080.jpg"
+      },
+      {
+        "filename": "97059-kidstramptrack10mepdm_33d50d6d5e_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/97059-kidstramptrack10mepdm_33d50d6d5e_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-kids-tramp-track-playground/97059-kidstramptrack10mepdm_33d50d6d5e_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground/97059-kidstramptrack10mepdm_33d50d6d5e_1920x1080.jpg"
+      },
+      {
+        "filename": "97004-kidstramptrackplayprorendering_7c450089a2_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/97004-kidstramptrackplayprorendering_7c450089a2_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-kids-tramp-track-playground/97004-kidstramptrackplayprorendering_7c450089a2_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground/97004-kidstramptrackplayprorendering_7c450089a2_1920x1080.jpg"
+      }
+    ],
+    "eurotramp-landing-mat-cover": [
+      {
+        "filename": "26101-landingmatcover_1c680f5d31_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/26101-landingmatcover_1c680f5d31_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-landing-mat-cover/26101-landingmatcover_1c680f5d31_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-landing-mat-cover/26101-landingmatcover_1c680f5d31_1920x1080.jpg"
+      }
+    ],
+    "eurotramp-lifting-roller-stand": [
+      {
+        "filename": "productdetails-liftingrollerstand_982c430eaa_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/productdetails-liftingrollerstand_982c430eaa_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-lifting-roller-stand/productdetails-liftingrollerstand_982c430eaa_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-lifting-roller-stand/productdetails-liftingrollerstand_982c430eaa_1920x1080.jpg"
+      }
+    ],
+    "eurotramp-master": [
+      {
+        "filename": "21000-master45mm_377137efe6_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/21000-master45mm_377137efe6_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-master/21000-master45mm_377137efe6_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-master/21000-master45mm_377137efe6_1920x1080.jpg"
+      },
+      {
+        "filename": "22000-masterschool_8d533ccbf5_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/22000-masterschool_8d533ccbf5_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-master/22000-masterschool_8d533ccbf5_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-master/22000-masterschool_8d533ccbf5_1920x1080.jpg"
+      }
+    ],
+    "eurotramp-mats-tramp": [
+      {
+        "filename": "91000-preview-matstrampoline_f249c65994_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/91000-preview-matstrampoline_f249c65994_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-mats-tramp/91000-preview-matstrampoline_f249c65994_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-mats-tramp/91000-preview-matstrampoline_f249c65994_1920x1080.jpg"
+      }
+    ],
+    "eurotramp-minitramp-trolley": [
+      {
+        "filename": "productdetails-minitramptransporttrolley_f6fad93348_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/productdetails-minitramptransporttrolley_f6fad93348_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-minitramp-trolley/productdetails-minitramptransporttrolley_f6fad93348_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-minitramp-trolley/productdetails-minitramptransporttrolley_f6fad93348_1920x1080.jpg"
+      }
+    ],
+    "eurotramp-open-end-minitramp": [
+      {
+        "filename": "productdetails-minitrampopen-endpremium_0f50707ffd_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/productdetails-minitrampopen-endpremium_0f50707ffd_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-open-end-minitramp/productdetails-minitrampopen-endpremium_0f50707ffd_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-open-end-minitramp/productdetails-minitrampopen-endpremium_0f50707ffd_1920x1080.jpg"
+      },
+      {
+        "filename": "productdetails-minitrampopen-endstandard_1cd9872c2d_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/productdetails-minitrampopen-endstandard_1cd9872c2d_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-open-end-minitramp/productdetails-minitrampopen-endstandard_1cd9872c2d_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-open-end-minitramp/productdetails-minitrampopen-endstandard_1cd9872c2d_1920x1080.jpg"
+      },
+      {
+        "filename": "productdetails-minitrampopen-endschool_a77e0090fe_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/productdetails-minitrampopen-endschool_a77e0090fe_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-open-end-minitramp/productdetails-minitrampopen-endschool_a77e0090fe_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-open-end-minitramp/productdetails-minitrampopen-endschool_a77e0090fe_1920x1080.jpg"
+      }
+    ],
+    "eurotramp-roller-stand": [
+      {
+        "filename": "e51110-rollerstand_45460b489d_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/e51110-rollerstand_45460b489d_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-roller-stand/e51110-rollerstand_45460b489d_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-roller-stand/e51110-rollerstand_45460b489d_1920x1080.jpg"
+      }
+    ],
+    "eurotramp-safety-platforms-and-safety-mats-integral": [
+      {
+        "filename": "30300-safetyplatformintegraluniversalultimategrandmaster_6e761adc06_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/30300-safetyplatformintegraluniversalultimategrandmaster_6e761adc06_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-safety-platforms-and-safety-mats-integral/30300-safetyplatformintegraluniversalultimategrandmaster_6e761adc06_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-safety-platforms-and-safety-mats-integral/30300-safetyplatformintegraluniversalultimategrandmaster_6e761adc06_1920x1080.jpg"
+      },
+      {
+        "filename": "29000-safetymatonewedge_d0c3397ce6_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/29000-safetymatonewedge_d0c3397ce6_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-safety-platforms-and-safety-mats-integral/29000-safetymatonewedge_d0c3397ce6_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-safety-platforms-and-safety-mats-integral/29000-safetymatonewedge_d0c3397ce6_1920x1080.jpg"
+      }
+    ],
+    "eurotramp-safety-platforms-and-safety-mats-universal": [
+      {
+        "filename": "27300-safetyplatformuniversal_2cdbded014_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/27300-safetyplatformuniversal_2cdbded014_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-safety-platforms-and-safety-mats-universal/27300-safetyplatformuniversal_2cdbded014_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-safety-platforms-and-safety-mats-universal/27300-safetyplatformuniversal_2cdbded014_1920x1080.jpg"
+      },
+      {
+        "filename": "27800-adaptionbarsafetyplatformcompetition-ultimate_8a71fd3a94_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/27800-adaptionbarsafetyplatformcompetition-ultimate_8a71fd3a94_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-safety-platforms-and-safety-mats-universal/27800-adaptionbarsafetyplatformcompetition-ultimate_8a71fd3a94_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-safety-platforms-and-safety-mats-universal/27800-adaptionbarsafetyplatformcompetition-ultimate_8a71fd3a94_1920x1080.jpg"
+      },
+      {
+        "filename": "28000-safetymatcompetition_4217d1e57a_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/28000-safetymatcompetition_4217d1e57a_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-safety-platforms-and-safety-mats-universal/28000-safetymatcompetition_4217d1e57a_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-safety-platforms-and-safety-mats-universal/28000-safetymatcompetition_4217d1e57a_1920x1080.jpg"
+      },
+      {
+        "filename": "28201-safetymatcompetition-doublewedge_0807134857_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/28201-safetymatcompetition-doublewedge_0807134857_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-safety-platforms-and-safety-mats-universal/28201-safetymatcompetition-doublewedge_0807134857_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-safety-platforms-and-safety-mats-universal/28201-safetymatcompetition-doublewedge_0807134857_1920x1080.jpg"
+      },
+      {
+        "filename": "28901-wedgeforsafetymatcompetition_9fe0a2949a_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/28901-wedgeforsafetymatcompetition_9fe0a2949a_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-safety-platforms-and-safety-mats-universal/28901-wedgeforsafetymatcompetition_9fe0a2949a_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-safety-platforms-and-safety-mats-universal/28901-wedgeforsafetymatcompetition_9fe0a2949a_1920x1080.jpg"
+      }
+    ],
+    "eurotramp-service-bag": [
+      {
+        "filename": "e31004-servicebagultimate_b4d7144723_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/e31004-servicebagultimate_b4d7144723_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-service-bag/e31004-servicebagultimate_b4d7144723_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-service-bag/e31004-servicebagultimate_b4d7144723_1920x1080.jpg"
+      },
+      {
+        "filename": "e31002-servicebaggrandmastermaster_8a4d6dc11b_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/e31002-servicebaggrandmastermaster_8a4d6dc11b_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-service-bag/e31002-servicebaggrandmastermaster_8a4d6dc11b_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-service-bag/e31002-servicebaggrandmastermaster_8a4d6dc11b_1920x1080.jpg"
+      },
+      {
+        "filename": "e31007-servicebagdouble-minitrampultimate_e59aecd1d8_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/e31007-servicebagdouble-minitrampultimate_e59aecd1d8_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-service-bag/e31007-servicebagdouble-minitrampultimate_e59aecd1d8_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-service-bag/e31007-servicebagdouble-minitrampultimate_e59aecd1d8_1920x1080.jpg"
+      }
+    ],
+    "eurotramp-sport-thieme-adventure-tramp": [
+      {
+        "filename": "97508-sport-thiemeadventure-trampepdm_72956c5c28_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/97508-sport-thiemeadventure-trampepdm_72956c5c28_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-sport-thieme-adventure-tramp/97508-sport-thiemeadventure-trampepdm_72956c5c28_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-sport-thieme-adventure-tramp/97508-sport-thiemeadventure-trampepdm_72956c5c28_1920x1080.jpg"
+      },
+      {
+        "filename": "97509-sport-thiemeadventure-trampkindergartenimpactprotectionsystemepdm_7c4ee24737_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/97509-sport-thiemeadventure-trampkindergartenimpactprotectionsystemepdm_7c4ee24737_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-sport-thieme-adventure-tramp/97509-sport-thiemeadventure-trampkindergartenimpactprotectionsystemepdm_7c4ee24737_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-sport-thieme-adventure-tramp/97509-sport-thiemeadventure-trampkindergartenimpactprotectionsystemepdm_7c4ee24737_1920x1080.jpg"
+      }
+    ],
+    "eurotramp-stability-plate": [
+      {
+        "filename": "tz002-preview-stabilityplateultimate_c96a2c490d_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/tz002-preview-stabilityplateultimate_c96a2c490d_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-stability-plate/tz002-preview-stabilityplateultimate_c96a2c490d_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-stability-plate/tz002-preview-stabilityplateultimate_c96a2c490d_1920x1080.jpg"
+      }
+    ],
+    "eurotramp-teamgym": [
+      {
+        "filename": "productdetails-minitrampteamgym_c4e2140598_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/productdetails-minitrampteamgym_c4e2140598_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-teamgym/productdetails-minitrampteamgym_c4e2140598_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-teamgym/productdetails-minitrampteamgym_c4e2140598_1920x1080.jpg"
+      }
+    ],
+    "eurotramp-trampoline-track-stationary": [
+      {
+        "filename": "productdetail-88004-trampolinetrackstationary_fe2da051c7_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/productdetail-88004-trampolinetrackstationary_fe2da051c7_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-trampoline-track-stationary/productdetail-88004-trampolinetrackstationary_fe2da051c7_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-trampoline-track-stationary/productdetail-88004-trampolinetrackstationary_fe2da051c7_1920x1080.jpg"
+      }
+    ],
+    "eurotramp-trampoline-track-vario": [
+      {
+        "filename": "productdetails-trampolinetrackvario_7e6dbd4ec9_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/productdetails-trampolinetrackvario_7e6dbd4ec9_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-trampoline-track-vario/productdetails-trampolinetrackvario_7e6dbd4ec9_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-trampoline-track-vario/productdetails-trampolinetrackvario_7e6dbd4ec9_1920x1080.jpg"
+      }
+    ],
+    "eurotramp-ultimate": [
+      {
+        "filename": "03150-ultimate80mmframepads_2ba6815e21_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/03150-ultimate80mmframepads_2ba6815e21_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-ultimate/03150-ultimate80mmframepads_2ba6815e21_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-ultimate/03150-ultimate80mmframepads_2ba6815e21_1920x1080.jpg"
+      },
+      {
+        "filename": "productdetails-ultimate_1a9386d18e_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/productdetails-ultimate_1a9386d18e_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-ultimate/productdetails-ultimate_1a9386d18e_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-ultimate/productdetails-ultimate_1a9386d18e_1920x1080.jpg"
+      }
+    ],
+    "eurotramp-ultimate-dmt-6x6": [
+      {
+        "filename": "productdetails-double-minitrampultimate_393daece32_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/productdetails-double-minitrampultimate_393daece32_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-ultimate-dmt-6x6/productdetails-double-minitrampultimate_393daece32_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-ultimate-dmt-6x6/productdetails-double-minitrampultimate_393daece32_1920x1080.jpg"
+      }
+    ],
+    "eurotramp-ultimate-freestyle": [
+      {
+        "filename": "productdetails-ultimatefreestyle_a3bc40e5dd_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/productdetails-ultimatefreestyle_a3bc40e5dd_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-ultimate-freestyle/productdetails-ultimatefreestyle_a3bc40e5dd_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-ultimate-freestyle/productdetails-ultimatefreestyle_a3bc40e5dd_1920x1080.jpg"
+      }
+    ],
+    "eurotramp-underwater-trampoline": [
+      {
+        "filename": "productdetails-underwatertrampoline_8fb7b817d5_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/productdetails-underwatertrampoline_8fb7b817d5_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-underwater-trampoline/productdetails-underwatertrampoline_8fb7b817d5_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-underwater-trampoline/productdetails-underwatertrampoline_8fb7b817d5_1920x1080.jpg"
+      }
+    ],
+    "eurotramp-wehrfritz-fun-round": [
+      {
+        "filename": "productdetails-wehrfritzfunroundplayground_1202e5eb57_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/productdetails-wehrfritzfunroundplayground_1202e5eb57_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-wehrfritz-fun-round/productdetails-wehrfritzfunroundplayground_1202e5eb57_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-wehrfritz-fun-round/productdetails-wehrfritzfunroundplayground_1202e5eb57_1920x1080.jpg"
+      }
+    ],
+    "eurotramp-wehrfritz-fun-xl-playground": [
+      {
+        "filename": "productdetail-wehrfritzfunxlplayground_672451331b_1920x1080.jpg",
+        "source_url": "https://www.eurotramp.com/_resources.d/images.d/productdetail-wehrfritzfunxlplayground_672451331b_1920x1080.jpg",
+        "gcs_path": "gs://ai-agents-go-vendors/eurotramp/eurotramp-wehrfritz-fun-xl-playground/productdetail-wehrfritzfunxlplayground_672451331b_1920x1080.jpg",
+        "proxy_url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-wehrfritz-fun-xl-playground/productdetail-wehrfritzfunxlplayground_672451331b_1920x1080.jpg"
+      }
+    ]
+  }
+}
