@@ -35,6 +35,7 @@ extracted_images_v2/
 verified_images/
 *Slack Downloads/
 *.pdf
+wisdom-catalog/data/pdf_images/
 
 # Python
 __pycache__/

@@ -1,0 +1,269 @@
+{
+  "subcollections": [
+    "products"
+  ],
+  "total_products_read": 5000,
+  "products_with_images": 2800,
+  "prefix_distribution_top20": [
+    [
+      "KB",
+      1261
+    ],
+    [
+      "QSWP",
+      518
+    ],
+    [
+      "GP",
+      382
+    ],
+    [
+      "HW",
+      295
+    ],
+    [
+      "N",
+      285
+    ],
+    [
+      "CH",
+      120
+    ],
+    [
+      "CY",
+      111
+    ],
+    [
+      "E",
+      83
+    ],
+    [
+      "CX",
+      82
+    ],
+    [
+      "CJ",
+      76
+    ],
+    [
+      "CD",
+      73
+    ],
+    [
+      "BS",
+      72
+    ],
+    [
+      "B",
+      70
+    ],
+    [
+      "CQ",
+      66
+    ],
+    [
+      "CS",
+      66
+    ],
+    [
+      "CC",
+      65
+    ],
+    [
+      "CM",
+      64
+    ],
+    [
+      "AT",
+      60
+    ],
+    [
+      "CB",
+      59
+    ],
+    [
+      "PDWP",
+      52
+    ]
+  ],
+  "image_source_pdf_counts": [
+    [
+      "catalog_pdf_wisdom_2025_spatial_v2",
+      3959
+    ],
+    [
+      "catalog_pdf_wisdom_2025_full",
+      1328
+    ],
+    [
+      "catalog_pdf_usa_2025_spatial_v2",
+      435
+    ],
+    [
+      "catalog_pdf_wisdom_2025_verified",
+      304
+    ],
+    [
+      "catalog_pdf_intl_2025_spatial_v2",
+      115
+    ],
+    [
+      "catalog_pdf_usa_2025_verified",
+      16
+    ],
+    [
+      "catalog_pdf_intl_2025_verified",
+      6
+    ],
+    [
+      "catalog_pdf_europe_2025_verified",
+      2
+    ]
+  ],
+  "doc_field_universe": [
+    "catalog_page",
+    "catalog_source",
+    "category",
+    "createdAt",
+    "description",
+    "description_cn",
+    "dimensions",
+    "gemini_description",
+    "gemini_product_type",
+    "handle",
+    "image_cleared_reason",
+    "image_match_score",
+    "image_mismatch_reason",
+    "image_verified",
+    "images",
+    "item_code",
+    "material",
+    "pricing",
+    "slug",
+    "status",
+    "sub_collections",
+    "subcategory",
+    "updatedAt",
+    "used_by_projects",
+    "volume_cbm",
+    "website_url",
+    "weight_kg"
+  ],
+  "source_field_distribution": [],
+  "sample_docs": [
+    {
+      "id": "wisdom-63-21029-110113",
+      "data_keys": [
+        "catalog_page",
+        "catalog_source",
+        "category",
+        "createdAt",
+        "description",
+        "description_cn",
+        "dimensions",
+        "gemini_description",
+        "gemini_product_type",
+        "handle",
+        "image_match_score",
+        "image_verified",
+        "images",
+        "item_code",
+        "material",
+        "pricing",
+        "slug",
+        "status",
+        "subcategory",
+        "updatedAt",
+        "volume_cbm",
+        "website_url",
+        "weight_kg"
+      ],
+      "code": "63-21029-110113",
+      "n_images": 1,
+      "image_sample": {
+        "is_primary": true,
+        "catalog": "usa_2025",
+        "page": 106,
+        "source": "catalog_pdf_usa_2025_spatial_v2",
+        "url": "https://catalogs.leka.studio/api/i/wisdom/spatial_v2/63-21029-110113_usa_2025_p106_c6f0fdbf.jpeg",
+        "alt_text": "Up & Over Climber (Dark Green & Tan) from usa_2025 p106"
+      }
+    },
+    {
+      "id": "wisdom-63-21031-111",
+      "data_keys": [
+        "catalog_page",
+        "catalog_source",
+        "category",
+        "createdAt",
+        "description",
+        "description_cn",
+        "dimensions",
+        "gemini_description",
+        "gemini_product_type",
+        "handle",
+        "image_match_score",
+        "image_verified",
+        "images",
+        "item_code",
+        "material",
+        "pricing",
+        "slug",
+        "status",
+        "subcategory",
+        "updatedAt",
+        "volume_cbm",
+        "website_url",
+        "weight_kg"
+      ],
+      "code": "63-21031-111",
+      "n_images": 3,
+      "image_sample": {
+        "is_primary": true,
+        "catalog": "wisdom_2025",
+        "page": 58,
+        "source": "catalog_pdf_wisdom_2025_spatial_v2",
+        "url": "https://catalogs.leka.studio/api/i/wisdom/spatial_v2/63-21031-111_wisdom_2025_p58_e1e42ee1.jpeg",
+        "alt_text": "Double Up & Over Climber from wisdom_2025 p58"
+      }
+    },
+    {
+      "id": "wisdom-63-21078",
+      "data_keys": [
+        "catalog_page",
+        "catalog_source",
+        "category",
+        "createdAt",
+        "description",
+        "description_cn",
+        "dimensions",
+        "gemini_description",
+        "gemini_product_type",
+        "handle",
+        "image_match_score",
+        "image_verified",
+        "images",
+        "item_code",
+        "material",
+        "pricing",
+        "slug",
+        "status",
+        "subcategory",
+        "updatedAt",
+        "volume_cbm",
+        "website_url",
+        "weight_kg"
+      ],
+      "code": "63-21078",
+      "n_images": 3,
+      "image_sample": {
+        "is_primary": true,
+        "catalog": "intl_2025",
+        "page": 115,
+        "source": "catalog_pdf_intl_2025_spatial_v2",
+        "url": "https://catalogs.leka.studio/api/i/wisdom/spatial_v2/63-21078_intl_2025_p115_fe5d2527.jpeg",
+        "alt_text": "63-21078 from intl_2025 p115"
+      }
+    }
+  ]
+}

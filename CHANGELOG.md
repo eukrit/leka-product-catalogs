@@ -4,6 +4,149 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.47.0] - 2026-05-30
+
+### Added — Leka Project image backfill from the 2025-08-11 Furniture Catalog
+
+Follow-up to v2.34.0 (placeholder backfill). Of the **2,138 Leka Project
+products** still rendering the cream "Image coming soon" placeholder, **33
+now display real catalog imagery** sourced from the never-previously-ingested
+`2025-08-11 Wisdom International Furniture Catalog.pdf` (355 pages, 1,418
+SKU codes, 5,286 raw embedded images). KB / GP / HW prefix furniture.
+
+Pattern mirrors the v2.43.0 4soft picture-pricelist enrichment (extract →
+upload → vendors-write → Medusa-sync), with a Gemini verify step inserted
+between vendors-write and Medusa-sync because the furniture catalog's
+free-form multi-product pages require spatial-proximity attribution
+(stricter than 4soft's y-row grid layout).
+
+#### Discovery + sizing
+Two source folders were inspected (`docs/wisdom-image-backfill-discovery.md`):
+- `…\WeChat OneDrive\WeChat Wisdom Playground` — 1 custom-order PDF + 1
+  xlsx, no catalog imagery. Skipped.
+- `…\My Drive\Catalogs GO\Wisdom Playground` — 3 catalog PDFs. The
+  2025-06-13 USA + International catalogues are being re-extracted by the
+  sibling worktree `claude/great-hopper-c0fd71` (outdoor-play / QSWP
+  prefixes). This wave handles only the brand-new Furniture catalog.
+
+Empirical bridge sizing (`data/bridge-sizing.json`,
+`data/wisdom-placeholder-summary.json`): **2,137 / 2,138 placeholders already
+have a `vendors/wisdom/products` doc with `images=[]`**. The prior
+v2.34.0 + v2.36-37 extractions left them empty; bridge-from-vendors
+alone yields zero. PDF→image extraction is the only path.
+
+#### `wisdom-catalog/extract_furniture_pdf_images.py` (new)
+
+Spatial PDF→image extractor. Mirrors `wisdom-catalog/map_images_verified.py`'s
+span-bbox-center + image-rect-center euclidean-nearest attribution, plus PR
+#73's DeviceRGB-JPEG preference over JPX and 3× zoom render fallback.
+
+- Reads gap codes once from `vendors/wisdom/products` (empty `images=[]` OR
+  new SKU not yet in vendors).
+- MAX_IMAGES = 2 per code, MAX_DISTANCE = 600 px.
+- Output: `wisdom-catalog/data/pdf_images/*.jpg` (gitignored, reproducible
+  from PDF) and `wisdom-catalog/data/pdf_images_map.json` (committed
+  provenance).
+- Idempotent: page-level checkpoint in Firestore
+  `wisdom_pdf_extract/{pdf_sha16}/pages/{N}`.
+- Flags: `--dry-run` (default), `--extract`, `--pages 1-30`, `--limit-codes N`,
+  `--no-gap-filter`.
+
+**Extraction run (355 pages, full):**
+- 1,631 distinct codes detected in PDF.
+- 858 in the gap (102 in vendors with empty images, 756 new SKUs).
+- 250 pages processed, 1,842 raw attributions, **1,538 unique JPEGs written**.
+- Distance distribution p50=100 px, p80=142 px, p95=181 px, max=361 px;
+  **96.5 % of attributions < 200 px** (tight spatial match).
+- 36 attributions dropped due to decode failure (acceptable noise).
+
+#### `wisdom-catalog/enrich_furniture_pdf_images.py` (new)
+
+Four sub-phases (`--upload`, `--write-firestore`, `--verify`,
+`--sync-medusa`), each idempotent and resumable.
+
+**A. `--upload`** → 1,222 new + 35 existing = 1,257 unique objects in
+`gs://ai-agents-go-vendors/wisdom/furniture_2025/`. Zero errors. Mirrors the
+4soft `<vendor>/<source-tag>/<file>` layout; served via
+`https://catalogs.leka.studio/api/i/wisdom/furniture_2025/<filename>`
+(proxy validated `200 OK image/jpeg`).
+
+**B. `--write-firestore`** → 93 `vendors/wisdom/products` docs updated with
+furniture image entries (`source = catalog_pdf_furniture_2025_spatial_v2`).
+Precedence rule from PR #73: keep real images, replace borrowed/base-design
+entries, ADD where `images=[]`. 742 codes skipped — they're new SKUs without
+a vendor doc (would require Medusa onboarding before backfill applies).
+
+**C. `--verify`** → Gemini 2.5 Flash @ Vertex location `global`, threshold
+0.70, concurrency 4. **93 calls, $0.86 spent** (under the $18 ceiling).
+**39 accepted / 47 rejected / 0 errors** (42 % accept rate). Decisions
+checkpoint in Firestore `image_backfill_verify/{sha1(code)}` (same
+collection as v2.34.0); per-image `image_verified` and `image_match_score`
+also written back to vendor docs.
+
+The reject rate is the spatial extractor's signal: on multi-product pages,
+the nearest-image heuristic can attribute an image whose code is spatially
+close but belongs to a neighbouring product. Gemini correctly catches
+these. The 39 accepts are tightly grouped on KB / GP / HW / MGF prefixes.
+
+**D. `--sync-medusa`** → 33 Medusa placeholder products flipped to
+`metadata.image_status = "backfilled_furniture"` (the other 6 of the 39
+verified codes don't have a matching live placeholder product). Each
+product's `images` + `thumbnail` replace the placeholder atomically.
+
+#### Outcome — `scripts/_audit_placeholders.py`
+
+| Metric | Before | After |
+|---|---:|---:|
+| Total Leka Project products | 5,062 | 5,062 |
+| Showing placeholder | **2,138** | **2,105** |
+| Backfilled (real image) | 67 | **100** |
+| New: vendors/wisdom/products with furniture image entries | — | 93 |
+| New: future-onboarding imagery (vendor doc not yet created) | — | 742 codes |
+
+Spot-checked product **GP1-12036 (Wallboard Handrail-Straight Rod)**:
+storefront thumbnail `200 OK`, `image_status = backfilled_furniture`, 2
+images served from `wisdom/furniture_2025/`. ✅
+
+#### Files
+
+- `wisdom-catalog/extract_furniture_pdf_images.py` (new, ~370 LOC)
+- `wisdom-catalog/enrich_furniture_pdf_images.py` (new, ~450 LOC)
+- `wisdom-catalog/data/pdf_images_map.json` (new, committed provenance)
+- `wisdom-catalog/data/furniture_candidates.csv` (new, committed)
+- `wisdom-catalog/data/pdf_images/` (gitignored)
+- `docs/wisdom-image-backfill-discovery.md` (new)
+- `data/wisdom-placeholder-skus.csv`, `data/wisdom-placeholder-summary.json`,
+  `data/bridge-candidates.csv`, `data/bridge-sizing.json`,
+  `data/vendors-wisdom-snapshot.json` (new audit artifacts)
+- `scripts/_audit_placeholders.py`, `scripts/_peek_pdfs.py`,
+  `scripts/_peek_vendors_wisdom.py`, `scripts/_size_bridge.py`
+  (new audit helpers — names prefixed `_` to mark them internal)
+- `.gitignore` — added `wisdom-catalog/data/pdf_images/`
+- New GCS objects: 1,222 under `gs://ai-agents-go-vendors/wisdom/furniture_2025/`
+- New Firestore docs: `wisdom_pdf_extract/{pdf_sha16}/pages/{0..354}` +
+  93 new entries in `image_backfill_verify/` (source=furniture_2025).
+- `CHANGELOG.md`, `VERSION` → 2.45.0
+- `wisdom-catalog/DEPLOYMENT_LOG.md` → run summary
+- `.claude/PROGRESS.md` → last-touched + recent-sessions
+
+#### Vertex AI spend (this wave)
+
+$0.86 — well under the $20 ceiling. 47 rejected codes can be re-verified
+later if a different image source emerges; their vendor-doc entries remain
+with `image_verified=False`.
+
+#### Sibling-branch coordination
+
+`claude/great-hopper-c0fd71` is independently re-extracting the
+2025-06-13 USA + International catalogues to chase the QSWP / SR / BS
+outdoor-play prefixes. This wave only writes `source` strings containing
+`furniture_2025` and only flips `image_status` to `backfilled_furniture`
+(distinct from `backfilled` v2.34 and from whatever tag the sibling chooses).
+No file-level conflicts expected.
+
+---
+
 ## [2.46.0] - 2026-05-30 — Eurotramp product-photo backfill
 
 > **STATUS:** SHIPPED. 16 Medusa products updated, 62 photos uploaded to GCS.
