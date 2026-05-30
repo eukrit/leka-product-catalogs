@@ -1,9 +1,9 @@
 # Leka Product Catalogs — Pricing Configuration Master Reference
 
-> **Last updated:** 2026-05-25 (v2.33.0 — SGD region created)
+> **Last updated:** 2026-05-29 (v2.41.0 — Archimedes Water Play brand added; 4soft #63 + WePlay #61 + Vortex #62 also landed)
 > **Source of truth:** Firestore `leka-product-catalogs/pricing_config/canonical`
 > **Editor UI:** `docs/forms/pricing-config.html` (served at `gateway.goco.bz/leka-product-catalogs/forms/pricing-config.html`)
-> **Code files:** `shared/pricing_config.py`, `shared/landed_pricing.py`, `shared/wisdom_pricing.py`
+> **Code files:** `shared/pricing_config.py`, `shared/landed_pricing.py`, `shared/wisdom_pricing.py`, `weplay-catalog/import_pricelist.py`
 
 ---
 
@@ -119,6 +119,93 @@ NOK_EUR  = 0.087  # rampline-catalog/import_pricelist.py
 | Family-desc lookup | `FAMILY_DESC_TO_SLUG` map | Bridges pricelist descriptive family names to scraped product slugs. In `rampline-catalog/import_pricelist.py`. Fixed v2.32.0. |
 | Duty | 10% | `duty_rate_non_china` global |
 
+### 4f. Vortex Aquatics (`brands.vortex`)
+
+Vortex's reseller discount is **per product LINE**, not a single brand discount.
+The importer maps each pricelist *Collection* → top-level product line, then
+applies that line's USD discount to the list price to get our EXW cost.
+
+| Key | Value | Description |
+|-----|-------|-------------|
+| `gross_margin` | **0.35** | 35% GM (matches DesignPark / global default). |
+| `origin` | `canada` | EXW Pointe-Claire, Quebec — non-China → 10% duty. |
+| `currency` | `USD` | Pricelist is USD; `our_cost_usd = list_usd × (1 − line_discount)`. |
+| Trade terms | EXW Canada (USD) | Confirmed from supplier Gmail thread + ECU Worldwide freight quote. |
+| Shipping | Flat-uplift (no CBM in pricelist) | `cif = fob × 1.35`; same path as DesignPark/WePlay. |
+| Duty | 10% | `duty_rate_non_china` global (Canada not FTA). |
+
+**Per-line reseller discounts** (`brands.vortex.line_discounts`, all USD):
+
+| Line | Discount | | Line | Discount |
+|------|----------|-|------|----------|
+| `splashpad` | 25% | | `elevations` | 15% |
+| `poolplay` | 15% | | `wqms` | 15% |
+| `spraypoint` | 25% | | `water_journey` | 20% |
+| `water_slides` | 15% | | `coolhub` | **0%** (user decision 2026-05-29) |
+
+**Collection → line map** (`brands.vortex.collection_to_line`, 22 collections):
+Splashpad ← Essentials, Classic, Contemporary, Toons, Vectory, Explora,
+Watergarden, Ground Sprays, Spraylink, Sea Silhouette, Nautical, Fine Mist,
+Playable Fountain, Custom Items, **SmartPoint, Smartpoint N°4** (user 2026-05-29:
+Spraypoint/Smartpoint classified as Splashpad 25%). · Poolplay ← Poolplay. ·
+Elevations ← Elevations, **Playnuk** (Vortex groups "Elevations™ & PlayNuk™"). ·
+Water Journey ← Water Journey, Lazy River. · CoolHub ← CoolHub (0%).
+
+Source of truth for the maps: `vortex-catalog/vortex_config.py` (shared by the
+importer and `seed_pricing_config.py`). Spraypoint / WQMS / Water Slides lines
+exist in the discount map but match 0 SKUs in the 2026 R2 pricelist.
+
+Code: `vortex-catalog/import_pricelist.py` `price_vortex_row()`
+
+### 4g. WePlay / Kiddie's Paradise (`brands.weplay`)
+
+| Key | Value | Description |
+|-----|-------|-------------|
+| `gross_margin` | **0.50** | 50% GM (confirmed 2026-05-29). |
+| `import_duty_rate` | **0.10** | Taiwan is **non-FTA** for Thailand → 10% import duty. |
+| `sea_lcl_per_cbm_thb` | **5500** | Ocean LCL Kaohsiung → Laem Chabang, THB per CBM (conservative static; refine when a real rate is available). |
+| `default_usd_thb` | 33.0 | Offline FX fallback only. |
+| Trade terms | **FOB Taiwan, net USD** | Quotation `AQ1251030077` (2025-10-30, valid 2026). No list/discount split — these are GO Corp's negotiated reseller prices. Payment T/T in advance; MOQ = full master carton; MOV USD 10,000/shipment. |
+| Shipping | **CBM-driven** sea LCL → Bangkok | Unlike DesignPark/Vortex (flat-uplift), WePlay's quotation gives per-carton CBM. `per_unit_cbm = carton_cbm / pack_qty` × `sea_lcl_per_cbm_thb`; flat 1.35× fallback for any row missing CBM. |
+| Duty | **10%** | Taiwan-origin, non-FTA. |
+| Code | `weplay-catalog/import_pricelist.py` | Parses the PDF, writes `pricing.retail_thb/usd/sgd` to `vendors/weplay/products` by SKU-token match; synced to Medusa SC `sc_01KR6Z0VBSXWYZDVGF30EAP0EQ`. **189 SKUs.** |
+### 4i. Archimedes Water Play (`brands.archimedes-water-play`)
+
+China-origin children's water-play products (Wenzhou Daosen 温州道森游乐戏水),
+priced in **CNY**. Reuses the Wisdom China-FOB pattern. Added v2.38.0.
+
+| Key | Value | Description |
+|-----|-------|-------------|
+| `gross_margin` | **0.50** | 50% GM — China-origin default (same as Wisdom). |
+| `import_duty_rate` | **0.00** | ASEAN-China FTA Form E (0% duty). |
+| `currency` | **CNY** | Source pricelist currency (RMB). |
+| `origin` | **china** | China consolidated sea. |
+| `default_cny_thb` | **4.80** | Offline FX fallback (THB per CNY). |
+| Trade terms | FOB China (CNY) | `fob_thb = price_cny × cny_thb`. |
+| Shipping | China consolidated sea → Bangkok | `kind=lwh` SKUs use China-LCL `cost_engine` CBM + tier clamp; all other dim kinds use flat CIF ≈ FOB. |
+| Duty | **0%** | China-origin under ASEAN-China FTA Form E. |
+| CBM rule | cm unless mm | `lwh` only; explicit "cm" marker → cm; else axis > 1000 → mm; else cm. `CBM = L·W·H(m³) × 0.15`. |
+| Caveat | lwh ≈ 2× flat | `lwh` (CBM) SKUs carry per-shipment China-LCL clearance/last-mile, pricing ~2× an equally-priced flat item; the tier clamp bounds it. |
+
+### 4h. 4soft (`brands.4soft`) — added v2.40.0
+
+4soft, s.r.o. (Tanvald, **Czech Republic**, VAT CZ28703324) makes discrete
+moulded-EPDM play elements — 3D animals/shapes/tunnels/furniture/fountains and
+2D markings (hopscotch, numbers/letters, footprints). **Per-item EUR SKUs**,
+NOT the area-priced wet-pour surfacing pricer (`products_epdm`/`products_infill`,
+`scripts/sync_epdm_pricelist.py`, CFH lookup contract — a separate system).
+Same shape as Berliner (EU EXW). Sales channel `sc_01KNQAA4A8SF4ZT9S8N0AHGY3Y`.
+
+| Key | Value | Description |
+|-----|-------|-------------|
+| `gross_margin` | **0.40** | 40% GM. User decision 2026-05-29 (no GM was previously documented). |
+| `exw_discount` | **0.15** | Our cost = `list_eur × (1 - 0.15)`. Basic reseller discount, "Price conditions 2020" PDF. |
+| Trade terms | EXW Czech/EU | `eur_fob = list_eur × 0.85`. (+5% >€2,500, +2.5% prepay are order-specific — NOT in catalog cost.) |
+| Shipping | LCL EU → Laem Chabang | `cost_engine` `origin=europe, method=lcl`. No published dims yet → flat 35% uplift; tier-0 floor (×1.80) re-bounds cheap 2D items (2,265/2,410 floored). |
+| Duty | 10% | `duty_rate_non_china` global |
+| Source | `foursoft-catalog/data/pricelist_2025-03-01.csv` | Parsed from `4soft_EPDM_graphics-price_list_2025.xls` (valid 2025-03-01). 2,410 priced SKUs. |
+| Firestore | `vendors/4soft/products` | All 2,410 priced. Medusa: 377 existing variants priced; ~2,033 pricelist-only pending a 4soft.cz scrape. |
+
 ---
 
 ## 5. Tax Rules
@@ -133,6 +220,8 @@ import_duty_rate (by origin):
   EU       → 0.10  (non-FTA: Vinci, Berliner, Rampline)
   Korea    → 0.10  (non-FTA: DesignPark)
   Norway   → 0.10  (non-FTA: Rampline)
+  Canada   → 0.10  (non-FTA: Vortex)
+  Taiwan   → 0.10  (non-FTA: WePlay)
 ```
 Code: `shared/landed_pricing.py` `duty_rate_non_china=0.10`, `duty_rate_china=0.0`
 
@@ -243,6 +332,65 @@ retail_usd = landed_usd / (1 - 0.30)
 retail_sgd = landed_sgd / (1 - 0.30)
 ```
 Code: `rampline-catalog/import_pricelist.py`; `shared/landed_pricing.py` `price_row(brand="rampline")`
+
+### 6f. Vortex Aquatics (Canada EXW, USD — per-line reseller discount)
+```python
+line       = collection_to_line(collection)        # 22 collections → 7 lines
+line_disc  = line_discounts[line]                  # e.g. splashpad 0.25, coolhub 0.0
+our_cost_usd = list_usd × (1 − line_disc)          # EXW cost we pay Vortex
+fob_usd    = our_cost_usd
+fob_thb    = fob_usd × USD_THB
+cif_thb    = fob_thb × 1.35                         # flat-uplift (no CBM in pricelist)
+duty_thb   = cif_thb × 0.10                          # non-China (Canada)
+vat_thb    = (cif_thb + duty_thb) × 0.07
+landed_thb = cif_thb + duty_thb + vat_thb
+             → TIER CLAMP applied (USD→EUR-equiv band, §7)
+retail_thb = (landed_thb / (1 − 0.35)) × 1.07        # TH customer VAT
+retail_usd = (landed_thb / USD_THB) / (1 − 0.35)     # independent, no TH VAT
+retail_sgd = (landed_thb / SGD_THB) / (1 − 0.35)     # × SG GST mult when registered
+```
+Code: `vortex-catalog/import_pricelist.py` `price_vortex_row()`;
+maps in `vortex-catalog/vortex_config.py`
+### 6h. Archimedes Water Play (China FOB, CNY)
+```python
+cny_thb    = live FX (shipping-automation fx_rates, THB per CNY; fallback 4.80)
+fob_thb    = price_cny × cny_thb
+
+# Path A — kind == "lwh" (CBM via China-LCL cost_engine + tier clamp):
+cbm        = L_m × W_m × H_m × 0.15      # unit: explicit cm → cm; axis>1000 → mm; else cm
+est        = cost_engine.estimate_landed_cost(origin="china", method="lcl",
+                 goods_value=price_cny, goods_currency="CNY", cbm=cbm, duty_rate=0.0, fx_rates=fx)
+landed_thb = est.total_landed_thb        → Vinci tier clamp (floor/cap on EUR-equiv FOB band)
+
+# Path B — all other dim kinds (custom / diameter / two-dim / length / unknown):
+cif_thb    = fob_thb                     # China consolidated sea: CIF ≈ FOB (no uplift)
+duty_thb   = cif_thb × 0.00             # ASEAN-China FTA Form E
+vat_thb    = (cif_thb + duty_thb) × 0.07
+landed_thb = cif_thb + duty_thb + vat_thb
+
+retail_thb = (landed_thb / (1 - 0.50)) × 1.07   # TH customer VAT embedded
+retail_usd = (landed_thb / usd_thb) / (1 - 0.50)   # independent, no TH customer VAT
+retail_sgd = (landed_thb / sgd_thb) / (1 - 0.50) × sg_gst_mult
+```
+Code: `archimedes-water-play-catalog/price_archimedes.py` `compute_pricing()`
+Pricelist: `archimedes-water-play-catalog/import_pricelist.py` (parse) +
+`price_archimedes.py` (price). 34 SKUs: 28 CBM / 6 flat (v2.40.0).
+
+### 6g. 4soft (EU EXW, EUR) — added v2.40.0
+```python
+eur_fob    = list_eur × (1 - 0.15)      # EXW-15% reseller discount
+fob_thb    = eur_fob × EUR_THB
+cif_thb    = fob_thb × 1.35              # flat-uplift (no published dims yet)
+duty_thb   = cif_thb × 0.10
+vat_thb    = (cif_thb + duty_thb) × 0.07
+landed_thb = cif_thb + duty_thb + vat_thb
+             → TIER CLAMP applied (see §7); most cheap 2D items hit the floor
+retail_thb = (landed_thb / (1 - 0.40)) × 1.07   # 40% GM + TH customer VAT
+retail_usd = (landed_thb / USD_THB) / (1 - 0.40)
+retail_eur = (landed_thb / EUR_THB) / (1 - 0.40)
+retail_sgd = (landed_thb / SGD_THB) / (1 - 0.40)   # ×(1+GST) when Nubo registered
+```
+Code: `foursoft-catalog/import_pricelist.py` (self-contained, mirrors Berliner).
 
 ---
 
@@ -389,8 +537,9 @@ Singapore region. No `region_id` override needed — currency match is sufficien
 - **When Nubo registers for SG GST**: set `sg_nubo_gst_registered=true` in
   `pricing_config/canonical.global`, re-run `backfill_sgd_pricing.py --brand all --write`,
   then re-run `sync_brand_prices_to_medusa.py --brand all --write`.
-- **When 4soft/Weplay/Vortex have pricelists** (~9k coverage): create a full SGD
-  pricing pass for those brands, then these brands can also sell into SG region.
+- **Vortex** now has full multi-currency pricing incl. SGD (v2.38.0). **When
+  4soft has a pricelist**: create a full SGD pricing pass for it, then it can
+  also sell into SG region.
 
 ---
 
@@ -439,6 +588,11 @@ These **must stay in sync** with `scripts/seed_pricing_config.py`:
 | `rampline-catalog/import_pricelist.py` | Parse Rampline NOK pricelist → Firestore `vendors/rampline/pricelists/<date>` | When source pricelist updated |
 | `vinci-catalog/import_pricelist.py` | Parse Vinci EUR pricelist → Firestore `vendors/vinci/products` | When source pricelist updated |
 | `berliner-catalog/import_pricelist.py` | Parse Berliner EUR CSV → Firestore `vendors/berliner/products` | When source pricelist updated |
+| `vortex-catalog/import_pricelist.py --apply` | Parse Vortex 2026 USD PDF → Firestore `vendors/vortex/products` + merge `brands.vortex` config | When source pricelist updated |
+| `foursoft-catalog/import_pricelist.py` | Parse 4soft EUR `.xls` (EXW 15%) → Firestore `vendors/4soft/products` + seed `brands.4soft` | When source pricelist updated |
+| `archimedes-water-play-catalog/import_pricelist.py` | Parse Wenzhou Daosen CNY pricelist → CSV + Firestore `vendors/archimedes-water-play/pricelists/<date>` audit doc | When source pricelist updated |
+| `archimedes-water-play-catalog/price_archimedes.py --apply` | Price 34 AWP### SKUs (CNY→landed→THB/USD/SGD) → Firestore `vendors/archimedes-water-play/products` | After parse, or any config/FX change |
+| `scripts/add_archimedes_pricing_config.py` | Merge `brands.archimedes-water-play` into `pricing_config/canonical` (does not touch other brands) | Initial brand setup |
 
 ---
 
@@ -446,6 +600,10 @@ These **must stay in sync** with `scripts/seed_pricing_config.py`:
 
 | Version | Date | Change |
 |---------|------|--------|
+| v2.41.0 | 2026-05-29 | Add `brands.archimedes-water-play` (China FOB, CNY, GM 0.50, 0% duty); landed pricing pass for 34 AWP### SKUs (`price_archimedes.py`, mirrors Wisdom); Archimedes Water Play Medusa sales channel (`sc_01KSSP39K5DVH9TT2TMXCREHFV`). Rebased onto 4soft 2.40.0 + WePlay 2.39.0 + Vortex 2.38.0. |
+| v2.40.0 | 2026-05-29 | Add **`brands.4soft`** (EU EXW, EUR; GM 40%, EXW discount 15%). Ingest 2025 EPDM-graphics `.xls` → 2,410 priced SKUs in `vendors/4soft`; 377 existing Medusa variants priced. Reconciled as a NEW brand (no overlap with the separate wet-pour EPDM/Infill CFH pricer) |
+| v2.39.0 | 2026-05-29 | Add **WePlay** brand (Taiwan/USD, GM 0.50, duty 0.10, sea LCL 5500 THB/CBM). `weplay-catalog/import_pricelist.py` computes landed THB/USD/SGD retail for 189 SKUs from quotation AQ1251030077 (CBM-driven freight `per_unit_cbm = carton_cbm/pack`); synced to Medusa |
+| v2.38.0 | 2026-05-29 | Add **Vortex Aquatics** (`brands.vortex`): per-product-LINE reseller discounts (Splashpad 25% / Poolplay 15% / Spraypoint 25% / Elevations 15% / WQMS 15% / Water Journey 20% / Water Slides 15% / CoolHub 0%), Canada EXW USD, 311 SKUs ingested, 295 synced to Medusa. Maps in `vortex-catalog/vortex_config.py`. |
 | v2.33.0 | 2026-05-25 | Create Medusa Singapore SGD region (`reg_01KSEBH1EAK9RWAYEW87QY8NWS`); move `sg` out of Asia-Pacific USD; re-sync all brand prices |
 | v2.32.0 | 2026-05-24 | Rampline weight scraper fix: `<p><br>` spec parsing + `FAMILY_DESC_TO_SLUG` map. 32/127 Rampline SKUs now use `airfreight_weight` routing (was 0 before) |
 | v2.31.0 | 2026-05-24 | Fix Wisdom duty 7%→0% (ASEAN-China FTA); add 7% TH customer VAT to all retail prices; Korea/China/Norway shipping-automation CBM routes; currency-independent retail calculations (THB/USD/SGD each from source FOB) |

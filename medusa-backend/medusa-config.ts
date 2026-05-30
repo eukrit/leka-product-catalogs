@@ -63,5 +63,8 @@ export default defineConfig({
         providers: authProviders,
       },
     },
+    {
+      resolve: "./src/modules/brand",
+    },
   ],
 })

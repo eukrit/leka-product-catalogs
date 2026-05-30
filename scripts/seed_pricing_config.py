@@ -30,6 +30,11 @@ if str(REPO_ROOT) not in sys.path:
 
 from shared import landed_pricing as _lp  # noqa: E402
 from shared import wisdom_pricing as _wp  # noqa: E402
+
+# Vortex canonical maps live in vortex-catalog/vortex_config.py (pure dicts,
+# no heavy deps) — single source of truth shared with its import_pricelist.py.
+sys.path.insert(0, str(REPO_ROOT / "vortex-catalog"))
+import vortex_config as _vortex  # noqa: E402
 from shared.pricing_config import (  # noqa: E402
     FS_COLLECTION, FS_DATABASE, FS_DOCUMENT, FS_PROJECT,
 )
@@ -111,6 +116,40 @@ def build_seed_doc() -> dict:
                 "default_usd_thb": _wp.DEFAULT_USD_THB,
                 "source_pricelist_url": "wisdom-catalog/data/",
                 "source_pricelist_label": "Wisdom Excel catalogs (in-repo)",
+            },
+            # Vortex Aquatics — Canada EXW USD, per-product-line reseller discounts.
+            "vortex": _vortex.brand_config(),
+            # WePlay (Kiddie's Paradise Inc., Taiwan) — FOB Taiwan, net USD.
+            # Taiwan is non-FTA for Thailand → 10% import duty + 7% import VAT.
+            # Freight is CBM-driven (carton CBM / pack qty) at sea_lcl_per_cbm_thb;
+            # see weplay-catalog/import_pricelist.py. GM 0.50 confirmed 2026-05-29.
+            "weplay": {
+                "gross_margin": 0.50,
+                "import_duty_rate": 0.10,
+                "sea_lcl_per_cbm_thb": 5500.0,
+                "default_usd_thb": 33.0,
+                "source_pricelist_url": "weplay-catalog/import_pricelist.py (AQ1251030077)",
+                "source_pricelist_label": "WePlay quotation AQ1251030077 (FOB Taiwan, USD)",
+            },
+            "4soft": {
+                # EU/Czech EXW brand — same shape as Berliner. Added v2.40.0.
+                "gross_margin": 0.40,
+                "exw_discount": 0.15,
+                "trade_terms": "EXW",
+                "origin": "EU/Czech",
+                "source_pricelist_url": "foursoft-catalog/data/pricelist_2025-03-01.csv",
+                "source_pricelist_label": "4soft 2025 EPDM-graphics pricelist (.xls, valid 2025-03-01)",
+            },
+            # China-origin (Wenzhou Daosen), priced in CNY. Mirrors Wisdom:
+            # 0% duty (ASEAN-China FTA Form E), 7% import VAT, 50% GM.
+            "archimedes-water-play": {
+                "gross_margin": 0.50,
+                "import_duty_rate": 0.00,
+                "currency": "CNY",
+                "origin": "china",
+                "default_cny_thb": 4.80,
+                "source_pricelist_url": "archimedes-water-play-catalog/data/source/daosen_pricelist_2026-05-29.xls",
+                "source_pricelist_label": "Wenzhou Daosen 温州道森游乐戏水 pricelist 2026-05-29 (in-repo XLS)",
             },
         },
         "logistics_tiers": tiers,

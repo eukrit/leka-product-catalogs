@@ -35,6 +35,7 @@ extracted_images_v2/
 verified_images/
 *Slack Downloads/
 *.pdf
+wisdom-catalog/data/pdf_images/
 
 # Python
 __pycache__/
@@ -81,9 +82,18 @@ Thumbs.db
 .claude/telemetry/
 .claude/worktrees/
 .claude/active-machine.*
+.claude/session-state.*
 
 # Next.js TS incremental build cache
 *.tsbuildinfo
 
 # Pricing backfill safety backups (local audit)
 scripts/backfill_backups/
+
+# Scraped catalog output (reproducible via scrape scripts; products.json is large) — not committed
+data/scraped/
+# PDF-extracted product image binaries (reproducible via extract_pdf_images.py; uploaded to GCS) — keep the mapping JSON
+foursoft-catalog/data/pdf_images/
+# Transient run logs (reproducible)
+*_run.log
+data-scrape-*.log

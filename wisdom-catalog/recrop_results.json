@@ -1,0 +1,283 @@
+{
+  "pages": [
+    {
+      "pdf": "2025 Wisdom catalog.pdf",
+      "page": 77,
+      "candidates": [
+        {
+          "sku": "CSS-CBZJ-BZ",
+          "product_id": "prod_01KNKW13627C98GJA8G11H421W",
+          "title": "Castle Support Standard Package",
+          "bucket": "C_silent_placeholder"
+        },
+        {
+          "sku": "CSS-JDZJ-BZ",
+          "product_id": "prod_01KNKW14JCJA57V7BQKAEG80NB",
+          "title": "Classical Support Standard Package",
+          "bucket": "A_rejected_thumb"
+        },
+        {
+          "sku": "CSS-JQ-V01",
+          "product_id": "prod_01KNKW15E5NSEKF8VV4VRHJVZ9",
+          "title": "Sand & Water - Jumbo Version",
+          "bucket": "A_rejected_thumb"
+        },
+        {
+          "sku": "CSS-QBWJ-BZ",
+          "product_id": "prod_01KNKW16TS5FCYTGN4VVGR7PPW",
+          "title": "Wallboard Toys Standard Package",
+          "bucket": "A_rejected_thumb"
+        },
+        {
+          "sku": "CSS-XPB-PMSG",
+          "product_id": "prod_01KNKW18EBWC29QD1B1CBCDKYX",
+          "title": "Accessory Package-Semicircular Tubes",
+          "bucket": "A_rejected_thumb"
+        },
+        {
+          "sku": "CSS-XPB-SG",
+          "product_id": "prod_01KNKW18ZR85W1HZ01HMHSXK0T",
+          "title": "Accessory Package-Tubes",
+          "bucket": "A_rejected_thumb"
+        }
+      ],
+      "boxes_raw": [
+        {
+          "sku": "CSS-CBZJ-BZ",
+          "found": true,
+          "ymin": 172,
+          "xmin": 824,
+          "ymax": 300,
+          "xmax": 973,
+          "confidence": 1.0,
+          "reasoning": "code above photo"
+        },
+        {
+          "sku": "CSS-JDZJ-BZ",
+          "found": true,
+          "ymin": 373,
+          "xmin": 575,
+          "ymax": 499,
+          "xmax": 801,
+          "confidence": 1.0,
+          "reasoning": "code above photo"
+        },
+        {
+          "sku": "CSS-JQ-V01",
+          "found": true,
+          "ymin": 444,
+          "xmin": 53,
+          "ymax": 650,
+          "xmax": 461,
+          "confidence": 1.0,
+          "reasoning": "code above photo"
+        },
+        {
+          "sku": "CSS-QBWJ-BZ",
+          "found": true,
+          "ymin": 582,
+          "xmin": 724,
+          "ymax": 710,
+          "xmax": 840,
+          "confidence": 0.9,
+          "reasoning": "code above photo in middle column"
+        },
+        {
+          "sku": "CSS-XPB-PMSG",
+          "found": true,
+          "ymin": 824,
+          "xmin": 523,
+          "ymax": 939,
+          "xmax": 669,
+          "confidence": 1.0,
+          "reasoning": "code above photo"
+        },
+        {
+          "sku": "CSS-XPB-SG",
+          "found": true,
+          "ymin": 624,
+          "xmin": 845,
+          "ymax": 710,
+          "xmax": 973,
+          "confidence": 0.9,
+          "reasoning": "code above photo in right column"
+        }
+      ],
+      "gemini_error": null,
+      "crops": [
+        {
+          "sku": "CSS-CBZJ-BZ",
+          "title": "Castle Support Standard Package",
+          "found": true,
+          "confidence": 1.0,
+          "reasoning": "code above photo",
+          "crop_path": "C:\\Users\\Eukrit\\OneDrive\\Documents\\Claude Code\\leka-product-catalogs\\.claude\\worktrees\\inspiring-hawking-756810\\wisdom-catalog\\preview\\crops\\CSS-CBZJ-BZ_p077.jpeg",
+          "bbox_norm": {
+            "ymin": 172,
+            "xmin": 824,
+            "ymax": 300,
+            "xmax": 973
+          }
+        },
+        {
+          "sku": "CSS-JDZJ-BZ",
+          "title": "Classical Support Standard Package",
+          "found": true,
+          "confidence": 1.0,
+          "reasoning": "code above photo",
+          "crop_path": "C:\\Users\\Eukrit\\OneDrive\\Documents\\Claude Code\\leka-product-catalogs\\.claude\\worktrees\\inspiring-hawking-756810\\wisdom-catalog\\preview\\crops\\CSS-JDZJ-BZ_p077.jpeg",
+          "bbox_norm": {
+            "ymin": 373,
+            "xmin": 575,
+            "ymax": 499,
+            "xmax": 801
+          }
+        },
+        {
+          "sku": "CSS-JQ-V01",
+          "title": "Sand & Water - Jumbo Version",
+          "found": true,
+          "confidence": 1.0,
+          "reasoning": "code above photo",
+          "crop_path": "C:\\Users\\Eukrit\\OneDrive\\Documents\\Claude Code\\leka-product-catalogs\\.claude\\worktrees\\inspiring-hawking-756810\\wisdom-catalog\\preview\\crops\\CSS-JQ-V01_p077.jpeg",
+          "bbox_norm": {
+            "ymin": 444,
+            "xmin": 53,
+            "ymax": 650,
+            "xmax": 461
+          }
+        },
+        {
+          "sku": "CSS-QBWJ-BZ",
+          "title": "Wallboard Toys Standard Package",
+          "found": true,
+          "confidence": 0.9,
+          "reasoning": "code above photo in middle column",
+          "crop_path": "C:\\Users\\Eukrit\\OneDrive\\Documents\\Claude Code\\leka-product-catalogs\\.claude\\worktrees\\inspiring-hawking-756810\\wisdom-catalog\\preview\\crops\\CSS-QBWJ-BZ_p077.jpeg",
+          "bbox_norm": {
+            "ymin": 582,
+            "xmin": 724,
+            "ymax": 710,
+            "xmax": 840
+          }
+        },
+        {
+          "sku": "CSS-XPB-PMSG",
+          "title": "Accessory Package-Semicircular Tubes",
+          "found": true,
+          "confidence": 1.0,
+          "reasoning": "code above photo",
+          "crop_path": "C:\\Users\\Eukrit\\OneDrive\\Documents\\Claude Code\\leka-product-catalogs\\.claude\\worktrees\\inspiring-hawking-756810\\wisdom-catalog\\preview\\crops\\CSS-XPB-PMSG_p077.jpeg",
+          "bbox_norm": {
+            "ymin": 824,
+            "xmin": 523,
+            "ymax": 939,
+            "xmax": 669
+          }
+        },
+        {
+          "sku": "CSS-XPB-SG",
+          "title": "Accessory Package-Tubes",
+          "found": true,
+          "confidence": 0.9,
+          "reasoning": "code above photo in right column",
+          "crop_path": "C:\\Users\\Eukrit\\OneDrive\\Documents\\Claude Code\\leka-product-catalogs\\.claude\\worktrees\\inspiring-hawking-756810\\wisdom-catalog\\preview\\crops\\CSS-XPB-SG_p077.jpeg",
+          "bbox_norm": {
+            "ymin": 624,
+            "xmin": 845,
+            "ymax": 710,
+            "xmax": 973
+          }
+        }
+      ]
+    },
+    {
+      "pdf": "2025 Wisdom catalog.pdf",
+      "page": 78,
+      "candidates": [
+        {
+          "sku": "GP3-1312-V02",
+          "product_id": "prod_01KNKWEHEKBR79PQMVSY3N0TS8",
+          "title": "Sand & Water Play Set-Round",
+          "bucket": "A_rejected_thumb"
+        }
+      ],
+      "boxes_raw": [
+        {
+          "sku": "GP3-1312-V02",
+          "found": true,
+          "ymin": 218,
+          "xmin": 285,
+          "ymax": 311,
+          "xmax": 340,
+          "confidence": 1.0,
+          "reasoning": "SKU is next to the product photo."
+        }
+      ],
+      "gemini_error": null,
+      "crops": [
+        {
+          "sku": "GP3-1312-V02",
+          "title": "Sand & Water Play Set-Round",
+          "found": true,
+          "confidence": 1.0,
+          "reasoning": "SKU is next to the product photo.",
+          "crop_path": "C:\\Users\\Eukrit\\OneDrive\\Documents\\Claude Code\\leka-product-catalogs\\.claude\\worktrees\\inspiring-hawking-756810\\wisdom-catalog\\preview\\crops\\GP3-1312-V02_p078.jpeg",
+          "bbox_norm": {
+            "ymin": 218,
+            "xmin": 285,
+            "ymax": 311,
+            "xmax": 340
+          }
+        }
+      ]
+    },
+    {
+      "pdf": "2025 Wisdom catalog.pdf",
+      "page": 79,
+      "candidates": [
+        {
+          "sku": "HW1-S060",
+          "product_id": "prod_01KNKWFEG6HHW9094S18A75FPF",
+          "title": "Stand Column Support",
+          "bucket": "A_rejected_thumb"
+        }
+      ],
+      "boxes_raw": [
+        {
+          "sku": "HW1-S060",
+          "found": true,
+          "ymin": 192,
+          "xmin": 297,
+          "ymax": 282,
+          "xmax": 359,
+          "confidence": 1.0,
+          "reasoning": "Code is directly below the product image."
+        }
+      ],
+      "gemini_error": null,
+      "crops": [
+        {
+          "sku": "HW1-S060",
+          "title": "Stand Column Support",
+          "found": true,
+          "confidence": 1.0,
+          "reasoning": "Code is directly below the product image.",
+          "crop_path": "C:\\Users\\Eukrit\\OneDrive\\Documents\\Claude Code\\leka-product-catalogs\\.claude\\worktrees\\inspiring-hawking-756810\\wisdom-catalog\\preview\\crops\\HW1-S060_p079.jpeg",
+          "bbox_norm": {
+            "ymin": 192,
+            "xmin": 297,
+            "ymax": 282,
+            "xmax": 359
+          }
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "sku_total": 8,
+    "sku_found": 8,
+    "mean_confidence": 0.975,
+    "pages_rendered": 3
+  }
+}

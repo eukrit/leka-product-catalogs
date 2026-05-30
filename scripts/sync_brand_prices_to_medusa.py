@@ -44,6 +44,11 @@ SC: dict[str, str] = {
     "berliner":   "sc_01KNQAA3QDYHP15Y9K4PPRMDF0",
     "designpark": "sc_01KRRK0N4ET8QZHX6QB3KZ84YD",
     "wisdom":     "sc_01KNKTHC0B7KFEDSZ3NNM49JQW",  # rebranded "Leka Project"
+    "vortex":     "sc_01KPRY1T8HZJ57020JPZVGAKZK",  # Vortex Aquatics (VOR-… SKUs)
+    "4soft":      "sc_01KNQAA4A8SF4ZT9S8N0AHGY3Y",  # 4soft EPDM graphics (v2.40.0)
+    # Archimedes Water Play SC created v2.40.0. Price sync is a no-op until the
+    # 34 AWP### products are created in Medusa (catalog creation is a follow-up).
+    "archimedes-water-play": "sc_01KSSP39K5DVH9TT2TMXCREHFV",
 }
 _CCY = (("retail_thb", "thb"), ("retail_usd", "usd"),
         ("retail_eur", "eur"), ("retail_sgd", "sgd"))

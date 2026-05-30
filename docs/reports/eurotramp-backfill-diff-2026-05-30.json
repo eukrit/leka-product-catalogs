@@ -1,0 +1,1396 @@
+{
+  "generated_at": "2026-05-30",
+  "audit_source": "eurotramp-image-audit-2026-05-30-classified.json",
+  "scrape_source": "data\\scraped\\eurotramp\\products.json",
+  "summary": {
+    "diffs": 76,
+    "backfill_targets_with_upstream_photos": 6,
+    "backfill_targets_no_upstream_photos": 13,
+    "targets_not_in_scrape": 15,
+    "cert_thumb_with_photos": 15
+  },
+  "upstream_gap_handles": [
+    "eurotramp-booster-board-freestyle",
+    "eurotramp-customized-fabrications",
+    "eurotramp-eurotramp-play",
+    "eurotramp-kids-tramp-kindergarten-loop",
+    "eurotramp-kids-tramp-kindergarten-loop-xl",
+    "eurotramp-kids-tramp-playground-loop",
+    "eurotramp-kids-tramp-playground-loop-xl",
+    "eurotramp-safety-platforms-universal-freestyle",
+    "eurotramp-set-of-landing-mats-dmt",
+    "eurotramp-spotting-mat-freestyle",
+    "eurotramp-trampoline-set-one-field",
+    "eurotramp-trampoline-set-stationary",
+    "eurotramp-transport-case-hdts"
+  ],
+  "not_in_scrape_handles": [
+    "eurotramp-adhesive-cartridge-for-kids-tramp-impact-protection-e97003",
+    "eurotramp-bonded-impact-protection-system-kids-tramp-xl-e97544",
+    "eurotramp-eurotramp-play-light-epl0001",
+    "eurotramp-impactprotection-system-kids-tramp-e97044",
+    "eurotramp-jumping-bed-kids-tramp-kindergarten-e21897",
+    "eurotramp-jumping-bed-kids-tramp-kindergarten-xl-e21879",
+    "eurotramp-minitrampoline-112-125",
+    "eurotramp-single-tile-impact-protection-kids-tramp-track-centrepiece-e97006",
+    "eurotramp-single-tile-impact-protection-kids-tramp-track-centrepiece-e97008",
+    "eurotramp-single-tile-impact-protection-kids-tramp-track-centrepiece-e97012",
+    "eurotramp-single-tile-impact-protection-kids-tramp-track-centrepiece-e97013",
+    "eurotramp-single-tile-impact-protection-kids-tramp-track-cornerpiece-e97005",
+    "eurotramp-single-tile-impact-protection-kids-tramp-track-cornerpiece-e97007",
+    "eurotramp-wehrfritz-fun-round-kindergarten-94750",
+    "eurotramp-wehrfritz-fun-xl-kindergarten"
+  ],
+  "diffs": [
+    {
+      "handle": "eurotramp-adaption-bars-safety-platform-integral-ultimate",
+      "title": "Adaption bars",
+      "is_backfill_target": false,
+      "thumb_kind": "photo",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-adaption-bars-safety-platform-integral-ultimate/30800-adaptorsafetyplatformintegral-ultimate_ee6ce9ce2b_200x112.jpg",
+      "scraped_photo_count": 1,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/30800-adaptorsafetyplatformintegral-ultimate_ee6ce9ce2b_200x112.jpg"
+      ],
+      "new_photo_urls": [],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/30800-adaptorsafetyplatformintegral-ultimate_ee6ce9ce2b_200x112.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/adaption-bars-safety-platform-integral-ultimate/"
+    },
+    {
+      "handle": "eurotramp-albatross",
+      "title": "Albatross",
+      "is_backfill_target": false,
+      "thumb_kind": "photo",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-albatross/16000-albatross-halfopened_60de5e7f97_200x112.jpg",
+      "scraped_photo_count": 1,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/16000-albatross-halfopened_60de5e7f97_200x112.jpg"
+      ],
+      "new_photo_urls": [],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/16000-albatross-halfopened_60de5e7f97_200x112.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/albatross/"
+    },
+    {
+      "handle": "eurotramp-anti-slip-plate-dmt",
+      "title": "Anti-slip plate",
+      "is_backfill_target": false,
+      "thumb_kind": "feature-badge",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-anti-slip-plate-dmt/madeingermany_5016cae181.jpg",
+      "scraped_photo_count": 2,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/23201-anti-slipplatefordmt_3be2acfea4_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/23200-preview-double-minitrampultimate_3e6da1d709_680x378.jpg"
+      ],
+      "new_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/23201-anti-slipplatefordmt_3be2acfea4_200x112.jpg"
+      ],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/23200-preview-double-minitrampultimate_3e6da1d709_680x378.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/anti-slip-plate-dmt/"
+    },
+    {
+      "handle": "eurotramp-booster-board",
+      "title": "Booster Board",
+      "is_backfill_target": false,
+      "thumb_kind": "feature-badge",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-booster-board/madeingermany_5016cae181.jpg",
+      "scraped_photo_count": 1,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-boosterboard_624fca473e_200x112.jpg"
+      ],
+      "new_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-boosterboard_624fca473e_200x112.jpg"
+      ],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/productdetails-boosterboard_624fca473e_200x112.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/booster-board/"
+    },
+    {
+      "handle": "eurotramp-booster-board-freestyle",
+      "title": "Booster Board \"Freestyle\"",
+      "is_backfill_target": true,
+      "thumb_kind": "feature-badge",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-booster-board-freestyle/madeingermany_5016cae181.jpg",
+      "scraped_photo_count": 0,
+      "scraped_photo_urls": [],
+      "new_photo_urls": [],
+      "best_thumb_candidate": null,
+      "vendor_url": "https://www.eurotramp.com/en/products/booster-board-freestyle/"
+    },
+    {
+      "handle": "eurotramp-bounce-cloud",
+      "title": "BounceCloud",
+      "is_backfill_target": false,
+      "thumb_kind": "feature-badge",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-bounce-cloud/madeingermany_5016cae181.jpg",
+      "scraped_photo_count": 15,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/93000-rendering-bouncecloudgreen_702fb19adf_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/93001-rendering-bouncecloudyellow_84b6cbb4b1_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/93002-rendering-bouncecloudorange_390a3f54a8_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/93003-rendering-bouncecloudblue_7c331a4552_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/93004-rendering-bouncecloudpurple_a606518cda_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/93005-rendering-bouncecloudgrey_a9f5c99758_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/93006-rendering-bouncecloudred_2aa7519f91_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/93020-bouncecloudgreen-setof3_0c3a707e5d_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/93021-bouncecloudyellow-setof3_e86e069229_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/93022-bouncecloudorange-setof3_5d3458eecf_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/93030-bouncecloudgreen-setof6_8a9b92e2d0_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/93031-bouncecloudyellow-setof6_6bf4d62e20_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/93032-bouncecloudorange-setof6_280d69d25d_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/93002-bouncecloud-orange_76337b8712_1920x1080.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/93100-concretefoundationbouncecloud_4fcf88a062_680x378.jpg"
+      ],
+      "new_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/93000-rendering-bouncecloudgreen_702fb19adf_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/93001-rendering-bouncecloudyellow_84b6cbb4b1_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/93002-rendering-bouncecloudorange_390a3f54a8_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/93003-rendering-bouncecloudblue_7c331a4552_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/93004-rendering-bouncecloudpurple_a606518cda_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/93005-rendering-bouncecloudgrey_a9f5c99758_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/93006-rendering-bouncecloudred_2aa7519f91_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/93020-bouncecloudgreen-setof3_0c3a707e5d_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/93021-bouncecloudyellow-setof3_e86e069229_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/93022-bouncecloudorange-setof3_5d3458eecf_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/93030-bouncecloudgreen-setof6_8a9b92e2d0_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/93031-bouncecloudyellow-setof6_6bf4d62e20_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/93032-bouncecloudorange-setof6_280d69d25d_200x112.jpg"
+      ],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/93002-bouncecloud-orange_76337b8712_1920x1080.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/bounce-cloud/"
+    },
+    {
+      "handle": "eurotramp-bumper-dorado",
+      "title": "Bumper Dorado\u00ae",
+      "is_backfill_target": false,
+      "thumb_kind": "photo",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-bumper-dorado/60055-bumperdorado_2a98a9128f_200x112.jpg",
+      "scraped_photo_count": 1,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/60055-bumperdorado_2a98a9128f_200x112.jpg"
+      ],
+      "new_photo_urls": [],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/60055-bumperdorado_2a98a9128f_200x112.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/bumper-dorado/"
+    },
+    {
+      "handle": "eurotramp-bumper-teamgym",
+      "title": "Bumper Teamgym",
+      "is_backfill_target": false,
+      "thumb_kind": "photo",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-bumper-teamgym/60022-bumper_4dfc4bfac4_200x112.jpg",
+      "scraped_photo_count": 2,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/60022-bumper_4dfc4bfac4_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/60020-preview-minitrampteamgym_2ba99bb563_680x378.jpg"
+      ],
+      "new_photo_urls": [],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/60020-preview-minitrampteamgym_2ba99bb563_680x378.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/bumper-teamgym/"
+    },
+    {
+      "handle": "eurotramp-bungee-longe",
+      "title": "Bungee Longe",
+      "is_backfill_target": false,
+      "thumb_kind": "placeholder",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-bungee-longe/placeholder_680x378.jpg",
+      "scraped_photo_count": 4,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/13000-preview-grandmaster_f6c96a547c_680x378.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/19000-preview-master_f22eaac4f3_680x378.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/03150-ultimate80mmframepads_2ba6815e21_680x378.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/35000-somersaultbelts_1bddcde3e0_680x378.jpg"
+      ],
+      "new_photo_urls": [],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/13000-preview-grandmaster_f6c96a547c_680x378.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/bungee-longe/"
+    },
+    {
+      "handle": "eurotramp-complete-competition-trampoline",
+      "title": "Competition trampoline sets",
+      "is_backfill_target": false,
+      "thumb_kind": "unknown",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-complete-competition-trampoline/figapproved_2907f615cc.jpg",
+      "scraped_photo_count": 7,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/03150-ultimate80mmframepads_2ba6815e21_680x378.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/27300-preview-safetyplatformuniversal_66fdb3e245_680x378.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/e53110-preview-liftingrollerstandsafecomfort_bd6fa7873b_680x378.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/tz002-preview-stabilityplateultimate_c96a2c490d_680x378.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/e11118-framepadssetultimate2_1eeb1abe1f_680x378.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/28600-eurotrampspottingmat-topview_b39a5e732b_680x378.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/28330---spieth-ground-safety-mats_cbb2542addd8f8060_680x378.jpg"
+      ],
+      "new_photo_urls": [],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/03150-ultimate80mmframepads_2ba6815e21_680x378.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/complete-competition-trampoline/"
+    },
+    {
+      "handle": "eurotramp-concrete-foundation",
+      "title": "Concrete foundation",
+      "is_backfill_target": false,
+      "thumb_kind": "photo",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-concrete-foundation/93100-concretefoundationbouncecloud_4fcf88a062_200x112.jpg",
+      "scraped_photo_count": 1,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/93100-concretefoundationbouncecloud_4fcf88a062_200x112.jpg"
+      ],
+      "new_photo_urls": [],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/93100-concretefoundationbouncecloud_4fcf88a062_200x112.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/concrete-foundation/"
+    },
+    {
+      "handle": "eurotramp-customized-fabrications",
+      "title": "Customized Fabrications",
+      "is_backfill_target": true,
+      "thumb_kind": "feature-badge",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-customized-fabrications/madeingermany_5016cae181.jpg",
+      "scraped_photo_count": 0,
+      "scraped_photo_urls": [],
+      "new_photo_urls": [],
+      "best_thumb_candidate": null,
+      "vendor_url": "https://www.eurotramp.com/en/products/customized-fabrications/"
+    },
+    {
+      "handle": "eurotramp-dorado",
+      "title": "Dorado\u00ae",
+      "is_backfill_target": false,
+      "thumb_kind": "photo",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-dorado/productdetails-dorado40_c44ced9035_200x112.jpg",
+      "scraped_photo_count": 2,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-dorado40_c44ced9035_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-dorado36_81897705dc_200x112.jpg"
+      ],
+      "new_photo_urls": [],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/productdetails-dorado40_c44ced9035_200x112.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/dorado/"
+    },
+    {
+      "handle": "eurotramp-double-minitramp-190",
+      "title": "Double-Minitramp 190",
+      "is_backfill_target": false,
+      "thumb_kind": "photo",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-double-minitramp-190/productdetails-double-minitrampultimate_393daece32_200x112.jpg",
+      "scraped_photo_count": 2,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-double-minitrampultimate_393daece32_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/23200-preview-double-minitrampultimate_3e6da1d709_680x378.jpg"
+      ],
+      "new_photo_urls": [],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/productdetails-double-minitrampultimate_393daece32_200x112.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/double-minitramp-190/"
+    },
+    {
+      "handle": "eurotramp-eurotramp-play",
+      "title": "Eurotramp PLAY!",
+      "is_backfill_target": true,
+      "thumb_kind": "feature-badge",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-eurotramp-play/madeingermany_5016cae181.jpg",
+      "scraped_photo_count": 0,
+      "scraped_photo_urls": [],
+      "new_photo_urls": [],
+      "best_thumb_candidate": null,
+      "vendor_url": "https://www.eurotramp.com/en/products/eurotramp-play/"
+    },
+    {
+      "handle": "eurotramp-eurotramp-spotting-mat",
+      "title": "Eurotramp spotting mat",
+      "is_backfill_target": false,
+      "thumb_kind": "photo",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-eurotramp-spotting-mat/28600-eurotrampspottingmat-topview_b39a5e732b_200x112.jpg",
+      "scraped_photo_count": 8,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/28600-eurotrampspottingmat-topview_b39a5e732b_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/23200-preview-double-minitrampultimate_3e6da1d709_680x378.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/96013-preview-groundtrampolineindoor13mm_1708fbfa3e_680x378.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/44113-preview-ultimatefreestyle_3de8e5ce81_680x378.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/13000-preview-grandmaster_f6c96a547c_680x378.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/19000-preview-master_f22eaac4f3_680x378.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/03150-ultimate80mmframepads_2ba6815e21_680x378.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/40001-preview-freestylefivesquare_03144af2aa_680x378.jpg"
+      ],
+      "new_photo_urls": [],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/23200-preview-double-minitrampultimate_3e6da1d709_680x378.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/eurotramp-spotting-mat/"
+    },
+    {
+      "handle": "eurotramp-fivesquare",
+      "title": "Fivesquare 5\u00b2",
+      "is_backfill_target": false,
+      "thumb_kind": "feature-badge",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-fivesquare/madeingermany_5016cae181.jpg",
+      "scraped_photo_count": 4,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/40000-fivesquaregrey_dfada99d79_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/40001-fivesquareblack_a1f403403b_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/40000-fivesquaregrey_dfada99d79_1920x1080.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/44113-preview-ultimatefreestyle_3de8e5ce81_680x378.jpg"
+      ],
+      "new_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/40000-fivesquaregrey_dfada99d79_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/40001-fivesquareblack_a1f403403b_200x112.jpg"
+      ],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/40000-fivesquaregrey_dfada99d79_1920x1080.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/fivesquare/"
+    },
+    {
+      "handle": "eurotramp-frame-pads-set-80mm-safety-plus",
+      "title": "Frame pads set 80 mm SAFETY PLUS",
+      "is_backfill_target": false,
+      "thumb_kind": "photo",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-frame-pads-set-80mm-safety-plus/e11118-framepadssetultimate2_1eeb1abe1f_200x112.jpg",
+      "scraped_photo_count": 1,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/e11118-framepadssetultimate2_1eeb1abe1f_200x112.jpg"
+      ],
+      "new_photo_urls": [],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/e11118-framepadssetultimate2_1eeb1abe1f_200x112.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/frame-pads-set-80mm-safety-plus/"
+    },
+    {
+      "handle": "eurotramp-grand-master",
+      "title": "Grand Master",
+      "is_backfill_target": false,
+      "thumb_kind": "cert",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-grand-master/tuev_13219_2021.jpg",
+      "scraped_photo_count": 9,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-grandmaster13mm_49d719a380_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-grandmaster13mm_49d719a380_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-grandmaster13mm_49d719a380_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-grandmaster45mm_99566bd928_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-grandmaster45mm_99566bd928_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-grandmaster45mm_99566bd928_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/e53110-preview-liftingrollerstandsafecomfort_bd6fa7873b_680x378.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/e52110-preview-liftingrollerstand_d57c24fc7b_680x378.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/34550-preview-bungeelonge_0151fb8b81_680x378.jpg"
+      ],
+      "new_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-grandmaster13mm_49d719a380_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-grandmaster45mm_99566bd928_200x112.jpg"
+      ],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/productdetails-grandmaster13mm_49d719a380_200x112.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/grand-master/"
+    },
+    {
+      "handle": "eurotramp-grand-master-exclusiv",
+      "title": "Grand Master Exclusiv",
+      "is_backfill_target": false,
+      "thumb_kind": "photo",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-grand-master-exclusiv/productdetails-grandmasterexclusiv_a84d797882_200x112.jpg",
+      "scraped_photo_count": 10,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-grandmasterexclusiv_a84d797882_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-grandmasterexclusiv_a84d797882_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-grandmasterexclusiv_a84d797882_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-grandmasterexclusiv_a84d797882_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-grandmasterexclusiv_a84d797882_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-grandmasterexclusiv_a84d797882_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/27300-preview-safetyplatformuniversal_66fdb3e245_680x378.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/29000-preview-safetyplatformintegral_10e347a7e8_680x378.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/e53110-preview-liftingrollerstandsafecomfort_bd6fa7873b_680x378.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/tz002-preview-stabilityplateultimate_c96a2c490d_680x378.jpg"
+      ],
+      "new_photo_urls": [],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/productdetails-grandmasterexclusiv_a84d797882_200x112.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/grand-master-exclusiv/"
+    },
+    {
+      "handle": "eurotramp-grand-master-exclusiv-open-end",
+      "title": "Grand Master Exclusiv Open-End",
+      "is_backfill_target": false,
+      "thumb_kind": "photo",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-grand-master-exclusiv-open-end/productdetails-grandmasterexclusivopen-end_06436d97e4_200x112.jpg",
+      "scraped_photo_count": 6,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-grandmasterexclusivopen-end_06436d97e4_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-grandmasterexclusivopen-end_06436d97e4_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-grandmasterexclusivopen-end_06436d97e4_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-grandmasterexclusivopen-end_06436d97e4_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-grandmasterexclusivopen-end_06436d97e4_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-grandmasterexclusivopen-end_06436d97e4_200x112.jpg"
+      ],
+      "new_photo_urls": [],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/productdetails-grandmasterexclusivopen-end_06436d97e4_200x112.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/grand-master-exclusiv-open-end/"
+    },
+    {
+      "handle": "eurotramp-ground-trampoline-freestyle",
+      "title": "Ground Trampoline \"Freestyle\"",
+      "is_backfill_target": false,
+      "thumb_kind": "feature-badge",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-ground-trampoline-freestyle/madeingermany_5016cae181.jpg",
+      "scraped_photo_count": 0,
+      "scraped_photo_urls": [],
+      "new_photo_urls": [],
+      "best_thumb_candidate": null,
+      "vendor_url": "https://www.eurotramp.com/en/products/ground-trampoline-freestyle/"
+    },
+    {
+      "handle": "eurotramp-ground-trampoline-indoor",
+      "title": "Ground Trampoline Grand Master INDOOR",
+      "is_backfill_target": false,
+      "thumb_kind": "cert",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-ground-trampoline-indoor/tuev_13219_2021.jpg",
+      "scraped_photo_count": 5,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/96013-groundtrampolineindoor13mm_9c8c0635b1_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/96013-groundtrampolineindoor13mm_9c8c0635b1_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/96013-groundtrampolineindoor13mm_9c8c0635b1_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/96013-groundtrampolineindoor13mm_9c8c0635b1_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/96013-groundtrampolineindoor13mm_9c8c0635b1_200x112.jpg"
+      ],
+      "new_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/96013-groundtrampolineindoor13mm_9c8c0635b1_200x112.jpg"
+      ],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/96013-groundtrampolineindoor13mm_9c8c0635b1_200x112.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/ground-trampoline-indoor/"
+    },
+    {
+      "handle": "eurotramp-ground-trampoline-outdoor",
+      "title": "Ground Trampoline OUTDOOR",
+      "is_backfill_target": false,
+      "thumb_kind": "cert",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-ground-trampoline-outdoor/tuev_13219_2021.jpg",
+      "scraped_photo_count": 33,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/94000-00195000-00196000-001-groundtrampolineoutdoornew_d69eadc570_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/94000-00195000-00196000-001-groundtrampolineoutdoornew_d69eadc570_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/94000-00195000-00196000-001-groundtrampolineoutdoornew_d69eadc570_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/94000-00295000-00296000-002-groundtrampolineoutdoornew_3c3d69e549_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/94000-00295000-00296000-002-groundtrampolineoutdoornew_3c3d69e549_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/94000-00295000-00296000-002-groundtrampolineoutdoornew_3c3d69e549_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/94000-00395000-00396000-003-groundtrampolineoutdoornew_55c5ed1383_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/94000-00395000-00396000-003-groundtrampolineoutdoornew_55c5ed1383_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/94000-00395000-00396000-003-groundtrampolineoutdoornew_55c5ed1383_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/94000-00495000-00496000-004-groundtrampolineoutdoornew_94c5ba4a23_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/94000-00495000-00496000-004-groundtrampolineoutdoornew_94c5ba4a23_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/94000-00495000-00496000-004-groundtrampolineoutdoornew_94c5ba4a23_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/94082-00195082-00196082-001-groundtrampolineoutdoornew_7a0766618b_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/94082-00195082-00196082-001-groundtrampolineoutdoornew_7a0766618b_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/94082-00195082-00196082-001-groundtrampolineoutdoornew_7a0766618b_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/94082-00295082-00296082-002-groundtrampolineoutdoornew_735be136e2_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/94082-00295082-00296082-002-groundtrampolineoutdoornew_735be136e2_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/94082-00295082-00296082-002-groundtrampolineoutdoornew_735be136e2_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/94082-00395082-00396082-003-groundtrampolineoutdoornew_aea0ec2641_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/94082-00395082-00396082-003-groundtrampolineoutdoornew_aea0ec2641_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/94082-00395082-00396082-003-groundtrampolineoutdoornew_aea0ec2641_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/94082-00495082-00496082-004-groundtrampolineoutdoornew_82bff93df3_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/94082-00495082-00496082-004-groundtrampolineoutdoornew_82bff93df3_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/94082-00495082-00496082-004-groundtrampolineoutdoornew_82bff93df3_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/94081-00295081-00296081-002-groundtrampolineoutdoornew_ae5fa58709_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/94081-00295081-00296081-002-groundtrampolineoutdoornew_ae5fa58709_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/94081-00295081-00296081-002-groundtrampolineoutdoornew_ae5fa58709_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/94081-00295081-00296081-002-groundtrampolineoutdoornew_644716267c_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/94081-00295081-00296081-002-groundtrampolineoutdoornew_644716267c_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/94081-00295081-00296081-002-groundtrampolineoutdoornew_644716267c_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/94000-01495000-01496000-014-groundtrampolineoutdoornew_7c996442c6_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/94000-01495000-01496000-014-groundtrampolineoutdoornew_7c996442c6_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/94000-01495000-01496000-014-groundtrampolineoutdoornew_7c996442c6_200x112.jpg"
+      ],
+      "new_photo_urls": [],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/94000-00195000-00196000-001-groundtrampolineoutdoornew_d69eadc570_200x112.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/ground-trampoline-outdoor/"
+    },
+    {
+      "handle": "eurotramp-hdts",
+      "title": "HDTS trampoline measurement device",
+      "is_backfill_target": false,
+      "thumb_kind": "feature-badge",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-hdts/patented.jpg",
+      "scraped_photo_count": 1,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/03150-ultimate80mmframepads_2ba6815e21_680x378.jpg"
+      ],
+      "new_photo_urls": [],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/03150-ultimate80mmframepads_2ba6815e21_680x378.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/hdts/"
+    },
+    {
+      "handle": "eurotramp-hobbytramp",
+      "title": "Hobbytramp",
+      "is_backfill_target": false,
+      "thumb_kind": "photo",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-hobbytramp/productdetails-hobbytramp_8da80229c9_200x112.jpg",
+      "scraped_photo_count": 2,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-hobbytramp_8da80229c9_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/94000-preview-groundtrampolineoutdoor_b542370e94_680x378.jpg"
+      ],
+      "new_photo_urls": [],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/productdetails-hobbytramp_8da80229c9_200x112.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/hobbytramp/"
+    },
+    {
+      "handle": "eurotramp-icepad",
+      "title": "Icepad\u00ae",
+      "is_backfill_target": false,
+      "thumb_kind": "photo",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-icepad/productdetails-icepad_20ea85a826_200x112.jpg",
+      "scraped_photo_count": 4,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-icepad_20ea85a826_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/13000-preview-grandmaster_f6c96a547c_680x378.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/19000-preview-master_f22eaac4f3_680x378.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/03150-ultimate80mmframepads_2ba6815e21_680x378.jpg"
+      ],
+      "new_photo_urls": [],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/productdetails-icepad_20ea85a826_200x112.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/icepad/"
+    },
+    {
+      "handle": "eurotramp-impact-protection-system",
+      "title": "Impact protection system EPDM",
+      "is_backfill_target": true,
+      "thumb_kind": "feature-badge",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-impact-protection-system/uv-lightresistant_kidstramp_2019.jpg",
+      "scraped_photo_count": 4,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/e97541-impactprotectionsystemepdmforkidstrampxlgrey_6f6c5cb7b8_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/e97041-impactprotectionsystemepdmforkidstrampgrey_850b489db6_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/e97542-impactprotectionsystemepdmforkidstramploopxlgrey_7b8666bdc1_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/e97051-impactprotectionsystemepdmforkidstramploopgrey_1e012138ee_200x112.jpg"
+      ],
+      "new_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/e97541-impactprotectionsystemepdmforkidstrampxlgrey_6f6c5cb7b8_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/e97041-impactprotectionsystemepdmforkidstrampgrey_850b489db6_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/e97542-impactprotectionsystemepdmforkidstramploopxlgrey_7b8666bdc1_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/e97051-impactprotectionsystemepdmforkidstramploopgrey_1e012138ee_200x112.jpg"
+      ],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/e97541-impactprotectionsystemepdmforkidstrampxlgrey_6f6c5cb7b8_200x112.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/impact-protection-system/"
+    },
+    {
+      "handle": "eurotramp-kids-tramp-kindergarten",
+      "title": "Kids Tramp \"Kindergarten\"",
+      "is_backfill_target": false,
+      "thumb_kind": "cert",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-kindergarten/tuev_1176_2021.jpg",
+      "scraped_photo_count": 1,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/e97541-impactprotectionsystemslategrey_1d68c0adea_680x378.jpg"
+      ],
+      "new_photo_urls": [],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/e97541-impactprotectionsystemslategrey_1d68c0adea_680x378.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/kids-tramp-kindergarten/"
+    },
+    {
+      "handle": "eurotramp-kids-tramp-kindergarten-loop",
+      "title": "Kids Tramp \"Kindergarten Loop\"",
+      "is_backfill_target": true,
+      "thumb_kind": "cert",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-kindergarten-loop/tuev_1176_2021.jpg",
+      "scraped_photo_count": 0,
+      "scraped_photo_urls": [],
+      "new_photo_urls": [],
+      "best_thumb_candidate": null,
+      "vendor_url": "https://www.eurotramp.com/en/products/kids-tramp-kindergarten-loop/"
+    },
+    {
+      "handle": "eurotramp-kids-tramp-kindergarten-loop-xl",
+      "title": "Kids Tramp \"Kindergarten Loop XL\"",
+      "is_backfill_target": true,
+      "thumb_kind": "cert",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-kindergarten-loop-xl/tuev_1176_2021.jpg",
+      "scraped_photo_count": 0,
+      "scraped_photo_urls": [],
+      "new_photo_urls": [],
+      "best_thumb_candidate": null,
+      "vendor_url": "https://www.eurotramp.com/en/products/kids-tramp-kindergarten-loop-xl/"
+    },
+    {
+      "handle": "eurotramp-kids-tramp-kindergarten-xl",
+      "title": "Kids Tramp \"Kindergarten XL\"",
+      "is_backfill_target": false,
+      "thumb_kind": "cert",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-kindergarten-xl/tuev_1176_2021.jpg",
+      "scraped_photo_count": 1,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/e97541-impactprotectionsystemslategrey_1d68c0adea_680x378.jpg"
+      ],
+      "new_photo_urls": [],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/e97541-impactprotectionsystemslategrey_1d68c0adea_680x378.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/kids-tramp-kindergarten-xl/"
+    },
+    {
+      "handle": "eurotramp-kids-tramp-playground",
+      "title": "Kids Tramp \"Playground\"",
+      "is_backfill_target": false,
+      "thumb_kind": "cert",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-playground/tuev_1176_2021.jpg",
+      "scraped_photo_count": 1,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/e97541-impactprotectionsystemslategrey_1d68c0adea_680x378.jpg"
+      ],
+      "new_photo_urls": [],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/e97541-impactprotectionsystemslategrey_1d68c0adea_680x378.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/kids-tramp-playground/"
+    },
+    {
+      "handle": "eurotramp-kids-tramp-playground-loop",
+      "title": "Kids Tramp \"Playground Loop\"",
+      "is_backfill_target": true,
+      "thumb_kind": "cert",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-playground-loop/tuev_1176_2021.jpg",
+      "scraped_photo_count": 0,
+      "scraped_photo_urls": [],
+      "new_photo_urls": [],
+      "best_thumb_candidate": null,
+      "vendor_url": "https://www.eurotramp.com/en/products/kids-tramp-playground-loop/"
+    },
+    {
+      "handle": "eurotramp-kids-tramp-playground-loop-xl",
+      "title": "Kids Tramp \"Playground Loop XL\"",
+      "is_backfill_target": true,
+      "thumb_kind": "cert",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-playground-loop-xl/tuev_1176_2021.jpg",
+      "scraped_photo_count": 0,
+      "scraped_photo_urls": [],
+      "new_photo_urls": [],
+      "best_thumb_candidate": null,
+      "vendor_url": "https://www.eurotramp.com/en/products/kids-tramp-playground-loop-xl/"
+    },
+    {
+      "handle": "eurotramp-kids-tramp-playground-xl",
+      "title": "Kids Tramp \"Playground XL\"",
+      "is_backfill_target": false,
+      "thumb_kind": "cert",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-playground-xl/tuev_1176_2021.jpg",
+      "scraped_photo_count": 1,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/e97541-impactprotectionsystemslategrey_1d68c0adea_680x378.jpg"
+      ],
+      "new_photo_urls": [],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/e97541-impactprotectionsystemslategrey_1d68c0adea_680x378.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/kids-tramp-playground-xl/"
+    },
+    {
+      "handle": "eurotramp-kids-tramp-track-playground",
+      "title": "Kids Tramp Track \"Playground\"",
+      "is_backfill_target": true,
+      "thumb_kind": "cert",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground/tuev_1176_2021.jpg",
+      "scraped_photo_count": 5,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/97054-kidstramptrack4mepdm_83ccaccd40_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/97056-kidstramptrack6mepdm_c385cac09c_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/97058-kidstramptrack8mepdm_de8ede0316_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/97059-kidstramptrack10mepdm_33d50d6d5e_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/97004-kidstramptrackplayprorendering_7c450089a2_200x112.jpg"
+      ],
+      "new_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/97054-kidstramptrack4mepdm_83ccaccd40_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/97056-kidstramptrack6mepdm_c385cac09c_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/97058-kidstramptrack8mepdm_de8ede0316_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/97059-kidstramptrack10mepdm_33d50d6d5e_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/97004-kidstramptrackplayprorendering_7c450089a2_200x112.jpg"
+      ],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/97054-kidstramptrack4mepdm_83ccaccd40_200x112.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/kids-tramp-track-playground/"
+    },
+    {
+      "handle": "eurotramp-landing-mat-cover",
+      "title": "Landing mat cover",
+      "is_backfill_target": false,
+      "thumb_kind": "unknown",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-landing-mat-cover/figapproved_2907f615cc.jpg",
+      "scraped_photo_count": 2,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/26101-landingmatcover_1c680f5d31_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/23200-preview-double-minitrampultimate_3e6da1d709_680x378.jpg"
+      ],
+      "new_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/26101-landingmatcover_1c680f5d31_200x112.jpg"
+      ],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/23200-preview-double-minitrampultimate_3e6da1d709_680x378.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/landing-mat-cover/"
+    },
+    {
+      "handle": "eurotramp-lifting-roller-stand",
+      "title": "Lifting Roller Stand",
+      "is_backfill_target": false,
+      "thumb_kind": "feature-badge",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-lifting-roller-stand/madeingermany_5016cae181.jpg",
+      "scraped_photo_count": 6,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-liftingrollerstand_982c430eaa_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-liftingrollerstand_982c430eaa_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/13000-preview-grandmaster_f6c96a547c_680x378.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/19000-preview-master_f22eaac4f3_680x378.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/03150-ultimate80mmframepads_2ba6815e21_680x378.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/e53110-preview-liftingrollerstandsafecomfort_bd6fa7873b_680x378.jpg"
+      ],
+      "new_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-liftingrollerstand_982c430eaa_200x112.jpg"
+      ],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/productdetails-liftingrollerstand_982c430eaa_200x112.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/lifting-roller-stand/"
+    },
+    {
+      "handle": "eurotramp-master",
+      "title": "Master",
+      "is_backfill_target": false,
+      "thumb_kind": "cert",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-master/tuev_13219_2021.jpg",
+      "scraped_photo_count": 8,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/21000-master45mm_377137efe6_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/21000-master45mm_377137efe6_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/21000-master45mm_377137efe6_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/22000-masterschool_8d533ccbf5_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/22000-masterschool_8d533ccbf5_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/22000-masterschool_8d533ccbf5_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/e53110-preview-liftingrollerstandsafecomfort_bd6fa7873b_680x378.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/28600-eurotrampspottingmat-topview_b39a5e732b_680x378.jpg"
+      ],
+      "new_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/21000-master45mm_377137efe6_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/22000-masterschool_8d533ccbf5_200x112.jpg"
+      ],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/e53110-preview-liftingrollerstandsafecomfort_bd6fa7873b_680x378.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/master/"
+    },
+    {
+      "handle": "eurotramp-mats-tramp",
+      "title": "Mats Trampoline",
+      "is_backfill_target": true,
+      "thumb_kind": "feature-badge",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-mats-tramp/madeingermany_5016cae181.jpg",
+      "scraped_photo_count": 1,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/91000-preview-matstrampoline_f249c65994_200x112.jpg"
+      ],
+      "new_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/91000-preview-matstrampoline_f249c65994_200x112.jpg"
+      ],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/91000-preview-matstrampoline_f249c65994_200x112.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/mats-tramp/"
+    },
+    {
+      "handle": "eurotramp-minitramp-trolley",
+      "title": "Minitramp Trolley",
+      "is_backfill_target": false,
+      "thumb_kind": "feature-badge",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-minitramp-trolley/madeingermany_5016cae181.jpg",
+      "scraped_photo_count": 4,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-minitramptransporttrolley_f6fad93348_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/60020-preview-minitrampteamgym_2ba99bb563_680x378.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/50018-preview-minitramp112_895430bd91_680x378.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/45300-preview-minitrampopen-end_855226a473_680x378.jpg"
+      ],
+      "new_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-minitramptransporttrolley_f6fad93348_200x112.jpg"
+      ],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/productdetails-minitramptransporttrolley_f6fad93348_200x112.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/minitramp-trolley/"
+    },
+    {
+      "handle": "eurotramp-octotramp",
+      "title": "Octotramp",
+      "is_backfill_target": false,
+      "thumb_kind": "photo",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-octotramp/productdetails-octotramp_93124273fe_200x112.jpg",
+      "scraped_photo_count": 4,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-octotramp_93124273fe_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-octotramp_93124273fe_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-octotramp_93124273fe_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/94000-preview-groundtrampolineoutdoor_b542370e94_680x378.jpg"
+      ],
+      "new_photo_urls": [],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/productdetails-octotramp_93124273fe_200x112.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/octotramp/"
+    },
+    {
+      "handle": "eurotramp-open-end-minitramp",
+      "title": "Minitramp Open-End",
+      "is_backfill_target": false,
+      "thumb_kind": "cert",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-open-end-minitramp/tuev_13219_2021.jpg",
+      "scraped_photo_count": 3,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-minitrampopen-endpremium_0f50707ffd_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-minitrampopen-endstandard_1cd9872c2d_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-minitrampopen-endschool_a77e0090fe_200x112.jpg"
+      ],
+      "new_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-minitrampopen-endpremium_0f50707ffd_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-minitrampopen-endstandard_1cd9872c2d_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-minitrampopen-endschool_a77e0090fe_200x112.jpg"
+      ],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/productdetails-minitrampopen-endpremium_0f50707ffd_200x112.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/open-end-minitramp/"
+    },
+    {
+      "handle": "eurotramp-premium",
+      "title": "Premium",
+      "is_backfill_target": false,
+      "thumb_kind": "placeholder",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-premium/placeholder.jpg",
+      "scraped_photo_count": 0,
+      "scraped_photo_urls": [],
+      "new_photo_urls": [],
+      "best_thumb_candidate": null,
+      "vendor_url": "https://www.eurotramp.com/en/products/premium/"
+    },
+    {
+      "handle": "eurotramp-roller-stand",
+      "title": "Roller Stand",
+      "is_backfill_target": false,
+      "thumb_kind": "feature-badge",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-roller-stand/madeingermany_5016cae181.jpg",
+      "scraped_photo_count": 6,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/e51110-rollerstand_45460b489d_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/e51110-rollerstand_45460b489d_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/e51110-rollerstand_45460b489d_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/13000-preview-grandmaster_f6c96a547c_680x378.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/03150-ultimate80mmframepads_2ba6815e21_680x378.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/e53110-preview-liftingrollerstandsafecomfort_bd6fa7873b_680x378.jpg"
+      ],
+      "new_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/e51110-rollerstand_45460b489d_200x112.jpg"
+      ],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/13000-preview-grandmaster_f6c96a547c_680x378.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/roller-stand/"
+    },
+    {
+      "handle": "eurotramp-rubber-protection-ring",
+      "title": "PlayPro\u2122 rubber protection ring/lip for EPDM wet pour surface or artificial turf",
+      "is_backfill_target": false,
+      "thumb_kind": "photo",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-rubber-protection-ring/e97548-playprorubberprotectionringsquareforkidstrampxl_7b85a4d9cd_200x112.jpg",
+      "scraped_photo_count": 8,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/e97548-playprorubberprotectionringsquareforkidstrampxl_7b85a4d9cd_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/e97048-playprorubberprotectionringsquareforkidstramp_2dc21dd2a9_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/e97547-playprokidstrampplaygroundloopxl_0b29343117_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/e97047-playprokidstramploop_5d3f9c9d18_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/e97448-playproimpactprotectionlipsetkidstramptrack4m_cddd08d0b9_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/e97648-playproimpactprotectionlipsetkidstramptrack6m_e465a6f74c_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/e97848-playproimpactprotectionlipsetkidstramptrack8m_a70d2b7a2c_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/e97948-playproimpactprotectionlipsetkidstramptrack10m_96fbedbdd6_200x112.jpg"
+      ],
+      "new_photo_urls": [],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/e97548-playprorubberprotectionringsquareforkidstrampxl_7b85a4d9cd_200x112.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/rubber-protection-ring/"
+    },
+    {
+      "handle": "eurotramp-run-up-track-dmt",
+      "title": "Run-Up track",
+      "is_backfill_target": false,
+      "thumb_kind": "unknown",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-run-up-track-dmt/preview-23005-run-uptrack-double-minitramp_1615e26c22_200x112.jpg",
+      "scraped_photo_count": 2,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/23200-preview-double-minitrampultimate_3e6da1d709_680x378.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/28330---spieth-ground-safety-mats_cbb2542addd8f8060_680x378.jpg"
+      ],
+      "new_photo_urls": [],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/23200-preview-double-minitrampultimate_3e6da1d709_680x378.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/run-up-track-dmt/"
+    },
+    {
+      "handle": "eurotramp-safety-platforms-and-safety-mats-integral",
+      "title": "Safety platforms \"Integral Universal\" & safety mats \"Integral\"",
+      "is_backfill_target": false,
+      "thumb_kind": "feature-badge",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-safety-platforms-and-safety-mats-integral/madeingermany_5016cae181.jpg",
+      "scraped_photo_count": 5,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/30300-safetyplatformintegraluniversalultimategrandmaster_6e761adc06_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/29000-safetymatonewedge_d0c3397ce6_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/13000-preview-grandmaster_f6c96a547c_680x378.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/19000-preview-master_f22eaac4f3_680x378.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/03150-ultimate80mmframepads_2ba6815e21_680x378.jpg"
+      ],
+      "new_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/30300-safetyplatformintegraluniversalultimategrandmaster_6e761adc06_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/29000-safetymatonewedge_d0c3397ce6_200x112.jpg"
+      ],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/13000-preview-grandmaster_f6c96a547c_680x378.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/safety-platforms-and-safety-mats-integral/"
+    },
+    {
+      "handle": "eurotramp-safety-platforms-and-safety-mats-universal",
+      "title": "Safety platforms \"Competition Universal\" & safety mats \"Competition\"",
+      "is_backfill_target": false,
+      "thumb_kind": "feature-badge",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-safety-platforms-and-safety-mats-universal/madeingermany_5016cae181.jpg",
+      "scraped_photo_count": 8,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/27300-safetyplatformuniversal_2cdbded014_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/27800-adaptionbarsafetyplatformcompetition-ultimate_8a71fd3a94_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/28000-safetymatcompetition_4217d1e57a_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/28201-safetymatcompetition-doublewedge_0807134857_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/28901-wedgeforsafetymatcompetition_9fe0a2949a_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/13000-preview-grandmaster_f6c96a547c_680x378.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/19000-preview-master_f22eaac4f3_680x378.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/03150-ultimate80mmframepads_2ba6815e21_680x378.jpg"
+      ],
+      "new_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/27300-safetyplatformuniversal_2cdbded014_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/27800-adaptionbarsafetyplatformcompetition-ultimate_8a71fd3a94_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/28000-safetymatcompetition_4217d1e57a_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/28201-safetymatcompetition-doublewedge_0807134857_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/28901-wedgeforsafetymatcompetition_9fe0a2949a_200x112.jpg"
+      ],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/13000-preview-grandmaster_f6c96a547c_680x378.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/safety-platforms-and-safety-mats-universal/"
+    },
+    {
+      "handle": "eurotramp-safety-platforms-universal-freestyle",
+      "title": "Safety platforms \"Competition Universal\"",
+      "is_backfill_target": true,
+      "thumb_kind": "unknown",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-safety-platforms-universal-freestyle/27300f-safetyplatformscompetitionuniversalforultimatefreestyle_b98bf83df6_200x112.jpg",
+      "scraped_photo_count": 0,
+      "scraped_photo_urls": [],
+      "new_photo_urls": [],
+      "best_thumb_candidate": null,
+      "vendor_url": "https://www.eurotramp.com/en/products/safety-platforms-universal-freestyle/"
+    },
+    {
+      "handle": "eurotramp-service-bag",
+      "title": "Service bag",
+      "is_backfill_target": false,
+      "thumb_kind": "feature-badge",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-service-bag/madeingermany_5016cae181.jpg",
+      "scraped_photo_count": 7,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/e31004-servicebagultimate_b4d7144723_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/e31002-servicebaggrandmastermaster_8a4d6dc11b_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/e31007-servicebagdouble-minitrampultimate_e59aecd1d8_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/23200-preview-double-minitrampultimate_3e6da1d709_680x378.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/13000-preview-grandmaster_f6c96a547c_680x378.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/19000-preview-master_f22eaac4f3_680x378.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/03150-ultimate80mmframepads_2ba6815e21_680x378.jpg"
+      ],
+      "new_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/e31004-servicebagultimate_b4d7144723_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/e31002-servicebaggrandmastermaster_8a4d6dc11b_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/e31007-servicebagdouble-minitrampultimate_e59aecd1d8_200x112.jpg"
+      ],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/23200-preview-double-minitrampultimate_3e6da1d709_680x378.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/service-bag/"
+    },
+    {
+      "handle": "eurotramp-set-of-landing-mats-dmt",
+      "title": "Set of landing mats",
+      "is_backfill_target": true,
+      "thumb_kind": "unknown",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-set-of-landing-mats-dmt/figapproved_2907f615cc.jpg",
+      "scraped_photo_count": 0,
+      "scraped_photo_urls": [],
+      "new_photo_urls": [],
+      "best_thumb_candidate": null,
+      "vendor_url": "https://www.eurotramp.com/en/products/set-of-landing-mats-dmt/"
+    },
+    {
+      "handle": "eurotramp-spieth-ground-safety-mat",
+      "title": "Spieth ground safety mat",
+      "is_backfill_target": false,
+      "thumb_kind": "unknown",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-spieth-ground-safety-mat/figapproved_2907f615cc.jpg",
+      "scraped_photo_count": 1,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/03150-ultimate80mmframepads_2ba6815e21_680x378.jpg"
+      ],
+      "new_photo_urls": [],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/03150-ultimate80mmframepads_2ba6815e21_680x378.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/spieth-ground-safety-mat/"
+    },
+    {
+      "handle": "eurotramp-sport-thieme-adventure-tramp",
+      "title": "Sport-Thieme\u00ae Adventure-Tramp",
+      "is_backfill_target": false,
+      "thumb_kind": "cert",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-sport-thieme-adventure-tramp/tuev_1176_2021.jpg",
+      "scraped_photo_count": 4,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/97508-sport-thiemeadventure-trampepdm_72956c5c28_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/97509-sport-thiemeadventure-trampkindergartenimpactprotectionsystemepdm_7c4ee24737_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/97508-sport-thiemeadventure-trampepdm_72956c5c28_1920x1080.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetail-97507-sport-thiemeadventure-trampbuilt-inframe_68c92cfe03_680x378.jpg"
+      ],
+      "new_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/97508-sport-thiemeadventure-trampepdm_72956c5c28_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/97509-sport-thiemeadventure-trampkindergartenimpactprotectionsystemepdm_7c4ee24737_200x112.jpg"
+      ],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/productdetail-97507-sport-thiemeadventure-trampbuilt-inframe_68c92cfe03_680x378.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/sport-thieme-adventure-tramp/"
+    },
+    {
+      "handle": "eurotramp-sport-thieme-adventure-tramp-built-in-frame",
+      "title": "Sport-Thieme\u00ae Adventure-Tramp built-in-frame",
+      "is_backfill_target": false,
+      "thumb_kind": "photo",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-sport-thieme-adventure-tramp-built-in-frame/productdetail-97507-sport-thiemeadventure-trampbuilt-inframe_68c92cfe03_200x112.jpg",
+      "scraped_photo_count": 2,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/productdetail-97507-sport-thiemeadventure-trampbuilt-inframe_68c92cfe03_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/97508-sport-thiemeadventure-trampepdm_72956c5c28_680x378.jpg"
+      ],
+      "new_photo_urls": [],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/productdetail-97507-sport-thiemeadventure-trampbuilt-inframe_68c92cfe03_200x112.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/sport-thieme-adventure-tramp-built-in-frame/"
+    },
+    {
+      "handle": "eurotramp-spotting-mat-freestyle",
+      "title": "Eurotramp Spotting mat \"Freestyle\"",
+      "is_backfill_target": true,
+      "thumb_kind": "unknown",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-spotting-mat-freestyle/28600f-eurotrampspottingmatfreestyle_3942cae5e5_200x112.jpg",
+      "scraped_photo_count": 0,
+      "scraped_photo_urls": [],
+      "new_photo_urls": [],
+      "best_thumb_candidate": null,
+      "vendor_url": "https://www.eurotramp.com/en/products/spotting-mat-freestyle/"
+    },
+    {
+      "handle": "eurotramp-stability-plate",
+      "title": "Stability plate",
+      "is_backfill_target": false,
+      "thumb_kind": "feature-badge",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-stability-plate/madeingermany_5016cae181.jpg",
+      "scraped_photo_count": 4,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/tz002-preview-stabilityplateultimate_c96a2c490d_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/13000-preview-grandmaster_f6c96a547c_680x378.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/19000-preview-master_f22eaac4f3_680x378.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/03150-ultimate80mmframepads_2ba6815e21_680x378.jpg"
+      ],
+      "new_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/tz002-preview-stabilityplateultimate_c96a2c490d_200x112.jpg"
+      ],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/13000-preview-grandmaster_f6c96a547c_680x378.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/stability-plate/"
+    },
+    {
+      "handle": "eurotramp-tchoukball",
+      "title": "Tchoukball",
+      "is_backfill_target": false,
+      "thumb_kind": "photo",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-tchoukball/productdetails-tchoukball_14fdd9b245_200x112.jpg",
+      "scraped_photo_count": 2,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-tchoukball_14fdd9b245_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-tchoukball_14fdd9b245_200x112.jpg"
+      ],
+      "new_photo_urls": [],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/productdetails-tchoukball_14fdd9b245_200x112.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/tchoukball/"
+    },
+    {
+      "handle": "eurotramp-teamgym",
+      "title": "Teamgym",
+      "is_backfill_target": false,
+      "thumb_kind": "cert",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-teamgym/tuev_13219_2021.jpg",
+      "scraped_photo_count": 2,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-minitrampteamgym_c4e2140598_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-minitrampteamgym_c4e2140598_200x112.jpg"
+      ],
+      "new_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-minitrampteamgym_c4e2140598_200x112.jpg"
+      ],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/productdetails-minitrampteamgym_c4e2140598_200x112.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/teamgym/"
+    },
+    {
+      "handle": "eurotramp-teamgym-freestyle",
+      "title": "Teamgym \"Freestyle\"",
+      "is_backfill_target": false,
+      "thumb_kind": "feature-badge",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-teamgym-freestyle/madeingermany_5016cae181.jpg",
+      "scraped_photo_count": 2,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/60020-preview-minitrampteamgym_2ba99bb563_680x378.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/45300-preview-minitrampopen-end_855226a473_680x378.jpg"
+      ],
+      "new_photo_urls": [],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/60020-preview-minitrampteamgym_2ba99bb563_680x378.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/teamgym-freestyle/"
+    },
+    {
+      "handle": "eurotramp-trampoline-set-freestyle",
+      "title": "Trampoline Set \"Freestyle\"",
+      "is_backfill_target": false,
+      "thumb_kind": "feature-badge",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-trampoline-set-freestyle/madeingermany_5016cae181.jpg",
+      "scraped_photo_count": 3,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-trampolinesetfreestyle_bf0def116c_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-trampolinesetfreestyle_22dbeff396_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-trampolinesetfreestyle_6779c41ab9_200x112.jpg"
+      ],
+      "new_photo_urls": [],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/productdetails-trampolinesetfreestyle_bf0def116c_200x112.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/trampoline-set-freestyle/"
+    },
+    {
+      "handle": "eurotramp-trampoline-set-one-field",
+      "title": "Trampoline Set \"Stationary\" - one jump area",
+      "is_backfill_target": true,
+      "thumb_kind": "feature-badge",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-trampoline-set-one-field/madeingermany_5016cae181.jpg",
+      "scraped_photo_count": 0,
+      "scraped_photo_urls": [],
+      "new_photo_urls": [],
+      "best_thumb_candidate": null,
+      "vendor_url": "https://www.eurotramp.com/en/products/trampoline-set-one-field/"
+    },
+    {
+      "handle": "eurotramp-trampoline-set-stationary",
+      "title": "Trampoline Set \"Stationary\"",
+      "is_backfill_target": true,
+      "thumb_kind": "feature-badge",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-trampoline-set-stationary/madeingermany_5016cae181.jpg",
+      "scraped_photo_count": 0,
+      "scraped_photo_urls": [],
+      "new_photo_urls": [],
+      "best_thumb_candidate": null,
+      "vendor_url": "https://www.eurotramp.com/en/products/trampoline-set-stationary/"
+    },
+    {
+      "handle": "eurotramp-trampoline-track-air-track-plus",
+      "title": "Airtrack +",
+      "is_backfill_target": false,
+      "thumb_kind": "photo",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-trampoline-track-air-track-plus/productdetails-airtrackplus_92738f7b98_200x112.jpg",
+      "scraped_photo_count": 1,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-airtrackplus_92738f7b98_200x112.jpg"
+      ],
+      "new_photo_urls": [],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/productdetails-airtrackplus_92738f7b98_200x112.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/trampoline-track-air-track-plus/"
+    },
+    {
+      "handle": "eurotramp-trampoline-track-stationary",
+      "title": "Trampoline Track \"Stationary\"",
+      "is_backfill_target": false,
+      "thumb_kind": "feature-badge",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-trampoline-track-stationary/madeingermany_5016cae181.jpg",
+      "scraped_photo_count": 9,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/productdetail-88004-trampolinetrackstationary_fe2da051c7_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetail-88004-trampolinetrackstationary_fe2da051c7_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetail-88004-trampolinetrackstationary_fe2da051c7_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetail-88004-trampolinetrackstationary_fe2da051c7_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetail-88004-trampolinetrackstationary_fe2da051c7_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetail-88004-trampolinetrackstationary_fe2da051c7_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetail-88004-trampolinetrackstationary_fe2da051c7_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetail-88004-trampolinetrackstationary_fe2da051c7_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetail-88004-trampolinetrackstationary_fe2da051c7_200x112.jpg"
+      ],
+      "new_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/productdetail-88004-trampolinetrackstationary_fe2da051c7_200x112.jpg"
+      ],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/productdetail-88004-trampolinetrackstationary_fe2da051c7_200x112.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/trampoline-track-stationary/"
+    },
+    {
+      "handle": "eurotramp-trampoline-track-stationary-2",
+      "title": "Trampoline Track \"Stationary\" 2 - NEW MODEL",
+      "is_backfill_target": false,
+      "thumb_kind": "feature-badge",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-trampoline-track-stationary-2/madeingermany_5016cae181.jpg",
+      "scraped_photo_count": 0,
+      "scraped_photo_urls": [],
+      "new_photo_urls": [],
+      "best_thumb_candidate": null,
+      "vendor_url": "https://www.eurotramp.com/en/products/trampoline-track-stationary-2/"
+    },
+    {
+      "handle": "eurotramp-trampoline-track-vario",
+      "title": "Trampoline Track \"Vario\"",
+      "is_backfill_target": false,
+      "thumb_kind": "feature-badge",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-trampoline-track-vario/madeingermany_5016cae181.jpg",
+      "scraped_photo_count": 9,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-trampolinetrackvario_7e6dbd4ec9_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-trampolinetrackvario_7e6dbd4ec9_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-trampolinetrackvario_7e6dbd4ec9_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-trampolinetrackvario_7e6dbd4ec9_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-trampolinetrackvario_7e6dbd4ec9_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-trampolinetrackvario_7e6dbd4ec9_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-trampolinetrackvario_7e6dbd4ec9_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-trampolinetrackvario_7e6dbd4ec9_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-trampolinetrackvario_7e6dbd4ec9_200x112.jpg"
+      ],
+      "new_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-trampolinetrackvario_7e6dbd4ec9_200x112.jpg"
+      ],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/productdetails-trampolinetrackvario_7e6dbd4ec9_200x112.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/trampoline-track-vario/"
+    },
+    {
+      "handle": "eurotramp-transport-case-hdts",
+      "title": "HDTS transport case",
+      "is_backfill_target": true,
+      "thumb_kind": "unknown",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-transport-case-hdts/hdts003-transportcase-hdts_7035077707_200x112.jpg",
+      "scraped_photo_count": 0,
+      "scraped_photo_urls": [],
+      "new_photo_urls": [],
+      "best_thumb_candidate": null,
+      "vendor_url": "https://www.eurotramp.com/en/products/transport-case-hdts/"
+    },
+    {
+      "handle": "eurotramp-trimm-tramp",
+      "title": "Trimm Tramp",
+      "is_backfill_target": false,
+      "thumb_kind": "photo",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-trimm-tramp/productdetails-trimmtramp_ccc52599e3_200x112.jpg",
+      "scraped_photo_count": 2,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-trimmtramp_ccc52599e3_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-trimmtramp_ccc52599e3_200x112.jpg"
+      ],
+      "new_photo_urls": [],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/productdetails-trimmtramp_ccc52599e3_200x112.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/trimm-tramp/"
+    },
+    {
+      "handle": "eurotramp-ultimate",
+      "title": "Ultimate",
+      "is_backfill_target": false,
+      "thumb_kind": "cert",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-ultimate/tuev_13219_2021.jpg",
+      "scraped_photo_count": 33,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/03150-ultimate80mmframepads_2ba6815e21_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-ultimate_1a9386d18e_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-ultimate_1a9386d18e_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-ultimate_1a9386d18e_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-ultimate_1a9386d18e_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-ultimate_1a9386d18e_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-ultimate_1a9386d18e_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-ultimate_1a9386d18e_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-ultimate_1a9386d18e_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-ultimate_1a9386d18e_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-ultimate_1a9386d18e_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-ultimate_1a9386d18e_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-ultimate_1a9386d18e_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-ultimate_1a9386d18e_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-ultimate_1a9386d18e_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-ultimate_1a9386d18e_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-ultimate_1a9386d18e_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-ultimate_1a9386d18e_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-ultimate_1a9386d18e_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-ultimate_1a9386d18e_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-ultimate_1a9386d18e_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-ultimate_1a9386d18e_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-ultimate_1a9386d18e_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-ultimate_1a9386d18e_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-ultimate_1a9386d18e_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-ultimate_1a9386d18e_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-ultimate_1a9386d18e_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-ultimate_1a9386d18e_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-ultimate_1a9386d18e_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-ultimate_1a9386d18e_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/27300-preview-safetyplatformuniversal_66fdb3e245_680x378.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/e53110-preview-liftingrollerstandsafecomfort_bd6fa7873b_680x378.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/tz002-preview-stabilityplateultimate_c96a2c490d_680x378.jpg"
+      ],
+      "new_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/03150-ultimate80mmframepads_2ba6815e21_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-ultimate_1a9386d18e_200x112.jpg"
+      ],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/productdetails-ultimate_1a9386d18e_200x112.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/ultimate/"
+    },
+    {
+      "handle": "eurotramp-ultimate-dmt-6x6",
+      "title": "Double-Minitramp Ultimate",
+      "is_backfill_target": false,
+      "thumb_kind": "cert",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-ultimate-dmt-6x6/tuev_13219_2021.jpg",
+      "scraped_photo_count": 2,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-double-minitrampultimate_393daece32_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/23201-anti-slipplatefordmt_ef61011eb1_680x378.jpg"
+      ],
+      "new_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-double-minitrampultimate_393daece32_200x112.jpg"
+      ],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/productdetails-double-minitrampultimate_393daece32_200x112.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/ultimate-dmt-6x6/"
+    },
+    {
+      "handle": "eurotramp-ultimate-freestyle",
+      "title": "Ultimate \"Freestyle\"",
+      "is_backfill_target": false,
+      "thumb_kind": "cert",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-ultimate-freestyle/tuev_13219_2021.jpg",
+      "scraped_photo_count": 7,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-ultimatefreestyle_a3bc40e5dd_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-ultimatefreestyle_a3bc40e5dd_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-ultimatefreestyle_a3bc40e5dd_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-ultimatefreestyle_a3bc40e5dd_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-ultimatefreestyle_a3bc40e5dd_1920x1080.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/40001-preview-freestylefivesquare_03144af2aa_680x378.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/e53110-preview-liftingrollerstandsafecomfort_bd6fa7873b_680x378.jpg"
+      ],
+      "new_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-ultimatefreestyle_a3bc40e5dd_200x112.jpg"
+      ],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/productdetails-ultimatefreestyle_a3bc40e5dd_1920x1080.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/ultimate-freestyle/"
+    },
+    {
+      "handle": "eurotramp-underwater-trampoline",
+      "title": "Underwater Trampoline",
+      "is_backfill_target": true,
+      "thumb_kind": "feature-badge",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-underwater-trampoline/madeingermany_5016cae181.jpg",
+      "scraped_photo_count": 1,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-underwatertrampoline_8fb7b817d5_200x112.jpg"
+      ],
+      "new_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-underwatertrampoline_8fb7b817d5_200x112.jpg"
+      ],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/productdetails-underwatertrampoline_8fb7b817d5_200x112.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/underwater-trampoline/"
+    },
+    {
+      "handle": "eurotramp-wehrfritz-fun-round",
+      "title": "Wehrfritz FUN round",
+      "is_backfill_target": true,
+      "thumb_kind": "cert",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-wehrfritz-fun-round/tuev_1176_2021.jpg",
+      "scraped_photo_count": 2,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-wehrfritzfunroundplayground_1202e5eb57_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-wehrfritzfunroundplayground_1202e5eb57_200x112.jpg"
+      ],
+      "new_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/productdetails-wehrfritzfunroundplayground_1202e5eb57_200x112.jpg"
+      ],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/productdetails-wehrfritzfunroundplayground_1202e5eb57_200x112.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/wehrfritz-fun-round/"
+    },
+    {
+      "handle": "eurotramp-wehrfritz-fun-xl-playground",
+      "title": "Wehrfritz FUN XL \"Playground\"",
+      "is_backfill_target": true,
+      "thumb_kind": "cert",
+      "current_thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-wehrfritz-fun-xl-playground/tuev_1176_2021.jpg",
+      "scraped_photo_count": 2,
+      "scraped_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/productdetail-wehrfritzfunxlplayground_672451331b_200x112.jpg",
+        "https://www.eurotramp.com/_resources.d/images.d/productdetail-wehrfritzfunxlplayground_672451331b_200x112.jpg"
+      ],
+      "new_photo_urls": [
+        "https://www.eurotramp.com/_resources.d/images.d/productdetail-wehrfritzfunxlplayground_672451331b_200x112.jpg"
+      ],
+      "best_thumb_candidate": "https://www.eurotramp.com/_resources.d/images.d/productdetail-wehrfritzfunxlplayground_672451331b_200x112.jpg",
+      "vendor_url": "https://www.eurotramp.com/en/products/wehrfritz-fun-xl-playground/"
+    }
+  ]
+}
