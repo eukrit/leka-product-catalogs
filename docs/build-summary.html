@@ -25,20 +25,22 @@
   <h1></h1>
   <div class="meta">
     Repo: <a href="https://github.com/eukrit/leka-product-catalogs">https://github.com/eukrit/leka-product-catalogs</a> ·
-    Branch: <code>feat/archimedes-landed-pricing</code> ·
-    Generated: 2026-05-29
+    Branch: <code>claude/great-hopper-c0fd71</code> ·
+    Generated: 2026-05-30
   </div>
 
   <div class="latest-card">
     <h2 style="margin-top:0;border:0">Latest build</h2>
     <p>
-      Version <strong>2.45.0-dryrun</strong> &middot; 2026-05-30 &middot;
-      <span class="badge badge-pending">dry-run</span>
+      Version <strong>2.48.0</strong> &middot; 2026-05-30 &middot;
+      <span class="badge badge-success">success</span>
     </p>
-    <p>4soft pricing pivot from sea-LCL to <strong>air freight</strong> with chargeable-weight handling (volumetric kg = cbm × 167). Engine + importer changed, 26/26 tests pass, 3 dry-runs at 90 / 105 / 135 THB/kg produced. <strong>Firestore + Medusa untouched</strong> pending user review of the diff doc (<a href="../foursoft-catalog/data/air-freight-dryrun-diff-2026-05-30.md">air-freight-dryrun-diff-2026-05-30.md</a>).</p>
+    <p>Wisdom outdoor-play (272 SKUs &rarr; 227 products) tagged into <code>wisdom-outdoor-play</code> Medusa collection. Hybrid link/create with Gemini-verified images. Renumbered from v2.40.0 during merge with main (now at v2.47.0 after the Furniture Catalog backfill).</p>
     <p>
-      <a href="CHANGELOG.md">Full build log</a> &middot;
-      <a href="PROJECT_INDEX.md">Project index</a>
+      <a href="../CHANGELOG.md">Full build log</a> &middot;
+      <a href="../wisdom-catalog/DEPLOYMENT_LOG.md">Wisdom log (v2.48.0)</a> &middot;
+      <a href="../wisdom-catalog/IMPORT_OUTDOOR_PLAY_REPORT.md">Import report</a> &middot;
+      <a href="../PROJECT_INDEX.md">Project index</a>
     </p>
   </div>
 
@@ -46,6 +48,9 @@
   <table>
     <thead><tr><th>Version</th><th>Date</th><th>Summary</th><th>Status</th></tr></thead>
     <tbody>
+      <tr><td><code>2.48.0</code></td><td>2026-05-30</td><td>Wisdom outdoor-play &rarr; Medusa <code>wisdom-outdoor-play</code> collection (link 255 existing + create 17 new, Gemini-verified images, 227 unique products)</td><td><span class="badge badge-success">success</span></td></tr>
+      <tr><td><code>2.47.0</code></td><td>2026-05-30</td><td>Leka Project image backfill from 2025-08-11 Furniture Catalog — 33 placeholders swapped to real catalog imagery</td><td><span class="badge badge-success">success</span></td></tr>
+      <tr><td><code>2.46.0</code></td><td>2026-05-30</td><td>Eurotramp product-photo backfill</td><td><span class="badge badge-success">success</span></td></tr>
       <tr><td><code>2.45.0-dryrun</code></td><td>2026-05-30</td><td>4soft pricing pivot sea-LCL → air freight (chargeable-weight). Engine + importer changed; 3 dry-runs at 90/105/135 THB/kg; Firestore untouched pending user review.</td><td><span class="badge badge-pending">dry-run</span></td></tr>
       <tr><td><code>2.44.0</code></td><td>2026-05-30</td><td>4soft 2D ground markings created in Medusa (1,553 new drafts + 247 updated); catalog 2,394/2,410 priced (99.3%).</td><td><span class="badge badge-success">success</span></td></tr>
       <tr><td><code>2.43.0</code></td><td>2026-05-29</td><td>4soft product images from picture-pricelist PDF — 989 extracted → GCS, 1,635/2,410 imaged (67.8%), 419 synced to Medusa.</td><td><span class="badge badge-success">success</span></td></tr>

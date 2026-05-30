@@ -212,6 +212,29 @@ class MedusaImporter:
             {"collection_id": collection_id},
         )
 
+    def update_product_images(
+        self,
+        product_id: str,
+        thumbnail_url: Optional[str],
+        gallery_urls: list,
+    ) -> dict:
+        """Replace thumbnail + image gallery on an existing product.
+
+        Medusa v2 PATCH semantics on `images` are full-replace (not append) —
+        send the complete desired list each call. `gallery_urls` should be the
+        full set of images you want stored (including the thumbnail URL if you
+        want it to appear in both the hero slot and the gallery).
+        """
+        body: dict = {
+            "thumbnail": thumbnail_url,
+            "images": [{"url": u} for u in gallery_urls],
+        }
+        return self._patch(f"/admin/products/{product_id}", body)
+
+    def update_product_metadata(self, product_id: str, metadata: dict) -> dict:
+        """Replace the metadata blob on an existing product (full replace)."""
+        return self._patch(f"/admin/products/{product_id}", {"metadata": metadata})
+
     def list_products_by_category(self, category_id: str, limit: int = 200) -> list:
         """Return all products linked to a category id (paginated)."""
         out = []
