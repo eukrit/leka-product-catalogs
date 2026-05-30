@@ -4,6 +4,74 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.51.0] - 2026-05-30
+
+### Added — 4soft EPDM-graphic pricing in `build_r2_curated.py` + Dulwich R2 script set
+
+Headline: **4soft EPDM surface-graphic codes are now priced** in the curated
+Dulwich Rev2 BoQ / Singapore SGD draft-order builder. The graphic codes
+(regex `^[A-Z]\d-\d{2}[A-Z]-\d{2,3}`, e.g. `C5-01A-05`, `V9-01A-001`,
+`G2-14A-02`) carry no Rev1 BoQ `retail_sgd` and no Wisdom FOB, so they
+previously fell through `price_of()` to TBC. The catalog now carries SGD prices
+on the 4soft Medusa variants (= `vendors/4soft/products.retail_sgd`, verified
+identical), so `scripts/build_r2_curated.py` reads them back:
+
+- The `/admin/products` paging loop now also requests
+  `variants.prices.amount,variants.prices.currency_code` and builds a `med_sgd`
+  dict: `norm(sku | metadata.legacy_sku) -> SGD unit price (dollars)`.
+- `price_of(code)` gains a fallback after the Rev1/FOB checks:
+  `if is_epdm(code) and med_sgd.get(n): return med_sgd[n], "priced"`.
+- The manual/draft branch (items not published in Medusa) now sets `pricing`
+  via `price_of()` for `is_epdm(code)` codes; non-EPDM missing items
+  deliberately stay TBC.
+
+Result: **24 of 26** 4soft items now priced (22 published draft-order lines + 2
+draft-bucket via manual); only `D2-02A-09UV` and `G2-27A-09UV` stay TBC. This
+produced the live SGD draft order **`order_01KSTN74NRPQ3DGETVHERQ1Z2G`** that the
+`leka-projects` Dulwich Rev2 proposal renders from. Code change only — no Medusa
+writes, no price push (all already live).
+
+#### Dulwich Rev2 (R2) script set — first commit to `main`
+
+These scripts authored the R2 proposal pipeline across prior sessions and were
+untracked working-tree files; consolidated here on `main`:
+
+- `scripts/build_r2_curated.py` — authors the curated Rev2 BoQ (zones A/C/CS/D)
+  from the user's exact equipment lists + quantities, builds the SGD Medusa draft
+  order for published items (qty carried in line `metadata.qty` because
+  `/admin/draft-orders` create drops per-line `quantity`), and emits the
+  manual_yaml (surfacing lines + draft/missing TBC items). Creates missing codes
+  as draft "Proposal"-bucket products. **Contains the 4soft pricing change above.**
+- `scripts/build_r2_draft_order.py` — builds the SGD (Singapore region) draft
+  order from the R2 selection, one line per published item with
+  zone/subzone/category/selection/dimensions metadata + explicit SGD `unit_price`
+  (Rev1 retail or Wisdom landed `fob×4.44`, else TBC). Idempotent on
+  `metadata.rev == "dulwich-r2"`.
+- `scripts/create_r2_missing_products.py` — creates products absent from the
+  catalog/Medusa as **draft** (variant `title="Default"`, sku=code, no price,
+  `metadata.source_url`+`supplier_url`=Notion vendor URL). Idempotent via handle.
+- `scripts/backfill_r2_vendor_urls.py` — merges the Notion vendor URL into
+  `metadata.supplier_url`+`source_url` on matching Medusa products, resolving
+  variants via a full product index (sku + `metadata.legacy_sku`).
+- `scripts/fix_r2_images.py` — R2 image-quality pass: `--reorder` vision-classifies
+  (Gemini 2.5 Flash via Vertex, `Part.from_bytes`) and reorders so a real
+  render/photo is hero; `--attach-notion` pulls Notion R2 photos for placeholder-only
+  products. Bounded to the R2 product set.
+- `scripts/rehost_4soft_images.py` — re-hosts the real Notion R2 graphic previews
+  flat under `leka-project/` (the `gs://…/4soft/` objects were HTML error pages
+  and the `/api/i/` proxy doesn't route the `4soft/` prefix) and repoints 4soft
+  products' Medusa images.
+- `scripts/reorg_r2_proposal_bucket.py` — keeps the genuinely-new items (EPDM
+  graphics, UBX) **draft** in a dedicated "Proposal" sales channel + Firestore
+  `products_proposal_draft`, not mixed into official brand channels.
+
+> **Version note:** these scripts were drafted against an out-of-sequence
+> `[2.35.0]`–`[2.35.2]` numbering on a stale local `main` (v2.34.0 era) that
+> never merged. Renumbered to **2.51.0** above current `main` HEAD (`[2.50.1]`)
+> after `main` advanced past the initially-chosen `2.49.0` (taken by PR #76's
+> Brand-module multi-brand cart) and `2.50.0` (PR #83 Urbanix). `VERSION` bumped
+> 2.50.1 → 2.51.0.
+
 ## [2.50.1] - 2026-05-30
 
 ### Fixed — Correct `proposal-export` auth documentation (HTTP Basic, not `x-medusa-access-token`)
