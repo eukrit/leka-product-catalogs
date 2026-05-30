@@ -15,10 +15,16 @@ import { Modules } from "@medusajs/framework/utils"
  * Today we just return the standard Order DTO with all relations loaded —
  * if the contract drifts, we shape it here without changing the Python adapter.
  *
- * Auth: admin (JWT or admin API key issued in Medusa admin UI).
+ * Auth: admin (JWT, or a secret admin API key issued in the Medusa admin UI).
  *
- * For the proposal_engine adapter we expect the caller to send
- *   `x-medusa-access-token: <api-key>`
+ * For the proposal_engine adapter we authenticate with the secret admin API
+ * key via HTTP Basic — the key is the username and the password is empty:
+ *   `Authorization: Basic base64("<api-key>:")`
+ * Medusa's built-in admin route middleware accepts Basic auth for secret keys.
+ * Note: `x-medusa-access-token` and `Authorization: Bearer <key>` both 401
+ * (verified live 2026-05-29). The downstream Python adapter
+ * (`eukrit/leka-projects:src/proposal_engine/medusa_adapter.py`, v1.52.0) uses
+ * `requests(..., auth=(key, ""))`.
  * The key lives in GCP Secret Manager as `medusa-admin-api-key-proposal-engine`.
  */
 export async function GET(req: MedusaRequest, res: MedusaResponse) {
