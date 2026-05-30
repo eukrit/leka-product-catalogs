@@ -4,6 +4,144 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.50.0] - 2026-05-30
+
+### Added — Urbanix → Leka Project import (1,298 products under fresh internal SKU scheme)
+
+Imported the full Urbanix vendor catalog from the `vendors` Firestore DB
+(landed as part of `eukrit/vendors` PR #29, v1.19.1) into the existing
+**Leka Project** sales channel under a brand-new internal SKU scheme.
+Source identity ("Urbanix" / "UBX International Limited" / source item
+codes) is stripped from every customer-visible surface; the audit trail
+back to the original vendor doc lives in an admin-only Firestore mapping
+collection.
+
+#### SKU scheme decision
+
+The "Leka Project" Medusa sales channel `sc_01KNKTHC0B7KFEDSZ3NNM49JQW`
+already holds 5,061 Wisdom-origin products with random nanoid SKUs
+(`LP-XXXXXXXX`). To keep Urbanix-origin products structurally distinguishable
+from Wisdom-origin within the same brand, the Urbanix import uses
+**sequential** sub-namespaced codes:
+
+| Source line       | Count | SKU pattern              | Namespace style    |
+|-------------------|------:|--------------------------|--------------------|
+| Wisdom (existing) | 5,061 | `LP-XXXXXXXX`            | 8-char nanoid      |
+| Urbanix fitness   |   339 | `LP-F-0001 … LP-F-0339`  | sequential 4-digit |
+| Urbanix playground|   959 | `LP-P-0001 … LP-P-0959`  | sequential 4-digit |
+
+The three namespaces are disjoint by structure — nanoid never matches
+`LP-[FP]-\d{4}`. Operations can filter by source line with a simple SKU
+prefix check; the public-facing handle (`leka-project-{nanoid8}`) stays
+opaque.
+
+#### Per-line counts (sourced from Firestore DB `vendors`)
+
+- `urbanix_fitness`: **339 docs** (all 339 have specs, 4 have pricing,
+  317 have description).
+- `urbanix_playground`: **959 docs** (all 959 have specs, 300 have
+  pricing, 955 have description).
+- **Total imported: 1,298** Medusa products + 1,298 audit-mapping docs.
+
+(The source-PR brief estimated 1,021 spec-bearing docs and 307 with
+pricing; reality is all 1,298 have Gemini specs and 304 have pricing.)
+
+#### Pricing posture
+
+All 1,298 products are imported with **no Medusa price rows** and
+`metadata.pricing_pending=true`. The 304 docs that carry Urbanix
+`pricing.landed_thb` get the same treatment — Leka pricing is set per-SKU
+by the merchandiser, not inherited from the source. The mapping doc
+flags `pricelist_linked: true` on those 304 for future reference.
+
+#### Sanitization
+
+`scripts/import_from_urbanix.py` strips, from title + description:
+`Urbanix`, `UBX`, `UBX International Limited`, item codes (`UBX-####`,
+`CC-##`, `TPF-####-#`). Then patches orphan determiners
+("The is" → "This is") and empty parens left by inline-identifier
+removal. A live scan of all 1,298 imported products found **zero**
+occurrences of these tokens in title / description / handle.
+
+#### 5-row mapping sample (admin-only audit trail)
+
+| Leka SKU   | Urbanix SKU            | Vendor               | Source path                                                            | Pricelist linked |
+|------------|------------------------|----------------------|------------------------------------------------------------------------|------------------|
+| LP-F-0001  | angled-monkey-bars-9   | urbanix_fitness      | vendors/urbanix_fitness/products/angled_monkey_bars_9                  | False            |
+| LP-F-0006  | CC-01                  | urbanix_fitness      | vendors/urbanix_fitness/products/cc_01                                 | True             |
+| LP-F-0174  | UBX-104                | urbanix_fitness      | vendors/urbanix_fitness/products/ubx_104                               | False            |
+| LP-P-0001  | 114-al-post-cover      | urbanix_playground   | vendors/urbanix_playground/products/114_al_post_cover                  | False            |
+| LP-P-0615  | TPF-2509-800           | urbanix_playground   | vendors/urbanix_playground/products/tpf_2509_800                       | True             |
+
+#### Brand-record updates
+
+- Medusa Sales Channel `sc_01KNKTHC0B7KFEDSZ3NNM49JQW` description refreshed
+  to "Leka Project — house collection spanning early-years toys,
+  commercial playground equipment, and outdoor fitness stations." Name
+  unchanged.
+- Firestore `pricing_config/canonical.brands.leka_project` block written
+  with `internal_code_prefix: "LP"` and the per-source `internal_code_scheme`
+  map above.
+
+#### Files
+
+- `scripts/import_from_urbanix.py` (new — 825 lines). Reads
+  `vendors/urbanix_{fitness,playground}/products/*` (Firestore DB
+  `vendors`, read-only), allocates sequential `LP-F-####` / `LP-P-####`
+  codes via a transactional counter at
+  `urbanix_mapping/_counters` (Firestore DB `leka-product-catalogs`),
+  sanitizes title + description, builds the Medusa create-product payload
+  (no prices, `pricing_pending=true`, full `specifications` carried verbatim,
+  source audit trail in `metadata.source_*`), POSTs to Medusa admin API,
+  writes one audit doc per product to `urbanix_mapping/{leka_sku}`.
+  Idempotent: re-run keys on `urbanix_doc_path`; existing mappings refresh
+  only when `source_sha` changes. CLI: `--dry-run`, `--limit N`,
+  `--vendor {fitness,playground,all}`, `--report`, `--refresh-brand-only`,
+  `--revert` (safety-checked).
+
+#### Mapping collection (admin-only)
+
+`urbanix_mapping/{leka_sku}` in Firestore DB **`leka-product-catalogs`**
+(NOT the source `vendors` DB — keeps the source side read-only per the
+brief). Doc shape:
+
+```jsonc
+{
+  "leka_sku": "LP-F-0174",
+  "urbanix_sku": "UBX-104",
+  "urbanix_doc_path": "vendors/urbanix_fitness/products/ubx_104",
+  "urbanix_vendor_id": "urbanix_fitness",
+  "urbanix_source_sha": "23989734fe6140fa...",
+  "medusa_product_id": "prod_01KSWPM4FT5CHD2Y1V4KKZYDHZ",
+  "medusa_handle": "leka-project-ywaesjvf",
+  "imported_at": <serverTimestamp>,
+  "last_synced_at": <serverTimestamp>,
+  "pricelist_linked": false
+}
+```
+
+The Medusa storefront API has no route that reads this collection
+(verified by greppage); it's admin-scoped by construction. A Firestore
+rule update would belong to a separate hardening PR if the project moves
+to client-side Firestore access.
+
+#### Run results (live, 2026-05-30)
+
+- Stage 1 (`--limit 5`): 10 products created, 0 errors.
+- Stage 2 (full): 1,288 new products created, 10 unchanged-skipped
+  (idempotency confirmed via `source_sha`), 0 errors. Runtime 9.5 min.
+- Verification: 4/4 brief-required checks pass (brand record, 3
+  spot-checks `UBX-104`/`TPF-2509-800`/Gemini-only, **0 leaks across all
+  1,298 products**, mapping admin-scoped).
+
+#### Source PR (vendors workspace)
+
+[eukrit/vendors#29](https://github.com/eukrit/vendors/pull/29) — v1.19.1
+landed the rich Urbanix product docs (Gemini-extracted specs +
+pricelist-driven landed cost for the priced subset).
+
+---
+
 ## [2.49.0] - 2026-05-30
 
 ### Changed — Native multi-brand cart (Brand Module replaces brand=sales-channel)
