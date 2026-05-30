@@ -4,6 +4,106 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.49.0] - 2026-05-30
+
+### Changed — Native multi-brand cart (Brand Module replaces brand=sales-channel)
+
+Reworked the Medusa v2 backend so the cart can carry products from any
+combination of brands. Brands are no longer Sales Channels — they're a
+first-class entity linked to products via a custom module link. The cart
+lives in one shared sales channel and accepts items regardless of brand.
+
+#### Why
+
+Each brand (Wisdom, Vinci Play, Vortex Aquatics) was a separate Medusa
+Sales Channel, and Medusa binds a cart to one sales channel. A customer
+could not put a Wisdom playground unit and a Vortex water-play feature in
+the same cart, and the B2B "Send to Proposal" flow could not produce a
+mixed-brand draft order. The user's commerce model treats brands as
+catalogs-to-browse, not separate stores — multi-brand baskets are required.
+
+#### Shape
+
+Adopted the Medusa v2 **Brand Module** recipe:
+
+1. New custom module `medusa-backend/src/modules/brand/` with one `Brand`
+   model (`id`, `name`, `handle` unique, `description?`, `logo_url?`) and a
+   `BrandModuleService` extending `MedusaService({ Brand })`.
+2. New module link `medusa-backend/src/links/brand-product.ts` — one brand
+   → many products, one product → one brand. Powers the query graph so
+   `GET /store/products?fields=+brand.*&filters[brand][handle]=wisdom`
+   filters products by brand without a custom route.
+3. New store route `GET /store/brands` for the storefront brand switcher.
+4. `medusa-config.ts` registers the brand module.
+5. **One** Sales Channel ("Leka Catalogs") instead of one-per-brand. All
+   products publish to it. **One** publishable API key for the storefront.
+6. Seed script (`src/scripts/seed-from-firestore.ts`) creates the Brand
+   records, links each product to its brand via
+   `ContainerRegistrationKeys.LINK`, and optionally loads
+   `vortex_products.json` if present.
+
+Cart routes (`/store/carts/:id/complete`,
+`/store/proposal-builder/convert-cart`) are unchanged — they were already
+brand-agnostic and just pass `sales_channel_id` through.
+
+#### Files
+
+- `medusa-backend/src/modules/brand/{index,service,models/brand}.ts` (new)
+- `medusa-backend/src/links/brand-product.ts` (new)
+- `medusa-backend/src/api/store/brands/route.ts` (new)
+- `medusa-backend/medusa-config.ts` — added brand module to modules array
+- `medusa-backend/src/scripts/seed-from-firestore.ts` — single SC, brand
+  records, brand-product link wiring, single publishable key, optional
+  Vortex loader
+
+#### Migration sequence (DEPLOY-TIME — not run in this PR)
+
+The seed script is fresh-DB only. The live Medusa DB carries v2.37.0
+state (5,061 Wisdom enrichments + Toys category links). To migrate:
+
+1. Re-export Firestore → `migration/{wisdom,vinci,vortex}_products.json`
+   (latest state).
+2. Tag prod DB / take Cloud SQL snapshot for rollback.
+3. `cd medusa-backend && npx medusa db:reset` (or drop schema).
+4. `npx medusa db:migrate` (picks up the brand module migration + link).
+5. `npx medusa exec ./src/scripts/seed-from-firestore.ts` — prints the new
+   `Leka Catalogs Storefront` publishable key.
+6. Re-run `python scripts/apply_wisdom_enrichment.py` (idempotent — restores
+   the AI metadata + descriptions from the Firestore `wisdom_enrichment/`
+   cache).
+7. Re-run `python scripts/medusa_create_toys_category.py --ensure-categories
+   --link` (idempotent — restores Toys + 15 other top-level categories
+   and their product links).
+8. Update `eukrit/leka-website/catalogs/.env` with the new publishable
+   key (single key replaces per-brand keys); redeploy storefront.
+
+#### Storefront follow-up (eukrit/leka-website — separate PR)
+
+- Replace `NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY_{WISDOM,VINCI}` with one
+  `NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY`.
+- Brand landing pages: query
+  `/store/products?fields=+brand.*&filters[brand][handle]=<slug>`.
+- Brand switcher: hit `/store/brands` once, cache client-side.
+- Drop any per-brand cart cookie logic — share the cart across
+  `/wisdom`, `/vinci`, `/vortex`.
+
+#### Verification
+
+- Backend builds (`npm run build` in `medusa-backend/`) with new module +
+  link + route + seed edits compiling clean.
+- After deploy:
+  1. `GET /store/brands` → 3 brands.
+  2. `GET /store/products?fields=+brand.*&limit=5` → every product carries
+     a `brand` object.
+  3. `GET /store/products?filters[brand][handle]=wisdom` → only Wisdom.
+  4. **The decisive test:** create a cart, add a Wisdom variant, add a
+     Vinci variant → both line items persist; `POST /store/proposal-builder
+     /convert-cart` produces one draft order with both brands.
+
+---
+
+
+
 ## [2.48.0] - 2026-05-30
 
 ### Added — Wisdom outdoor-play collection in Medusa (link existing 255 + create 17)
