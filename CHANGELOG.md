@@ -4,6 +4,32 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.50.1] - 2026-05-30
+
+### Fixed — Correct `proposal-export` auth documentation (HTTP Basic, not `x-medusa-access-token`)
+
+Comment/doc-only fix — no behavior change. The docstring of
+`medusa-backend/src/api/admin/draft-orders/[id]/proposal-export/route.ts`
+instructed callers to authenticate by sending `x-medusa-access-token: <api-key>`.
+That is wrong.
+
+Verified live on 2026-05-29 against the deployed backend: a Medusa v2 **secret**
+admin API key authenticates via **HTTP Basic** — the key as the username with an
+empty password (`Authorization: Basic base64("<key>:")`) → 200. Both
+`x-medusa-access-token: <key>` and `Authorization: Bearer <key>` return 401.
+Medusa's built-in admin route middleware accepts Basic auth for secret keys.
+
+The downstream Python consumer
+(`eukrit/leka-projects:src/proposal_engine/medusa_adapter.py`) was already
+fixed in leka-projects v1.52.0 to use `requests(..., auth=(key, ""))`.
+
+**Files changed:**
+
+- `medusa-backend/src/api/admin/draft-orders/[id]/proposal-export/route.ts` — docstring auth section corrected.
+- `CHANGELOG.md` — corrected the stale `x-medusa-access-token` note in the 2.29.0 proposal-export release entry.
+
+---
+
 ## [2.50.0] - 2026-05-30
 
 ### Added — Urbanix → Leka Project import (1,298 products under fresh internal SKU scheme)
@@ -1618,7 +1644,7 @@ Plan: `~/.claude/plans/based-on-the-latest-tingly-coral.md` §D.
   - **File:** `medusa-backend/src/api/store/proposal-builder/convert-cart/route.ts`.
 
 - `GET /admin/draft-orders/:id/proposal-export`
-  - **Auth:** admin (JWT or admin API key from Medusa admin UI). The proposal engine sends `x-medusa-access-token: <key>`; key lives in GCP Secret Manager as `medusa-admin-api-key-proposal-engine`.
+  - **Auth:** admin (JWT, or a secret admin API key from the Medusa admin UI). The proposal engine authenticates with the secret key via **HTTP Basic** — key as username, empty password (`Authorization: Basic base64("<key>:")`); key lives in GCP Secret Manager as `medusa-admin-api-key-proposal-engine`. (Corrected in 2.50.1 — earlier notes mistakenly said `x-medusa-access-token`, which 401s.)
   - **Returns:** the draft order with every expansion the Python adapter needs (items → variant → product → images, region, addresses) in a single HTTP call, wrapped in a legacy-`cart`-shaped envelope so the adapter doesn't have to dual-handle v1/v2 order shapes.
   - **Why custom:** the BoQ adapter contract is stable in `proposal_engine` (plan §C3); pinning the wire shape here means future BoQ schema changes don't require redeploying Cloud Run.
   - **File:** `medusa-backend/src/api/admin/draft-orders/[id]/proposal-export/route.ts`.
