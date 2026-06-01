@@ -4,6 +4,48 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.56.0] - 2026-06-01
+
+### Added — Enrich Medusa with the embedded product photos from the Dulwich PO Excel
+
+The 2026-06-01 Dulwich PO Excel embeds one clean single-product studio photo per
+line item (column C), stored as EMF/WMF/PNG inside the `.xlsx`. Extracted all 36,
+mapped each to its item code via the drawing anchors, rasterized the EMFs, and
+used them to enrich the matching Medusa (Leka Project) products.
+
+Three new scripts (the pipeline is reproducible):
+
+- `wisdom-catalog/extract_po_images.py` — reads `xl/drawings/drawing1.xml`
+  anchors + `.rels` to pair each embedded media file with its PO line-item code,
+  writes `exports/po_images_raw/<code>.<ext>` + `manifest.json`. (36/36 mapped.)
+- `wisdom-catalog/convert_po_emf.ps1` — rasterizes EMF/WMF/PNG → normalized PNG
+  via Windows GDI+ (`System.Drawing`), upscaled to 800px long-side
+  (HighQualityBicubic). No ImageMagick/Inkscape/LibreOffice on the box; .NET
+  renders the metafiles natively. 36/36 converted.
+- `wisdom-catalog/enrich_medusa_from_po_images.py` — uploads each PNG to
+  `gs://ai-agents-go-vendors/leka-project/po-20260601/<code>.png` (the PRIVATE
+  proxy bucket; served via `https://catalogs.leka.studio/api/i/leka-project/…`,
+  never made public), resolves the Medusa product via the Leka Project
+  legacy_sku index, and updates images (full-replace semantics).
+
+Hero policy (`--hero-all` overrides): set the PO photo as the hero/thumbnail only
+where the current hero is a placeholder or a 2025-catalog crop
+(`/spatial_v2/`, `_wisdom_2025_`, `/catalog/…_imgN`); curated `_notionr2_` heroes
+are kept. The PO photo is added to the gallery in all cases.
+
+Result: **31 heroes replaced** (incl. the 2 placeholders `HW1-S281-V02`,
+`CSS-CBZJ-BZ`), **5 curated `notionr2` heroes kept** with the PO photo added to
+gallery; 36 GCS objects uploaded, 0 errors. Verified proxy serves HTTP 200.
+
+#### Files
+
+- `wisdom-catalog/extract_po_images.py`, `wisdom-catalog/convert_po_emf.ps1`,
+  `wisdom-catalog/enrich_medusa_from_po_images.py` (new)
+- `wisdom-catalog/.gitignore` (ignore regenerable `exports/po_images_{raw,png}/`)
+- `CHANGELOG.md`, `VERSION`, `docs/build-summary.html`, `wisdom-catalog/DEPLOYMENT_LOG.md`
+
+---
+
 ## [2.55.0] - 2026-06-01
 
 ### Added — Ingest Wisdom Dulwich PO `2026060101` pricing (Firestore + Medusa + quotation)

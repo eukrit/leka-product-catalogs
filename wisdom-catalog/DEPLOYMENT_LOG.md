@@ -1,5 +1,35 @@
 # Deployment Log — Wisdom Product Catalog
 
+## v2.56.0 — 2026-06-01 (Dulwich PO embedded photos → Medusa enrichment)
+
+### Summary
+Extracted the 36 embedded single-product studio photos from the Dulwich PO Excel
+(column C, EMF/WMF/PNG) and enriched the matching Medusa (Leka Project) products.
+
+### Pipeline (reproducible)
+1. `wisdom-catalog/extract_po_images.py` — anchor-map each embedded media file to
+   its item code (36/36) → `exports/po_images_raw/` + `manifest.json`.
+2. `wisdom-catalog/convert_po_emf.ps1` — GDI+ rasterize EMF/WMF/PNG → PNG, 800px
+   long-side (36/36 OK).
+3. `wisdom-catalog/enrich_medusa_from_po_images.py --write` — upload to
+   `gs://ai-agents-go-vendors/leka-project/po-20260601/<code>.png` (proxy-served,
+   private) + patch Medusa images.
+
+### Outcome
+| Bucket | Count |
+|---|---:|
+| Embedded photos extracted + mapped | 36 |
+| Rasterized to PNG | 36 |
+| GCS objects uploaded | 36 |
+| Heroes replaced (placeholder / 2025-catalog crop) | 31 |
+| Curated `notionr2` heroes kept (PO added to gallery) | 5 |
+| Errors | 0 |
+
+- 2 placeholders fixed: `HW1-S281-V02`, `CSS-CBZJ-BZ`.
+- Verified the proxy serves the new images (HTTP 200, image/png).
+
+---
+
 ## v2.55.0 — 2026-06-01 (Dulwich PO 2026060101 pricing ingest)
 
 ### Summary
