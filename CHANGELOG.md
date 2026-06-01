@@ -4,6 +4,33 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.55.0] - 2026-05-31
+
+### Added — Gum-tec as the 11th brand in `migrate-to-brand-module.ts`
+
+The v2.54.0 dry-run against prod produced excellent results — 12,308 /
+12,381 products (99.4%) brand-linkable, all 10 brand SCs mapped — but
+surfaced ~50 unmapped products with `gumtec-gmt-corner-tile-*` handles
+on a `Gum-tec` SC that wasn't in my original brand list.
+
+Gum-tec is a separate EPDM rubber-tile vendor (different from 4soft EPDM
+graphics, which it shares pricing-pipeline characteristics with). Added
+as the 11th first-class Brand record so its products are queryable via
+`?filters[brand][handle]=gumtec` and show up in the storefront brand
+switcher just like every other brand.
+
+#### Files
+
+- `medusa-backend/src/scripts/migrate-to-brand-module.ts` — added `gumtec`
+  to `BRAND_DEFINITIONS` + `Gum-tec`/`Gumtec` aliases to
+  `SC_NAME_TO_BRAND`.
+
+After this lands + redeploys, the dry-run should drop no-brand to ~25
+(only `test-*` dev products + the `Default Sales Channel` + the
+`Proposal` SC's products remain unmapped, which is correct).
+
+---
+
 ## [2.54.0] - 2026-05-31
 
 ### Fixed — `migrate-to-brand-module` script: dry-run output + missing SC alias + Leka Project handle prefix
