@@ -4,6 +4,32 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.56.0] - 2026-06-01
+
+### Changed — Rename brand "Gum-tec" → "Gum-tech" (typo fix, full slug rename)
+
+The brand added in v2.55.0 was onboarded with a typo: the real vendor is
+**Gum-tech GmbH** (gum-tech.de). Corrected the brand everywhere — display
+name, Brand-module handle, and the live prod data (sales channel + product
+handles + metadata). Full structural rename: slug `gumtec` → `gumtech`.
+
+#### Files
+
+- `medusa-backend/src/scripts/migrate-to-brand-module.ts` —
+  `BRAND_SPECS` entry now `handle: "gumtech"`, `name: "Gum-tech"`. Canonical
+  `SC_NAME_TO_BRAND` keys are now `"Gum-tech"`/`"Gumtech"` → `gumtech`; the
+  legacy `"Gum-tec"`/`"Gumtec"` keys are kept as aliases (→ `gumtech`) so an
+  in-flight prod SC still resolves during the rename.
+
+#### Live data (runtime migration, see `eukrit/vendors` `gumtech-catalog/`)
+
+- Medusa sales channel renamed `Gum-tec` → `Gum-tech`.
+- ~50 product handles migrated `gumtec-gmt-*` → `gumtech-gmt-*`; metadata keys
+  `gumtec_sku`/`gumtec_website` → `gumtech_sku`/`gumtech_website`.
+- Storefront brand filter is now `?filters[brand][handle]=gumtech`.
+
+---
+
 ## [2.55.0] - 2026-05-31
 
 ### Added — Gum-tec as the 11th brand in `migrate-to-brand-module.ts`

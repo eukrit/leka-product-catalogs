@@ -4,9 +4,9 @@
  *
  * What this script does
  * ----------------------
- * 1. Ensures a Brand record exists for each of the 10 live brands (Wisdom /
+ * 1. Ensures a Brand record exists for each of the 11 live brands (Wisdom /
  *    Leka Project, Vinci Play, Berliner, Designpark, Vortex Aquatics, 4soft,
- *    Archimedes Water Play, Eurotramp, Rampline, WePlay).
+ *    Archimedes Water Play, Eurotramp, Rampline, WePlay, Gum-tech).
  * 2. Ensures a single shared "Leka Catalogs" sales channel + matching
  *    "Leka Catalogs Storefront" publishable API key exist. Adds the SC to
  *    the key so the storefront's single key resolves to the shared SC.
@@ -126,9 +126,9 @@ const BRAND_SPECS: Array<{
     description: "WePlay inclusive play equipment",
   },
   {
-    handle: "gumtec",
-    name: "Gum-tec",
-    description: "Gum-tec — EPDM rubber tiles + safety surfacing",
+    handle: "gumtech",
+    name: "Gum-tech",
+    description: "Gum-tech — EPDM rubber tiles + safety surfacing",
   },
 ]
 
@@ -159,8 +159,12 @@ const SC_NAME_TO_BRAND: Record<string, string> = {
   "Rampline": "rampline",
   "Weplay": "weplay",
   "WePlay": "weplay",
-  "Gum-tec": "gumtec",
-  "Gumtec": "gumtec",
+  "Gum-tech": "gumtech",
+  "Gumtech": "gumtech",
+  // Legacy typo'd spellings — keep mapping to the corrected handle so an
+  // in-flight prod SC named "Gum-tec" still resolves during/after the rename.
+  "Gum-tec": "gumtech",
+  "Gumtec": "gumtech",
 }
 
 export default async function migrateToBrandModule({ container }: ExecArgs) {
