@@ -1,5 +1,46 @@
 # Deployment Log — Wisdom Product Catalog
 
+## v2.57.0 — 2026-06-01 (Full raw-media request emailed to Wisdom vendor)
+
+> Renumbered v2.56.0 → v2.57.0 during the rebase onto main: PR #93
+> (Gum-tec → Gum-tech rename) had already taken v2.56.0. Work unchanged.
+
+### Summary
+Sent the full Wisdom data-request email to the Huasenwei vendor team via
+Gmail domain-wide delegation (`subject=eukrit@goco.bz`), attaching the
+timestamped 5,071-SKU Excel export. Used the existing
+`request_raw_media_from_wisdom.py` after two body edits the user requested.
+
+- **Recipients:** `alex@`, `amanda@`, `martin_zhu@`, `martin@huasenwei.com`
+- **Subject:** `Wisdom — request for updated prices, dimensions and product images (2026-06-01)`
+- **Attachment:** `exports/wisdom_raw_media_request_2026-06-01.xlsx` (701.7 KB, "Wisdom SKUs" + "Coverage summary" sheets)
+- **Sent message id:** `19e832026e7becde`
+- **Flow:** dry-run → user approval of rendered body → live send.
+
+### Body changes (`build_email_body()`)
+1. Added a **product weight (kg) + packed/carton gross weight** bullet to
+   the per-item ask, matching the Weight column already in the Excel.
+2. Reworded the image ask into an explicit single shared-drive request
+   (Google Drive / Dropbox / WeTransfer) of high-res photos for all 5,000+
+   SKUs, organized by item code, for bulk download + per-code auto-mapping.
+
+### Coverage at send time
+| Field | Have / Total |
+|-------|-------------:|
+| EN description | 5,029 / 5,071 |
+| FOB USD price | 4,816 / 5,071 |
+| Dimensions | 3,813 / 5,071 |
+| Weight (kg) | 916 / 5,071 |
+| Product image | 2,840 / 5,071 |
+
+### Files
+| File | Change |
+|------|--------|
+| `request_raw_media_from_wisdom.py` | `build_email_body()` — weight bullet + shared-drive image ask |
+| `exports/wisdom_raw_media_request_2026-06-01.xlsx` | regenerated export (attachment sent) |
+
+---
+
 ## v2.48.0 — 2026-05-30 (Outdoor-Play Collection — Medusa Link + Gemini Image Verify)
 
 > Renumbered from v1.5.0 → v2.48.0 during merge with main: the wisdom brand
