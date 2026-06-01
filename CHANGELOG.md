@@ -4,6 +4,91 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.59.0] - 2026-06-01
+
+> Renumbered 2.56.0 → 2.59.0 during merge with main (2.55.0–2.57.0 were taken by
+> the Gum-tec brand work + raw-media request that landed first). Work unchanged.
+
+### Added — Enrich Medusa with the embedded product photos from the Dulwich PO Excel
+
+The 2026-06-01 Dulwich PO Excel embeds one clean single-product studio photo per
+line item (column C), stored as EMF/WMF/PNG inside the `.xlsx`. Extracted all 36,
+mapped each to its item code via the drawing anchors, rasterized the EMFs, and
+used them to enrich the matching Medusa (Leka Project) products.
+
+Three new scripts (the pipeline is reproducible):
+
+- `wisdom-catalog/extract_po_images.py` — reads `xl/drawings/drawing1.xml`
+  anchors + `.rels` to pair each embedded media file with its PO line-item code,
+  writes `exports/po_images_raw/<code>.<ext>` + `manifest.json`. (36/36 mapped.)
+- `wisdom-catalog/convert_po_emf.ps1` — rasterizes EMF/WMF/PNG → normalized PNG
+  via Windows GDI+ (`System.Drawing`), upscaled to 800px long-side
+  (HighQualityBicubic). No ImageMagick/Inkscape/LibreOffice on the box; .NET
+  renders the metafiles natively. 36/36 converted.
+- `wisdom-catalog/enrich_medusa_from_po_images.py` — uploads each PNG to
+  `gs://ai-agents-go-vendors/leka-project/po-20260601/<code>.png` (the PRIVATE
+  proxy bucket; served via `https://catalogs.leka.studio/api/i/leka-project/…`,
+  never made public), resolves the Medusa product via the Leka Project
+  legacy_sku index, and updates images (full-replace semantics).
+
+Hero policy (`--hero-all` overrides): set the PO photo as the hero/thumbnail only
+where the current hero is a placeholder or a 2025-catalog crop
+(`/spatial_v2/`, `_wisdom_2025_`, `/catalog/…_imgN`); curated `_notionr2_` heroes
+are kept. The PO photo is added to the gallery in all cases.
+
+Result: **31 heroes replaced** (incl. the 2 placeholders `HW1-S281-V02`,
+`CSS-CBZJ-BZ`), **5 curated `notionr2` heroes kept** with the PO photo added to
+gallery; 36 GCS objects uploaded, 0 errors. Verified proxy serves HTTP 200.
+
+#### Files
+
+- `wisdom-catalog/extract_po_images.py`, `wisdom-catalog/convert_po_emf.ps1`,
+  `wisdom-catalog/enrich_medusa_from_po_images.py` (new)
+- `wisdom-catalog/.gitignore` (ignore regenerable `exports/po_images_{raw,png}/`)
+- `CHANGELOG.md`, `VERSION`, `docs/build-summary.html`, `wisdom-catalog/DEPLOYMENT_LOG.md`
+
+---
+
+## [2.58.0] - 2026-06-01
+
+> Renumbered 2.55.0 → 2.58.0 during merge with main. Work unchanged.
+
+### Added — Ingest Wisdom Dulwich PO `2026060101` pricing (Firestore + Medusa + quotation)
+
+Ingested the **2026-06-01 Dulwich Singapore proforma invoice** (PO `2026060101`
+from TUMACO LIMITED, 36 line items, 242 units, **USD 76,020.52**, price term
+*Ex-work Shanghai*) as the authoritative FOB for those Wisdom codes.
+
+New script `wisdom-catalog/ingest_po_pricing.py` (dry-run by default, `--write`):
+reads the PO Excel, matches every code to `products_wisdom` (36/36 matched, exact
++ normalized fallback), recomputes landed/retail (THB/USD/SGD) via the canonical
+`shared/wisdom_pricing.py`, and writes:
+
+- `products_wisdom/{code}.pricing.*` — clean PO `fob_usd` + recomputed
+  landed/retail + rates + `price_date=2026-06-01` + `price_source`; plus
+  top-level `volume_cbm` from the PO. Overwrites all 36 (PO is authoritative).
+- **7 codes priced for the first time** (previously no FOB → would render TBC in
+  the Dulwich R2 proposal): `DDJM-JQ01-V01`, `DDGT-BZ`, `DDHD-BZ`, `CSS-QB-BZ`,
+  `CSS-DMGD-BZ-V01`, `CSS-CBZJ-BZ`, `CSS-QBWJ-BZ` (Holey Block sets + Water Play
+  standard packages). `HW1-S016-V03` corrected 225.00 → 225.64.
+- `leka_vendor_quotations/wisdom-PO-2026060101` — the PO snapshot (vendor, date,
+  price term, total, 36 `{item_code, fob_usd, volume_cbm, qty, amount_usd}` items).
+- Medusa: pushed recomputed THB retail + USD FOB to **36 Leka-Project variants**
+  (auth via Secret Manager `medusa-admin-email`/`-password`).
+- Handoff `wisdom-catalog/exports/dulwich-po-2026060101-priced.json` for the
+  downstream leka-projects Dulwich R2 proposal session.
+
+Reuses `update_pricing.update_medusa` + `shared/medusa_importer.py` (legacy_sku
+index) — no new pricing math. EPDM Graphics are 4soft (not in this Wisdom PO).
+
+#### Files
+
+- `wisdom-catalog/ingest_po_pricing.py` (new)
+- `wisdom-catalog/exports/dulwich-po-2026060101-priced.json` (new)
+- `wisdom-catalog/DEPLOYMENT_LOG.md`, `CHANGELOG.md`, `VERSION`, `docs/build-summary.html`
+
+---
+
 ## [2.57.0] - 2026-06-01
 
 ### Changed — Wisdom raw-media request email now asks for weight + a per-code shared drive

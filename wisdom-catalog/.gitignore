@@ -1,1 +1,5 @@
 preview/
+
+# Regenerable PO image artifacts (re-extract via extract_po_images.py + convert_po_emf.ps1)
+exports/po_images_raw/
+exports/po_images_png/

@@ -1,6 +1,76 @@
 # Deployment Log — Wisdom Product Catalog
 
+## v2.59.0 — 2026-06-01 (Dulwich PO embedded photos → Medusa enrichment)
+
+> Renumbered v2.56.0 → v2.59.0 during merge with main (2.55.0–2.57.0 taken). Work unchanged.
+
+### Summary
+Extracted the 36 embedded single-product studio photos from the Dulwich PO Excel
+(column C, EMF/WMF/PNG) and enriched the matching Medusa (Leka Project) products.
+
+### Pipeline (reproducible)
+1. `wisdom-catalog/extract_po_images.py` — anchor-map each embedded media file to
+   its item code (36/36) → `exports/po_images_raw/` + `manifest.json`.
+2. `wisdom-catalog/convert_po_emf.ps1` — GDI+ rasterize EMF/WMF/PNG → PNG, 800px
+   long-side (36/36 OK).
+3. `wisdom-catalog/enrich_medusa_from_po_images.py --write` — upload to
+   `gs://ai-agents-go-vendors/leka-project/po-20260601/<code>.png` (proxy-served,
+   private) + patch Medusa images.
+
+### Outcome
+| Bucket | Count |
+|---|---:|
+| Embedded photos extracted + mapped | 36 |
+| Rasterized to PNG | 36 |
+| GCS objects uploaded | 36 |
+| Heroes replaced (placeholder / 2025-catalog crop) | 31 |
+| Curated `notionr2` heroes kept (PO added to gallery) | 5 |
+| Errors | 0 |
+
+- 2 placeholders fixed: `HW1-S281-V02`, `CSS-CBZJ-BZ`.
+- Verified the proxy serves the new images (HTTP 200, image/png).
+
+---
+
+## v2.58.0 — 2026-06-01 (Dulwich PO 2026060101 pricing ingest)
+
+> Renumbered v2.55.0 → v2.58.0 during merge with main. Work unchanged.
+
+### Summary
+Ingested the **2026-06-01 Dulwich Singapore proforma invoice** (PO `2026060101`,
+TUMACO LIMITED) into the catalog. 36 line items, 242 units, **USD 76,020.52**,
+price term *Ex-work Shanghai*. The PO is now the authoritative FOB for these codes.
+
+### Pipeline
+- **Script:** `wisdom-catalog/ingest_po_pricing.py` (new) — dry-run by default,
+  `--write` to commit, `--skip-medusa` available. Reads the PO Excel
+  (`Sheet1`, rows 11–46), matches each code to `products_wisdom` (exact +
+  normalized fallback), recomputes landed/retail via `shared/wisdom_pricing.py`,
+  and reuses `update_pricing.update_medusa` for the Medusa push.
+- **Match:** 36/36 matched, 0 missing.
+- **FX at ingest:** USD/THB 33.2020, SGD/THB 26.0071.
+
+### Outcome
+| Bucket | Count |
+|---|---:|
+| PO line items | 36 |
+| Matched to `products_wisdom` | 36 |
+| **Newly priced (had no FOB)** | **7** |
+| FOB corrected | 1 (`HW1-S016-V03` 225.00→225.64) |
+| Medusa variants updated | 36 |
+
+- **Newly priced (was TBC):** `DDJM-JQ01-V01`, `DDGT-BZ`, `DDHD-BZ`, `CSS-QB-BZ`,
+  `CSS-DMGD-BZ-V01`, `CSS-CBZJ-BZ`, `CSS-QBWJ-BZ`.
+- **Quotation recorded:** `leka_vendor_quotations/wisdom-PO-2026060101` (36 items).
+- **Handoff:** `wisdom-catalog/exports/dulwich-po-2026060101-priced.json` →
+  consumed by the leka-projects Dulwich R2 proposal session.
+
+---
+
 ## v2.57.0 — 2026-06-01 (Full raw-media request emailed to Wisdom vendor)
+
+> Renumbered v2.56.0 → v2.57.0 during the rebase onto main: PR #93
+> (Gum-tec → Gum-tech rename) had already taken v2.56.0. Work unchanged.
 
 > Renumbered v2.56.0 → v2.57.0 during the rebase onto main: PR #93
 > (Gum-tec → Gum-tech rename) had already taken v2.56.0. Work unchanged.
