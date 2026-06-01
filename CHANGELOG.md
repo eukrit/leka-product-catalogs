@@ -4,6 +4,35 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.53.0] - 2026-05-31
+
+### Fixed — Add missing Brand-module migration file (the `brand` table)
+
+Companion hotfix to v2.49.0 (PR #76) + v2.52.0 (PR #87). The Brand module
+was registered and its model defined, but the migration file that
+actually creates the `brand` table was never generated (the v2.49.0
+build said "MODULE: brand — Skipped. Database is up-to-date" — meaning
+no migration files to run, not "already done"). The `migrate-to-brand-module`
+job from v2.52.0 therefore exited(1) on its first SQL call.
+
+Hand-wrote `medusa-backend/src/modules/brand/migrations/Migration20260531000000.ts`
+matching the shape Medusa v2 emits for similar small modules:
+
+- `brand` table — id text PK, name text, handle text, description text
+  null, logo_url text null, plus soft-delete timestamps.
+- Partial unique index on `(handle) WHERE deleted_at IS NULL`.
+
+After this migration lands and Cloud Build redeploys, `db:migrate` will
+create the table on the prod DB (idempotent — `create table if not
+exists`). The `migrate-to-brand-module` Cloud Run Job can then be
+re-executed.
+
+#### Files
+
+- `medusa-backend/src/modules/brand/migrations/Migration20260531000000.ts` (new)
+
+---
+
 ## [2.52.0] - 2026-05-31
 
 ### Added — In-place Brand-module migration script (safe alternative to wipe+reseed)
