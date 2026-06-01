@@ -230,11 +230,12 @@ For each item code we would like:
 
   • Current FOB USD price (and validity period if applicable).
   • Latest product dimensions (and package dimensions / carton size if available).
+  • Product weight (kg) and packed / carton gross weight (kg) — for every SKU.
   • One or more high-resolution single-product images — clean photos of the product on its own, ideally not catalog-page layouts where many products share one frame.
 
 Where the data on file is still correct, please just leave the cell as-is. Where we have gaps or your information has changed, please update the cell directly in the file and return it to us.
 
-If you are also able to share a Google Drive / Dropbox / WeTransfer folder of the latest product images, organized by item code, that would help us a great deal — many of our current images came from the 2025 catalog and pages where the photo is shared by multiple products, which makes it hard for us to assign the right image to the right code automatically.
+For the product photos, we would like to request a single shared Google Drive folder (or Dropbox / WeTransfer) containing high-resolution images for all {total}+ Wisdom SKUs, organized by item code (one sub-folder or file name per code). This is important to us: most of our current images came from shared catalog-page layouts where a single photo covers many products, so we cannot reliably assign the correct image to each individual code. A shared drive of per-code photos lets us bulk-download everything and automatically map each picture to its SKU. Please make sure the folder covers the full range of 5,000+ item codes, not just a selection.
 
 Coverage right now (based on what we have on file):
 

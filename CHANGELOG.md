@@ -4,7 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ---
 
-## [2.56.0] - 2026-06-01
+## [2.59.0] - 2026-06-01
+
+> Renumbered 2.56.0 → 2.59.0 during merge with main (2.55.0–2.57.0 were taken by
+> the Gum-tec brand work + raw-media request that landed first). Work unchanged.
 
 ### Added — Enrich Medusa with the embedded product photos from the Dulwich PO Excel
 
@@ -46,7 +49,9 @@ gallery; 36 GCS objects uploaded, 0 errors. Verified proxy serves HTTP 200.
 
 ---
 
-## [2.55.0] - 2026-06-01
+## [2.58.0] - 2026-06-01
+
+> Renumbered 2.55.0 → 2.58.0 during merge with main. Work unchanged.
 
 ### Added — Ingest Wisdom Dulwich PO `2026060101` pricing (Firestore + Medusa + quotation)
 
@@ -81,6 +86,91 @@ index) — no new pricing math. EPDM Graphics are 4soft (not in this Wisdom PO).
 - `wisdom-catalog/ingest_po_pricing.py` (new)
 - `wisdom-catalog/exports/dulwich-po-2026060101-priced.json` (new)
 - `wisdom-catalog/DEPLOYMENT_LOG.md`, `CHANGELOG.md`, `VERSION`, `docs/build-summary.html`
+
+---
+
+## [2.57.0] - 2026-06-01
+
+### Changed — Wisdom raw-media request email now asks for weight + a per-code shared drive
+
+Sent the full Wisdom vendor-data request to the Huasenwei team
+(`alex@`, `amanda@`, `martin_zhu@`, `martin@huasenwei.com`) via Gmail DWD
+as `eukrit@goco.bz`, attaching the timestamped 5,071-SKU Excel export
+(`wisdom_raw_media_request_2026-06-01.xlsx`). Message id `19e832026e7becde`.
+
+Two body changes were made to `request_raw_media_from_wisdom.py` before
+sending:
+
+1. Added an explicit **product weight (kg) + packed/carton gross weight**
+   bullet to the "For each item code we would like" list (the Excel already
+   carried a Weight column; the ask now matches). Weight is our biggest gap
+   — only 916 / 5,071 SKUs have it on file.
+2. Rewrote the image paragraph into a firm request for **a single shared
+   Google Drive (or Dropbox / WeTransfer) folder of high-resolution photos
+   for all 5,000+ SKUs, organized by item code**, so we can bulk-download
+   and auto-map each photo to its code. Our current images mostly came from
+   shared catalog-page layouts that can't be assigned per SKU.
+
+Coverage rollup at send time: descriptions 5,029/5,071 · FOB 4,816 ·
+dimensions 3,813 · weight 916 · images 2,840.
+
+#### Files
+
+- `wisdom-catalog/request_raw_media_from_wisdom.py` — `build_email_body()`
+  weight bullet + shared-drive image ask.
+
+---
+
+## [2.56.0] - 2026-06-01
+
+### Changed — Rename brand "Gum-tec" → "Gum-tech" (typo fix, full slug rename)
+
+The brand added in v2.55.0 was onboarded with a typo: the real vendor is
+**Gum-tech GmbH** (gum-tech.de). Corrected the brand everywhere — display
+name, Brand-module handle, and the live prod data (sales channel + product
+handles + metadata). Full structural rename: slug `gumtec` → `gumtech`.
+
+#### Files
+
+- `medusa-backend/src/scripts/migrate-to-brand-module.ts` —
+  `BRAND_SPECS` entry now `handle: "gumtech"`, `name: "Gum-tech"`. Canonical
+  `SC_NAME_TO_BRAND` keys are now `"Gum-tech"`/`"Gumtech"` → `gumtech`; the
+  legacy `"Gum-tec"`/`"Gumtec"` keys are kept as aliases (→ `gumtech`) so an
+  in-flight prod SC still resolves during the rename.
+
+#### Live data (runtime migration, see `eukrit/vendors` `gumtech-catalog/`)
+
+- Medusa sales channel renamed `Gum-tec` → `Gum-tech`.
+- ~50 product handles migrated `gumtec-gmt-*` → `gumtech-gmt-*`; metadata keys
+  `gumtec_sku`/`gumtec_website` → `gumtech_sku`/`gumtech_website`.
+- Storefront brand filter is now `?filters[brand][handle]=gumtech`.
+
+---
+
+## [2.55.0] - 2026-05-31
+
+### Added — Gum-tec as the 11th brand in `migrate-to-brand-module.ts`
+
+The v2.54.0 dry-run against prod produced excellent results — 12,308 /
+12,381 products (99.4%) brand-linkable, all 10 brand SCs mapped — but
+surfaced ~50 unmapped products with `gumtec-gmt-corner-tile-*` handles
+on a `Gum-tec` SC that wasn't in my original brand list.
+
+Gum-tec is a separate EPDM rubber-tile vendor (different from 4soft EPDM
+graphics, which it shares pricing-pipeline characteristics with). Added
+as the 11th first-class Brand record so its products are queryable via
+`?filters[brand][handle]=gumtec` and show up in the storefront brand
+switcher just like every other brand.
+
+#### Files
+
+- `medusa-backend/src/scripts/migrate-to-brand-module.ts` — added `gumtec`
+  to `BRAND_DEFINITIONS` + `Gum-tec`/`Gumtec` aliases to
+  `SC_NAME_TO_BRAND`.
+
+After this lands + redeploys, the dry-run should drop no-brand to ~25
+(only `test-*` dev products + the `Default Sales Channel` + the
+`Proposal` SC's products remain unmapped, which is correct).
 
 ---
 

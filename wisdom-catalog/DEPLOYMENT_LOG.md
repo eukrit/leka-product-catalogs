@@ -1,6 +1,8 @@
 # Deployment Log — Wisdom Product Catalog
 
-## v2.56.0 — 2026-06-01 (Dulwich PO embedded photos → Medusa enrichment)
+## v2.59.0 — 2026-06-01 (Dulwich PO embedded photos → Medusa enrichment)
+
+> Renumbered v2.56.0 → v2.59.0 during merge with main (2.55.0–2.57.0 taken). Work unchanged.
 
 ### Summary
 Extracted the 36 embedded single-product studio photos from the Dulwich PO Excel
@@ -30,7 +32,9 @@ Extracted the 36 embedded single-product studio photos from the Dulwich PO Excel
 
 ---
 
-## v2.55.0 — 2026-06-01 (Dulwich PO 2026060101 pricing ingest)
+## v2.58.0 — 2026-06-01 (Dulwich PO 2026060101 pricing ingest)
+
+> Renumbered v2.55.0 → v2.58.0 during merge with main. Work unchanged.
 
 ### Summary
 Ingested the **2026-06-01 Dulwich Singapore proforma invoice** (PO `2026060101`,
@@ -60,6 +64,50 @@ price term *Ex-work Shanghai*. The PO is now the authoritative FOB for these cod
 - **Quotation recorded:** `leka_vendor_quotations/wisdom-PO-2026060101` (36 items).
 - **Handoff:** `wisdom-catalog/exports/dulwich-po-2026060101-priced.json` →
   consumed by the leka-projects Dulwich R2 proposal session.
+
+---
+
+## v2.57.0 — 2026-06-01 (Full raw-media request emailed to Wisdom vendor)
+
+> Renumbered v2.56.0 → v2.57.0 during the rebase onto main: PR #93
+> (Gum-tec → Gum-tech rename) had already taken v2.56.0. Work unchanged.
+
+> Renumbered v2.56.0 → v2.57.0 during the rebase onto main: PR #93
+> (Gum-tec → Gum-tech rename) had already taken v2.56.0. Work unchanged.
+
+### Summary
+Sent the full Wisdom data-request email to the Huasenwei vendor team via
+Gmail domain-wide delegation (`subject=eukrit@goco.bz`), attaching the
+timestamped 5,071-SKU Excel export. Used the existing
+`request_raw_media_from_wisdom.py` after two body edits the user requested.
+
+- **Recipients:** `alex@`, `amanda@`, `martin_zhu@`, `martin@huasenwei.com`
+- **Subject:** `Wisdom — request for updated prices, dimensions and product images (2026-06-01)`
+- **Attachment:** `exports/wisdom_raw_media_request_2026-06-01.xlsx` (701.7 KB, "Wisdom SKUs" + "Coverage summary" sheets)
+- **Sent message id:** `19e832026e7becde`
+- **Flow:** dry-run → user approval of rendered body → live send.
+
+### Body changes (`build_email_body()`)
+1. Added a **product weight (kg) + packed/carton gross weight** bullet to
+   the per-item ask, matching the Weight column already in the Excel.
+2. Reworded the image ask into an explicit single shared-drive request
+   (Google Drive / Dropbox / WeTransfer) of high-res photos for all 5,000+
+   SKUs, organized by item code, for bulk download + per-code auto-mapping.
+
+### Coverage at send time
+| Field | Have / Total |
+|-------|-------------:|
+| EN description | 5,029 / 5,071 |
+| FOB USD price | 4,816 / 5,071 |
+| Dimensions | 3,813 / 5,071 |
+| Weight (kg) | 916 / 5,071 |
+| Product image | 2,840 / 5,071 |
+
+### Files
+| File | Change |
+|------|--------|
+| `request_raw_media_from_wisdom.py` | `build_email_body()` — weight bullet + shared-drive image ask |
+| `exports/wisdom_raw_media_request_2026-06-01.xlsx` | regenerated export (attachment sent) |
 
 ---
 
