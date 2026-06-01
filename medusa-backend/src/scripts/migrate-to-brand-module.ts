@@ -143,6 +143,7 @@ const SC_NAME_TO_BRAND: Record<string, string> = {
   "Berliner": "berliner",
   "Berliner Seilfabrik": "berliner",
   "Designpark": "designpark",
+  "Design Park": "designpark",
   "Vortex Aquatics": "vortex",
   "Vortex": "vortex",
   "4soft": "4soft",
@@ -185,6 +186,11 @@ export default async function migrateToBrandModule({ container }: ExecArgs) {
       brandMap[spec.handle] = created.id
       console.log(`  [created] ${spec.handle.padEnd(22)} → ${created.id}`)
     } else {
+      // Populate a placeholder so Steps 4 + 5 can still simulate the
+      // brand → product linking they'd do in a real run. Without this,
+      // every SC reports as `[unmapped]` and every product as `no-brand`
+      // — misleading output that doesn't reflect what a real run would do.
+      brandMap[spec.handle] = `brand_dryrun_${spec.handle}`
       console.log(`  [would]   ${spec.handle}`)
     }
   }
@@ -309,8 +315,15 @@ export default async function migrateToBrandModule({ container }: ExecArgs) {
       }
       if (!brandHandle) {
         // Fallback: handle prefix (wisdom-…, vinci-…, vortex-…, etc.)
-        const prefix = (p.handle || "").split("-")[0]
-        if (brandMap[prefix]) brandHandle = prefix
+        // Special case: Wisdom was rebranded to "Leka Project" — handles
+        // are now `leka-project-XXX`. Map that to the `wisdom` brand.
+        const lower = (p.handle || "").toLowerCase()
+        if (lower.startsWith("leka-project-")) {
+          brandHandle = "wisdom"
+        } else {
+          const prefix = lower.split("-")[0]
+          if (brandMap[prefix]) brandHandle = prefix
+        }
       }
 
       if (!brandHandle) {
