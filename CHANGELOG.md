@@ -4,6 +4,35 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.54.0] - 2026-05-31
+
+### Fixed — `migrate-to-brand-module` script: dry-run output + missing SC alias + Leka Project handle prefix
+
+Three fixes surfaced by the v2.53.0 dry-run against prod:
+
+1. **Dry-run brandMap was empty.** Step 1's `[would]` branch never
+   populated `brandMap` in `MIGRATION_DRY_RUN=1` mode, so Steps 4 + 5
+   reported every SC as `[unmapped]` and every product as `no-brand`.
+   Misleading output that didn't reflect what a real run would do. Fixed
+   by populating a `brand_dryrun_<handle>` placeholder during dry-run.
+2. **`Design Park` SC name was missing from the alias table.** Prod has
+   `Design Park` (with a space); my map only had `Designpark` (no space).
+   Added the space variant.
+3. **`leka-project-XXX` handle prefix didn't match `wisdom`.** Wisdom
+   was rebranded to "Leka Project" — handles are now `leka-project-…`,
+   not `wisdom-…`. Added an explicit prefix rule mapping
+   `leka-project-*` → `wisdom` brand in the handle-prefix fallback.
+
+Brand `wisdom` keeps its handle (don't break the storefront's existing
+`?filters[brand][handle]=wisdom` queries); only the display name on the
+admin is "Leka Project".
+
+#### Files
+
+- `medusa-backend/src/scripts/migrate-to-brand-module.ts`
+
+---
+
 ## [2.53.0] - 2026-05-31
 
 ### Fixed — Add missing Brand-module migration file (the `brand` table)
