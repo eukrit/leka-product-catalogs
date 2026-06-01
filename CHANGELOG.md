@@ -4,6 +4,44 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.55.0] - 2026-06-01
+
+### Added — Ingest Wisdom Dulwich PO `2026060101` pricing (Firestore + Medusa + quotation)
+
+Ingested the **2026-06-01 Dulwich Singapore proforma invoice** (PO `2026060101`
+from TUMACO LIMITED, 36 line items, 242 units, **USD 76,020.52**, price term
+*Ex-work Shanghai*) as the authoritative FOB for those Wisdom codes.
+
+New script `wisdom-catalog/ingest_po_pricing.py` (dry-run by default, `--write`):
+reads the PO Excel, matches every code to `products_wisdom` (36/36 matched, exact
++ normalized fallback), recomputes landed/retail (THB/USD/SGD) via the canonical
+`shared/wisdom_pricing.py`, and writes:
+
+- `products_wisdom/{code}.pricing.*` — clean PO `fob_usd` + recomputed
+  landed/retail + rates + `price_date=2026-06-01` + `price_source`; plus
+  top-level `volume_cbm` from the PO. Overwrites all 36 (PO is authoritative).
+- **7 codes priced for the first time** (previously no FOB → would render TBC in
+  the Dulwich R2 proposal): `DDJM-JQ01-V01`, `DDGT-BZ`, `DDHD-BZ`, `CSS-QB-BZ`,
+  `CSS-DMGD-BZ-V01`, `CSS-CBZJ-BZ`, `CSS-QBWJ-BZ` (Holey Block sets + Water Play
+  standard packages). `HW1-S016-V03` corrected 225.00 → 225.64.
+- `leka_vendor_quotations/wisdom-PO-2026060101` — the PO snapshot (vendor, date,
+  price term, total, 36 `{item_code, fob_usd, volume_cbm, qty, amount_usd}` items).
+- Medusa: pushed recomputed THB retail + USD FOB to **36 Leka-Project variants**
+  (auth via Secret Manager `medusa-admin-email`/`-password`).
+- Handoff `wisdom-catalog/exports/dulwich-po-2026060101-priced.json` for the
+  downstream leka-projects Dulwich R2 proposal session.
+
+Reuses `update_pricing.update_medusa` + `shared/medusa_importer.py` (legacy_sku
+index) — no new pricing math. EPDM Graphics are 4soft (not in this Wisdom PO).
+
+#### Files
+
+- `wisdom-catalog/ingest_po_pricing.py` (new)
+- `wisdom-catalog/exports/dulwich-po-2026060101-priced.json` (new)
+- `wisdom-catalog/DEPLOYMENT_LOG.md`, `CHANGELOG.md`, `VERSION`, `docs/build-summary.html`
+
+---
+
 ## [2.54.0] - 2026-05-31
 
 ### Fixed — `migrate-to-brand-module` script: dry-run output + missing SC alias + Leka Project handle prefix

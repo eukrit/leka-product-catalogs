@@ -1,5 +1,38 @@
 # Deployment Log — Wisdom Product Catalog
 
+## v2.55.0 — 2026-06-01 (Dulwich PO 2026060101 pricing ingest)
+
+### Summary
+Ingested the **2026-06-01 Dulwich Singapore proforma invoice** (PO `2026060101`,
+TUMACO LIMITED) into the catalog. 36 line items, 242 units, **USD 76,020.52**,
+price term *Ex-work Shanghai*. The PO is now the authoritative FOB for these codes.
+
+### Pipeline
+- **Script:** `wisdom-catalog/ingest_po_pricing.py` (new) — dry-run by default,
+  `--write` to commit, `--skip-medusa` available. Reads the PO Excel
+  (`Sheet1`, rows 11–46), matches each code to `products_wisdom` (exact +
+  normalized fallback), recomputes landed/retail via `shared/wisdom_pricing.py`,
+  and reuses `update_pricing.update_medusa` for the Medusa push.
+- **Match:** 36/36 matched, 0 missing.
+- **FX at ingest:** USD/THB 33.2020, SGD/THB 26.0071.
+
+### Outcome
+| Bucket | Count |
+|---|---:|
+| PO line items | 36 |
+| Matched to `products_wisdom` | 36 |
+| **Newly priced (had no FOB)** | **7** |
+| FOB corrected | 1 (`HW1-S016-V03` 225.00→225.64) |
+| Medusa variants updated | 36 |
+
+- **Newly priced (was TBC):** `DDJM-JQ01-V01`, `DDGT-BZ`, `DDHD-BZ`, `CSS-QB-BZ`,
+  `CSS-DMGD-BZ-V01`, `CSS-CBZJ-BZ`, `CSS-QBWJ-BZ`.
+- **Quotation recorded:** `leka_vendor_quotations/wisdom-PO-2026060101` (36 items).
+- **Handoff:** `wisdom-catalog/exports/dulwich-po-2026060101-priced.json` →
+  consumed by the leka-projects Dulwich R2 proposal session.
+
+---
+
 ## v2.48.0 — 2026-05-30 (Outdoor-Play Collection — Medusa Link + Gemini Image Verify)
 
 > Renumbered from v1.5.0 → v2.48.0 during merge with main: the wisdom brand
