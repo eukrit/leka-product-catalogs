@@ -125,6 +125,11 @@ const BRAND_SPECS: Array<{
     name: "WePlay",
     description: "WePlay inclusive play equipment",
   },
+  {
+    handle: "gumtec",
+    name: "Gum-tec",
+    description: "Gum-tec — EPDM rubber tiles + safety surfacing",
+  },
 ]
 
 /**
@@ -154,6 +159,8 @@ const SC_NAME_TO_BRAND: Record<string, string> = {
   "Rampline": "rampline",
   "Weplay": "weplay",
   "WePlay": "weplay",
+  "Gum-tec": "gumtec",
+  "Gumtec": "gumtec",
 }
 
 export default async function migrateToBrandModule({ container }: ExecArgs) {
