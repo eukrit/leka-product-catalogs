@@ -4,6 +4,38 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.57.0] - 2026-06-01
+
+### Changed — Wisdom raw-media request email now asks for weight + a per-code shared drive
+
+Sent the full Wisdom vendor-data request to the Huasenwei team
+(`alex@`, `amanda@`, `martin_zhu@`, `martin@huasenwei.com`) via Gmail DWD
+as `eukrit@goco.bz`, attaching the timestamped 5,071-SKU Excel export
+(`wisdom_raw_media_request_2026-06-01.xlsx`). Message id `19e832026e7becde`.
+
+Two body changes were made to `request_raw_media_from_wisdom.py` before
+sending:
+
+1. Added an explicit **product weight (kg) + packed/carton gross weight**
+   bullet to the "For each item code we would like" list (the Excel already
+   carried a Weight column; the ask now matches). Weight is our biggest gap
+   — only 916 / 5,071 SKUs have it on file.
+2. Rewrote the image paragraph into a firm request for **a single shared
+   Google Drive (or Dropbox / WeTransfer) folder of high-resolution photos
+   for all 5,000+ SKUs, organized by item code**, so we can bulk-download
+   and auto-map each photo to its code. Our current images mostly came from
+   shared catalog-page layouts that can't be assigned per SKU.
+
+Coverage rollup at send time: descriptions 5,029/5,071 · FOB 4,816 ·
+dimensions 3,813 · weight 916 · images 2,840.
+
+#### Files
+
+- `wisdom-catalog/request_raw_media_from_wisdom.py` — `build_email_body()`
+  weight bullet + shared-drive image ask.
+
+---
+
 ## [2.56.0] - 2026-06-01
 
 ### Changed — Rename brand "Gum-tec" → "Gum-tech" (typo fix, full slug rename)
