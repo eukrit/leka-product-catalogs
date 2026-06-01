@@ -4,6 +4,77 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.52.0] - 2026-05-31
+
+### Added — In-place Brand-module migration script (safe alternative to wipe+reseed)
+
+Companion to v2.49.0 (PR #76). Adds an idempotent in-place migration
+script that promotes brand from "sales channel" to "first-class entity
+via the Brand module" without touching live product data, so the cart
+can carry products from multiple brands at the same time.
+
+#### Why an in-place migration
+
+The v2.49.0 plan was "wipe + reseed", which would have worked if every
+brand's products lived in Firestore. They don't: only Wisdom (5,071) and
+Vinci (1,113) are in Firestore. The other 7 brands (Berliner, Designpark,
+Vortex, 4soft, Archimedes Water Play, Eurotramp, Rampline, WePlay) live
+ONLY in Medusa, populated by independent per-brand ingestion pipelines
+(vendor PDFs, Google Sheets, scrapers). `db:reset` + `seed-from-firestore`
+would have permanently deleted them.
+
+#### What the script does
+
+`medusa-backend/src/scripts/migrate-to-brand-module.ts`:
+
+1. Ensures a Brand record exists for each of the 10 live brands.
+2. Ensures a shared `Leka Catalogs` sales channel + `Leka Catalogs
+   Storefront` publishable API key exist (and that the key is linked to
+   the SC).
+3. Iterates every live Product:
+   - Infers the brand from the product's current SC association
+     (fallback: handle prefix).
+   - Creates the `brand ↔ product` link if missing.
+   - Adds the shared SC to `sales_channels` ALONGSIDE the existing
+     per-brand SC. Per-brand SCs and their publishable keys are left in
+     place so the storefront keeps working through the cut-over.
+
+Idempotent, dry-runnable, capped via `MIGRATION_MAX=N` for a first-N
+smoke test before a full run.
+
+```bash
+# Dry run
+MIGRATION_DRY_RUN=1 npx medusa exec ./src/scripts/migrate-to-brand-module.ts
+# 50-product smoke test
+MIGRATION_MAX=50 npx medusa exec ./src/scripts/migrate-to-brand-module.ts
+# Full run
+npx medusa exec ./src/scripts/migrate-to-brand-module.ts
+```
+
+Recovery: every link is a row in the link tables (`brand_product`,
+`product_sales_channel`, `publishable_api_key_sales_channel`) and can be
+deleted via the admin API or a follow-up cleanup script. No product,
+SC, brand record, or publishable key is mutated destructively.
+
+#### Files
+
+- `medusa-backend/src/scripts/migrate-to-brand-module.ts` (new) — the
+  migration script described above.
+
+#### Follow-ups (NOT in this PR)
+
+- Take a Cloud SQL snapshot.
+- Run the dry run, then the 50-product smoke test, then the full run.
+- Update `eukrit/leka-website/catalogs/.env.local` with the new
+  `NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY` printed by the script.
+- Storefront PR in `eukrit/leka-website` to use the single key + brand
+  filters in `?filters[brand][handle]=…` (coordinate with in-flight
+  multi-brand-bag PRs there).
+- Optional later cleanup: disable / delete the now-redundant per-brand
+  publishable keys + SCs once the storefront is fully cut over.
+
+---
+
 ## [2.51.0] - 2026-05-30
 
 ### Added — 4soft EPDM-graphic pricing in `build_r2_curated.py` + Dulwich R2 script set
