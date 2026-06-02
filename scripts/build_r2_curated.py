@@ -44,8 +44,12 @@ WISDOM_FOB_TO_SGD = 104.09 * 1.05 / 24.6  # ≈ 4.44
 REV = "dulwich-r2"
 CATALOG_DB = "leka-product-catalogs"
 
-LP = (r"C:\Users\Eukrit\OneDrive\Claude Code\NUC11\leka-projects\.claude"
-      r"\worktrees\goofy-snyder-ab838e")
+# leka-projects worktree that holds the Dulwich R2 data files + receives the
+# regenerated manual.yaml. Override with $LEKA_PROJECTS_WORKTREE (the default
+# goofy-snyder worktree path is not stable across machines / OneDrive prunes).
+LP = os.environ.get("LEKA_PROJECTS_WORKTREE") or (
+    r"C:\Users\Eukrit\OneDrive\Claude Code\NUC11\leka-projects\.claude"
+    r"\worktrees\goofy-snyder-ab838e")
 SELECTION = LP + r"\projects\dulwich-singapore\_data\dulwich-singapore-r2-selection.json"
 REV1_BOQ = LP + r"\docs\reports\_data\dulwich-singapore-boq.json"
 MANUAL_OUT = LP + r"\projects\dulwich-singapore\_data\dulwich-singapore-r2-manual.yaml"
@@ -77,14 +81,14 @@ PRODUCTS = [
     ("C", "Play Equipment", "HW1-S292", 1, "Motor Skills-Forest Set C"),
     ("C", "Play Equipment", "HW1-S023-V06", 1, "Nature's Elements Outdoor Teepee"),
     ("C", "Play Equipment", "HW1-S020-V03", 1, "Nature's Elements Outdoor Play House"),
-    ("C", "Play Equipment", "HW1-S256", 1, "HW1-S256"),
+    ("C", "Play Equipment", "HW1-S256-V01", 1, "Little Farm-Square Set"),
     ("C", "Play Equipment", "HW1-S029", 1, "Nature's Elements Outdoor Chalkboard"),
     ("C", "Play Equipment", "HW1-S031", 1, "Nature's Elements Outdoor Translucent Panel"),
-    ("C", "Play Equipment", "HW1-S367", 1, "HW1-S367"),
-    ("C", "Play Equipment", "HW1-S270", 1, "HW1-S270"),
+    ("C", "Play Equipment", "HW1-S367-V01", 1, "Vision Wallboard Set-Lines"),
+    ("C", "Play Equipment", "HW1-S270-V02", 1, "Music Wallboard Set-Lines"),
     ("C", "Play Equipment", "HW5-SD001-V01", 8, "Nature's Elements Outdoor Stool"),
     # Zone A & C — Sandpit (equipment)
-    ("CS", "Sand & Water Play", "HW1-S281", 1, "HW1-S281"),
+    ("CS", "Sand & Water Play", "HW1-S281-V02", 1, "Sand Delivery Play"),
     ("CS", "Sand & Water Play", "HW1-S484", 1, "Wallboard-Sand Play HW1-S484"),
     ("CS", "Sand & Water Play", "HW1-S062", 1, "Wallboard-Halfpipe Sand Channel HW1-S062"),
     ("CS", "Sand & Water Play", "HW1-S070", 1, "Wallboard-Hosepipe HW1-S070"),
@@ -93,12 +97,12 @@ PRODUCTS = [
     ("CS", "Sand & Water Play", "HW1-S066", 1, "Wallboard-Sand Play HW1-S066"),
     # Zone D — Balcony 17 Classrooms
     ("D", "Water Play Set (per classroom)", "CSS-QB-BZ", 17, "Water Play Set - Wallboard Standard Package"),
-    ("D", "Water Play Set (per classroom)", "CSS-DMGD-BZ", 17, "Water Play Set - CSS-DMGD-BZ"),
+    ("D", "Water Play Set (per classroom)", "CSS-DMGD-BZ-V01", 17, "Water Play Set - Ground Tubes & Connector Standard Package"),
     ("D", "Water Play Set (per classroom)", "CSS-CBZJ-BZ", 17, "Water Play Set - Castle Support Standard Package"),
     ("D", "Water Play Set (per classroom)", "CSS-QBWJ-BZ", 17, "Water Play Set - Wallboard Toys Standard Package"),
     ("D", "Classroom Set (per classroom)", "HW1-S035", 17, "Messy Tables & Water Cascade Table"),
-    ("D", "Classroom Set (per classroom)", "HW4-SZ006-V01", 17, "HW4-SZ006-V01"),
-    ("D", "Classroom Set (per classroom)", "HW1-S016-V02", 17, "HW1-S016-V02"),
+    ("D", "Classroom Set (per classroom)", "HW4-SZ006-V02", 17, "Nature's Elements Outdoor Workbench"),
+    ("D", "Classroom Set (per classroom)", "HW1-S016-V03", 17, "Nature's Elements Outdoor Kitchen Set"),
     ("D", "Classroom Set (per classroom)", "HW1-S202", 17, "Castle Storage (L)"),
     ("D", "Classroom Set (per classroom)", "HW1-S203", 17, "Castle Storage (R)"),
     ("D", "Classroom Set (per classroom)", "HW1-S201", 17, "Castle Storage B"),
@@ -110,7 +114,7 @@ PRODUCTS = [
 # into the ZSURF "Surfacing Summary" section (areas from the Option-1 master plan).
 SURFACING = [
     ("C", "Mound", "EPDM Mound height 1.00 m. + Tunnel + Double Slide", 1, "set", 25400.0, True),
-    ("ZSURF", "Surfacing", "Zone A — Grass Green EPDM Surfacing with Surface Renovation", 974, "sq.m.", 119.90, False),
+    ("ZSURF", "Surfacing", "Zone A — Grass Green EPDM Surfacing with Surface Renovation", 840, "sq.m.", 119.90, False),
     ("ZSURF", "Surfacing", "Zone A & C — Sand Pit 300mm Depth with Drainage System", 92, "sq.m.", 420.0, False),
     ("ZSURF", "Surfacing", "Zone C — Hexagon Grid 45 mm Green Color", 235, "sq.m.", 182.85, False),
 ]
@@ -212,14 +216,17 @@ def main() -> int:
 
     def price_of(code):
         n = norm(code)
+        # Prefer the authoritative Medusa SGD catalog price. Both 4soft
+        # (= vendors/4soft.retail_sgd) and Wisdom / "Leka Project" variants now
+        # carry a pipeline-computed retail_sgd, so this is the source of truth —
+        # it replaces the old Wisdom fob×FX estimate and prices the items that
+        # had neither a Rev1 nor a FOB figure (DD holey blocks, CSS water-play).
+        if med_sgd.get(n):
+            return med_sgd[n], "priced"
         if n in rev1:
             return round(rev1[n], 2), "priced"
         if fob.get(n):
             return round(fob[n] * WISDOM_FOB_TO_SGD, 2), "priced"
-        # 4soft EPDM surface graphics: no Rev1/FOB price, but the catalog now
-        # carries a synced Medusa SGD price (= vendors/4soft.retail_sgd).
-        if is_epdm(code) and med_sgd.get(n):
-            return med_sgd[n], "priced"
         return None, "tbc"
 
     def dims_of(code):
@@ -262,10 +269,11 @@ def main() -> int:
                 "dimensions": dims_of(code) or {"raw": None, "L": None, "W": None, "H": None, "unit": "cm"},
                 "quantity": {"qty": int(qty), "unit": "set", "detail": None},
                 "images": (sel_by_code.get(norm(code)) or {}).get("images") or [],
-                # 4soft EPDM-graphic drafts carry a catalog SGD price; other
-                # missing/draft items have no confirmed price yet → stay TBC.
+                # Draft/unpublished items carry a catalog SGD price only if their
+                # Medusa variant has one (some 4soft drafts do); the rest have no
+                # confirmed price yet → stay TBC.
                 "pricing": ({"retail_status": status, "retail_sgd": price}
-                            if is_epdm(code) else {"retail_status": "tbc", "retail_sgd": None}),
+                            if med_sgd.get(norm(code)) else {"retail_status": "tbc", "retail_sgd": None}),
             })
 
     # surfacing manual items

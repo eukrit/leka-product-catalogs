@@ -4,6 +4,27 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.65.0] - 2026-06-02
+
+### Changed — `scripts/build_r2_curated.py`: Medusa-SGD-first pricing + versioned PO codes + 840 sq.m
+
+Brings the curated Dulwich Rev2 BoQ builder up to the state that produced the
+live draft order `order_01KT34JZ7MPE7JT887R3JCKJFR` (consumed by
+`eukrit/leka-projects` main, v1.58.0):
+
+- **`price_of()` now prefers the Medusa variant SGD price** (the authoritative
+  pipeline retail) over the old Rev1-BoQ / Wisdom-FOB×4.44 fallbacks, for both
+  4soft EPDM graphics and Wisdom/"Leka Project" items. The manual/draft branch
+  prices an item only when its Medusa variant carries an SGD price.
+- **7 PO Wisdom codes corrected to their versioned published forms**
+  (HW1-S256→`-V01`, HW1-S367→`-V01`, HW1-S270→`-V02`, HW1-S281→`-V02`,
+  CSS-DMGD-BZ→`-V01`, HW4-SZ006-V01→`-V02`, HW1-S016-V02→`-V03`) + catalog
+  names — they now resolve to the priced published products instead of the
+  unpriced `proposal-*` draft stubs.
+- **Zone A Grass Green EPDM surfacing 974 → 840 sq.m.**
+- **`LP` data path now `$LEKA_PROJECTS_WORKTREE`-overridable** (the hardcoded
+  goofy-snyder worktree path was machine-specific / lost to OneDrive prunes).
+
 ## [2.64.0] - 2026-06-02
 
 ### Fixed — rampline SGD backfill derived from VAT-inclusive THB (latent double-tax)
