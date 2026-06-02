@@ -239,8 +239,20 @@ def _run_rampline(fx, write):
 
     Rampline prices live in vendors/rampline/pricelists/<date>.variants and do
     NOT surface in Medusa (per-variant migration deferred). We add retail_sgd
-    derived from each variant's stored retail_thb at current FX.
+    derived from each variant's stored landed_thb at current FX — the canonical
+    formula every brand uses (shared.landed_pricing / rampline-catalog importer).
+
+    NOTE (fix 2026-06-02): previously this divided the VAT-inclusive retail_thb
+    by the SGD rate, which baked Thailand's 7% domestic customer VAT into the
+    SG/international price (retail_sgd came out 1.07x too high). SGD must be
+    derived from the landed cost (pre-TH-VAT), matching every other brand.
     """
+    from shared.pricing_config import get_pricing_config
+    cfg = get_pricing_config("rampline")
+    gm = float(cfg.get("gross_margin", 0.30))
+    sg_gst_mult = (1 + float(cfg.get("sg_customer_gst_rate", 0.09))) \
+        if bool(cfg.get("sg_nubo_gst_registered", False)) else 1.0
+
     db = _fc()
     pl = list(db.collection("vendors").document("rampline").collection("pricelists").stream())
     if not pl:
@@ -252,22 +264,43 @@ def _run_rampline(fx, write):
     sgd_thb = fx.get("SGD", 25.0)
     rows = []
     new_variants = {}
+    skipped_no_landed = 0
     for key, v in variants.items():
         rt = v.get("retail_thb")
+        lt = v.get("landed_thb")
         if not rt:
             new_variants[key] = v
             continue
-        sgd = round(rt / sgd_thb, 2)  # Nubo unregistered → no GST
+        if not lt:
+            # No landed cost stored → cannot derive SGD on the canonical base.
+            # Leave the variant untouched rather than fall back to the wrong
+            # (VAT-inclusive retail_thb) formula.
+            skipped_no_landed += 1
+            new_variants[key] = v
+            continue
+        # Canonical: SGD off landed cost (pre-TH-VAT), Nubo unregistered → no GST.
+        sgd = round(((lt / sgd_thb) / (1 - gm)) * sg_gst_mult, 2)
         nv = dict(v)
         nv["retail_sgd"] = sgd
         new_variants[key] = nv
         rows.append({
             "doc_id": latest.id, "code": v.get("article_code") or key, "fob": v.get("eur_fob"),
-            "fob_ccy": "EUR", "landed_thb": v.get("landed_thb"), "cbm_method": v.get("cbm_method"),
+            "fob_ccy": "EUR", "landed_thb": lt, "cbm_method": v.get("cbm_method"),
             "retail_thb": rt, "retail_usd": v.get("retail_usd"), "retail_eur": v.get("retail_eur"),
             "retail_sgd": sgd, "old_thb": rt, "old_usd": v.get("retail_usd"),
+            "old_sgd": v.get("retail_sgd"),
         })
+    if skipped_no_landed:
+        log.warning("[rampline] %d variants skipped (no landed_thb stored — "
+                    "cannot derive canonical SGD)", skipped_no_landed)
     _report("rampline", rows)
+    # SGD-specific drift (the generic _report tracks THB, which is unchanged here).
+    sgd_drifts = [d for r in rows if (d := _pct_drift(r["retail_sgd"], r.get("old_sgd"))) is not None]
+    if sgd_drifts:
+        print(f"  retail_sgd drift vs stored: mean Δ={statistics.mean(sgd_drifts):+.2f}%  "
+              f"min={min(sgd_drifts):+.2f}%  max={max(sgd_drifts):+.2f}%  (n={len(sgd_drifts)})")
+        print("  (≈0% + FX drift when the stored retail_thb is pre-VAT; ≈ -6.5% if a")
+        print("   VAT-inclusive retail_thb was previously divided by SGD — 1/1.07-1.)")
     log.info("[rampline] Medusa surfacing DEFERRED — audit doc only (pricelists/%s)", latest.id)
     if write:
         _backup("rampline", rows)
