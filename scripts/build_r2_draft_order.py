@@ -45,8 +45,12 @@ SC_LEKA = "sc_01KNKTHC0B7KFEDSZ3NNM49JQW"
 WISDOM_FOB_TO_SGD = 104.09 * 1.05 / 24.6  # ≈ 4.44 — LAST-RESORT only (v2.61.0); Medusa SGD price is now authoritative
 REV = "dulwich-r2"
 
-LP = (r"C:\Users\Eukrit\OneDrive\Claude Code\NUC11\leka-projects\.claude"
-      r"\worktrees\goofy-snyder-ab838e")
+# leka-projects R2 data dir. Override with LEKA_PROJECTS_R2_DIR when the data
+# lives in a different worktree/checkout (the hardcoded default is machine- and
+# worktree-specific and goes stale as worktrees rotate).
+LP = os.environ.get("LEKA_PROJECTS_R2_DIR") or (
+    r"C:\Users\Eukrit\OneDrive\Claude Code\NUC11\leka-projects\.claude"
+    r"\worktrees\goofy-snyder-ab838e")
 DEFAULT_SELECTION = LP + r"\projects\dulwich-singapore\_data\dulwich-singapore-r2-selection.json"
 REV1_BOQ = LP + r"\docs\reports\_data\dulwich-singapore-boq.json"
 MAPPING = LP + r"\docs\reports\_data\dulwich-singapore-r2-mapping.json"

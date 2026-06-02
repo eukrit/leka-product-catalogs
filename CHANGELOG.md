@@ -4,6 +4,38 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.62.0] - 2026-06-02
+
+### Fixed — proposal-export draft-order retrieval + build_r2 stale data paths
+
+Two fixes uncovered while wiring the Dulwich R2 proposal to the synced Medusa
+prices.
+
+**`medusa-backend` `GET /admin/draft-orders/:id/proposal-export`** — the endpoint
+the leka-projects proposal renderer calls returned **404 for every draft order**:
+`orderModule.retrieveOrder(id)` does not return draft orders in Medusa v2.13
+(verified live). Replaced it with `query.graph({ entity: "order", filters: { id,
+is_draft_order: true } })` (the same path the core `/admin/draft-orders/:id`
+route uses), keeping the response contract byte-identical. **Requires a Medusa
+backend deploy to take effect** — the R2 render pipeline is blocked until then.
+
+**`scripts/build_r2_draft_order.py`** — the hardcoded `LP` data dir pointed at a
+stale worktree (`goofy-snyder-ab838e`) whose R2 data files no longer exist.
+Made it overridable via `LEKA_PROJECTS_R2_DIR` so the builder can target whichever
+worktree/checkout holds the current `dulwich-singapore-r2-selection.json` etc.
+
+Verified end-to-end against live Medusa: building the R2 draft order now prices
+**85/86 published lines from the Medusa SGD price** (0 from the `fob×4.44`
+heuristic), e.g. HW1-S292 S$16,003.49 — the synced catalog value.
+
+#### Files
+
+- `medusa-backend/src/api/admin/draft-orders/[id]/proposal-export/route.ts` — `query.graph` draft-order retrieval
+- `scripts/build_r2_draft_order.py` — `LEKA_PROJECTS_R2_DIR` env override for the data dir
+- `VERSION`, `CHANGELOG.md`, `docs/build-summary.html`, `docs/hub.html`
+
+---
+
 ## [2.61.0] - 2026-06-02
 
 ### Changed — Sync Dulwich R2 proposal pricing to Medusa (drop the fob×4.44 heuristic)

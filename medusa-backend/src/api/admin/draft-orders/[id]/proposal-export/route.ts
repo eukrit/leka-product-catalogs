@@ -1,5 +1,5 @@
 import type { MedusaRequest, MedusaResponse } from "@medusajs/framework/http"
-import { Modules } from "@medusajs/framework/utils"
+import { ContainerRegistrationKeys } from "@medusajs/framework/utils"
 
 /**
  * GET /admin/draft-orders/:id/proposal-export
@@ -30,22 +30,52 @@ import { Modules } from "@medusajs/framework/utils"
 export async function GET(req: MedusaRequest, res: MedusaResponse) {
   const { id } = req.params
 
-  const orderModule = req.scope.resolve(Modules.ORDER)
+  // NOTE: `orderModule.retrieveOrder(id)` does NOT return DRAFT orders in
+  // Medusa v2.13 (verified live 2026-06-02 — it 404s every draft order, which
+  // is exactly what this endpoint serves). Use the Query graph with an explicit
+  // `is_draft_order: true` filter instead — the same path the core
+  // `/admin/draft-orders/:id` route uses — so draft orders resolve correctly.
+  const query = req.scope.resolve(ContainerRegistrationKeys.QUERY)
   let order: any
   try {
-    order = await (orderModule as any).retrieveOrder(id, {
-      relations: [
-        "items",
-        "items.variant",
-        "items.variant.product",
-        "items.variant.product.images",
-        "shipping_address",
-        "billing_address",
-        "shipping_methods",
+    const { data } = await query.graph({
+      entity: "order",
+      fields: [
+        "id",
+        "display_id",
+        "status",
+        "currency_code",
+        "region_id",
+        "email",
+        "customer_id",
+        "metadata",
+        "items.id",
+        "items.title",
+        "items.quantity",
+        "items.unit_price",
+        "items.compare_at_unit_price",
+        "items.metadata",
+        "items.variant.id",
+        "items.variant.sku",
+        "items.variant.title",
+        "items.variant.metadata",
+        "items.variant.product.id",
+        "items.variant.product.title",
+        "items.variant.product.metadata",
+        "items.variant.product.images.id",
+        "items.variant.product.images.url",
+        "shipping_address.*",
+        "billing_address.*",
       ],
+      filters: { id, is_draft_order: true },
     })
+    order = data?.[0]
   } catch (err: any) {
-    console.log(`[proposal-export] order ${id} not found: ${err?.message}`)
+    console.log(`[proposal-export] order ${id} query failed: ${err?.message}`)
+    return res.status(500).json({ message: `proposal-export query failed for ${id}` })
+  }
+  if (!order) {
+    console.log(`[proposal-export] draft order ${id} not found`)
     return res.status(404).json({ message: `draft order ${id} not found` })
   }
 
