@@ -25,20 +25,19 @@
   <h1></h1>
   <div class="meta">
     Repo: <a href="https://github.com/eukrit/leka-product-catalogs">https://github.com/eukrit/leka-product-catalogs</a> ·
-    Branch: <code>claude/migration-script-fixes</code> ·
-    Generated: 2026-06-01
+    Branch: <code>claude/fix-proposal-export-and-r2-paths</code> ·
+    Generated: 2026-06-02
   </div>
 
   <div class="latest-card">
     <h2 style="margin-top:0;border:0">Latest build</h2>
     <p>
-      Version <strong>2.59.0</strong> &middot; 2026-06-01 &middot;
+      Version <strong>2.62.0</strong> &middot; 2026-06-02 &middot;
       <span class="badge badge-success">success</span>
     </p>
-    <p>Enrich Medusa with 36 embedded product photos from the Dulwich PO Excel (31 heroes replaced, 5 curated kept).</p>
+    <p>Fixed the <code>proposal-export</code> admin endpoint (404'd every draft order — <code>retrieveOrder</code> skips drafts in Medusa v2.13; now uses <code>query.graph</code> with <code>is_draft_order:true</code>) — <strong>requires a backend deploy</strong>. Also made <code>build_r2_draft_order.py</code>'s data dir overridable via <code>LEKA_PROJECTS_R2_DIR</code>. R2 draft order now prices 85/86 lines from Medusa SGD.</p>
     <p>
       <a href="CHANGELOG.md">Full build log</a> &middot;
-      <a href="https://github.com/eukrit/leka-product-catalogs/commit/48fd899127878176b59a1444eca7450885f6f614">Commit 48fd899</a> &middot;
       <a href="PROJECT_INDEX.md">Project index</a>
     </p>
   </div>
@@ -47,6 +46,9 @@
   <table>
     <thead><tr><th>Version</th><th>Date</th><th>Summary</th><th>Status</th></tr></thead>
     <tbody>
+      <tr><td><code>2.62.0</code></td><td>2026-06-02</td><td>Fix proposal-export draft-order retrieval (needs deploy) + build_r2 LEKA_PROJECTS_R2_DIR override</td><td><span class="badge badge-success">success</span></td></tr>
+      <tr><td><code>2.61.0</code></td><td>2026-06-02</td><td>Sync Dulwich R2 proposal pricing to Medusa (SGD backfill + drop fob×4.44 heuristic)</td><td><span class="badge badge-success">success</span></td></tr>
+      <tr><td><code>2.60.0</code></td><td>2026-06-02</td><td>Dulwich PO 2026060101 FOB→SGD per-product pricing breakdown (report + CSV; 36/36 reconciled)</td><td><span class="badge badge-success">success</span></td></tr>
       <tr><td><code>2.59.0</code></td><td>2026-06-01</td><td>Enrich Medusa with 36 embedded PO product photos (31 heroes replaced, 5 curated kept)</td><td><span class="badge badge-success">success</span></td></tr>
       <tr><td><code>2.58.0</code></td><td>2026-06-01</td><td>Ingest Wisdom Dulwich PO 2026060101 pricing (36 codes, 7 newly priced)</td><td><span class="badge badge-success">success</span></td></tr>
       <tr><td><code>2.57.0</code></td><td>2026-06-01</td><td>Full Wisdom raw-media request emailed to vendor (weight + shared-drive ask)</td><td><span class="badge badge-success">success</span></td></tr>

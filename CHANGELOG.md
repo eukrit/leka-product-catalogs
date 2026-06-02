@@ -4,6 +4,119 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.62.0] - 2026-06-02
+
+### Fixed — proposal-export draft-order retrieval + build_r2 stale data paths
+
+Two fixes uncovered while wiring the Dulwich R2 proposal to the synced Medusa
+prices.
+
+**`medusa-backend` `GET /admin/draft-orders/:id/proposal-export`** — the endpoint
+the leka-projects proposal renderer calls returned **404 for every draft order**:
+`orderModule.retrieveOrder(id)` does not return draft orders in Medusa v2.13
+(verified live). Replaced it with `query.graph({ entity: "order", filters: { id,
+is_draft_order: true } })` (the same path the core `/admin/draft-orders/:id`
+route uses), keeping the response contract byte-identical. **Requires a Medusa
+backend deploy to take effect** — the R2 render pipeline is blocked until then.
+
+**`scripts/build_r2_draft_order.py`** — the hardcoded `LP` data dir pointed at a
+stale worktree (`goofy-snyder-ab838e`) whose R2 data files no longer exist.
+Made it overridable via `LEKA_PROJECTS_R2_DIR` so the builder can target whichever
+worktree/checkout holds the current `dulwich-singapore-r2-selection.json` etc.
+
+Verified end-to-end against live Medusa: building the R2 draft order now prices
+**85/86 published lines from the Medusa SGD price** (0 from the `fob×4.44`
+heuristic), e.g. HW1-S292 S$16,003.49 — the synced catalog value.
+
+#### Files
+
+- `medusa-backend/src/api/admin/draft-orders/[id]/proposal-export/route.ts` — `query.graph` draft-order retrieval
+- `scripts/build_r2_draft_order.py` — `LEKA_PROJECTS_R2_DIR` env override for the data dir
+- `VERSION`, `CHANGELOG.md`, `docs/build-summary.html`, `docs/hub.html`
+
+---
+
+## [2.61.0] - 2026-06-02
+
+### Changed — Sync Dulwich R2 proposal pricing to Medusa (drop the fob×4.44 heuristic)
+
+Made the **Medusa SGD price authoritative** for the customer-facing Dulwich R2
+proposal, replacing the divergent `SGD ≈ FOB × 4.44` quick heuristic that ran
+~63% above the reconciled catalog retail.
+
+**Root cause:** the Wisdom→Medusa price push only ever wrote THB (retail) + USD
+(FOB), so the 36 Leka-Project variants had **no SGD price** in Medusa — forcing
+`build_r2_draft_order.py` onto `fob×4.44`.
+
+**Part A — backfill SGD into Medusa** (`wisdom-catalog/sync_po_sgd_to_medusa.py`,
+new): pushes `sgd = pricing.retail_sgd` (+ unchanged `thb = retail_thb`,
+`usd = fob_usd`) onto the 36 Dulwich variants, sourced from
+`products_wisdom/<code>.pricing` (the values reconciled in the v2.60.0 report).
+`update_variant_prices` replaces the list, so all three currencies are sent
+together. **36/36 variants updated and verified live** (SGD added, THB/USD
+preserved).
+
+**Part B — repoint the R2 builder** (`scripts/build_r2_draft_order.py`): the SGD
+unit price now resolves **Medusa variant SGD price → Rev1 BoQ retail_sgd →
+fob×4.44 last-resort → TBC**. `index_all` captures each variant's SGD price;
+`price_for` returns a `source` recorded as per-line `metadata.price_source`; a
+warning lists any line that still falls back to the heuristic. Validated live:
+all 36 Dulwich Wisdom codes now resolve via `medusa` at the catalog price
+(e.g. DDGT-BZ S$1,462.64 → **S$899.41**; PO-wide S$337,748.96 → **S$207,690.51**).
+
+> The leka-projects Dulwich R2 session must **re-run** `build_r2_draft_order.py`
+> (`--write`) to rebuild the draft order with the synced prices — that step
+> writes a live customer-facing draft order and was intentionally not triggered
+> here.
+
+#### Files
+
+- `wisdom-catalog/sync_po_sgd_to_medusa.py` (new) — SGD→Medusa backfill (dry-run default)
+- `scripts/build_r2_draft_order.py` — Medusa SGD authoritative; `fob×4.44` demoted to last-resort
+- `VERSION`, `CHANGELOG.md`, `docs/build-summary.html`, `docs/hub.html`
+
+---
+
+## [2.60.0] - 2026-06-02
+
+### Added — Dulwich PO 2026060101 FOB→SGD per-product pricing breakdown (report + CSV)
+
+Auditable, per-product pricing report for the Wisdom Dulwich proforma invoice
+(PO `2026060101` from TUMACO LIMITED, dated 2026-06-01, 36 line items, USD
+76,020.52). Shows the full chain from **FOB USD → retail SGD** step by step for
+every line, using the **flat China path** (CIF ≈ FOB) exactly as the ingest
+called `shared/wisdom_pricing.py` (without CBM).
+
+- Reconstructs the chain locally from live Firestore
+  (`leka_vendor_quotations/wisdom-PO-2026060101` + `products_wisdom/<code>.pricing.*`)
+  and reconciles every computed value against the stored pricing:
+  **36/36 rows match exactly** across VAT / Landed THB / Retail THB / Retail USD /
+  Retail SGD (0 mismatches). Worked example: DDGT-BZ FOB $329.21 → CIF ฿10,930.43
+  → landed ฿11,695.56 → retail **S$899.41** (== stored `pricing.retail_sgd`).
+- Highlights the **7 first-time-priced sets** (`DDJM-JQ01-V01`, `DDGT-BZ`,
+  `DDHD-BZ`, `CSS-QB-BZ`, `CSS-DMGD-BZ-V01`, `CSS-CBZJ-BZ`, `CSS-QBWJ-BZ`).
+- Shows the catalog flat-path retail (≈ FOB × 2.732) alongside the customer-facing
+  Dulwich **R2 proposal** heuristic `SGD ≈ FOB × 4.44`
+  (`leka-projects/build_r2_draft_order.py`, `104.09 × 1.05 ÷ 24.6`) so the
+  difference is visible (PO-wide S$207,690.51 vs S$337,748.96, +63%).
+- Constants at ingest: USD→THB 33.2020, SGD→THB 26.0071, import duty 0%
+  (ASEAN–China FTA Form E), import VAT 7%, gross margin 50%, TH customer VAT 7%
+  (THB retail only), SG GST off (Nubo not GST-registered → ×1.0).
+
+Report served via the gateway:
+`https://gateway.goco.bz/leka-product-catalogs/reports/dulwich-po-2026060101-pricing.html`.
+
+#### Files
+
+- `docs/reports/dulwich-po-2026060101-pricing.html` (new) — Leka Design System report
+- `docs/reports/dulwich-po-2026060101-pricing.csv` (new) — spreadsheet export
+- `data/dulwich-po-2026060101-report.json` (new) — reconciled dataset
+- `scripts/_build_dulwich_report_data.py` (new) — pulls live Firestore + reconciles
+- `scripts/_gen_dulwich_report_html.py` (new) — renders HTML + CSV
+- `VERSION`, `CHANGELOG.md`, `docs/build-summary.html`, `docs/hub.html`
+
+---
+
 ## [2.59.0] - 2026-06-01
 
 > Renumbered 2.56.0 → 2.59.0 during merge with main (2.55.0–2.57.0 were taken by
