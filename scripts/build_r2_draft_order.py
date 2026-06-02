@@ -10,9 +10,16 @@ Items that can't be draft-order lines (the 8 draft "Proposal"-bucket items, the
 source so the proposal render still shows them as TBC. The render then merges:
     boq.sources: [{medusa, draft_order_ids:[…]}, {manual_yaml, path: …r2-manual.yaml}]
 
-Pricing (SGD = order currency):
-  - Rev1 BoQ retail_sgd if the code had one, else Wisdom landed (fob*4.44),
-    else TBC (unit_price 0, retail_status="tbc").
+Pricing (SGD = order currency). Precedence (v2.61.0 — synced to Medusa):
+  - Medusa variant SGD price (AUTHORITATIVE; backfilled by
+    wisdom-catalog/sync_po_sgd_to_medusa.py from the reconciled catalog
+    flat-path retail), else
+  - Rev1 BoQ retail_sgd, else
+  - the fob*4.44 LAST-RESORT heuristic (only when a code has neither a Medusa
+    SGD price nor a Rev1 price — logged with a warning), else
+  - TBC (unit_price 0, retail_status="tbc").
+  The fob*4.44 heuristic is no longer the primary path for Wisdom lines; the
+  Medusa SGD price is. Per-line `metadata.price_source` records which path won.
 
 Idempotent on metadata.rev == "dulwich-r2" unless --force. Variant lookup uses a
 full product index (sku + metadata.legacy_sku); the `?sku=` filter is unreliable.
@@ -35,7 +42,7 @@ if str(REPO_ROOT) not in sys.path:
 BACKEND = "https://leka-medusa-backend-538978391890.asia-southeast1.run.app"
 REGION_SGD = "reg_01KSEBH1EAK9RWAYEW87QY8NWS"
 SC_LEKA = "sc_01KNKTHC0B7KFEDSZ3NNM49JQW"
-WISDOM_FOB_TO_SGD = 104.09 * 1.05 / 24.6  # ≈ 4.44
+WISDOM_FOB_TO_SGD = 104.09 * 1.05 / 24.6  # ≈ 4.44 — LAST-RESORT only (v2.61.0); Medusa SGD price is now authoritative
 REV = "dulwich-r2"
 
 LP = (r"C:\Users\Eukrit\OneDrive\Claude Code\NUC11\leka-projects\.claude"
@@ -50,23 +57,30 @@ def norm(s) -> str:
     return re.sub(r"[^A-Z0-9]", "", str(s).upper()) if s else ""
 
 
-def index_all(c) -> dict[str, tuple[str, str, str]]:
-    """norm(code) -> (product_id, variant_id, product_status)."""
-    idx: dict[str, tuple[str, str, str]] = {}
+def index_all(c) -> dict[str, dict]:
+    """norm(code) -> {pid, vid, status, sgd} where sgd is the variant's SGD price
+    in major units (float) or None when the variant has no SGD price."""
+    idx: dict[str, dict] = {}
     off = 0
     while True:
         r = c._get("/admin/products", {
             "limit": 200, "offset": off,
-            "fields": "id,status,variants.id,variants.sku,variants.metadata"})
+            "fields": "id,status,variants.id,variants.sku,variants.metadata,"
+                      "variants.prices.amount,variants.prices.currency_code"})
         b = r.get("products", [])
         if not b:
             break
         for p in b:
             st = p.get("status")
             for v in p.get("variants") or []:
+                sgd_minor = next(
+                    (pr["amount"] for pr in (v.get("prices") or [])
+                     if pr.get("currency_code") == "sgd"), None)
+                sgd = round(sgd_minor / 100, 2) if sgd_minor is not None else None
                 for k in (v.get("sku"), (v.get("metadata") or {}).get("legacy_sku")):
                     if k:
-                        idx.setdefault(norm(k), (p["id"], v["id"], st))
+                        idx.setdefault(norm(k), {
+                            "pid": p["id"], "vid": v["id"], "status": st, "sgd": sgd})
         if len(b) < 200:
             break
         off += 200
@@ -94,16 +108,24 @@ def load_prices():
     return rev1, fob
 
 
-def price_for(code, rev1, fob):
+def price_for(code, idx, rev1, fob):
+    """Resolve the SGD unit price. Returns (price, status, source).
+
+    Precedence: Medusa variant SGD price (authoritative) -> Rev1 BoQ retail_sgd
+    -> fob*4.44 last-resort heuristic -> TBC.
+    """
     n = norm(code)
+    hit = idx.get(n)
+    if hit and hit.get("sgd") is not None:
+        return round(hit["sgd"], 2), "priced", "medusa"
     if n in rev1:
-        return round(rev1[n], 2), "priced"
+        return round(rev1[n], 2), "priced", "rev1"
     if n in fob:
-        return round(fob[n] * WISDOM_FOB_TO_SGD, 2), "priced"
-    return None, "tbc"
+        return round(fob[n] * WISDOM_FOB_TO_SGD, 2), "priced", "heuristic"
+    return None, "tbc", "tbc"
 
 
-def boq_item_from_selection(it, price, status):
+def boq_item_from_selection(it, price, status, source="tbc"):
     """Convert an R2 selection item to a renderer BoQ item (for manual_yaml)."""
     return {
         "zone": it["zone"], "zone_title": it["zone_title"],
@@ -123,6 +145,7 @@ def boq_item_from_selection(it, price, status):
         "quantity": it.get("quantity") or {"qty": 1, "unit": "pc", "detail": None},
         "images": it.get("images") or [],
         "pricing": {"retail_status": status,
+                    "price_source": source,
                     "retail_sgd": price if status == "priced" else None},
     }
 
@@ -155,19 +178,25 @@ def main() -> int:
 
     lines, manual = [], []
     priced = tbc = 0
+    src_counts = {"medusa": 0, "rev1": 0, "heuristic": 0, "tbc": 0}
+    heuristic_codes = []
     for it in items:
         code = it.get("product_code")
-        price, status = price_for(code, rev1, fob) if code else (None, "tbc")
+        price, status, source = price_for(code, idx, rev1, fob) if code \
+            else (None, "tbc", "tbc")
+        src_counts[source] = src_counts.get(source, 0) + 1
+        if source == "heuristic":
+            heuristic_codes.append(code)
         if status == "priced":
             priced += 1
         else:
             tbc += 1
         hit = idx.get(norm(code)) if code else None
         # Only PUBLISHED products can be draft-order lines.
-        if hit and hit[2] == "published":
+        if hit and hit["status"] == "published":
             qty = (it.get("quantity") or {}).get("qty") or 1
             lines.append({
-                "variant_id": hit[1], "quantity": int(qty),
+                "variant_id": hit["vid"], "quantity": int(qty),
                 "unit_price": int(round((price or 0) * 100)),
                 "metadata": {
                     "zone": it["zone"], "zone_title": it["zone_title"],
@@ -177,16 +206,23 @@ def main() -> int:
                     "selection_status": it.get("selection_status") or "selected",
                     "seq": it.get("seq") or 0, "option_no": it.get("option_no"),
                     "name_clean": it.get("name_clean"),
-                    "retail_status": status, "product_code": code,
+                    "retail_status": status, "price_source": source,
+                    "product_code": code,
                     "dimensions": it.get("dimensions"),
                     "vendor_url": it.get("vendor_url"),
                 },
             })
         else:
-            manual.append(boq_item_from_selection(it, price, status))
+            manual.append(boq_item_from_selection(it, price, status, source))
 
     print(f"   draft-order lines={len(lines)} (published)  "
           f"manual/TBC items={len(manual)}  priced={priced} tbc={tbc}")
+    print(f"   price sources: medusa={src_counts['medusa']} rev1={src_counts['rev1']} "
+          f"heuristic={src_counts['heuristic']} tbc={src_counts['tbc']}")
+    if heuristic_codes:
+        print(f"   WARNING: {len(heuristic_codes)} line(s) fell back to the fob*4.44 "
+              f"last-resort heuristic (no Medusa SGD nor Rev1 price): "
+              f"{', '.join(str(x) for x in heuristic_codes)}")
 
     # write manual_yaml (draft Proposal items + code-less + unresolved).
     # JSON is valid YAML and boq_sources loads it with yaml.safe_load, so we

@@ -25,17 +25,17 @@
   <h1></h1>
   <div class="meta">
     Repo: <a href="https://github.com/eukrit/leka-product-catalogs">https://github.com/eukrit/leka-product-catalogs</a> ·
-    Branch: <code>claude/dulwich-po-2026060101-pricing-report</code> ·
+    Branch: <code>claude/sync-wisdom-sgd-to-medusa</code> ·
     Generated: 2026-06-02
   </div>
 
   <div class="latest-card">
     <h2 style="margin-top:0;border:0">Latest build</h2>
     <p>
-      Version <strong>2.60.0</strong> &middot; 2026-06-02 &middot;
+      Version <strong>2.61.0</strong> &middot; 2026-06-02 &middot;
       <span class="badge badge-success">success</span>
     </p>
-    <p>Dulwich PO 2026060101 FOB→SGD per-product pricing breakdown (HTML + CSV): 36 line items reconciled 36/36 against stored <code>products_wisdom</code> pricing, 7 first-time-priced sets highlighted, catalog retail vs R2 <code>FOB×4.44</code> heuristic shown side by side.</p>
+    <p>Synced Dulwich R2 proposal pricing to Medusa: backfilled SGD onto 36 Leka-Project variants (verified live) and repointed <code>build_r2_draft_order.py</code> to use the Medusa SGD price as authoritative, demoting the <code>fob×4.44</code> heuristic to a last resort. All 36 Wisdom lines now price at catalog retail (PO-wide S$337,748.96 → S$207,690.51).</p>
     <p>
       <a href="reports/dulwich-po-2026060101-pricing.html">Open the pricing report</a> &middot;
       <a href="CHANGELOG.md">Full build log</a> &middot;
@@ -47,6 +47,7 @@
   <table>
     <thead><tr><th>Version</th><th>Date</th><th>Summary</th><th>Status</th></tr></thead>
     <tbody>
+      <tr><td><code>2.61.0</code></td><td>2026-06-02</td><td>Sync Dulwich R2 proposal pricing to Medusa (SGD backfill + drop fob×4.44 heuristic)</td><td><span class="badge badge-success">success</span></td></tr>
       <tr><td><code>2.60.0</code></td><td>2026-06-02</td><td>Dulwich PO 2026060101 FOB→SGD per-product pricing breakdown (report + CSV; 36/36 reconciled)</td><td><span class="badge badge-success">success</span></td></tr>
       <tr><td><code>2.59.0</code></td><td>2026-06-01</td><td>Enrich Medusa with 36 embedded PO product photos (31 heroes replaced, 5 curated kept)</td><td><span class="badge badge-success">success</span></td></tr>
       <tr><td><code>2.58.0</code></td><td>2026-06-01</td><td>Ingest Wisdom Dulwich PO 2026060101 pricing (36 codes, 7 newly priced)</td><td><span class="badge badge-success">success</span></td></tr>

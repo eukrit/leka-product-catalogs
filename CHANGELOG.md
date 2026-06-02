@@ -4,6 +4,47 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.61.0] - 2026-06-02
+
+### Changed — Sync Dulwich R2 proposal pricing to Medusa (drop the fob×4.44 heuristic)
+
+Made the **Medusa SGD price authoritative** for the customer-facing Dulwich R2
+proposal, replacing the divergent `SGD ≈ FOB × 4.44` quick heuristic that ran
+~63% above the reconciled catalog retail.
+
+**Root cause:** the Wisdom→Medusa price push only ever wrote THB (retail) + USD
+(FOB), so the 36 Leka-Project variants had **no SGD price** in Medusa — forcing
+`build_r2_draft_order.py` onto `fob×4.44`.
+
+**Part A — backfill SGD into Medusa** (`wisdom-catalog/sync_po_sgd_to_medusa.py`,
+new): pushes `sgd = pricing.retail_sgd` (+ unchanged `thb = retail_thb`,
+`usd = fob_usd`) onto the 36 Dulwich variants, sourced from
+`products_wisdom/<code>.pricing` (the values reconciled in the v2.60.0 report).
+`update_variant_prices` replaces the list, so all three currencies are sent
+together. **36/36 variants updated and verified live** (SGD added, THB/USD
+preserved).
+
+**Part B — repoint the R2 builder** (`scripts/build_r2_draft_order.py`): the SGD
+unit price now resolves **Medusa variant SGD price → Rev1 BoQ retail_sgd →
+fob×4.44 last-resort → TBC**. `index_all` captures each variant's SGD price;
+`price_for` returns a `source` recorded as per-line `metadata.price_source`; a
+warning lists any line that still falls back to the heuristic. Validated live:
+all 36 Dulwich Wisdom codes now resolve via `medusa` at the catalog price
+(e.g. DDGT-BZ S$1,462.64 → **S$899.41**; PO-wide S$337,748.96 → **S$207,690.51**).
+
+> The leka-projects Dulwich R2 session must **re-run** `build_r2_draft_order.py`
+> (`--write`) to rebuild the draft order with the synced prices — that step
+> writes a live customer-facing draft order and was intentionally not triggered
+> here.
+
+#### Files
+
+- `wisdom-catalog/sync_po_sgd_to_medusa.py` (new) — SGD→Medusa backfill (dry-run default)
+- `scripts/build_r2_draft_order.py` — Medusa SGD authoritative; `fob×4.44` demoted to last-resort
+- `VERSION`, `CHANGELOG.md`, `docs/build-summary.html`, `docs/hub.html`
+
+---
+
 ## [2.60.0] - 2026-06-02
 
 ### Added — Dulwich PO 2026060101 FOB→SGD per-product pricing breakdown (report + CSV)
