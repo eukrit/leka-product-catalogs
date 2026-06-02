@@ -1,0 +1,55 @@
+code,name,type,qty,quoted_sgd,catalog_sgd,delta,match,retail_status,variant_id
+C5-01A-05,Hedgehog,4soft-EPDM,,1459.15,1459.15,0.0,MATCH,priced,variant_01KNQ3R6J2HWF2RB27JYW9ESK7
+C5-02A-03,Butterfly,4soft-EPDM,,1554.96,1554.96,0.0,MATCH,priced,variant_01KNQ3QMVCZBVBYKCACP9KQVRM
+C5-03A-01,Ladybird - 2D,4soft-EPDM,,1599.17,1599.17,0.0,MATCH,priced,variant_01KNQ3QQ8G9J0WJA2H0F3D2EHG
+D1-05A-70UV,"Set of 5 leaves (Maple, Linden, Oak, Four-leaf clo",4soft-EPDM,,1785.1,1785.1,0.0,MATCH,priced,variant_01KNQ3S6H8A9537V71DS07MJH7
+D3-01A-02,Mushroom-1 - beige,4soft-EPDM,,1238.07,1238.07,0.0,MATCH,priced,variant_01KNQ3R2D7YP9H8X1NX7QR3KQT
+D5-01A-03,Sun-2 - earth yellow,4soft-EPDM,,1510.74,1510.74,0.0,MATCH,priced,variant_01KNQ3SGV13XVT8RNKTRH6CB55
+D5-04A-06,Cloud - capri blue,4soft-EPDM,,899.07,899.07,0.0,MATCH,priced,variant_01KNQ3RS69X204APX51344AAJD
+E1-01A-20,Labyrinth,4soft-EPDM,,1171.11,1171.11,0.0,MATCH,priced,variant_01KNQ3RHQRPEQF328HK0GH3RS1
+E1-04A-57UV,"Target with numbers 1, 5,10",4soft-EPDM,,1190.06,1190.06,0.0,MATCH,priced,variant_01KNQ3QPASZ47AM1S8F2YY381N
+E1-05A-20,Target with numbers - big,4soft-EPDM,,2860.2,2860.2,0.0,MATCH,priced,variant_01KNQ3SN9FM732WZG3DCTP8B4R
+E1-08A-02,Jumping box small - beige,4soft-EPDM,,1945.54,1945.54,0.0,MATCH,priced,variant_01KNQ3SC4SM6XHR77HGMQ88B9B
+E2-01A-03,Clock,4soft-EPDM,,1569.06,1569.06,0.0,MATCH,priced,variant_01KNQ3R23CEQZ7S1FH6BJJAZZ0
+E2-04A-20,Hopscotch Kite (1-9),4soft-EPDM,,4371.56,4371.56,0.0,MATCH,priced,variant_01KNQ3RJA4J6YV8A7X8Z1DXV7Q
+E3-05A-53UV,Snake and Ladders game,4soft-EPDM,,7880.81,7880.81,0.0,MATCH,priced,variant_01KNQ3R3ADHETBPJQVX1YVVYVH
+F4-03A-20,Hopscotch Policeman (1-8),4soft-EPDM,,3301.52,3301.52,0.0,MATCH,priced,variant_01KNQ3S0BQ9S5NQC4RP2BBYNDJ
+F5-03A-20,Jump leaflets with numbers 1-8,4soft-EPDM,,4203.54,4203.54,0.0,MATCH,priced,variant_01KNQ3SD8MZAHSHAW670ZGYR2Y
+F5-06A-20,Sunflower - hopscotch (1-10),4soft-EPDM,,5212.58,5212.58,0.0,MATCH,priced,variant_01KNQ3SE40A8EJ65MWCJSTZW61
+G2-01A-07,Lights SMALL - black,4soft-EPDM,,722.21,722.21,0.0,MATCH,priced,variant_01KNQ3SANDPBA5TCSJDD4DQ5XQ
+G2-08A-02,Petrol station (set of 2 pcs),4soft-EPDM,,744.32,744.32,0.0,MATCH,priced,variant_01KNQ3QSE9686QV11NJNQFXXPY
+G2-14A-02,Striping - straight Arrow - beige,4soft-EPDM,,302.15,302.15,0.0,MATCH,priced,variant_01KNQ3SBTZ95J5M5ZAM3WYK462
+G2-30A-57UV,Traffic roundabout,4soft-EPDM,,246.35,246.35,0.0,MATCH,priced,variant_01KNQ3RGHV1BKDW3QA3R6Y48JA
+V9-01A-001,MINI Sport Court - BASIC,4soft-EPDM,,11575.28,11575.28,0.0,MATCH,priced,variant_01KNQ3V6XXP6KYABG9DEA9YVMP
+CSS-CBZJ-BZ,Castle Support Standard Package,other,,0.0,,,no_catalog_price,tbc,variant_01KNKW137HX0E6QJZ90P5GHZXC
+CSS-QB-BZ,Wallboard Standard Package,other,,0.0,,,no_catalog_price,tbc,variant_01KNKW15YMPXPJP3WKTY6TMMCE
+CSS-QBWJ-BZ,Wallboard Toys Standard Package,other,,0.0,,,no_catalog_price,tbc,variant_01KNKW16WSZMAEF75P2ZGBG285
+DDGT-BZ,Holey Block Motor Skills Set-Standard Version,other,,0.0,,,no_catalog_price,tbc,variant_01KNKW5MQJG5VCCX4KPRFKWKXF
+DDHD-BZ,Holey Block Motor Skills Set-Standard Version,other,,0.0,,,no_catalog_price,tbc,variant_01KNKW5Q2WS7YZHDR1EY25HYB2
+DDJM-JQ01-V01,Outdoor Holey Stacking Block Set-Jumbo Version,other,,0.0,,,no_catalog_price,tbc,variant_01KNKW5YNQZBJ8WVHXJ76S1K51
+GP2-TC007-V02-06,Two-wheeled Power Scooter-Yellow,other,,268.77,,,no_catalog_price,priced,variant_01KNKWE2BN371CKRYJKNE2B72R
+GP2-TC013-V02-06,Power Trike-Yellow,other,,282.16,,,no_catalog_price,priced,variant_01KNKWE575DRQACPV9K1Z770WW
+GP2-TC014-V01-06,Power Slide Car-Yellow,other,,265.33,,,no_catalog_price,priced,variant_01KNKWE5N4VQYRZEY9QQJ6XATQ
+GP2-TC015-V02-06,Power Tricycle-Yellow,other,,297.61,,,no_catalog_price,priced,variant_01KNKWE6FA805HMQCDP0F8PEBD
+GP2-TC018-05,Scooter & Slide Bike Stand - Red,other,,95.63,,,no_catalog_price,priced,variant_01KNKWE736X4C4CFZ5XM9HBZT2
+HW1-S020-V03,"Nature's Elements Outdoor
+Play House",other,,3313.6,,,no_catalog_price,priced,variant_01KNKWF3GEQVCXQKTF20000FYY
+HW1-S023-V06,Nature's Elements Outdoor Teepee,other,,2091.61,,,no_catalog_price,priced,variant_01KNKWF4BVJJ65QQBZRD0KBBG8
+HW1-S029,"Nature's Elements
+Outdoor Chalkboard Easel-Plantin",other,,778.1,,,no_catalog_price,priced,variant_01KNKWF89R5JPXR29RMJ5SGY3T
+HW1-S031,"Nature's Elements
+Outdoor Transparent Easel-Planti",other,,599.7,,,no_catalog_price,priced,variant_01KNKWF94150VR6PCNCAQM4A6H
+HW1-S035,Messy Tables & Water Cascade Table,other,,1361.02,,,no_catalog_price,priced,variant_01KNKWFAS9AVWKDEM58YC2GZW3
+HW1-S062,Wallboard-Halfpipe Sand Channel,other,,1004.64,,,no_catalog_price,priced,variant_01KNKWFFCF816FHZR6GF7P3TNZ
+HW1-S064,Wallboard-Sand Channel,other,,1176.69,,,no_catalog_price,priced,variant_01KNKWFGDVJXT6SWT1VATCSQ59
+HW1-S066,Wallboard-Sand Play,other,,842.73,,,no_catalog_price,priced,variant_01KNKWFH97PDHBWQ1YMFDH8MAV
+HW1-S070,Wallboard-Hosepipe,other,,1361.08,,,no_catalog_price,priced,variant_01KNKWFK6YYFFZTWZFJSPHMB96
+HW1-S071,Water Channel-Knob,other,,1738.83,,,no_catalog_price,priced,variant_01KNKWFKMP2P30CGE11ZQVCJZR
+HW1-S200,Castle Storage A,other,,2017.22,,,no_catalog_price,priced,variant_01KNKWG6P697GKQTQZH64TN7GX
+HW1-S201,Castle Storage B,other,,1974.3,,,no_catalog_price,priced,variant_01KNKWG733D90GTRH0WX47GHK7
+HW1-S202,Castle Storage(L),other,,1864.21,,,no_catalog_price,priced,variant_01KNKWG7GGKC10CY61P3FBHE08
+HW1-S203,Castle Storage®,other,,1864.21,,,no_catalog_price,priced,variant_01KNKWG84ADMC5XMZ8E3MTP3QA
+HW1-S292,Activity Range-4 Square Set,other,,26025.06,,,no_catalog_price,priced,variant_01KNKWH2DF6AEZ3C2FC8RN31KC
+HW1-S484,Wallboard-Sand Play,other,,762.08,,,no_catalog_price,priced,variant_01KNKWHT5BV04YE09S9NDQYN3Y
+HW1-S747,Outdoor Storage House A,other,,1296.51,,,no_catalog_price,priced,variant_01KNKWJWC933HW5DYCM7H8R2ZP
+HW5-SD001-V01,Nature's Elements Outdoor Rectangular Stool,other,,321.23,,,no_catalog_price,priced,variant_01KNKWK6SZ1FJBGBAY8SRPP67G

@@ -1,0 +1,38 @@
+{
+  "total_pricelist_skus": 2410,
+  "by_type": {
+    "2D": 1802,
+    "3D": 592,
+    "accessory": 6,
+    "packaging": 10
+  },
+  "in_medusa": 2392,
+  "not_in_medusa": 18,
+  "medusa_by_status": {
+    "published": 839,
+    "draft": 1553,
+    "null": 18
+  },
+  "live_priced_sgd": 2392,
+  "live_zero_or_missing_sgd": 0,
+  "price_state": {
+    "live=sea-LCL": 2392,
+    "not_in_medusa": 18
+  },
+  "known_tbc_codes": {
+    "D2-02A-09UV": {
+      "in_pricelist": false,
+      "in_medusa": false,
+      "live_sgd": null,
+      "sea_computed_sgd": null,
+      "status": null
+    },
+    "G2-27A-09UV": {
+      "in_pricelist": false,
+      "in_medusa": false,
+      "live_sgd": null,
+      "sea_computed_sgd": null,
+      "status": null
+    }
+  }
+}

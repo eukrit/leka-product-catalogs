@@ -7,6 +7,48 @@ Products: `vendors/4soft/products` (db `vendors`)
 
 ---
 
+## 2026-06-02 — Flat 20% reseller discount applied LIVE (sea-LCL retained)
+
+- **User decision (2026-06-02):** raise the EXW reseller discount **15% → 20% flat**
+  (`eur_fob = list × 0.80`). Stay on the **sea-LCL** freight basis — the air pivot
+  (v2.45.0) remains dry-run only.
+- **2026-05-31 pricelist file** (`2026-05-31 4soft_EPDM_graphics-price_list_2025.xls`)
+  diffed against the committed 2025 list: **2,410 SKUs, 0 added / 0 removed / 0 price
+  changes** — it is a re-export of the same 2025 list (internal header still
+  "Valid from 1.3.2025"). So only the discount changed; list prices are unchanged.
+- **Code:** `import_pricelist.py` reverted `METHOD="air"→"lcl"` and restored the
+  sea-LCL Baltic per-CBM dims_scaled branch; module `EXW_DISCOUNT 0.15→0.20`.
+- **Firestore `pricing_config/canonical.brands.4soft`:** `exw_discount=0.20`
+  (read-modify-write merge; gm 0.40 unchanged).
+- **Firestore `vendors/4soft/products`:** 2,410 docs repriced. FX this run:
+  USD 33.254, EUR 38.689, SGD 26.009. By CBM method: dims_scaled 251 / flat_uplift
+  2,159. Clamp: none 177 / floored 2,061 / capped 172.
+- **Medusa** (`sync_brand_prices_to_medusa.py --brand 4soft --write`): **2,394
+  updated, 0 errors**, 16 unmatched (packaging/accessory not in Medusa).
+- **Price impact:** median **−5.80%** vs the 15% basis (≈ 0.80/0.85). 0 zero/negative.
+  13 SKUs near the €500 FOB tier boundary rose ≤9% (lower FOB drops them into the
+  higher-floor tier — existing clamp model behaviour, not a regression).
+- **Dulwich R2 proposal** (`sync_dulwich_epdm_prices.py --write`): the 22 EPDM lines
+  refreshed in place via the draft-order edit workflow. **The confirm produced a new
+  draft-order id** `order_01KT33G0MZFM06NNS0GA3HWEFE` (display #12), replacing the
+  prior `order_01KSTN74NRPQ3DGETVHERQ1Z2G` (#10). 51 lines intact, 22/22 EPDM at 20%.
+  ⚠️ Scripts hardcoding the old id (`scripts/_sync_draftorder_prices.py`,
+  `build_r2_curated.py`'s delete-by-`rev` is safe) must be repointed to #12.
+- **Audit deliverables:** `docs/reports/4soft-pricing-audit.html`,
+  `foursoft-catalog/data/4soft_pricing_audit.csv`, `dulwich_r2_vs_medusa.csv`.
+- **Unchanged:** the 29 Wisdom proposal lines (separate pricing path; 6 still S$0 —
+  pre-existing, out of scope here) and the sea-tuned `LOGISTICS_TIERS`.
+
+### Run commands
+```bash
+# config already set: brands.4soft.exw_discount=0.20
+python foursoft-catalog/import_pricelist.py --no-seed --xls ".../2026-05-31 4soft_EPDM_graphics-price_list_2025.xls"
+python scripts/sync_brand_prices_to_medusa.py --brand 4soft --write
+python foursoft-catalog/sync_dulwich_epdm_prices.py --write
+```
+
+---
+
 ## 2026-05-30 — v2.45.0-dryrun — Air-freight pricing pivot (dry-run, NOT deployed)
 
 - **Scope:** switch the pricing engine from sea-LCL to air freight (4soft ships
