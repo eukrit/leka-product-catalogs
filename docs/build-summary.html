@@ -32,10 +32,10 @@
   <div class="latest-card">
     <h2 style="margin-top:0;border:0">Latest build</h2>
     <p>
-      Version <strong>2.66.1</strong> &middot; 2026-06-02 &middot;
+      Version <strong>2.68.0</strong> &middot; 2026-06-02 &middot;
       <span class="badge badge-success">success</span>
     </p>
-    <p>Cleanup follow-up to 2.66.0: dropped the last broken <code>_wisdom_2025_</code> image and swept 4,340 now-unreferenced old GCS objects (each with a neutral copy; 1,678 copy-less orphans left). All store-API Wisdom traces now = 0.</p>
+    <p>Hide Leka Project products with no real photo or only a low-resolution image (<code>scripts/hide_leka_project_lowres_products.py</code>) — flips Medusa status to draft so the storefront only shows products with a usable picture. Reversible via <code>--restore</code>.</p>
     <p>
       <a href="CHANGELOG.md">Full build log</a> &middot;
       <a href="reports/leka-project-wisdom-exposure.json">Exposure audit</a> &middot;
@@ -47,8 +47,11 @@
   <table>
     <thead><tr><th>Version</th><th>Date</th><th>Summary</th><th>Status</th></tr></thead>
     <tbody>
+      <tr><td><code>2.68.0</code></td><td>2026-06-02</td><td>Hide Leka Project products with no/low-res photos (scripts/hide_leka_project_lowres_products.py)</td><td><span class="badge badge-success">success</span></td></tr>
+      <tr><td><code>2.67.0</code></td><td>2026-06-02</td><td>Tighten CBM logistics tiers across all brands</td><td><span class="badge badge-success">success</span></td></tr>
       <tr><td><code>2.66.1</code></td><td>2026-06-02</td><td>Cleanup: drop last broken Wisdom image + sweep 4,340 unreferenced old GCS objects</td><td><span class="badge badge-success">success</span></td></tr>
       <tr><td><code>2.66.0</code></td><td>2026-06-02</td><td>Scrub internal "Wisdom" vendor traces from Leka Project brand (metadata + exw_source + 4,340 image re-hosts + 17 handle rebrands)</td><td><span class="badge badge-success">success</span></td></tr>
+      <tr><td><code>2.65.0</code></td><td>2026-06-02</td><td></td><td><span class="badge badge-success">success</span></td></tr>
       <tr><td><code>2.64.0</code></td><td>2026-06-02</td><td></td><td><span class="badge badge-success">success</span></td></tr>
       <tr><td><code>2.63.0</code></td><td>2026-06-02</td><td></td><td><span class="badge badge-success">success</span></td></tr>
       <tr><td><code>2.62.0</code></td><td>2026-06-02</td><td></td><td><span class="badge badge-success">success</span></td></tr>

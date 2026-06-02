@@ -4,6 +4,51 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.68.0] - 2026-06-02
+
+### Added — `scripts/hide_leka_project_lowres_products.py`: hide Leka Project products with no/low-res photos
+
+New maintenance script that removes "Leka Project" (the Wisdom-rebranded SC
+`sc_01KNKTHC0B7KFEDSZ3NNM49JQW`) products from the storefront when they have no
+real photo or only a low-resolution image, so `catalogs.leka.studio` only shows
+products with a usable picture.
+
+**How it hides:** flips the Medusa product `status` from `published` to
+`draft`. The storefront reads the Store API, which returns only published
+products, so a draft product silently drops off the catalog — no storefront
+(`eukrit/leka-website`) code change needed.
+
+**A product is hidden when either:**
+- **no_image** — `metadata.image_status == "placeholder"` (on the v2.34.0
+  "Image coming soon" card), or it has no `images[]` and no `thumbnail`.
+- **low_resolution** — its representative image's longest edge is `<`
+  `--min-dimension` (default **400 px**). Measured by downloading the thumbnail
+  through the public proxy and reading the dimensions with Pillow. Images whose
+  size can't be read (transient/network) are **left published** — never hidden
+  on an unreadable probe.
+
+**Reversible + idempotent.** Each hidden product is tagged
+`metadata.hidden_by="image-quality-filter"`, `hidden_reason`, `hidden_at`, and
+`hidden_dims` (low-res only). `--restore` re-publishes exactly the products this
+script hid and clears those keys, so a bad threshold is a one-command undo.
+
+**Phases (pick one):** `--audit` (read-only report), `--hide` (with `--dry-run`
+to preview, `--limit N` to smoke-test, `--min-dimension N` to tune the cutoff),
+`--restore`. Admin enumeration uses the admin API (not the Store API) so it can
+see already-drafted products for restore/audit. Auth + retry mirror
+`scripts/backfill_leka_project_images.py` (Medusa admin creds from Secret
+Manager `medusa-admin-email`/`medusa-admin-password` or env vars).
+
+Recommended run order against prod:
+`--audit` → `--hide --dry-run` → `--hide` → `--audit`.
+
+#### Files
+
+- `scripts/hide_leka_project_lowres_products.py` — new
+- `VERSION`, `CHANGELOG.md`, `docs/build-summary.html`, `.claude/PROGRESS.md`
+
+---
+
 ## [2.67.0] - 2026-06-02
 
 ### Changed — tighten CBM-based tiered logistics bands across all brands (supersedes draft #100)
