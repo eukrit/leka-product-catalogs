@@ -79,7 +79,7 @@ VENDORS_DB = "vendors"
 
 # Module-level fallbacks. Source of truth = Firestore pricing_config/canonical
 # (brands.4soft + global). Kept in sync with scripts/seed_pricing_config.py.
-EXW_DISCOUNT = 0.15           # 2020 "Price conditions" PDF: basic reseller discount
+EXW_DISCOUNT = 0.20           # flat reseller discount (user 2026-06-02; was 0.15)
 GROSS_MARGIN = 0.40           # user decision 2026-05-29 (4soft-specific)
 DUTY_RATE_NON_CHINA = 0.10    # EU/Czech import → 10% Thai duty
 THAI_VAT_RATE = 0.07          # 7% Thai import VAT on (CIF + duty)
@@ -87,7 +87,7 @@ TH_CUSTOMER_VAT_RATE = 0.07   # 7% TH customer VAT embedded in retail_thb
 UNMATCHED_LANDED_UPLIFT = 1.35  # 35% flat uplift on EUR-THB FOB when no CBM
 PRODUCT_CATEGORY = "playground_equipment"
 ORIGIN_ROUTE = "europe"
-METHOD = "air"                  # 2026-05-30 pivot: 4soft is Czech, ships by air (was "lcl")
+METHOD = "lcl"                  # sea-LCL basis (live). Air pivot (2026-05-30) stays dry-run only per user 2026-06-02.
 
 # Override the cost_engine's per-kg air rate for this run. None → use the engine
 # default (see shipping-automation/mcp-server/cost_engine.py ROUTE_PROFILES.europe.air).
@@ -312,19 +312,12 @@ def price_row(row: RawRow, dim_index: dict, fx: dict, baltic: dict, packing_fact
     cbm = compute_cbm(dims, packing_factor) if dims else None
 
     if cbm and cbm > 0:
-        # Per-SKU air-freight pricing. We override the engine's air method:
-        #   1. per_kg → AIR_RATE_OVERRIDE_THB_PER_KG (when set; else engine default)
-        #   2. min_charge → 0 (the 5000 THB shipment minimum doesn't apply to
-        #      per-SKU economics; it's amortized across the whole shipment)
-        # The engine derives chargeable kg from cbm via volumetric_divisor_kg_per_m3
-        # when kg=0 is passed.
-        air = cost_engine.ROUTE_PROFILES["europe"]["methods"]["air"]
-        original_rate = air["rates"]["per_kg"]
-        original_min = air["rates"].get("min_charge", 0)
+        # Sea-LCL per-SKU landed cost. Monkey-patch the engine's EU LCL per-CBM
+        # rate to the Baltic-calibrated rate for this call (matches the live
+        # pricing basis; air pivot stays dry-run only — see DEPLOYMENT_LOG).
+        original = cost_engine.ROUTE_PROFILES["europe"]["methods"]["lcl"]["rates"]["per_cbm"]
         try:
-            if AIR_RATE_OVERRIDE_THB_PER_KG is not None:
-                air["rates"]["per_kg"] = AIR_RATE_OVERRIDE_THB_PER_KG
-            air["rates"]["min_charge"] = 0
+            cost_engine.ROUTE_PROFILES["europe"]["methods"]["lcl"]["rates"]["per_cbm"] = baltic["per_cbm_thb"]
             est = estimate_landed_cost(
                 origin=ORIGIN_ROUTE, method=METHOD,
                 goods_value=eur_fob, goods_currency="EUR",
@@ -332,8 +325,7 @@ def price_row(row: RawRow, dim_index: dict, fx: dict, baltic: dict, packing_fact
                 fx_rates=fx, duty_rate=p["duty_rate_non_china"],
             )
         finally:
-            air["rates"]["per_kg"] = original_rate
-            air["rates"]["min_charge"] = original_min
+            cost_engine.ROUTE_PROFILES["europe"]["methods"]["lcl"]["rates"]["per_cbm"] = original
         landed_thb = est["total_landed_thb"]
         freight_thb = est["freight"]["thb"]
         duty_thb = est["customs"]["duty_thb"]
