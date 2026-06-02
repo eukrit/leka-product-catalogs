@@ -496,10 +496,10 @@ def _empty_config() -> dict:
                          "source_pricelist_label": "Wisdom Excel catalogs (in-repo)"},
         },
         "logistics_tiers": [
-            {"fob_eur_max": 500,    "min_pct": 0.80, "max_pct": 2.50},
-            {"fob_eur_max": 2000,   "min_pct": 0.60, "max_pct": 1.80},
-            {"fob_eur_max": 10000,  "min_pct": 0.45, "max_pct": 1.20},
-            {"fob_eur_max": None,   "min_pct": 0.35, "max_pct": 0.80},
+            {"fob_eur_max": 500,    "min_pct": 0.60, "max_pct": 1.20},
+            {"fob_eur_max": 2000,   "min_pct": 0.50, "max_pct": 1.00},
+            {"fob_eur_max": 10000,  "min_pct": 0.40, "max_pct": 0.80},
+            {"fob_eur_max": None,   "min_pct": 0.30, "max_pct": 0.60},
         ],
     }
 

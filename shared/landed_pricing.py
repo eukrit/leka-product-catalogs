@@ -92,11 +92,14 @@ DEFAULT_PACKING_FACTOR = 0.15
 # last-mile, insurance). Ceiling clamps outliers where installed dimensions
 # wildly overstate packing CBM.
 # Tuple = (fob_eur_max_inclusive, min_logistics_pct, max_logistics_pct)
+# Revised 2026-06-02: tightened bands per user direction — applies to every
+# brand (Wisdom, Vinci, Berliner, Rampline, Vortex, WePlay, 4soft, Archimedes)
+# since they all clamp against this shared table by EUR-equivalent FOB band.
 LOGISTICS_TIERS: list[tuple[float, float, float]] = [
-    (500,          0.80, 2.50),
-    (2_000,        0.60, 1.80),
-    (10_000,       0.45, 1.20),
-    (float("inf"), 0.35, 0.80),
+    (500,          0.60, 1.20),
+    (2_000,        0.50, 1.00),
+    (10_000,       0.40, 0.80),
+    (float("inf"), 0.30, 0.60),
 ]
 
 

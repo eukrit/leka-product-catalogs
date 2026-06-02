@@ -4,6 +4,40 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.60.0] - 2026-06-02
+
+### Changed — Tighten CBM-based tiered logistics bands (all brands)
+
+Revised the shared `LOGISTICS_TIERS` floor/cap percentages (logistics cost as a
+% of FOB/EXW-in-THB, clamped by EUR-equivalent FOB band). The new bands apply to
+**every** brand that prices through the shared landed-cost pipeline — Wisdom (Leka
+Project), Vinci, Berliner, Rampline, Vortex, WePlay, 4soft, Archimedes — because
+they all clamp against this one table.
+
+| FOB band (EUR-equiv) | Old min–max | New min–max |
+|---|---|---|
+| < 500     | 80% – 250% | **60% – 120%** |
+| < 2,000   | 60% – 180% | **50% – 100%** |
+| < 10,000  | 45% – 120% | **40% – 80%**  |
+| ≥ 10,000  | 35% – 80%  | **30% – 60%**  |
+
+Files changed:
+- `shared/landed_pricing.py` — master `LOGISTICS_TIERS` (source the seed reads).
+- `shared/wisdom_pricing.py` — top-tier exception fallback `0.35,0.80 → 0.30,0.60`.
+- `shared/pricing_config.py` — docstring schema example.
+- `berliner-catalog/import_pricelist.py`, `foursoft-catalog/import_pricelist.py`
+  — these two keep a local copy of the table (no Firestore read), updated in lock-step.
+- `src/main.py` — hardcoded Flask-config fallback tiers.
+
+> **Runtime activation required.** The live source of truth is the Firestore doc
+> `pricing_config/canonical.logistics_tiers`. The Firestore-driven brands (Vinci,
+> Vortex, Rampline, Archimedes, Wisdom) keep using the *stored* tiers until the
+> doc is re-seeded: run `python scripts/seed_pricing_config.py --force` (or edit
+> via the gateway pricing-config form). Existing products are not re-priced until
+> each brand's `import_pricelist.py` / `update_pricing.py` is re-run.
+
+---
+
 ## [2.59.0] - 2026-06-01
 
 > Renumbered 2.56.0 → 2.59.0 during merge with main (2.55.0–2.57.0 were taken by
