@@ -1,5 +1,42 @@
 # Deployment Log — Wisdom Product Catalog
 
+## v2.66.0 — 2026-06-02 (Scrub internal Wisdom vendor traces from the Leka Project brand)
+
+> Renumbered v2.58.0 → v2.66.0 during rebase onto main (main reached 2.65.0). Work unchanged.
+
+### Summary
+Audited and scrubbed avoidable internal "Wisdom"/vendor traces from the
+customer-facing **Leka Project** brand in Medusa (the Wisdom→Leka Project
+rebrand should not leak the vendor identity). New idempotent script
+`scripts/scrub_leka_project_wisdom_traces.py` with `--verify`, `--dry-run`,
+`--write`. **Medusa + GCS only — internal codes on Firestore/Firebase were
+left intact (per user instruction).**
+
+### Store-API exposure audit (publishable key, unauthenticated)
+- `variant.metadata.exw_source` (Wisdom/TUMACO + USD cost) — exposed **by default**.
+- `_wisdom_2025_` image URLs — exposed **by default** (every `<img src>`).
+- 17 products with literal `wisdom-…` URL handles — public **by default**.
+- `product.metadata.*` Wisdom keys — retrievable via `?fields=+metadata`.
+- Report: `docs/reports/leka-project-wisdom-exposure.json`.
+
+### Scrub results (0 errors)
+| Trace | Action | Count |
+|---|---|---|
+| `source_brand_internal`, `legacy_handle`, `wisdom_item_code`, `outdoor_play.wisdom_item_code` | removed (empty-string sentinel) | 6,376 products |
+| `source` = wisdom-outdoor-play-merged | → outdoor-play-merged | (incl. above) |
+| `exw_source` vendor name | stripped, kept PI ref + EXW Shanghai + USD + legacy_sku | 4 variants |
+| `_wisdom_2025_` images | re-hosted GCS → `leka-project/catalog2025/…` neutral, repointed | 2,405 products / 4,340 objects (1 missing source deferred) |
+| `wisdom-…` handles | → `leka-project-<id>` + redirect map | 17 |
+
+### Notes
+- **Medusa v2 metadata is a shallow merge** — keys delete only when sent as `""`
+  (the first `--write` omitted them, which no-op'd; fixed and re-run).
+- Re-hosted image verified serving HTTP 200 `image/jpeg` via the proxy.
+- **KEPT:** `variant.metadata.legacy_sku`, brand `handle="wisdom"`, geography tokens.
+- Old GCS objects left in place for a later cleanup sweep.
+
+---
+
 ## v2.59.0 — 2026-06-01 (Dulwich PO embedded photos → Medusa enrichment)
 
 > Renumbered v2.56.0 → v2.59.0 during merge with main (2.55.0–2.57.0 taken). Work unchanged.
