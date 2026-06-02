@@ -4,6 +4,44 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.63.0] - 2026-06-02
+
+### Changed — New hero photo for Wallboard Toys Standard Package (CSS-QBWJ-BZ)
+
+Set the vendor-supplied product photo as the **primary/hero image** for the
+Wisdom (Leka Project) product **Wallboard Toys Standard Package** (item code
+`CSS-QBWJ-BZ`, Medusa `prod_01KNKW16TS5FCYTGN4VVGR7PPW`).
+
+The new photo was uploaded to the private, UBLA image bucket
+`gs://ai-agents-go-vendors` under both `leka-project/catalog/` and
+`wisdom/catalog/` as `CSS-QBWJ-BZ_hero.jpg` (no `make_public`; served via the
+storefront proxy) and propagated to all three surfaces:
+
+- **Medusa** — `thumbnail` + image `rank 0` set to the hero proxy URL; the
+  three existing catalog images follow at ranks 1–3.
+- **Firestore** `products_wisdom/CSS-QBWJ-BZ` (DB `leka-product-catalogs`) —
+  `images[]` reordered so the hero is `is_primary: true`; the legacy
+  `storage.googleapis.com/ai-agents-go-documents/...` URLs migrated to the
+  `catalogs.leka.studio/api/i/leka-project/...` proxy path; `thumbnail` +
+  `primary_image` set to the hero.
+- **Static JSON** `wisdom-catalog/web-app/public/data/cat_other.json` — same
+  migration (hero first, deprecated documents-bucket URLs → proxy URLs).
+
+Hero proxy URL:
+`https://catalogs.leka.studio/api/i/leka-project/catalog/CSS-QBWJ-BZ_hero.jpg`
+(verified HTTP 200, 18,513 bytes).
+
+> Note (Hexagon Grid): a requested image update for the "EPDM Hexagon Grid
+> 45 mm" interlocking tile (`NGHG`/`NGHR`/`NGHB`/`NGHGY`) was **not applied** —
+> the product does not exist on Medusa (title/SKU/`natural grass` searches all
+> returned 0) nor in Firestore `products_epdm`/`products_infill`. Creating a
+> product is out of scope for an image-update task; flagged for confirmation.
+
+#### Files
+
+- `wisdom-catalog/web-app/public/data/cat_other.json` — CSS-QBWJ-BZ `images[]`
+  hero + proxy migration.
+
 ## [2.62.0] - 2026-06-02
 
 ### Fixed — proposal-export draft-order retrieval + build_r2 stale data paths
