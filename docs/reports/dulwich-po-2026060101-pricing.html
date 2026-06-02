@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dulwich PO 2026060101 — Wisdom FOB→SGD pricing breakdown</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple:#8003FF; --navy:#182557; --cream:#FFF9E6; --magenta:#970260;
+    --amber:#FFA900; --redorange:#E54822;
+    --card-radius:16px; --btn-radius:8px;
+    --shadow:0px 2px 8px rgba(24,37,87,0.08);
+    --line:#e7e9f2;
+  }
+  * { box-sizing:border-box; }
+  body {
+    font-family:'Manrope',-apple-system,Segoe UI,Roboto,sans-serif;
+    color:var(--navy); background:#f6f5fb; margin:0; padding:32px 20px 80px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap { max-width:1280px; margin:0 auto; }
+  h1 { font-size:28px; font-weight:800; letter-spacing:-0.02em; margin:0 0 6px; }
+  h2 { font-size:18px; font-weight:700; margin:0 0 14px; }
+  .sub { color:#5b648a; font-weight:500; margin:0 0 24px; font-size:15px; }
+  .card {
+    background:#fff; border-radius:var(--card-radius); box-shadow:var(--shadow);
+    padding:24px; margin-bottom:22px; border:1px solid var(--line);
+  }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; }
+  .stat { background:var(--cream); border-radius:var(--btn-radius); padding:14px 16px; }
+  .stat .k { font-size:12px; text-transform:uppercase; letter-spacing:.06em; color:var(--magenta); font-weight:700; }
+  .stat .v { font-size:22px; font-weight:800; margin-top:4px; }
+  .meta-row { display:flex; flex-wrap:wrap; gap:8px 28px; font-size:14px; color:#41496f; margin-top:4px; }
+  .meta-row b { color:var(--navy); }
+  table.formula { width:100%; border-collapse:collapse; font-size:14px; }
+  table.formula td { padding:7px 10px; border-bottom:1px solid var(--line); vertical-align:top; }
+  table.formula td:first-child { font-weight:700; width:160px; color:var(--purple); }
+  code, .mono { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:13px; background:#f3effc; padding:1px 6px; border-radius:5px; color:var(--purple); }
+  .worked { background:var(--navy); color:#fff; border-radius:var(--card-radius); padding:22px 24px; }
+  .worked h2 { color:#fff; }
+  .worked .step { display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid rgba(255,255,255,.12); font-size:14px; }
+  .worked .step span:first-child { color:#c9ccff; }
+  .worked .step b { font-weight:700; }
+  .worked .final { color:var(--amber); font-size:17px; }
+  .tablewrap { overflow-x:auto; border-radius:var(--card-radius); border:1px solid var(--line); }
+  table.data { width:100%; border-collapse:collapse; font-size:13px; background:#fff; min-width:1100px; }
+  table.data thead th {
+    position:sticky; top:0; background:var(--navy); color:#fff; font-weight:700;
+    padding:11px 9px; text-align:right; font-size:12px; white-space:nowrap; z-index:2;
+  }
+  table.data thead th:first-child, table.data thead th:nth-child(2) { text-align:left; }
+  table.data tbody td { padding:9px; border-bottom:1px solid var(--line); }
+  table.data tbody tr:hover { background:#faf8ff; }
+  td.num { text-align:right; white-space:nowrap; font-variant-numeric:tabular-nums; }
+  td.code { font-weight:700; white-space:nowrap; }
+  td.name { color:#41496f; max-width:240px; }
+  td.thb { color:#5b648a; }
+  td.sgd { font-weight:700; color:var(--purple); }
+  td.r2 { color:var(--redorange); font-weight:600; }
+  td.recon { text-align:center; }
+  tr.ftp { background:#fff6fb; }
+  tr.ftp:hover { background:#ffeef7; }
+  tr.ftp td.code { color:var(--magenta); }
+  .badge { display:inline-block; font-size:10px; font-weight:800; padding:2px 7px; border-radius:9999px; letter-spacing:.04em; vertical-align:middle; }
+  .badge.new { background:var(--magenta); color:#fff; }
+  .badge.ok { background:#e7f7ec; color:#1c8a45; }
+  .badge.fail { background:#fdecea; color:var(--redorange); }
+  tfoot td { padding:11px 9px; font-weight:800; border-top:2px solid var(--navy); background:var(--cream); }
+  .note { font-size:13px; color:#5b648a; line-height:1.6; }
+  .note b { color:var(--navy); }
+  .pill { display:inline-block; background:var(--purple); color:#fff; font-size:12px; font-weight:700; padding:4px 12px; border-radius:9999px; }
+  .legend { display:flex; gap:18px; flex-wrap:wrap; font-size:12.5px; margin-top:12px; color:#5b648a; }
+  .legend .sw { display:inline-block; width:12px; height:12px; border-radius:3px; margin-right:5px; vertical-align:middle; }
+  a { color:var(--purple); }
+  .footer { text-align:center; color:#9aa0bf; font-size:12px; margin-top:30px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <span class="pill">Leka · Wisdom catalog</span>
+  <h1 style="margin-top:12px">Dulwich PO 2026060101 — Wisdom FOB→SGD pricing breakdown</h1>
+  <p class="sub">Per-product audit trail from FOB USD to retail SGD · proforma invoice from
+  <b>TUMACO LIMITED</b>, dated 2026-06-01 ·
+  36 line items · flat China path (CIF ≈ FOB) as actually used at ingest.</p>
+
+  <div class="card">
+    <h2>Purchase order</h2>
+    <div class="meta-row">
+      <div><b>PO / Quotation</b> · 2026060101</div>
+      <div><b>Vendor</b> · TUMACO LIMITED</div>
+      <div><b>Project</b> · dulwich-singapore</div>
+      <div><b>Price term</b> · Ex-work Shanghai, China</div>
+      <div><b>PO total</b> · $76,020.52</div>
+      <div><b>Price date</b> · 2026-06-01</div>
+    </div>
+    <div class="grid" style="margin-top:18px">
+      <div class="stat"><div class="k">Line items</div><div class="v">36</div></div>
+      <div class="stat"><div class="k">First-time priced</div><div class="v">7</div></div>
+      <div class="stat"><div class="k">Reconciled OK</div><div class="v">36/36</div></div>
+      <div class="stat"><div class="k">Σ Retail (catalog)</div><div class="v">S$207,690.51</div></div>
+      <div class="stat"><div class="k">Σ R2 heuristic</div><div class="v">S$337,748.96</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Constants &amp; formula (flat China path, as used at ingest)</h2>
+    <div class="meta-row" style="margin-bottom:14px">
+      <div><b>USD→THB</b> · 33.2020</div>
+      <div><b>SGD→THB</b> · 26.0071</div>
+      <div><b>Import duty</b> · 0% (ASEAN–China FTA Form E)</div>
+      <div><b>Import VAT</b> · 7%</div>
+      <div><b>Gross margin</b> · 50%</div>
+      <div><b>TH customer VAT</b> · 7% (THB retail only)</div>
+      <div><b>SG GST</b> · off (Nubo not GST-registered → ×1.0)</div>
+    </div>
+    <table class="formula">
+      <tr><td>1 · CIF THB</td><td><code>FOB USD × USD→THB</code> — China consolidated sea: CIF ≈ FOB (no separate freight)</td></tr>
+      <tr><td>2 · Duty</td><td><code>CIF × 0%</code> = 0</td></tr>
+      <tr><td>3 · Import VAT</td><td><code>(CIF + duty) × 7%</code></td></tr>
+      <tr><td>4 · Landed THB</td><td><code>CIF + duty + VAT</code> = CIF × 1.07</td></tr>
+      <tr><td>5 · Retail THB</td><td><code>Landed ÷ (1 − 0.50) × (1 + 0.07)</code> — 50% GM, +7% TH customer VAT</td></tr>
+      <tr><td>6 · Retail USD</td><td><code>(Landed ÷ 33.2020) ÷ (1 − 0.50)</code> — no TH VAT</td></tr>
+      <tr><td>7 · Retail SGD</td><td><code>(Landed ÷ 26.0071) ÷ (1 − 0.50) × 1.0</code> — no TH VAT, SG GST off</td></tr>
+    </table>
+    <p class="note" style="margin-top:14px">Source of truth: <code>shared/wisdom_pricing.py</code> ·
+    <code>compute_wisdom_retail()</code>. The ingest called it <b>without CBM</b>, so the
+    flat China path was used (CIF ≈ FOB) — not the LCL/CBM logistics path.</p>
+  </div>
+
+  <div class="worked">
+    <h2>Worked example — DDGT-BZ (Holey Block Motor Skills Set)</h2>
+    <div class="step"><span>FOB USD</span><b>$329.21</b></div>
+    <div class="step"><span>× USD→THB 33.2020 → CIF THB</span><b>฿10,930.43</b></div>
+    <div class="step"><span>Duty (0%)</span><b>฿0.00</b></div>
+    <div class="step"><span>Import VAT 7% of CIF</span><b>฿765.13</b></div>
+    <div class="step"><span>Landed THB (CIF × 1.07)</span><b>฿11,695.56</b></div>
+    <div class="step"><span>Retail THB (÷0.5 × 1.07)</span><b>฿25,028.50</b></div>
+    <div class="step"><span>Retail USD (Landed÷33.2020 ÷0.5)</span><b>$704.51</b></div>
+    <div class="step final"><span>Retail SGD (Landed÷26.0071 ÷0.5)</span><b>S$899.41</b></div>
+    <p class="note" style="color:#c9ccff; margin-top:12px">Confirmed against stored
+    <code style="background:rgba(255,255,255,.12);color:#fff">pricing.retail_sgd</code> = S$899.41 ✓</p>
+  </div>
+
+  <div class="card">
+    <h2>Per-product pricing — all 36 line items</h2>
+    <div class="legend">
+      <span><span class="sw" style="background:#fff6fb;border:1px solid #f0c9e0"></span>First-time-priced set (7) — previously no FOB, would render TBC</span>
+      <span><span class="sw" style="background:var(--purple)"></span>Retail SGD (catalog, served price)</span>
+      <span><span class="sw" style="background:var(--redorange)"></span>R2 heuristic SGD = FOB × 4.44</span>
+    </div>
+    <div class="tablewrap" style="margin-top:14px">
+      <table class="data">
+        <thead><tr>
+          <th>Code</th><th>Name</th><th>FOB USD</th><th>×rate → CIF THB</th>
+          <th>VAT 7%</th><th>Landed THB</th><th>Retail THB</th><th>Retail USD</th>
+          <th>Retail SGD</th><th>Qty</th><th>Line total SGD</th>
+          <th>R2 ≈FOB×4.44</th><th>Recon</th>
+        </tr></thead>
+        <tbody>
+<tr class="">
+  <td class="code">HW1-S747 </td>
+  <td class="name">Outdoor Storage House A</td>
+  <td class="num">$425.78</td>
+  <td class="num thb">฿14,136.75</td>
+  <td class="num thb">฿989.57</td>
+  <td class="num thb">฿15,126.32</td>
+  <td class="num thb">฿32,370.32</td>
+  <td class="num">$911.17</td>
+  <td class="num sgd">S$1,163.25</td>
+  <td class="num">4</td>
+  <td class="num sgd">S$4,653.00</td>
+  <td class="num r2">S$1,891.68</td>
+  <td class="recon"><span class="badge ok">✓ match</span></td>
+</tr>
+<tr class="ftp">
+  <td class="code">DDJM-JQ01-V01 <span class="badge new">NEW</span></td>
+  <td class="name">Outdoor Holey Stacking Block Set-Jumbo Version</td>
+  <td class="num">$1,741.91</td>
+  <td class="num thb">฿57,834.90</td>
+  <td class="num thb">฿4,048.44</td>
+  <td class="num thb">฿61,883.34</td>
+  <td class="num thb">฿132,430.35</td>
+  <td class="num">$3,727.69</td>
+  <td class="num sgd">S$4,758.96</td>
+  <td class="num">1</td>
+  <td class="num sgd">S$4,758.96</td>
+  <td class="num r2">S$7,739.07</td>
+  <td class="recon"><span class="badge ok">✓ match</span></td>
+</tr>
+<tr class="ftp">
+  <td class="code">DDGT-BZ <span class="badge new">NEW</span></td>
+  <td class="name">Holey Block Motor Skills Set-Standard Version</td>
+  <td class="num">$329.21</td>
+  <td class="num thb">฿10,930.43</td>
+  <td class="num thb">฿765.13</td>
+  <td class="num thb">฿11,695.56</td>
+  <td class="num thb">฿25,028.50</td>
+  <td class="num">$704.51</td>
+  <td class="num sgd">S$899.41</td>
+  <td class="num">1</td>
+  <td class="num sgd">S$899.41</td>
+  <td class="num r2">S$1,462.64</td>
+  <td class="recon"><span class="badge ok">✓ match</span></td>
+</tr>
+<tr class="ftp">
+  <td class="code">DDHD-BZ <span class="badge new">NEW</span></td>
+  <td class="name">Holey Block Motor Skills Set-Standard Version</td>
+  <td class="num">$496.24</td>
+  <td class="num thb">฿16,476.16</td>
+  <td class="num thb">฿1,153.33</td>
+  <td class="num thb">฿17,629.49</td>
+  <td class="num thb">฿37,727.11</td>
+  <td class="num">$1,061.95</td>
+  <td class="num sgd">S$1,355.74</td>
+  <td class="num">1</td>
+  <td class="num sgd">S$1,355.74</td>
+  <td class="num r2">S$2,204.73</td>
+  <td class="recon"><span class="badge ok">✓ match</span></td>
+</tr>
+<tr class="">
+  <td class="code">GP2-TC015-V02-06 </td>
+  <td class="name">Power Tricycle-Yellow</td>
+  <td class="num">$66.99</td>
+  <td class="num thb">฿2,224.20</td>
+  <td class="num thb">฿155.69</td>
+  <td class="num thb">฿2,379.89</td>
+  <td class="num thb">฿5,092.96</td>
+  <td class="num">$143.36</td>
+  <td class="num sgd">S$183.02</td>
+  <td class="num">5</td>
+  <td class="num sgd">S$915.10</td>
+  <td class="num r2">S$297.63</td>
+  <td class="recon"><span class="badge ok">✓ match</span></td>
+</tr>
+<tr class="">
+  <td class="code">GP2-TC013-V02-06 </td>
+  <td class="name">Power Trike-Yellow</td>
+  <td class="num">$63.51</td>
+  <td class="num thb">฿2,108.66</td>
+  <td class="num thb">฿147.61</td>
+  <td class="num thb">฿2,256.27</td>
+  <td class="num thb">฿4,828.42</td>
+  <td class="num">$135.91</td>
+  <td class="num sgd">S$173.51</td>
+  <td class="num">5</td>
+  <td class="num sgd">S$867.55</td>
+  <td class="num r2">S$282.17</td>
+  <td class="recon"><span class="badge ok">✓ match</span></td>
+</tr>
+<tr class="">
+  <td class="code">GP2-TC007-V02-06 </td>
+  <td class="name">Two-wheeled Power Scooter-Yellow</td>
+  <td class="num">$60.49</td>
+  <td class="num thb">฿2,008.39</td>
+  <td class="num thb">฿140.59</td>
+  <td class="num thb">฿2,148.98</td>
+  <td class="num thb">฿4,598.82</td>
+  <td class="num">$129.45</td>
+  <td class="num sgd">S$165.26</td>
+  <td class="num">5</td>
+  <td class="num sgd">S$826.30</td>
+  <td class="num r2">S$268.75</td>
+  <td class="recon"><span class="badge ok">✓ match</span></td>
+</tr>
+<tr class="">
+  <td class="code">GP2-TC014-V01-06 </td>
+  <td class="name">Power Slide Car-Yellow</td>
+  <td class="num">$59.72</td>
+  <td class="num thb">฿1,982.82</td>
+  <td class="num thb">฿138.80</td>
+  <td class="num thb">฿2,121.62</td>
+  <td class="num thb">฿4,540.27</td>
+  <td class="num">$127.80</td>
+  <td class="num sgd">S$163.16</td>
+  <td class="num">5</td>
+  <td class="num sgd">S$815.80</td>
+  <td class="num r2">S$265.33</td>
+  <td class="recon"><span class="badge ok">✓ match</span></td>
+</tr>
+<tr class="">
+  <td class="code">GP2-TC018-05 </td>
+  <td class="name">Scooter &amp; Slide Bike Stand - Red</td>
+  <td class="num">$21.53</td>
+  <td class="num thb">฿714.84</td>
+  <td class="num thb">฿50.04</td>
+  <td class="num thb">฿764.88</td>
+  <td class="num thb">฿1,636.84</td>
+  <td class="num">$46.07</td>
+  <td class="num sgd">S$58.82</td>
+  <td class="num">5</td>
+  <td class="num sgd">S$294.10</td>
+  <td class="num r2">S$95.65</td>
+  <td class="recon"><span class="badge ok">✓ match</span></td>
+</tr>
+<tr class="">
+  <td class="code">HW1-S292 </td>
+  <td class="name">Activity Range-4 Square Set</td>
+  <td class="num">$5,857.72</td>
+  <td class="num thb">฿194,488.02</td>
+  <td class="num thb">฿13,614.16</td>
+  <td class="num thb">฿208,102.18</td>
+  <td class="num thb">฿445,338.67</td>
+  <td class="num">$12,535.52</td>
+  <td class="num sgd">S$16,003.49</td>
+  <td class="num">1</td>
+  <td class="num sgd">S$16,003.49</td>
+  <td class="num r2">S$26,025.06</td>
+  <td class="recon"><span class="badge ok">✓ match</span></td>
+</tr>
+<tr class="">
+  <td class="code">HW1-S023-V06 </td>
+  <td class="name">Nature&#x27;s Elements Outdoor Teepee</td>
+  <td class="num">$470.78</td>
+  <td class="num thb">฿15,630.84</td>
+  <td class="num thb">฿1,094.16</td>
+  <td class="num thb">฿16,725.00</td>
+  <td class="num thb">฿35,791.50</td>
+  <td class="num">$1,007.47</td>
+  <td class="num sgd">S$1,286.19</td>
+  <td class="num">1</td>
+  <td class="num sgd">S$1,286.19</td>
+  <td class="num r2">S$2,091.61</td>
+  <td class="recon"><span class="badge ok">✓ match</span></td>
+</tr>
+<tr class="">
+  <td class="code">HW1-S020-V03 </td>
+  <td class="name">Nature&#x27;s Elements Outdoor Play House</td>
+  <td class="num">$745.82</td>
+  <td class="num thb">฿24,762.72</td>
+  <td class="num thb">฿1,733.39</td>
+  <td class="num thb">฿26,496.11</td>
+  <td class="num thb">฿56,701.68</td>
+  <td class="num">$1,596.06</td>
+  <td class="num sgd">S$2,037.61</td>
+  <td class="num">1</td>
+  <td class="num sgd">S$2,037.61</td>
+  <td class="num r2">S$3,313.58</td>
+  <td class="recon"><span class="badge ok">✓ match</span></td>
+</tr>
+<tr class="">
+  <td class="code">HW1-S256-V01 </td>
+  <td class="name">Little Farm-Square Set</td>
+  <td class="num">$360.38</td>
+  <td class="num thb">฿11,965.34</td>
+  <td class="num thb">฿837.57</td>
+  <td class="num thb">฿12,802.91</td>
+  <td class="num thb">฿27,398.23</td>
+  <td class="num">$771.21</td>
+  <td class="num sgd">S$984.57</td>
+  <td class="num">1</td>
+  <td class="num sgd">S$984.57</td>
+  <td class="num r2">S$1,601.12</td>
+  <td class="recon"><span class="badge ok">✓ match</span></td>
+</tr>
+<tr class="">
+  <td class="code">HW1-S029 </td>
+  <td class="name">Nature&#x27;s Elements Outdoor Chalkboard Easel-Planting Set</td>
+  <td class="num">$175.13</td>
+  <td class="num thb">฿5,814.67</td>
+  <td class="num thb">฿407.03</td>
+  <td class="num thb">฿6,221.70</td>
+  <td class="num thb">฿13,314.44</td>
+  <td class="num">$374.78</td>
+  <td class="num sgd">S$478.46</td>
+  <td class="num">1</td>
+  <td class="num sgd">S$478.46</td>
+  <td class="num r2">S$778.08</td>
+  <td class="recon"><span class="badge ok">✓ match</span></td>
+</tr>
+<tr class="">
+  <td class="code">HW1-S031 </td>
+  <td class="name">Nature&#x27;s Elements Outdoor Transparent Easel-Planting Set</td>
+  <td class="num">$134.98</td>
+  <td class="num thb">฿4,481.61</td>
+  <td class="num thb">฿313.71</td>
+  <td class="num thb">฿4,795.32</td>
+  <td class="num thb">฿10,261.98</td>
+  <td class="num">$288.86</td>
+  <td class="num sgd">S$368.77</td>
+  <td class="num">1</td>
+  <td class="num sgd">S$368.77</td>
+  <td class="num r2">S$599.70</td>
+  <td class="recon"><span class="badge ok">✓ match</span></td>
+</tr>
+<tr class="">
+  <td class="code">HW1-S367-V01 </td>
+  <td class="name">Vision Wallboard Set-Lines</td>
+  <td class="num">$483.64</td>
+  <td class="num thb">฿16,057.82</td>
+  <td class="num thb">฿1,124.05</td>
+  <td class="num thb">฿17,181.87</td>
+  <td class="num thb">฿36,769.20</td>
+  <td class="num">$1,034.99</td>
+  <td class="num sgd">S$1,321.32</td>
+  <td class="num">1</td>
+  <td class="num sgd">S$1,321.32</td>
+  <td class="num r2">S$2,148.75</td>
+  <td class="recon"><span class="badge ok">✓ match</span></td>
+</tr>
+<tr class="">
+  <td class="code">HW1-S270-V02 </td>
+  <td class="name">Music Wallboard Set-Lines</td>
+  <td class="num">$759.38</td>
+  <td class="num thb">฿25,212.93</td>
+  <td class="num thb">฿1,764.91</td>
+  <td class="num thb">฿26,977.84</td>
+  <td class="num thb">฿57,732.58</td>
+  <td class="num">$1,625.07</td>
+  <td class="num sgd">S$2,074.65</td>
+  <td class="num">1</td>
+  <td class="num sgd">S$2,074.65</td>
+  <td class="num r2">S$3,373.82</td>
+  <td class="recon"><span class="badge ok">✓ match</span></td>
+</tr>
+<tr class="">
+  <td class="code">HW5-SD001-V01 </td>
+  <td class="name">Nature&#x27;s Elements Outdoor Rectangular Stool</td>
+  <td class="num">$72.30</td>
+  <td class="num thb">฿2,400.50</td>
+  <td class="num thb">฿168.04</td>
+  <td class="num thb">฿2,568.54</td>
+  <td class="num thb">฿5,496.68</td>
+  <td class="num">$154.72</td>
+  <td class="num sgd">S$197.53</td>
+  <td class="num">8</td>
+  <td class="num sgd">S$1,580.24</td>
+  <td class="num r2">S$321.22</td>
+  <td class="recon"><span class="badge ok">✓ match</span></td>
+</tr>
+<tr class="">
+  <td class="code">HW1-S281-V02 </td>
+  <td class="name">Sand Delivery Play</td>
+  <td class="num">$453.84</td>
+  <td class="num thb">฿15,068.40</td>
+  <td class="num thb">฿1,054.79</td>
+  <td class="num thb">฿16,123.19</td>
+  <td class="num thb">฿34,503.63</td>
+  <td class="num">$971.22</td>
+  <td class="num sgd">S$1,239.91</td>
+  <td class="num">1</td>
+  <td class="num sgd">S$1,239.91</td>
+  <td class="num r2">S$2,016.35</td>
+  <td class="recon"><span class="badge ok">✓ match</span></td>
+</tr>
+<tr class="">
+  <td class="code">HW1-S484 </td>
+  <td class="name">Wallboard-Sand Play</td>
+  <td class="num">$265.41</td>
+  <td class="num thb">฿8,812.14</td>
+  <td class="num thb">฿616.85</td>
+  <td class="num thb">฿9,428.99</td>
+  <td class="num thb">฿20,178.04</td>
+  <td class="num">$567.98</td>
+  <td class="num sgd">S$725.11</td>
+  <td class="num">1</td>
+  <td class="num sgd">S$725.11</td>
+  <td class="num r2">S$1,179.18</td>
+  <td class="recon"><span class="badge ok">✓ match</span></td>
+</tr>
+<tr class="">
+  <td class="code">HW1-S062 </td>
+  <td class="name">Wallboard-Halfpipe Sand Channel</td>
+  <td class="num">$332.47</td>
+  <td class="num thb">฿11,038.67</td>
+  <td class="num thb">฿772.71</td>
+  <td class="num thb">฿11,811.38</td>
+  <td class="num thb">฿25,276.35</td>
+  <td class="num">$711.49</td>
+  <td class="num sgd">S$908.32</td>
+  <td class="num">1</td>
+  <td class="num sgd">S$908.32</td>
+  <td class="num r2">S$1,477.12</td>
+  <td class="recon"><span class="badge ok">✓ match</span></td>
+</tr>
+<tr class="">
+  <td class="code">HW1-S070 </td>
+  <td class="name">Wallboard-Hosepipe</td>
+  <td class="num">$306.35</td>
+  <td class="num thb">฿10,171.43</td>
+  <td class="num thb">฿712.00</td>
+  <td class="num thb">฿10,883.43</td>
+  <td class="num thb">฿23,290.54</td>
+  <td class="num">$655.59</td>
+  <td class="num sgd">S$836.96</td>
+  <td class="num">1</td>
+  <td class="num sgd">S$836.96</td>
+  <td class="num r2">S$1,361.07</td>
+  <td class="recon"><span class="badge ok">✓ match</span></td>
+</tr>
+<tr class="">
+  <td class="code">HW1-S064 </td>
+  <td class="name">Wallboard-Sand Channel</td>
+  <td class="num">$391.29</td>
+  <td class="num thb">฿12,991.61</td>
+  <td class="num thb">฿909.41</td>
+  <td class="num thb">฿13,901.02</td>
+  <td class="num thb">฿29,748.18</td>
+  <td class="num">$837.36</td>
+  <td class="num sgd">S$1,069.02</td>
+  <td class="num">1</td>
+  <td class="num sgd">S$1,069.02</td>
+  <td class="num r2">S$1,738.45</td>
+  <td class="recon"><span class="badge ok">✓ match</span></td>
+</tr>
+<tr class="">
+  <td class="code">HW1-S071 </td>
+  <td class="name">Water Channel-Knob</td>
+  <td class="num">$391.38</td>
+  <td class="num thb">฿12,994.60</td>
+  <td class="num thb">฿909.62</td>
+  <td class="num thb">฿13,904.22</td>
+  <td class="num thb">฿29,755.03</td>
+  <td class="num">$837.55</td>
+  <td class="num sgd">S$1,069.26</td>
+  <td class="num">1</td>
+  <td class="num sgd">S$1,069.26</td>
+  <td class="num r2">S$1,738.85</td>
+  <td class="recon"><span class="badge ok">✓ match</span></td>
+</tr>
+<tr class="">
+  <td class="code">HW1-S066 </td>
+  <td class="name">Wallboard-Sand Play</td>
+  <td class="num">$293.50</td>
+  <td class="num thb">฿9,744.79</td>
+  <td class="num thb">฿682.14</td>
+  <td class="num thb">฿10,426.93</td>
+  <td class="num thb">฿22,313.63</td>
+  <td class="num">$628.09</td>
+  <td class="num sgd">S$801.85</td>
+  <td class="num">1</td>
+  <td class="num sgd">S$801.85</td>
+  <td class="num r2">S$1,303.98</td>
+  <td class="recon"><span class="badge ok">✓ match</span></td>
+</tr>
+<tr class="ftp">
+  <td class="code">CSS-QB-BZ <span class="badge new">NEW</span></td>
+  <td class="name">Wallboard Standard Package</td>
+  <td class="num">$472.21</td>
+  <td class="num thb">฿15,678.32</td>
+  <td class="num thb">฿1,097.48</td>
+  <td class="num thb">฿16,775.80</td>
+  <td class="num thb">฿35,900.21</td>
+  <td class="num">$1,010.53</td>
+  <td class="num sgd">S$1,290.09</td>
+  <td class="num">17</td>
+  <td class="num sgd">S$21,931.53</td>
+  <td class="num r2">S$2,097.97</td>
+  <td class="recon"><span class="badge ok">✓ match</span></td>
+</tr>
+<tr class="ftp">
+  <td class="code">CSS-DMGD-BZ-V01 <span class="badge new">NEW</span></td>
+  <td class="name">Ground Tubes &amp; Connector Standard Package</td>
+  <td class="num">$189.36</td>
+  <td class="num thb">฿6,287.13</td>
+  <td class="num thb">฿440.10</td>
+  <td class="num thb">฿6,727.23</td>
+  <td class="num thb">฿14,396.27</td>
+  <td class="num">$405.23</td>
+  <td class="num sgd">S$517.34</td>
+  <td class="num">17</td>
+  <td class="num sgd">S$8,794.78</td>
+  <td class="num r2">S$841.30</td>
+  <td class="recon"><span class="badge ok">✓ match</span></td>
+</tr>
+<tr class="ftp">
+  <td class="code">CSS-CBZJ-BZ <span class="badge new">NEW</span></td>
+  <td class="name">Castle Support Standard Package</td>
+  <td class="num">$49.78</td>
+  <td class="num thb">฿1,652.80</td>
+  <td class="num thb">฿115.70</td>
+  <td class="num thb">฿1,768.50</td>
+  <td class="num thb">฿3,784.59</td>
+  <td class="num">$106.53</td>
+  <td class="num sgd">S$136.00</td>
+  <td class="num">17</td>
+  <td class="num sgd">S$2,312.00</td>
+  <td class="num r2">S$221.17</td>
+  <td class="recon"><span class="badge ok">✓ match</span></td>
+</tr>
+<tr class="ftp">
+  <td class="code">CSS-QBWJ-BZ <span class="badge new">NEW</span></td>
+  <td class="name">Wallboard Toys Standard Package</td>
+  <td class="num">$123.32</td>
+  <td class="num thb">฿4,094.47</td>
+  <td class="num thb">฿286.61</td>
+  <td class="num thb">฿4,381.08</td>
+  <td class="num thb">฿9,375.51</td>
+  <td class="num">$263.90</td>
+  <td class="num sgd">S$336.91</td>
+  <td class="num">17</td>
+  <td class="num sgd">S$5,727.47</td>
+  <td class="num r2">S$547.89</td>
+  <td class="recon"><span class="badge ok">✓ match</span></td>
+</tr>
+<tr class="">
+  <td class="code">HW1-S035 </td>
+  <td class="name">Messy Tables &amp; Water Cascade Table</td>
+  <td class="num">$450.00</td>
+  <td class="num thb">฿14,940.90</td>
+  <td class="num thb">฿1,045.86</td>
+  <td class="num thb">฿15,986.76</td>
+  <td class="num thb">฿34,211.67</td>
+  <td class="num">$963.00</td>
+  <td class="num sgd">S$1,229.42</td>
+  <td class="num">17</td>
+  <td class="num sgd">S$20,900.14</td>
+  <td class="num r2">S$1,999.29</td>
+  <td class="recon"><span class="badge ok">✓ match</span></td>
+</tr>
+<tr class="">
+  <td class="code">HW4-SZ006-V02 </td>
+  <td class="name">Nature&#x27;s Elements Outdoor Workbench</td>
+  <td class="num">$186.69</td>
+  <td class="num thb">฿6,198.48</td>
+  <td class="num thb">฿433.89</td>
+  <td class="num thb">฿6,632.37</td>
+  <td class="num thb">฿14,193.27</td>
+  <td class="num">$399.52</td>
+  <td class="num sgd">S$510.04</td>
+  <td class="num">17</td>
+  <td class="num sgd">S$8,670.68</td>
+  <td class="num r2">S$829.44</td>
+  <td class="recon"><span class="badge ok">✓ match</span></td>
+</tr>
+<tr class="">
+  <td class="code">HW1-S016-V03 </td>
+  <td class="name">Nature&#x27;s Elements Outdoor Kitchen Set</td>
+  <td class="num">$225.64</td>
+  <td class="num thb">฿7,491.70</td>
+  <td class="num thb">฿524.42</td>
+  <td class="num thb">฿8,016.12</td>
+  <td class="num thb">฿17,154.50</td>
+  <td class="num">$482.87</td>
+  <td class="num sgd">S$616.46</td>
+  <td class="num">17</td>
+  <td class="num sgd">S$10,479.82</td>
+  <td class="num r2">S$1,002.49</td>
+  <td class="recon"><span class="badge ok">✓ match</span></td>
+</tr>
+<tr class="">
+  <td class="code">HW1-S202 </td>
+  <td class="name">Castle Storage(L)</td>
+  <td class="num">$419.60</td>
+  <td class="num thb">฿13,931.56</td>
+  <td class="num thb">฿975.21</td>
+  <td class="num thb">฿14,906.77</td>
+  <td class="num thb">฿31,900.49</td>
+  <td class="num">$897.94</td>
+  <td class="num sgd">S$1,146.36</td>
+  <td class="num">17</td>
+  <td class="num sgd">S$19,488.12</td>
+  <td class="num r2">S$1,864.23</td>
+  <td class="recon"><span class="badge ok">✓ match</span></td>
+</tr>
+<tr class="">
+  <td class="code">HW1-S203 </td>
+  <td class="name">Castle Storage®</td>
+  <td class="num">$419.60</td>
+  <td class="num thb">฿13,931.56</td>
+  <td class="num thb">฿975.21</td>
+  <td class="num thb">฿14,906.77</td>
+  <td class="num thb">฿31,900.49</td>
+  <td class="num">$897.94</td>
+  <td class="num sgd">S$1,146.36</td>
+  <td class="num">17</td>
+  <td class="num sgd">S$19,488.12</td>
+  <td class="num r2">S$1,864.23</td>
+  <td class="recon"><span class="badge ok">✓ match</span></td>
+</tr>
+<tr class="">
+  <td class="code">HW1-S201 </td>
+  <td class="name">Castle Storage B</td>
+  <td class="num">$444.37</td>
+  <td class="num thb">฿14,753.97</td>
+  <td class="num thb">฿1,032.78</td>
+  <td class="num thb">฿15,786.75</td>
+  <td class="num thb">฿33,783.65</td>
+  <td class="num">$950.95</td>
+  <td class="num sgd">S$1,214.03</td>
+  <td class="num">17</td>
+  <td class="num sgd">S$20,638.51</td>
+  <td class="num r2">S$1,974.28</td>
+  <td class="recon"><span class="badge ok">✓ match</span></td>
+</tr>
+<tr class="">
+  <td class="code">HW1-S200 </td>
+  <td class="name">Castle Storage A</td>
+  <td class="num">$454.04</td>
+  <td class="num thb">฿15,075.04</td>
+  <td class="num thb">฿1,055.25</td>
+  <td class="num thb">฿16,130.29</td>
+  <td class="num thb">฿34,518.82</td>
+  <td class="num">$971.65</td>
+  <td class="num sgd">S$1,240.45</td>
+  <td class="num">17</td>
+  <td class="num sgd">S$21,087.65</td>
+  <td class="num r2">S$2,017.24</td>
+  <td class="recon"><span class="badge ok">✓ match</span></td>
+</tr>
+        </tbody>
+        <tfoot><tr>
+          <td colspan="9" style="text-align:right">PO totals →</td>
+          <td class="num">36 items</td>
+          <td class="num sgd">S$207,690.51</td>
+          <td class="num r2">S$337,748.96</td>
+          <td></td>
+        </tr></tfoot>
+      </table>
+    </div>
+    <p class="note" style="margin-top:14px"><b>Reconciliation:</b> every computed Retail SGD (and
+    the full VAT / Landed / Retail THB / Retail USD chain) was recomputed locally from
+    <code>fob_usd</code> and checked against the stored <code>products_wisdom/&lt;code&gt;.pricing.*</code>.
+    <b>36 of 36 match exactly</b>
+    (no mismatches).</p>
+  </div>
+
+  <div class="card">
+    <h2>Catalog retail vs Dulwich R2 proposal heuristic</h2>
+    <p class="note">The numbers in the <b>Retail SGD</b> column above are the canonical catalog
+    landed-cost retail prices from <code>shared/wisdom_pricing.py</code> (effectively
+    <b>FOB × 2.732</b>: 33.2020 × 1.07 ÷ 26.0071 ÷ 0.50). The customer-facing
+    <b>Dulwich R2 proposal</b> in <code>leka-projects</code>
+    (<code>build_r2_draft_order.py</code>) prices Wisdom-landed draft-order lines with a
+    separate quick heuristic — <code>WISDOM_FOB_TO_SGD = 104.09 × 1.05 ÷ 24.6 ≈ 4.44</code>,
+    i.e. <b>SGD ≈ FOB × 4.44</b>. Because 4.44 &gt; 2.732, the R2 draft lines run materially
+    higher than the catalog retail (PO-wide: S$337,748.96 vs S$207,690.51,
+    +63%). Both are shown per line so the
+    difference is auditable. The R2 heuristic is a draft-stage estimate only; the catalog
+    flat-path retail is the reconciled source of truth stored in Firestore.</p>
+  </div>
+
+  <p class="footer">Generated from live Firestore (<code>leka-product-catalogs</code>) ·
+  quotation <code>leka_vendor_quotations/wisdom-PO-2026060101</code> +
+  <code>products_wisdom/*.pricing</code> · leka-product-catalogs v2.60.0 ·
+  first-time-priced: DDJM-JQ01-V01, DDGT-BZ, DDHD-BZ, CSS-QB-BZ, CSS-DMGD-BZ-V01, CSS-CBZJ-BZ, CSS-QBWJ-BZ</p>
+</div>
+</body>
+</html>

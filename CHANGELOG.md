@@ -4,6 +4,46 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.60.0] - 2026-06-02
+
+### Added — Dulwich PO 2026060101 FOB→SGD per-product pricing breakdown (report + CSV)
+
+Auditable, per-product pricing report for the Wisdom Dulwich proforma invoice
+(PO `2026060101` from TUMACO LIMITED, dated 2026-06-01, 36 line items, USD
+76,020.52). Shows the full chain from **FOB USD → retail SGD** step by step for
+every line, using the **flat China path** (CIF ≈ FOB) exactly as the ingest
+called `shared/wisdom_pricing.py` (without CBM).
+
+- Reconstructs the chain locally from live Firestore
+  (`leka_vendor_quotations/wisdom-PO-2026060101` + `products_wisdom/<code>.pricing.*`)
+  and reconciles every computed value against the stored pricing:
+  **36/36 rows match exactly** across VAT / Landed THB / Retail THB / Retail USD /
+  Retail SGD (0 mismatches). Worked example: DDGT-BZ FOB $329.21 → CIF ฿10,930.43
+  → landed ฿11,695.56 → retail **S$899.41** (== stored `pricing.retail_sgd`).
+- Highlights the **7 first-time-priced sets** (`DDJM-JQ01-V01`, `DDGT-BZ`,
+  `DDHD-BZ`, `CSS-QB-BZ`, `CSS-DMGD-BZ-V01`, `CSS-CBZJ-BZ`, `CSS-QBWJ-BZ`).
+- Shows the catalog flat-path retail (≈ FOB × 2.732) alongside the customer-facing
+  Dulwich **R2 proposal** heuristic `SGD ≈ FOB × 4.44`
+  (`leka-projects/build_r2_draft_order.py`, `104.09 × 1.05 ÷ 24.6`) so the
+  difference is visible (PO-wide S$207,690.51 vs S$337,748.96, +63%).
+- Constants at ingest: USD→THB 33.2020, SGD→THB 26.0071, import duty 0%
+  (ASEAN–China FTA Form E), import VAT 7%, gross margin 50%, TH customer VAT 7%
+  (THB retail only), SG GST off (Nubo not GST-registered → ×1.0).
+
+Report served via the gateway:
+`https://gateway.goco.bz/leka-product-catalogs/reports/dulwich-po-2026060101-pricing.html`.
+
+#### Files
+
+- `docs/reports/dulwich-po-2026060101-pricing.html` (new) — Leka Design System report
+- `docs/reports/dulwich-po-2026060101-pricing.csv` (new) — spreadsheet export
+- `data/dulwich-po-2026060101-report.json` (new) — reconciled dataset
+- `scripts/_build_dulwich_report_data.py` (new) — pulls live Firestore + reconciles
+- `scripts/_gen_dulwich_report_html.py` (new) — renders HTML + CSV
+- `VERSION`, `CHANGELOG.md`, `docs/build-summary.html`, `docs/hub.html`
+
+---
+
 ## [2.59.0] - 2026-06-01
 
 > Renumbered 2.56.0 → 2.59.0 during merge with main (2.55.0–2.57.0 were taken by
