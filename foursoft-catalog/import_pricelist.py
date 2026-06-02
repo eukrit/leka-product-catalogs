@@ -99,14 +99,15 @@ AIR_RATE_OVERRIDE_THB_PER_KG: float | None = None
 # Used by cost_engine when kg=0 and cbm>0 (per-SKU pricing).
 VOLUMETRIC_DIVISOR = 167
 
-# Sea-tuned clamps. Knowingly retained under the air pivot — the dry-run diff
-# is supposed to surface where the cap dominates so a follow-up PR can retune
-# with evidence (see ~/.claude/plans/goal-4soft-is-imported-hazy-mochi.md §4).
+# Tightened 2026-06-02 (v2.67.0) to match shared/landed_pricing.py — this is the
+# evidence-based retune the air-pivot PR (#98) flagged as a follow-up: the
+# sea-tuned clamps were knowingly retained then so the dry-run diff could surface
+# where the cap dominates (see ~/.claude/plans/goal-4soft-is-imported-hazy-mochi.md §4).
 LOGISTICS_TIERS: list[tuple[float, float, float]] = [
-    (500,          0.80, 2.50),
-    (2_000,        0.60, 1.80),
-    (10_000,       0.45, 1.20),
-    (float("inf"), 0.35, 0.80),
+    (500,          0.60, 1.20),
+    (2_000,        0.50, 1.00),
+    (10_000,       0.40, 0.80),
+    (float("inf"), 0.30, 0.60),
 ]
 
 

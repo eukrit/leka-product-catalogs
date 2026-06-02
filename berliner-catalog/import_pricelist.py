@@ -78,11 +78,12 @@ def _berliner_params() -> dict:
     }
 
 # Tiered logistics-cost band (% of FOB-in-THB). Identical to Vinci.
+# Tightened 2026-06-02 (v2.67.0) to match shared/landed_pricing.py.
 LOGISTICS_TIERS: list[tuple[float, float, float]] = [
-    (500,         0.80, 2.50),
-    (2_000,       0.60, 1.80),
-    (10_000,      0.45, 1.20),
-    (float("inf"),0.35, 0.80),
+    (500,         0.60, 1.20),
+    (2_000,       0.50, 1.00),
+    (10_000,      0.40, 0.80),
+    (float("inf"),0.30, 0.60),
 ]
 
 
