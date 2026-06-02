@@ -1,0 +1,25 @@
+{
+  "backend": "https://leka-medusa-backend-538978391890.asia-southeast1.run.app",
+  "sales_channel": "sc_01KNKTHC0B7KFEDSZ3NNM49JQW",
+  "counts": {
+    "total": 6377,
+    "source_brand_internal": 0,
+    "legacy_handle": 0,
+    "outdoor_play.wisdom_item_code": 0,
+    "md_source_wisdom": 0,
+    "md_wisdom_item_code": 0,
+    "exw_source_vendor": 0,
+    "wisdom_image_products": 0,
+    "wisdom_image_objects": 0,
+    "wisdom_handle_products": 0
+  },
+  "samples": {
+    "source_brand_internal": null,
+    "legacy_handle": null,
+    "outdoor_play.wisdom_item_code": null,
+    "exw_source": null,
+    "wisdom_image": null,
+    "wisdom_handle": null
+  },
+  "store_exposure": {}
+}

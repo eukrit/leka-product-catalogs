@@ -4,6 +4,94 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.66.1] - 2026-06-02
+
+### Cleanup — drop the last broken Wisdom image + sweep unreferenced old GCS objects (follow-up to 2.66.0)
+
+New script `scripts/cleanup_old_wisdom_images.py` (`--drop-broken` / `--sweep` /
+`--all`, dry-run default, `--write`).
+
+- **drop-broken:** removed the single `_wisdom_2025_` gallery image whose GCS
+  source object never existed (`leka-project-aid1ofsb`, a dead link the 2.66.0
+  re-host couldn't copy). Not the thumbnail; the 2 neutral images remain. This
+  clears the last store-API residual.
+- **sweep:** deleted **4,340** now-unreferenced old objects under
+  `leka-project/{spatial_v2,verified}/` that carry the `_wisdom_2025_` token —
+  each only after confirming (a) no live product references it and (b) an
+  identical neutral `catalog2025/` copy exists (bytes preserved). **1,678
+  copy-less orphans were left in place** (never re-hosted; private + unreferenced,
+  so not a leak — deleting them would lose the only bytes; sweep them later only
+  if explicitly desired). 0 errors.
+
+**Verification:** `--verify` now reports **all** trace counts = 0
+(`wisdom_image_products` = 0). Spot-checked: a neutral `catalog2025/` image still
+serves HTTP 200; a deleted old `_wisdom_2025_` URL now 404s.
+
+#### Files
+- `scripts/cleanup_old_wisdom_images.py` (NEW).
+
+---
+
+## [2.66.0] - 2026-06-02
+
+> Renumbered v2.58.0 → v2.66.0 during rebase onto main: main had advanced to
+> 2.65.0 while this work was in flight. Work unchanged.
+
+### Security/Privacy — Scrub avoidable internal "Wisdom" vendor traces from the Leka Project brand
+
+The Wisdom→Leka Project rebrand left several internal vendor traces in Medusa.
+A store-API exposure audit (with the browser-exposed publishable key) confirmed
+which traces reach an **unauthenticated** customer; we then scrubbed the
+avoidable leaks. New script `scripts/scrub_leka_project_wisdom_traces.py`
+(`--verify` / `--dry-run` / `--write`, idempotent).
+
+**Store-API exposure found (before):**
+- `variant.metadata.exw_source` "(Wisdom/TUMACO EXW Shanghai…)" + `exw_shanghai_usd`
+  — returned **by default** (no special query). Worst leak: vendor name **and** cost.
+- Image URLs `…/spatial_v2/<code>_wisdom_2025_pNN_*.jpeg` — in every `<img src>`
+  **by default**.
+- 17 products still carried literal `wisdom-…` **handles** (the product URL slug) —
+  public by default.
+- `product.metadata.{source_brand_internal, legacy_handle, outdoor_play.wisdom_item_code,
+  source, wisdom_item_code}` — hidden by default but retrievable by anyone via
+  `?fields=+metadata` (the publishable key is browser-exposed).
+
+**Scrubbed (Medusa + GCS only — internal codes on Firestore/Firebase left intact):**
+- Metadata: removed `source_brand_internal`, `legacy_handle`, top-level
+  `wisdom_item_code`, and `outdoor_play.wisdom_item_code`; rewrote
+  `source` "wisdom-outdoor-play-merged" → "outdoor-play-merged". **6,376 products.**
+  (Medusa v2 metadata is a shallow merge — keys are deleted by sending value `""`,
+  the empty-string sentinel; `null`/omission do **not** delete.)
+- `exw_source`: "PI 2026031801 (Wisdom/TUMACO EXW Shanghai, 2026-03-18)" →
+  **"PI 2026031801 (EXW Shanghai, 2026-03-18)"**. **4 variants.** Kept PI ref,
+  EXW Shanghai, USD cost, `legacy_sku`.
+- Images: server-side GCS copy (same bucket, no download)
+  `leka-project/spatial_v2/…_wisdom_2025_…` → `leka-project/catalog2025/spatial_v2_…_2025_….jpeg`
+  and repointed each product's thumbnail+gallery to the neutral proxy URL.
+  **2,405 products / 4,340 objects** (1 source object missing → original left in place,
+  deferred). Old objects left for a later cleanup sweep.
+- Handles: renamed the 17 leftover `wisdom-…` slugs to `leka-project-<id>`;
+  appended old→new to `migration/wisdom-handle-redirects.json` so storefront
+  redirects survive.
+
+**Kept intentionally:** `variant.metadata.legacy_sku` (the Medusa↔Firestore bridge
+used by pricing/image tooling), brand `handle="wisdom"` (storefront
+`?filters[brand][handle]=wisdom`), and geography tokens (`_usa_2025_`, `_intl_2025_`,
+`_china_2025_`, `catalog_source`).
+
+**Post-scrub verification (store API):** residual `_wisdom_2025_` images = 1
+(the missing-source object), exw vendor traces = 0, wisdom- handles = 0,
+`outdoor_play.wisdom_item_code` = 0, `source_brand_internal`/`legacy_handle` = 0.
+Re-hosted image confirmed serving HTTP 200 `image/jpeg` via the proxy; exw + handle
+redirect confirmed live.
+
+#### Files
+- `scripts/scrub_leka_project_wisdom_traces.py` (NEW) — verify + scrub.
+- `docs/reports/leka-project-wisdom-exposure.json` (NEW) — exposure audit.
+- `migration/wisdom-handle-redirects.json` — +17 handle redirects.
+
+---
+
 ## [2.65.1] - 2026-06-02
 
 ### Documented — 4soft conditional discounts (2.5% prepay + 2.5% e-shop) available but NOT applied
