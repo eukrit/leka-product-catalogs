@@ -4,6 +4,53 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.64.0] - 2026-06-02
+
+### Fixed — rampline SGD backfill derived from VAT-inclusive THB (latent double-tax)
+
+Audited how every Leka brand derives `retail_sgd` to rule out a "double FX
+conversion" / tax-contaminated SGD price. **8 brands are correct**; the canonical
+formula is `retail_sgd = ((landed_thb / sgd_thb) / (1 - gm)) * sg_gst_mult` —
+derived from the genuine THB **landed cost** (freight/duty/import-VAT accrue in
+THB), excluding the 7% Thai *domestic* customer VAT, with `sg_gst_mult = 1`
+(Nubo not GST-registered).
+
+**The one wrong path** was `scripts/backfill_sgd_pricing.py` → `_run_rampline()`,
+which divided the **VAT-inclusive `retail_thb`** by the SGD rate
+(`sgd = rt / sgd_thb`). Replaced with the canonical landed-cost derivation,
+matching rampline's own importer (`rampline-catalog/import_pricelist.py:588`).
+
+**Severity = latent, not live.** The stored audit doc
+`vendors/rampline/pricelists/2026-05-13` predates the TH-customer-VAT convention
+(v2.29.0, 2026-05-22), so its `retail_thb` is *pre-VAT* (e.g. `SD 02`: landed 468,
+retail_thb 669 = 468/0.70, no ×1.07). The old formula therefore produced correct
+SGD *by accident*. The current importer now writes a **VAT-inclusive** `retail_thb`,
+so regenerating that audit doc would have made the old backfill overstate SGD by
+7%. The fix removes that landmine and makes the backfill VAT-convention-agnostic.
+Re-ran `--write`: 127 variants refreshed (drift +0.10%, pure FX), old values
+backed up to `scripts/backfill_backups/rampline_2026-06-02T02-01-06*.csv`.
+
+Regression dry-run `--brand all`: vinci/berliner/designpark/wisdom THB drift
+≤0.33% (FX only) — their formulas untouched.
+
+**Verified non-issues (no change):** the 2% FX buffer does *not* double-compound —
+in `landed_thb / sgd_thb` the +2% on the source rate (EUR/USD→THB) and on SGD→THB
+cancel for the goods pass-through, surviving only on the genuinely-THB cost stack
+(intended). `src/main.py` divides a THB figure by SGD but off `retail_pre_tax_thb`
+(no TH VAT) → equivalent to canonical.
+
+Also corrected the stale `weplay-catalog/import_pricelist.py` docstring, which
+described the old `retail_thb * sg_gst_mult / SGD_THB` SGD formula (code at line
+269 was already canonical) — a copy-paste hazard for new brands.
+
+#### Files
+
+- `scripts/backfill_sgd_pricing.py` — rampline SGD off `landed_thb`; skip-if-no-landed guard; SGD-drift report line
+- `weplay-catalog/import_pricelist.py` — docstring corrected to canonical SGD/USD/THB formulas
+- `VERSION`, `CHANGELOG.md`, `docs/build-summary.html`, `docs/hub.html`
+
+---
+
 ## [2.63.0] - 2026-06-02
 
 ### Changed — New hero photo for Wallboard Toys Standard Package (CSS-QBWJ-BZ)

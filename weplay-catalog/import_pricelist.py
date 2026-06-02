@@ -27,10 +27,13 @@ EU `shared/landed_pricing.price_row()` and the China-USD `shared/wisdom_pricing`
     duty_thb     = cif_thb * IMPORT_DUTY_RATE                (0.10, Taiwan non-FTA)
     import_vat   = (cif_thb + duty_thb) * THAI_VAT_RATE      (0.07, embedded in landed)
     landed_thb   = cif_thb + duty_thb + import_vat
-    retail_thb   = landed_thb / (1 - GROSS_MARGIN)           (TH retail is VAT-inclusive
-                                                              per the 2026-05-17 convention)
-    retail_usd   = retail_thb / USD_THB
-    retail_sgd   = retail_thb * sg_gst_mult / SGD_THB        (GST gated on Nubo registration)
+    retail_thb   = (landed_thb / (1 - GROSS_MARGIN)) * (1 + TH_CUSTOMER_VAT_RATE)
+                                                            (7% TH customer VAT embedded
+                                                             in THB retail ONLY)
+    retail_usd   = (landed_thb / USD_THB) / (1 - GROSS_MARGIN)   (no TH customer VAT)
+    retail_sgd   = ((landed_thb / SGD_THB) / (1 - GROSS_MARGIN)) * sg_gst_mult
+                                                            (off landed cost, NOT retail_thb;
+                                                             GST gated on Nubo registration)
 
 Config source of truth: Firestore `pricing_config/canonical`, brands.weplay
 (+ global), editable via the gateway-served form. Module constants below are
