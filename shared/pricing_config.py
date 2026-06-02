@@ -25,7 +25,7 @@ Schema (single document):
                       "default_usd_thb": 35.0 }
       },
       "logistics_tiers": [
-        { "fob_eur_max": 500,    "min_pct": 0.80, "max_pct": 2.50 },
+        { "fob_eur_max": 500,    "min_pct": 0.60, "max_pct": 1.20 },
         ...
       ]
     }

@@ -237,7 +237,7 @@ def compute_wisdom_retail(fob_usd: float, usd_thb: float | None = None,
             from shared.landed_pricing import logistics_band, LOGISTICS_TIERS
             lo_pct, hi_pct = logistics_band(eur_fob_equiv)
         except Exception:
-            lo_pct, hi_pct = 0.35, 0.80  # Tier 3 fallback
+            lo_pct, hi_pct = 0.30, 0.60  # top-tier fallback (>= 10k EUR band)
         floor_landed = fob_thb * (1 + lo_pct)
         cap_landed = fob_thb * (1 + hi_pct)
         if landed_thb_raw < floor_landed:

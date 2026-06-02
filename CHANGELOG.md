@@ -4,6 +4,44 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.67.0] - 2026-06-02
+
+### Changed — tighten CBM-based tiered logistics bands across all brands (supersedes draft #100)
+
+Per user direction (2026-06-02), tightened the shared `LOGISTICS_TIERS` clamp
+table (logistics cost as % of FOB/EXW-in-THB, by EUR-equivalent FOB band). The
+lower ceilings clamp outlier landed costs harder, generally **lowering** landed
+and retail prices for affected SKUs. Rebuilt cleanly on `main` — the original
+draft PR #100 (branched at v2.59.0) was stale/conflicting and is superseded.
+
+| FOB band (EUR) | OLD min,max | NEW min,max |
+|---|---|---|
+| < 500   | 0.80, 2.50 | 0.60, 1.20 |
+| < 2,000 | 0.60, 1.80 | 0.50, 1.00 |
+| < 10,000| 0.45, 1.20 | 0.40, 0.80 |
+| ≥ 10,000| 0.35, 0.80 | 0.30, 0.60 |
+
+**Files (tier literals + fallbacks):** `shared/landed_pricing.py` (master table),
+`shared/wisdom_pricing.py` (top-tier fallback `0.35,0.80 → 0.30,0.60`),
+`shared/pricing_config.py` (docstring), `src/main.py` (`_empty_config` Flask
+fallback), `berliner-catalog/import_pricelist.py` + `foursoft-catalog/import_pricelist.py`
+(local copies — these two read their own literal, not Firestore). The 4soft
+`EXW_DISCOUNT = 0.20` (PR #98) is preserved untouched; only its tier clamp moved.
+
+**Seed hygiene:** `scripts/seed_pricing_config.py` 4soft block reconciled to the
+live doc (`exw_discount: 0.20` + reseller note) so a future `--force` re-seed no
+longer reverts PR #98's discount.
+
+**Activation:** the Firestore canonical doc `pricing_config/canonical` was updated
+**surgically** via new `scripts/update_logistics_tiers.py` (only `logistics_tiers`,
+leaving brand blocks intact — a full `--force` re-seed would have clobbered 4soft's
+live 0.20 discount). Per-brand:
+- **4soft** — Firestore repriced + **pushed to live Medusa** (`sync_brand_prices_to_medusa`, updated=2394, errors=0, ~−11.5%).
+- **Archimedes** — Firestore repriced (~−15%; no Medusa storefront yet).
+- **Berliner** — **held**: a reprice bundles a pre-existing +22.6% duty/VAT catch-up (last repriced 2026-05-13, before the v2.20–v2.29 duty+VAT add), unrelated to the tier change.
+- **Vinci** — Firestore repriced (mean −8%) but **Medusa push held**: 48 SKUs rise up to +25% from v2.29/FX drift since its 2026-05-22 push.
+- **Rampline** (−0.8%, deferred-Medusa path) and **Wisdom/WePlay** (not tier-affected, flat paths) — not pushed.
+
 ## [2.66.1] - 2026-06-02
 
 ### Cleanup — drop the last broken Wisdom image + sweep unreferenced old GCS objects (follow-up to 2.66.0)

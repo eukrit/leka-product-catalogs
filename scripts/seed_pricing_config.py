@@ -133,12 +133,16 @@ def build_seed_doc() -> dict:
             },
             "4soft": {
                 # EU/Czech EXW brand — same shape as Berliner. Added v2.40.0.
+                # Reseller discount bumped 0.15 -> 0.20 live by PR #98
+                # (user 2026-06-02); kept in sync here so a future --force does
+                # not revert it.
                 "gross_margin": 0.40,
-                "exw_discount": 0.15,
+                "exw_discount": 0.20,
+                "reseller_discount_note": "Flat 20% EXW reseller discount per user 2026-06-02 (was 15%). Prices unchanged vs 2025 list.",
                 "trade_terms": "EXW",
                 "origin": "EU/Czech",
                 "source_pricelist_url": "foursoft-catalog/data/pricelist_2025-03-01.csv",
-                "source_pricelist_label": "4soft 2025 EPDM-graphics pricelist (.xls, valid 2025-03-01)",
+                "source_pricelist_label": "4soft EPDM-graphics pricelist (2025 prices, re-export 2026-05-31). Reseller discount 20% flat.",
             },
             # China-origin (Wenzhou Daosen), priced in CNY. Mirrors Wisdom:
             # 0% duty (ASEAN-China FTA Form E), 7% import VAT, 50% GM.
