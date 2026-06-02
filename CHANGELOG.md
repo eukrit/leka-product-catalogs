@@ -92,6 +92,22 @@ redirect confirmed live.
 
 ---
 
+## [2.65.1] - 2026-06-02
+
+### Documented — 4soft conditional discounts (2.5% prepay + 2.5% e-shop) available but NOT applied
+
+The 20% reseller discount applied in v2.65.0 (see `foursoft-catalog/DEPLOYMENT_LOG.md`)
+is the **basic** EXW rate. Supplier 4soft (Roger, 2026-05-31) additionally offers a
+2.5% prepayment discount and a 2.5% e-shop discount; per the user these stay
+**unapplied** for now — the catalog is held at the 20% basic rate.
+
+- Firestore `pricing_config/canonical.brands.4soft` annotated with
+  `additional_discounts_available { prepayment_pct 0.025, eshop_pct 0.025, applied false }`
+  + `additional_discounts_note`. **Metadata only** — `exw_discount` stays `0.20`,
+  `gross_margin` stays `0.40`; no `vendors/4soft/products` or Medusa reprice.
+- `foursoft-catalog/DEPLOYMENT_LOG.md` — follow-up entry; verified Firestore/Medusa
+  SGD still match at 20% (C5-01A-05 S$1374.47, G2-14A-02 S$284.61, V9-01A-001 S$11048.45).
+
 ## [2.65.0] - 2026-06-02
 
 ### Changed — `scripts/build_r2_curated.py`: Medusa-SGD-first pricing + versioned PO codes + 840 sq.m
