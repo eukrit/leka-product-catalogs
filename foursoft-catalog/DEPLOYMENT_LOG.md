@@ -7,6 +7,23 @@ Products: `vendors/4soft/products` (db `vendors`)
 
 ---
 
+## 2026-06-02 — Recorded 2.5% prepay + 2.5% e-shop discounts as available-but-NOT-applied
+
+- **Context:** the 20% flat discount (entry below) is the **basic** EXW reseller rate.
+  Supplier 4soft (Roger, email 2026-05-31) additionally offers a **2.5% prepayment**
+  discount and a **2.5% e-shop** discount. Per user decision (2026-06-02) these stay
+  **NOT applied** — the catalog is held at the 20% basic rate for now.
+- **Annotation only — no reprice.** `pricing_config/canonical.brands.4soft` now carries:
+  - `additional_discounts_available = { prepayment_pct: 0.025, eshop_pct: 0.025, applied: false }`
+  - `additional_discounts_note` documenting the decision (ASCII).
+  `exw_discount` stays `0.20`, `gross_margin` stays `0.40`. `vendors/4soft/products`
+  and Medusa variant prices are **unchanged** (already at 20% from the entry below).
+- **Verification (read-only, 2026-06-02):** Firestore + Medusa SGD match at 20% on
+  spot-checked codes — C5-01A-05 S$1374.47, G2-14A-02 S$284.61, V9-01A-001 S$11048.45;
+  Dulwich R2 proposal live (HTTP 200), 4soft = optional add-on.
+
+---
+
 ## 2026-06-02 — Flat 20% reseller discount applied LIVE (sea-LCL retained)
 
 - **User decision (2026-06-02):** raise the EXW reseller discount **15% → 20% flat**
