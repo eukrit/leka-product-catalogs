@@ -1,5 +1,20 @@
 # Deployment Log — Wisdom Product Catalog
 
+## v2.66.1 — 2026-06-02 (Cleanup: drop last broken Wisdom image + sweep old GCS objects)
+
+Follow-up to v2.66.0. New `scripts/cleanup_old_wisdom_images.py`.
+
+- **drop-broken:** removed the 1 `_wisdom_2025_` gallery image with a missing GCS
+  source (`leka-project-aid1ofsb`; not the thumbnail). Clears the last store-API
+  residual → `wisdom_image_products` now 0.
+- **sweep:** deleted **4,340** unreferenced old objects under
+  `leka-project/{spatial_v2,verified}/` that each have an identical neutral
+  `catalog2025/` copy (byte-safe). **1,678 copy-less orphans left** (no backup;
+  private + unreferenced). 0 errors.
+- Verified: neutral image serves HTTP 200; deleted old URL 404s; `--verify` all 0.
+
+---
+
 ## v2.66.0 — 2026-06-02 (Scrub internal Wisdom vendor traces from the Leka Project brand)
 
 > Renumbered v2.58.0 → v2.66.0 during rebase onto main (main reached 2.65.0). Work unchanged.

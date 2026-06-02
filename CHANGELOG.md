@@ -4,6 +4,34 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.66.1] - 2026-06-02
+
+### Cleanup — drop the last broken Wisdom image + sweep unreferenced old GCS objects (follow-up to 2.66.0)
+
+New script `scripts/cleanup_old_wisdom_images.py` (`--drop-broken` / `--sweep` /
+`--all`, dry-run default, `--write`).
+
+- **drop-broken:** removed the single `_wisdom_2025_` gallery image whose GCS
+  source object never existed (`leka-project-aid1ofsb`, a dead link the 2.66.0
+  re-host couldn't copy). Not the thumbnail; the 2 neutral images remain. This
+  clears the last store-API residual.
+- **sweep:** deleted **4,340** now-unreferenced old objects under
+  `leka-project/{spatial_v2,verified}/` that carry the `_wisdom_2025_` token —
+  each only after confirming (a) no live product references it and (b) an
+  identical neutral `catalog2025/` copy exists (bytes preserved). **1,678
+  copy-less orphans were left in place** (never re-hosted; private + unreferenced,
+  so not a leak — deleting them would lose the only bytes; sweep them later only
+  if explicitly desired). 0 errors.
+
+**Verification:** `--verify` now reports **all** trace counts = 0
+(`wisdom_image_products` = 0). Spot-checked: a neutral `catalog2025/` image still
+serves HTTP 200; a deleted old `_wisdom_2025_` URL now 404s.
+
+#### Files
+- `scripts/cleanup_old_wisdom_images.py` (NEW).
+
+---
+
 ## [2.66.0] - 2026-06-02
 
 > Renumbered v2.58.0 → v2.66.0 during rebase onto main: main had advanced to
