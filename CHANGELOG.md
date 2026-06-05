@@ -4,6 +4,61 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.69.0] - 2026-06-05
+
+### Changed — Eurotramp catalog cleanup: categories, collections, images, variant merges
+
+End-to-end cleanup of the **Eurotramp** brand (was 187 → now **162** products) on the
+live Medusa catalog (`leka-medusa-backend`), driven by new reusable scripts. All
+changes carry rollback metadata (`previous_*`) and timestamped reports under
+`docs/reports/`.
+
+**Phase 1 — Categories + family collections + discontinued (`scripts/reassign_eurotramp_categories.py`,
+`data/curated/eurotramp_category_map.json`).** The original uploader had dumped every
+Eurotramp product into a single broken `competition-trampolines` category (the scrape's
+`category` field was uniformly corrupt). Created the **13 real eurotramp.com categories**
+and reassigned all 187 products (REPLACE semantics, verified by probe) — `competition-trampolines`
+went 80 → 5; **0 uncategorized, 0 multi-category**. Added **10 cross-cutting family
+collections** (BounceCloud, Kids Tramp, Wehrfritz FUN, Ground Trampoline, Trampoline Track,
+Grand Master, Ultimate, Minitramp, Safety & Landing Mats, Roller Stands & Transport).
+**Unpublished 10 discontinued products** (Premium, Grand Master Exclusiv [+Open-End],
+Double-Minitramp 190, Hobbytramp, Octotramp, Trampoline Track Stationary/Vario, Tchoukball,
+Trimm Tramp) → `status=draft`.
+
+**Phase 2 — Image correction (`scripts/fix_eurotramp_thumbnails.py`,
+`scripts/backfill_eurotramp_recoverable_photos.py`).** Re-pointed **24** products whose
+thumbnail was a cert/feature-badge/symbol/placeholder to the best real photo already in
+their gallery (handle-overlap-guarded, photos-first reorder, never drops images).
+Backfilled **71 real product photos** to **32** products from eurotramp.com (size-upgraded
+to largest available, rehosted to `gs://ai-agents-go-vendors/eurotramp/<handle>/`), fixing a
+scrape↔Medusa handle mismatch (`112--125`) that had hidden recoverable photos. Real-photo
+thumbnails: 115 → **147** (122/162 after merges). Remaining 40 gaps (vendor JS
+configurators / uncrawled spare parts) are listed in `docs/reports/eurotramp-image-gaps-2026-06-05.md`
+for manual sourcing — not fabricated.
+
+**Phase 3 — Variant merges (`scripts/merge_eurotramp_variants.py`,
+`data/curated/eurotramp_merge_groups.json`).** Consolidated over-split products into single
+products with proper Medusa options + variants, deleting 25 redundant members:
+- **BounceCloud** → 9 variants (Configuration {Single, 3-Piece, 6-Piece} × Colour {Green, Orange, Yellow}).
+- **Kids Tramp Track "Playground"** → 8 variants (Length {4/6/8/10 m} × Variant {Type A/Type B}; the
+  Type A/B labels are placeholders for the 9704x/9705x spec series — rename when confirmed).
+- **Bonded impact protection / Jumping bed / PlayPro lip — Kids Tramp Track** → 4 Length variants
+  each (draft accessory ladders, renamed to clean generic handles).
+
+Member SKUs preserved on the new variants; canonical handles preserved (ladders renamed);
+brand/category/collection links intact; `merged_handles` breadcrumbs + redirects written
+(`docs/reports/eurotramp-merge-redirects-2026-06-05.json`). Held back as `needs_review`
+(distinct parts / ambiguous spec): clamping-jaw, torsion-spring L/R, single-tile
+cornerpiece/centrepiece families, top-sheet-for-bouncecloud, adhesive-cartridge.
+
+### Added
+- `scripts/eurotramp_snapshot.py` — full pre/post-change product backup + diff source.
+- `scripts/reassign_eurotramp_categories.py`, `scripts/fix_eurotramp_thumbnails.py`,
+  `scripts/backfill_eurotramp_recoverable_photos.py`, `scripts/merge_eurotramp_variants.py`.
+- `data/curated/eurotramp_category_map.json`, `data/curated/eurotramp_merge_groups.json`.
+
+---
+
 ## [2.68.0] - 2026-06-02
 
 ### Added — `scripts/hide_leka_project_lowres_products.py`: hide Leka Project products with no/low-res photos
