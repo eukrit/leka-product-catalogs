@@ -1,0 +1,171 @@
+{
+  "generated_at": "2026-06-03T04:55:42.597043+00:00",
+  "mode": "dry-run",
+  "totals": {
+    "products": 32,
+    "photos_uploaded": 0,
+    "failed": 0
+  },
+  "log": [
+    {
+      "handle": "eurotramp-anti-slip-plate-dmt",
+      "status": "dry_run",
+      "new_photos": 1
+    },
+    {
+      "handle": "eurotramp-booster-board",
+      "status": "dry_run",
+      "new_photos": 1
+    },
+    {
+      "handle": "eurotramp-bounce-cloud",
+      "status": "dry_run",
+      "new_photos": 13
+    },
+    {
+      "handle": "eurotramp-fivesquare",
+      "status": "dry_run",
+      "new_photos": 2
+    },
+    {
+      "handle": "eurotramp-grand-master",
+      "status": "dry_run",
+      "new_photos": 2
+    },
+    {
+      "handle": "eurotramp-ground-trampoline-indoor",
+      "status": "dry_run",
+      "new_photos": 1
+    },
+    {
+      "handle": "eurotramp-impact-protection-system",
+      "status": "dry_run",
+      "new_photos": 4
+    },
+    {
+      "handle": "eurotramp-kids-tramp-track-playground",
+      "status": "dry_run",
+      "new_photos": 5
+    },
+    {
+      "handle": "eurotramp-landing-mat-cover",
+      "status": "dry_run",
+      "new_photos": 1
+    },
+    {
+      "handle": "eurotramp-lifting-roller-stand",
+      "status": "dry_run",
+      "new_photos": 1
+    },
+    {
+      "handle": "eurotramp-lifting-roller-stand-safe-comfort",
+      "status": "dry_run",
+      "new_photos": 1
+    },
+    {
+      "handle": "eurotramp-master",
+      "status": "dry_run",
+      "new_photos": 2
+    },
+    {
+      "handle": "eurotramp-mats-tramp",
+      "status": "dry_run",
+      "new_photos": 1
+    },
+    {
+      "handle": "eurotramp-minitramp-trolley",
+      "status": "dry_run",
+      "new_photos": 1
+    },
+    {
+      "handle": "eurotramp-minitrampoline-112-125",
+      "status": "dry_run",
+      "new_photos": 6
+    },
+    {
+      "handle": "eurotramp-open-end-minitramp",
+      "status": "dry_run",
+      "new_photos": 3
+    },
+    {
+      "handle": "eurotramp-roller-stand",
+      "status": "dry_run",
+      "new_photos": 1
+    },
+    {
+      "handle": "eurotramp-safety-platforms-and-safety-mats-integral",
+      "status": "dry_run",
+      "new_photos": 2
+    },
+    {
+      "handle": "eurotramp-safety-platforms-and-safety-mats-universal",
+      "status": "dry_run",
+      "new_photos": 5
+    },
+    {
+      "handle": "eurotramp-service-bag",
+      "status": "dry_run",
+      "new_photos": 3
+    },
+    {
+      "handle": "eurotramp-somersault-belt-twisting-belt",
+      "status": "dry_run",
+      "new_photos": 2
+    },
+    {
+      "handle": "eurotramp-sport-thieme-adventure-tramp",
+      "status": "dry_run",
+      "new_photos": 2
+    },
+    {
+      "handle": "eurotramp-stability-plate",
+      "status": "dry_run",
+      "new_photos": 1
+    },
+    {
+      "handle": "eurotramp-teamgym",
+      "status": "dry_run",
+      "new_photos": 1
+    },
+    {
+      "handle": "eurotramp-trampoline-track-stationary",
+      "status": "dry_run",
+      "new_photos": 1
+    },
+    {
+      "handle": "eurotramp-trampoline-track-vario",
+      "status": "dry_run",
+      "new_photos": 1
+    },
+    {
+      "handle": "eurotramp-ultimate",
+      "status": "dry_run",
+      "new_photos": 2
+    },
+    {
+      "handle": "eurotramp-ultimate-dmt-6x6",
+      "status": "dry_run",
+      "new_photos": 1
+    },
+    {
+      "handle": "eurotramp-ultimate-freestyle",
+      "status": "dry_run",
+      "new_photos": 1
+    },
+    {
+      "handle": "eurotramp-underwater-trampoline",
+      "status": "dry_run",
+      "new_photos": 1
+    },
+    {
+      "handle": "eurotramp-wehrfritz-fun-round",
+      "status": "dry_run",
+      "new_photos": 1
+    },
+    {
+      "handle": "eurotramp-wehrfritz-fun-xl-playground",
+      "status": "dry_run",
+      "new_photos": 1
+    }
+  ]
+}
