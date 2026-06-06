@@ -1,0 +1,122 @@
+{
+  "_comment": "Curated Eurotramp variant-merge groups. Each group consolidates several standalone Medusa products that are really variants of ONE product into the canonical (handle preserved where it already exists) with proper Medusa options + variants, then deletes the redundant members. Eurotramp is request-a-quote: all variants carry a single 0/usd price (mirrors existing variants). SKUs are preserved per member for traceability. needs_review groups are NOT auto-applied — they need a human to confirm the 2nd-axis meaning or confirm they are distinct parts.",
+  "groups": [
+    {
+      "id": "bouncecloud",
+      "canonical_handle": "eurotramp-bounce-cloud",
+      "canonical_title": "BounceCloud",
+      "confidence": "high",
+      "multi_axis": true,
+      "note": "Clean 3x3 matrix. Canonical variant ET-93000 = Single/Green.",
+      "options": {
+        "Configuration": ["Single", "3-Piece Combination", "6-Piece Combination"],
+        "Colour": ["Green", "Orange", "Yellow"]
+      },
+      "canonical_variant": {"title": "Single - Green", "options": {"Configuration": "Single", "Colour": "Green"}},
+      "members": [
+        {"handle": "eurotramp-bouncecloud-orange-93002", "title": "Single - Orange", "sku": "93002", "options": {"Configuration": "Single", "Colour": "Orange"}},
+        {"handle": "eurotramp-bouncecloud-yellow-93001", "title": "Single - Yellow", "sku": "93001", "options": {"Configuration": "Single", "Colour": "Yellow"}},
+        {"handle": "eurotramp-bouncecloud-3-piece-combination-green-93020", "title": "3-Piece Combination - Green", "sku": "93020", "options": {"Configuration": "3-Piece Combination", "Colour": "Green"}},
+        {"handle": "eurotramp-bouncecloud-3-piece-combination-orange-93022", "title": "3-Piece Combination - Orange", "sku": "93022", "options": {"Configuration": "3-Piece Combination", "Colour": "Orange"}},
+        {"handle": "eurotramp-bouncecloud-3-piece-combination-yellow-93021", "title": "3-Piece Combination - Yellow", "sku": "93021", "options": {"Configuration": "3-Piece Combination", "Colour": "Yellow"}},
+        {"handle": "eurotramp-bouncecloud-6-piece-combination-green-93030", "title": "6-Piece Combination - Green", "sku": "93030", "options": {"Configuration": "6-Piece Combination", "Colour": "Green"}},
+        {"handle": "eurotramp-bouncecloud-6-piece-combination-orange-93032", "title": "6-Piece Combination - Orange", "sku": "93032", "options": {"Configuration": "6-Piece Combination", "Colour": "Orange"}},
+        {"handle": "eurotramp-bouncecloud-6-piece-combination-yellow-93031", "title": "6-Piece Combination - Yellow", "sku": "93031", "options": {"Configuration": "6-Piece Combination", "Colour": "Yellow"}}
+      ]
+    },
+    {
+      "id": "bonded-impact-protection-track",
+      "canonical_handle": "eurotramp-bonded-impact-protection-kids-tramp-track-4m-e97441",
+      "canonical_new_handle": "eurotramp-bonded-impact-protection-kids-tramp-track",
+      "canonical_title": "Bonded impact protection Kids Tramp Track",
+      "confidence": "high",
+      "multi_axis": false,
+      "note": "Clean single-axis Length ladder (4/6/8/10m). No bare parent exists; canonical = the 4m member, renamed to the generic handle.",
+      "options": {"Length": ["4 m", "6 m", "8 m", "10 m"]},
+      "canonical_variant": {"title": "4 m", "options": {"Length": "4 m"}},
+      "members": [
+        {"handle": "eurotramp-bonded-impact-protection-kids-tramp-track-6m-e97641", "title": "6 m", "sku": "E97641", "options": {"Length": "6 m"}},
+        {"handle": "eurotramp-bonded-impact-protection-kids-tramp-track-8m-e97841", "title": "8 m", "sku": "E97841", "options": {"Length": "8 m"}},
+        {"handle": "eurotramp-bonded-impact-protection-kids-tramp-track-10m-e97941", "title": "10 m", "sku": "E97941", "options": {"Length": "10 m"}}
+      ]
+    },
+    {
+      "id": "jumping-bed-track-playground",
+      "canonical_handle": "eurotramp-jumping-bed-kids-tramp-track-playground-4m-e21004",
+      "canonical_new_handle": "eurotramp-jumping-bed-kids-tramp-track-playground",
+      "canonical_title": "Jumping bed Kids Tramp Track \"Playground\"",
+      "confidence": "high",
+      "multi_axis": false,
+      "note": "Clean single-axis Length ladder (4/6/8/10m). Canonical = the 4m member, renamed.",
+      "options": {"Length": ["4 m", "6 m", "8 m", "10 m"]},
+      "canonical_variant": {"title": "4 m", "options": {"Length": "4 m"}},
+      "members": [
+        {"handle": "eurotramp-jumping-bed-kids-tramp-track-playground-6m-e21006", "title": "6 m", "sku": "E21006", "options": {"Length": "6 m"}},
+        {"handle": "eurotramp-jumping-bed-kids-tramp-track-playground-8m-e21008", "title": "8 m", "sku": "E21008", "options": {"Length": "8 m"}},
+        {"handle": "eurotramp-jumping-bed-kids-tramp-track-playground-10m-e21009", "title": "10 m", "sku": "E21009", "options": {"Length": "10 m"}}
+      ]
+    },
+    {
+      "id": "playpro-lip-track",
+      "canonical_handle": "eurotramp-playpro-rubber-protection-lip-for-kids-tramp-track-4m-e97448",
+      "canonical_new_handle": "eurotramp-playpro-rubber-protection-lip-for-kids-tramp-track",
+      "canonical_title": "PlayPro rubber protection lip for Kids Tramp Track",
+      "confidence": "high",
+      "multi_axis": false,
+      "note": "Clean single-axis Length ladder (4/6/8/10m). Canonical = the 4m member, renamed.",
+      "options": {"Length": ["4 m", "6 m", "8 m", "10 m"]},
+      "canonical_variant": {"title": "4 m", "options": {"Length": "4 m"}},
+      "members": [
+        {"handle": "eurotramp-playpro-rubber-protection-lip-for-kids-tramp-track-6m-e97648", "title": "6 m", "sku": "E97648", "options": {"Length": "6 m"}},
+        {"handle": "eurotramp-playpro-rubber-protection-lip-for-kids-tramp-track-8m-e97848", "title": "8 m", "sku": "E97848", "options": {"Length": "8 m"}},
+        {"handle": "eurotramp-playpro-rubber-protection-lip-for-kids-tramp-track-10m-e97948", "title": "10 m", "sku": "E97948", "options": {"Length": "10 m"}}
+      ]
+    },
+    {
+      "id": "kids-tramp-track-playground",
+      "canonical_handle": "eurotramp-kids-tramp-track-playground",
+      "canonical_title": "Kids Tramp Track \"Playground\"",
+      "confidence": "review-approved",
+      "multi_axis": true,
+      "note": "Length x Variant (8 variants). 2nd-axis labels 'Type A' (9704x series) / 'Type B' (9705x series) are PLACEHOLDERS — rename once the 9704x vs 9705x spec distinction is confirmed. Canonical Default variant (ET-97004) is repointed to 4 m / Type A and takes SKU 97044 (its member is deleted first to free the SKU).",
+      "options": {"Length": ["4 m", "6 m", "8 m", "10 m"], "Variant": ["Type A", "Type B"]},
+      "canonical_variant": {"title": "4 m - Type A", "sku": "97044", "free_sku_from": "eurotramp-kids-tramp-track-playground-4m-97044", "options": {"Length": "4 m", "Variant": "Type A"}},
+      "members": [
+        {"handle": "eurotramp-kids-tramp-track-playground-4m-97054", "title": "4 m - Type B", "sku": "97054", "options": {"Length": "4 m", "Variant": "Type B"}},
+        {"handle": "eurotramp-kids-tramp-track-playground-6m-97046", "title": "6 m - Type A", "sku": "97046", "options": {"Length": "6 m", "Variant": "Type A"}},
+        {"handle": "eurotramp-kids-tramp-track-playground-6m-97056", "title": "6 m - Type B", "sku": "97056", "options": {"Length": "6 m", "Variant": "Type B"}},
+        {"handle": "eurotramp-kids-tramp-track-playground-8m-97048", "title": "8 m - Type A", "sku": "97048", "options": {"Length": "8 m", "Variant": "Type A"}},
+        {"handle": "eurotramp-kids-tramp-track-playground-8m-97058", "title": "8 m - Type B", "sku": "97058", "options": {"Length": "8 m", "Variant": "Type B"}},
+        {"handle": "eurotramp-kids-tramp-track-playground-10m-97049", "title": "10 m - Type A", "sku": "97049", "options": {"Length": "10 m", "Variant": "Type A"}},
+        {"handle": "eurotramp-kids-tramp-track-playground-10m-97059", "title": "10 m - Type B", "sku": "97059", "options": {"Length": "10 m", "Variant": "Type B"}}
+      ]
+    }
+  ],
+  "needs_review": [
+    {
+      "id": "clamping-jaw-bouncecloud",
+      "reason": "inside / outside-center / outside-corner are DISTINCT parts, not variants — do not merge.",
+      "handles": ["eurotramp-clamping-jaw-inside-bouncecloud-e44193", "eurotramp-clamping-jaw-outside-center-bouncecloud-e44194", "eurotramp-clamping-jaw-outside-corner-bouncecloud-e44195"]
+    },
+    {
+      "id": "torsion-spring-bouncecloud",
+      "reason": "left / right are DISTINCT parts, not variants — do not merge.",
+      "handles": ["eurotramp-torsion-spring-left-bouncecloud-e31195", "eurotramp-torsion-spring-right-bouncecloud-e31194"]
+    },
+    {
+      "id": "single-tile-impact-protection",
+      "reason": "Large families of cornerpiece/centrepiece tiles whose article numbers encode position + colour + tile-size simultaneously (no clean single ladder). Needs human grouping before any merge.",
+      "handles": ["eurotramp-single-tile-impact-protection-* (24 products)"]
+    },
+    {
+      "id": "top-sheet-for-bouncecloud",
+      "reason": "e21030/31/32 may be 3 colours (mergeable as Colour axis) but colour mapping is unconfirmed — verify before merging.",
+      "handles": ["eurotramp-top-sheet-for-bouncecloud-e21030", "eurotramp-top-sheet-for-bouncecloud-e21031", "eurotramp-top-sheet-for-bouncecloud-e21032"]
+    },
+    {
+      "id": "adhesive-cartridge",
+      "reason": "e97003/e97043 may be 2 variants (size) — verify before merging.",
+      "handles": ["eurotramp-adhesive-cartridge-for-kids-tramp-impact-protection-e97003", "eurotramp-adhesive-cartridge-for-kids-tramp-impact-protection-e97043"]
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+{
+  "generated_at": "2026-06-05T13:57:20.170405+00:00",
+  "mode": "dry-run",
+  "groups": [
+    {
+      "id": "kids-tramp-track-playground",
+      "canonical": "eurotramp-kids-tramp-track-playground",
+      "members": [
+        "eurotramp-kids-tramp-track-playground-4m-97054",
+        "eurotramp-kids-tramp-track-playground-6m-97046",
+        "eurotramp-kids-tramp-track-playground-6m-97056",
+        "eurotramp-kids-tramp-track-playground-8m-97048",
+        "eurotramp-kids-tramp-track-playground-8m-97058",
+        "eurotramp-kids-tramp-track-playground-10m-97049",
+        "eurotramp-kids-tramp-track-playground-10m-97059"
+      ],
+      "actions": [],
+      "status": "dry_run",
+      "plan": {
+        "rename_to": null,
+        "add_options": {
+          "Length": [
+            "4 m",
+            "6 m",
+            "8 m",
+            "10 m"
+          ],
+          "Variant": [
+            "Type A",
+            "Type B"
+          ]
+        },
+        "canonical_variant": {
+          "title": "4 m - Type A",
+          "sku": "97044",
+          "free_sku_from": "eurotramp-kids-tramp-track-playground-4m-97044",
+          "options": {
+            "Length": "4 m",
+            "Variant": "Type A"
+          }
+        },
+        "add_variants": [
+          {
+            "title": "4 m - Type B",
+            "sku": "97054",
+            "options": {
+              "Length": "4 m",
+              "Variant": "Type B"
+            }
+          },
+          {
+            "title": "6 m - Type A",
+            "sku": "97046",
+            "options": {
+              "Length": "6 m",
+              "Variant": "Type A"
+            }
+          },
+          {
+            "title": "6 m - Type B",
+            "sku": "97056",
+            "options": {
+              "Length": "6 m",
+              "Variant": "Type B"
+            }
+          },
+          {
+            "title": "8 m - Type A",
+            "sku": "97048",
+            "options": {
+              "Length": "8 m",
+              "Variant": "Type A"
+            }
+          },
+          {
+            "title": "8 m - Type B",
+            "sku": "97058",
+            "options": {
+              "Length": "8 m",
+              "Variant": "Type B"
+            }
+          },
+          {
+            "title": "10 m - Type A",
+            "sku": "97049",
+            "options": {
+              "Length": "10 m",
+              "Variant": "Type A"
+            }
+          },
+          {
+            "title": "10 m - Type B",
+            "sku": "97059",
+            "options": {
+              "Length": "10 m",
+              "Variant": "Type B"
+            }
+          }
+        ],
+        "union_images": 60,
+        "thumbnail": "97054-kidstramptrack4mepdm_83ccaccd40_1920x1080.jpg",
+        "delete_products": [
+          "eurotramp-kids-tramp-track-playground-4m-97054",
+          "eurotramp-kids-tramp-track-playground-6m-97046",
+          "eurotramp-kids-tramp-track-playground-6m-97056",
+          "eurotramp-kids-tramp-track-playground-8m-97048",
+          "eurotramp-kids-tramp-track-playground-8m-97058",
+          "eurotramp-kids-tramp-track-playground-10m-97049",
+          "eurotramp-kids-tramp-track-playground-10m-97059",
+          "eurotramp-kids-tramp-track-playground-4m-97044"
+        ]
+      }
+    }
+  ]
+}

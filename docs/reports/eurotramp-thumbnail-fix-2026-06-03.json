@@ -1,0 +1,235 @@
+{
+  "generated_at": "2026-06-03T04:45:00.268593+00:00",
+  "mode": "apply",
+  "totals": {
+    "changed": 24,
+    "failed": 0
+  },
+  "log": [
+    {
+      "handle": "eurotramp-anti-slip-plate-dmt",
+      "status": "skipped_no_overlap",
+      "best_candidate": "23200-preview-double-minitrampultimate_3e6da1d709_680x378.jpg"
+    },
+    {
+      "handle": "eurotramp-booster-board",
+      "status": "updated",
+      "thumb_changed": true
+    },
+    {
+      "handle": "eurotramp-bounce-cloud",
+      "status": "updated",
+      "thumb_changed": true
+    },
+    {
+      "handle": "eurotramp-bungee-longe",
+      "status": "skipped_no_overlap",
+      "best_candidate": "13000-preview-grandmaster_f6c96a547c_680x378.jpg"
+    },
+    {
+      "handle": "eurotramp-clamping-jaw-inside-bouncecloud-e44193",
+      "status": "updated",
+      "thumb_changed": true
+    },
+    {
+      "handle": "eurotramp-clamping-jaw-outside-center-bouncecloud-e44194",
+      "status": "updated",
+      "thumb_changed": true
+    },
+    {
+      "handle": "eurotramp-clamping-jaw-outside-corner-bouncecloud-e44195",
+      "status": "updated",
+      "thumb_changed": true
+    },
+    {
+      "handle": "eurotramp-complete-competition-trampoline",
+      "status": "skipped_no_overlap",
+      "best_candidate": "03150-ultimate80mmframepads_2ba6815e21_680x378.jpg"
+    },
+    {
+      "handle": "eurotramp-fivesquare",
+      "status": "updated",
+      "thumb_changed": true
+    },
+    {
+      "handle": "eurotramp-frame-bouncecloud-e41093",
+      "status": "updated",
+      "thumb_changed": true
+    },
+    {
+      "handle": "eurotramp-ground-trampoline-freestyle",
+      "status": "updated",
+      "thumb_changed": true
+    },
+    {
+      "handle": "eurotramp-hdts",
+      "status": "skipped_no_overlap",
+      "best_candidate": "03150-ultimate80mmframepads_2ba6815e21_680x378.jpg"
+    },
+    {
+      "handle": "eurotramp-jumping-bed-kids-tramp-playground-additional-coating-e21898b",
+      "status": "updated",
+      "thumb_changed": true
+    },
+    {
+      "handle": "eurotramp-jumping-bed-kids-tramp-playground-e21898",
+      "status": "updated",
+      "thumb_changed": true
+    },
+    {
+      "handle": "eurotramp-jumping-bed-kids-tramp-playground-xl-additional-coating-e21899b",
+      "status": "updated",
+      "thumb_changed": true
+    },
+    {
+      "handle": "eurotramp-kids-tramp-kindergarten",
+      "status": "skipped_no_overlap",
+      "best_candidate": "e97541-impactprotectionsystemslategrey_1d68c0adea_680x378.jpg"
+    },
+    {
+      "handle": "eurotramp-kids-tramp-kindergarten-xl",
+      "status": "skipped_no_overlap",
+      "best_candidate": "e97541-impactprotectionsystemslategrey_1d68c0adea_680x378.jpg"
+    },
+    {
+      "handle": "eurotramp-kids-tramp-playground",
+      "status": "skipped_no_overlap",
+      "best_candidate": "e97541-impactprotectionsystemslategrey_1d68c0adea_680x378.jpg"
+    },
+    {
+      "handle": "eurotramp-kids-tramp-playground-xl",
+      "status": "skipped_no_overlap",
+      "best_candidate": "e97541-impactprotectionsystemslategrey_1d68c0adea_680x378.jpg"
+    },
+    {
+      "handle": "eurotramp-landing-mat-cover",
+      "status": "skipped_no_overlap",
+      "best_candidate": "23200-preview-double-minitrampultimate_3e6da1d709_680x378.jpg"
+    },
+    {
+      "handle": "eurotramp-leaf-spring-bouncecloud-e31196",
+      "status": "updated",
+      "thumb_changed": true
+    },
+    {
+      "handle": "eurotramp-lifting-roller-stand",
+      "status": "updated",
+      "thumb_changed": true
+    },
+    {
+      "handle": "eurotramp-lifting-roller-stand-safe-comfort",
+      "status": "skipped_no_overlap",
+      "best_candidate": "13000-preview-grandmaster_f6c96a547c_680x378.jpg"
+    },
+    {
+      "handle": "eurotramp-long-leaf-spring-connecting-cable-e33393",
+      "status": "skipped_no_overlap",
+      "best_candidate": "93000-rendering-bouncecloudgreen_7b7a10bce0_1920x1080.jpg"
+    },
+    {
+      "handle": "eurotramp-minitramp-trolley",
+      "status": "updated",
+      "thumb_changed": true
+    },
+    {
+      "handle": "eurotramp-minitrampoline-112-125",
+      "status": "skipped_no_overlap",
+      "best_candidate": "e21310-jumpingbed6x6mm-premiumgme_28dc08f365_200x112.jpg"
+    },
+    {
+      "handle": "eurotramp-premium",
+      "status": "skipped_no_overlap",
+      "best_candidate": "e26410-jumpingbed4x4mm-ultimate_762f9e90c7_200x112.jpg"
+    },
+    {
+      "handle": "eurotramp-roller-stand",
+      "status": "updated",
+      "thumb_changed": true
+    },
+    {
+      "handle": "eurotramp-run-up-track-dmt",
+      "status": "skipped_no_overlap",
+      "best_candidate": "23200-preview-double-minitrampultimate_3e6da1d709_680x378.jpg"
+    },
+    {
+      "handle": "eurotramp-safety-platforms-and-safety-mats-integral",
+      "status": "updated",
+      "thumb_changed": true
+    },
+    {
+      "handle": "eurotramp-safety-platforms-and-safety-mats-universal",
+      "status": "updated",
+      "thumb_changed": true
+    },
+    {
+      "handle": "eurotramp-service-bag",
+      "status": "skipped_no_overlap",
+      "best_candidate": "23200-preview-double-minitrampultimate_3e6da1d709_680x378.jpg"
+    },
+    {
+      "handle": "eurotramp-short-leaf-spring-connecting-cable-e33394",
+      "status": "skipped_no_overlap",
+      "best_candidate": "93000-rendering-bouncecloudgreen_7b7a10bce0_1920x1080.jpg"
+    },
+    {
+      "handle": "eurotramp-spieth-ground-safety-mat",
+      "status": "skipped_no_overlap",
+      "best_candidate": "03150-ultimate80mmframepads_2ba6815e21_680x378.jpg"
+    },
+    {
+      "handle": "eurotramp-stability-plate",
+      "status": "skipped_no_overlap",
+      "best_candidate": "13000-preview-grandmaster_f6c96a547c_680x378.jpg"
+    },
+    {
+      "handle": "eurotramp-teamgym-freestyle",
+      "status": "updated",
+      "thumb_changed": true
+    },
+    {
+      "handle": "eurotramp-top-sheet-for-bouncecloud-e21030",
+      "status": "updated",
+      "thumb_changed": true
+    },
+    {
+      "handle": "eurotramp-top-sheet-for-bouncecloud-e21031",
+      "status": "updated",
+      "thumb_changed": true
+    },
+    {
+      "handle": "eurotramp-top-sheet-for-bouncecloud-e21032",
+      "status": "updated",
+      "thumb_changed": true
+    },
+    {
+      "handle": "eurotramp-torsion-spring-left-bouncecloud-e31195",
+      "status": "updated",
+      "thumb_changed": true
+    },
+    {
+      "handle": "eurotramp-torsion-spring-right-bouncecloud-e31194",
+      "status": "updated",
+      "thumb_changed": true
+    },
+    {
+      "handle": "eurotramp-trampoline-set-freestyle",
+      "status": "updated",
+      "thumb_changed": true
+    },
+    {
+      "handle": "eurotramp-trampoline-track-stationary",
+      "status": "skipped_no_overlap",
+      "best_candidate": "e21973-jumpingbedpvc_7614f7753d_200x112.jpg"
+    },
+    {
+      "handle": "eurotramp-trampoline-track-stationary-2",
+      "status": "skipped_no_overlap",
+      "best_candidate": "e21973-jumpingbedpvc_7614f7753d_200x112.jpg"
+    },
+    {
+      "handle": "eurotramp-trampoline-track-vario",
+      "status": "skipped_no_overlap",
+      "best_candidate": "e21973-jumpingbedpvc_7614f7753d_200x112.jpg"
+    }
+  ]
+}

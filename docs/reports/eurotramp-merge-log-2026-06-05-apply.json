@@ -1,0 +1,1111 @@
+{
+  "generated_at": "2026-06-05T13:59:51.722165+00:00",
+  "mode": "apply",
+  "groups": [
+    {
+      "id": "bouncecloud",
+      "status": "already_merged"
+    },
+    {
+      "id": "bonded-impact-protection-track",
+      "canonical": "eurotramp-bonded-impact-protection-kids-tramp-track-4m-e97441",
+      "members": [
+        "eurotramp-bonded-impact-protection-kids-tramp-track-6m-e97641",
+        "eurotramp-bonded-impact-protection-kids-tramp-track-8m-e97841",
+        "eurotramp-bonded-impact-protection-kids-tramp-track-10m-e97941"
+      ],
+      "actions": [
+        "rename/title {'handle': 'eurotramp-bonded-impact-protection-kids-tramp-track', 'title': 'Bonded impact protection Kids Tramp Track'}",
+        "added options ['Length']",
+        "unioned images -> 12",
+        "repurposed default variant -> 4 m",
+        "deleted 3 members + added sibling variants",
+        "deleted Default option"
+      ],
+      "redirects": {
+        "eurotramp-bonded-impact-protection-kids-tramp-track-6m-e97641": "eurotramp-bonded-impact-protection-kids-tramp-track",
+        "eurotramp-bonded-impact-protection-kids-tramp-track-8m-e97841": "eurotramp-bonded-impact-protection-kids-tramp-track",
+        "eurotramp-bonded-impact-protection-kids-tramp-track-10m-e97941": "eurotramp-bonded-impact-protection-kids-tramp-track"
+      },
+      "status": "merged"
+    },
+    {
+      "id": "jumping-bed-track-playground",
+      "canonical": "eurotramp-jumping-bed-kids-tramp-track-playground-4m-e21004",
+      "members": [
+        "eurotramp-jumping-bed-kids-tramp-track-playground-6m-e21006",
+        "eurotramp-jumping-bed-kids-tramp-track-playground-8m-e21008",
+        "eurotramp-jumping-bed-kids-tramp-track-playground-10m-e21009"
+      ],
+      "actions": [
+        "rename/title {'handle': 'eurotramp-jumping-bed-kids-tramp-track-playground', 'title': 'Jumping bed Kids Tramp Track \"Playground\"'}",
+        "added options ['Length']",
+        "unioned images -> 24",
+        "repurposed default variant -> 4 m",
+        "deleted 3 members + added sibling variants",
+        "deleted Default option"
+      ],
+      "redirects": {
+        "eurotramp-jumping-bed-kids-tramp-track-playground-6m-e21006": "eurotramp-jumping-bed-kids-tramp-track-playground",
+        "eurotramp-jumping-bed-kids-tramp-track-playground-8m-e21008": "eurotramp-jumping-bed-kids-tramp-track-playground",
+        "eurotramp-jumping-bed-kids-tramp-track-playground-10m-e21009": "eurotramp-jumping-bed-kids-tramp-track-playground"
+      },
+      "status": "merged"
+    },
+    {
+      "id": "playpro-lip-track",
+      "canonical": "eurotramp-playpro-rubber-protection-lip-for-kids-tramp-track-4m-e97448",
+      "members": [
+        "eurotramp-playpro-rubber-protection-lip-for-kids-tramp-track-6m-e97648",
+        "eurotramp-playpro-rubber-protection-lip-for-kids-tramp-track-8m-e97848",
+        "eurotramp-playpro-rubber-protection-lip-for-kids-tramp-track-10m-e97948"
+      ],
+      "actions": [
+        "rename/title {'handle': 'eurotramp-playpro-rubber-protection-lip-for-kids-tramp-track', 'title': 'PlayPro rubber protection lip for Kids Tramp Track'}",
+        "added options ['Length']",
+        "unioned images -> 12",
+        "repurposed default variant -> 4 m",
+        "deleted 3 members + added sibling variants",
+        "deleted Default option"
+      ],
+      "redirects": {
+        "eurotramp-playpro-rubber-protection-lip-for-kids-tramp-track-6m-e97648": "eurotramp-playpro-rubber-protection-lip-for-kids-tramp-track",
+        "eurotramp-playpro-rubber-protection-lip-for-kids-tramp-track-8m-e97848": "eurotramp-playpro-rubber-protection-lip-for-kids-tramp-track",
+        "eurotramp-playpro-rubber-protection-lip-for-kids-tramp-track-10m-e97948": "eurotramp-playpro-rubber-protection-lip-for-kids-tramp-track"
+      },
+      "status": "merged"
+    },
+    {
+      "id": "kids-tramp-track-playground",
+      "canonical": "eurotramp-kids-tramp-track-playground",
+      "members": [
+        "eurotramp-kids-tramp-track-playground-4m-97054",
+        "eurotramp-kids-tramp-track-playground-6m-97046",
+        "eurotramp-kids-tramp-track-playground-6m-97056",
+        "eurotramp-kids-tramp-track-playground-8m-97048",
+        "eurotramp-kids-tramp-track-playground-8m-97058",
+        "eurotramp-kids-tramp-track-playground-10m-97049",
+        "eurotramp-kids-tramp-track-playground-10m-97059"
+      ],
+      "actions": [
+        "added options ['Length', 'Variant']",
+        "unioned images -> 60",
+        "deleted free_sku_from eurotramp-kids-tramp-track-playground-4m-97044",
+        "repurposed default variant -> 4 m - Type A",
+        "deleted 7 members + added sibling variants",
+        "deleted Default option"
+      ],
+      "redirects": {
+        "eurotramp-kids-tramp-track-playground-4m-97044": "eurotramp-kids-tramp-track-playground",
+        "eurotramp-kids-tramp-track-playground-4m-97054": "eurotramp-kids-tramp-track-playground",
+        "eurotramp-kids-tramp-track-playground-6m-97046": "eurotramp-kids-tramp-track-playground",
+        "eurotramp-kids-tramp-track-playground-6m-97056": "eurotramp-kids-tramp-track-playground",
+        "eurotramp-kids-tramp-track-playground-8m-97048": "eurotramp-kids-tramp-track-playground",
+        "eurotramp-kids-tramp-track-playground-8m-97058": "eurotramp-kids-tramp-track-playground",
+        "eurotramp-kids-tramp-track-playground-10m-97049": "eurotramp-kids-tramp-track-playground",
+        "eurotramp-kids-tramp-track-playground-10m-97059": "eurotramp-kids-tramp-track-playground"
+      },
+      "status": "merged"
+    }
+  ],
+  "deleted_products": [
+    {
+      "id": "prod_01KRGBDDZWVTVWJYM88ZMBDTEZ",
+      "handle": "eurotramp-bonded-impact-protection-kids-tramp-track-6m-e97641",
+      "title": "Bonded impact protection Kids Tramp Track 6m",
+      "status": "draft",
+      "thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-bonded-impact-protection-kids-tramp-track-6m-e97641/e97641-impactprotectionsystemepdm-kidstramptrack6m_180d68ba88_200x112.jpg",
+      "metadata": {
+        "gtin": "4260477194596",
+        "category": "accessory",
+        "item_code": "E97641",
+        "brand_slug": "eurotramp",
+        "dimensions": {
+          "frame_width_cm": 160,
+          "frame_length_cm": 636
+        },
+        "source_url": "https://www.eurotramp.com/en/products/bonded-impact-protection-system-for-kids-tramp-loop-xl---complete-set/",
+        "taxonomy_fixed_at": "2026-06-03T04:38:00.443750+00:00",
+        "previous_categories": [],
+        "previous_collection_id": null
+      },
+      "images": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-bonded-impact-protection-kids-tramp-track-6m-e97641/e97641-impactprotectionsystemepdm-kidstramptrack6m_180d68ba88_200x112.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-bonded-impact-protection-kids-tramp-track-6m-e97641/e97641-impactprotectionsystemepdm-kidstramptrack6m_180d68ba88_680x378.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-bonded-impact-protection-kids-tramp-track-6m-e97641/e97641-impactprotectionsystemepdm-kidstramptrack6m_180d68ba88_1920x1080.jpg"
+        }
+      ],
+      "options": [
+        {
+          "id": "opt_01KRGBDDZX7HX040FMVZSYHX4Z",
+          "title": "Default",
+          "values": [
+            {
+              "value": "Default"
+            }
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": "variant_01KRGBDE1CZEMFEM7BTPJ64TDT",
+          "title": "Bonded impact protection Kids Tramp Track 6m",
+          "sku": "E97641",
+          "options": [
+            {
+              "value": "Default"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "prod_01KRGBDFF0CG6PRXC3SV0R67GS",
+      "handle": "eurotramp-bonded-impact-protection-kids-tramp-track-8m-e97841",
+      "title": "Bonded impact  protection Kids Tramp Track 8m",
+      "status": "draft",
+      "thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-bonded-impact-protection-kids-tramp-track-8m-e97841/e97841-impactprotectionsystemepdm-kidstramptrack8m_f2d6c5be76_200x112.jpg",
+      "metadata": {
+        "gtin": "4260477194602",
+        "category": "accessory",
+        "item_code": "E97841",
+        "brand_slug": "eurotramp",
+        "dimensions": {
+          "frame_width_cm": 160,
+          "frame_length_cm": 836
+        },
+        "source_url": "https://www.eurotramp.com/en/products/bonded-impact-protection-system-for-kids-tramp-loop-xl---complete-set/",
+        "taxonomy_fixed_at": "2026-06-03T04:38:00.443750+00:00",
+        "previous_categories": [],
+        "previous_collection_id": null
+      },
+      "images": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-bonded-impact-protection-kids-tramp-track-8m-e97841/e97841-impactprotectionsystemepdm-kidstramptrack8m_f2d6c5be76_200x112.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-bonded-impact-protection-kids-tramp-track-8m-e97841/e97841-impactprotectionsystemepdm-kidstramptrack8m_f2d6c5be76_680x378.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-bonded-impact-protection-kids-tramp-track-8m-e97841/e97841-impactprotectionsystemepdm-kidstramptrack8m_f2d6c5be76_1920x1080.jpg"
+        }
+      ],
+      "options": [
+        {
+          "id": "opt_01KRGBDFF1EYBM8N897QGH2FNY",
+          "title": "Default",
+          "values": [
+            {
+              "value": "Default"
+            }
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": "variant_01KRGBDFGACR3XTKPHZAG4GGMR",
+          "title": "Bonded impact  protection Kids Tramp Track 8m",
+          "sku": "E97841",
+          "options": [
+            {
+              "value": "Default"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "prod_01KRGBDAKZWYCKV5VVX9T8V0V5",
+      "handle": "eurotramp-bonded-impact-protection-kids-tramp-track-10m-e97941",
+      "title": "Bonded impact protection Kids Tramp Track 10m",
+      "status": "draft",
+      "thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-bonded-impact-protection-kids-tramp-track-10m-e97941/e97941-impactprotectionsystemepdm-kidstramptrack10m_d363d36e9a_200x112.jpg",
+      "metadata": {
+        "gtin": "4260477194619",
+        "category": "accessory",
+        "item_code": "E97941",
+        "brand_slug": "eurotramp",
+        "dimensions": {
+          "frame_width_cm": 160,
+          "frame_length_cm": 1036
+        },
+        "source_url": "https://www.eurotramp.com/en/products/bonded-impact-protection-system-for-kids-tramp-loop-xl---complete-set/",
+        "taxonomy_fixed_at": "2026-06-03T04:38:00.443750+00:00",
+        "previous_categories": [],
+        "previous_collection_id": null
+      },
+      "images": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-bonded-impact-protection-kids-tramp-track-10m-e97941/e97941-impactprotectionsystemepdm-kidstramptrack10m_d363d36e9a_200x112.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-bonded-impact-protection-kids-tramp-track-10m-e97941/e97941-impactprotectionsystemepdm-kidstramptrack10m_d363d36e9a_680x378.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-bonded-impact-protection-kids-tramp-track-10m-e97941/e97941-impactprotectionsystemepdm-kidstramptrack10m_d363d36e9a_1920x1080.jpg"
+        }
+      ],
+      "options": [
+        {
+          "id": "opt_01KRGBDAM0JCTSKWNRC7S0PNDP",
+          "title": "Default",
+          "values": [
+            {
+              "value": "Default"
+            }
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": "variant_01KRGBDAN9SC6B8QXBYNG7MKCH",
+          "title": "Bonded impact protection Kids Tramp Track 10m",
+          "sku": "E97941",
+          "options": [
+            {
+              "value": "Default"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "prod_01KRGBFZYMYJ7F063P131FCAKZ",
+      "handle": "eurotramp-jumping-bed-kids-tramp-track-playground-6m-e21006",
+      "title": "jumping bed Kids Tramp Track \"Playground\" 6m",
+      "status": "draft",
+      "thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-jumping-bed-kids-tramp-track-playground-6m-e21006/97056-kidstramptrack6mepdm_c385cac09c_1920x1080.jpg",
+      "metadata": {
+        "gtin": "4260477185969",
+        "category": "accessory",
+        "item_code": "E21006",
+        "brand_slug": "eurotramp",
+        "source_url": "https://www.eurotramp.com/en/products/jumping-bed---kids-tramp-playground-xl/",
+        "taxonomy_fixed_at": "2026-06-03T04:38:00.443750+00:00",
+        "previous_categories": [],
+        "previous_collection_id": null
+      },
+      "images": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-jumping-bed-kids-tramp-track-playground-6m-e21006/97056-kidstramptrack6mepdm_c385cac09c_1920x1080.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-jumping-bed-kids-tramp-track-playground-6m-e21006/e97648-playproimpactprotectionlipsetkidstramptrack6m_e465a6f74c_1920x1080.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-jumping-bed-kids-tramp-track-playground-6m-e21006/e97641-impactprotectionsystemepdm-kidstramptrack6m_180d68ba88_1920x1080.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-jumping-bed-kids-tramp-track-playground-6m-e21006/97056-kidstramptrack6mepdm_c385cac09c_680x378.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-jumping-bed-kids-tramp-track-playground-6m-e21006/e97648-playproimpactprotectionlipsetkidstramptrack6m_e465a6f74c_680x378.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-jumping-bed-kids-tramp-track-playground-6m-e21006/e97641-impactprotectionsystemepdm-kidstramptrack6m_180d68ba88_680x378.jpg"
+        }
+      ],
+      "options": [
+        {
+          "id": "opt_01KRGBFZYMSGDNNQXZRJ7R3KXT",
+          "title": "Default",
+          "values": [
+            {
+              "value": "Default"
+            }
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": "variant_01KRGBG002V2AQEMAXNYYNJKKX",
+          "title": "jumping bed Kids Tramp Track \"Playground\" 6m",
+          "sku": "E21006",
+          "options": [
+            {
+              "value": "Default"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "prod_01KRGBG1DBM2MRAACSADPBAKEN",
+      "handle": "eurotramp-jumping-bed-kids-tramp-track-playground-8m-e21008",
+      "title": "jumping bed Kids Tramp Track \"Playground\" 8m",
+      "status": "draft",
+      "thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-jumping-bed-kids-tramp-track-playground-8m-e21008/97058-kidstramptrack8mepdm_de8ede0316_1920x1080.jpg",
+      "metadata": {
+        "gtin": "4260477185976",
+        "category": "accessory",
+        "item_code": "E21008",
+        "brand_slug": "eurotramp",
+        "source_url": "https://www.eurotramp.com/en/products/jumping-bed---kids-tramp-playground-xl/",
+        "taxonomy_fixed_at": "2026-06-03T04:38:00.443750+00:00",
+        "previous_categories": [],
+        "previous_collection_id": null
+      },
+      "images": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-jumping-bed-kids-tramp-track-playground-8m-e21008/97058-kidstramptrack8mepdm_de8ede0316_1920x1080.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-jumping-bed-kids-tramp-track-playground-8m-e21008/e97848-playproimpactprotectionlipsetkidstramptrack8m_a70d2b7a2c_1920x1080.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-jumping-bed-kids-tramp-track-playground-8m-e21008/e97841-impactprotectionsystemepdm-kidstramptrack8m_f2d6c5be76_1920x1080.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-jumping-bed-kids-tramp-track-playground-8m-e21008/97058-kidstramptrack8mepdm_de8ede0316_680x378.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-jumping-bed-kids-tramp-track-playground-8m-e21008/e97848-playproimpactprotectionlipsetkidstramptrack8m_a70d2b7a2c_680x378.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-jumping-bed-kids-tramp-track-playground-8m-e21008/e97841-impactprotectionsystemepdm-kidstramptrack8m_f2d6c5be76_680x378.jpg"
+        }
+      ],
+      "options": [
+        {
+          "id": "opt_01KRGBG1DCN8M71PZKRB8X8CY3",
+          "title": "Default",
+          "values": [
+            {
+              "value": "Default"
+            }
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": "variant_01KRGBG1EPFEEYNHQRPH29ZHEV",
+          "title": "jumping bed Kids Tramp Track \"Playground\" 8m",
+          "sku": "E21008",
+          "options": [
+            {
+              "value": "Default"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "prod_01KRGBFXCZ4SQ5NRMNT59BVGJY",
+      "handle": "eurotramp-jumping-bed-kids-tramp-track-playground-10m-e21009",
+      "title": "jumping bed Kids Tramp Track \"Playground\" 10m",
+      "status": "draft",
+      "thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-jumping-bed-kids-tramp-track-playground-10m-e21009/97059-kidstramptrack10mepdm_33d50d6d5e_1920x1080.jpg",
+      "metadata": {
+        "gtin": "4260477186140",
+        "category": "accessory",
+        "item_code": "E21009",
+        "brand_slug": "eurotramp",
+        "source_url": "https://www.eurotramp.com/en/products/jumping-bed---kids-tramp-playground-xl/",
+        "taxonomy_fixed_at": "2026-06-03T04:38:00.443750+00:00",
+        "previous_categories": [],
+        "previous_collection_id": null
+      },
+      "images": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-jumping-bed-kids-tramp-track-playground-10m-e21009/97059-kidstramptrack10mepdm_33d50d6d5e_1920x1080.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-jumping-bed-kids-tramp-track-playground-10m-e21009/e97948-playproimpactprotectionlipsetkidstramptrack10m_96fbedbdd6_1920x1080.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-jumping-bed-kids-tramp-track-playground-10m-e21009/e97941-impactprotectionsystemepdm-kidstramptrack10m_d363d36e9a_1920x1080.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-jumping-bed-kids-tramp-track-playground-10m-e21009/97059-kidstramptrack10mepdm_33d50d6d5e_680x378.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-jumping-bed-kids-tramp-track-playground-10m-e21009/e97948-playproimpactprotectionlipsetkidstramptrack10m_96fbedbdd6_680x378.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-jumping-bed-kids-tramp-track-playground-10m-e21009/e97941-impactprotectionsystemepdm-kidstramptrack10m_d363d36e9a_680x378.jpg"
+        }
+      ],
+      "options": [
+        {
+          "id": "opt_01KRGBFXD02PDVYPW58AMYKFEA",
+          "title": "Default",
+          "values": [
+            {
+              "value": "Default"
+            }
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": "variant_01KRGBFXEG0V9E8T8H9N779MPE",
+          "title": "jumping bed Kids Tramp Track \"Playground\" 10m",
+          "sku": "E21009",
+          "options": [
+            {
+              "value": "Default"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "prod_01KRGBHVC51MXFJ1R52C5CAKFQ",
+      "handle": "eurotramp-playpro-rubber-protection-lip-for-kids-tramp-track-6m-e97648",
+      "title": "PlayPro rubber protection lip for Kids Tramp Track 6m",
+      "status": "draft",
+      "thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-playpro-rubber-protection-lip-for-kids-tramp-track-6m-e97648/e97648-playproimpactprotectionlipsetkidstramptrack6m_e465a6f74c_200x112.jpg",
+      "metadata": {
+        "gtin": "4260477194558",
+        "category": "accessory",
+        "item_code": "E97648",
+        "brand_slug": "eurotramp",
+        "source_url": "https://www.eurotramp.com/en/products/impact-protection-system-epdm-kids-tramp-track-6m-complete-set/",
+        "taxonomy_fixed_at": "2026-06-03T04:38:00.443750+00:00",
+        "previous_categories": [],
+        "previous_collection_id": null
+      },
+      "images": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-playpro-rubber-protection-lip-for-kids-tramp-track-6m-e97648/e97648-playproimpactprotectionlipsetkidstramptrack6m_e465a6f74c_200x112.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-playpro-rubber-protection-lip-for-kids-tramp-track-6m-e97648/e97648-playproimpactprotectionlipsetkidstramptrack6m_e465a6f74c_1920x1080.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-playpro-rubber-protection-lip-for-kids-tramp-track-6m-e97648/e97648-playproimpactprotectionlipsetkidstramptrack6m_e465a6f74c_680x378.jpg"
+        }
+      ],
+      "options": [
+        {
+          "id": "opt_01KRGBHVC6M5G32A16ESDFHRYW",
+          "title": "Default",
+          "values": [
+            {
+              "value": "Default"
+            }
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": "variant_01KRGBHVDMYQXVEEZ0YN7XGJAD",
+          "title": "PlayPro rubber protection lip for Kids Tramp Track 6m",
+          "sku": "E97648",
+          "options": [
+            {
+              "value": "Default"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "prod_01KRGBHWT637KGW03XY632A4NN",
+      "handle": "eurotramp-playpro-rubber-protection-lip-for-kids-tramp-track-8m-e97848",
+      "title": "PlayPro rubber protection lip for Kids Tramp Track 8m",
+      "status": "draft",
+      "thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-playpro-rubber-protection-lip-for-kids-tramp-track-8m-e97848/e97848-playproimpactprotectionlipsetkidstramptrack8m_a70d2b7a2c_200x112.jpg",
+      "metadata": {
+        "gtin": "4260477194565",
+        "category": "accessory",
+        "item_code": "E97848",
+        "brand_slug": "eurotramp",
+        "source_url": "https://www.eurotramp.com/en/products/impact-protection-system-epdm-kids-tramp-track-8m-complete-set/",
+        "taxonomy_fixed_at": "2026-06-03T04:38:00.443750+00:00",
+        "previous_categories": [],
+        "previous_collection_id": null
+      },
+      "images": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-playpro-rubber-protection-lip-for-kids-tramp-track-8m-e97848/e97848-playproimpactprotectionlipsetkidstramptrack8m_a70d2b7a2c_200x112.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-playpro-rubber-protection-lip-for-kids-tramp-track-8m-e97848/e97848-playproimpactprotectionlipsetkidstramptrack8m_a70d2b7a2c_1920x1080.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-playpro-rubber-protection-lip-for-kids-tramp-track-8m-e97848/e97848-playproimpactprotectionlipsetkidstramptrack8m_a70d2b7a2c_680x378.jpg"
+        }
+      ],
+      "options": [
+        {
+          "id": "opt_01KRGBHWT7J6MZVEZNK7VB2AFH",
+          "title": "Default",
+          "values": [
+            {
+              "value": "Default"
+            }
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": "variant_01KRGBHWVKF031PAH0MQZ7MXF3",
+          "title": "PlayPro rubber protection lip for Kids Tramp Track 8m",
+          "sku": "E97848",
+          "options": [
+            {
+              "value": "Default"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "prod_01KRGBHRXEZRY21RAMAG3672QB",
+      "handle": "eurotramp-playpro-rubber-protection-lip-for-kids-tramp-track-10m-e97948",
+      "title": "PlayPro rubber protection lip for Kids Tramp Track 10m",
+      "status": "draft",
+      "thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-playpro-rubber-protection-lip-for-kids-tramp-track-10m-e97948/e97948-playproimpactprotectionlipsetkidstramptrack10m_96fbedbdd6_200x112.jpg",
+      "metadata": {
+        "gtin": "4260477194572",
+        "category": "accessory",
+        "item_code": "E97948",
+        "brand_slug": "eurotramp",
+        "source_url": "https://www.eurotramp.com/en/products/impact-protection-system-epdm-kids-tramp-track-10m-complete-set/",
+        "taxonomy_fixed_at": "2026-06-03T04:38:00.443750+00:00",
+        "previous_categories": [],
+        "previous_collection_id": null
+      },
+      "images": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-playpro-rubber-protection-lip-for-kids-tramp-track-10m-e97948/e97948-playproimpactprotectionlipsetkidstramptrack10m_96fbedbdd6_200x112.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-playpro-rubber-protection-lip-for-kids-tramp-track-10m-e97948/e97948-playproimpactprotectionlipsetkidstramptrack10m_96fbedbdd6_1920x1080.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-playpro-rubber-protection-lip-for-kids-tramp-track-10m-e97948/e97948-playproimpactprotectionlipsetkidstramptrack10m_96fbedbdd6_680x378.jpg"
+        }
+      ],
+      "options": [
+        {
+          "id": "opt_01KRGBHRXEM7HDTA8G3ZTFX94Q",
+          "title": "Default",
+          "values": [
+            {
+              "value": "Default"
+            }
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": "variant_01KRGBHRYTG5XWTE9ESPDZR628",
+          "title": "PlayPro rubber protection lip for Kids Tramp Track 10m",
+          "sku": "E97948",
+          "options": [
+            {
+              "value": "Default"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "prod_01KRGBGZ8CV68T12FXC9J2EFY2",
+      "handle": "eurotramp-kids-tramp-track-playground-4m-97044",
+      "title": "Kids Tramp Track \"Playground\" 4m",
+      "status": "draft",
+      "thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground-4m-97044/97054-kidstramptrack4mepdm_83ccaccd40_1920x1080.jpg",
+      "metadata": {
+        "gtin": "4260477194756",
+        "category": "playground",
+        "item_code": "97044",
+        "brand_slug": "eurotramp",
+        "dimensions": {
+          "frame_width_cm": 431,
+          "frame_height_cm": 71,
+          "frame_length_cm": 156,
+          "jumping_bed_width_cm": 366,
+          "jumping_bed_length_cm": 89
+        },
+        "source_url": "https://www.eurotramp.com/en/products/impact-protection-system-epdm-kids-tramp-track-4m-complete-set/",
+        "taxonomy_fixed_at": "2026-06-03T04:38:00.443750+00:00",
+        "previous_categories": [],
+        "previous_collection_id": null
+      },
+      "images": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground-4m-97044/97054-kidstramptrack4mepdm_83ccaccd40_1920x1080.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground-4m-97044/e97448-playproimpactprotectionlipsetkidstramptrack4m_cddd08d0b9_1920x1080.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground-4m-97044/e97441-impactprotectionsystemepdm-kidstramptrack4m_166975ffdd_1920x1080.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground-4m-97044/e97400-impactprotectionsystem-kidstramptrack4m_c628b9a36a_1920x1080.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground-4m-97044/97054-kidstramptrack4mepdm_83ccaccd40_680x378.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground-4m-97044/e97448-playproimpactprotectionlipsetkidstramptrack4m_cddd08d0b9_680x378.jpg"
+        }
+      ],
+      "options": [
+        {
+          "id": "opt_01KRGBGZ8DSHMKZBM6Y07JX23K",
+          "title": "Default",
+          "values": [
+            {
+              "value": "Default"
+            }
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": "variant_01KRGBGZ9Y0NQFMGVWCCFTTVZZ",
+          "title": "Kids Tramp Track \"Playground\" 4m",
+          "sku": "97044",
+          "options": [
+            {
+              "value": "Default"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "prod_01KRGBH0H4XNTP3QG8E8V3SSFB",
+      "handle": "eurotramp-kids-tramp-track-playground-4m-97054",
+      "title": "Kids Tramp Track \"Playground\" 4m",
+      "status": "draft",
+      "thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground-4m-97054/97054-kidstramptrack4mepdm_83ccaccd40_1920x1080.jpg",
+      "metadata": {
+        "gtin": "4260477194718",
+        "category": "playground",
+        "item_code": "97054",
+        "brand_slug": "eurotramp",
+        "dimensions": {
+          "frame_width_cm": 431,
+          "frame_height_cm": 71,
+          "frame_length_cm": 156,
+          "jumping_bed_width_cm": 366,
+          "jumping_bed_length_cm": 89
+        },
+        "source_url": "https://www.eurotramp.com/en/products/impact-protection-system-epdm-kids-tramp-track-4m-complete-set/",
+        "taxonomy_fixed_at": "2026-06-03T04:38:00.443750+00:00",
+        "previous_categories": [],
+        "previous_collection_id": null
+      },
+      "images": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground-4m-97054/97054-kidstramptrack4mepdm_83ccaccd40_1920x1080.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground-4m-97054/97054-kidstramptrack4mepdm_83ccaccd40_680x378.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground-4m-97054/97054-kidstramptrack4mepdm_83ccaccd40_200x112.jpg"
+        }
+      ],
+      "options": [
+        {
+          "id": "opt_01KRGBH0H4DFCK9TQ91VZP633Z",
+          "title": "Default",
+          "values": [
+            {
+              "value": "Default"
+            }
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": "variant_01KRGBH0JFR5JQZ44RRFW70BBP",
+          "title": "Kids Tramp Track \"Playground\" 4m",
+          "sku": "97054",
+          "options": [
+            {
+              "value": "Default"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "prod_01KRGBH1WXJJM4K4GYYVSYTY9S",
+      "handle": "eurotramp-kids-tramp-track-playground-6m-97046",
+      "title": "Kids Tramp Track \"Playground\" 6m",
+      "status": "draft",
+      "thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground-6m-97046/97056-kidstramptrack6mepdm_c385cac09c_1920x1080.jpg",
+      "metadata": {
+        "gtin": "4260477194763",
+        "category": "playground",
+        "item_code": "97046",
+        "brand_slug": "eurotramp",
+        "dimensions": {
+          "frame_width_cm": 631,
+          "frame_height_cm": 71,
+          "frame_length_cm": 156,
+          "jumping_bed_width_cm": 566,
+          "jumping_bed_length_cm": 89
+        },
+        "source_url": "https://www.eurotramp.com/en/products/impact-protection-system-epdm-kids-tramp-track-6m-complete-set/",
+        "taxonomy_fixed_at": "2026-06-03T04:38:00.443750+00:00",
+        "previous_categories": [],
+        "previous_collection_id": null
+      },
+      "images": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground-6m-97046/97056-kidstramptrack6mepdm_c385cac09c_1920x1080.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground-6m-97046/e97648-playproimpactprotectionlipsetkidstramptrack6m_e465a6f74c_1920x1080.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground-6m-97046/e97641-impactprotectionsystemepdm-kidstramptrack6m_180d68ba88_1920x1080.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground-6m-97046/97056-kidstramptrack6mepdm_c385cac09c_680x378.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground-6m-97046/e97648-playproimpactprotectionlipsetkidstramptrack6m_e465a6f74c_680x378.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground-6m-97046/e97641-impactprotectionsystemepdm-kidstramptrack6m_180d68ba88_680x378.jpg"
+        }
+      ],
+      "options": [
+        {
+          "id": "opt_01KRGBH1WYHVEWTSEXXBKQV8Q6",
+          "title": "Default",
+          "values": [
+            {
+              "value": "Default"
+            }
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": "variant_01KRGBH1Y8VP6XFV0G6HCN6ASJ",
+          "title": "Kids Tramp Track \"Playground\" 6m",
+          "sku": "97046",
+          "options": [
+            {
+              "value": "Default"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "prod_01KRGBH3AMXEJWTENPZYBGSD8F",
+      "handle": "eurotramp-kids-tramp-track-playground-6m-97056",
+      "title": "Kids Tramp Track \"Playground\" 6m",
+      "status": "draft",
+      "thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground-6m-97056/97056-kidstramptrack6mepdm_c385cac09c_1920x1080.jpg",
+      "metadata": {
+        "gtin": "4260477194725",
+        "category": "playground",
+        "item_code": "97056",
+        "brand_slug": "eurotramp",
+        "dimensions": {
+          "frame_width_cm": 631,
+          "frame_height_cm": 71,
+          "frame_length_cm": 156,
+          "jumping_bed_width_cm": 566,
+          "jumping_bed_length_cm": 89
+        },
+        "source_url": "https://www.eurotramp.com/en/products/impact-protection-system-epdm-kids-tramp-track-6m-complete-set/",
+        "taxonomy_fixed_at": "2026-06-03T04:38:00.443750+00:00",
+        "previous_categories": [],
+        "previous_collection_id": null
+      },
+      "images": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground-6m-97056/97056-kidstramptrack6mepdm_c385cac09c_1920x1080.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground-6m-97056/97056-kidstramptrack6mepdm_c385cac09c_680x378.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground-6m-97056/97056-kidstramptrack6mepdm_c385cac09c_200x112.jpg"
+        }
+      ],
+      "options": [
+        {
+          "id": "opt_01KRGBH3AM41ED6TP5Y18HRFJP",
+          "title": "Default",
+          "values": [
+            {
+              "value": "Default"
+            }
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": "variant_01KRGBH3BYWFNDFCEC40F67H2P",
+          "title": "Kids Tramp Track \"Playground\" 6m",
+          "sku": "97056",
+          "options": [
+            {
+              "value": "Default"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "prod_01KRGBH4W98GQ4XAB0VQ0EED6R",
+      "handle": "eurotramp-kids-tramp-track-playground-8m-97048",
+      "title": "Kids Tramp Track \"Playground\" 8m",
+      "status": "draft",
+      "thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground-8m-97048/97058-kidstramptrack8mepdm_de8ede0316_1920x1080.jpg",
+      "metadata": {
+        "gtin": "4260477194770",
+        "category": "playground",
+        "item_code": "97048",
+        "brand_slug": "eurotramp",
+        "dimensions": {
+          "frame_width_cm": 831,
+          "frame_height_cm": 71,
+          "frame_length_cm": 156,
+          "jumping_bed_width_cm": 766,
+          "jumping_bed_length_cm": 89
+        },
+        "source_url": "https://www.eurotramp.com/en/products/impact-protection-system-epdm-kids-tramp-track-8m-complete-set/",
+        "taxonomy_fixed_at": "2026-06-03T04:38:00.443750+00:00",
+        "previous_categories": [],
+        "previous_collection_id": null
+      },
+      "images": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground-8m-97048/97058-kidstramptrack8mepdm_de8ede0316_1920x1080.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground-8m-97048/e97848-playproimpactprotectionlipsetkidstramptrack8m_a70d2b7a2c_1920x1080.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground-8m-97048/e97841-impactprotectionsystemepdm-kidstramptrack8m_f2d6c5be76_1920x1080.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground-8m-97048/97058-kidstramptrack8mepdm_de8ede0316_680x378.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground-8m-97048/e97848-playproimpactprotectionlipsetkidstramptrack8m_a70d2b7a2c_680x378.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground-8m-97048/e97841-impactprotectionsystemepdm-kidstramptrack8m_f2d6c5be76_680x378.jpg"
+        }
+      ],
+      "options": [
+        {
+          "id": "opt_01KRGBH4WAMNJPQG2VCQ1KBC91",
+          "title": "Default",
+          "values": [
+            {
+              "value": "Default"
+            }
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": "variant_01KRGBH4XRVBACC213HGM0BMJ1",
+          "title": "Kids Tramp Track \"Playground\" 8m",
+          "sku": "97048",
+          "options": [
+            {
+              "value": "Default"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "prod_01KRGBH6B8WR209VNX9NHH79MQ",
+      "handle": "eurotramp-kids-tramp-track-playground-8m-97058",
+      "title": "Kids Tramp Track \"Playground\" 8m",
+      "status": "draft",
+      "thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground-8m-97058/97058-kidstramptrack8mepdm_de8ede0316_1920x1080.jpg",
+      "metadata": {
+        "gtin": "4260477194732",
+        "category": "playground",
+        "item_code": "97058",
+        "brand_slug": "eurotramp",
+        "dimensions": {
+          "frame_width_cm": 831,
+          "frame_height_cm": 71,
+          "frame_length_cm": 156,
+          "jumping_bed_width_cm": 766,
+          "jumping_bed_length_cm": 89
+        },
+        "source_url": "https://www.eurotramp.com/en/products/impact-protection-system-epdm-kids-tramp-track-8m-complete-set/",
+        "taxonomy_fixed_at": "2026-06-03T04:38:00.443750+00:00",
+        "previous_categories": [],
+        "previous_collection_id": null
+      },
+      "images": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground-8m-97058/97058-kidstramptrack8mepdm_de8ede0316_1920x1080.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground-8m-97058/97058-kidstramptrack8mepdm_de8ede0316_680x378.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground-8m-97058/97058-kidstramptrack8mepdm_de8ede0316_200x112.jpg"
+        }
+      ],
+      "options": [
+        {
+          "id": "opt_01KRGBH6B9GNH5KAYKX3B590W4",
+          "title": "Default",
+          "values": [
+            {
+              "value": "Default"
+            }
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": "variant_01KRGBH6CKE16ZPEDVC9TT5XD7",
+          "title": "Kids Tramp Track \"Playground\" 8m",
+          "sku": "97058",
+          "options": [
+            {
+              "value": "Default"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "prod_01KRGBGWNTV00G0RVFPH2SVY7T",
+      "handle": "eurotramp-kids-tramp-track-playground-10m-97049",
+      "title": "Kids Tramp Track \"Playground\" 10m",
+      "status": "draft",
+      "thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground-10m-97049/97059-kidstramptrack10mepdm_33d50d6d5e_1920x1080.jpg",
+      "metadata": {
+        "gtin": "4260477194787",
+        "category": "playground",
+        "item_code": "97049",
+        "brand_slug": "eurotramp",
+        "dimensions": {
+          "frame_width_cm": 1031,
+          "frame_height_cm": 71,
+          "frame_length_cm": 156,
+          "jumping_bed_width_cm": 966,
+          "jumping_bed_length_cm": 89
+        },
+        "source_url": "https://www.eurotramp.com/en/products/impact-protection-system-epdm-kids-tramp-track-10m-complete-set/",
+        "taxonomy_fixed_at": "2026-06-03T04:38:00.443750+00:00",
+        "previous_categories": [],
+        "previous_collection_id": null
+      },
+      "images": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground-10m-97049/97059-kidstramptrack10mepdm_33d50d6d5e_1920x1080.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground-10m-97049/e97948-playproimpactprotectionlipsetkidstramptrack10m_96fbedbdd6_1920x1080.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground-10m-97049/e97941-impactprotectionsystemepdm-kidstramptrack10m_d363d36e9a_1920x1080.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground-10m-97049/97059-kidstramptrack10mepdm_33d50d6d5e_680x378.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground-10m-97049/e97948-playproimpactprotectionlipsetkidstramptrack10m_96fbedbdd6_680x378.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground-10m-97049/e97941-impactprotectionsystemepdm-kidstramptrack10m_d363d36e9a_680x378.jpg"
+        }
+      ],
+      "options": [
+        {
+          "id": "opt_01KRGBGWNVA28KMGR0F0P08V6S",
+          "title": "Default",
+          "values": [
+            {
+              "value": "Default"
+            }
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": "variant_01KRGBGWQ53NYNBW9X31J8XM32",
+          "title": "Kids Tramp Track \"Playground\" 10m",
+          "sku": "97049",
+          "options": [
+            {
+              "value": "Default"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "prod_01KRGBGXYBR7JB8V416EE4S9XP",
+      "handle": "eurotramp-kids-tramp-track-playground-10m-97059",
+      "title": "Kids Tramp Track \"Playground\" 10m",
+      "status": "draft",
+      "thumbnail": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground-10m-97059/97059-kidstramptrack10mepdm_33d50d6d5e_1920x1080.jpg",
+      "metadata": {
+        "gtin": "4260477194749",
+        "category": "playground",
+        "item_code": "97059",
+        "brand_slug": "eurotramp",
+        "dimensions": {
+          "frame_width_cm": 1031,
+          "frame_height_cm": 71,
+          "frame_length_cm": 156,
+          "jumping_bed_width_cm": 966,
+          "jumping_bed_length_cm": 89
+        },
+        "source_url": "https://www.eurotramp.com/en/products/impact-protection-system-epdm-kids-tramp-track-10m-complete-set/",
+        "taxonomy_fixed_at": "2026-06-03T04:38:00.443750+00:00",
+        "previous_categories": [],
+        "previous_collection_id": null
+      },
+      "images": [
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground-10m-97059/97059-kidstramptrack10mepdm_33d50d6d5e_1920x1080.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground-10m-97059/97059-kidstramptrack10mepdm_33d50d6d5e_680x378.jpg"
+        },
+        {
+          "url": "https://catalogs.leka.studio/api/i/eurotramp/eurotramp-kids-tramp-track-playground-10m-97059/97059-kidstramptrack10mepdm_33d50d6d5e_200x112.jpg"
+        }
+      ],
+      "options": [
+        {
+          "id": "opt_01KRGBGXYBMP70JV91FZGPFGCX",
+          "title": "Default",
+          "values": [
+            {
+              "value": "Default"
+            }
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "id": "variant_01KRGBGXZRKBPSHJQ2P1K2KAAS",
+          "title": "Kids Tramp Track \"Playground\" 10m",
+          "sku": "97059",
+          "options": [
+            {
+              "value": "Default"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

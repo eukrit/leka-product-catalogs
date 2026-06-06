@@ -1,0 +1,3917 @@
+{
+  "generated_at": "2026-06-03T04:38:00.443750+00:00",
+  "mode": "apply",
+  "r1_semantics": "replace",
+  "totals": {
+    "products": 187,
+    "writes": 186,
+    "cat_changes": 182,
+    "coll_changes": 153,
+    "status_changes": 10,
+    "failed": 0,
+    "unmapped": 0
+  },
+  "unmapped": [],
+  "decisions": [
+    {
+      "handle": "eurotramp-adaption-bars-safety-platform-integral-ultimate",
+      "title": "Adaption bars",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "accessories-spare-parts",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "ultimate",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-adhesive-cartridge-for-kids-tramp-impact-protection-e97003",
+      "title": "adhesive cartridge for Kids Tramp impact protection",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-adhesive-cartridge-for-kids-tramp-impact-protection-e97043",
+      "title": "adhesive cartridge for Kids Tramp impact protection",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-albatross",
+      "title": "Albatross",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "school-popular-sports-trampolines",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": null,
+        "change": false
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-anchor-bar-kids-tramp-e20970",
+      "title": "Anchor bar Kids Tramp",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-anti-slip-plate-dmt",
+      "title": "Anti-slip plate",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "accessories-spare-parts",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": null,
+        "change": false
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-bonded-impact-protection-kids-tramp-track-10m-e97941",
+      "title": "Bonded impact protection Kids Tramp Track 10m",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-bonded-impact-protection-kids-tramp-track-4m-e97441",
+      "title": "Bonded impact protection Kids Tramp Track 4m",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-bonded-impact-protection-kids-tramp-track-6m-e97641",
+      "title": "Bonded impact protection Kids Tramp Track 6m",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-bonded-impact-protection-kids-tramp-track-8m-e97841",
+      "title": "Bonded impact  protection Kids Tramp Track 8m",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-bonded-impact-protection-system-kids-tramp-e97041",
+      "title": "Bonded impact protection system Kids Tramp",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-bonded-impact-protection-system-kids-tramp-loop-e97051",
+      "title": "Bonded impact protection system Kids Tramp Loop",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-bonded-impact-protection-system-kids-tramp-loop-xl-e97542",
+      "title": "Bonded impact protection system Kids Tramp Loop XL",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-bonded-impact-protection-system-kids-tramp-xl-e97544",
+      "title": "Bonded impact protection system Kids Tramp XL",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-bonded-impact-protection-system-wehrfritz-fun-round-e94700",
+      "title": "bonded impact protection system Wehrfritz Fun round",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "wehrfritz-fun",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-bonded-impact-protection-system-wehrfritz-fun-xl-e94541",
+      "title": "Bonded impact protection system Wehrfritz Fun XL",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "wehrfritz-fun",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-booster-board",
+      "title": "Booster Board",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "booster-board",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": null,
+        "change": false
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-booster-board-freestyle",
+      "title": "Booster Board \"Freestyle\"",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "freestyle-trampolines",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": null,
+        "change": false
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-bounce-cloud",
+      "title": "BounceCloud",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "playground-kindergarten",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "bouncecloud",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-bouncecloud-3-piece-combination-green-93020",
+      "title": "BounceCloud 3-piece combination - green",
+      "category": {
+        "from": [],
+        "to": "playground-kindergarten",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "bouncecloud",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-bouncecloud-3-piece-combination-orange-93022",
+      "title": "BounceCloud 3-piece combination - orange",
+      "category": {
+        "from": [],
+        "to": "playground-kindergarten",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "bouncecloud",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-bouncecloud-3-piece-combination-yellow-93021",
+      "title": "BounceCloud 3-piece combination - yellow",
+      "category": {
+        "from": [],
+        "to": "playground-kindergarten",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "bouncecloud",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-bouncecloud-6-piece-combination-green-93030",
+      "title": "BounceCloud 6-piece combination - green",
+      "category": {
+        "from": [],
+        "to": "playground-kindergarten",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "bouncecloud",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-bouncecloud-6-piece-combination-orange-93032",
+      "title": "BounceCloud 6-piece combination - orange",
+      "category": {
+        "from": [],
+        "to": "playground-kindergarten",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "bouncecloud",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-bouncecloud-6-piece-combination-yellow-93031",
+      "title": "BounceCloud 6-piece combination - yellow",
+      "category": {
+        "from": [],
+        "to": "playground-kindergarten",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "bouncecloud",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-bouncecloud-orange-93002",
+      "title": "BounceCloud - orange",
+      "category": {
+        "from": [],
+        "to": "playground-kindergarten",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "bouncecloud",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-bouncecloud-yellow-93001",
+      "title": "BounceCloud - yellow",
+      "category": {
+        "from": [],
+        "to": "playground-kindergarten",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "bouncecloud",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-bumper-dorado",
+      "title": "Bumper Dorado®",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "accessories-spare-parts",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "minitramp",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-bumper-teamgym",
+      "title": "Bumper Teamgym",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "accessories-spare-parts",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "minitramp",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-bungee-longe",
+      "title": "Bungee Longe",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "accessories-spare-parts",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": null,
+        "change": false
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-clamping-jaw-inside-bouncecloud-e44193",
+      "title": "Clamping jaw inside BounceCloud",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "bouncecloud",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-clamping-jaw-outside-center-bouncecloud-e44194",
+      "title": "Clamping jaw outside center BounceCloud",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "bouncecloud",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-clamping-jaw-outside-corner-bouncecloud-e44195",
+      "title": "Clamping jaw outside corner BounceCloud",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "bouncecloud",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-complete-competition-trampoline",
+      "title": "Competition trampoline sets",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "competition-trampolines",
+        "reason": "override",
+        "change": false
+      },
+      "collection": {
+        "from": null,
+        "to": null,
+        "change": false
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-concrete-foundation",
+      "title": "Concrete foundation",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "accessories-spare-parts",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": null,
+        "change": false
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-customized-fabrications",
+      "title": "Customized Fabrications",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "customized-fabrications",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": null,
+        "change": false
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-dorado",
+      "title": "Dorado®",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "minitramps",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "minitramp",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-double-minitramp-190",
+      "title": "Double-Minitramp 190",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "double-minitramp",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "minitramp",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "draft",
+        "change": true
+      }
+    },
+    {
+      "handle": "eurotramp-eurotramp-play",
+      "title": "Eurotramp PLAY!",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "playground-kindergarten",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": null,
+        "change": false
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-eurotramp-play-light-epl0001",
+      "title": "Eurotramp PLAY! Light",
+      "category": {
+        "from": [],
+        "to": "playground-kindergarten",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": null,
+        "change": false
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-eurotramp-spotting-mat",
+      "title": "Eurotramp spotting mat",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "accessories-spare-parts",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "safety-landing-mats",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-fivesquare",
+      "title": "Fivesquare 5²",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "freestyle-trampolines",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": null,
+        "change": false
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-frame-bouncecloud-e41093",
+      "title": "Frame BounceCloud",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "bouncecloud",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-frame-pads-set-80mm-safety-plus",
+      "title": "Frame pads set 80 mm SAFETY PLUS",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "accessories-spare-parts",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": null,
+        "change": false
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-grand-master",
+      "title": "Grand Master",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "school-popular-sports-trampolines",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "grand-master",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-grand-master-exclusiv",
+      "title": "Grand Master Exclusiv",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "competition-trampolines",
+        "reason": "override",
+        "change": false
+      },
+      "collection": {
+        "from": null,
+        "to": "grand-master",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "draft",
+        "change": true
+      }
+    },
+    {
+      "handle": "eurotramp-grand-master-exclusiv-open-end",
+      "title": "Grand Master Exclusiv Open-End",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "competition-trampolines",
+        "reason": "override",
+        "change": false
+      },
+      "collection": {
+        "from": null,
+        "to": "grand-master",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "draft",
+        "change": true
+      }
+    },
+    {
+      "handle": "eurotramp-ground-trampoline-freestyle",
+      "title": "Ground Trampoline \"Freestyle\"",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "freestyle-trampolines",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "ground-trampoline",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-ground-trampoline-indoor",
+      "title": "Ground Trampoline Grand Master INDOOR",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "school-popular-sports-trampolines",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "ground-trampoline",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-ground-trampoline-outdoor",
+      "title": "Ground Trampoline OUTDOOR",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "outdoor-trampolines",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "ground-trampoline",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-hdts",
+      "title": "HDTS trampoline measurement device",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "accessories-spare-parts",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "roller-stands-transport",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-hobbytramp",
+      "title": "Hobbytramp",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "outdoor-trampolines",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": null,
+        "change": false
+      },
+      "status": {
+        "from": "published",
+        "to": "draft",
+        "change": true
+      }
+    },
+    {
+      "handle": "eurotramp-icepad",
+      "title": "Icepad®",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "accessories-spare-parts",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": null,
+        "change": false
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-impact-protection-system",
+      "title": "Impact protection system EPDM",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "accessories-spare-parts",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": null,
+        "change": false
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-impactprotection-system-kids-tramp-e97044",
+      "title": "impactprotection system Kids Tramp",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-jumping-bed-kids-tramp-kindergarten-e21897",
+      "title": "Jumping bed Kids Tramp Kindergarten",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-jumping-bed-kids-tramp-kindergarten-xl-e21879",
+      "title": "Jumping bed Kids Tramp \"Kindergarten\" XL",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-jumping-bed-kids-tramp-playground-additional-coating-e21898b",
+      "title": "jumping bed Kids Tramp \"Playground\" additional coating",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-jumping-bed-kids-tramp-playground-e21898",
+      "title": "Jumping bed Kids Tramp \"Playground\"",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-jumping-bed-kids-tramp-playground-xl-additional-coating-e21899b",
+      "title": "jumping bed Kids Tramp \"Playground\" XL additional coating",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-jumping-bed-kids-tramp-playground-xl-e21899",
+      "title": "jumping bed Kids Tramp \"Playground\" XL",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-jumping-bed-kids-tramp-track-playground-10m-e21009",
+      "title": "jumping bed Kids Tramp Track \"Playground\" 10m",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-jumping-bed-kids-tramp-track-playground-4m-e21004",
+      "title": "jumping bed Kids Tramp Track \"Playground\" 4m",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-jumping-bed-kids-tramp-track-playground-6m-e21006",
+      "title": "jumping bed Kids Tramp Track \"Playground\" 6m",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-jumping-bed-kids-tramp-track-playground-8m-e21008",
+      "title": "jumping bed Kids Tramp Track \"Playground\" 8m",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-jumping-bed-wehrfritz-fun-round-kindergarten-e21950",
+      "title": "Jumping bed Wehrfritz Fun round \"Kindergarten\"",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "wehrfritz-fun",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-jumping-bed-wehrfritz-fun-round-playground-additional-coating-e21947b",
+      "title": "jumping bed Wehrfritz Fun round \"Playground\" additional coating",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "wehrfritz-fun",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-jumping-bed-wehrfritz-fun-round-playground-e21947",
+      "title": "Jumping bed Wehrfritz Fun round \"Playground\"",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "wehrfritz-fun",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-jumping-bed-wehrfritz-fun-xl-kindergarten-e21945",
+      "title": "Jumping bed Wehrfritz Fun XL \"Kindergarten\"",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "wehrfritz-fun",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-jumping-bed-wehrfritz-fun-xl-playground-additional-coating-e21946b",
+      "title": "jumping bed Wehrfritz FUN XL \"Playground\" additional coating",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "wehrfritz-fun",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-jumping-bed-wehrfritz-fun-xl-playground-e21946",
+      "title": "Jumping bed Wehrfritz Fun XL \"Playground\"",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "wehrfritz-fun",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-kids-tramp-kindergarten",
+      "title": "Kids Tramp \"Kindergarten\"",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "playground-kindergarten",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-kids-tramp-kindergarten-loop",
+      "title": "Kids Tramp \"Kindergarten Loop\"",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "playground-kindergarten",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-kids-tramp-kindergarten-loop-xl",
+      "title": "Kids Tramp \"Kindergarten Loop XL\"",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "playground-kindergarten",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-kids-tramp-kindergarten-xl",
+      "title": "Kids Tramp \"Kindergarten XL\"",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "playground-kindergarten",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-kids-tramp-playground",
+      "title": "Kids Tramp \"Playground\"",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "playground-kindergarten",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-kids-tramp-playground-loop",
+      "title": "Kids Tramp \"Playground Loop\"",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "playground-kindergarten",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-kids-tramp-playground-loop-xl",
+      "title": "Kids Tramp \"Playground Loop XL\"",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "playground-kindergarten",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-kids-tramp-playground-xl",
+      "title": "Kids Tramp \"Playground XL\"",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "playground-kindergarten",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-kids-tramp-track-playground",
+      "title": "Kids Tramp Track \"Playground\"",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "playground-kindergarten",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-kids-tramp-track-playground-10m-97049",
+      "title": "Kids Tramp Track \"Playground\" 10m",
+      "category": {
+        "from": [],
+        "to": "playground-kindergarten",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-kids-tramp-track-playground-10m-97059",
+      "title": "Kids Tramp Track \"Playground\" 10m",
+      "category": {
+        "from": [],
+        "to": "playground-kindergarten",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-kids-tramp-track-playground-4m-97044",
+      "title": "Kids Tramp Track \"Playground\" 4m",
+      "category": {
+        "from": [],
+        "to": "playground-kindergarten",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-kids-tramp-track-playground-4m-97054",
+      "title": "Kids Tramp Track \"Playground\" 4m",
+      "category": {
+        "from": [],
+        "to": "playground-kindergarten",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-kids-tramp-track-playground-6m-97046",
+      "title": "Kids Tramp Track \"Playground\" 6m",
+      "category": {
+        "from": [],
+        "to": "playground-kindergarten",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-kids-tramp-track-playground-6m-97056",
+      "title": "Kids Tramp Track \"Playground\" 6m",
+      "category": {
+        "from": [],
+        "to": "playground-kindergarten",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-kids-tramp-track-playground-8m-97048",
+      "title": "Kids Tramp Track \"Playground\" 8m",
+      "category": {
+        "from": [],
+        "to": "playground-kindergarten",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-kids-tramp-track-playground-8m-97058",
+      "title": "Kids Tramp Track \"Playground\" 8m",
+      "category": {
+        "from": [],
+        "to": "playground-kindergarten",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-landing-mat-cover",
+      "title": "Landing mat cover",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "accessories-spare-parts",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "safety-landing-mats",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-leaf-spring-bouncecloud-e31196",
+      "title": "Leaf spring BounceCloud",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "bouncecloud",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-lifting-roller-stand",
+      "title": "Lifting Roller Stand",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "accessories-spare-parts",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "roller-stands-transport",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-lifting-roller-stand-safe-comfort",
+      "title": "Lifting Roller Stand \"Safe & Comfort\"",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "accessories-spare-parts",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "roller-stands-transport",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-long-leaf-spring-connecting-cable-e33393",
+      "title": "Long leaf spring connecting cable",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": null,
+        "change": false
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-master",
+      "title": "Master",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "school-popular-sports-trampolines",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": null,
+        "change": false
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-mats-tramp",
+      "title": "Mats Trampoline",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "playground-kindergarten",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": null,
+        "change": false
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-minitramp-trolley",
+      "title": "Minitramp Trolley",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "accessories-spare-parts",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "minitramp",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-minitrampoline-112-125",
+      "title": "Minitramp 112 / 125",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "minitramps",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "minitramp",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-mounting-tool-kids-tramp-e31100",
+      "title": "Mounting tool Kids Tramp",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-octotramp",
+      "title": "Octotramp",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "outdoor-trampolines",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": null,
+        "change": false
+      },
+      "status": {
+        "from": "published",
+        "to": "draft",
+        "change": true
+      }
+    },
+    {
+      "handle": "eurotramp-open-end-minitramp",
+      "title": "Minitramp Open-End",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "minitramps",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "minitramp",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-playpro-rubber-protection-lip-for-kids-tramp-e97048",
+      "title": "PlayPro rubber protection lip for Kids Tramp",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-playpro-rubber-protection-lip-for-kids-tramp-track-10m-e97948",
+      "title": "PlayPro rubber protection lip for Kids Tramp Track 10m",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-playpro-rubber-protection-lip-for-kids-tramp-track-4m-e97448",
+      "title": "PlayPro rubber protection lip for Kids Tramp Track 4m",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-playpro-rubber-protection-lip-for-kids-tramp-track-6m-e97648",
+      "title": "PlayPro rubber protection lip for Kids Tramp Track 6m",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-playpro-rubber-protection-lip-for-kids-tramp-track-8m-e97848",
+      "title": "PlayPro rubber protection lip for Kids Tramp Track 8m",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-playpro-rubber-protection-lip-for-kids-tramp-xl-e97548",
+      "title": "PlayPro rubber protection lip for Kids Tramp XL",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-playpro-rubber-protection-ring-for-kids-tramp-loop-e97047",
+      "title": "PlayPro rubber protection ring for Kids Tramp Loop",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-plug-in-connector-bouncecloud-e93001",
+      "title": "Plug-in Connector BounceCloud",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "bouncecloud",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-premium",
+      "title": "Premium",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "competition-trampolines",
+        "reason": "override",
+        "change": false
+      },
+      "collection": {
+        "from": null,
+        "to": null,
+        "change": false
+      },
+      "status": {
+        "from": "published",
+        "to": "draft",
+        "change": true
+      }
+    },
+    {
+      "handle": "eurotramp-roller-stand",
+      "title": "Roller Stand",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "accessories-spare-parts",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "roller-stands-transport",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-rubber-protection-bar-kids-tramp-150x150-cm-e97022",
+      "title": "Rubber protection bar Kids Tramp 150x150 cm",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-rubber-protection-bar-kids-tramp-xl-200x200-cm-e97522",
+      "title": "Rubber protection bar Kids Tramp XL 200x200 cm",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-rubber-protection-bars-kids-tramp-xl-200x200cm-4-sides-e97502",
+      "title": "Rubber protection bars Kids Tramp XL 200x200cm (4 sides)",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-rubber-protection-ring",
+      "title": "PlayPro™ rubber protection ring/lip for EPDM wet pour surface or artificial turf",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "accessories-spare-parts",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": null,
+        "change": false
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-rubber-protections-bars-kids-tramp-150x150cm-4-pieces-e97002",
+      "title": "Rubber protections bars Kids Tramp 150x150cm (4 pieces)",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-run-up-track-dmt",
+      "title": "Run-Up track",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "accessories-spare-parts",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": null,
+        "change": false
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-safety-platforms-and-safety-mats-integral",
+      "title": "Safety platforms \"Integral Universal\" & safety mats \"Integral\"",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "accessories-spare-parts",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "safety-landing-mats",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-safety-platforms-and-safety-mats-universal",
+      "title": "Safety platforms \"Competition Universal\" & safety mats \"Competition\"",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "accessories-spare-parts",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "safety-landing-mats",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-safety-platforms-universal-freestyle",
+      "title": "Safety platforms \"Competition Universal\"",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "accessories-spare-parts",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "safety-landing-mats",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-service-bag",
+      "title": "Service bag",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "accessories-spare-parts",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "roller-stands-transport",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-set-of-landing-mats-dmt",
+      "title": "Set of landing mats",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "accessories-spare-parts",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "safety-landing-mats",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-short-leaf-spring-connecting-cable-e33394",
+      "title": "Short leaf spring connecting cable",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": null,
+        "change": false
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-single-tile-impact-protection-kids-tramp-cornerpiece-e97302",
+      "title": "Single tile impact protection Kids Tramp cornerpiece",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-single-tile-impact-protection-kids-tramp-cornerpiece-e97303",
+      "title": "Single tile impact protection Kids Tramp cornerpiece",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-single-tile-impact-protection-kids-tramp-cornerpiece-e97305",
+      "title": "Single tile impact protection Kids Tramp cornerpiece",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-single-tile-impact-protection-kids-tramp-cornerpiece-e97306",
+      "title": "Single tile impact protection Kids Tramp cornerpiece",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-single-tile-impact-protection-kids-tramp-cornerpiece-e97402",
+      "title": "Single tile impact protection Kids Tramp cornerpiece",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-single-tile-impact-protection-kids-tramp-cornerpiece-e97403",
+      "title": "Single tile impact protection Kids Tramp cornerpiece",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-single-tile-impact-protection-kids-tramp-cornerpiece-e97405",
+      "title": "Single tile impact protection Kids Tramp cornerpiece",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-single-tile-impact-protection-kids-tramp-cornerpiece-e97406",
+      "title": "Single tile impact protection Kids Tramp cornerpiece",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-single-tile-impact-protection-kids-tramp-loop-centrepiece-e97308",
+      "title": "Single tile impact protection Kids Tramp Loop centrepiece",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-single-tile-impact-protection-kids-tramp-loop-centrepiece-e97408",
+      "title": "Single tile impact protection Kids Tramp Loop centrepiece",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-single-tile-impact-protection-kids-tramp-loop-cornerpiece-e97307",
+      "title": "Single tile impact protection Kids Tramp Loop cornerpiece",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-single-tile-impact-protection-kids-tramp-loop-cornerpiece-e97407",
+      "title": "Single tile impact protection Kids Tramp Loop cornerpiece",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-single-tile-impact-protection-kids-tramp-loop-xl-centrepiece-left-e97310",
+      "title": "Single tile impact protection Kids Tramp Loop XL centrepiece left",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-single-tile-impact-protection-kids-tramp-loop-xl-centrepiece-left-e97410",
+      "title": "Single tile impact protection Kids Tramp Loop XL centrepiece left",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-single-tile-impact-protection-kids-tramp-loop-xl-centrepiece-right-e97311",
+      "title": "Single tile impact protection Kids Tramp Loop XL centrepiece right",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-single-tile-impact-protection-kids-tramp-loop-xl-centrepiece-right-e97411",
+      "title": "Single tile impact protection Kids Tramp Loop XL centrepiece right",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-single-tile-impact-protection-kids-tramp-loop-xl-cornerpiece-e97309",
+      "title": "Single tile impact protection Kids Tramp Loop XL cornerpiece",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-single-tile-impact-protection-kids-tramp-loop-xl-cornerpiece-e97409",
+      "title": "Single tile impact protection Kids Tramp Loop XL cornerpiece",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-single-tile-impact-protection-kids-tramp-track-centrepiece-e97006",
+      "title": "single tile impact protection Kids Tramp Track centrepiece",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-single-tile-impact-protection-kids-tramp-track-centrepiece-e97008",
+      "title": "single tile impact protection Kids Tramp Track centrepiece",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-single-tile-impact-protection-kids-tramp-track-centrepiece-e97012",
+      "title": "single tile impact protection Kids Tramp Track centrepiece",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-single-tile-impact-protection-kids-tramp-track-centrepiece-e97013",
+      "title": "single tile impact protection Kids Tramp Track centrepiece",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-single-tile-impact-protection-kids-tramp-track-centrepiece-e97056",
+      "title": "single tile impact protection Kids Tramp Track centrepiece",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-single-tile-impact-protection-kids-tramp-track-centrepiece-e97058",
+      "title": "single tile impact protection Kids Tramp Track centrepiece",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-single-tile-impact-protection-kids-tramp-track-centrepiece-e97059",
+      "title": "single tile impact protection Kids Tramp Track centrepiece",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-single-tile-impact-protection-kids-tramp-track-cornerpiece-e97005",
+      "title": "single tile impact protection Kids Tramp track cornerpiece",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-single-tile-impact-protection-kids-tramp-track-cornerpiece-e97007",
+      "title": "single tile impact protection Kids Tramp track cornerpiece",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-single-tile-impact-protection-kids-tramp-track-cornerpiece-e97055",
+      "title": "single tile impact protection Kids Tramp track cornerpiece",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-single-tile-impact-protection-kids-tramp-track-cornerpiece-e97057",
+      "title": "single tile impact protection Kids Tramp track cornerpiece",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-single-tile-impact-protection-kids-tramp-xl-centrepiece-e97301",
+      "title": "Single tile impact protection Kids Tramp XL centrepiece",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-single-tile-impact-protection-kids-tramp-xl-centrepiece-e97304",
+      "title": "Single tile impact protection Kids Tramp XL centrepiece",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-single-tile-impact-protection-kids-tramp-xl-centrepiece-e97401",
+      "title": "Single tile impact protection Kids Tramp XL centrepiece",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-single-tile-impact-protection-kids-tramp-xl-centrepiece-e97404",
+      "title": "Single tile impact protection Kids Tramp XL centrepiece",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "kids-tramp",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-somersault-belt-twisting-belt",
+      "title": "Somersault belt",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "accessories-spare-parts",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": null,
+        "change": false
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-spieth-ground-safety-mat",
+      "title": "Spieth ground safety mat",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "accessories-spare-parts",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "safety-landing-mats",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-sport-thieme-adventure-tramp",
+      "title": "Sport-Thieme® Adventure-Tramp",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "playground-kindergarten",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": null,
+        "change": false
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-sport-thieme-adventure-tramp-built-in-frame",
+      "title": "Sport-Thieme® Adventure-Tramp built-in-frame",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "playground-kindergarten",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": null,
+        "change": false
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-spotting-mat-freestyle",
+      "title": "Eurotramp Spotting mat \"Freestyle\"",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "accessories-spare-parts",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "safety-landing-mats",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-stability-plate",
+      "title": "Stability plate",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "accessories-spare-parts",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": null,
+        "change": false
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-steel-spring-145x20mm-e31120",
+      "title": "Steel spring 145x20mm",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": null,
+        "change": false
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-tchoukball",
+      "title": "Tchoukball",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "accessories-spare-parts",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": null,
+        "change": false
+      },
+      "status": {
+        "from": "published",
+        "to": "draft",
+        "change": true
+      }
+    },
+    {
+      "handle": "eurotramp-teamgym",
+      "title": "Teamgym",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "minitramps",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "minitramp",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-teamgym-freestyle",
+      "title": "Teamgym \"Freestyle\"",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "freestyle-trampolines",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "minitramp",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-top-sheet-for-bouncecloud-e21030",
+      "title": "Top-Sheet for BounceCloud",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "bouncecloud",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-top-sheet-for-bouncecloud-e21031",
+      "title": "Top-Sheet for BounceCloud",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "bouncecloud",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-top-sheet-for-bouncecloud-e21032",
+      "title": "Top-Sheet for BounceCloud",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "bouncecloud",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-torsion-spring-left-bouncecloud-e31195",
+      "title": "Torsion spring left BounceCloud",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "bouncecloud",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-torsion-spring-right-bouncecloud-e31194",
+      "title": "Torsion spring right BounceCloud",
+      "category": {
+        "from": [],
+        "to": "accessories-spare-parts",
+        "reason": "accessory-regex",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "bouncecloud",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-trampoline-set-freestyle",
+      "title": "Trampoline Set \"Freestyle\"",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "freestyle-trampolines",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": null,
+        "change": false
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-trampoline-set-one-field",
+      "title": "Trampoline Set \"Stationary\" - one jump area",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "outdoor-trampolines",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": null,
+        "change": false
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-trampoline-set-stationary",
+      "title": "Trampoline Set \"Stationary\"",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "trampoline-sets",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": null,
+        "change": false
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-trampoline-track-air-track-plus",
+      "title": "Airtrack +",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "trampoline-tracks",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "trampoline-track",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-trampoline-track-stationary",
+      "title": "Trampoline Track \"Stationary\"",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "trampoline-tracks",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "trampoline-track",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "draft",
+        "change": true
+      }
+    },
+    {
+      "handle": "eurotramp-trampoline-track-stationary-2",
+      "title": "Trampoline Track \"Stationary\" 2 - NEW MODEL",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "trampoline-tracks",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "trampoline-track",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-trampoline-track-vario",
+      "title": "Trampoline Track \"Vario\"",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "trampoline-tracks",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "trampoline-track",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "draft",
+        "change": true
+      }
+    },
+    {
+      "handle": "eurotramp-transport-case-hdts",
+      "title": "HDTS transport case",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "accessories-spare-parts",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "roller-stands-transport",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-trimm-tramp",
+      "title": "Trimm Tramp",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "outdoor-trampolines",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": null,
+        "change": false
+      },
+      "status": {
+        "from": "published",
+        "to": "draft",
+        "change": true
+      }
+    },
+    {
+      "handle": "eurotramp-ultimate",
+      "title": "Ultimate",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "competition-trampolines",
+        "reason": "override",
+        "change": false
+      },
+      "collection": {
+        "from": null,
+        "to": "ultimate",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-ultimate-dmt-6x6",
+      "title": "Double-Minitramp Ultimate",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "double-minitramp",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "ultimate",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-ultimate-freestyle",
+      "title": "Ultimate \"Freestyle\"",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "freestyle-trampolines",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "ultimate",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-underwater-trampoline",
+      "title": "Underwater Trampoline",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "underwater-trampoline",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": null,
+        "change": false
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-wehrfritz-fun-round",
+      "title": "Wehrfritz FUN round",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "playground-kindergarten",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "wehrfritz-fun",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-wehrfritz-fun-round-kindergarten-94750",
+      "title": "Wehrfritz Fun round \"Kindergarten\"",
+      "category": {
+        "from": [],
+        "to": "playground-kindergarten",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "wehrfritz-fun",
+        "change": true
+      },
+      "status": {
+        "from": "draft",
+        "to": "draft",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-wehrfritz-fun-xl-kindergarten",
+      "title": "Wehrfritz FUN XL \"Kindergarten\"",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "playground-kindergarten",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "wehrfritz-fun",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    },
+    {
+      "handle": "eurotramp-wehrfritz-fun-xl-playground",
+      "title": "Wehrfritz FUN XL \"Playground\"",
+      "category": {
+        "from": [
+          "competition-trampolines"
+        ],
+        "to": "playground-kindergarten",
+        "reason": "override",
+        "change": true
+      },
+      "collection": {
+        "from": null,
+        "to": "wehrfritz-fun",
+        "change": true
+      },
+      "status": {
+        "from": "published",
+        "to": "published",
+        "change": false
+      }
+    }
+  ]
+}

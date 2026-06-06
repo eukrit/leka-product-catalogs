@@ -1,0 +1,203 @@
+{
+  "generated_at": "2026-06-05T13:27:55.185530+00:00",
+  "mode": "apply",
+  "totals": {
+    "products": 32,
+    "photos_uploaded": 71,
+    "failed": 0
+  },
+  "log": [
+    {
+      "handle": "eurotramp-anti-slip-plate-dmt",
+      "status": "updated",
+      "new_photos": 1,
+      "thumb": "23201-anti-slipplatefordmt_3be2acfea4_1920x1080.jpg"
+    },
+    {
+      "handle": "eurotramp-booster-board",
+      "status": "updated",
+      "new_photos": 1,
+      "thumb": "e50061---transport-wheels-booster-board_41726a25b1c4f5c50_680x378.jpg"
+    },
+    {
+      "handle": "eurotramp-bounce-cloud",
+      "status": "updated",
+      "new_photos": 13,
+      "thumb": "93002-bouncecloud-orange_76337b8712_1920x1080.jpg"
+    },
+    {
+      "handle": "eurotramp-fivesquare",
+      "status": "updated",
+      "new_photos": 2,
+      "thumb": "40000-fivesquaregrey_dfada99d79_1920x1080.jpg"
+    },
+    {
+      "handle": "eurotramp-grand-master",
+      "status": "updated",
+      "new_photos": 2,
+      "thumb": "productdetails-grandmaster13mm_49d719a380_1920x1080.jpg"
+    },
+    {
+      "handle": "eurotramp-ground-trampoline-indoor",
+      "status": "updated",
+      "new_photos": 1,
+      "thumb": "96013-groundtrampolineindoor13mm_9c8c0635b1_1920x1080.jpg"
+    },
+    {
+      "handle": "eurotramp-impact-protection-system",
+      "status": "updated",
+      "new_photos": 4,
+      "thumb": "e97541-impactprotectionsystemepdmforkidstrampxlgrey_6f6c5cb7b8_1920x1080.jpg"
+    },
+    {
+      "handle": "eurotramp-kids-tramp-track-playground",
+      "status": "updated",
+      "new_photos": 5,
+      "thumb": "97054-kidstramptrack4mepdm_83ccaccd40_1920x1080.jpg"
+    },
+    {
+      "handle": "eurotramp-landing-mat-cover",
+      "status": "updated",
+      "new_photos": 1,
+      "thumb": "26101-landingmatcover_1c680f5d31_1920x1080.jpg"
+    },
+    {
+      "handle": "eurotramp-lifting-roller-stand",
+      "status": "updated",
+      "new_photos": 1,
+      "thumb": "e53110-preview-liftingrollerstandsafecomfort_bd6fa7873b_680x378.jpg"
+    },
+    {
+      "handle": "eurotramp-lifting-roller-stand-safe-comfort",
+      "status": "updated",
+      "new_photos": 1,
+      "thumb": "productdetails-liftingrollerstandsafecomfort_095c3e9b50_1920x1080.jpg"
+    },
+    {
+      "handle": "eurotramp-master",
+      "status": "updated",
+      "new_photos": 2,
+      "thumb": "21000-master45mm_377137efe6_1920x1080.jpg"
+    },
+    {
+      "handle": "eurotramp-mats-tramp",
+      "status": "updated",
+      "new_photos": 1,
+      "thumb": "91000-preview-matstrampoline_f249c65994_1920x1080.jpg"
+    },
+    {
+      "handle": "eurotramp-minitramp-trolley",
+      "status": "updated",
+      "new_photos": 1,
+      "thumb": "60020-preview-minitrampteamgym_2ba99bb563_680x378.jpg"
+    },
+    {
+      "handle": "eurotramp-minitrampoline-112-125",
+      "status": "updated",
+      "new_photos": 6,
+      "thumb": "productdetails-minitramp112doubleperlonrubbercable_6f6e0692da_1920x1080.jpg"
+    },
+    {
+      "handle": "eurotramp-open-end-minitramp",
+      "status": "updated",
+      "new_photos": 3,
+      "thumb": "productdetails-minitrampopen-endpremium_0f50707ffd_1920x1080.jpg"
+    },
+    {
+      "handle": "eurotramp-roller-stand",
+      "status": "updated",
+      "new_photos": 1,
+      "thumb": "e53110-preview-liftingrollerstandsafecomfort_bd6fa7873b_680x378.jpg"
+    },
+    {
+      "handle": "eurotramp-safety-platforms-and-safety-mats-integral",
+      "status": "updated",
+      "new_photos": 2,
+      "thumb": "e44004-chain-safetyplatformsintegraluniversal_b2082b7584_200x112.jpg"
+    },
+    {
+      "handle": "eurotramp-safety-platforms-and-safety-mats-universal",
+      "status": "updated",
+      "new_photos": 5,
+      "thumb": "e33230-rubbercable-shortsidesafetyplatformscompetitionuniversalminitramps_fb9767432a_200x112.jpg"
+    },
+    {
+      "handle": "eurotramp-service-bag",
+      "status": "updated",
+      "new_photos": 3,
+      "thumb": "e31004-servicebagultimate_b4d7144723_1920x1080.jpg"
+    },
+    {
+      "handle": "eurotramp-somersault-belt-twisting-belt",
+      "status": "updated",
+      "new_photos": 2,
+      "thumb": "35000-somersaultbelts_1bddcde3e0_200x112.jpg"
+    },
+    {
+      "handle": "eurotramp-sport-thieme-adventure-tramp",
+      "status": "updated",
+      "new_photos": 2,
+      "thumb": "e97545-impactprotectionsystemepdm-sport-thiemeadventure-tramp_7cf732765e_200x112.jpg"
+    },
+    {
+      "handle": "eurotramp-stability-plate",
+      "status": "updated",
+      "new_photos": 1,
+      "thumb": "tz002-preview-stabilityplateultimate_c96a2c490d_1920x1080.jpg"
+    },
+    {
+      "handle": "eurotramp-teamgym",
+      "status": "updated",
+      "new_photos": 1,
+      "thumb": "productdetails-minitrampteamgym_c4e2140598_1920x1080.jpg"
+    },
+    {
+      "handle": "eurotramp-trampoline-track-stationary",
+      "status": "updated",
+      "new_photos": 1,
+      "thumb": "productdetail-88004-trampolinetrackstationary_fe2da051c7_1920x1080.jpg"
+    },
+    {
+      "handle": "eurotramp-trampoline-track-vario",
+      "status": "updated",
+      "new_photos": 1,
+      "thumb": "productdetails-trampolinetrackvario_7e6dbd4ec9_1920x1080.jpg"
+    },
+    {
+      "handle": "eurotramp-ultimate",
+      "status": "updated",
+      "new_photos": 2,
+      "thumb": "productdetails-ultimate_1a9386d18e_1920x1080.jpg"
+    },
+    {
+      "handle": "eurotramp-ultimate-dmt-6x6",
+      "status": "updated",
+      "new_photos": 1,
+      "thumb": "productdetails-double-minitrampultimate_393daece32_1920x1080.jpg"
+    },
+    {
+      "handle": "eurotramp-ultimate-freestyle",
+      "status": "updated",
+      "new_photos": 1,
+      "thumb": "productdetails-ultimatefreestyle_a3bc40e5dd_1920x1080.jpg"
+    },
+    {
+      "handle": "eurotramp-underwater-trampoline",
+      "status": "updated",
+      "new_photos": 1,
+      "thumb": "productdetails-underwatertrampoline_8fb7b817d5_1920x1080.jpg"
+    },
+    {
+      "handle": "eurotramp-wehrfritz-fun-round",
+      "status": "updated",
+      "new_photos": 1,
+      "thumb": "productdetails-wehrfritzfunroundplayground_1202e5eb57_1920x1080.jpg"
+    },
+    {
+      "handle": "eurotramp-wehrfritz-fun-xl-playground",
+      "status": "updated",
+      "new_photos": 1,
+      "thumb": "productdetail-wehrfritzfunxlplayground_672451331b_1920x1080.jpg"
+    }
+  ]
+}
