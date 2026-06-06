@@ -4,6 +4,49 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.70.1] - 2026-06-06
+
+### Added — Eurotramp full catalog price go-live (kids / BounceCloud / spares)
+
+Pushed the remaining priced-but-unsynced Eurotramp products to Medusa. v2.70.0
+only pushed the 34-handle competition/performance line (via `--scope-file`); the
+kids, BounceCloud, and accessory/spare-part lines were already priced in
+Firestore (`vendors/eurotramp/products[].pricing`, computed by
+`vendors/eurotramp-catalog` at FX EUR 38.7877 / USD 33.0472 / SGD 25.974,
+retail = landed × 1.30) but had never reached Medusa — so they still showed
+`usd=0` stubs on `catalogs.leka.studio`.
+
+**Push.** Ran `scripts/sync_brand_prices_to_medusa.py --brand eurotramp --write`
+with **no `--scope-file`**, so all priced vendor docs were included. The sync is
+update-only (never creates products), matching Firestore `item_code` → Medusa
+variant SKU, falling back to `legacy_sku`, then product handle.
+
+- **151 / 151 priced vendor docs matched (100%) → 151 updated, 0 errors, 0 unmatched.**
+- 36 of the 187 `vendors/eurotramp/products` docs remain unpriced (no `pricing`
+  block) and were correctly skipped.
+- THB/USD/EUR/SGD now live on every priced variant — from spares (~€19; anchor
+  bar E20970 ฿744.65, adhesive cartridge E97003 ฿1,645.83) through accessories
+  (Adaption bars ET-30800 ฿12,508.71), BounceCloud kids (single ฿86,899.84 /
+  3-piece ฿259,367.02 / 6-piece ฿492,197.72), up to playground installs
+  (kids-tramp-track-playground 97049 ฿1,126,294.99 / €29,037.43).
+- The competition/performance line (already live in v2.70.0) was verified
+  **unchanged** (Albatross ฿595,420.25 / €15,350.75).
+
+**Safety.** Pre-push structural backup of all 162 live Eurotramp Medusa products
+written to `docs/reports/eurotramp-snapshot-2026-06-06-pre-kids-price-push.json`
+(`scripts/eurotramp_snapshot.py --tag pre-kids-price-push`). The full dry-run
+price distribution was audited for order-of-magnitude and FX-consistency
+anomalies before the live write — **0 anomalies** (every THB = EUR × 38.7877
+within 3%, with USD/SGD cross-consistent; `retail_eur` range €19.14–€29,037.43,
+median €1,275.69).
+
+### Files
+- `docs/reports/eurotramp-snapshot-2026-06-06-pre-kids-price-push.json` (NEW) — pre-push backup snapshot.
+- `CHANGELOG.md`, `docs/build-summary.html`, `docs/hub.html` updated. (No code change — the
+  sync + snapshot scripts already shipped in v2.70.0; this is a config-free re-run at full scope.)
+
+---
+
 ## [2.70.0] - 2026-06-06
 
 ### Added — Eurotramp competition/performance line: pricing, dimensions, hero images

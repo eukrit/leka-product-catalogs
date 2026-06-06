@@ -32,14 +32,13 @@
   <div class="latest-card">
     <h2 style="margin-top:0;border:0">Latest build</h2>
     <p>
-      Version <strong>2.70.0</strong> &middot; 2026-06-06 &middot;
+      Version <strong>2.70.1</strong> &middot; 2026-06-06 &middot;
       <span class="badge badge-success">success</span>
     </p>
-    <p>Eurotramp competition/performance line (34 products behind the "performance-trampoline" page): set retail pricing THB/USD/EUR/SGD on 28/34 from the current full 2025 (1E) pricelist (Master ฿313,809 / Ultimate ฿503,099), populated open-frame dimensions on 28/34 (Ultimate 520×305×115 cm) so the storefront spec table shows them, and fixed hero images to 33/34 real-photo thumbnails with de-cluttered galleries. 6 pricelist gaps + 1 image gap flagged.</p>
+    <p>Eurotramp full catalog price go-live (kids / BounceCloud / spares). The kids, BounceCloud and accessory/spare-part lines were already priced in Firestore at FX EUR 38.7877 / USD 33.0472 / SGD 25.974 (retail = landed × 1.30) but had never reached Medusa — so they still showed <code>usd=0</code> stubs on catalogs.leka.studio. Re-ran <code>sync_brand_prices_to_medusa.py --brand eurotramp --write</code> with <strong>no <code>--scope-file</code></strong>: <strong>151/151 priced docs matched (100%) → 151 updated, 0 errors</strong>. THB/USD/EUR/SGD now live from spares (~€19) through BounceCloud (single ฿86,899.84 / 6-piece ฿492,197.72) to playground installs (97049 ฿1,126,294.99 / €29,037.43). Competition line (v2.70.0) verified unchanged. Pre-push snapshot + 0-anomaly dry-run audit. 36 unpriced docs skipped.</p>
     <p>
       <a href="CHANGELOG.md">Full build log</a> &middot;
-      <a href="reports/eurotramp-perf-line-gaps-2026-06-06.md">Residual gaps</a> &middot;
-      <a href="reports/eurotramp-perf-line-audit-2026-06-06-post.md">Post audit</a> &middot;
+      <a href="reports/eurotramp-snapshot-2026-06-06-pre-kids-price-push.json">Pre-push snapshot</a> &middot;
       <a href="PROJECT_INDEX.md">Project index</a>
     </p>
   </div>
@@ -48,6 +47,7 @@
   <table>
     <thead><tr><th>Version</th><th>Date</th><th>Summary</th><th>Status</th></tr></thead>
     <tbody>
+      <tr><td><code>2.70.1</code></td><td>2026-06-06</td><td>Eurotramp full catalog price go-live (kids / BounceCloud / spares): full-scope price push, 151/151 priced docs → Medusa (THB/USD/EUR/SGD), 0 errors; competition line unchanged</td><td><span class="badge badge-success">success</span></td></tr>
       <tr><td><code>2.70.0</code></td><td>2026-06-06</td><td>Eurotramp competition/performance line: pricing (28/34 THB/USD/EUR/SGD), open-frame dimensions (28/34), hero images (33/34) + gallery de-clutter</td><td><span class="badge badge-success">success</span></td></tr>
       <tr><td><code>2.69.0</code></td><td>2026-06-05</td><td>Eurotramp cleanup: categories + collections, discontinued unpublish, image fixes/backfill, variant merges (187→162)</td><td><span class="badge badge-success">success</span></td></tr>
       <tr><td><code>2.68.0</code></td><td>2026-06-02</td><td>Hide Leka Project products with no/low-res photos (scripts/hide_leka_project_lowres_products.py)</td><td><span class="badge badge-success">success</span></td></tr>
