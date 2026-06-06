@@ -21,6 +21,7 @@ from __future__ import annotations
 import argparse
 import datetime
 import json
+import os
 import re
 import sys
 import time
@@ -31,8 +32,7 @@ import requests
 REPO_ROOT = Path(__file__).resolve().parents[1]
 REPORTS_DIR = REPO_ROOT / "docs" / "reports"
 MEDUSA_URL = "https://leka-medusa-backend-538978391890.asia-southeast1.run.app"
-ADMIN_EMAIL = "admin@leka.studio"
-ADMIN_PASSWORD = "LekaAdmin2026"
+GCP_PROJECT = "ai-agents-go"
 
 PHOTO_PREFIX_RANK = [
     ("productdetails-", 40),
@@ -72,10 +72,34 @@ def latest_manifest_json() -> Path:
     return files[-1]
 
 
+def _sm_secret(name: str) -> str:
+    """Fetch a secret value from GCP Secret Manager (lazy import so the
+    google-cloud-secret-manager dependency is only required when the env
+    vars are absent)."""
+    from google.cloud import secretmanager
+
+    client = secretmanager.SecretManagerServiceClient()
+    path = f"projects/{GCP_PROJECT}/secrets/{name}/versions/latest"
+    return client.access_secret_version(name=path).payload.data.decode().strip()
+
+
+def _medusa_admin_creds() -> tuple[str, str]:
+    """Admin email/password from env, falling back to Secret Manager.
+
+    Never hardcode credentials (Process Standard Rule 12). Populate via
+    LEKA_MEDUSA_ADMIN_EMAIL / LEKA_MEDUSA_ADMIN_PASSWORD, or let this fall
+    back to Secret Manager secrets `medusa-admin-email` / `medusa-admin-password`.
+    """
+    email = os.environ.get("LEKA_MEDUSA_ADMIN_EMAIL") or _sm_secret("medusa-admin-email")
+    password = os.environ.get("LEKA_MEDUSA_ADMIN_PASSWORD") or _sm_secret("medusa-admin-password")
+    return email, password
+
+
 def authenticate(session: requests.Session) -> str:
+    email, password = _medusa_admin_creds()
     r = session.post(
         f"{MEDUSA_URL}/auth/user/emailpass",
-        json={"email": ADMIN_EMAIL, "password": ADMIN_PASSWORD},
+        json={"email": email, "password": password},
         timeout=30,
     )
     r.raise_for_status()

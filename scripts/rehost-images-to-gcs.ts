@@ -20,8 +20,16 @@ import { Storage } from "@google-cloud/storage"
 // ── Config ──────────────────────────────────────────────────────────────
 
 const MEDUSA_URL = "https://leka-medusa-backend-538978391890.asia-southeast1.run.app"
-const ADMIN_EMAIL = "admin@leka.studio"
-const ADMIN_PASSWORD = "LekaAdmin2026"
+const ADMIN_EMAIL = process.env.LEKA_MEDUSA_ADMIN_EMAIL || "admin@leka.studio"
+const ADMIN_PASSWORD = process.env.LEKA_MEDUSA_ADMIN_PASSWORD
+if (!ADMIN_PASSWORD) {
+  console.error(
+    "Missing LEKA_MEDUSA_ADMIN_PASSWORD. Fetch it from Secret Manager first, e.g.:\n" +
+      "  PowerShell: $env:LEKA_MEDUSA_ADMIN_PASSWORD = (gcloud secrets versions access latest --secret=medusa-admin-password --project=ai-agents-go)\n" +
+      "  bash:       export LEKA_MEDUSA_ADMIN_PASSWORD=$(gcloud secrets versions access latest --secret=medusa-admin-password --project=ai-agents-go)"
+  )
+  process.exit(1)
+}
 const GCS_BUCKET = "ai-agents-go-documents"
 const GCS_PREFIX = "product-images"
 const GCS_PUBLIC_BASE = `https://storage.googleapis.com/${GCS_BUCKET}`

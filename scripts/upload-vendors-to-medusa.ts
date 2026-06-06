@@ -16,8 +16,16 @@ import * as path from "path"
 
 // ── Leka Medusa Config ───────────────────────────────────────────────────
 const MEDUSA_URL = "https://leka-medusa-backend-538978391890.asia-southeast1.run.app"
-const ADMIN_EMAIL = "admin@leka.studio"
-const ADMIN_PASSWORD = "LekaAdmin2026"
+const ADMIN_EMAIL = process.env.LEKA_MEDUSA_ADMIN_EMAIL || "admin@leka.studio"
+const ADMIN_PASSWORD = process.env.LEKA_MEDUSA_ADMIN_PASSWORD
+if (!ADMIN_PASSWORD) {
+  console.error(
+    "Missing LEKA_MEDUSA_ADMIN_PASSWORD. Fetch it from Secret Manager first, e.g.:\n" +
+      "  PowerShell: $env:LEKA_MEDUSA_ADMIN_PASSWORD = (gcloud secrets versions access latest --secret=medusa-admin-password --project=ai-agents-go)\n" +
+      "  bash:       export LEKA_MEDUSA_ADMIN_PASSWORD=$(gcloud secrets versions access latest --secret=medusa-admin-password --project=ai-agents-go)"
+  )
+  process.exit(1)
+}
 
 // Leka sales channels — playground equipment goes to a new dedicated channel
 // or to the Wisdom channel for now

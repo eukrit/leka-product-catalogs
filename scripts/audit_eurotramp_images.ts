@@ -20,8 +20,16 @@ import * as path from "path"
 
 const MEDUSA_URL =
   "https://leka-medusa-backend-538978391890.asia-southeast1.run.app"
-const ADMIN_EMAIL = "admin@leka.studio"
-const ADMIN_PASSWORD = "LekaAdmin2026"
+const ADMIN_EMAIL = process.env.LEKA_MEDUSA_ADMIN_EMAIL || "admin@leka.studio"
+const ADMIN_PASSWORD = process.env.LEKA_MEDUSA_ADMIN_PASSWORD
+if (!ADMIN_PASSWORD) {
+  console.error(
+    "Missing LEKA_MEDUSA_ADMIN_PASSWORD. Fetch it from Secret Manager first, e.g.:\n" +
+      "  PowerShell: $env:LEKA_MEDUSA_ADMIN_PASSWORD = (gcloud secrets versions access latest --secret=medusa-admin-password --project=ai-agents-go)\n" +
+      "  bash:       export LEKA_MEDUSA_ADMIN_PASSWORD=$(gcloud secrets versions access latest --secret=medusa-admin-password --project=ai-agents-go)"
+  )
+  process.exit(1)
+}
 
 // Storefront cert regex as shipped in catalogs/v0.19.2 — `\b` falsely passes
 // `tuev_*.jpg` because `_` is a word character. We keep it to report what the
