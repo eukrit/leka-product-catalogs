@@ -45,6 +45,7 @@ SC: dict[str, str] = {
     "designpark": "sc_01KRRK0N4ET8QZHX6QB3KZ84YD",
     "wisdom":     "sc_01KNKTHC0B7KFEDSZ3NNM49JQW",  # rebranded "Leka Project"
     "vortex":     "sc_01KPRY1T8HZJ57020JPZVGAKZK",  # Vortex Aquatics (VOR-… SKUs)
+    "eurotramp":  "sc_01KNQAA3Y72W17B7CP2VQ93T3M",  # Eurotramp (ET-… SKUs)
     "4soft":      "sc_01KNQAA4A8SF4ZT9S8N0AHGY3Y",  # 4soft EPDM graphics (v2.40.0)
     # Archimedes Water Play SC created v2.40.0. Price sync is a no-op until the
     # 34 AWP### products are created in Medusa (catalog creation is a follow-up).
@@ -112,16 +113,21 @@ def _match_key(dd: dict, idx: dict) -> tuple[str, str] | None:
     return None
 
 
-def run_brand(client, slug: str, write: bool, limit: int | None, idx: dict) -> dict:
+def run_brand(client, slug: str, write: bool, limit: int | None, idx: dict,
+              scope: set[str] | None = None) -> dict:
     db = _firestore()
     docs = list(db.collection("vendors").document(slug).collection("products").stream())
     rows = []
     for d in docs:
         dd = d.to_dict() or {}
         dd["_id"] = d.id
+        if scope is not None and not ({dd.get("handle"), dd.get("item_code"), dd["_id"]} & scope):
+            continue
         p = dd.get("pricing") or {}
         if _prices(p):
             rows.append(dd)
+    if scope is not None:
+        log.info("[%s] scope filter active: %d docs in scope", slug, len(rows))
     if limit:
         rows = rows[:limit]
     log.info("[%s] %d priced vendor docs", slug, len(rows))
@@ -164,7 +170,19 @@ def main() -> int:
     g.add_argument("--dry-run", action="store_true")
     g.add_argument("--write", action="store_true")
     ap.add_argument("--limit", type=int, default=None)
+    ap.add_argument("--scope-file", default=None,
+                    help="JSON list of handles/item_codes to restrict the push to "
+                         "(e.g. data/curated/eurotramp_performance_line.json).")
     args = ap.parse_args()
+
+    scope: set[str] | None = None
+    if args.scope_file:
+        import json
+        raw = json.loads(Path(args.scope_file).read_text(encoding="utf-8"))
+        if isinstance(raw, dict) and "groups" in raw:
+            raw = [h for v in raw["groups"].values() for h in v]
+        scope = set(raw)
+        log.info("scope-file: %d keys", len(scope))
     brands = list(SC) if args.brand == "all" else [args.brand]
     for b in brands:
         if b not in SC:
@@ -181,7 +199,7 @@ def main() -> int:
     idx = _index_all(client)
     log.info("Indexed %d keys", len(idx))
 
-    summary = [run_brand(client, b, args.write, args.limit, idx) for b in brands]
+    summary = [run_brand(client, b, args.write, args.limit, idx, scope) for b in brands]
     print("\n=== summary ===")
     for s in summary:
         print(f"  {s['brand']:11} matched={s['matched']:5} updated={s['updated']:5} unmatched={s['unmatched']:5}")
