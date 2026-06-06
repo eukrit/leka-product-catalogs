@@ -15,11 +15,15 @@ if [ $MIGRATE_EXIT -ne 0 ]; then
   echo "WARNING: Migration failed with exit code $MIGRATE_EXIT, attempting to start anyway..."
 fi
 
-# Create admin user on first run (idempotent — fails silently if exists)
-if [ -n "$MEDUSA_ADMIN_EMAIL" ]; then
+# Create admin user on first run (idempotent — fails silently if exists).
+# Credentials come from the runtime env: MEDUSA_ADMIN_PASSWORD is mounted from
+# Secret Manager `medusa-admin-password` by cloudbuild — never hardcode it.
+if [ -n "$MEDUSA_ADMIN_EMAIL" ] && [ -n "$MEDUSA_ADMIN_PASSWORD" ]; then
   echo ""
   echo "Ensuring admin user exists..."
-  npx medusa user -e "$MEDUSA_ADMIN_EMAIL" -p "${MEDUSA_ADMIN_PASSWORD:-LekaAdmin2026}" 2>&1 || echo "Admin user already exists or creation failed"
+  npx medusa user -e "$MEDUSA_ADMIN_EMAIL" -p "$MEDUSA_ADMIN_PASSWORD" 2>&1 || echo "Admin user already exists or creation failed"
+elif [ -n "$MEDUSA_ADMIN_EMAIL" ]; then
+  echo "MEDUSA_ADMIN_PASSWORD not set — skipping admin user creation (set it from Secret Manager)"
 fi
 
 echo ""

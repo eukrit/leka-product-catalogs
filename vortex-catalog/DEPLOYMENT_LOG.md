@@ -115,7 +115,7 @@ Added Vortex Aquatic Structures International (vortex-intl.com) as the third bra
 
 ### Auth setup
 
-- GSM secret `medusa-admin-password` (v2, 13 bytes) holds `LekaAdmin2026`
+- GSM secret `medusa-admin-password` holds the Medusa admin password (value redacted — rotated 2026-06-06; fetch the current value with `gcloud secrets versions access latest --secret=medusa-admin-password --project=ai-agents-go`)
 - `shared/medusa_importer.py` now uses Medusa v2 Bearer auth. If `MEDUSA_ADMIN_API_KEY` is empty, it falls back to `MEDUSA_ADMIN_EMAIL` + `MEDUSA_ADMIN_PASSWORD` and does `/auth/user/emailpass` auto-login.
 - Re-run is idempotent: `batch_import()` skips products whose handle already exists.
 
