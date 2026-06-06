@@ -4,6 +4,56 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.70.0] - 2026-06-06
+
+### Added — Eurotramp competition/performance line: pricing, dimensions, hero images
+
+Enriched the 34 published products behind
+`next.leka.studio/education-solutions/performance-trampoline` (the Eurotramp
+competition/performance line — Master, Grand Master, Ultimate + freestyle/DMT,
+sets, safety envelope, roller stands, booster boards). Scope pinned in
+`data/curated/eurotramp_performance_line.json`. All Medusa writes carry rollback
+metadata (`previous_*`); reports under `docs/reports/eurotramp-perf-line-*`.
+
+**Pricing (was 0/34 → 28/34 live).** Fetched the current full **"Price list 2025
+(1E)"** (full range, incl. competition) from Gmail via
+`scripts/fetch_eurotramp_pricelist.py`. New
+`vendors/eurotramp-catalog/scripts/price_performance_line.py` computes landed +
+retail (THB/USD/EUR/SGD) with the established model (ins 1% + freight 18% + duty
+10% + VAT 7% + clearance/40, retail = landed × 1.30) at the pinned kids-run FX
+(EUR 38.7877 / USD 33.0472 / SGD 25.974) and writes `pricing.*` to
+`vendors/eurotramp/products`. Pushed to Medusa via
+`scripts/sync_brand_prices_to_medusa.py` — **added `eurotramp` to the SC map** and
+a new **`--scope-file`** filter so only the competition line went live (Master
+฿313,809 / Ultimate ฿503,099 / …). 6 products not in the list are flagged.
+
+**Dimensions (was 0/34 → 28/34).** New `scripts/backfill_eurotramp_dimensions.py`
+parses open-frame dims from the pricelist descriptions (e.g. Ultimate
+520×305×115 cm) → `metadata.length/width/height_cm`, falling back to
+`vendor_data`. The storefront spec table already renders these rows
+(`product-detail.tsx` length/width/height guards) — Dimensions now appear; no
+storefront change needed.
+
+**Hero images + gallery (33/34 real-photo thumbnails).** New
+`scripts/fix_eurotramp_perf_images.py` re-points junk thumbnails (cert/badge/
+placeholder) to real photos — repointing in-gallery photos (hdts, set-of-landing-
+mats) and rehosting real scrape photos to GCS for bungee-longe, spieth-ground-
+safety-mat, booster-board-freestyle and trampoline-set-stationary — and
+de-clutters galleries (real photos first, merchant logos/badges demoted, never
+dropped). 1 true gap flagged (`trampoline-set-one-field`).
+
+**Reports.** `scripts/audit_eurotramp_perf_line.py` (pre/post),
+`docs/reports/eurotramp-perf-line-gaps-2026-06-06.md` (residual gaps + the
+kids/spares price-push follow-up: 123 Firestore docs priced-but-never-pushed).
+
+### Added (scripts)
+- `scripts/audit_eurotramp_perf_line.py`, `scripts/backfill_eurotramp_dimensions.py`,
+  `scripts/fix_eurotramp_perf_images.py`, `data/curated/eurotramp_performance_line.json`.
+- `scripts/sync_brand_prices_to_medusa.py`: `eurotramp` SC + `--scope-file`.
+- (vendors repo) `eurotramp-catalog/scripts/price_performance_line.py`.
+
+---
+
 ## [2.69.0] - 2026-06-05
 
 ### Changed — Eurotramp catalog cleanup: categories, collections, images, variant merges

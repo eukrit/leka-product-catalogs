@@ -1,0 +1,65 @@
+{
+  "generated_at": "2026-06-06T08:58:44.397696+00:00",
+  "mode": "dry-run",
+  "totals": {
+    "changed": 0,
+    "failed": 0
+  },
+  "log": [
+    {
+      "handle": "eurotramp-bungee-longe",
+      "status": "skipped_no_overlap",
+      "best_candidate": "13000-preview-grandmaster_f6c96a547c_680x378.jpg"
+    },
+    {
+      "handle": "eurotramp-complete-competition-trampoline",
+      "status": "skipped_no_overlap",
+      "best_candidate": "03150-ultimate80mmframepads_2ba6815e21_680x378.jpg"
+    },
+    {
+      "handle": "eurotramp-hdts",
+      "status": "skipped_no_overlap",
+      "best_candidate": "03150-ultimate80mmframepads_2ba6815e21_680x378.jpg"
+    },
+    {
+      "handle": "eurotramp-kids-tramp-kindergarten-xl",
+      "status": "skipped_no_overlap",
+      "best_candidate": "e97541-impactprotectionsystemslategrey_1d68c0adea_680x378.jpg"
+    },
+    {
+      "handle": "eurotramp-kids-tramp-playground-xl",
+      "status": "skipped_no_overlap",
+      "best_candidate": "e97541-impactprotectionsystemslategrey_1d68c0adea_680x378.jpg"
+    },
+    {
+      "handle": "eurotramp-long-leaf-spring-connecting-cable-e33393",
+      "status": "skipped_no_overlap",
+      "best_candidate": "93000-rendering-bouncecloudgreen_7b7a10bce0_1920x1080.jpg"
+    },
+    {
+      "handle": "eurotramp-premium",
+      "status": "skipped_no_overlap",
+      "best_candidate": "e26410-jumpingbed4x4mm-ultimate_762f9e90c7_200x112.jpg"
+    },
+    {
+      "handle": "eurotramp-run-up-track-dmt",
+      "status": "skipped_no_overlap",
+      "best_candidate": "23200-preview-double-minitrampultimate_3e6da1d709_680x378.jpg"
+    },
+    {
+      "handle": "eurotramp-short-leaf-spring-connecting-cable-e33394",
+      "status": "skipped_no_overlap",
+      "best_candidate": "93000-rendering-bouncecloudgreen_7b7a10bce0_1920x1080.jpg"
+    },
+    {
+      "handle": "eurotramp-spieth-ground-safety-mat",
+      "status": "skipped_no_overlap",
+      "best_candidate": "03150-ultimate80mmframepads_2ba6815e21_680x378.jpg"
+    },
+    {
+      "handle": "eurotramp-trampoline-track-stationary-2",
+      "status": "skipped_no_overlap",
+      "best_candidate": "e21973-jumpingbedpvc_7614f7753d_200x112.jpg"
+    }
+  ]
+}

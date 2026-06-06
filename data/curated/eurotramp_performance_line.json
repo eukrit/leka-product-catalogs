@@ -1,0 +1,49 @@
+{
+  "_comment": "Scope set for the 'Performance & Competition Trampolines' enrichment (hero images, pricing, specs). Sourced from the page next.leka.studio/education-solutions/performance-trampoline + eurotramp_category_map.json + the live catalogs.leka.studio/eurotramp listing (2026-06-06). Only PUBLISHED handles. Discontinued models (Premium, Grand Master Exclusiv, etc.) excluded per category_map.discontinued. Pricing is applied only to handles present in the obtained Performance-Series pricelist; images/specs apply to all.",
+  "groups": {
+    "competition_and_performance_trampolines": [
+      "eurotramp-master",
+      "eurotramp-grand-master",
+      "eurotramp-ultimate",
+      "eurotramp-ultimate-freestyle",
+      "eurotramp-ultimate-dmt-6x6",
+      "eurotramp-complete-competition-trampoline",
+      "eurotramp-ground-trampoline-indoor",
+      "eurotramp-ground-trampoline-freestyle",
+      "eurotramp-albatross",
+      "eurotramp-fivesquare"
+    ],
+    "competition_sets": [
+      "eurotramp-trampoline-set-freestyle",
+      "eurotramp-trampoline-set-one-field",
+      "eurotramp-trampoline-set-stationary"
+    ],
+    "safety_envelope": [
+      "eurotramp-safety-platforms-and-safety-mats-integral",
+      "eurotramp-safety-platforms-and-safety-mats-universal",
+      "eurotramp-safety-platforms-universal-freestyle",
+      "eurotramp-adaption-bars-safety-platform-integral-ultimate",
+      "eurotramp-spieth-ground-safety-mat",
+      "eurotramp-spotting-mat-freestyle",
+      "eurotramp-eurotramp-spotting-mat",
+      "eurotramp-set-of-landing-mats-dmt",
+      "eurotramp-landing-mat-cover",
+      "eurotramp-frame-pads-set-80mm-safety-plus"
+    ],
+    "roller_stands_and_transport": [
+      "eurotramp-hdts",
+      "eurotramp-transport-case-hdts",
+      "eurotramp-run-up-track-dmt",
+      "eurotramp-lifting-roller-stand-safe-comfort",
+      "eurotramp-lifting-roller-stand",
+      "eurotramp-roller-stand",
+      "eurotramp-anti-slip-plate-dmt"
+    ],
+    "booster_and_training": [
+      "eurotramp-booster-board",
+      "eurotramp-booster-board-freestyle",
+      "eurotramp-bungee-longe",
+      "eurotramp-somersault-belt-twisting-belt"
+    ]
+  }
+}
