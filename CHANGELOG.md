@@ -4,6 +4,42 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.75.0] - 2026-06-07
+
+### Changed — Eurotramp costing moved to the HOUSE cost-plus model (volumetric deferred)
+
+Replaced the over-simplistic **flat ×1.30** Eurotramp pricing (computed in the
+sibling `vendors` repo by `eurotramp-catalog/scripts/calc_landed_cost.py`) with a
+corrected house cost-plus model. New
+[`scripts/recompute_eurotramp_pricing.py`](scripts/recompute_eurotramp_pricing.py)
+(dry-run → snapshot → write); full run report under
+[`docs/reports/eurotramp-recompute-2026-06-07.md`](docs/reports/eurotramp-recompute-2026-06-07.md).
+
+Model (owner directive 2026-06-07): **freight = 30% of goods**, **clearance = 6%
+of goods** (replacing the old fixed 512.5 THB/SKU floor), insurance 1%, 10% non-China
+duty on CIF, 7% Thai import VAT; retail = landed / (1 − **GM 0.35**); **retail_thb now
+embeds the 7% TH customer VAT** while USD/EUR/SGD stay ex-VAT (SG GST ×1.0 — Nubo not
+GST-registered). FX **pinned** to the existing snapshot (EUR=38.7877 / USD=33.0472 /
+SGD=25.974) so the reconciliation isolates the model change and stays coherent with
+live prices. Added `brands.eurotramp` to `pricing_config/canonical`.
+
+This is a standalone per-SKU recompute (does not use `shared/landed_pricing.py`):
+Eurotramp has no packing dims/weights, so the v2.74.0 vendor-freight branch does
+not apply here — the owner runs the volumetric calculation separately.
+
+- **151/187** docs repriced (36 unpriced/no-EXW left untouched); Firestore 151 updated, 0 errors.
+- **Blended retail THB +44.1%** (฿20.59M → ฿29.67M); 137 SKUs rise, **14 held flat**.
+- **No-decrease floor:** 14 micro-spares that would have dropped 50–85% (old fixed
+  clearance removed) are held at their current price (`pricing.floored=true`); 0 SKUs decrease.
+- Medusa push `sync_brand_prices_to_medusa.py --brand eurotramp --write`:
+  **151/151 matched → 151 updated, 0 errors**;
+  **read-back 151/151 exact across THB/USD/EUR/SGD, 0 mismatch**.
+- **FLAGGED:** volumetric CBM / air-vs-LCL **not** applied — no SKU has packing
+  dims or weights (frame dims only); owner runs volumetric separately
+  (`pricing.volumetric_applied=false`).
+
+---
+
 ## [2.74.0] - 2026-06-07
 
 ### Added — landed-cost engine consumes real per-SKU vendor freight (Vinci/Vortex/Rampline)
