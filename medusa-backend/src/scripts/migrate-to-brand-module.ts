@@ -130,6 +130,14 @@ const BRAND_SPECS: Array<{
     name: "Gum-tech",
     description: "Gum-tech — EPDM rubber tiles + safety surfacing",
   },
+  {
+    handle: "lappset",
+    name: "Lappset",
+    description:
+      "Lappset Group Oy — Finnish playground, outdoor sport, fitness, and "
+      + "senior activity equipment. Catalogue heroes are normalized to clean "
+      + "white at the vendors source (hero_white).",
+  },
 ]
 
 /**
@@ -161,6 +169,7 @@ const SC_NAME_TO_BRAND: Record<string, string> = {
   "WePlay": "weplay",
   "Gum-tech": "gumtech",
   "Gumtech": "gumtech",
+  "Lappset": "lappset",
   // Legacy typo'd spellings — keep mapping to the corrected handle so an
   // in-flight prod SC named "Gum-tec" still resolves during/after the rename.
   "Gum-tec": "gumtech",

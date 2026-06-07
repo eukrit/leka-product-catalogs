@@ -58,6 +58,7 @@ BRAND_SALES_CHANNELS: dict[str, str] = {
     "4soft":     "sc_01KNQAA4A8SF4ZT9S8N0AHGY3Y",
     "weplay":    "sc_01KR6Z0VBSXWYZDVGF30EAP0EQ",
     "designpark": "sc_01KRRK0N4ET8QZHX6QB3KZ84YD",
+    "lappset":   "sc_01KTGNBRJZ71VWWH3W7FAW0E4R",
 }
 
 
@@ -161,6 +162,10 @@ def _build_create_payload(slug: str, sc_id: str, p: dict) -> dict:
         "category": p.get("category"),
         "subcategory": p.get("subcategory"),
         "source_url": p.get("source_url"),
+        # Canonical clean-white hero (produced at the vendors source by
+        # lappset-catalog step8). Downstream renderers read this instead of
+        # re-die-cutting. Dropped by the None-filter for brands that don't set it.
+        "hero_white_gcs": p.get("hero_white_gcs"),
     }
     metadata = {k: v for k, v in metadata.items() if v is not None}
 
@@ -224,6 +229,7 @@ def _build_update_payload(p: dict, *, existing_image_urls: set[str] | None = Non
         "category": p.get("category"),
         "source_url": p.get("source_url"),
         "dimensions": p.get("dimensions"),
+        "hero_white_gcs": p.get("hero_white_gcs"),
     }
     metadata = {k: v for k, v in metadata.items() if v is not None}
 
@@ -323,6 +329,33 @@ def _ensure_variants(token: str, product_id: str, p: dict,
     return existing_variants  # caller will refetch on next pass
 
 
+def _lappset_hero_ok(p: dict) -> bool:
+    """Guard: a Lappset product must lead with a normalized, proxy-served hero.
+
+    Accepts either the canonical `hero_white` variant, OR — for the handful of
+    products with no white/transparent source render (in-situ installation
+    photos) — the proxy-served ORIGINAL explicitly flagged `needs_fallback`.
+    Refuses anything else: a raw `webapi.lappset.com` studio URL, an empty
+    images list, or an un-flagged non-hero_white lead. The whole point of the
+    source-side fix is that no raw studio/transparent hero ever reaches the
+    storefront. Run the producer
+    (`vendors/lappset-catalog/scripts/step8_normalize_heroes.py --apply`) first.
+    """
+    imgs = p.get("images") or []
+    if not imgs:
+        return False
+    first = imgs[0]
+    url = first.get("url") or ""
+    if first.get("source") == "hero_white" and "/api/i/lappset/hero_white/" in url:
+        return True
+    # Documented fallback: environment photo, proxy-served, explicitly flagged.
+    if (first.get("source") == "original"
+            and "/api/i/lappset/" in url
+            and (p.get("hero_white") or {}).get("needs_fallback")):
+        return True
+    return False
+
+
 def sync_brand(slug: str, dry_run: bool, limit: int | None, skip_no_images: bool = False) -> dict:
     sc_id = _resolve_sales_channel(slug)
     db = firestore.Client(project=PROJECT, database=SRC_DB)
@@ -341,7 +374,27 @@ def sync_brand(slug: str, dry_run: bool, limit: int | None, skip_no_images: bool
 
     for i, doc in enumerate(docs, start=1):
         p = doc.to_dict() or {}
-        handle = p.get("handle") or doc.id
+        # Medusa handles must be URL-safe (lowercase alphanumeric + hyphens).
+        # Raw vendor docs (e.g. Lappset) have no explicit handle and fall back to
+        # the underscore slug doc-id, so hyphenate that fallback.
+        handle = p.get("handle") or doc.id.replace("_", "-")
+        # Normalize raw vendor-template docs (e.g. Lappset, which stores
+        # product_name/sku and no handle) into the field shape the payload
+        # builders expect. setdefault never overrides brands that already carry
+        # these (wisdom/vinci/etc.).
+        p["handle"] = handle
+        p.setdefault("name", p.get("product_name") or "")
+        p.setdefault("item_code", p.get("sku") or "")
+        p.setdefault("slug", slug)
+        p.setdefault("status", "active")
+
+        # Guardrail: never publish a Lappset product whose hero isn't the
+        # normalized white variant (see _lappset_hero_ok).
+        if slug == "lappset" and not _lappset_hero_ok(p):
+            log.error("[lappset] %s: hero is not the normalized white variant "
+                      "— skipping (run step8_normalize_heroes first)", handle)
+            errors += 1
+            continue
 
         if i % TOKEN_REFRESH_EVERY == 0:
             token = auth()
