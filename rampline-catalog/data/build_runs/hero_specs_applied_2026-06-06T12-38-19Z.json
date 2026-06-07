@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-06-06T12-38-19Z",
+  "dry_run": false,
+  "totals": {
+    "ENRICH": 4
+  },
+  "errors": [],
+  "actions": [
+    {
+      "op": "ENRICH",
+      "handle": "rampline-rampball",
+      "product_id": "prod_01KNQ3PW9PMY591KPNQXDQ3738",
+      "changed_keys": [
+        "specifications",
+        "spec_table"
+      ]
+    },
+    {
+      "op": "ENRICH",
+      "handle": "rampline-jumpstone-en",
+      "product_id": "prod_01KNQ3PXDX28415XPZAQ5FFH6S",
+      "changed_keys": [
+        "specifications",
+        "fall_height_cm",
+        "spec_table"
+      ]
+    },
+    {
+      "op": "ENRICH",
+      "handle": "rampline-rampline-slackline",
+      "product_id": "prod_01KNQ3PYP224DRZPM2Y893RDTC",
+      "changed_keys": [
+        "specifications",
+        "fall_height_cm",
+        "spec_table"
+      ]
+    },
+    {
+      "op": "ENRICH",
+      "handle": "rampline-trampoline-loop-en",
+      "product_id": "prod_01KNQ3PX4H6YFY0B7MZ46TWZJ2",
+      "changed_keys": [
+        "specifications",
+        "fall_height_cm",
+        "spec_table"
+      ]
+    }
+  ]
+}

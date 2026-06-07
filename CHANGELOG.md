@@ -4,6 +4,32 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.71.0] - 2026-06-06
+
+### Added — Rampline hero-product spec enrichment (PDP-perfect specs for the Leka education page)
+
+New `rampline-catalog/enrich_hero_specs.py` (dry-run → apply, idempotent diff-only,
+run-log under `rampline-catalog/data/build_runs/`). Hand-curated, vendor-sourced
+(rampline.com) spec metadata for the four products featured on Leka Studio's
+`/education-solutions/active-challenge-balancing` page, written to the **exact keys
+the catalog PDP reads** (the previous crawl-based `enrich_specifications.py` wrote
+to `installed_dimensions`, which the PDP ignores, and the crawl had no numeric dims
+for these four — so every structured spec field had stayed `0`).
+
+Per product (`rampline-rampball`, `rampline-jumpstone-en`,
+`rampline-rampline-slackline`, `rampline-trampoline-loop-en`):
+- `metadata.specifications` — `subcategory`, `indoor_outdoor`, and `free_fall_height_cm` (single-size items).
+- flat `metadata.fall_height_cm` (single-size items).
+- `metadata.spec_table` — `{ title, note?, columns[], rows[][] }` per-model table
+  (Rampball ×4 sizes, Jumpstone ×2, Slackline dims, Loop dims) consumed by the new
+  `spec_table` renderer in `leka-website` `catalogs/.../product-detail.tsx`.
+
+Medusa v2 metadata shallow-merge preserves existing keys (materials, downloads,
+certifications, brand_country, …). Applied to live `leka-medusa-backend` and verified
+via the Store API. Run logs: `hero_specs_dryrun_*.json` / `hero_specs_applied_*.json`.
+
+---
+
 ## [2.70.1] - 2026-06-06
 
 ### Added — Eurotramp full catalog price go-live (kids / BounceCloud / spares)
