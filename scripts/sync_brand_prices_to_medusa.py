@@ -47,6 +47,7 @@ SC: dict[str, str] = {
     "vortex":     "sc_01KPRY1T8HZJ57020JPZVGAKZK",  # Vortex Aquatics (VOR-… SKUs)
     "eurotramp":  "sc_01KNQAA3Y72W17B7CP2VQ93T3M",  # Eurotramp (ET-… SKUs)
     "4soft":      "sc_01KNQAA4A8SF4ZT9S8N0AHGY3Y",  # 4soft EPDM graphics (v2.40.0)
+    "rampline":   "sc_01KNQAA448RY0YPR51FNPM2TVA",  # Rampline (article-code SKUs; 2026 price go-live)
     # Archimedes Water Play SC created v2.40.0. Price sync is a no-op until the
     # 34 AWP### products are created in Medusa (catalog creation is a follow-up).
     "archimedes-water-play": "sc_01KSSP39K5DVH9TT2TMXCREHFV",

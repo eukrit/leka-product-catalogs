@@ -4,6 +4,57 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.72.0] - 2026-06-07
+
+### Added — Rampline 2026 retail pricing (THB/USD/SGD/EUR) → Firestore + Medusa go-live
+
+The 2026 Rampline NOK price list (82 priced articles, eff. 2025-12-01) was parsed
+and cost-stacked in the sibling `vendors` repo at **35% gross margin / 10% import
+duty**, ex-VAT, against a fixed FX snapshot (frankfurter.app 2026-06-05:
+1 NOK = 3.5029 THB / 0.10734 USD / 0.09221 EUR). That supersedes the older 2025
+xlsx that `rampline-catalog/import_pricelist.py` reads.
+
+New `rampline-catalog/build_2026_pricing.py`:
+- **Anchors** `retail_thb / retail_usd / retail_eur` verbatim to the vendors
+  cost-plus stack (`pricelist_landed.json`) so the two catalogs agree exactly
+  (0 drift; `retail_thb == landed_thb / 0.65`, ex-VAT).
+- **Derives** `retail_sgd` via the house SG-GST logic (`shared/pricing_config.py`:
+  `sg_nubo_gst_registered=false` → multiplier 1.0) and a NOK-snapshot-coherent FX
+  rate **THB/SGD = 3.5029 / 0.13776 = 25.4276** (NOK→SGD, same frankfurter date).
+- Writes `rampline-catalog/parsed/rampline_pricing_2026.json` (committed) and
+  upserts `vendors/rampline/products/{code}` (`item_code` + `pricing.retail_{thb,
+  usd,eur,sgd}` / `gross_margin` / `import_duty_rate` / `price_date`) for the
+  Medusa sync. Also refreshes audit doc `vendors/rampline/pricelists/2026-12-01`.
+- Bumped `pricing_config/canonical` `brands.rampline.gross_margin` **0.30 → 0.35**
+  for house consistency.
+
+`scripts/sync_brand_prices_to_medusa.py`: added `rampline` → its sales channel.
+Pushed prices to Medusa and **read-back verified 64/64 matched variants exact
+across THB/USD/EUR/SGD (0 mismatches)**; SGD now live on the Rampline channel.
+11 priced articles have no Medusa variant yet (8 spares + RL410 SD + FF1 1002 +
+FF1 EXT 1002) and were safely skipped (the sync never creates products).
+
+**Cross-brand guard:** the Rampline list's "Kids Tramp" family (Loop trampolines,
+PlayPro rings, springs, jumping beds — 97010B, E97047, E31120, E21898B, …) are
+Eurotramp-manufactured items resold under **identical Eurotramp SKUs**, already
+priced by the Eurotramp catalog. The first push matched 4 of them by SKU and
+overwrote the correct Eurotramp prices; those were **restored** and the whole
+Kids-Tramp family is now **excluded** from the Rampline products subcollection
+(`EUROTRAMP_OWNED_FAMILIES`) so re-syncs can't clobber Eurotramp.
+
+### Files
+- `rampline-catalog/build_2026_pricing.py` (new)
+- `rampline-catalog/parsed/rampline_pricing_2026.json` (new)
+- `scripts/sync_brand_prices_to_medusa.py` (rampline SC entry)
+- `docs/reports/rampline-2026-price-go-live-2026-06-07.md` (new run/verification report)
+- Firestore: `vendors/rampline/products/*` (75 pushable), `vendors/rampline/pricelists/2026-12-01`, `pricing_config/canonical`
+
+> Note: v2.71.0 is reserved for in-flight Rampline hero-spec work staged on
+> another machine (not yet pushed to origin); this entry is sequenced as 2.72.0
+> to avoid a version collision.
+
+---
+
 ## [2.70.1] - 2026-06-06
 
 ### Added — Eurotramp full catalog price go-live (kids / BounceCloud / spares)
