@@ -4,6 +4,38 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.79.0] - 2026-06-07
+
+### Added — Polysoft brand: Sales Channel + publishable key (aquatic Splash line)
+
+Onboarded **PolySoft Surfaces** (seamless wet-pour / EPDM aquatic safety surfacing,
+`polysoftsurfaces.com`) as a first-class brand in the Leka multi-brand storefront so the
+Leka Splashpad solution page's surfacing hotspot can link to a real product page
+(`catalogs.leka.studio/polysoft/polysoft-splash`) instead of an external manufacturer link.
+
+- **`scripts/bootstrap_polysoft.py`** (NEW, idempotent) — creates/confirms:
+  - Sales Channel **"Polysoft"** → `sc_01KTHCBEG12R58DGPKR4SBN1WM`.
+  - Publishable API key **"Polysoft Storefront"** → `pk_bf12c3b5…` (browser-exposed),
+    linked to the sales channel.
+  - Auth resolves from env (`LEKA_MEDUSA_ADMIN_EMAIL`/`_PASSWORD`) or Secret Manager
+    (`medusa-admin-email` / `medusa-admin-password`) via gcloud — never hardcoded (Rule 12).
+- **Product import is done from `eukrit/vendors`** (`polysoft-catalog/scripts/push_to_medusa.py`),
+  which upserts the 7-product aquatic line (handles `polysoft-<slug>`) into this sales channel.
+  Mirrors how Vortex products are pushed from the vendors repo into the per-brand SC.
+- **No public pricing** — PolySoft publishes no SKUs/prices, so the brand ships
+  `hasPricing:false` (same as Vortex's initial onboarding). No `pricing_config` block added.
+
+### Files
+- NEW `scripts/bootstrap_polysoft.py`
+- EDIT `CHANGELOG.md`, `VERSION` (2.79.0), `docs/build-summary.html`
+
+### Outcome
+- Success. SC + publishable key created and linked; 7 aquatic products live in the channel
+  (pushed from the vendors repo). Wiring of the publishable key into the storefront build is in
+  `eukrit/leka-website` (separate PR). No auto-merge.
+
+---
+
 ## [2.78.0] - 2026-06-07
 
 ### Added — Eurotramp: close 4 image gaps + spec enrichment from the local 2023 asset pack
