@@ -8,25 +8,38 @@ All notable changes to this project will be documented in this file.
 
 ### Added — Rampline 2026 retail pricing (THB/USD/SGD/EUR) → Firestore + Medusa go-live
 
-The 2026 Rampline NOK price list (82 priced articles, eff. 2025-12-01) was parsed
-and cost-stacked in the sibling `vendors` repo at **35% gross margin / 10% import
-duty**, ex-VAT, against a fixed FX snapshot (frankfurter.app 2026-06-05:
-1 NOK = 3.5029 THB / 0.10734 USD / 0.09221 EUR). That supersedes the older 2025
-xlsx that `rampline-catalog/import_pricelist.py` reads.
+The 2026 Rampline NOK price list (82 priced articles, eff. 2025-12-01) is priced
+at **35% gross margin / 10% import duty**, against a fixed FX snapshot
+(frankfurter.app 2026-06-05: 1 NOK = 3.5029 THB / 0.10734 USD / 0.09221 EUR /
+0.13776 SGD). Supersedes the older 2025 xlsx that `import_pricelist.py` reads.
 
-New `rampline-catalog/build_2026_pricing.py`:
-- **Anchors** `retail_thb / retail_usd / retail_eur` verbatim to the vendors
-  cost-plus stack (`pricelist_landed.json`) so the two catalogs agree exactly
-  (0 drift; `retail_thb == landed_thb / 0.65`, ex-VAT).
-- **Derives** `retail_sgd` via the house SG-GST logic (`shared/pricing_config.py`:
-  `sg_nubo_gst_registered=false` → multiplier 1.0) and a NOK-snapshot-coherent FX
-  rate **THB/SGD = 3.5029 / 0.13776 = 25.4276** (NOK→SGD, same frankfurter date).
-- Writes `rampline-catalog/parsed/rampline_pricing_2026.json` (committed) and
-  upserts `vendors/rampline/products/{code}` (`item_code` + `pricing.retail_{thb,
-  usd,eur,sgd}` / `gross_margin` / `import_duty_rate` / `price_date`) for the
-  Medusa sync. Also refreshes audit doc `vendors/rampline/pricelists/2026-12-01`.
-- Bumped `pricing_config/canonical` `brands.rampline.gross_margin` **0.30 → 0.35**
-  for house consistency.
+New `rampline-catalog/build_2026_pricing.py` recomputes the **landed cost** from
+`net_nok` via a flat NOK-direct stack (owner-set params 2026-06-07; volumetric is
+analysed separately):
+
+```
+goods     = net_nok × 3.5029
+freight   = 30% × goods          insurance = 1% × goods
+CIF       = goods + freight + insurance
+duty      = 10% × CIF            import_vat = 7% × (CIF + duty)
+clearance = 6% × goods
+landed    = CIF + duty + import_vat + clearance
+retail_thb = landed / 0.65 × 1.07      ← 35% GM, 7% TH customer VAT INCLUDED
+retail_usd/eur/sgd = (landed / 0.65) / FX   ← ex customer-VAT (VAT is TH-domestic)
+```
+
+- `retail_thb` is **VAT-inclusive** (×1.07), matching the Vinci/Berliner/Wisdom/
+  4soft/Vortex convention. USD/EUR/SGD stay ex customer-VAT; SGD applies the house
+  SG-GST multiplier (`sg_nubo_gst_registered=false` → ×1.0) at THB/SGD = 25.4276.
+- Writes `rampline-catalog/parsed/rampline_pricing_2026.json` (committed; includes
+  the per-article `cost_stack`) and upserts `vendors/rampline/products/{code}`
+  (`item_code` + `pricing.*`). Refreshes audit doc
+  `vendors/rampline/pricelists/2026-12-01`. Re-runnable offline (falls back to the
+  committed JSON's `net_nok` when the vendors worktree is absent).
+- Bumped `pricing_config/canonical` `brands.rampline.gross_margin` **0.30 → 0.35**.
+
+Example (RB35): goods 50,673 → landed 81,171 → **retail_thb 133,621** (VAT-incl) /
+USD 3,826.70 / EUR 3,287.31 / SGD 4,911.18.
 
 `scripts/sync_brand_prices_to_medusa.py`: added `rampline` → its sales channel.
 Pushed prices to Medusa and **read-back verified 64/64 matched variants exact

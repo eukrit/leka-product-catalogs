@@ -3,27 +3,28 @@
 **Date:** 2026-06-07 · **Version:** 2.72.0 · **Brand:** Rampline (`sc_01KNQAA448RY0YPR51FNPM2TVA`)
 
 ## Inputs & parameters
-- **Source:** 2026 Rampline NOK price list (eff. 2025-12-01), 82 priced articles, parsed +
-  cost-stacked in the `vendors` repo (`rampline-catalog/parsed/pricelist{,_landed}.json`).
-- **Gross margin:** 35% · **Import duty:** 10% · **Retail basis:** ex-VAT (THB/USD/EUR).
-- **FX snapshot (frankfurter.app 2026-06-05):** 1 NOK = 3.5029 THB / 0.10734 USD / 0.09221 EUR /
-  0.13776 SGD → **THB/SGD = 25.4276**.
+- **Source:** 2026 Rampline NOK price list (eff. 2025-12-01), 82 priced articles; `net_nok` (GO buy price = RRP − distributor discount) is the cost input.
+- **Gross margin:** 35% · **Import duty:** 10% · **Freight:** 30% of goods (flat) · **Clearance:** 6% of goods · **Insurance:** 1% of goods · **Import VAT:** 7% (in landed) · **TH customer VAT:** 7% (in retail THB).
+- **FX (frankfurter.app 2026-06-05):** 1 NOK = 3.5029 THB / 0.10734 USD / 0.09221 EUR / 0.13776 SGD → THB/USD 32.6337, THB/EUR 37.9883, THB/SGD 25.4276.
+- Volumetric / CBM analysis is run **separately by the owner** — this stack is the flat model.
 
-## Pricing methodology
-- `retail_thb / retail_usd / retail_eur` **anchored verbatim** to the vendors cost-plus stack
-  (`landed_thb / 0.65`) so the two catalogs agree exactly (0 drift).
-- `retail_sgd = retail_thb / 25.4276 × SG-GST-mult`, where the multiplier comes from the house
-  `shared/pricing_config.py` SG logic (`sg_nubo_gst_registered=false` → **×1.0**; Nubo is not yet
-  GST-registered in Singapore, so the SG sale is a zero-rated export).
-- `pricing_config/canonical` `brands.rampline.gross_margin` updated **0.30 → 0.35**.
+## Costing structure (landed THB → retail THB/USD/SGD/EUR)
+```
+goods     = net_nok × 3.5029
+freight   = 30% × goods          insurance = 1% × goods
+CIF       = goods + freight + insurance
+duty      = 10% × CIF            import_vat = 7% × (CIF + duty)
+clearance = 6% × goods
+landed    = CIF + duty + import_vat + clearance
+retail_thb        = landed / 0.65 × 1.07      (35% GM, 7% TH customer VAT INCLUDED)
+retail_usd/eur/sgd = (landed / 0.65) / FX     (ex customer-VAT; SGD × SG-GST 1.0)
+```
+`retail_thb` is **VAT-inclusive**, matching the Vinci/Berliner/Wisdom/4soft/Vortex convention. USD/EUR/SGD are ex customer-VAT (VAT is TH-domestic). There is no independent USD/SGD landed stack — they convert the THB cost at the fixed FX snapshot.
 
-## Reconciliation note (THB anchor)
-THB/USD/EUR equal the vendors `pricelist_landed.json` outputs by construction → **drift = 0**.
-The shared `shared/landed_pricing.py::price_row()` EUR-cost-engine path was **not** used to
-re-derive amounts: it embeds 7% TH customer VAT in `retail_thb` and models landed cost via the
-EUR CBM/air engine, which would diverge from the vendors NOK-direct stack (18% freight + 1%
-insurance + 10% duty + 7% import VAT + fixed clearance). Per the task directive the vendors
-NOK-direct, ex-VAT stack is the anchor; only the SGD currency derivation uses the house config.
+**Worked example — RB35** (`net_nok 14,466`): goods 50,672.95 → freight 15,201.89 → insurance 506.73 → CIF 66,381.56 → duty 6,638.16 → import VAT 5,111.38 → clearance 3,040.38 → **landed 81,171.48** → **retail_thb 133,620.74** (VAT-incl) / USD 3,826.70 / EUR 3,287.31 / SGD 4,911.18.
+
+## Change vs first cut
+The initial v2.72.0 cut anchored THB/USD/EUR to the vendors stack (18% freight, fixed per-SKU clearance, **ex-VAT** retail). Per owner direction 2026-06-07 the landed cost is now recomputed (30% freight, 6% clearance, retained 1% insurance + 10% duty + 7% import VAT) and `retail_thb` is **VAT-inclusive (×1.07)**.
 
 ## Medusa push & verification
 | Metric | Count |
@@ -35,28 +36,12 @@ NOK-direct, ex-VAT stack is the anchor; only the SGD currency derivation uses th
 | **Read-back verified exact (THB/USD/EUR/SGD)** | **64 / 64 (0 mismatches)** |
 | No Medusa variant yet (skipped) | 11 |
 
-**Skipped (no variant on the Rampline channel):** `4005`, `4008`, `4010`, `4020`, `4022`,
-`4024-2`, `4046-2`, `946020` (spares) + `RL410 SD`, `FF1 1002`, `FF1 EXT 1002`. The sync never
-creates products; these will price once their variants exist.
+**Skipped (no variant on the Rampline channel):** `4005`, `4008`, `4010`, `4020`, `4022`, `4024-2`, `4046-2`, `946020` (spares) + `RL410 SD`, `FF1 1002`, `FF1 EXT 1002`.
 
-## Cross-brand incident & remediation
-The Rampline list's **Kids Tramp** family are Eurotramp-made items resold under **identical
-Eurotramp article codes** (`97010B`, `E97047`, `E31120`, `E21898B`, `E97547`, `Loop 1.0`,
-`LED TR LOOP 1.0`). They already exist as Eurotramp Medusa products (Eurotramp + Leka Catalogs
-channels). The first sync matched 4 of them by SKU and overwrote the correct Eurotramp prices
-with Rampline-stack values (the list gives them 0% distributor discount → inflated).
-
-**Remediated:**
-1. Restored the 4 Eurotramp variants to their correct Eurotramp prices
-   (`97010B`→ET-97010 144,273.78 THB; `E97047` 22,423.82; `E31120` 908.49; `E21898B` 47,173.77).
-2. Deleted the 7 Kids-Tramp docs from `vendors/rampline/products`.
-3. Added `EUROTRAMP_OWNED_FAMILIES` guard to `build_2026_pricing.py` so the family is
-   permanently excluded from the Rampline products subcollection / Medusa push.
-
-Re-verified: Rampline 64/64 exact; all 4 Eurotramp variants correct.
+## Cross-brand guard (Eurotramp shared SKUs)
+The Rampline "Kids Tramp" family are Eurotramp-made items resold under **identical Eurotramp SKUs** (`97010B`, `E97047`, `E31120`, `E21898B`, `E97547`, `Loop 1.0`, `LED TR LOOP 1.0`), already priced by the Eurotramp catalog. They are **excluded** from the Rampline push (`EUROTRAMP_OWNED_FAMILIES`); the 4 Eurotramp variants remain at their correct Eurotramp prices (re-verified untouched after this re-push).
 
 ## Follow-ups
-- When variants exist for the 11 skipped articles (RL410 SD, FF1 Forest, spares), re-run
-  `python scripts/sync_brand_prices_to_medusa.py --brand rampline --write`.
-- The shared sync indexes Medusa SKUs globally; cross-brand SKU collisions (Rampline⇄Eurotramp)
-  are real. Consider sales-channel-scoped matching in the shared script as a hardening follow-up.
+- When variants exist for the 11 skipped articles, re-run `python scripts/sync_brand_prices_to_medusa.py --brand rampline --write`.
+- Owner's separate volumetric/CBM analysis may supersede the flat 30% freight assumption.
+- The shared sync indexes Medusa SKUs globally; sales-channel-scoped matching is a hardening follow-up (see spawned task).

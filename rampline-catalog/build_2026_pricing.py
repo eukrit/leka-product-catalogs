@@ -54,8 +54,27 @@ log = logging.getLogger("rampline_2026_pricing")
 BRAND = "rampline"
 PRICE_DATE = "2026-12-01"          # price list effective date (eff. 2025-12-01 list)
 PRICELIST_DOC_ID = "2026-12-01"
+
+# --- Costing parameters (user-set 2026-06-07; flat stack, volumetric handled
+# separately by the owner). Landed THB is recomputed from net_nok, NOT anchored
+# to the vendors stack (which used 18% freight + fixed per-SKU clearance).
+#   goods    = net_nok * NOK→THB
+#   freight  = goods * 0.30                       (flat 30% of goods)
+#   insurance= goods * 0.01
+#   CIF      = goods + freight + insurance
+#   duty     = CIF * 0.10
+#   import_vat = (CIF + duty) * 0.07              (Thai import VAT, kept in landed)
+#   clearance= goods * 0.06                       (flat 6% of goods)
+#   landed   = CIF + duty + import_vat + clearance
+#   retail_thb = landed / (1-GM) * (1 + TH customer VAT)   ← VAT-INCLUSIVE
+#   retail_usd/eur/sgd = (landed / (1-GM)) / FX            ← ex customer-VAT
 GROSS_MARGIN = 0.35
 IMPORT_DUTY_RATE = 0.10
+FREIGHT_PCT = 0.30
+INSURANCE_PCT = 0.01
+CLEARANCE_PCT = 0.06
+IMPORT_VAT_RATE = 0.07
+TH_CUSTOMER_VAT_RATE = 0.07        # embedded in retail_thb (VAT-inclusive)
 
 # The "Kids Tramp" family (Loop trampolines, PlayPro rings, springs, jumping beds)
 # are Eurotramp-manufactured items resold through the Rampline price list under
@@ -79,6 +98,9 @@ FX_SNAPSHOT = {
     "SGD": 0.13776,
     "source": "frankfurter.app 2026-06-05",
 }
+NOK_THB = FX_SNAPSHOT["THB"]                                      # 3.5029
+THB_PER_USD = round(FX_SNAPSHOT["THB"] / FX_SNAPSHOT["USD"], 6)   # 32.6337
+THB_PER_EUR = round(FX_SNAPSHOT["THB"] / FX_SNAPSHOT["EUR"], 6)   # 37.9883
 THB_PER_SGD = round(FX_SNAPSHOT["THB"] / FX_SNAPSHOT["SGD"], 6)   # 25.4276
 
 # Default location of the vendors authoritative JSONs (overridable via --vendors-parsed).
@@ -106,23 +128,89 @@ def _sg_gst_mult() -> tuple[float, bool]:
     return ((1.0 + rate) if registered else 1.0), registered
 
 
-def load_vendors(parsed_dir: Path) -> tuple[dict, dict]:
-    pl = json.loads((parsed_dir / "pricelist.json").read_text(encoding="utf-8"))
-    landed = json.loads((parsed_dir / "pricelist_landed.json").read_text(encoding="utf-8"))
-    return pl, landed
+def load_rows(parsed_dir: Path) -> list[dict]:
+    """Return normalized source rows (article_code, family, product_name,
+    is_spare_part, net_nok, recommended_nok, discount_pct).
+
+    Prefers the vendors parsed JSONs (pricelist.json + pricelist_landed.json);
+    falls back to this repo's committed rampline_pricing_2026.json (which
+    preserves net_nok for all 82 articles) so the recompute is reproducible
+    even when the ephemeral vendors worktree is gone. net_nok is the only real
+    input; everything downstream is recomputed here.
+    """
+    if (parsed_dir / "pricelist_landed.json").exists():
+        pl = json.loads((parsed_dir / "pricelist.json").read_text(encoding="utf-8"))
+        landed = json.loads((parsed_dir / "pricelist_landed.json").read_text(encoding="utf-8"))
+        meta = {r["article_code"]: r for r in pl["rows"]}
+        rows = []
+        for lr in landed["rows"]:
+            m = meta.get(lr["article_code"], {})
+            rows.append({
+                "article_code": lr["article_code"],
+                "family": lr.get("family"),
+                "product_name": lr.get("product_name") or m.get("product_name"),
+                "is_spare_part": lr.get("is_spare_part", False),
+                "net_nok": lr.get("net_nok") or m.get("net_nok"),
+                "recommended_nok": m.get("recommended_nok"),
+                "discount_pct": lr.get("discount_pct") or m.get("discount_pct"),
+            })
+        log.info("Loaded %d rows from vendors parsed JSONs (%s)", len(rows), parsed_dir)
+        return rows
+    if OUT_JSON.exists():
+        d = json.loads(OUT_JSON.read_text(encoding="utf-8"))
+        rows = [{
+            "article_code": r["article_code"],
+            "family": r.get("family"),
+            "product_name": r.get("product_name"),
+            "is_spare_part": r.get("is_spare_part", False),
+            "net_nok": r.get("net_nok"),
+            "recommended_nok": r.get("recommended_nok"),
+            "discount_pct": r.get("discount_pct"),
+        } for r in d["rows"]]
+        log.warning("vendors parsed dir absent — sourced net_nok from committed %s", OUT_JSON.name)
+        return rows
+    raise FileNotFoundError(
+        f"No source data: neither {parsed_dir}/pricelist_landed.json nor {OUT_JSON} exists"
+    )
 
 
-def compute(pl: dict, landed: dict) -> list[dict]:
+def _landed_stack(net_nok: float) -> dict:
+    """Flat NOK-direct landed cost stack (user params 2026-06-07)."""
+    goods = net_nok * NOK_THB
+    freight = goods * FREIGHT_PCT
+    insurance = goods * INSURANCE_PCT
+    cif = goods + freight + insurance
+    duty = cif * IMPORT_DUTY_RATE
+    import_vat = (cif + duty) * IMPORT_VAT_RATE
+    clearance = goods * CLEARANCE_PCT
+    landed = cif + duty + import_vat + clearance
+    return {
+        "goods_thb": round(goods, 2),
+        "freight_thb": round(freight, 2),
+        "insurance_thb": round(insurance, 2),
+        "cif_thb": round(cif, 2),
+        "duty_thb": round(duty, 2),
+        "import_vat_thb": round(import_vat, 2),
+        "clearance_thb": round(clearance, 2),
+        "landed_thb": round(landed, 2),
+    }
+
+
+def compute(rows: list[dict]) -> list[dict]:
     sg_mult, sg_registered = _sg_gst_mult()
-    by_code = {r["article_code"]: r for r in pl["rows"]}
+    th_vat_mult = 1.0 + TH_CUSTOMER_VAT_RATE
     records: list[dict] = []
-    for lr in landed["rows"]:
+    for lr in rows:
         code = lr["article_code"]
-        meta = by_code.get(code, {})
-        retail_thb = lr["retail_thb"]                       # ex-VAT anchor
-        retail_usd = lr["retail_usd"]
-        retail_eur = lr["retail_eur"]
-        retail_sgd = round((retail_thb / THB_PER_SGD) * sg_mult, 2)
+        meta = lr
+        net_nok = lr.get("net_nok")
+        stack = _landed_stack(net_nok)
+        landed_thb = stack["landed_thb"]
+        pretax = landed_thb / (1 - GROSS_MARGIN)            # ex customer-VAT base
+        retail_thb = round(pretax * th_vat_mult, 2)         # VAT-INCLUSIVE
+        retail_usd = round(pretax / THB_PER_USD, 2)         # ex customer-VAT
+        retail_eur = round(pretax / THB_PER_EUR, 2)
+        retail_sgd = round((pretax / THB_PER_SGD) * sg_mult, 2)
         excluded = lr.get("family") in EUROTRAMP_OWNED_FAMILIES
         records.append({
             "item_code": code,                              # exact Medusa variant SKU
@@ -133,10 +221,11 @@ def compute(pl: dict, landed: dict) -> list[dict]:
             "excluded_from_medusa": excluded,
             "excluded_reason": ("Eurotramp-owned family — priced by the Eurotramp catalog; "
                                 "shares Eurotramp SKUs") if excluded else None,
-            "net_nok": lr.get("net_nok"),
+            "net_nok": net_nok,
             "recommended_nok": meta.get("recommended_nok"),
             "discount_pct": lr.get("discount_pct"),
-            "landed_thb": lr.get("landed_thb"),
+            "landed_thb": landed_thb,
+            "cost_stack": stack,
             "pricing": {
                 "retail_thb": retail_thb,
                 "retail_usd": retail_usd,
@@ -144,9 +233,13 @@ def compute(pl: dict, landed: dict) -> list[dict]:
                 "retail_sgd": retail_sgd,
                 "gross_margin": GROSS_MARGIN,
                 "import_duty_rate": IMPORT_DUTY_RATE,
+                "freight_pct": FREIGHT_PCT,
+                "clearance_pct": CLEARANCE_PCT,
                 "price_date": PRICE_DATE,
-                "landed_thb": lr.get("landed_thb"),
-                "currency_basis": "ex-VAT (THB/USD/EUR); SG GST applied only if Nubo registered",
+                "landed_thb": landed_thb,
+                "currency_basis": "THB VAT-INCLUSIVE (7%); USD/EUR/SGD ex customer-VAT; "
+                                  "SG GST only if Nubo registered",
+                "th_customer_vat_rate": TH_CUSTOMER_VAT_RATE,
                 "sg_gst_applied": sg_registered,
                 "fx_snapshot": FX_SNAPSHOT,
             },
@@ -162,15 +255,25 @@ def write_repo_json(records: list[dict]) -> None:
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "gross_margin": GROSS_MARGIN,
         "import_duty_rate": IMPORT_DUTY_RATE,
+        "freight_pct": FREIGHT_PCT,
+        "insurance_pct": INSURANCE_PCT,
+        "clearance_pct": CLEARANCE_PCT,
+        "import_vat_rate": IMPORT_VAT_RATE,
+        "th_customer_vat_rate": TH_CUSTOMER_VAT_RATE,
+        "thb_per_usd": THB_PER_USD,
+        "thb_per_eur": THB_PER_EUR,
         "thb_per_sgd": THB_PER_SGD,
         "fx_snapshot": FX_SNAPSHOT,
-        "source": "vendors/rampline-catalog/parsed/pricelist_landed.json (35% GM / 10% duty, ex-VAT)",
+        "source": "Rampline 2026 NOK pricelist net_nok (eff. 2025-12-01); landed recomputed",
         "row_count": len(records),
         "notes": (
-            "retail_thb/usd/eur anchored verbatim to the vendors cost-plus stack so "
-            "the two catalogs agree; retail_sgd derived = retail_thb / 25.4276 (THB per "
-            "SGD, NOK snapshot-coherent) x SG-GST-mult (1.0, Nubo not GST-registered). "
-            "Retail is EX-VAT for THB/USD/EUR."
+            "Flat landed stack (user params 2026-06-07): goods=net_nok*3.5029; "
+            "freight=30%*goods; insurance=1%*goods; CIF=goods+freight+insurance; "
+            "duty=10%*CIF; import_vat=7%*(CIF+duty); clearance=6%*goods; "
+            "landed=CIF+duty+import_vat+clearance. retail_thb=landed/0.65*1.07 "
+            "(35% GM, 7% TH customer VAT INCLUDED). retail_usd/eur/sgd=(landed/0.65)/FX "
+            "(ex customer-VAT); SG GST x1.0 (Nubo not registered). Volumetric handled "
+            "separately by owner."
         ),
         "rows": records,
     }
@@ -265,14 +368,11 @@ def main() -> int:
     ap.add_argument("--update-config", action="store_true")
     args = ap.parse_args()
 
-    if not (args.vendors_parsed / "pricelist_landed.json").exists():
-        log.error("vendors JSONs not found under %s — pass --vendors-parsed", args.vendors_parsed)
-        return 2
-
-    pl, landed = load_vendors(args.vendors_parsed)
-    records = compute(pl, landed)
-    log.info("Computed %d Rampline articles (GM=%.0f%%, duty=%.0f%%, THB/SGD=%.4f)",
-             len(records), GROSS_MARGIN * 100, IMPORT_DUTY_RATE * 100, THB_PER_SGD)
+    rows = load_rows(args.vendors_parsed)
+    records = compute(rows)
+    log.info("Computed %d Rampline articles (GM=%.0f%%, duty=%.0f%%, freight=%.0f%%, "
+             "clearance=%.0f%%, retail_thb VAT-incl)", len(records), GROSS_MARGIN * 100,
+             IMPORT_DUTY_RATE * 100, FREIGHT_PCT * 100, CLEARANCE_PCT * 100)
     for r in records[:3]:
         p = r["pricing"]
         log.info("  %-12s THB %.0f  USD %.2f  EUR %.2f  SGD %.2f",
