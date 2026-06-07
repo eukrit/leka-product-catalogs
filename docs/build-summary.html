@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title> — Build Summary</title>
+  <title>leka-product-catalogs — Build Summary</title>
   <style>
     body { font-family: -apple-system, Segoe UI, Roboto, sans-serif; max-width: 960px; margin: 2rem auto; padding: 0 1rem; color: #1a1a1a; }
     h1 { margin-bottom: 0.25rem; }
@@ -22,23 +22,23 @@
   </style>
 </head>
 <body>
-  <h1></h1>
+  <h1>leka-product-catalogs</h1>
   <div class="meta">
-    Repo: <a href=""></a> ·
-    Branch: <code>main</code> ·
-    Generated: 2026-06-02
+    Repo: <a href="https://github.com/eukrit/leka-product-catalogs">https://github.com/eukrit/leka-product-catalogs</a> ·
+    Branch: <code>HEAD</code> ·
+    Generated: 2026-06-07
   </div>
 
   <div class="latest-card">
     <h2 style="margin-top:0;border:0">Latest build</h2>
     <p>
-      Version <strong>2.70.1</strong> &middot; 2026-06-06 &middot;
+      Version <strong>2.73.0</strong> &middot; 2026-06-07 &middot;
       <span class="badge badge-success">success</span>
     </p>
-    <p>Eurotramp full catalog price go-live (kids / BounceCloud / spares). The kids, BounceCloud and accessory/spare-part lines were already priced in Firestore at FX EUR 38.7877 / USD 33.0472 / SGD 25.974 (retail = landed × 1.30) but had never reached Medusa — so they still showed <code>usd=0</code> stubs on catalogs.leka.studio. Re-ran <code>sync_brand_prices_to_medusa.py --brand eurotramp --write</code> with <strong>no <code>--scope-file</code></strong>: <strong>151/151 priced docs matched (100%) → 151 updated, 0 errors</strong>. THB/USD/EUR/SGD now live from spares (~€19) through BounceCloud (single ฿86,899.84 / 6-piece ฿492,197.72) to playground installs (97049 ฿1,126,294.99 / €29,037.43). Competition line (v2.70.0) verified unchanged. Pre-push snapshot + 0-anomaly dry-run audit. 36 unpriced docs skipped.</p>
+    <p></p>
     <p>
       <a href="CHANGELOG.md">Full build log</a> &middot;
-      <a href="reports/eurotramp-snapshot-2026-06-06-pre-kids-price-push.json">Pre-push snapshot</a> &middot;
+      <a href="https://github.com/eukrit/leka-product-catalogs/commit/f6a4739332c32c7eff8ef6b95e9e22996ff76239">Commit f6a4739</a> &middot;
       <a href="PROJECT_INDEX.md">Project index</a>
     </p>
   </div>
@@ -47,13 +47,17 @@
   <table>
     <thead><tr><th>Version</th><th>Date</th><th>Summary</th><th>Status</th></tr></thead>
     <tbody>
-      <tr><td><code>2.70.1</code></td><td>2026-06-06</td><td>Eurotramp full catalog price go-live (kids / BounceCloud / spares): full-scope price push, 151/151 priced docs → Medusa (THB/USD/EUR/SGD), 0 errors; competition line unchanged</td><td><span class="badge badge-success">success</span></td></tr>
-      <tr><td><code>2.70.0</code></td><td>2026-06-06</td><td>Eurotramp competition/performance line: pricing (28/34 THB/USD/EUR/SGD), open-frame dimensions (28/34), hero images (33/34) + gallery de-clutter</td><td><span class="badge badge-success">success</span></td></tr>
-      <tr><td><code>2.69.0</code></td><td>2026-06-05</td><td>Eurotramp cleanup: categories + collections, discontinued unpublish, image fixes/backfill, variant merges (187→162)</td><td><span class="badge badge-success">success</span></td></tr>
-      <tr><td><code>2.68.0</code></td><td>2026-06-02</td><td>Hide Leka Project products with no/low-res photos (scripts/hide_leka_project_lowres_products.py)</td><td><span class="badge badge-success">success</span></td></tr>
-      <tr><td><code>2.67.0</code></td><td>2026-06-02</td><td>Tighten CBM logistics tiers across all brands</td><td><span class="badge badge-success">success</span></td></tr>
-      <tr><td><code>2.66.1</code></td><td>2026-06-02</td><td>Cleanup: drop last broken Wisdom image + sweep 4,340 unreferenced old GCS objects</td><td><span class="badge badge-success">success</span></td></tr>
-      <tr><td><code>2.66.0</code></td><td>2026-06-02</td><td>Scrub internal "Wisdom" vendor traces from Leka Project brand (metadata + exw_source + 4,340 image re-hosts + 17 handle rebrands)</td><td><span class="badge badge-success">success</span></td></tr>
+      <tr><td><code>2.73.0</code></td><td>2026-06-07</td><td></td><td><span class="badge badge-success">success</span></td></tr>
+      <tr><td><code>2.72.0</code></td><td>2026-06-07</td><td></td><td><span class="badge badge-success">success</span></td></tr>
+      <tr><td><code>2.71.0</code></td><td>2026-06-06</td><td></td><td><span class="badge badge-success">success</span></td></tr>
+      <tr><td><code>2.70.1</code></td><td>2026-06-06</td><td></td><td><span class="badge badge-success">success</span></td></tr>
+      <tr><td><code>2.70.0</code></td><td>2026-06-06</td><td></td><td><span class="badge badge-success">success</span></td></tr>
+      <tr><td><code>2.69.0</code></td><td>2026-06-05</td><td></td><td><span class="badge badge-success">success</span></td></tr>
+      <tr><td><code>2.68.0</code></td><td>2026-06-02</td><td></td><td><span class="badge badge-success">success</span></td></tr>
+      <tr><td><code>2.67.0</code></td><td>2026-06-02</td><td></td><td><span class="badge badge-success">success</span></td></tr>
+      <tr><td><code>2.66.1</code></td><td>2026-06-02</td><td></td><td><span class="badge badge-success">success</span></td></tr>
+      <tr><td><code>2.66.0</code></td><td>2026-06-02</td><td></td><td><span class="badge badge-success">success</span></td></tr>
+      <tr><td><code>2.65.1</code></td><td>2026-06-02</td><td></td><td><span class="badge badge-success">success</span></td></tr>
       <tr><td><code>2.65.0</code></td><td>2026-06-02</td><td></td><td><span class="badge badge-success">success</span></td></tr>
       <tr><td><code>2.64.0</code></td><td>2026-06-02</td><td></td><td><span class="badge badge-success">success</span></td></tr>
       <tr><td><code>2.63.0</code></td><td>2026-06-02</td><td></td><td><span class="badge badge-success">success</span></td></tr>
