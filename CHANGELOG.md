@@ -4,6 +4,46 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.77.0] - 2026-06-07
+
+### Added — Kids Tramp "Impact Protection" option + 32 bundle variants (PlayPro / Bonded Tiles) on Medusa
+
+Each Eurotramp **Kids Tramp** base product now carries an **`Impact Protection`** product
+option so customers can configure the impact-protection surface inline instead of buying the
+accessory as a separate line item. Existing variants are set to `Impact Protection = None`
+(prices unchanged); **32 new bundle variants** were created across 9 base products, priced
+**base-variant + accessory retail** in all four currencies (THB/USD/EUR/SGD).
+
+**Option values** (created per product, only where the accessory SKU exists):
+- `PlayPro` — PlayPro rubber protection lip/ring (single colour).
+- `Bonded Tiles (Grey)` / `Bonded Tiles (Red)` — bonded EPDM tile system. The vendor code
+  encodes colour: `…41` = Grey, `…44` = Red (confirmed in pricelist descriptions).
+
+**Coverage** (mirrors what exists in `vendors/eurotramp/products`):
+- Playground (both coatings) → PlayPro + Bonded Grey + Bonded Red.
+- Playground Loop / Loop XL → Grey only; Playground XL → Red only; PlayPro on all except Loop XL.
+- Kindergarten line (Default) → same value sets as the matching Playground model.
+- Track "Playground" → PlayPro + Bonded Grey per length (4/6/8/10m), on the **Track-only** base
+  variants only ("With EPDM" skipped — already includes EPDM protection).
+
+**SKU convention:** composite `<base_sku>+<accessory_sku>` (e.g. `97000+E97041`). Each new
+variant carries `metadata.{base_sku, accessory_sku, impact_protection}`.
+
+**Excluded (logged):** `E94541`/`E94700` are **Wehrfritz Fun** products, not Kids Tramp;
+`E97541`/`E97547` do not exist in the source data.
+
+**Files:**
+- `scripts/add_kidstramp_impact_protection.py` — idempotent writer: adds the option, backfills
+  existing variants to `None`, creates the bundle variants, verifies each product against live
+  Medusa, aborts on first real error. Tolerant of transient Cloud Run 503s (retry + already-exists
+  skip). Re-runs as a pure verifier once everything exists. Read-only on Firestore; no source-price
+  mutation.
+
+**Outcome:** success — all 32 variants verified live (prices match in THB/USD/EUR/SGD); existing
+variants intact at `Impact Protection = None`.
+
+---
+
 ## [2.76.0] - 2026-06-07
 
 ### Added — Lappset brand: consumer wiring + storefront import (clean-white heroes)
