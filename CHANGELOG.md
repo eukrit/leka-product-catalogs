@@ -4,6 +4,51 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.73.0] - 2026-06-07
+
+### Fixed — `scripts/sync_brand_prices_to_medusa.py`: sales-channel-scoped matching (cross-brand-clobber root cause)
+
+The shared price sync built a **global** Medusa SKU index (`_index_all`) and
+matched each vendor doc's `item_code`/`handle` against ALL products regardless
+of sales channel (first-wins `setdefault`). Because Rampline "Kids Tramp"
+articles are Eurotramp-made and resold under **identical** SKUs (97010B, E97047,
+E31120, E21898B …), a Rampline run could match — and overwrite — the Eurotramp
+variant. v2.72.0 patched this reactively in `rampline-catalog/build_2026_pricing.py`
+(`EUROTRAMP_OWNED_FAMILIES` exclusion); this release removes the **root cause**
+in the shared sync itself.
+
+**What changed:**
+- `_index_all` now keeps **every** candidate per key (list, not first-wins) and
+  tags each with its product's `sales_channels.id` set (added `sales_channels.id`
+  to the admin `fields`).
+- `_match_key(dd, idx, brand_sc, other_brand_channels)` resolves a vendor doc to
+  a variant **safe for the requesting brand**: (1) prefer a candidate on the
+  brand's own channel `SC[brand]`; (2) else accept one not claimed by any other
+  brand (no channel, or only the shared aggregate channels — "Leka Catalogs",
+  "Default", "Proposal"); (3) else refuse and record a **cross-brand guard**.
+- `run_brand` logs guarded docs (`CROSS-BRAND GUARD: …`) and reports a `guarded`
+  count in the per-brand summary.
+- `SC` map completed to mirror `sync_vendors_to_medusa.py` — added **rampline**
+  and **weplay** (their absence was part of what let the global index clobber).
+- `--scope-file` (JSON) and `--brand all` behaviors preserved.
+
+**Why "Leka Catalogs" is allowed:** it's the shared aggregate channel powering
+the unified `catalogs.leka.studio` storefront; many brand products live there
+only. Pricing those is not a clobber — the guard fires solely when a SKU resolves
+**exclusively** to another brand's *dedicated* channel.
+
+**Verified (dry-run):** rampline **64/64** (unchanged, 11 SKUs absent from
+Medusa), eurotramp **151/151** (unchanged), vinci **1234/1234** (no over-guard
+regression), `--brand all` healthy with `guarded=0` across all 10 brands.
+Targeted check: all four collision SKUs are **refused** for a rampline run and
+resolve to the correct Eurotramp variant for a eurotramp run.
+
+**Files changed:** `scripts/sync_brand_prices_to_medusa.py`.
+
+---
+
+---
+
 ## [2.72.0] - 2026-06-07
 
 ### Added — Rampline 2026 retail pricing (THB/USD/SGD/EUR) → Firestore + Medusa go-live
@@ -65,6 +110,32 @@ Kids-Tramp family is now **excluded** from the Rampline products subcollection
 > Note: v2.71.0 is reserved for in-flight Rampline hero-spec work staged on
 > another machine (not yet pushed to origin); this entry is sequenced as 2.72.0
 > to avoid a version collision.
+
+---
+
+## [2.71.0] - 2026-06-06
+
+### Added — Rampline hero-product spec enrichment (PDP-perfect specs for the Leka education page)
+
+New `rampline-catalog/enrich_hero_specs.py` (dry-run → apply, idempotent diff-only,
+run-log under `rampline-catalog/data/build_runs/`). Hand-curated, vendor-sourced
+(rampline.com) spec metadata for the four products featured on Leka Studio's
+`/education-solutions/active-challenge-balancing` page, written to the **exact keys
+the catalog PDP reads** (the previous crawl-based `enrich_specifications.py` wrote
+to `installed_dimensions`, which the PDP ignores, and the crawl had no numeric dims
+for these four — so every structured spec field had stayed `0`).
+
+Per product (`rampline-rampball`, `rampline-jumpstone-en`,
+`rampline-rampline-slackline`, `rampline-trampoline-loop-en`):
+- `metadata.specifications` — `subcategory`, `indoor_outdoor`, and `free_fall_height_cm` (single-size items).
+- flat `metadata.fall_height_cm` (single-size items).
+- `metadata.spec_table` — `{ title, note?, columns[], rows[][] }` per-model table
+  (Rampball ×4 sizes, Jumpstone ×2, Slackline dims, Loop dims) consumed by the new
+  `spec_table` renderer in `leka-website` `catalogs/.../product-detail.tsx`.
+
+Medusa v2 metadata shallow-merge preserves existing keys (materials, downloads,
+certifications, brand_country, …). Applied to live `leka-medusa-backend` and verified
+via the Store API. Run logs: `hero_specs_dryrun_*.json` / `hero_specs_applied_*.json`.
 
 ---
 
