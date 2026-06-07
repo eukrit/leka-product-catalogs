@@ -4,6 +4,69 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.74.0] - 2026-06-07
+
+### Added — landed-cost engine consumes real per-SKU vendor freight (Vinci/Vortex/Rampline)
+
+Wires this repo's master landed-cost engine to the new per-SKU DDP freight that
+the sibling `vendors` repo (`scripts/sync_freight.py`, BUILD_LOG v1.31.0) writes
+to `vendors/<brand>/products` once a SKU has **confirmed vendor packing data**.
+This is the last leg of the cross-repo pipeline: shipping-automation refreshes
+Europe DDP LCL rates + a `ddp_air` method → vendors syncs `pricing.freight_thb`
+per SKU → **this repo re-runs landed + retail from that real freight** → Medusa.
+
+**What changed:**
+- `shared/landed_pricing.py` — `price_row()` gains an optional, highest-priority
+  **vendor-freight branch**. When the caller passes `vendor_freight_thb` and a
+  `vendor_packing_source` in the new `VENDOR_PACKING_SOURCES`
+  (`vendor_email`/`vendor_attachment`/`vendor_pricelist`), it uses that real
+  freight verbatim (CIF = FOB + vendor_freight; duty on CIF; VAT on CIF+duty —
+  the same treatment as the flat-uplift branch and consistent with cost_engine's
+  customs base), **bypassing the CBM estimate and the 1.35× flat uplift**. The
+  tiered logistics floor/cap clamp and the independent per-currency retail
+  derivation (35% GM, 7% TH customer VAT embedded in `retail_thb` only) are
+  unchanged and still apply. With no vendor freight supplied the output is
+  byte-identical to before — existing callers (`*-catalog/import_pricelist.py`)
+  are unaffected.
+- **New** `scripts/recompute_landed_from_vendor_freight.py` — gated recompute +
+  write-back. Scans `vendors/<brand>/products`, and **only** for SKUs carrying a
+  vendor-sourced `pricing.freight_thb` re-runs `price_row` and writes back
+  `pricing.{landed_thb,landed_thb_raw,logistics_pct,logistics_clamp,retail_thb,
+  retail_usd,retail_eur,retail_sgd,retail_basis,recompute_fx_snapshot,
+  recomputed_at}`. Per-brand EUR-FOB resolver: Vinci `eur_fob`; Rampline
+  `from_net_nok`×live NOK→EUR; Vortex `fob_usd`→EUR-equivalent at FX (Canada/USD
+  origin — DDP-EUR premise flagged). `--dry-run` default; estimate/none rows are
+  never touched, so it is a safe no-op before the upstream sync.
+
+**Ordering / current state (verified 2026-06-07):** this step is gated behind two
+upstream preconditions that are **not yet met**, exactly as anticipated:
+- shipping-automation `cost_engine.py` still exposes only a generic `ddp` method
+  (no `ddp_lcl`/`ddp_air`) — the Europe DDP-Air rate refresh has not landed.
+- `vendors/scripts/sync_freight.py --write` has **not** populated any
+  vendor-sourced freight: a direct query of Firestore DB `vendors` finds **0**
+  SKUs across Vinci (1,416)/Vortex (311)/Rampline (241) with `pricing.freight_thb`
+  + a vendor `packing_source` (every existing `freight_thb` is an old CBM/flat
+  estimate with `packing_source = null`). Per the vendors coverage report only
+  **1** SKU (Rampline RL410) is even vendor-confirmed, and it has no product doc yet.
+
+Therefore the recompute (`--dry-run --brand all`) reports **0 eligible / 0 updated**
+and **no Medusa push** is performed (there is no *updated* retail to push). The
+engine + tool are in place and validated, so a re-run will pick up vendor-freight
+SKUs automatically as soon as the upstream sync writes them — no further code
+change required.
+
+**Verified:** `price_row` self-test (vendor branch math freight/duty/VAT/landed;
+gate holds for estimate sources & zero freight; identical output when vendor
+params omitted) — all assertions pass. FOB resolver self-test (Vinci/Vortex/
+Rampline, USD→EUR-equiv reproduces THB FOB exactly) — pass. `recompute … --brand
+all --dry-run` → 0 eligible across all three brands. `./verify.sh` green.
+
+**Files changed:** `shared/landed_pricing.py`,
+`scripts/recompute_landed_from_vendor_freight.py` (new), `CHANGELOG.md`,
+`docs/build-summary.html` + `docs/hub.html` (regenerated), `.claude/PROGRESS.md`.
+
+---
+
 ## [2.73.0] - 2026-06-07
 
 ### Fixed — `scripts/sync_brand_prices_to_medusa.py`: sales-channel-scoped matching (cross-brand-clobber root cause)

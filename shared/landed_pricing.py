@@ -4,14 +4,24 @@ Extracted verbatim from vinci-catalog/import_pricelist.py so multiple brands
 (Vinci Play, Rampline, future EU brands) compute landed cost and retail price
 through one canonical formula.
 
-Pipeline per SKU:
+Pipeline per SKU (freight source chosen by precedence):
+  0. VENDOR FREIGHT (highest priority): when the caller passes a real per-SKU
+     `pricing.freight_thb` sourced from `vendors/<brand>/products` (written by
+     the vendors repo's sync_freight.py, gated to confirmed vendor packing data),
+     use it verbatim as the freight line — CIF = FOB + vendor_freight, then the
+     same duty/VAT treatment as the flat-uplift branch. This bypasses both the
+     CBM estimate and the 1.35x flat uplift. Gated on `vendor_packing_source`
+     being a real vendor source (vendor_email/vendor_attachment/vendor_pricelist)
+     so estimate/none rows never trigger it.
   1. CBM = L*W*H_cm / 1e6 * packing_factor (default 0.15). No dims → flat 35%
      landed uplift on EUR-THB FOB.
   2. Landed THB via shipping-automation cost_engine.estimate_landed_cost,
      origin=europe (Gdynia → Laem Chabang), method=lcl, with Baltic-rate
      calibration when FBX index is reachable.
-  3. Tiered logistics clamp (floor + cap as % of FOB-in-THB) by EUR FOB band.
-  4. Retail = landed / (1 - GROSS_MARGIN). USD/EUR derived at live FX.
+  3. Tiered logistics clamp (floor + cap as % of FOB-in-THB) by EUR FOB band —
+     applied to every freight source above, vendor freight included.
+  4. Retail = landed / (1 - GROSS_MARGIN). USD/EUR/SGD derived independently at
+     live FX; 7% TH customer VAT embedded in retail_thb only.
 
 Brand files own pricelist parsing, dim-index loading, and Firestore writes —
 this module is brand-agnostic.
@@ -86,6 +96,12 @@ ORIGIN_ROUTE = "europe"
 METHOD = "lcl"
 UNMATCHED_LANDED_UPLIFT = 1.35         # 35% flat uplift on EUR-THB FOB when no CBM
 DEFAULT_PACKING_FACTOR = 0.15
+
+# Packing-data sources the vendors repo's sync_freight.py tags as real (vendor)
+# vs estimated. Only these make a per-SKU `pricing.freight_thb` trustworthy enough
+# to override the CBM estimate / flat uplift. Must match the sync-eligible set in
+# vendors/scripts/{ingest_packing,sync_freight}.py.
+VENDOR_PACKING_SOURCES = frozenset({"vendor_email", "vendor_attachment", "vendor_pricelist"})
 
 # Tiered minimum/maximum logistics cost as a % of FOB-in-THB.
 # Floor ensures every SKU carries a reasonable share of fixed costs (clearance,
@@ -257,12 +273,43 @@ def price_row(
     packing_factor: float = DEFAULT_PACKING_FACTOR,
     product_category: str = DEFAULT_PRODUCT_CATEGORY,
     brand: str = "vinci",
+    vendor_freight_thb: float | None = None,
+    vendor_freight_method: str | None = None,
+    vendor_packing_source: str | None = None,
 ) -> PricedRow:
+    """Price one SKU. `vendor_freight_thb` (+ `vendor_packing_source` in
+    VENDOR_PACKING_SOURCES) takes precedence over the CBM estimate / flat uplift —
+    see the module docstring. When no vendor freight is supplied the behaviour is
+    identical to before, so existing callers are unaffected."""
     p = _resolve_params(brand)
     dims, strategy = fuzzy_lookup(code, dim_index)
     cbm = compute_cbm(dims, packing_factor) if dims else None
+    note = ""
 
-    if cbm and cbm > 0:
+    use_vendor_freight = (
+        vendor_freight_thb is not None
+        and float(vendor_freight_thb) > 0
+        and (vendor_packing_source or "") in VENDOR_PACKING_SOURCES
+    )
+
+    if use_vendor_freight:
+        # Real per-SKU DDP freight from vendors/<brand>/products. Same CIF→duty→VAT
+        # structure as the flat-uplift branch below — only the freight number is
+        # real (vendor-confirmed) instead of a 0.35x estimate. cost_engine bills
+        # duty on CIF (goods+freight) and VAT on (CIF+duty); we mirror that here.
+        eur_thb = fx.get("EUR", 38.0)
+        fob_thb = eur * eur_thb
+        freight_thb = round(float(vendor_freight_thb), 2)
+        cif_thb = fob_thb + freight_thb
+        duty_thb = round(cif_thb * p["duty_rate_non_china"], 2)
+        vat_thb = round((cif_thb + duty_thb) * p["thai_vat_rate"], 2)
+        landed_thb = round(cif_thb + duty_thb + vat_thb, 2)
+        cbm = 0.0
+        cbm_method = vendor_freight_method or "vendor_freight"
+        matched = True
+        match_strategy = "vendor_freight"
+        note = f"vendor_freight {vendor_freight_method or ''} src={vendor_packing_source}".strip()
+    elif cbm and cbm > 0:
         # Monkey-patched per-CBM rate for this call (Baltic calibration).
         original = cost_engine.ROUTE_PROFILES["europe"]["methods"]["lcl"]["rates"]["per_cbm"]
         try:
@@ -374,4 +421,5 @@ def price_row(
         freight_thb=freight_thb,
         duty_thb=duty_thb,
         vat_thb=vat_thb,
+        note=note,
     )
