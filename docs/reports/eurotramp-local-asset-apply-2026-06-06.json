@@ -1,0 +1,262 @@
+{
+  "generated_at": "2026-06-06T08:42:52.600251+00:00",
+  "mode": "apply",
+  "totals": {
+    "products_images": 7,
+    "uploads": 13,
+    "failed": 0,
+    "products_specs": 15
+  },
+  "image_log": [
+    {
+      "handle": "eurotramp-kids-tramp-playground",
+      "status": "updated",
+      "n_assets": 2,
+      "thumb": "97000-kidstramp-playground-epdm.jpg",
+      "confidence": "high",
+      "is_gap": true,
+      "images": "38->38"
+    },
+    {
+      "handle": "eurotramp-kids-tramp-playground-loop",
+      "status": "updated",
+      "n_assets": 1,
+      "thumb": "97010b-kidstramp-playgroundloop-playpro.jpg",
+      "confidence": "high",
+      "is_gap": true,
+      "images": "37->37"
+    },
+    {
+      "handle": "eurotramp-playpro-rubber-protection-ring-for-kids-tramp-loop-e97047",
+      "status": "updated",
+      "n_assets": 1,
+      "thumb": "e97047-playpro-rubber-protection-ring-loop.jpg",
+      "confidence": "high",
+      "is_gap": false,
+      "images": "4->4"
+    },
+    {
+      "handle": "eurotramp-playpro-rubber-protection-lip-for-kids-tramp-e97048",
+      "status": "updated",
+      "n_assets": 2,
+      "thumb": "e97048-playpro-rubber-protection-lip-square.jpg",
+      "confidence": "high",
+      "is_gap": false,
+      "images": "5->5"
+    },
+    {
+      "handle": "eurotramp-playpro-rubber-protection-lip-for-kids-tramp-xl-e97548",
+      "status": "updated",
+      "n_assets": 1,
+      "thumb": "e97548-playpro-rubber-protection-lip-square-xl.jpg",
+      "confidence": "high",
+      "is_gap": false,
+      "images": "4->4"
+    },
+    {
+      "handle": "eurotramp-kids-tramp-kindergarten",
+      "status": "updated",
+      "n_assets": 3,
+      "thumb": "productdetails-kids-tramp-kindergarten-078.jpg",
+      "confidence": "medium",
+      "is_gap": true,
+      "images": "39->39"
+    },
+    {
+      "handle": "eurotramp-wehrfritz-fun-xl-kindergarten",
+      "status": "updated",
+      "n_assets": 3,
+      "thumb": "productdetails-wehrfritz-fun-xl-kindergarten-019.jpg",
+      "confidence": "medium",
+      "is_gap": true,
+      "images": "18->16"
+    }
+  ],
+  "spec_log": [
+    {
+      "handle": "eurotramp-kids-tramp-playground",
+      "status": "updated",
+      "added_keys": [
+        "standard_playground",
+        "tuv_gs_tested",
+        "enriched_source",
+        "facility_type",
+        "supervision",
+        "surface_features",
+        "applications"
+      ]
+    },
+    {
+      "handle": "eurotramp-kids-tramp-playground-xl",
+      "status": "updated",
+      "added_keys": [
+        "standard_playground",
+        "tuv_gs_tested",
+        "enriched_source",
+        "facility_type",
+        "supervision",
+        "surface_features",
+        "applications",
+        "size_m"
+      ]
+    },
+    {
+      "handle": "eurotramp-kids-tramp-playground-loop",
+      "status": "updated",
+      "added_keys": [
+        "standard_playground",
+        "tuv_gs_tested",
+        "enriched_source",
+        "facility_type",
+        "supervision",
+        "surface_features",
+        "applications"
+      ]
+    },
+    {
+      "handle": "eurotramp-kids-tramp-playground-loop-xl",
+      "status": "updated",
+      "added_keys": [
+        "standard_playground",
+        "tuv_gs_tested",
+        "enriched_source",
+        "facility_type",
+        "supervision",
+        "surface_features",
+        "applications"
+      ]
+    },
+    {
+      "handle": "eurotramp-kids-tramp-kindergarten",
+      "status": "updated",
+      "added_keys": [
+        "standard_playground",
+        "tuv_gs_tested",
+        "enriched_source",
+        "facility_type",
+        "supervision",
+        "applications"
+      ]
+    },
+    {
+      "handle": "eurotramp-kids-tramp-kindergarten-xl",
+      "status": "updated",
+      "added_keys": [
+        "standard_playground",
+        "tuv_gs_tested",
+        "enriched_source",
+        "facility_type",
+        "supervision",
+        "applications"
+      ]
+    },
+    {
+      "handle": "eurotramp-kids-tramp-kindergarten-loop",
+      "status": "updated",
+      "added_keys": [
+        "standard_playground",
+        "tuv_gs_tested",
+        "enriched_source",
+        "facility_type",
+        "supervision",
+        "applications",
+        "size_m"
+      ]
+    },
+    {
+      "handle": "eurotramp-kids-tramp-kindergarten-loop-xl",
+      "status": "updated",
+      "added_keys": [
+        "standard_playground",
+        "tuv_gs_tested",
+        "enriched_source",
+        "facility_type",
+        "supervision",
+        "applications"
+      ]
+    },
+    {
+      "handle": "eurotramp-wehrfritz-fun-xl-kindergarten",
+      "status": "updated",
+      "added_keys": [
+        "standard_playground",
+        "tuv_gs_tested",
+        "enriched_source",
+        "facility_type",
+        "supervision",
+        "applications",
+        "size_m",
+        "wheelchair_accessible"
+      ]
+    },
+    {
+      "handle": "eurotramp-wehrfritz-fun-round-kindergarten-94750",
+      "status": "updated",
+      "added_keys": [
+        "standard_playground",
+        "tuv_gs_tested",
+        "made_in",
+        "enriched_source",
+        "facility_type",
+        "supervision",
+        "applications",
+        "shape"
+      ]
+    },
+    {
+      "handle": "eurotramp-eurotramp-play",
+      "status": "updated",
+      "added_keys": [
+        "standard_playground",
+        "tuv_gs_tested",
+        "enriched_source",
+        "features",
+        "add_on"
+      ]
+    },
+    {
+      "handle": "eurotramp-eurotramp-play-light-epl0001",
+      "status": "updated",
+      "added_keys": [
+        "standard_playground",
+        "tuv_gs_tested",
+        "made_in",
+        "enriched_source",
+        "features"
+      ]
+    },
+    {
+      "handle": "eurotramp-playpro-rubber-protection-ring-for-kids-tramp-loop-e97047",
+      "status": "updated",
+      "added_keys": [
+        "material",
+        "standard_playground",
+        "developed_by",
+        "function",
+        "enriched_source"
+      ]
+    },
+    {
+      "handle": "eurotramp-playpro-rubber-protection-lip-for-kids-tramp-e97048",
+      "status": "updated",
+      "added_keys": [
+        "material",
+        "standard_playground",
+        "developed_by",
+        "function",
+        "enriched_source"
+      ]
+    },
+    {
+      "handle": "eurotramp-playpro-rubber-protection-lip-for-kids-tramp-xl-e97548",
+      "status": "updated",
+      "added_keys": [
+        "material",
+        "standard_playground",
+        "developed_by",
+        "function",
+        "enriched_source"
+      ]
+    }
+  ]
+}

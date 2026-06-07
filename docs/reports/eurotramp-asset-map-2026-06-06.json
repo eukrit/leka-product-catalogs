@@ -1,0 +1,974 @@
+{
+  "generated_at": "2026-06-06T08:42:52.600251+00:00",
+  "mode": "apply",
+  "asset_root": "C:\\Users\\eukri\\OneDrive\\Documents\\Documents GO\\2023-06-23 EuroTramp 2023 Downloads",
+  "counts": {
+    "plan_assets": 13,
+    "review_assets": 85,
+    "gap_handles_total": 40
+  },
+  "image_plan": [
+    {
+      "asset": "Info-Package-KidsTramp-PlayPro_EN/97000-KidsTramp-Playground-EPDM-TSV-Bulach.jpg",
+      "article": "97000",
+      "tier": "1-article",
+      "confidence": "high",
+      "upload_as": "97000-kidstramp-playground-epdm.jpg",
+      "hydrated": true,
+      "diagram": false,
+      "target_handle": "eurotramp-kids-tramp-playground",
+      "is_gap": true,
+      "set_thumbnail": true,
+      "action": "apply"
+    },
+    {
+      "asset": "Info-Package-KidsTramp-PlayPro_EN/97000B-KidsTramp-Playground-PlayPro.jpg",
+      "article": "97000",
+      "tier": "1-article",
+      "confidence": "high",
+      "upload_as": "97000b-kidstramp-playground-playpro.jpg",
+      "hydrated": true,
+      "diagram": false,
+      "target_handle": "eurotramp-kids-tramp-playground",
+      "is_gap": true,
+      "set_thumbnail": true,
+      "action": "apply"
+    },
+    {
+      "asset": "Info-Package-KidsTramp-PlayPro_EN/97010B-KidsTramp-PlaygroundLoop-PlayPro.jpg",
+      "article": "97010",
+      "tier": "1-article",
+      "confidence": "high",
+      "upload_as": "97010b-kidstramp-playgroundloop-playpro.jpg",
+      "hydrated": true,
+      "diagram": false,
+      "target_handle": "eurotramp-kids-tramp-playground-loop",
+      "is_gap": true,
+      "set_thumbnail": true,
+      "action": "apply"
+    },
+    {
+      "asset": "Info-Package-KidsTramp-PlayPro_EN/E97047-PlayPro-rubber-protection-ring-Loop.jpg",
+      "article": "e97047",
+      "tier": "1-article",
+      "confidence": "high",
+      "upload_as": "e97047-playpro-rubber-protection-ring-loop.jpg",
+      "hydrated": true,
+      "diagram": false,
+      "target_handle": "eurotramp-playpro-rubber-protection-ring-for-kids-tramp-loop-e97047",
+      "is_gap": false,
+      "set_thumbnail": true,
+      "action": "apply"
+    },
+    {
+      "asset": "Info-Package-KidsTramp-PlayPro_EN/E97048-PlayPro-rubber-protection-lip-square-KidsTramp.jpg",
+      "article": "e97048",
+      "tier": "1-article",
+      "confidence": "high",
+      "upload_as": "e97048-playpro-rubber-protection-lip-square.jpg",
+      "hydrated": true,
+      "diagram": false,
+      "target_handle": "eurotramp-playpro-rubber-protection-lip-for-kids-tramp-e97048",
+      "is_gap": false,
+      "set_thumbnail": true,
+      "action": "apply"
+    },
+    {
+      "asset": "Info-Package-KidsTramp-PlayPro_EN/E97548-PlayPro-rubber-protection-lip-square-KidsTrampXL.jpg",
+      "article": "e97548",
+      "tier": "1-article",
+      "confidence": "high",
+      "upload_as": "e97548-playpro-rubber-protection-lip-square-xl.jpg",
+      "hydrated": true,
+      "diagram": false,
+      "target_handle": "eurotramp-playpro-rubber-protection-lip-for-kids-tramp-xl-e97548",
+      "is_gap": false,
+      "set_thumbnail": true,
+      "action": "apply"
+    },
+    {
+      "asset": "Info-Package-KidsTramp-PlayPro_EN/PlayProSquare_Section.png",
+      "article": "e97048",
+      "tier": "1-article",
+      "confidence": "high",
+      "upload_as": "playpro-square-section.png",
+      "hydrated": true,
+      "diagram": true,
+      "target_handle": "eurotramp-playpro-rubber-protection-lip-for-kids-tramp-e97048",
+      "is_gap": false,
+      "set_thumbnail": false,
+      "action": "apply"
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-078.jpg",
+      "tier": "2-curated",
+      "confidence": "medium",
+      "scene": "square in-ground trampoline in a daycare/kindergarten garden",
+      "evidence": "075-084 are a single product shoot of a square supervised garden trampoline = the 'Kindergarten' (supervised) model",
+      "target_handle": "eurotramp-kids-tramp-kindergarten",
+      "is_gap": true,
+      "upload_as": "productdetails-kids-tramp-kindergarten-078.jpg",
+      "set_thumbnail": true,
+      "hydrated": true,
+      "diagram": false,
+      "action": "apply"
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-076.jpg",
+      "tier": "2-curated",
+      "confidence": "medium",
+      "scene": "square in-ground trampoline in a daycare/kindergarten garden",
+      "evidence": "075-084 are a single product shoot of a square supervised garden trampoline = the 'Kindergarten' (supervised) model",
+      "target_handle": "eurotramp-kids-tramp-kindergarten",
+      "is_gap": true,
+      "upload_as": "productdetails-kids-tramp-kindergarten-076.jpg",
+      "set_thumbnail": false,
+      "hydrated": true,
+      "diagram": false,
+      "action": "apply"
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-082.jpg",
+      "tier": "2-curated",
+      "confidence": "medium",
+      "scene": "square in-ground trampoline in a daycare/kindergarten garden",
+      "evidence": "075-084 are a single product shoot of a square supervised garden trampoline = the 'Kindergarten' (supervised) model",
+      "target_handle": "eurotramp-kids-tramp-kindergarten",
+      "is_gap": true,
+      "upload_as": "productdetails-kids-tramp-kindergarten-082.jpg",
+      "set_thumbnail": false,
+      "hydrated": true,
+      "diagram": false,
+      "action": "apply"
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-019.jpg",
+      "tier": "2-curated",
+      "confidence": "medium",
+      "scene": "wheelchair user entering an in-ground trampoline via the ramped edge",
+      "evidence": "wheelchair accessibility is the Wehrfritz FUN XL Kindergarten signature feature (metadata suitable-for-wheelchairs)",
+      "target_handle": "eurotramp-wehrfritz-fun-xl-kindergarten",
+      "is_gap": true,
+      "upload_as": "productdetails-wehrfritz-fun-xl-kindergarten-019.jpg",
+      "set_thumbnail": true,
+      "hydrated": true,
+      "diagram": false,
+      "action": "apply"
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-021.jpg",
+      "tier": "2-curated",
+      "confidence": "medium",
+      "scene": "wheelchair user entering an in-ground trampoline via the ramped edge",
+      "evidence": "wheelchair accessibility is the Wehrfritz FUN XL Kindergarten signature feature (metadata suitable-for-wheelchairs)",
+      "target_handle": "eurotramp-wehrfritz-fun-xl-kindergarten",
+      "is_gap": true,
+      "upload_as": "productdetails-wehrfritz-fun-xl-kindergarten-021.jpg",
+      "set_thumbnail": false,
+      "hydrated": true,
+      "diagram": false,
+      "action": "apply"
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-020.jpg",
+      "tier": "2-curated",
+      "confidence": "medium",
+      "scene": "wheelchair user entering an in-ground trampoline via the ramped edge",
+      "evidence": "wheelchair accessibility is the Wehrfritz FUN XL Kindergarten signature feature (metadata suitable-for-wheelchairs)",
+      "target_handle": "eurotramp-wehrfritz-fun-xl-kindergarten",
+      "is_gap": true,
+      "upload_as": "productdetails-wehrfritz-fun-xl-kindergarten-020.jpg",
+      "set_thumbnail": false,
+      "hydrated": true,
+      "diagram": false,
+      "action": "apply"
+    }
+  ],
+  "review": [
+    {
+      "asset": "Info-Package-KidsTramp-PlayPro_EN/E97547-PlayPro-rubber-protection-ring-LoopXL.jpg",
+      "article": "e97547",
+      "tier": "1-article",
+      "confidence": "high",
+      "upload_as": "e97547-playpro-rubber-protection-ring-loop-xl.jpg",
+      "hydrated": true,
+      "diagram": false,
+      "target_handle": null,
+      "action": "review",
+      "reason": "no Medusa product for this article number"
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-001.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-002.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-003.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-004.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-005.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-006.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-007.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-008.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-009.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-010.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-011.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-012.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-013.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-014.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-015.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-016.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-017.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-018.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-022.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-023.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-024.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-025.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-026.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-027.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-028.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-029.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-030.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-031.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-032.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-033.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-034.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-035.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-036.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-037.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-038.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-039.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-040.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-041.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-042.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-043.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-044.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-045.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-046.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-047.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-048.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-049.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-050.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-051.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-052.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-053.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-054.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-055.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-056.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-057.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-058.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-059.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-060.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-061.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-062.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-063.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-064.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-065.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-066.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-067.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-068.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-069.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-070.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-071.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-072.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-073.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-074.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-075.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-077.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-079.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-080.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-081.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-083.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-084.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-085.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-086.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-087.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-088.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-089.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    },
+    {
+      "asset": "Info-Package-Playground-Outdoor-Trampolines-2023/Eurotramp-090.jpg",
+      "tier": "library",
+      "confidence": "unmapped",
+      "target_handle": null,
+      "action": "review",
+      "reason": "generic marketing-library photo; no confident product match",
+      "hydrated": true
+    }
+  ],
+  "spec_enrichment_targets": [
+    "eurotramp-eurotramp-play",
+    "eurotramp-eurotramp-play-light-epl0001",
+    "eurotramp-kids-tramp-kindergarten",
+    "eurotramp-kids-tramp-kindergarten-loop",
+    "eurotramp-kids-tramp-kindergarten-loop-xl",
+    "eurotramp-kids-tramp-kindergarten-xl",
+    "eurotramp-kids-tramp-playground",
+    "eurotramp-kids-tramp-playground-loop",
+    "eurotramp-kids-tramp-playground-loop-xl",
+    "eurotramp-kids-tramp-playground-xl",
+    "eurotramp-playpro-rubber-protection-lip-for-kids-tramp-e97048",
+    "eurotramp-playpro-rubber-protection-lip-for-kids-tramp-xl-e97548",
+    "eurotramp-playpro-rubber-protection-ring-for-kids-tramp-loop-e97047",
+    "eurotramp-wehrfritz-fun-round-kindergarten-94750",
+    "eurotramp-wehrfritz-fun-xl-kindergarten"
+  ]
+}

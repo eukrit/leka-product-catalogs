@@ -4,6 +4,50 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.78.0] - 2026-06-07
+
+### Added — Eurotramp: close 4 image gaps + spec enrichment from the local 2023 asset pack
+
+Enriches the live Medusa Eurotramp catalog from the **EuroTramp 2023 Info-Package** local asset
+pack (`Info-Package-KidsTramp-PlayPro_EN` + `Info-Package-Playground-Outdoor-Trampolines-2023`;
+98 photos + 9 spec PDFs, all verified hydrated). New reusable script
+`scripts/enrich_eurotramp_from_local_assets.py` (dry-run → apply → `--rollback`), reusing the
+`classify` / `photo_rank` / `handle_overlap` helpers. Rollback metadata stashed
+(`previous_thumbnail` / `previous_images`); timestamped reports under `docs/reports/`.
+
+> **Note vs already-merged work:** this branch was authored against `main` @ v2.69.0 and rebased
+> over v2.70.0–v2.77.0. The **merge proposal** below predates **#122 (v2.77.0, Kids Tramp Impact
+> Protection option + PlayPro/Bonded Tiles bundle variants)** — reconcile the single-tile /
+> adhesive / PlayPro sections against what #122 already implemented before acting on them. #113
+> (competition/performance hero images) may also have independently closed some gaps.
+
+**Asset → product map (dry-run first):** `docs/reports/eurotramp-asset-map-2026-06-06.json` + `.md`
+— 13 assets mapped with confidence/evidence; **85 generic `Eurotramp-0XX` marketing-library photos
+left for review** (not force-assigned).
+
+**Images closed — 4 of the 40 documented gaps** (real-photo thumbnails + galleries on live Medusa,
+proxy verified HTTP 200): `kids-tramp-playground` (art 97000, in-ground EPDM),
+`kids-tramp-playground-loop` (97010B), `kids-tramp-kindergarten` (square daycare-garden shoot),
+`wehrfritz-fun-xl-kindergarten` (wheelchair signature). Plus official PlayPro photos onto 3 non-gap
+parts (E97047 / E97048 / E97548). 13 photos → `gs://ai-agents-go-vendors/eurotramp/<handle>/`.
+
+**Metadata enrichment — 15 products** (additive only): DIN EN 1176, TÜV-GS, `facility_type`
+(Kindergarten = supervised / Playground = unsupervised), catalog dimensions, PlayPro / PLAY! specs.
+
+**Merge proposal (no auto-merge)** — `docs/reports/eurotramp-merge-proposal-2026-06-06.md`. The
+Fallschutz flyer revealed the **old vs new (2023 EPDM-top) system** split (single-tile 33 SKUs → 9
+groups; adhesive E97003 old / E97043 new system, not 2 sizes; Top-Sheet BounceCloud held — 3 ≠ 9
+colours). See the reconcile note above re: #122.
+
+**Upload hardening:** `gcloud storage cp`'s multiprocessing worker pool deadlocks on Windows under a
+non-interactive shell; uploads force `CLOUDSDK_STORAGE_PROCESS_COUNT/THREAD_COUNT=1` + timeout/retry.
+
+**Follow-up:** the live **Eurotramp dealer media pool** (login portal) is the source for a
+higher-confidence pass on the remaining ~36 gaps + the BounceCloud colour-vs-size question — being
+ingested into the `vendors` project.
+
+---
+
 ## [2.77.0] - 2026-06-07
 
 ### Added — Kids Tramp "Impact Protection" option + 32 bundle variants (PlayPro / Bonded Tiles) on Medusa
