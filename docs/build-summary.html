@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title> — Build Summary</title>
+  <title>leka-product-catalogs — Build Summary</title>
   <style>
     body { font-family: -apple-system, Segoe UI, Roboto, sans-serif; max-width: 960px; margin: 2rem auto; padding: 0 1rem; color: #1a1a1a; }
     h1 { margin-bottom: 0.25rem; }
@@ -22,24 +22,23 @@
   </style>
 </head>
 <body>
-  <h1></h1>
+  <h1>leka-product-catalogs</h1>
   <div class="meta">
     Repo: <a href="https://github.com/eukrit/leka-product-catalogs">https://github.com/eukrit/leka-product-catalogs</a> ·
-    Branch: <code>claude/flamboyant-nightingale-27bea2</code> ·
+    Branch: <code>HEAD</code> ·
     Generated: 2026-06-07
   </div>
 
   <div class="latest-card">
     <h2 style="margin-top:0;border:0">Latest build</h2>
     <p>
-      Version <strong>2.75.0</strong> &middot; 2026-06-07 &middot;
+      Version <strong>2.76.0</strong> &middot; 2026-06-07 &middot;
       <span class="badge badge-success">success</span>
     </p>
-    <p>Eurotramp costing corrected to the <strong>house cost-plus model</strong>, replacing the over-simplistic flat ×1.30. Owner directive: <strong>freight = 30% of goods</strong>, <strong>clearance = 6% of goods</strong> (replacing the old fixed 512.5 THB/SKU floor), insurance 1%, 10% non-China duty, 7% import VAT; retail = landed / (1 − <strong>GM 0.35</strong>); <strong>retail_thb now embeds the 7% TH customer VAT</strong> (USD/EUR/SGD ex-VAT). FX pinned (EUR 38.7877 / USD 33.0472 / SGD 25.974). New <code>scripts/recompute_eurotramp_pricing.py</code> (standalone — Eurotramp has no packing dims, so the v2.74.0 vendor-freight branch doesn't apply). <strong>151/187 repriced</strong>, blended retail THB <strong>+44.1%</strong> (฿20.59M→฿29.67M); 137 rise, <strong>14 micro-spares held flat</strong> by a no-decrease floor (0 SKUs drop). Medusa push <strong>151/151 matched → 151 updated, 0 errors</strong>; <strong>read-back 151/151 exact</strong> across THB/USD/EUR/SGD. <strong>Volumetric CBM deferred</strong> (no packing dims/weights; owner runs it separately). Added <code>brands.eurotramp</code> to <code>pricing_config/canonical</code>.</p>
+    <p></p>
     <p>
       <a href="CHANGELOG.md">Full build log</a> &middot;
-      <a href="reports/eurotramp-recompute-2026-06-07.md">Run report</a> &middot;
-      <a href="reports/eurotramp-snapshot-2026-06-07-pre-house-costing.json">Pre-write snapshot</a> &middot;
+      <a href="https://github.com/eukrit/leka-product-catalogs/commit/0d46b29699f02eddd923947745e01987322f115c">Commit 0d46b29</a> &middot;
       <a href="PROJECT_INDEX.md">Project index</a>
     </p>
   </div>
@@ -48,7 +47,8 @@
   <table>
     <thead><tr><th>Version</th><th>Date</th><th>Summary</th><th>Status</th></tr></thead>
     <tbody>
-      <tr><td><code>2.75.0</code></td><td>2026-06-07</td><td>Eurotramp costing → house cost-plus model (freight 30%/clearance 6% of goods, GM 35%, retail_thb VAT-inclusive): 151/187 repriced, blended +44.1%, 14 micro-spares held by no-decrease floor; Medusa 151/151 updated + read-back exact; volumetric deferred</td><td><span class="badge badge-success">success</span></td></tr>
+      <tr><td><code>2.76.0</code></td><td>2026-06-07</td><td></td><td><span class="badge badge-success">success</span></td></tr>
+      <tr><td><code>2.75.0</code></td><td>2026-06-07</td><td></td><td><span class="badge badge-success">success</span></td></tr>
       <tr><td><code>2.74.0</code></td><td>2026-06-07</td><td></td><td><span class="badge badge-success">success</span></td></tr>
       <tr><td><code>2.73.0</code></td><td>2026-06-07</td><td></td><td><span class="badge badge-success">success</span></td></tr>
       <tr><td><code>2.72.0</code></td><td>2026-06-07</td><td></td><td><span class="badge badge-success">success</span></td></tr>

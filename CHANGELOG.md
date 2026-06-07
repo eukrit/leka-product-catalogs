@@ -4,6 +4,56 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.76.0] - 2026-06-07
+
+### Added — Lappset brand: consumer wiring + storefront import (clean-white heroes)
+
+_(Renumbered → 2.76.0 on rebase: main reached 2.75.0 via PR #120.)_
+
+Consumer half of the permanent Lappset hero-image fix. The producer lives at the
+catalog source (`eukrit/vendors` PR #52, `lappset-catalog/scripts/step8_normalize_heroes.py`):
+it normalizes every Lappset hero to a clean white background and records it as
+`images[0]` (`source:"hero_white"`) + `hero_white_gcs` on `vendors/lappset/products/*`.
+This release consumes that and brings Lappset into Leka Medusa.
+
+**Why:** Lappset catalogue renders ship transparent/studio-background, so every
+`leka-projects` proposal re-die-cut them per-project — a fix that kept regressing
+(re-ingest wiped the cache; Gemini die-cut was billing-blocked; classifier
+non-deterministic). Fixing it once at the source + consuming `images[0]` here means
+the storefront and downstream renderers never re-die-cut.
+
+**`scripts/sync_vendors_to_medusa.py`:**
+- Added `"lappset"` to `BRAND_SALES_CHANNELS` (`sc_01KTGNBRJZ71VWWH3W7FAW0E4R`, new "Lappset" channel).
+- `metadata.hero_white_gcs` propagated to Medusa on create + update (None-filtered for other brands).
+- Brand-agnostic normalization of raw vendor-template docs (Lappset stores
+  `product_name`/`sku`, no `handle`) into the payload-builder shape; URL-safe
+  handle (hyphenated slug) so Medusa accepts `000502.1`-style SKUs.
+- **Guard `_lappset_hero_ok`** — refuses to publish a Lappset product unless
+  `images[0]` is the proxy-served `hero_white` variant, OR a documented
+  `needs_fallback` original (in-situ photo); rejects raw `webapi.lappset.com`
+  URLs and empty images. `thumbnail`/`images[0]` come from the hero_white proxy URL.
+
+**`tests/test_lappset_hero_guard.py`** (new, 9 tests, no network): guard accepts
+white heroes + documented fallbacks; rejects raw/empty/un-flagged; create/update
+payloads carry hero_white thumbnail + metadata; no `hero_white_gcs` key leaks for
+other brands.
+
+**`medusa-backend/src/scripts/migrate-to-brand-module.ts`:** added the `lappset`
+Brand spec + `"Lappset"` → `lappset` sales-channel mapping so the existing
+idempotent brand-module migration creates the Lappset Brand and links its products.
+
+**Import (2026-06-07):** created the "Lappset" Medusa sales channel and synced all
+imageable Lappset products with hero_white as the primary image — **1064 created /
+12 updated → 1076 live**; 8 no-image products skipped by the guard; 7 in-situ
+fallbacks published with their proxy original. Live audit of all 1076: **1069
+hero_white + 7 original thumbnails, 0 raw `webapi.lappset.com` URLs, 0 missing**.
+
+**Follow-up (storefront switcher visibility):** after this merges and
+`leka-medusa-backend` redeploys (image then contains the `lappset` BRAND_SPEC),
+run `npx medusa exec ./src/scripts/migrate-to-brand-module.ts` in-cluster (dry-run
+first) to create the Lappset Brand record + link the products + add the shared
+"Leka Catalogs" sales channel — same one-time step used for all 11 existing brands.
+
 ## [2.75.0] - 2026-06-07
 
 ### Changed — Eurotramp costing moved to the HOUSE cost-plus model (volumetric deferred)
