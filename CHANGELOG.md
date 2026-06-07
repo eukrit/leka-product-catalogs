@@ -4,6 +4,49 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.73.0] - 2026-06-07
+
+### Fixed — `scripts/sync_brand_prices_to_medusa.py`: sales-channel-scoped matching (cross-brand-clobber root cause)
+
+The shared price sync built a **global** Medusa SKU index (`_index_all`) and
+matched each vendor doc's `item_code`/`handle` against ALL products regardless
+of sales channel (first-wins `setdefault`). Because Rampline "Kids Tramp"
+articles are Eurotramp-made and resold under **identical** SKUs (97010B, E97047,
+E31120, E21898B …), a Rampline run could match — and overwrite — the Eurotramp
+variant. v2.72.0 patched this reactively in `rampline-catalog/build_2026_pricing.py`
+(`EUROTRAMP_OWNED_FAMILIES` exclusion); this release removes the **root cause**
+in the shared sync itself.
+
+**What changed:**
+- `_index_all` now keeps **every** candidate per key (list, not first-wins) and
+  tags each with its product's `sales_channels.id` set (added `sales_channels.id`
+  to the admin `fields`).
+- `_match_key(dd, idx, brand_sc, other_brand_channels)` resolves a vendor doc to
+  a variant **safe for the requesting brand**: (1) prefer a candidate on the
+  brand's own channel `SC[brand]`; (2) else accept one not claimed by any other
+  brand (no channel, or only the shared aggregate channels — "Leka Catalogs",
+  "Default", "Proposal"); (3) else refuse and record a **cross-brand guard**.
+- `run_brand` logs guarded docs (`CROSS-BRAND GUARD: …`) and reports a `guarded`
+  count in the per-brand summary.
+- `SC` map completed to mirror `sync_vendors_to_medusa.py` — added **rampline**
+  and **weplay** (their absence was part of what let the global index clobber).
+- `--scope-file` (JSON) and `--brand all` behaviors preserved.
+
+**Why "Leka Catalogs" is allowed:** it's the shared aggregate channel powering
+the unified `catalogs.leka.studio` storefront; many brand products live there
+only. Pricing those is not a clobber — the guard fires solely when a SKU resolves
+**exclusively** to another brand's *dedicated* channel.
+
+**Verified (dry-run):** rampline **64/64** (unchanged, 11 SKUs absent from
+Medusa), eurotramp **151/151** (unchanged), vinci **1234/1234** (no over-guard
+regression), `--brand all` healthy with `guarded=0` across all 10 brands.
+Targeted check: all four collision SKUs are **refused** for a rampline run and
+resolve to the correct Eurotramp variant for a eurotramp run.
+
+**Files changed:** `scripts/sync_brand_prices_to_medusa.py`.
+
+---
+
 ## [2.71.0] - 2026-06-06
 
 ### Added — Rampline hero-product spec enrichment (PDP-perfect specs for the Leka education page)
