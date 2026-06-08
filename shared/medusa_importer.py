@@ -250,17 +250,22 @@ class MedusaImporter:
                 return out
             offset += limit
 
-    def get_or_create_collection(self, title: str, handle: str) -> str:
-        """Get existing collection by handle or create new one. Returns collection ID."""
+    def get_or_create_collection(self, title: str, handle: str,
+                                 metadata: dict | None = None) -> str:
+        """Get existing collection by handle or create new one. Returns collection ID.
+
+        Pass `metadata={"brand_slug": "<brand>"}` so the storefront can filter
+        global collections by brand (Medusa v2 collections are not sales-channel
+        scoped — see scripts/backfill_collection_brand_slug.py)."""
         resp = self._get("/admin/collections", {"handle": [handle], "limit": 1})
         collections = resp.get("collections", [])
         if collections:
             return collections[0]["id"]
 
-        result = self._post("/admin/collections", {
-            "title": title,
-            "handle": handle,
-        })
+        body: dict = {"title": title, "handle": handle}
+        if metadata:
+            body["metadata"] = metadata
+        result = self._post("/admin/collections", body)
         return result["collection"]["id"]
 
     def get_or_create_tag(self, value: str) -> str:

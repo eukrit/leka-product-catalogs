@@ -139,7 +139,11 @@ def main():
             series_names[slug] = sp.get("series_name", slug.upper())
 
     for slug, name in series_names.items():
-        collection_ids[slug] = client.get_or_create_collection(name, slug)
+        # Vinci collection handles are prefixed `vinci-*` (consistent with other
+        # brands) and tagged brand_slug so the storefront filters by metadata,
+        # not handle. Map key stays `slug` (matches transform_product lookup).
+        collection_ids[slug] = client.get_or_create_collection(
+            name, f"vinci-{slug}", metadata={"brand_slug": "vinci"})
         print(f"  {name}: {collection_ids[slug]}")
 
     # Ensure tags exist

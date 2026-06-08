@@ -176,7 +176,7 @@ async function ensureCategories(handles: string[]): Promise<Record<string, strin
   return map
 }
 
-async function ensureCollections(names: string[]): Promise<Record<string, string>> {
+async function ensureCollections(names: string[], brandSlug?: string): Promise<Record<string, string>> {
   const map: Record<string, string> = {}
   for (const name of [...new Set(names)]) {
     if (!name) continue
@@ -184,7 +184,9 @@ async function ensureCollections(names: string[]): Promise<Record<string, string
     try {
       const res = await medusaFetch("/admin/collections", {
         method: "POST",
-        body: JSON.stringify({ title: name, handle }),
+        // brand_slug lets the storefront filter global collections by metadata
+        // instead of handle prefix (Medusa v2 collections are not SC-scoped).
+        body: JSON.stringify({ title: name, handle, ...(brandSlug ? { metadata: { brand_slug: brandSlug } } : {}) }),
       })
       map[name] = res.collection.id
       console.log(`  Created collection: ${name}`)
@@ -462,7 +464,7 @@ async function uploadVendor(config: VendorConfig) {
   } else if (config.slug === "4soft") {
     collNames.push("4soft 2D Graphics", "4soft 3D Elements", "4soft Tunnels & Furniture")
   }
-  const collMap = DRY_RUN ? {} : await ensureCollections(collNames)
+  const collMap = DRY_RUN ? {} : await ensureCollections(collNames, config.slug)
 
   // Upload
   const log: any[] = []
