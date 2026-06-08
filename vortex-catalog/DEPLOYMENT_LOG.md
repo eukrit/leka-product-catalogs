@@ -48,10 +48,15 @@ The reported "missing images" had **two distinct causes**:
 - [vortex-catalog/import_to_medusa.py](import_to_medusa.py) — prefers the proxy
   URL and never emits a raw `storage.googleapis.com` private-bucket URL.
 
-### ⚠️ Follow-up flag
-- Secret Manager `medusa-admin-password` **`:latest` (v6, created 2026-06-08) is
-  EMPTY** — only **v5** authenticates against `leka-medusa-backend`. Any consumer
-  using `:latest` (scripts, next backend redeploy) will 401. Disable/fix v6.
+### ⚠️ Follow-up flag — RESOLVED 2026-06-08
+- ~~Secret Manager `medusa-admin-password` **`:latest` (v6, created 2026-06-08) is
+  EMPTY**~~ — corrected: v6 held the **wrong value** (Areda's Medusa password, a
+  15-char string, not empty). Only **v5** authenticates. **Fixed:** v6 disabled +
+  new **v7** added from v5's value; `:latest` (= v7) now authenticates **HTTP 200**
+  (32-char). Note: SM's `latest` resolves to the highest *version number*, not the
+  highest *enabled* version, so disabling v6 alone was insufficient — v7 was
+  required. Detail: `docs/security/medusa-admin-password-rotation-2026-06-06.md`
+  (addendum). Scripts referencing **v5** still work; they could move to `:latest`.
 
 ## v0.2.0 — 2026-05-29 (leka-product-catalogs v2.38.0)
 

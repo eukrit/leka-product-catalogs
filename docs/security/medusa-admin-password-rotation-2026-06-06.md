@@ -53,3 +53,30 @@ the env var refreshes to `:latest` on the next deploy.
   it needs explicit sign-off before running.
 - A redeploy of `leka-medusa-backend` will refresh its runtime `MEDUSA_ADMIN_PASSWORD`
   env to the new `:latest` (cosmetic — not used for auth).
+
+## Addendum — 2026-06-08: bad v6 + `:latest` repair
+
+A **v6** was added to `medusa-admin-password` on 2026-06-08 (01:16 UTC) holding
+the **wrong value** — it was the *Areda* Medusa admin password (a 15-char string,
+NOT empty as first reported), accidentally written to Leka's secret. This is the
+same Areda↔Leka cross-contamination already seen on `medusa-admin-email`. Because
+v6 became `:latest`, any consumer reading `:latest` (scripts on the Secret-Manager
+fallback; the next `leka-medusa-backend` redeploy mounting `MEDUSA_ADMIN_PASSWORD`)
+would have gotten the wrong password → 401 / broken admin seeding. Confirmed:
+v6 auth → **401**, v5 auth → **200**.
+
+**Important Secret Manager behavior learned:** the `latest` alias resolves to the
+**highest version number regardless of state** — it does NOT skip to the next
+*enabled* version. So merely *disabling* v6 did **not** fall through to v5;
+`access latest` then failed with `FAILED_PRECONDITION: version 6 is in DISABLED
+state` (worse — the next redeploy would fail secret resolution entirely).
+
+**Fix applied:**
+1. Disabled v6 (wrong value, kept for audit trail).
+2. Added **v7** by piping v5's payload straight into a new version
+   (`access 5 | versions add --data-file=-`) — the value never touched stdout/logs.
+3. v7 is now `:latest` (ENABLED, 32 bytes).
+
+**Verified:** `access latest` returns a 32-char value; `POST /auth/user/emailpass`
+with `admin@leka.studio` + `:latest` → **HTTP 200**. v5 remains enabled as a
+backstop; v6 disabled.
