@@ -4,6 +4,28 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.79.1] - 2026-06-08
+
+### Fixed — Outdoor Education: rename 2 mis-titled wisdom-outdoor-play import stubs
+
+Two `wisdom-outdoor-play` import stubs (the 2026-05-29 "missing from firestore" set)
+carried titles scraped from catalog spec lines, leaving 2 of 164 hotspots on the
+leka-website `/catalogue/outdoor-education` page dead-ending on an empty `?q=` search.
+Renamed both products live in Medusa (`leka-medusa-backend`) via the admin API and
+assigned categories so the storefront builder resolves them:
+
+- `HW1-S610` `leka-project-6f9c3w5n` — "Pre-treated Pinewood" → **"Outdoor Classroom - Blackboard"** (cats: Kids Furniture, Outdoor)
+- `HW1-S638` `leka-project-ikx4fp5b` — "Age Group: 3Y+" → **"Outdoor Teepee (Pinewood)"** (cats: Outdoor, Playground Equipment)
+
+- **`scripts/fix_outdoor_education_stubs.py`** (NEW, idempotent, `--apply`) — Basic-auth
+  admin client; renames + redescribes + recategorises the two stubs with a SKU
+  safety-check. Images left on the `leka-coming-soon` placeholder (no real asset exists —
+  vendor raw media already requested); prices left unset (no authoritative source).
+- `migration/wisdom-handle-redirects.json` already maps both SKUs → handles (no change);
+  the builder's stale sibling-repo copy was the other half of the dead-hotspot bug.
+- Verified live via the store API + public publishable key; leka-website Outdoor
+  Education now resolves **164/164** (companion PR eukrit/leka-website#125).
+
 ## [2.79.0] - 2026-06-07
 
 ### Added — Polysoft brand: Sales Channel + publishable key (aquatic Splash line)
