@@ -4,6 +4,44 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.80.0] - 2026-06-08
+
+### Fixed — Vortex "missing images": PDP query bug + 249 image-less SKUs unpublished
+
+Investigated the reported missing Vortex product images. The image **data** was
+already correct — all 272 scraped products have proxy URLs
+(`catalogs.leka.studio/api/i/vortex/...`) that resolve 200 from the private
+`ai-agents-go-vendors` bucket. Two real causes:
+
+1. **Storefront PDP query** requested the bare `+images` field, which Medusa v2's
+   store API returns as `null` → empty PDP gallery / 📦 placeholder. Fixed in
+   `eukrit/leka-website` ([PR #131](https://github.com/eukrit/leka-website/pull/131),
+   `+images.url`). Fixes all brands' PDP galleries.
+2. **249 bare `vortex-vor-XXXX` SKUs** (pricelist/component SKUs; the long-flagged
+   "521 vs 272" discrepancy) had no images, no collection, garbled titles. A
+   website cross-check (WP REST products CPT = the 272 scraped products) found
+   **9 duplicates** of existing imaged products, **0 standalone products missing**
+   from the catalog, **240 components/spares with no page**. All 249 **unpublished**
+   (`status=draft`, reversible). Vortex now: **272 published (0 without images),
+   249 draft**.
+
+### Also
+- Storefront: Vortex `hasPricing: true`; **USD** default display currency
+  site-wide (246/272 published have USD retail). PDP price label "FOB" → "Retail".
+- PDP → Vortex link already works (all 272 carry `metadata.source_url`).
+- `mirror_images_to_gcs.py` / `import_to_medusa.py` fixed to use the
+  proxy-served `ai-agents-go-vendors` bucket + proxy URLs (prevents the
+  stale-`ai-agents-go-documents` regression).
+- ⚠️ Flag: Secret Manager `medusa-admin-password` `:latest` (v6) is **empty** —
+  only **v5** authenticates; fix/disable v6.
+
+### Files
+- `vortex-catalog/crosscheck_bare_products.py` (new) — cross-check + unpublish.
+- `vortex-catalog/bare_products_crosscheck.{md,json}` (new) — flag report.
+- `vortex-catalog/mirror_images_to_gcs.py`, `vortex-catalog/import_to_medusa.py` — bucket/proxy fixes.
+
+---
+
 ## [2.79.1] - 2026-06-08
 
 ### Fixed — Outdoor Education: rename 2 mis-titled wisdom-outdoor-play import stubs
