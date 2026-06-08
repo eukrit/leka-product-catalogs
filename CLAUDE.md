@@ -54,12 +54,25 @@ Master instructions: `Credentials Claude Code/Instructions/API Access Master Ins
 ### GCP Secret Manager (CI/CD)
 | Secret Name | Source File | Used By |
 |---|---|---|
+| `leka-medusa-admin-email` | — (`admin@leka.studio`) | **Leka** Medusa admin auth (scripts + Cloud Run) |
+| `leka-medusa-admin-password` | — (rotated value) | **Leka** Medusa admin auth (scripts + Cloud Run) |
 | `peak-api-token` | Peak API Credential.txt | Peak API calls |
 | `xero-client-secret` | Xero Credentials.txt | Xero OAuth refresh |
 | `notion-api-key` | NOTION_API_KEY.md | Notion API |
 | `slack-bot-token` | Slack OAuth.txt | Slack notifications |
 | `figma-token` | Figma Token.txt | Figma API |
 | `n8n-webhook-key` | n8n config | n8n webhook auth |
+
+> **⚠️ Leka admin secrets are dedicated — do NOT use the shared `medusa-admin-*` secrets.**
+> The shared `medusa-admin-email` / `medusa-admin-password` secrets are **ambiguous**:
+> Areda processes have pushed Areda's credentials (`admin@aredaatelier.com`) onto
+> their `:latest`, which **401s against the Leka backend**. Every Leka consumer
+> (scripts, `cloudbuild.yaml`, `cloudbuild-debug-admin.yaml`) reads the dedicated
+> `leka-medusa-admin-email` / `leka-medusa-admin-password` secrets instead.
+> Areda has its own `areda-medusa-admin-*` secrets. See
+> `docs/security/leka-medusa-admin-secret-split-2026-06-08.md`. Env overrides
+> `LEKA_MEDUSA_ADMIN_EMAIL` / `LEKA_MEDUSA_ADMIN_PASSWORD` still take precedence
+> in scripts. Login: `admin@leka.studio`.
 
 ### Credential File References
 | File | Location | Purpose |

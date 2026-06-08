@@ -7,7 +7,7 @@ against the Phase-0 snapshot to confirm only intended fields changed.
 
 Auth: env LEKA_MEDUSA_ADMIN_EMAIL / LEKA_MEDUSA_ADMIN_PASSWORD (or
 MEDUSA_ADMIN_EMAIL / MEDUSA_ADMIN_PASSWORD), or GCP Secret Manager secrets
-`medusa-admin-email` / `medusa-admin-password` (pulled by the caller into env).
+`leka-medusa-admin-email` / `leka-medusa-admin-password` (pulled by the caller into env).
 
 Usage:
     python scripts/eurotramp_snapshot.py                 # writes dated snapshot

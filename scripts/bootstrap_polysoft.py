@@ -50,12 +50,12 @@ def _sm(secret: str) -> str | None:
 
 
 def _creds() -> tuple[str, str]:
-    email = os.environ.get("LEKA_MEDUSA_ADMIN_EMAIL") or _sm("medusa-admin-email")
-    pw = os.environ.get("LEKA_MEDUSA_ADMIN_PASSWORD") or _sm("medusa-admin-password")
+    email = os.environ.get("LEKA_MEDUSA_ADMIN_EMAIL") or _sm("leka-medusa-admin-email")
+    pw = os.environ.get("LEKA_MEDUSA_ADMIN_PASSWORD") or _sm("leka-medusa-admin-password")
     if not (email and pw):
         raise RuntimeError(
             "Medusa admin creds not found. Set LEKA_MEDUSA_ADMIN_EMAIL / "
-            "LEKA_MEDUSA_ADMIN_PASSWORD or grant access to the medusa-admin-* secrets."
+            "LEKA_MEDUSA_ADMIN_PASSWORD or grant access to the leka-medusa-admin-* secrets."
         )
     return email, pw
 

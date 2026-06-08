@@ -4,6 +4,52 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.81.0] - 2026-06-08
+
+### Fixed — Leka Medusa admin auth: dedicated `leka-medusa-admin-*` secrets (credential trap)
+
+The Leka backend admin auth was riding on the **shared** Secret Manager secrets
+`medusa-admin-email` / `medusa-admin-password`, which Areda processes also write
+to. Areda had pushed its own credentials (`admin@aredaatelier.com` + a different
+password) onto those secrets' `:latest`, which **401s against the Leka backend**
+— so every Leka script reading `:latest` silently failed auth. Only the *disabled*
+`medusa-admin-password` v5 still held the Leka password.
+
+**Fix (additive, non-destructive — preferred option a):**
+- Created dedicated **`leka-medusa-admin-email`** (`admin@leka.studio`) and
+  **`leka-medusa-admin-password`** (= the Leka password from `medusa-admin-password`
+  v5) in `ai-agents-go`. Granted `secretAccessor` to the runtime compute SA,
+  Cloud Build SA, and `claude@` SA (mirrors the shared secret's bindings).
+- Migrated **all 10 Leka Python consumers**, `cloudbuild.yaml` (service
+  `--set-secrets`), and `cloudbuild-debug-admin.yaml` to read the dedicated
+  secrets. Env overrides `LEKA_MEDUSA_ADMIN_EMAIL` / `LEKA_MEDUSA_ADMIN_PASSWORD`
+  still take precedence.
+- The shared `medusa-admin-*` secrets (incl. v5/v6) were **left untouched** —
+  nothing destructive. Areda continues to use its own `areda-medusa-admin-*`.
+
+**Verified:** Leka `/auth/user/emailpass` → **HTTP 200** with the new secrets;
+Areda `/auth/user/emailpass` → **HTTP 200** with `areda-medusa-admin-*` (unaffected).
+
+> Note: a concurrent `claude@` session had separately applied the fragile
+> *option b* (added `medusa-admin-password` v7 = Leka pw so the shared `:latest`
+> works again) but did **not** fix the email (`medusa-admin-email:latest` is still
+> Areda's). The dedicated-secret split here supersedes that and is robust against
+> future Areda writes to the shared secret.
+
+### Files
+- `scripts/`: `apply_wisdom_enrichment.py`, `add_kidstramp_impact_protection.py`,
+  `bootstrap_polysoft.py`, `backfill_eurotramp_photos_to_medusa.py`,
+  `backfill_leka_project_images.py`, `hide_leka_project_lowres_products.py`,
+  `medusa_create_toys_category.py`, `audit_eurotramp_images.ts`,
+  `eurotramp_snapshot.py` (docstring).
+- `wisdom-catalog/`: `enrich_furniture_pdf_images.py`,
+  `import_outdoor_play_to_medusa.py`, `sync_po_sgd_to_medusa.py`.
+- `vortex-catalog/crosscheck_bare_products.py` (docstring).
+- `cloudbuild.yaml`, `cloudbuild-debug-admin.yaml`, `medusa-backend/start.sh` (comment).
+- `CLAUDE.md` (credential table + warning), `docs/security/leka-medusa-admin-secret-split-2026-06-08.md` (new).
+
+---
+
 ## [2.80.0] - 2026-06-08
 
 ### Fixed — Vortex "missing images": PDP query bug + 249 image-less SKUs unpublished

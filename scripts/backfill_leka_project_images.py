@@ -32,7 +32,7 @@ and resumable.
                      of products still rendering blank (expect 0 after --attach).
 
 Auth: ADC for GCP (Rule 12b); Medusa admin creds pulled from Secret Manager secrets
-`medusa-admin-email` / `medusa-admin-password` at runtime.
+`leka-medusa-admin-email` / `leka-medusa-admin-password` at runtime.
 
 Examples:
   python scripts/backfill_leka_project_images.py --verify --limit 20      # smoke
@@ -135,8 +135,8 @@ def _sm_secret(name: str) -> str:
 
 
 def _medusa_admin_token() -> str:
-    email = os.environ.get("LEKA_MEDUSA_ADMIN_EMAIL") or _sm_secret("medusa-admin-email")
-    pw = os.environ.get("LEKA_MEDUSA_ADMIN_PASSWORD") or _sm_secret("medusa-admin-password")
+    email = os.environ.get("LEKA_MEDUSA_ADMIN_EMAIL") or _sm_secret("leka-medusa-admin-email")
+    pw = os.environ.get("LEKA_MEDUSA_ADMIN_PASSWORD") or _sm_secret("leka-medusa-admin-password")
     r = requests.post(
         f"{MEDUSA_BACKEND}/auth/user/emailpass",
         json={"email": email, "password": pw},

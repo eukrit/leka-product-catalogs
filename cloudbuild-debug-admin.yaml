@@ -39,7 +39,7 @@ availableSecrets:
       env: 'COOKIE_SECRET'
     - versionName: projects/$PROJECT_ID/secrets/medusa-jwt-secret/versions/latest
       env: 'JWT_SECRET'
-    - versionName: projects/$PROJECT_ID/secrets/medusa-admin-password/versions/latest
+    - versionName: projects/$PROJECT_ID/secrets/leka-medusa-admin-password/versions/latest
       env: 'MEDUSA_ADMIN_PASSWORD'
 
 options:
