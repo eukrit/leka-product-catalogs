@@ -1,12 +1,19 @@
 """
 Mirror Vortex product images from vortex-intl.com to GCS.
 
-Downloads each image URL, uploads to:
-  gs://ai-agents-go-documents/product-images/vortex/catalog/<slug>/<filename>
+Downloads each image URL, uploads to the PROXY-SERVED vendors bucket:
+  gs://ai-agents-go-vendors/vortex/catalog/<slug>/<filename>
 
-Rewrites each product's images[] with `gcs_url` (public HTTPS) while keeping
-`url` as the original source for provenance. Idempotent — skips blobs that
-already exist.
+Rewrites each product's images[] with `gcs_url` holding the storefront PROXY URL
+(https://catalogs.leka.studio/api/i/vortex/catalog/<slug>/<filename>) while
+keeping `url` as the original source for provenance. The proxy streams the
+private bucket with the Cloud Run runtime SA; raw storage.googleapis.com URLs
+403 (both buckets are private). Idempotent — skips blobs that already exist.
+
+NOTE (2026-06-08): the old `ai-agents-go-documents/product-images/...` target was
+never served by the live proxy — that is why early Vortex imports showed broken
+images until the blobs were copied to ai-agents-go-vendors and URLs rewritten.
+Do NOT point this back at the documents bucket.
 
 Usage:
     python vortex-catalog/mirror_images_to_gcs.py
@@ -25,8 +32,9 @@ from urllib.parse import urlparse
 import requests
 from google.cloud import storage
 
-BUCKET_NAME = "ai-agents-go-documents"
-GCS_PREFIX = "product-images/vortex/catalog"
+BUCKET_NAME = "ai-agents-go-vendors"          # proxy-served bucket (private, UBLA)
+GCS_PREFIX = "vortex/catalog"                  # -> gs://ai-agents-go-vendors/vortex/catalog/...
+PROXY_BASE = "https://catalogs.leka.studio/api/i"  # /api/i/<path> -> gs://ai-agents-go-vendors/<path>
 DATA_PATH = os.path.join(os.path.dirname(__file__), "web-app", "public", "data", "products_all.json")
 
 THROTTLE = 0.25  # seconds between downloads
@@ -46,21 +54,21 @@ def sanitize_filename(url):
 
 
 def mirror_image(bucket, src_url, dest_blob_path, dry_run=False):
-    """Download src_url, upload to GCS. Returns public URL."""
-    public_url = f"https://storage.googleapis.com/{BUCKET_NAME}/{dest_blob_path}"
+    """Download src_url, upload to the vendors bucket. Returns the storefront PROXY URL."""
+    proxy_url = f"{PROXY_BASE}/{dest_blob_path}"
     if dry_run:
-        return public_url
+        return proxy_url
 
     blob = bucket.blob(dest_blob_path)
     if blob.exists():
-        return public_url
+        return proxy_url
 
     try:
         r = requests.get(src_url, timeout=45, stream=True)
         r.raise_for_status()
         content_type = r.headers.get("content-type", "image/jpeg")
         blob.upload_from_string(r.content, content_type=content_type)
-        return public_url
+        return proxy_url
     except requests.RequestException as e:
         log.warning(f"    download failed: {e}")
         return None

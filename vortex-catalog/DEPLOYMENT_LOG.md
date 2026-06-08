@@ -1,5 +1,58 @@
 # Vortex Aquatics Catalog — Deployment Log
 
+## v0.3.0 — 2026-06-08 (leka-product-catalogs v2.80.0)
+
+### Fixed — "missing product images" investigation + 249 image-less SKUs unpublished
+
+**Investigation finding (the bucket/URL data was already correct).** All 272
+scraped Vortex products already had proxy image URLs
+(`https://catalogs.leka.studio/api/i/vortex/catalog/<slug>/<file>`) that resolve
+**200**; the blobs live in the proxy-served bucket `gs://ai-agents-go-vendors/vortex/`.
+The reported "missing images" had **two distinct causes**:
+
+1. **Storefront PDP query bug (272 products).** The PDP fetched the gallery with
+   the bare `+images` field, which Medusa v2's **store** API returns as
+   `images: null` — so the gallery was empty and showed the 📦 placeholder. Fixed
+   in `eukrit/leka-website` (`product-detail.tsx` → `+images.url`,
+   PR [#131](https://github.com/eukrit/leka-website/pull/131)). PLP cards were
+   unaffected (they fall back to `thumbnail`).
+2. **249 image-less pricelist/component SKUs.** The Vortex sales channel held 521
+   products: the 272 scraped (with images + `source_url`) plus **249** bare
+   `vortex-vor-XXXX` SKUs with no images, no collection, and poor/garbled titles
+   (the "521 vs 272" discrepancy CHANGELOG flagged on day one). A website
+   cross-check (against the WP REST products CPT — exhaustively the 272 scraped
+   products) classified them: **9** duplicates of an existing imaged product, **0**
+   standalone products missing from the catalog, **240** components/spares with no
+   product page. None is a distinct product missing from the catalog, so all 249
+   were **unpublished** (`status=draft`, reversible). Vortex catalog now: **272
+   published, 0 without images; 249 draft.**
+
+### Pricing / PDP link
+- Vortex pricing **enabled** on the storefront (`hasPricing: true`); USD is the
+  default display currency site-wide. 246/272 published products have a USD retail
+  price (synced 2026-05-29); the USD region populates `calculated_price`.
+- PDP → Vortex link already works: all 272 published products carry
+  `metadata.source_url` = `vortex-intl.com/products/<slug>/` → "View on
+  manufacturer website →". No change needed.
+
+### Files added / changed (this repo)
+- [vortex-catalog/crosscheck_bare_products.py](crosscheck_bare_products.py) (NEW) —
+  website cross-check + unpublish (offline match to the 272 + optional live WP REST
+  fallback; `--dry-run`). Auth: `admin@leka.studio` + Secret Manager
+  `medusa-admin-password` (**v5** — note `:latest`/v6 is empty, see below).
+- [vortex-catalog/bare_products_crosscheck.md](bare_products_crosscheck.md) /
+  `.json` (NEW) — the flag report (per-SKU classification + best-effort match).
+- [vortex-catalog/mirror_images_to_gcs.py](mirror_images_to_gcs.py) — now targets
+  the proxy-served `ai-agents-go-vendors` bucket and writes proxy URLs (was the
+  stale, never-served `ai-agents-go-documents` path).
+- [vortex-catalog/import_to_medusa.py](import_to_medusa.py) — prefers the proxy
+  URL and never emits a raw `storage.googleapis.com` private-bucket URL.
+
+### ⚠️ Follow-up flag
+- Secret Manager `medusa-admin-password` **`:latest` (v6, created 2026-06-08) is
+  EMPTY** — only **v5** authenticates against `leka-medusa-backend`. Any consumer
+  using `:latest` (scripts, next backend redeploy) will 401. Disable/fix v6.
+
 ## v0.2.0 — 2026-05-29 (leka-product-catalogs v2.38.0)
 
 ### Added — 2026 USD pricelist ingestion + per-product-line reseller discounts

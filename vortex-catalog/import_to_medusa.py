@@ -47,11 +47,26 @@ def transform_product(scraped, category_ids, collection_ids, sales_channel_id):
 
     handle = f"vortex-{primary_type}-{slug}".lower().replace(" ", "-").replace("/", "-")[:120]
 
-    # Prefer GCS URLs (post-mirror). Fall back to source URL if mirror failed.
+    # Prefer the storefront PROXY URL written by mirror_images_to_gcs.py
+    # (`gcs_url` now holds https://catalogs.leka.studio/api/i/vortex/...).
+    # NEVER emit a raw storage.googleapis.com URL — both GCS buckets are private
+    # (UBLA + PAP) so direct links 403 and the storefront shows broken images.
     images = []
     for img in scraped.get("images", []):
         url = img.get("gcs_url") or img.get("url")
-        if url and url not in images:
+        if not url:
+            continue
+        if "storage.googleapis.com" in url:
+            # Stale raw-bucket URL — convert documents-bucket path to the proxy.
+            if "ai-agents-go-documents/product-images/vortex/" in url:
+                tail = url.split("ai-agents-go-documents/product-images/vortex/", 1)[1]
+                url = f"https://catalogs.leka.studio/api/i/vortex/{tail}"
+            elif "ai-agents-go-vendors/" in url:
+                tail = url.split("ai-agents-go-vendors/", 1)[1]
+                url = f"https://catalogs.leka.studio/api/i/{tail}"
+            else:
+                continue  # unknown private-bucket URL — skip rather than ship a 403
+        if url not in images:
             images.append(url)
 
     metadata = {
