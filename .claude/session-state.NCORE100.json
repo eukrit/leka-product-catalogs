@@ -1,10 +1,10 @@
 {
   "machine": "NCORE100",
-  "branch": "claude/hardcore-meitner-8d777e",
-  "sha": "6257352",
+  "branch": "claude/nostalgic-pasteur-3a339a",
+  "sha": "0dd41c3",
   "ahead": 0,
   "behind": 0,
   "dirty_files": 0,
-  "sop_version": "2026.05.18-rev6",
-  "session_start": "2026-06-06T04:30:55Z"
+  "sop_version": "2026.06.08-rev7",
+  "session_start": "2026-06-08T12:02:29Z"
 }
