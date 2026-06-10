@@ -4,6 +4,58 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.83.0] - 2026-06-10
+
+### Fixed — Eurotramp 2026 price-list SKU collisions (28 spare-part / Kids-Tramp-Track variants)
+
+Follow-up to the 2026 Eurotramp (1E) price-list ingest (`eukrit/vendors` PR #67,
+which re-priced `vendors/eurotramp/products` 187 → 707 docs). That ingest pushed to
+Leka Medusa via `scripts/sync_vendors_to_medusa.py --brand=eurotramp` (520 created,
+158 updated, **29 errors**). The 29 errors were all
+`400 invalid_data: "Product variant with sku: <SKU> already exists"` for 28 SKUs.
+
+**Root cause.** The vendors model is **1-doc-per-SKU**; Medusa folds related SKUs into
+a handful of **multi-variant "umbrella" products**. The 2026 seed created NEW per-SKU
+Firestore docs with NEW handles, but each of these 28 SKUs was already a *variant* of
+one of **5 existing Eurotramp umbrella products** (created in the 2025 sync). The sync
+matches Firestore→Medusa by **handle** and CREATEs on a miss, so for these it attempted
+a create, which Medusa rejects (variant SKU is globally unique). Firestore was correct;
+only the storefront was stale. The 5 umbrellas (all on the Eurotramp sales channel —
+**no cross-brand collision**):
+| Medusa product | colliding SKUs |
+|---|---|
+| `eurotramp-bounce-cloud` | 93001/02/20/21/22/30/31/32 |
+| `eurotramp-kids-tramp-track-playground` | 97044/46/48/49/54/56/58/59 |
+| `eurotramp-jumping-bed-kids-tramp-track-playground` | E21004/06/08/09 |
+| `eurotramp-bonded-impact-protection-kids-tramp-track` | E97441/641/841/941 |
+| `eurotramp-playpro-rubber-protection-lip-for-kids-tramp-track` | E97448/648/848/948 |
+
+**Fix.**
+- **`scripts/fix_eurotramp_2026_sku_collisions.py`** (NEW, idempotent, `--dry-run`/`--write`/`--skus`)
+  — pages the Medusa catalog, maps each colliding SKU → existing variant, and PATCHes all
+  4 currency prices (THB/USD/EUR/SGD) **in place** (matching existing price rows by
+  currency so no rows are orphaned; reuses `sync_vendors_to_medusa._build_prices`). Never
+  creates products; never touches product-level fields, so the umbrellas stay intact.
+  Stamps `medusa_product_id` + `medusa_variant_id` on each Firestore doc once the live
+  price is confirmed correct. An "already-at-target" short-circuit makes it converge.
+- **Applied live** to `leka-medusa-backend`: all **28 variants priced to 2026 values**,
+  28 Firestore docs stamped, 0 outstanding errors (verified by
+  `scripts/_verify_eurotramp_collisions.py`: ok=28/28). Notably corrects a real bug —
+  the BounceCloud 3-/6-piece combos were stuck at the single-unit price (THB 88,110);
+  now THB 262,998 / 499,096. (The `eurotramp-kids-tramp-track-playground` product's
+  variant-price writes intermittently time out ~59s → 503 server-side yet commit; the
+  script's idempotent re-run reconciles them cleanly.)
+- **De-dup (stops recurrence).** `scripts/sync_vendors_to_medusa.py` gains a
+  **variant-member fallback**: a doc whose handle has no Medusa match but which carries
+  `medusa_product_id` now resolves to that umbrella and does a **variant-only price
+  UPDATE** (matched by SKU) instead of attempting a CREATE — and never overwrites the
+  umbrella's product-level fields (many member docs share one umbrella). After the fix, a
+  `--brand=eurotramp --dry-run` shows these 28 as **UPDATE (variant-member)**, not CREATE.
+- Published the 3 previously-draft umbrellas (jumping-bed, bonded-impact-protection,
+  PlayPro-lip) so the priced spare parts surface on the storefront.
+- **Firestore (`vendors` DB) mutated only** by adding `medusa_product_id` /
+  `medusa_variant_id` to the 28 docs — no pricing or other fields changed.
+
 ## [2.82.0] - 2026-06-10
 
 ### Fixed — Collections leaking across brands (Eurotramp/orphan collections on the Vinci PLP)
