@@ -202,7 +202,10 @@ export default async function seedFromFirestore({ container }: ExecArgs) {
     const name = seriesNames[slug] || slug.toUpperCase()
     const collection = await productService.createProductCollections({
       title: name,
-      handle: slug,
+      // Prefixed handle + brand_slug so the storefront filters collections by
+      // metadata (Medusa v2 collections are global, not sales-channel scoped).
+      handle: `vinci-${slug}`,
+      metadata: { brand_slug: "vinci" },
     })
     collectionMap[slug] = collection.id
     console.log(`  Collection: ${name} (${collection.id})`)

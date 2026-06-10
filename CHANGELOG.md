@@ -4,6 +4,42 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.82.0] - 2026-06-10
+
+### Fixed — Collections leaking across brands (Eurotramp/orphan collections on the Vinci PLP)
+
+Medusa v2 collections are **global** — `GET /store/collections` returns every brand's
+collections regardless of the publishable key's sales channel. The storefront
+(leka-website `catalogs/`) filtered them client-side by **handle prefix**; every brand
+used a positive allowlist (`berliner-`, `4soft-`, `vortex-`, `leka-project-`) except
+**Vinci**, which used `collectionPrefix: undefined` → a negative *blocklist*. Any
+collection with an unprefixed handle leaked onto the Vinci PLP: the 10 Eurotramp
+collections (`kids-tramp`, `bouncecloud`, `wehrfritz-fun`, `ground-trampoline`, …) and
+`wisdom-outdoor-play` (which was *also* missing from its own Leka Project PLP).
+
+Fix: make collection→brand association robust via **`metadata.brand_slug`** so the
+storefront filters on metadata instead of handles (companion PR eukrit/leka-website).
+
+- **`scripts/backfill_collection_brand_slug.py`** (NEW, idempotent, `--dry-run`/`--revert`)
+  — stamps `metadata.brand_slug` on every collection. Brand is inferred from the
+  authoritative **brand-module link** (`product.brand.name` → storefront slug), not
+  `metadata.brand_slug` on products (only the vendor-upload brands carry that). Zero-product
+  collections are tagged `_orphan` (match no brand). Collection **IDs are never changed**, so
+  product↔collection links are untouched. Re-prefixes any non-`vinci-` Vinci handles
+  (no-op today — all 29 are already `vinci-*`).
+- **Applied live** to `leka-medusa-backend`: 74/74 collections stamped — vinci 29,
+  berliner 18, leka-project 6, 4soft 3, eurotramp 10, vortex 1, `_orphan` 7 (empty
+  `vortex-*` themed collections). Verified via the store API with the Vinci publishable
+  key: the metadata filter yields exactly 29 Vinci collections, **0 Eurotramp/orphan leaks**.
+- Creation sites updated to keep the convention on future re-seeds:
+  `medusa-backend/src/scripts/seed-from-firestore.ts` (Vinci series → `vinci-` handle +
+  `brand_slug`), `vinci-catalog/import_to_medusa.py` + `shared/medusa_importer.py`
+  (`get_or_create_collection` gains a `metadata` arg), `scripts/upload-vendors-to-medusa.ts`
+  (`ensureCollections` stamps per-vendor `brand_slug`).
+- The data change is a **safe no-op for the currently-deployed (prefix-based) storefront**
+  (it ignores collection metadata); the leak closes when the storefront deploy lands.
+- (The Leka admin credential trap surfaced during this work is fixed separately in v2.81.0.)
+
 ## [2.81.0] - 2026-06-08
 
 ### Fixed — Leka Medusa admin auth: dedicated `leka-medusa-admin-*` secrets (credential trap)
