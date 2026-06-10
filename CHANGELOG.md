@@ -4,6 +4,57 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.84.0] - 2026-06-10
+
+### Audit — Eurotramp full price reconciliation vs 2026 (1E) price list (storefront already converged)
+
+Broad follow-up to v2.83.0 (which fixed only the 28 create-collision SKUs). This is
+the comprehensive audit: reconcile **every** Eurotramp variant's live Medusa price
+(THB/USD/EUR/SGD) against the per-SKU 2026 price list in Firestore
+(`vendors/eurotramp/products`, `price_date 2026-06-07`).
+
+**New reusable tool:** `scripts/audit_eurotramp_prices.py` — read-only. Pages the
+whole Medusa catalog (14,110 variants), matches by exact SKU → `legacy_sku` →
+handle (reusing `sync_brand_prices_to_medusa._match_key`, scoped to the Eurotramp
+sales channel), diffs all 4 currencies, and buckets discrepancies as
+(a) stale / (b) orphan / (c) missing / (d) cross-brand. Exit non-zero on any stale
+variant or 28-fix regression.
+
+**Result — fully converged, 0 stale, 0 writes needed:**
+
+| Bucket | Count |
+|---|---|
+| Priced Firestore docs | 683 (of 707) |
+| Medusa variants on Eurotramp SC | 744 |
+| Matched (Firestore→Medusa) | 683 |
+| (a) STALE — needs update | **0** |
+| (b) ORPHAN — variant, no priced FS doc | 67 |
+| (c) MISSING — priced FS doc, no variant | 0 |
+| (d) CROSS-BRAND — skip | 0 |
+| OK (already at 2026 price) | 683 |
+| 28-fix regression check | 28/28 OK |
+
+Every priced 2026 SKU is matched and already at its exact 2026 price in all four
+currencies. Independent confirmation: `_verify_eurotramp_collisions.py` →
+`ok=28 bad=0`; `sync_brand_prices_to_medusa.py --brand eurotramp --dry-run` →
+`matched 683/683 (100%), unmatched=0, guarded=0`. The **apply** step is a verified
+no-op — no stale variants exist. A redundant `--write` was intentionally skipped to
+avoid churn and the known `eurotramp-kids-tramp-track-playground` 503-hang.
+
+**Bucket (b) — 67 orphans flagged (not repriced):** all benign and out of scope for
+the per-SKU list — 32 composite `BASE+OPTION` "Impact Protection" variants
+(synthesised, not a single FS doc), ~12 `B`-suffix / bare-number umbrella siblings
+(no 1:1 doc; non-B siblings already carry the canonical price), and ~23 unpriced
+`ET-####` parents / spec-only products (no 2026 price to apply). Any fix is upstream
+in `eukrit/vendors`, not the storefront.
+
+**Files:** `scripts/audit_eurotramp_prices.py` (new),
+`docs/reports/eurotramp-price-audit-2026-06-10.md` (new).
+**Firestore:** read-only (no mutations). **Outcome:** ✅ storefront confirmed fully
+priced to 2026 (1E) for every list SKU; no stale Eurotramp pricing remains.
+
+---
+
 ## [2.83.0] - 2026-06-10
 
 ### Fixed — Eurotramp 2026 price-list SKU collisions (28 spare-part / Kids-Tramp-Track variants)
