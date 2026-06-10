@@ -38,7 +38,7 @@ For every bare (no-thumbnail) Vortex product on the sales channel:
   5. Write a flag report (JSON + Markdown) under vortex-catalog/.
 
 Auth: LEKA_MEDUSA_ADMIN_EMAIL / LEKA_MEDUSA_ADMIN_PASSWORD (email defaults to
-admin@leka.studio; password from Secret Manager `medusa-admin-password`).
+admin@leka.studio; password from Secret Manager `leka-medusa-admin-password`).
 Firestore + ADC for vendors DB read.
 
 Usage:

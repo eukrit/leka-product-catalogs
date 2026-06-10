@@ -50,7 +50,7 @@ ones from scratch.
   --force-image-refresh  refresh existing-product images even if already set
 
 Credentials are read from GCP Secret Manager via gcloud
-(`medusa-admin-email`, `medusa-admin-password`). ADC for Firestore + Vertex.
+(`leka-medusa-admin-email`, `leka-medusa-admin-password`). ADC for Firestore + Vertex.
 """
 from __future__ import annotations
 
@@ -869,8 +869,8 @@ def main():
     else:
         log.info("[6] Authenticating to Medusa + building legacy_sku index …")
         if not os.environ.get("MEDUSA_ADMIN_API_KEY"):
-            os.environ.setdefault("MEDUSA_ADMIN_EMAIL", load_secret_sm("medusa-admin-email"))
-            os.environ.setdefault("MEDUSA_ADMIN_PASSWORD", load_secret_sm("medusa-admin-password"))
+            os.environ.setdefault("MEDUSA_ADMIN_EMAIL", load_secret_sm("leka-medusa-admin-email"))
+            os.environ.setdefault("MEDUSA_ADMIN_PASSWORD", load_secret_sm("leka-medusa-admin-password"))
         client = MedusaImporter(base_url=args.medusa_url)
         collection_id = client.get_or_create_collection(
             args.collection_title, args.collection_handle)

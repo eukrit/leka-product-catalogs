@@ -88,10 +88,10 @@ def _medusa_admin_creds() -> tuple[str, str]:
 
     Never hardcode credentials (Process Standard Rule 12). Populate via
     LEKA_MEDUSA_ADMIN_EMAIL / LEKA_MEDUSA_ADMIN_PASSWORD, or let this fall
-    back to Secret Manager secrets `medusa-admin-email` / `medusa-admin-password`.
+    back to Secret Manager secrets `leka-medusa-admin-email` / `leka-medusa-admin-password`.
     """
-    email = os.environ.get("LEKA_MEDUSA_ADMIN_EMAIL") or _sm_secret("medusa-admin-email")
-    password = os.environ.get("LEKA_MEDUSA_ADMIN_PASSWORD") or _sm_secret("medusa-admin-password")
+    email = os.environ.get("LEKA_MEDUSA_ADMIN_EMAIL") or _sm_secret("leka-medusa-admin-email")
+    password = os.environ.get("LEKA_MEDUSA_ADMIN_PASSWORD") or _sm_secret("leka-medusa-admin-password")
     return email, password
 
 

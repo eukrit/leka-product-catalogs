@@ -47,8 +47,8 @@ Phases (pick exactly one)
                no-image / low-res at the current threshold (no writes).
 
 Auth: ADC for nothing here (no GCP needed — image bytes come through the public
-proxy). Medusa admin creds come from Secret Manager `medusa-admin-email` /
-`medusa-admin-password`, or the env vars `LEKA_MEDUSA_ADMIN_EMAIL` /
+proxy). Medusa admin creds come from Secret Manager `leka-medusa-admin-email` /
+`leka-medusa-admin-password`, or the env vars `LEKA_MEDUSA_ADMIN_EMAIL` /
 `LEKA_MEDUSA_ADMIN_PASSWORD` (mirrors backfill_leka_project_images.py).
 
 Examples:
@@ -115,8 +115,8 @@ def _sm_secret(name: str) -> str:
 
 
 def _medusa_admin_token() -> str:
-    email = os.environ.get("LEKA_MEDUSA_ADMIN_EMAIL") or _sm_secret("medusa-admin-email")
-    pw = os.environ.get("LEKA_MEDUSA_ADMIN_PASSWORD") or _sm_secret("medusa-admin-password")
+    email = os.environ.get("LEKA_MEDUSA_ADMIN_EMAIL") or _sm_secret("leka-medusa-admin-email")
+    pw = os.environ.get("LEKA_MEDUSA_ADMIN_PASSWORD") or _sm_secret("leka-medusa-admin-password")
     r = requests.post(
         f"{MEDUSA_BACKEND}/auth/user/emailpass",
         json={"email": email, "password": pw},

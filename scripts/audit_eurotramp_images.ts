@@ -25,8 +25,8 @@ const ADMIN_PASSWORD = process.env.LEKA_MEDUSA_ADMIN_PASSWORD
 if (!ADMIN_PASSWORD) {
   console.error(
     "Missing LEKA_MEDUSA_ADMIN_PASSWORD. Fetch it from Secret Manager first, e.g.:\n" +
-      "  PowerShell: $env:LEKA_MEDUSA_ADMIN_PASSWORD = (gcloud secrets versions access latest --secret=medusa-admin-password --project=ai-agents-go)\n" +
-      "  bash:       export LEKA_MEDUSA_ADMIN_PASSWORD=$(gcloud secrets versions access latest --secret=medusa-admin-password --project=ai-agents-go)"
+      "  PowerShell: $env:LEKA_MEDUSA_ADMIN_PASSWORD = (gcloud secrets versions access latest --secret=leka-medusa-admin-password --project=ai-agents-go)\n" +
+      "  bash:       export LEKA_MEDUSA_ADMIN_PASSWORD=$(gcloud secrets versions access latest --secret=leka-medusa-admin-password --project=ai-agents-go)"
   )
   process.exit(1)
 }

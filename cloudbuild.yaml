@@ -93,7 +93,7 @@ steps:
             --cpu 1 \
             --min-instances 1 \
             --max-instances 5 \
-            --set-secrets="DATABASE_URL=medusa-database-url:latest,REDIS_URL=medusa-redis-url:latest,COOKIE_SECRET=medusa-cookie-secret:latest,JWT_SECRET=medusa-jwt-secret:latest,MEDUSA_ADMIN_PASSWORD=medusa-admin-password:latest,GOOGLE_CLIENT_ID=medusa-google-oauth-client-id:latest,GOOGLE_CLIENT_SECRET=medusa-google-oauth-client-secret:latest,GOOGLE_CALLBACK_URL=medusa-google-oauth-callback-url:latest" \
+            --set-secrets="DATABASE_URL=medusa-database-url:latest,REDIS_URL=medusa-redis-url:latest,COOKIE_SECRET=medusa-cookie-secret:latest,JWT_SECRET=medusa-jwt-secret:latest,MEDUSA_ADMIN_PASSWORD=leka-medusa-admin-password:latest,GOOGLE_CLIENT_ID=medusa-google-oauth-client-id:latest,GOOGLE_CLIENT_SECRET=medusa-google-oauth-client-secret:latest,GOOGLE_CALLBACK_URL=medusa-google-oauth-callback-url:latest" \
             --set-env-vars="^|^NODE_ENV=production|DISABLE_ADMIN=false|MEDUSA_ADMIN_EMAIL=admin@leka.studio|MEDUSA_BACKEND_URL=https://catalogs.leka.studio|STORE_CORS=https://catalogs.leka.studio|ADMIN_CORS=https://catalogs.leka.studio,https://leka-medusa-backend-538978391890.$_REGION.run.app|AUTH_CORS=https://catalogs.leka.studio,https://leka-medusa-backend-538978391890.$_REGION.run.app|DATA_COMMS_SEND_SLACK_URL=https://data-comms-send-slack-538978391890.$_REGION.run.app|DATA_COMMS_SEND_EMAIL_URL=https://data-comms-send-email-538978391890.$_REGION.run.app|ORDER_NOTIFY_EMAIL=leka-medusa-order@goco.bz|ORDER_NOTIFY_SLACK_CHANNEL=C0B557QQTDK"
           echo "Deployed medusa-backend:$SHORT_SHA"
         else
