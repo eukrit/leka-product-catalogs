@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ---
 
-## [2.80.0] - 2026-06-08
+## [2.82.0] - 2026-06-10
 
 ### Fixed — Collections leaking across brands (Eurotramp/orphan collections on the Vinci PLP)
 
@@ -38,11 +38,91 @@ storefront filters on metadata instead of handles (companion PR eukrit/leka-webs
   (`ensureCollections` stamps per-vendor `brand_slug`).
 - The data change is a **safe no-op for the currently-deployed (prefix-based) storefront**
   (it ignores collection metadata); the leak closes when the storefront deploy lands.
+- (The Leka admin credential trap surfaced during this work is fixed separately in v2.81.0.)
 
-### Note — Leka admin credential
-`medusa-admin-password:latest` (v6, 15 chars) authenticates Areda, **not** Leka. The Leka
-backend admin is `admin@leka.studio` + **password v5** (32 chars). Scripts calling
-`get_secret("medusa-admin-password")` (latest) will 401 against `leka-medusa-backend`.
+## [2.81.0] - 2026-06-08
+
+### Fixed — Leka Medusa admin auth: dedicated `leka-medusa-admin-*` secrets (credential trap)
+
+The Leka backend admin auth was riding on the **shared** Secret Manager secrets
+`medusa-admin-email` / `medusa-admin-password`, which Areda processes also write
+to. Areda had pushed its own credentials (`admin@aredaatelier.com` + a different
+password) onto those secrets' `:latest`, which **401s against the Leka backend**
+— so every Leka script reading `:latest` silently failed auth. Only the *disabled*
+`medusa-admin-password` v5 still held the Leka password.
+
+**Fix (additive, non-destructive — preferred option a):**
+- Created dedicated **`leka-medusa-admin-email`** (`admin@leka.studio`) and
+  **`leka-medusa-admin-password`** (= the Leka password from `medusa-admin-password`
+  v5) in `ai-agents-go`. Granted `secretAccessor` to the runtime compute SA,
+  Cloud Build SA, and `claude@` SA (mirrors the shared secret's bindings).
+- Migrated **all 10 Leka Python consumers**, `cloudbuild.yaml` (service
+  `--set-secrets`), and `cloudbuild-debug-admin.yaml` to read the dedicated
+  secrets. Env overrides `LEKA_MEDUSA_ADMIN_EMAIL` / `LEKA_MEDUSA_ADMIN_PASSWORD`
+  still take precedence.
+- The shared `medusa-admin-*` secrets (incl. v5/v6) were **left untouched** —
+  nothing destructive. Areda continues to use its own `areda-medusa-admin-*`.
+
+**Verified:** Leka `/auth/user/emailpass` → **HTTP 200** with the new secrets;
+Areda `/auth/user/emailpass` → **HTTP 200** with `areda-medusa-admin-*` (unaffected).
+
+> Note: a concurrent `claude@` session had separately applied the fragile
+> *option b* (added `medusa-admin-password` v7 = Leka pw so the shared `:latest`
+> works again) but did **not** fix the email (`medusa-admin-email:latest` is still
+> Areda's). The dedicated-secret split here supersedes that and is robust against
+> future Areda writes to the shared secret.
+
+### Files
+- `scripts/`: `apply_wisdom_enrichment.py`, `add_kidstramp_impact_protection.py`,
+  `bootstrap_polysoft.py`, `backfill_eurotramp_photos_to_medusa.py`,
+  `backfill_leka_project_images.py`, `hide_leka_project_lowres_products.py`,
+  `medusa_create_toys_category.py`, `audit_eurotramp_images.ts`,
+  `eurotramp_snapshot.py` (docstring).
+- `wisdom-catalog/`: `enrich_furniture_pdf_images.py`,
+  `import_outdoor_play_to_medusa.py`, `sync_po_sgd_to_medusa.py`.
+- `vortex-catalog/crosscheck_bare_products.py` (docstring).
+- `cloudbuild.yaml`, `cloudbuild-debug-admin.yaml`, `medusa-backend/start.sh` (comment).
+- `CLAUDE.md` (credential table + warning), `docs/security/leka-medusa-admin-secret-split-2026-06-08.md` (new).
+
+---
+
+## [2.80.0] - 2026-06-08
+
+### Fixed — Vortex "missing images": PDP query bug + 249 image-less SKUs unpublished
+
+Investigated the reported missing Vortex product images. The image **data** was
+already correct — all 272 scraped products have proxy URLs
+(`catalogs.leka.studio/api/i/vortex/...`) that resolve 200 from the private
+`ai-agents-go-vendors` bucket. Two real causes:
+
+1. **Storefront PDP query** requested the bare `+images` field, which Medusa v2's
+   store API returns as `null` → empty PDP gallery / 📦 placeholder. Fixed in
+   `eukrit/leka-website` ([PR #131](https://github.com/eukrit/leka-website/pull/131),
+   `+images.url`). Fixes all brands' PDP galleries.
+2. **249 bare `vortex-vor-XXXX` SKUs** (pricelist/component SKUs; the long-flagged
+   "521 vs 272" discrepancy) had no images, no collection, garbled titles. A
+   website cross-check (WP REST products CPT = the 272 scraped products) found
+   **9 duplicates** of existing imaged products, **0 standalone products missing**
+   from the catalog, **240 components/spares with no page**. All 249 **unpublished**
+   (`status=draft`, reversible). Vortex now: **272 published (0 without images),
+   249 draft**.
+
+### Also
+- Storefront: Vortex `hasPricing: true`; **USD** default display currency
+  site-wide (246/272 published have USD retail). PDP price label "FOB" → "Retail".
+- PDP → Vortex link already works (all 272 carry `metadata.source_url`).
+- `mirror_images_to_gcs.py` / `import_to_medusa.py` fixed to use the
+  proxy-served `ai-agents-go-vendors` bucket + proxy URLs (prevents the
+  stale-`ai-agents-go-documents` regression).
+- ⚠️ Flag: Secret Manager `medusa-admin-password` `:latest` (v6) is **empty** —
+  only **v5** authenticates; fix/disable v6.
+
+### Files
+- `vortex-catalog/crosscheck_bare_products.py` (new) — cross-check + unpublish.
+- `vortex-catalog/bare_products_crosscheck.{md,json}` (new) — flag report.
+- `vortex-catalog/mirror_images_to_gcs.py`, `vortex-catalog/import_to_medusa.py` — bucket/proxy fixes.
+
+---
 
 ## [2.79.1] - 2026-06-08
 

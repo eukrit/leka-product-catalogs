@@ -17,7 +17,7 @@ fi
 
 # Create admin user on first run (idempotent — fails silently if exists).
 # Credentials come from the runtime env: MEDUSA_ADMIN_PASSWORD is mounted from
-# Secret Manager `medusa-admin-password` by cloudbuild — never hardcode it.
+# Secret Manager `leka-medusa-admin-password` by cloudbuild — never hardcode it.
 if [ -n "$MEDUSA_ADMIN_EMAIL" ] && [ -n "$MEDUSA_ADMIN_PASSWORD" ]; then
   echo ""
   echo "Ensuring admin user exists..."

@@ -132,8 +132,8 @@ def main():
     write = args.write
 
     os.environ["MEDUSA_BACKEND_URL"] = BACKEND
-    os.environ["MEDUSA_ADMIN_EMAIL"] = get_secret("medusa-admin-email")
-    os.environ["MEDUSA_ADMIN_PASSWORD"] = get_secret("medusa-admin-password")
+    os.environ["MEDUSA_ADMIN_EMAIL"] = get_secret("leka-medusa-admin-email")
+    os.environ["MEDUSA_ADMIN_PASSWORD"] = get_secret("leka-medusa-admin-password")
     sys.path.insert(0, ".")
     from shared.medusa_importer import MedusaImporter
     cl = MedusaImporter(base_url=BACKEND)

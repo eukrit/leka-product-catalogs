@@ -84,8 +84,8 @@ def main() -> int:
 
     os.environ["MEDUSA_BACKEND_URL"] = BACKEND
     if args.secrets or not os.environ.get("LEKA_MEDUSA_ADMIN_EMAIL"):
-        os.environ["MEDUSA_ADMIN_EMAIL"] = _secret("medusa-admin-email")
-        os.environ["MEDUSA_ADMIN_PASSWORD"] = _secret("medusa-admin-password")
+        os.environ["MEDUSA_ADMIN_EMAIL"] = _secret("leka-medusa-admin-email")
+        os.environ["MEDUSA_ADMIN_PASSWORD"] = _secret("leka-medusa-admin-password")
     else:
         os.environ["MEDUSA_ADMIN_EMAIL"] = os.environ["LEKA_MEDUSA_ADMIN_EMAIL"]
         os.environ["MEDUSA_ADMIN_PASSWORD"] = os.environ.get("LEKA_MEDUSA_ADMIN_PASSWORD", "")
