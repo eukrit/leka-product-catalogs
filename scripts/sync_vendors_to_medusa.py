@@ -115,6 +115,28 @@ def _find_product_by_handle(token: str, handle: str) -> dict | None:
     return products[0] if products else None
 
 
+def _fetch_product_by_id(token: str, product_id: str) -> dict | None:
+    """Fetch one product by id (same field shape as _find_product_by_handle).
+
+    Used for the variant-member fallback: docs stamped with medusa_product_id
+    whose handle has no Medusa match (sub-variants of a multi-variant umbrella).
+    """
+    r = requests.get(
+        f"{BACKEND}/admin/products/{product_id}",
+        params={"fields": "id,handle,thumbnail,images.url,"
+                          "options.id,options.title,options.values.value,"
+                          "variants.id,variants.title,variants.sku,"
+                          "variants.options.value,variants.options.option_id,"
+                          "variants.prices.id,variants.prices.currency_code,variants.prices.amount"},
+        headers=_headers(token),
+        timeout=TIMEOUT,
+    )
+    if r.status_code == 404:
+        return None
+    r.raise_for_status()
+    return r.json().get("product")
+
+
 # Pricing keys on `pricing.*` → Medusa currency code.
 _RETAIL_KEYS: tuple[tuple[str, str], ...] = (
     ("retail_usd", "usd"),
@@ -281,6 +303,28 @@ def _update_variant_prices(token: str, product_id: str, variant_id: str,
         log.warning("price update failed for variant %s: %s %s", variant_id, r.status_code, r.text[:200])
 
 
+def _price_variant_member(token: str, existing: dict, p: dict) -> bool:
+    """Price ONLY the variant whose SKU == this doc's item_code.
+
+    For variant-member docs (a per-SKU vendors doc that maps to one variant of
+    an existing multi-variant umbrella product). We deliberately do NOT touch
+    product-level fields — many such docs share one umbrella, so overwriting
+    title/description/images from a single member would clobber the others.
+    Returns True if a matching variant was priced.
+    """
+    sku = (p.get("item_code") or "").strip()
+    pricing = p.get("pricing") or {}
+    if not sku or not _build_prices(pricing):
+        return False
+    for v in (existing.get("variants") or []):
+        if (v.get("sku") or "").strip() == sku:
+            _update_variant_prices(token, existing["id"], v["id"], pricing, v.get("prices"))
+            return True
+    log.warning("[variant-member] %s: sku %s not present on product %s",
+                p.get("handle"), sku, existing.get("id"))
+    return False
+
+
 def _ensure_variants(token: str, product_id: str, p: dict,
                      existing_variants: list[dict]) -> list[dict]:
     """If the Firestore doc has multi-variant data and Medusa only has the
@@ -399,12 +443,27 @@ def sync_brand(slug: str, dry_run: bool, limit: int | None, skip_no_images: bool
         if i % TOKEN_REFRESH_EVERY == 0:
             token = auth()
 
+        variant_member = False
         try:
             existing = _find_product_by_handle(token, handle)
         except requests.HTTPError as e:
             log.warning("[%s] %s lookup failed: %s", slug, handle, e)
             errors += 1
             continue
+
+        # Variant-member fallback. Some vendors docs are sub-variants of an
+        # existing multi-variant umbrella product (the vendors model is
+        # 1-doc-per-SKU; Medusa folds related SKUs into one product). Their
+        # per-SKU handle never matches a Medusa handle, so a handle-only sync
+        # would attempt a CREATE and 400 with "variant sku already exists".
+        # When such a doc has been stamped with medusa_product_id, resolve to
+        # that umbrella and UPDATE only its own variant price — never CREATE.
+        if existing is None and p.get("medusa_product_id"):
+            try:
+                existing = _fetch_product_by_id(token, p["medusa_product_id"])
+            except requests.HTTPError as e:
+                log.warning("[%s] %s medusa_product_id lookup failed: %s", slug, handle, e)
+            variant_member = existing is not None
 
         if existing is None:
             if dry_run:
@@ -422,6 +481,14 @@ def sync_brand(slug: str, dry_run: bool, limit: int | None, skip_no_images: bool
                     errors += 1
                     continue
             created += 1
+        elif variant_member:
+            if dry_run:
+                log.info("[%s] UPDATE %s (variant-member of %s, dry)",
+                         slug, handle, existing.get("handle"))
+            else:
+                if _price_variant_member(token, existing, p):
+                    priced += 1
+            updated += 1
         else:
             if dry_run:
                 log.info("[%s] UPDATE %s (dry)", slug, handle)
